@@ -138,7 +138,8 @@ code rather than in prose:
 ### 2.3 Rigid 256-bit Measurement Table
 
 All values below are Arb/Acb enclosures at 256-bit working precision
-(`python-flint` 0.9.0, `ctx.prec = 256`).
+(`python-flint` 0.9.0, `ctx.prec = 256`), re-measured against the sealed
+kernel with zero drift.
 
 | # | Quantity | Measured enclosure |
 |---|---|---|
@@ -156,6 +157,8 @@ All values below are Arb/Acb enclosures at 256-bit working precision
 | 12 | $n_{\mathrm{crit}}$, measured path ($H := 0.5 + 0.5\log_2(2(n-1))$) | `3.16e60` |
 | 13 | $\chi_{4,3}$ first Hardy bracket | $(6.0,\ 6.1)$, endpoints strictly $+1$/$-1$ |
 | 14 | Pixel projection $\rho_{1,2,3}$ | `461`, `686`, `816` (exact integers mod $N_{\mathrm{steps}}$) |
+| 15 | Ledger replay $V(L)$, both ledgers | True (hash chain intact, every block reproduced) |
+| 16 | Final holographic seal, $n \in \{16, 400, 800\}$ | `SAFE-COMPUTATION` on both entropy paths |
 
 Rows 11-12 differ by 29 orders of magnitude because of the entropy
 assumption, not because of arithmetic: the manuscript arithmetic reproduces
@@ -176,7 +179,7 @@ pip install "python-flint==0.9.0" matplotlib pytest
 only already-certified integers (no float produced by any computation ever
 reaches the plotter); `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (67 -> 71 tests, every landmine pinned)
+### 3.2 Regression Suite (71 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -248,7 +251,7 @@ Each `.jsonl` line is one immutable record: `index`, `generation`,
 serialised-ball fields as decimal strings, `previous_hash`, and `record_hash`
 (SHA-256 over the canonical body). `REVERT` is a safety event (no
 certificate), distinct from `REJECT` (a fitness comparison). Verify with the
-replay commands of Sec.3.4; trust nothing from runtime memory.
+replay commands of Sec. 3.4; trust nothing from runtime memory.
 
 ---
 
