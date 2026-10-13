@@ -166,6 +166,8 @@ root-pull ledger replays byte-identical under the renamed budget parameter.
 Post-Terminus: repo initialised + sealed commit `2298140`, fresh-clone
 reproduction green (67 tests then, both ledgers V(L)=True). Dirichlet campaign
 live: `msaf/dirichlet.py`, chi_4_3 bracket (6.0, 6.1), audit section 13.
+GRH class-gated rewrite: `DirichletCharacter` + `RigorousLFunction`
+(straddle raises `StraddlingEnclosure`), 12-test purity suite, register L38.
 PUBLIC PUSH 2026-10-13: repo `aidilamrym-ops/T-hat-N` (public) created, branch
 `main` pushed (commits `e446d1f`, `64abe12` rewritten with noreply author
 email; placeholder email eliminated). Token file `T-hat-N.txt` consumed then

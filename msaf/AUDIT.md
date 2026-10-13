@@ -3,7 +3,7 @@
 Every item below is verified by execution on `python-flint 0.9.0` /
 `Python 3.14.4`. Nothing here is based on reading the manuscript.
 
-Regression suite: `python -m pytest msaf -q` (71 tests, all passing).
+Regression suite: `python -m pytest msaf -q` (83 tests, all passing).
 Full report: `python -m msaf.audit --prec 256 --evolve 6 --root-pull 3 --visualize 3 --final-audit`.
 Standalone replay: `python -m msaf.evolution --replay ledger/msaf_ledger.jsonl --dimension 16`.
 
@@ -453,3 +453,25 @@ three, five. Reporting it as "the zero at" would be fabrication. The verdict
 vocabulary (`ZeroBracket`, never `ZeroLocalization`) and the audit section
 both enforce the distinction. Measured: chi_4_3 first bracket (6.0, 6.1),
 endpoints strictly +1/-1.
+
+---
+
+# Part VI: class-gated Dirichlet kernel (GRH campaign)
+
+`DirichletCharacter` admits only real primitive characters (order <= 2 and
+`is_primitive()`); complex, imprimitive and invalid numbers all raise the
+single failure type `ValueError`. `RigorousLFunction` evaluates Hardy Z and
+the L-surface through symmetric Minkowski widening and raises
+`StraddlingEnclosure` (a `RuntimeError`) on any enclosure whose real part
+touches zero: undetermined means failed transaction, never rounded verdict.
+Sweeps record straddling points as gaps (or propagate in `strict=True`).
+`ZeroBracket` carries its epistemic boundary (`odd ...; not a localisation`)
+in the data. The kernel source is machine-scanned for `float(`/`numpy`/
+`math.`/`matplotlib` references by the test suite itself.
+
+## L38. A validation backdoor is still a backdoor, even a convenient one
+
+The first draft contained `_admitted()`, a constructor bypass that skipped
+the admission gate for "already-described" specs. Removed before it ever
+shipped: any path around a gate invalidates every verdict the gate protects,
+including in tests.
