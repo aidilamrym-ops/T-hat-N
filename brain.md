@@ -172,6 +172,11 @@ email; placeholder email eliminated). Token file `T-hat-N.txt` consumed then
 permanently deleted; remote URL carries no credential; no `ghp_` string
 anywhere in tracked files. ACTION REQUIRED BY RESEARCHER: revoke the consumed
 token at github.com/settings/tokens (it cannot be revoked via API here).
+README rewritten 2026-10-13: 4-section auditor architecture (epistemology +
+flow diagram, spectrum mechanics + 14-row 256-bit table, reproducibility
+manual, L31-L35 amendments), LaTeX throughout, ASCII-strict, all numbers
+measured. Second push 2026-10-13 (`443a004`, `fe45ae1`) via transient token
+in memory only; remote verified credential-free afterwards.
 Next (only if researcher orders): replace postulated γ_m DFT definition with
 Newton-derived spectrum module (`zetazeros.py`); multi-precision stress sweep
 (128/256/512/1024 bit) as campaign matrix.
