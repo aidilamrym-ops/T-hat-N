@@ -31,6 +31,8 @@ __all__ = [
     "MatrixDimensionViolation",
     "CyclicShift",
     "CirculantHamiltonian",
+    "PlanckClock",
+    "PLANCK_TIME_SECONDS",
     "identity",
     "commutator_residual",
     "structural_commutation",
@@ -59,6 +61,61 @@ def identity(n: int) -> arb_mat:
     for i in range(n):
         m[i, i] = arb(1)
     return m
+
+
+#: One Planck tick in seconds, from the manuscript value 5.39e-44 s.
+#: Constructed live from the decimal string on every call below, never frozen
+#: at import precision (landmine L31) and never routed through float.
+def PLANCK_TIME_SECONDS() -> arb:  # noqa: N802 - constant-like factory, see docstring
+    return arb("5.39e-44")
+
+
+class PlanckClock:
+    """Discrete time bookkeeping on the shift-operator execution path.
+
+    The operator `CyclicShift` itself stays pure and stateless. This clock
+    wraps it and records every executed lattice shift (k -> k+1 mod n) as one
+    accumulated Planck tick. The counter is a Python integer: exact,
+    unbounded, with no rounding at any magnitude. The physical elapsed time
+    is derived only on demand as `ticks * t_P` in Arb balls built from exact
+    decimal strings. No float64 participates at any point.
+    """
+
+    __slots__ = ("shift", "ticks")
+
+    def __init__(self, n: int) -> None:
+        self.shift = CyclicShift(n)
+        self.ticks = 0
+
+    @property
+    def dimension(self) -> int:
+        return self.shift.n
+
+    def tick(self, vector: Sequence[arb]) -> list[arb]:
+        """Execute one shift and record one Planck tick. Returns the vector."""
+        self.ticks += 1
+        return self.shift.apply(vector)
+
+    def advance(self, vector: Sequence[arb], steps: int) -> list[arb]:
+        """Execute `steps` shifts, recording each. Negative steps refused."""
+        if int(steps) < 0:
+            raise ValueError(f"steps must be non-negative, got {steps}")
+        state = list(vector)
+        for _ in range(int(steps)):
+            state = self.tick(state)
+        return state
+
+    def elapsed_ticks(self) -> int:
+        """Accumulated discrete time in Planck ticks. Exact integer."""
+        return self.ticks
+
+    def elapsed_time(self) -> arb:
+        """Accumulated physical time in seconds, as an Arb ball.
+
+        `arb(int)` is exact, so the only enclosure width comes from the
+        three-significant-figure manuscript value of t_P itself.
+        """
+        return arb(self.ticks) * PLANCK_TIME_SECONDS()
 
 
 class CyclicShift:
