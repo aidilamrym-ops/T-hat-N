@@ -822,6 +822,24 @@ def test_final_audit_seals_only_fully_safe_campaigns() -> None:
             assert verdict.identity_holds
 
 
+def test_readme_equation_assets_resolve() -> None:
+    """Every docs/math image referenced by the README must exist on disk.
+
+    GitHub renders no LaTeX; a dangling img src degrades silently into an
+    empty box in front of every auditor. This pins the README-to-asset link.
+    """
+    import re
+
+    root = Path(__file__).resolve().parent.parent.parent
+    readme = (root / "README.md").read_text(encoding="utf-8")
+    refs = re.findall(r"docs/math/([a-z_]+\.svg)", readme)
+    assert refs, "README references no equation assets"
+    for ref in refs:
+        target = root / "docs" / "math" / ref
+        assert target.exists(), f"missing equation asset: {ref}"
+        assert target.stat().st_size > 1000, f"suspiciously small asset: {ref}"
+
+
 def main() -> int:
     failures = 0
     for name, fn in sorted(globals().items()):

@@ -8,23 +8,43 @@ arithmetic (`arb` / `acb` / `arb_mat`, version 0.9.0). No floating-point value
 ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
+- Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338272.svg)](https://doi.org/10.5281/zenodo.23338272)
+- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0)
+- License: MIT - see [LICENSE](LICENSE)
+
+Display equations below are versioned local SVG assets under
+[`docs/math/`](docs/math/), rendered offline by
+[`harness/render_math.py`](harness/render_math.py) with no network and no TeX
+installation, so the archive stays self-contained forever.
+
+## Contents
+
+- [Section 1: Epistemological Foundation and Cognitive Logic](#section-1-epistemological-foundation--cognitive-logic)
+- [Section 2: Spectrum Mechanics and Critical Line Lock](#section-2-the-spectrum-mechanics--critical-line-lock)
+- [Section 3: Step-by-Step Reproducibility Manual](#section-3-step-by-step-reproducibility-manual-how-to-run-audit)
+- [Section 4: Recent Audit Kernel Amendments (Landmines L31-L35)](#section-4-recent-audit-kernel-amendments-landmines-l31-l35)
+- [Symbol Glossary](#symbol-glossary)
+- [Proven vs Postulated](#proven-vs-postulated-standing-disclosure)
+- [Repository Layout](#repository-layout)
+- [Citation](#citation)
+
 ---
 
 ## SECTION 1: EPISTEMOLOGICAL FOUNDATION & COGNITIVE LOGIC
 
-### 1.1 The Actual Infinity Paradox on $[0 \to 0.5 \to 1]$
+### 1.1 The Actual Infinity Paradox on [0, 0.5, 1]
 
 Classical analysis founded on ZFC postulates the continuum: between any two
 distinct points lies an actual infinity of further points. Applied to the
 unit interval, the innocent-looking equidistant partition
 
-$$\Delta_1 = 0.5 - 0 = 0.5, \qquad \Delta_2 = 1 - 0.5 = 0.5$$
+<p align="center"><img src="docs/math/partition.svg" alt="Delta_1 = 0.5 - 0 = 0.5, Delta_2 = 1 - 0.5 = 0.5"></p>
 
 conceals an illegitimate object. Under Zeno's argument, traversing the segment
-$[0, 0.5]$ requires completing an actually infinite sequence of informational
-stages $(X_0, X_1, \dots \to \infty)$. If the number of stages is actually
+[0, 0.5] requires completing an actually infinite sequence of informational
+stages (X0, X1, ... -> infinity). If the number of stages is actually
 infinite, the first step can never logically begin, and the exact coordinates
-$0.5$ and $1$ can never be reached, confirmed, or computed by any causal
+0.5 and 1 can never be reached, confirmed, or computed by any causal
 information system. The continuum is therefore not a neutral background: it
 is a paradox smuggled into the foundations wherever a computation must
 terminate.
@@ -34,29 +54,23 @@ terminate.
 MSAF removes the paradox by binding the computational domain to the two
 absolute physical cut-offs of observable reality. The macro cut-off is the
 diameter of the observable universe, mapped onto the unit interval:
+D_obs ~= 8.8e26 m, so coordinate 0.5 identically equals half that diameter.
+The micro cut-off is the Planck length l_P ~= 1.616255e-35 m, below which
+localisation of information collapses. Their ratio is the total number of
+addressable information pixels, and it is finite:
 
-$$D_{\mathrm{obs}} \approx 8.8 \times 10^{26}\ \mathrm{m}, \qquad
-\text{coordinate } 0.5 \equiv \tfrac{1}{2} D_{\mathrm{obs}}.$$
-
-The micro cut-off is the Planck length, below which localisation of
-information collapses:
-
-$$\ell_P = \sqrt{\hbar G / c^3} \approx 1.616255 \times 10^{-35}\ \mathrm{m}.$$
-
-Their ratio is the total number of addressable information pixels, and it is
-finite:
-
-$$N_{\mathrm{steps}} = \frac{D_{\mathrm{obs}}}{\ell_P}
-  \approx 5.44468544329815837306650 \times 10^{61}\ \text{steps}.$$
+<p align="center"><img src="docs/math/nsteps.svg" alt="N_steps = D_obs / l_P approx 5.44 x 10^61"></p>
 
 The continuum is thereby cut into a **Finite Information Lattice**. Every
 staircase object of the theory, e.g. the discrete Chebyshev function
-$\psi_d(k) = \sum_{j \le k} \Lambda_d(j)$ with the quantised von Mangoldt
-weight $\Lambda_d(k) = \ln p$ iff the pixel index $k$ is a prime power
-$p^m$ (and $0$ otherwise), executes as discrete modular arithmetic over pixel
-addresses $k \in \{1, \dots, N_{\mathrm{steps}}\}$. There is no actual
-infinity left to traverse, so Zeno's objection dissolves: every coordinate is
-a finite integer address.
+
+<p align="center"><img src="docs/math/chebyshev.svg" alt="psi_d(k) = sum_{j <= k} Lambda_d(j)"></p>
+
+with the quantised von Mangoldt weight Lambda_d(k) = ln p iff the pixel
+index k is a prime power p^m (and 0 otherwise), executes as discrete modular
+arithmetic over pixel addresses k = 1..N_steps. There is no actual infinity
+left to traverse, so Zeno's objection dissolves: every coordinate is a finite
+integer address.
 
 ### 1.3 Logic-Flow Map: Continuous Zeta Functionals to the Unitary Lattice
 
@@ -90,50 +104,63 @@ a finite integer address.
 ```
 
 The downward arrows are the entire content of the framework: nothing above
-the cut-off line is executed, and everything below it is an enclosure.
+the cut-off line is executed, and everything below it is an enclosure. The
+completed zeta function driving the inversion kernel is:
+
+<p align="center"><img src="docs/math/xi.svg" alt="xi(s) = 1/2 s(s-1) pi^(-s/2) Gamma(s/2) zeta(s)"></p>
 
 ---
 
 ## SECTION 2: THE SPECTRUM MECHANICS & CRITICAL LINE LOCK
 
-### 2.1 Perfect Commutation $[\hat{H}, \hat{T}] = 0$
+### 2.1 Perfect Commutation [H, T] = 0
 
-On a finite-dimensional space $\mathbb{C}^N$, the Planck time-shift operator
-acts as the unitary cyclic shift matrix ($T e_j = e_{(j+1)\bmod N}$,
-$T^\dagger T = \mathbb{I}$, $T^N = \mathbb{I}$). The spectral Hamiltonian
-$\hat{H}$ carries the zeta-root frequencies as its eigenvalues and is
-required to satisfy the perfect commutation constraint
+On a finite-dimensional space C^N, the Planck time-shift operator acts as the
+unitary cyclic shift matrix (T e_j = e_((j+1) mod N), T^dag T = I, T^N = I).
+The spectral Hamiltonian H carries the zeta-root frequencies as its
+eigenvalues and is required to satisfy the perfect commutation constraint
 
-$$[\hat{H}, \hat{T}] = \hat{H}\hat{T} - \hat{T}\hat{H} = 0.$$
+<p align="center"><img src="docs/math/commutator.svg" alt="[H,T] = HT - TH = 0"></p>
 
-Because every circulant Hamiltonian factors as $H = \sum_j c_j T^j$ over
-powers of a single generator, and $T^a T^b = T^{a+b}$, the commutator vanishes
-as an algebraic identity for any generator symbol $c$ and any dimension $N$.
-Both operators therefore share one eigenbasis, delivered by the Discrete
-Fourier Transform: the eigenvalues of $T$ lock onto the $N$-th roots of unity
-$e^{i2\pi m/N}$, and the spectrum $\gamma_m = f(e^{i2\pi m/N})$ is quantised
+Because every circulant Hamiltonian factors as H = sum_j c_j T^j over powers
+of a single generator, and T^a T^b = T^(a+b), the commutator vanishes as an
+algebraic identity for any generator symbol c and any dimension N. Both
+operators therefore share one eigenbasis, delivered by the Discrete Fourier
+Transform: the eigenvalues of T lock onto the N-th roots of unity
+e^(i 2 pi m / N), and the spectrum gamma_m = f(e^(i 2 pi m / N)) is quantised
 by that geometry. Under the unitary projection, the functional symmetry
-$\xi(s) = \xi(1-s)$ becomes the Hermitian rigidity $\hat{H}^\dagger =
-\hat{H}$, and invariance of the spectral Shannon entropy under causal
-reversal forces the real coordinate of every eigenvalue to the fixed point of
-$\sigma_m = 1 - \sigma_m$:
+xi(s) = xi(1-s) becomes the Hermitian rigidity H^dag = H, and invariance of
+the spectral Shannon entropy
 
-$$\sigma_m = 0.5.$$
+<p align="center"><img src="docs/math/entropy.svg" alt="H(n) = -sum_k p_k log_2(p_k)"></p>
+
+under causal reversal forces the real coordinate of every eigenvalue to the
+fixed point of sigma_m = 1 - sigma_m:
+
+<p align="center"><img src="docs/math/sigma.svg" alt="sigma_m = 1 - sigma_m implies sigma_m = 0.5"></p>
 
 ### 2.2 Verification Status (audited, not asserted)
 
 Two audit findings qualify the mechanism above, and both are enforced in
 code rather than in prose:
 
-* The commutation identity holds for **every** circulant $H$, so a bare PASS
+* The commutation identity holds for **every** circulant H, so a bare PASS
   would be evidence of nothing. `verify_commutation` performs a structural
   circulant test and downgrades such verdicts to
   `TRIVIAL ... carries no information` (landmine L11).
 * A Hermitian circulant matrix has real eigenvalues; the only forced
-  structure is conjugate pairing $\gamma_{N-m} = \overline{\gamma_m}$.
-  The coordinate $\sigma = 0.5$ is therefore carried in this repository as an
-  explicit **postulate** (`ZETA_SIGMA`), while the ordinates $\gamma_m$ are
-  genuinely measured by interval Newton contraction (landmine L12).
+  structure is conjugate pairing gamma_(N-m) = conj(gamma_m). The coordinate
+  sigma = 0.5 is therefore carried in this repository as an explicit
+  **postulate** (`ZETA_SIGMA`), while the ordinates gamma_m are genuinely
+  measured by interval Newton contraction (landmine L12).
+
+The assumed eigenvalue decay law under test is:
+
+<p align="center"><img src="docs/math/lambda_min.svg" alt="lambda_min(n) ~ A e^(-B n)"></p>
+
+and the critical-dimension equation solved on both entropy paths is:
+
+<p align="center"><img src="docs/math/ncrit.svg" alt="B log_2(e) n^2 + n log_2(1/A) - N_steps = 0"></p>
 
 ### 2.3 Rigid 256-bit Measurement Table
 
@@ -143,26 +170,28 @@ kernel with zero drift.
 
 | # | Quantity | Measured enclosure |
 |---|---|---|
-| 1 | $N_{\mathrm{steps}} = D_{\mathrm{obs}} / \ell_P$ | `5.44468544329815837306650e+61`, non-integer |
-| 2 | `floor(N_steps)` (modulus of $T^N = I$) | `54446853992717733278474003174004102075476951347404957757284586` |
-| 3 | $\log_2(N_{\mathrm{steps}})$ | 206 bit; storage lower bound `6805856749089716659809250396750512759434618918425619719660574` byte |
-| 4 | $[H,T]$ residual, $n = 16$ | contains zero (PASS-BY-ENCLOSURE), max half-width `2.35950e-77` |
-| 5 | $T^\dagger T - I$, $T^n - I$ | exact zero at every entry (rational 0/1, no rounding) |
-| 6 | Weil minimum $\|\lambda_{\min}\|$, $n = 16$ | `1.00000000000000000000000000000000` (no exponential decay) |
-| 7 | Spectral entropy $H(n=16)$ | `2.95344529780425926466202918672` bit |
-| 8 | $\mathrm{Re}(\rho_1)$ enclosure radius | `3.77221946277e-71`, offset ball contains 0.5 |
-| 9 | $\mathrm{Re}(\rho_2)$ enclosure radius | `8.68430320525e-78`, offset ball contains 0.5 |
-| 10 | $\mathrm{Re}(\rho_3)$ enclosure radius | `1.16898354764e-71`, offset ball contains 0.5 |
-| 11 | $n_{\mathrm{crit}}$, manuscript path ($H := n$) | `1.8e31` |
-| 12 | $n_{\mathrm{crit}}$, measured path ($H := 0.5 + 0.5\log_2(2(n-1))$) | `3.16e60` |
-| 13 | $\chi_{4,3}$ first Hardy bracket | $(6.0,\ 6.1)$, endpoints strictly $+1$/$-1$ |
-| 14 | Pixel projection $\rho_{1,2,3}$ | `461`, `686`, `816` (exact integers mod $N_{\mathrm{steps}}$) |
-| 15 | Ledger replay $V(L)$, both ledgers | True (hash chain intact, every block reproduced) |
-| 16 | Final holographic seal, $n \in \{16, 400, 800\}$ | `SAFE-COMPUTATION` on both entropy paths |
+| 1 | N_steps = D_obs / l_P | `5.44468544329815837306650e+61`, non-integer |
+| 2 | floor(N_steps) (modulus of T^N = I) | `54446853992717733278474003174004102075476951347404957757284586` |
+| 3 | log2(N_steps) | 206 bit; storage lower bound `6805856749089716659809250396750512759434618918425619719660574` byte |
+| 4 | [H,T] residual, n = 16 | contains zero (PASS-BY-ENCLOSURE), max half-width `2.35950e-77` |
+| 5 | T^dag T - I, T^n - I | exact zero at every entry (rational 0/1, no rounding) |
+| 6 | Weil minimum |lambda_min|, n = 16 | `1.00000000000000000000000000000000` (no exponential decay) |
+| 7 | Spectral entropy H(n=16) | `2.95344529780425926466202918672` bit |
+| 8 | Re(rho_1) enclosure radius | `3.77221946277e-71`, offset ball contains 0.5 |
+| 9 | Re(rho_2) enclosure radius | `8.68430320525e-78`, offset ball contains 0.5 |
+| 10 | Re(rho_3) enclosure radius | `1.16898354764e-71`, offset ball contains 0.5 |
+| 11 | n_crit, manuscript path (H := n) | `1.8e31` |
+| 12 | n_crit, measured path (H := 0.5 + 0.5 log2(2(n-1))) | `3.16e60` |
+| 13 | chi_4_3 first Hardy bracket | `(6.0, 6.1)`, endpoints strictly +1/-1 |
+| 14 | Pixel projection rho_1,2,3 | `461`, `686`, `816` (exact integers mod N_steps) |
+| 15 | Ledger replay V(L), both ledgers | True (hash chain intact, every block reproduced) |
+| 16 | Final holographic seal, n in {16, 400, 800} | `SAFE-COMPUTATION` on both entropy paths |
 
 Rows 11-12 differ by 29 orders of magnitude because of the entropy
 assumption, not because of arithmetic: the manuscript arithmetic reproduces
-exactly, its premise $H \equiv n$ does not survive measurement.
+exactly, its premise H = n does not survive measurement. The pixel map is:
+
+<p align="center"><img src="docs/math/pixel.svg" alt="k_m = floor(gamma_m / 2pi log_2(N_steps)) mod N_steps"></p>
 
 ---
 
@@ -177,21 +206,23 @@ pip install "python-flint==0.9.0" matplotlib pytest
 
 `python-flint` provides the Arb/Acb ball arithmetic; `matplotlib` renders
 only already-certified integers (no float produced by any computation ever
-reaches the plotter); `pytest` runs the regression suite.
+reaches the plotter) and typesets the equations in `docs/math/`;
+`pytest` runs the regression suite.
 
-### 3.2 Regression Suite (71 tests, every landmine pinned)
+### 3.2 Regression Suite (86 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
 # Asserts the precision kernel, the lattice operators, the von Mangoldt map,
 # the commutation certificates, the Newton inversion, both evolution lineages,
-# the Dirichlet bracketing, and every landmine L1-L37.
+# the Dirichlet bracketing, and every landmine L1-L38.
 ```
 
 A pytest-free runner with identical coverage is included:
 
 ```bash
 python -m msaf.tests.test_msaf
+python -m msaf.tests.test_dirichlet
 ```
 
 ### 3.3 Full Audit and Evolution Campaigns
@@ -207,9 +238,9 @@ python -m msaf.audit --prec 256 --evolve 6 --root-pull 3 \
 Flag annotations: `--prec` locks the global Arb precision exactly once;
 `--evolve` runs symbol-mutation proposals; `--root-pull` runs proposals
 pulled from certified zeta zeros (failures recorded as `REVERT`);
-`--visualize` localises $N$ zeros and writes the pixel report;
+`--visualize` localises N zeros and writes the pixel report;
 `--final-audit` replays every ledger and checks capacity;
-`--dirichlet` enumerates primitive characters and brackets $\chi_{4,3}$.
+`--dirichlet` enumerates primitive characters and brackets chi_4_3.
 
 ### 3.4 Independent SHA-256 Ledger Replay
 
@@ -244,9 +275,9 @@ a small radius onto exactly `0.0` and fabricate a zero):
 qualify them. `reports/spectral_density.png` renders the same integer data
 with the axis explicitly labelled `mod 2^32` for plottability.
 `reports/GRH_BRACKET_REPORT.json` is the Dirichlet counterpart: the
-multi-resolution sign-change dossier for $\chi_{4,3}$ over $(6.0,\ 6.1)$,
-with per-level endpoints, Hardy values, radii, measured signs and the
-odd-count claim boundary.
+multi-resolution sign-change dossier for chi_4_3 over (6.0, 6.1), with
+per-level endpoints, Hardy values, radii, measured signs and the odd-count
+claim boundary.
 
 ### 3.6 Reading `ledger/` - the Evidence Books
 
@@ -255,36 +286,36 @@ Each `.jsonl` line is one immutable record: `index`, `generation`,
 serialised-ball fields as decimal strings, `previous_hash`, and `record_hash`
 (SHA-256 over the canonical body). `REVERT` is a safety event (no
 certificate), distinct from `REJECT` (a fitness comparison). Verify with the
-replay commands of Sec. 3.4; trust nothing from runtime memory.
+replay commands of Section 3.4; trust nothing from runtime memory.
 
 ---
 
 ## SECTION 4: RECENT AUDIT KERNEL AMENDMENTS (LANDMINES L31-L35)
 
 Found by adversarial self-audit: every module re-read under the assumption
-that the green suite is lying, then measured. Full text in
-[`msaf/AUDIT.md`](msaf/AUDIT.md), Parts IV-V.
+that the green suite is lying, then measured. L36-L38 extend the register to
+the Dirichlet kernel. Full text in [`msaf/AUDIT.md`](msaf/AUDIT.md), Parts
+IV-VI.
 
-**L31 - Frozen $\log_2 e$ constant.** A module-level `LOG2_E` was evaluated
-once at import under the 53-bit default (`[1.442695040888963 +/- 8.70e-16]`)
-while the kernel ran at 256 bit, so every budget width was secretly a 53-bit
-radius. Replaced by a `log2_e()` function evaluated at the active precision
-on every call; a function cannot freeze.
+**L31 - Frozen log2(e) constant.** A module-level `LOG2_E` was evaluated
+once at import under the 53-bit default, while the kernel ran at 256 bit, so
+every budget width was secretly a 53-bit radius. Replaced by a `log2_e()`
+function evaluated at the active precision on every call; a function cannot
+freeze.
 
 **L32 - Double-counted differentiation factor.** The derivative tail summed
-$(k+1)\lvert d_k\rvert r^k$ over already-differentiated coefficients. Still a
-valid (looser) bound, but contradicting the documented identity. Now exactly
-$\sum \lvert d_k\rvert r^k$, pinned by a test evaluating the series at exact
-sample points inside the ball.
+(k+1)|d_k|r^k over already-differentiated coefficients. Still a valid
+(looser) bound, but contradicting the documented identity. Now exactly the
+differentiated-coefficient sum, pinned by a test evaluating the series at
+exact sample points inside the ball.
 
 **L33 - One-sided widening let genuine derivatives escape (UNSOUND).**
 The enclosure `union(enc, enc + 2*tail)` widens only upward when the tail is
-one-sided positive, while the true correction $d_1 h$ points either way
-(measured $-8.01\times 10^{-16}$ in the real part at $h = +r/2$, below the
-lower edge). Certificates reported success regardless; results survived only
-because Newton division is dominated by the imaginary component - luck, not
-rigor. Replaced by symmetric Minkowski widening `enclosure + ([-t, +t])`,
-which cannot miss either side. Verdicts and seal unchanged after the fix.
+one-sided positive, while the true correction points either way. Certificates
+reported success regardless; results survived only because Newton division is
+dominated by the imaginary component - luck, not rigor. Replaced by symmetric
+Minkowski widening, which cannot miss either side. Verdicts and seal
+unchanged after the fix.
 
 **L34 - Root-pull outcome promised `Fitness`, delivered `None`.** A typed lie
 under a `type: ignore` comment, one caller away from detonation. Replaced by a
@@ -299,19 +330,57 @@ now anchored to the workspace root derived from the module location.
 
 ---
 
-## Proven vs Postulated (standing disclosure)
+## SYMBOL GLOSSARY
+
+| Symbol | Meaning | Defined |
+|---|---|---|
+| N_steps | Total information pixels, D_obs / l_P | Sec. 1.2 |
+| l_P, D_obs | Planck length; observable-universe diameter | Sec. 1.2 |
+| T (T-hat) | Unitary Planck time-shift, cyclic permutation | Sec. 1.3 |
+| H (H-hat) | Circulant spectral Hamiltonian | Sec. 2.1 |
+| c | Circulant generator symbol, H = sum_j c_j T^j | Sec. 2.1 |
+| gamma_m | m-th spectral ordinate (imaginary part) | Sec. 2.1 |
+| sigma_m | Real part of m-th eigenvalue; postulated 0.5 | Sec. 2.2 |
+| rho_m | m-th non-trivial zero, sigma_m + i gamma_m | Sec. 2.3 |
+| k_m | Modular pixel projection of gamma_m | Sec. 2.3 |
+| psi_d, Lambda_d | Discrete Chebyshev step; quantised von Mangoldt weight | Sec. 1.2 |
+| xi(s) | Completed zeta function (Newton target) | Sec. 1.3 |
+| lambda_min | Smallest eigenvalue magnitude under test law | Sec. 2.2 |
+| H(n) | Spectral Shannon entropy in bits | Sec. 2.1 |
+| V(L) | Ledger verification identity (chain + replay) | Sec. 3.4 |
+| chi_q_n | Dirichlet character, modulus q, number n | Sec. 2.3 |
+| Z(t) | Hardy Z-function of a real character | Sec. 2.3 |
+
+## PROVEN VS POSTULATED (STANDING DISCLOSURE)
 
 Proven by execution: the grid arithmetic, the operator certificates, the
 Weil spectrum in closed form, three localised zeros with certified
 enclosures, the Dirichlet brackets, the hash chains and their independent
-replay. Postulated, not derived: $\sigma = 0.5$ as a universal statement
-(every result carries `global_claim_supported = False`); the decay law
-$\lambda_{\min} \sim A e^{-Bn}$ with $\mathcal{B} \approx 0.115$ (both
-entropy paths reported side by side).
+replay. Postulated, not derived: sigma = 0.5 as a universal statement
+(every result carries `global_claim_supported = False`); the decay law with
+B ~= 0.115 (both entropy paths reported side by side).
 
 Session memory and Terminus log: [`brain.md`](brain.md).
-Landmine register L1-L37: [`msaf/AUDIT.md`](msaf/AUDIT.md).
+Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
 
-## License
+## REPOSITORY LAYOUT
+
+- `msaf/` - kernel: precision, constants, grid, certificates, operators,
+  Guinand-Weil matrices, budget, zeta inversion, evolution, visualizer,
+  Dirichlet bracketing, final audit
+- `msaf_core_lattice.py` - the four mandated entry points
+- `msaf/tests/` - regression suite (86 tests)
+- `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py)
+- `harness/` - release gate and math renderer
+- `ledger/` - append-only evidence chains; `reports/` - integer pixel reports
+
+## CITATION
+
+```text
+Amry, Muhammad Aidil. T-hat-N: Matrix-constraint Spectral Analysis Framework.
+v1.1.0. Zenodo. https://doi.org/10.5281/zenodo.23338272
+```
+
+## LICENSE
 
 MIT - see [LICENSE](LICENSE).
