@@ -177,6 +177,9 @@ flow diagram, spectrum mechanics + 14-row 256-bit table, reproducibility
 manual, L31-L35 amendments), LaTeX throughout, ASCII-strict, all numbers
 measured. Second push 2026-10-13 (`443a004`, `fe45ae1`) via transient token
 in memory only; remote verified credential-free afterwards.
+README refresh 2026-10-13 (commit `a1c48ac`, local): full re-audit showed
+zero numeric drift, table extended to 16 rows (ledger seal rows), ASCII
+re-verified at 0 non-ASCII. Pending push (needs researcher auth).
 Next (only if researcher orders): replace postulated γ_m DFT definition with
 Newton-derived spectrum module (`zetazeros.py`); multi-precision stress sweep
 (128/256/512/1024 bit) as campaign matrix.
