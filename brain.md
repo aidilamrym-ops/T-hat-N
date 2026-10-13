@@ -174,6 +174,9 @@ v1.1.0 SEALED locally 2026-10-13: `.zenodo.json` (Title/Creators/ORCID/keywords/
 `harness/release_tag.sh` (5 hard gates, local-only, never pushes), 85 green,
 audit `--prec 256 --newton_max_iter 16 --final-audit` exit 0 with V(L)=True on
 both ledgers. Tag object `v1.1.0` annotated. No remote contacted for release.
+ZENODO ARCHIVED 2026-10-13: deposition 23338272 published via direct API
+deposit (git-archive zip of tag v1.1.0, md5-verified pre-publish). Version DOI
+10.5281/zenodo.23338272, concept DOI 10.5281/zenodo.23338271.
 PUBLIC PUSH 2026-10-13: repo `aidilamrym-ops/T-hat-N` (public) created, branch
 `main` pushed (commits `e446d1f`, `64abe12` rewritten with noreply author
 email; placeholder email eliminated). Token file `T-hat-N.txt` consumed then
