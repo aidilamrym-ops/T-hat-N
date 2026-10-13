@@ -166,6 +166,12 @@ root-pull ledger replays byte-identical under the renamed budget parameter.
 Post-Terminus: repo initialised + sealed commit `2298140`, fresh-clone
 reproduction green (67 tests then, both ledgers V(L)=True). Dirichlet campaign
 live: `msaf/dirichlet.py`, chi_4_3 bracket (6.0, 6.1), audit section 13.
+PUBLIC PUSH 2026-10-13: repo `aidilamrym-ops/T-hat-N` (public) created, branch
+`main` pushed (commits `e446d1f`, `64abe12` rewritten with noreply author
+email; placeholder email eliminated). Token file `T-hat-N.txt` consumed then
+permanently deleted; remote URL carries no credential; no `ghp_` string
+anywhere in tracked files. ACTION REQUIRED BY RESEARCHER: revoke the consumed
+token at github.com/settings/tokens (it cannot be revoked via API here).
 Next (only if researcher orders): replace postulated γ_m DFT definition with
 Newton-derived spectrum module (`zetazeros.py`); multi-precision stress sweep
 (128/256/512/1024 bit) as campaign matrix.
