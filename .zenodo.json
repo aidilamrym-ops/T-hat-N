@@ -1,0 +1,25 @@
+{
+  "title": "T-hat-N: Matrix-constraint Spectral Analysis Framework — Rigid Ball-Arithmetic Kernel, Interval Newton Zeta Inversion, and Certified Dirichlet Bracketing",
+  "creators": [
+    {
+      "name": "Amry, Muhammad Aidil",
+      "affiliation": "Independent Researcher",
+      "orcid": "0009-0002-9718-9710"
+    }
+  ],
+  "description": "Executable research software for the Matrix-constraint Spectral Analysis Framework (MSAF). A rigid computational kernel built on python-flint ball arithmetic (Arb/Acb, 256-bit working precision) with zero floating-point hand-offs: a finite information lattice (N_steps = D_obs / l_P), unitary cyclic-shift operator certificates, Guinand-Weil spectral analysis, rigorous interval Newton inversion of the Riemann xi function, SHA-256 hash-chained evolution ledgers with independent replay, rigid cosmological pixel projection, and certified Hardy sign-change bracketing for real primitive Dirichlet characters. Every zero claim is certified by interval containment, never by equality. Includes an 85-test regression suite pinning 38 documented precision landmines, machine-readable evidence ledgers, and a formal 16-row measurement table in the README.",
+  "keywords": [
+    "Riemann zeta function",
+    "Dirichlet L-functions",
+    "Generalized Riemann Hypothesis",
+    "rigorous numerics",
+    "ball arithmetic",
+    "interval arithmetic",
+    "python-flint",
+    "spectral analysis",
+    "reproducible research"
+  ],
+  "license": "MIT",
+  "version": "v1.1.0",
+  "language": "eng"
+}

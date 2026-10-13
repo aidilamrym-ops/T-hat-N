@@ -46,6 +46,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--capacity-dims", type=int, nargs="*", default=[16, 400, 800])
     parser.add_argument("--dirichlet", type=int, default=0,
                         help="enumerate primitive characters to modulus N and bracket chi_4")
+    parser.add_argument("--newton_max_iter", type=int, default=None,
+                        help="Newton iteration budget for root-pull localisation "
+                             "(defaults to --regression-n)")
     args = parser.parse_args(argv)
 
     if not args.skip_env_check:
@@ -246,8 +249,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.root_pull > 0:
         from .evolution import RootPullGenome, evolve_root_pull
 
+        newton_budget = args.newton_max_iter if args.newton_max_iter is not None else n
         pull = evolve_root_pull(
-            RootPullGenome(0, 1, 1), n, args.root_pull, args.ledger.with_name("rootpull.jsonl")
+            RootPullGenome(0, 1, 1), newton_budget, args.root_pull, args.ledger.with_name("rootpull.jsonl")
         )
         decisions = [f"{r.decision}({r.tilt})" for r in pull.ledger.records]
         intact, first_bad = pull.ledger.verify_chain()
