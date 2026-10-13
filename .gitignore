@@ -3,3 +3,10 @@ __pycache__/
 .pytest_cache/
 .DS_Store
 Thumbs.db
+
+# Private working files: researcher-to-agent instructions, never published
+instruksi_*.md
+msaf_execution_manual.md
+msaf_terminus_phase*.md
+system_prompt_opencode.md
+Kompilasi Rumus, Turunan, dan Penjelasan Simbol.md
