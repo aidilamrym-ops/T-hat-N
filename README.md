@@ -51,7 +51,8 @@ pinned by a test) and [`brain.md`](brain.md) (session memory and Terminus log).
 ## Layout
 
 - `msaf/` — kernel: precision, constants, grid, certificates, operators,
-  Guinand–Weil matrices, budget, zeta inversion, evolution, visualizer, audit
+  Guinand–Weil matrices, budget, zeta inversion, evolution, visualizer,
+  Dirichlet bracketing, final audit
 - `msaf_core_lattice.py` — the four mandated entry points
 - `msaf/tests/` — regression suite
 - `ledger/` — append-only evidence chains · `reports/` — integer pixel reports

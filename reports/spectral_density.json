@@ -11,11 +11,17 @@
     "21.0220396387715549926284795939",
     "25.0108575801456887632137909926"
   ],
+  "gamma_radii": [
+    "1.38847243130e-76",
+    "2.80732518641e-76",
+    "2.77068351253e-76"
+  ],
   "verdicts": [
     "ZERO-LOCALIZED",
     "ZERO-LOCALIZED",
     "ZERO-LOCALIZED"
   ],
   "locked": 3,
-  "total": 3
+  "total": 3,
+  "note": "gammas are enclosure midpoints; gamma_radii are the certified radii; pixels are exact integers, never rounded floats"
 }

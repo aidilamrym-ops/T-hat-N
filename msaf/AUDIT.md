@@ -3,7 +3,7 @@
 Every item below is verified by execution on `python-flint 0.9.0` /
 `Python 3.14.4`. Nothing here is based on reading the manuscript.
 
-Regression suite: `python -m pytest msaf -q` (67 tests, all passing).
+Regression suite: `python -m pytest msaf -q` (71 tests, all passing).
 Full report: `python -m msaf.audit --prec 256 --evolve 6 --root-pull 3 --visualize 3 --final-audit`.
 Standalone replay: `python -m msaf.evolution --replay ledger/msaf_ledger.jsonl --dimension 16`.
 
@@ -427,3 +427,29 @@ compatibility preserved, so every existing ledger still replays byte-identical.
 audit from any other directory silently scattered ledgers across the
 filesystem. Both are now anchored to the workspace root derived from the
 module's own location. Ledgers can no longer escape the project.
+
+---
+
+# Part V: Dirichlet extension (2026-10-13)
+
+FLINT exposes character enumeration, `L(chi, s)` on Acb balls and Hardy
+`Z(t)`, but no power-series expansion for L. The Taylor Newton of
+`zeta_inversion` therefore has no analogue here, and no attempt is made to
+fake one. `msaf/dirichlet.py` does the one supported thing: bracketing zeros
+of real primitive characters through certified Hardy sign changes.
+
+## L36. Character numbers are 1-based units, metadata are methods
+
+`dirichlet_char(q, 0)` raises AssertionError, and `conductor`/`order` are
+methods on this binding, not attributes. Valid numbers are the units mod q
+(verified: q=4 admits 1 and 3, q=8 admits 1, 3 and 5). Enumeration tries units
+and skips AssertionError rather than asserting a numbering rule FLINT never
+documented.
+
+## L37. A bracket is not a localisation
+
+A certified sign change proves an ODD number of zeros in the interval: one,
+three, five. Reporting it as "the zero at" would be fabrication. The verdict
+vocabulary (`ZeroBracket`, never `ZeroLocalization`) and the audit section
+both enforce the distinction. Measured: chi_4_3 first bracket (6.0, 6.1),
+endpoints strictly +1/-1.

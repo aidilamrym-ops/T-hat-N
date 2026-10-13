@@ -159,10 +159,13 @@ pixels 461…/686…/816… for ρ₁/ρ₂/ρ₃).
 Day 5–7 replay + stress + seal: DONE (`final_audit.py`, `--replay` CLI,
 holographic check vs `n_crit≈3.16e60` measured path; seal=True).
 Landmines L26–L30 recorded (Phase 2/3 blueprint float chain + mid-file guard).
-Suite: 67 tests green. Artifacts: `ledger/msaf_ledger.jsonl`,
+Suite: 71 tests green. Artifacts: `ledger/msaf_ledger.jsonl`,
 `ledger/rootpull.jsonl`, `reports/spectral_density.{json,png}`.
 Blind-spot repairs are value-preserving: same verdicts, same seal, tighter tails;
 root-pull ledger replays byte-identical under the renamed budget parameter.
+Post-Terminus: repo initialised + sealed commit `2298140`, fresh-clone
+reproduction green (67 tests then, both ledgers V(L)=True). Dirichlet campaign
+live: `msaf/dirichlet.py`, chi_4_3 bracket (6.0, 6.1), audit section 13.
 Next (only if researcher orders): replace postulated γ_m DFT definition with
 Newton-derived spectrum module (`zetazeros.py`); multi-precision stress sweep
 (128/256/512/1024 bit) as campaign matrix.

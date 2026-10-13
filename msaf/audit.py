@@ -44,6 +44,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--final-audit", action="store_true",
                         help="replay every ledger and check holographic capacity")
     parser.add_argument("--capacity-dims", type=int, nargs="*", default=[16, 400, 800])
+    parser.add_argument("--dirichlet", type=int, default=0,
+                        help="enumerate primitive characters to modulus N and bracket chi_4")
     args = parser.parse_args(argv)
 
     if not args.skip_env_check:
@@ -321,6 +323,26 @@ def main(argv: list[str] | None = None) -> int:
             ledgers.append(sibling)
         seal = run_final_audit(ledgers, args.capacity_dims, n)
         blocks.append(_block("12. FINAL AUDIT (ledger replay + capacity)", [seal.render()]))
+
+    if args.dirichlet > 0:
+        from .dirichlet import describe, isolate_sign_changes, primitive_characters
+
+        prims = primitive_characters(args.dirichlet)
+        real = [s for s in prims if s.is_real]
+        chi4 = describe(4, 3)
+        brackets = isolate_sign_changes(chi4, "5.5", "7.0", "0.1")
+        blocks.append(
+            _block(
+                "13. DIRICHLET CAMPAIGN (Hardy Z bracketing)",
+                [
+                    f"primitive characters to mod {args.dirichlet} = {len(prims)}",
+                    f"real (order<=2)                        = {len(real)}",
+                    f"complex (excluded from isolation)      = {len(prims) - len(real)}",
+                    *[b.render() for b in brackets[:3]],
+                    "brackets certify an ODD number of zeros, never exactly one",
+                ],
+            )
+        )
 
     sys.stdout.write("\n".join(blocks))
     return 0

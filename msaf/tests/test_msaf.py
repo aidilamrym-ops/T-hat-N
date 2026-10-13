@@ -763,6 +763,53 @@ def test_replay_cli_refuses_precision_mismatch() -> None:
     assert "V(L)                = False" in completed.stdout
 
 
+# --------------------------------------------------------------------------
+# Dirichlet campaign: primitive characters and Hardy Z bracketing
+# --------------------------------------------------------------------------
+
+
+def test_chi_4_classification_is_primitive_odd_real() -> None:
+    from msaf.dirichlet import describe
+
+    spec = describe(4, 3)
+    assert (spec.conductor, spec.primitive, spec.parity, spec.order) == (4, True, 1, 2)
+    assert spec.is_real
+
+
+def test_isolation_refuses_complex_characters() -> None:
+    from msaf.dirichlet import describe, isolate_sign_changes
+
+    try:
+        isolate_sign_changes(describe(5, 2), "5", "7", "0.1")
+    except ValueError:
+        return
+    raise AssertionError("sign isolation ran on a complex-valued Z")
+
+
+def test_chi_4_first_bracket_is_certified_and_tight() -> None:
+    from msaf.dirichlet import describe, isolate_sign_changes, strict_sign, hardy_enclosure
+
+    spec = describe(4, 3)
+    brackets = isolate_sign_changes(spec, "5.5", "7.0", "0.1")
+    assert brackets, "no bracket found where the zero is known to be"
+    first = brackets[0]
+    assert first.width() <= arb("0.1") + arb("1e-30")
+    assert strict_sign(hardy_enclosure(spec, first.lower)) == 1
+    assert strict_sign(hardy_enclosure(spec, first.upper)) == -1
+    assert first.lower.upper() < arb("6.021") and first.upper.lower() > arb("6.020")
+
+
+def test_undetermined_sign_contributes_no_claim() -> None:
+    from msaf.dirichlet import strict_sign
+
+    assert strict_sign(acb("0 +/- 1")) == 0
+    # A narrow imaginary enclosure around zero does not veto a strict real
+    # sign; Z of a real character at a real ordinate is exactly real anyway.
+    assert strict_sign(acb("1 +/- 0.001") + acb(0, 1) * acb("0 +/- 0.001")) == 1
+    assert strict_sign(acb("2 +/- 0.001")) == 1
+    assert strict_sign(acb("-2 +/- 0.001")) == -1
+
+
 def test_final_audit_seals_only_fully_safe_campaigns() -> None:
     from msaf.final_audit import run_final_audit
 
