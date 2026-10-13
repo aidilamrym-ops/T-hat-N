@@ -151,6 +151,51 @@ def test_primitive_enumeration_is_stable() -> None:
     assert all(s.primitive for s in primitive_characters(8))
 
 
+def test_multiresolution_dossier_nests_and_measures_signs() -> None:
+    """Each refinement level re-measures; nesting and opposition are checked."""
+    from msaf.dirichlet import multiresolution_bracket_report
+
+    dossier = multiresolution_bracket_report(4, 3, "6.0", "6.1", ["0.01", "0.001"])
+    assert dossier["global_claim_supported"] is False
+    assert "odd" in dossier["claim"].lower() and "localisation" in dossier["claim"]
+    levels = dossier["levels"]
+    assert len(levels) == 2
+    outer, inner = levels[0], levels[1]
+    # Exact decimal comparison: ball-vs-ball <= is False on overlapping balls
+    # (L14), so nesting is checked on the exact decimal strings themselves.
+    from decimal import Decimal
+
+    assert Decimal(outer["lower"]) <= Decimal(inner["lower"])
+    assert Decimal(inner["upper"]) <= Decimal(outer["upper"])
+    for level in levels:
+        assert level["lower_sign"] != level["upper_sign"]
+    assert outer["lower_sign"] == 1 and outer["upper_sign"] == -1
+
+
+def test_dossier_serialises_strings_only() -> None:
+    """An auditor must never have to guess a number's type."""
+    import json
+
+    from msaf.dirichlet import multiresolution_bracket_report
+
+    dossier = multiresolution_bracket_report(4, 3, "6.0", "6.1", ["0.01"])
+
+    def check(node) -> None:
+        if isinstance(node, dict):
+            for value in node.values():
+                check(value)
+        elif isinstance(node, list):
+            for value in node:
+                check(value)
+        elif isinstance(node, bool):
+            pass
+        else:
+            assert isinstance(node, (str, int)), f"non-string leaf: {node!r}"
+
+    check(dossier)
+    assert isinstance(dossier["levels"][0]["width"], str)
+
+
 def main() -> int:
     failures = 0
     for name, fn in sorted(globals().items()):

@@ -243,6 +243,10 @@ a small radius onto exactly `0.0` and fabricate a zero):
 `gammas` are enclosure midpoints; `gamma_radii` are the certified radii that
 qualify them. `reports/spectral_density.png` renders the same integer data
 with the axis explicitly labelled `mod 2^32` for plottability.
+`reports/GRH_BRACKET_REPORT.json` is the Dirichlet counterpart: the
+multi-resolution sign-change dossier for $\chi_{4,3}$ over $(6.0,\ 6.1)$,
+with per-level endpoints, Hardy values, radii, measured signs and the
+odd-count claim boundary.
 
 ### 3.6 Reading `ledger/` - the Evidence Books
 

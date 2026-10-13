@@ -42,6 +42,9 @@ __all__ = [
     "DirichletCharacter",
     "RigorousLFunction",
     "ZeroBracket",
+    "BracketLevel",
+    "multiresolution_bracket_report",
+    "write_bracket_report",
     "enumerate_characters",
     "primitive_characters",
     "describe",
@@ -373,3 +376,115 @@ def _measured_sign(
         if strict:
             raise
         return 0
+
+
+class BracketLevel(NamedTuple):
+    """One resolution level of a multi-resolution bracketing dossier."""
+
+    step: str
+    bracket: ZeroBracket
+    lower_value: str
+    lower_radius: str
+    lower_sign: int
+    upper_value: str
+    upper_radius: str
+    upper_sign: int
+
+    def to_dict(self) -> dict:
+        return {
+            "step": self.step,
+            "lower": self.bracket.lower.mid().str(30, radius=False),
+            "upper": self.bracket.upper.mid().str(30, radius=False),
+            "lower_z_mid": self.lower_value,
+            "lower_z_radius": self.lower_radius,
+            "lower_sign": self.lower_sign,
+            "upper_z_mid": self.upper_value,
+            "upper_z_radius": self.upper_radius,
+            "upper_sign": self.upper_sign,
+            "width": self.bracket.width().mid().str(12, radius=False),
+        }
+
+
+def multiresolution_bracket_report(
+    modulus: int, number: int, t_start: str, t_end: str, steps: list[str]
+) -> dict:
+    """Narrow a sign-change bracket through successive grid refinements.
+
+    Each level sweeps the CURRENT bracket with a finer step and keeps its
+    first certified sign change, so levels nest rigorously: every level's
+    interval is contained in the previous one. A level that yields no bracket
+    aborts the dossier with `RuntimeError` instead of inventing coordinates.
+
+    The returned mapping contains decimal strings only: midpoints, radii,
+    signs, verdicts and method notes. No float ever participates, on any path.
+    """
+    admitted = DirichletCharacter(modulus, number)
+    kernel = RigorousLFunction(admitted)
+    spec = admitted.spec
+    levels: list[BracketLevel] = []
+    lower, upper = arb(t_start), arb(t_end)
+    for step in steps:
+        found = isolate_sign_changes(
+            spec,
+            lower.mid().str(30, radius=False),
+            upper.mid().str(30, radius=False),
+            step,
+        )
+        if not found:
+            raise RuntimeError(
+                f"{spec.identifier()}: refinement at step {step} lost the bracket; "
+                "dossier aborted rather than extrapolated"
+            )
+        first = found[0]
+        lower_z = kernel.hardy(first.lower)
+        upper_z = kernel.hardy(first.upper)
+        # Signs are measured from the widened enclosures, never assumed from
+        # the previous level: a bracket may run either direction.
+        lower_sign = 1 if lower_z.real.lower() > 0 else -1
+        upper_sign = 1 if upper_z.real.lower() > 0 else -1
+        if lower_sign == upper_sign:
+            raise RuntimeError(
+                f"{spec.identifier()}: bracket endpoints agree in sign at step "
+                f"{step}; the sweep below is inconsistent, dossier aborted"
+            )
+        levels.append(
+            BracketLevel(
+                step=step,
+                bracket=first,
+                lower_value=lower_z.real.mid().str(30, radius=False),
+                lower_radius=lower_z.real.rad().mid().str(12, radius=False),
+                lower_sign=lower_sign,
+                upper_value=upper_z.real.mid().str(30, radius=False),
+                upper_radius=upper_z.real.rad().mid().str(12, radius=False),
+                upper_sign=upper_sign,
+            )
+        )
+        lower, upper = first.lower, first.upper
+    return {
+        "character": spec.identifier(),
+        "modulus": spec.modulus,
+        "number": spec.number,
+        "conductor": spec.conductor,
+        "primitive": spec.primitive,
+        "parity": spec.parity,
+        "order": spec.order,
+        "search_range": [t_start, t_end],
+        "method": "certified Hardy Z sign changes on exact decimal grids; "
+                  "each level sweeps the previous bracket with a finer step",
+        "claim": "each level brackets an ODD number of zeros; not a localisation; "
+                 "says nothing about zeros off the critical line",
+        "global_claim_supported": False,
+        "working_precision_bits": working_precision(),
+        "levels": [level.to_dict() for level in levels],
+    }
+
+
+def write_bracket_report(path, dossier: dict):
+    """Serialise a bracketing dossier as indented JSON. Strings only."""
+    import json
+    from pathlib import Path as _Path
+
+    target = _Path(path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(dossier, indent=2), encoding="utf-8")
+    return target

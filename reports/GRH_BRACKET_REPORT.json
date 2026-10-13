@@ -1,0 +1,55 @@
+{
+  "character": "chi_4_3",
+  "modulus": 4,
+  "number": 3,
+  "conductor": 4,
+  "primitive": true,
+  "parity": 1,
+  "order": 2,
+  "search_range": [
+    "6.0",
+    "6.1"
+  ],
+  "method": "certified Hardy Z sign changes on exact decimal grids; each level sweeps the previous bracket with a finer step",
+  "claim": "each level brackets an ODD number of zeros; not a localisation; says nothing about zeros off the critical line",
+  "global_claim_supported": false,
+  "working_precision_bits": 256,
+  "levels": [
+    {
+      "step": "0.01",
+      "lower": "6.02000000000000000000000000000",
+      "upper": "6.03000000000000000000000000000",
+      "lower_z_mid": "0.00124227780338380296018824253605",
+      "lower_z_radius": "9.40732114316e-75",
+      "lower_sign": 1,
+      "upper_z_mid": "-0.0118634591326002095370778138071",
+      "upper_z_radius": "1.41027294304e-74",
+      "upper_sign": -1,
+      "width": "0.0100000000000"
+    },
+    {
+      "step": "0.001",
+      "lower": "6.02000000000000000000000000000",
+      "upper": "6.02100000000000000000000000000",
+      "lower_z_mid": "0.00124227780338380296018824253605",
+      "lower_z_radius": "7.67584520433e-76",
+      "lower_sign": 1,
+      "upper_z_mid": "-6.69004178250146409724619970101e-5",
+      "upper_z_radius": "5.46683708917e-75",
+      "upper_sign": -1,
+      "width": "0.00100000000000"
+    },
+    {
+      "step": "0.0001",
+      "lower": "6.02090000000000000000000000000",
+      "upper": "6.02100000000000000000000000000",
+      "lower_z_mid": "6.40314393793440642349690268708e-5",
+      "lower_z_radius": "4.30621479712e-74",
+      "lower_sign": 1,
+      "upper_z_mid": "-6.69004178250146409724619970101e-5",
+      "upper_z_radius": "4.77816241952e-74",
+      "upper_sign": -1,
+      "width": "0.000100000000000"
+    }
+  ]
+}
