@@ -12,9 +12,12 @@ This module verifies that claim mechanically, with zero narrative:
    output of the renderer configuration (figsize 10x8 at 300 dpi). A
    substituted or re-rendered image with different geometry fails.
 3. INK PRESENCE. Decoded with Pillow (an independent decoder codebase from
-   matplotlib's writer, C-speed) and counted: total ink, histogram blue and
-   scatter green must each exceed pinned floors. A blank canvas, a missing
-   subplot, or a swapped image fails by orders of magnitude.
+   matplotlib's writer, C-speed) and counted with numpy purely as a counting
+   accelerator inside test scaffolding: no measured value flows through it,
+   and the pass/fail verdicts come from pinned floors, never from numpy
+   arithmetic. Histogram blue and scatter green must each exceed pinned
+   floors. A blank canvas, a missing subplot, or a swapped image fails by
+   orders of magnitude.
 4. JSON LINKAGE. The JSON side is checked for type discipline (decimal
    strings, never floats), internal consistency (locked == total, verdicts
    unanimous), and range validity against the modulus.
