@@ -170,6 +170,10 @@ GRH class-gated rewrite: `DirichletCharacter` + `RigorousLFunction`
 (straddle raises `StraddlingEnclosure`), 12-test purity suite, register L38.
 GRH dossier: `reports/GRH_BRACKET_REPORT.json` (chi_4, 3 resolution levels to
 1e-4, measured signs, string-only), 85 tests green.
+v1.1.0 SEALED locally 2026-10-13: `.zenodo.json` (Title/Creators/ORCID/keywords/MIT),
+`harness/release_tag.sh` (5 hard gates, local-only, never pushes), 85 green,
+audit `--prec 256 --newton_max_iter 16 --final-audit` exit 0 with V(L)=True on
+both ledgers. Tag object `v1.1.0` annotated. No remote contacted for release.
 PUBLIC PUSH 2026-10-13: repo `aidilamrym-ops/T-hat-N` (public) created, branch
 `main` pushed (commits `e446d1f`, `64abe12` rewritten with noreply author
 email; placeholder email eliminated). Token file `T-hat-N.txt` consumed then
