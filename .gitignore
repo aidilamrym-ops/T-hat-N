@@ -1,6 +1,8 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.lake/
+lean/.lake/
 .DS_Store
 Thumbs.db
 

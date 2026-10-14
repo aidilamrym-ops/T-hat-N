@@ -336,8 +336,9 @@ now anchored to the workspace root derived from the module location.
 Sealed through `v1.8.5-alpha` (main `139 passed`, isolated `35 passed +
 1 honest skip`, exit 0). Full derivations in
 [`reports/finite_hydrodynamic_lattices.md`](reports/finite_hydrodynamic_lattices.md)
-(Chapters 1-3) and the Lean blueprint in [`lean/NavierStokesCore.lean`](lean/NavierStokesCore.lean)
-(0 `sorry` / `admit` / `unsafe`).
+(Chapters 1-3) and the machine-checked Lean kernel in [`lean/NavierStokesCore.lean`](lean/NavierStokesCore.lean)
+(`lake build` green, 0 `sorry` / `admit` / `unsafe`, `#print axioms`:
+propext + Classical.choice + Quot.sound only).
 
 ### 5.1 Fractional-step Navier-Stokes loop (`msaf/navier_stokes/`)
 
