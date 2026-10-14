@@ -365,6 +365,7 @@ propext + Classical.choice + Quot.sound only).
 | Z3 double-entry, first zero | `sat`, `[0.5, 0.5]` at 30 decimals (conformance, not proof) |
 | Hodge Gram, exact QQ Sylvester | `POSITIVE/NEGATIVE_DEFINITE`, `UNDETERMINED` on zero minor |
 | Moore box (Lean, Banach) | Newton map + Lipschitz < 1 ⟹ exactly one zero (standard axioms) |
+| Moore-MVT (Lean) | Lipschitz derived from derivative bound; subtype-scoped theorem |
 | RH certified count, [10, 24.5] x [0.49, 0.51] | exactly 2 (strict Newton isolation + full exclusion) |
 
 ### 5.3 Frontier scaffolding (`msaf/milenium_frontier/`, proofs: none)

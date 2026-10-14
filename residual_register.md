@@ -31,6 +31,7 @@
 | TAILS quotient 1.9519 (theory 2.0), far-field 0.61%, radii < 1e-70 | CLOSED |
 | FRONTIER milenium_frontier/ (RH scaffold + Hodge scaffold, lazy zeta) | CLOSED |
 | FRONTIER-DEPTH z3 sat first zero; T-hat-N honest skip | CLOSED |
+| LEAN-MOORE-MVT Lipschitz from deriv bound, subtype theorem | CLOSED |
 | HODGE-GRAM exact Sylvester (pos/neg/undet), pivoted det | CLOSED |
 | F17-LN1 Lean kernel 1D+2D+3D (lake build GREEN, axioms: propext/choice/Quot only) | CLOSED |
 | LEAN-CENTRAL wide-Laplacian estimate + machine-checked no-go | CLOSED |
