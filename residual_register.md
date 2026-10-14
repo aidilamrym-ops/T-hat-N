@@ -56,6 +56,8 @@
 | HODGE-ODD F_{3^n} counts 16/280/784, smooth gates, dual-norm check | CLOSED |
 | HODGE-JACOBI Gauss-sum traces, certified integers, closed-form e=2 | CLOSED |
 | HODGE-PICARD Newton+FE(dim_x)+Moebius mult-count; K3 F_3 pipeline bound 22 | CLOSED |
+| HODGE-EXACT Davenport-Hasse lifted Jacobi sums in Z[zeta_4p], all F_5 counts | CLOSED |
+| HODGE-K3F5 Fermat K3 over F_5: traces a_1..a_11, bound 20 (non-vacuous vs 22) | CLOSED |
 | CHAR2-DEGENERACY quartic = fat plane in char 2; K3 claims fenced to odd p | CLOSED |
 | HODGE-ODD-PICARD K3 program needs odd-p extensions + Jacobi (char-2 degenerate) | OPEN (mapped) |
 | TURING-NT N(T) consistency table + explicit G1/G2/G3 gaps | CLOSED |
@@ -65,4 +67,4 @@
 | VERDICT-GAP floor-branch never counts (pinned, no-zero-ball demo) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
-Suites at seal: isolated `67 passed, 1 skipped`; main `196 passed`; `exit 0`.
+Suites at seal: isolated `75 passed, 1 skipped`; main `204 passed`; `exit 0`.

@@ -14,4 +14,6 @@ __all__ = [
     "finite_fields",
     "odd_fields",
     "picard_bound",
+    "gauss_exact",
+    "fermat_k3",
 ]
