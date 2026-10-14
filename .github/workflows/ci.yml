@@ -13,7 +13,7 @@ jobs:
         with:
           python-version: "3.14"
       - name: Install dependencies
-        run: pip install "python-flint==0.9.0" matplotlib pytest
+        run: pip install "python-flint==0.9.0" matplotlib pytest z3-solver
       - name: Run regression suite
         run: python -m pytest msaf -q
 
@@ -38,4 +38,4 @@ jobs:
         run: lake build
       - name: Escape-token sensor (must be zero hits)
         run: |
-          ! grep -rnE '\bsorry\b|\badmit\b|\bunsafe\b|^axiom\b' --include='*.lean' .
+          ! grep -rnE '\bsorry\b|\badmit\b|\bunsafe\b|^axiom\b' --include='*.lean' --exclude-dir=.lake .
