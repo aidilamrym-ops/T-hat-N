@@ -1,3 +1,4 @@
+import Mathlib.Analysis.Calculus.Deriv.MeanValue
 import Mathlib.Analysis.Calculus.MeanValue
 import Mathlib.Tactic
 
@@ -155,5 +156,48 @@ theorem brouwer_Icc (a b : ℝ) (hab : a ≤ b) (g : ℝ → ℝ)
     the existence theorem through it is future work. -/
 def mooreImage (m : ℝ) (f : ℝ → ℝ) (D : Set ℝ) : Set ℝ :=
   (fun d => m - f m / d) '' D
+
+/-! ## Moore-test uniqueness half (Rolle via MVT).
+
+A derivative enclosure excluding zero allows at most one zero per
+box. The existence half through the operator is mapped future work,
+explicitly not claimed here. -/
+
+/-- At most one zero per box under a clean derivative enclosure. -/
+theorem moore_unique_of_deriv_exclusion (a b : ℝ) (f f' : ℝ → ℝ)
+    (hcont : ContinuousOn f (Set.Icc a b))
+    (hdiff : ∀ x ∈ Set.Icc a b, HasDerivAt f (f' x) x)
+    (D : Set ℝ) (henc : ∀ x ∈ Set.Icc a b, f' x ∈ D)
+    (h0 : 0 ∉ D) :
+    ∀ u ∈ Set.Icc a b, ∀ v ∈ Set.Icc a b,
+      f u = 0 → f v = 0 → u = v := by
+  have key : ∀ x ∈ Set.Icc a b, ∀ y ∈ Set.Icc a b, x < y →
+      f x = 0 → f y = 0 → x = y := by
+    intro x hx y hy hlt hfx hfy
+    have hsub : Set.Icc x y ⊆ Set.Icc a b :=
+      Set.Icc_subset_Icc hx.1 hy.2
+    have hfc : ContinuousOn f (Set.Icc x y) := hcont.mono hsub
+    have hfd : DifferentiableOn ℝ f (Set.Ioo x y) := by
+      intro z hz
+      have hzm : z ∈ Set.Icc a b := hsub (Set.Ioo_subset_Icc_self hz)
+      exact ((hdiff z hzm).differentiableAt).differentiableWithinAt
+    obtain ⟨c, hcmem, hceq⟩ := exists_deriv_eq_slope f hlt hfc hfd
+    have hcIcc : c ∈ Set.Icc a b := hsub (Set.Ioo_subset_Icc_self hcmem)
+    have hderiv : deriv f c = 0 := by
+      rw [hceq, hfy, hfx, sub_self, zero_div]
+    have hfp : f' c = 0 := by
+      rw [← (hdiff c hcIcc).deriv]
+      exact hderiv
+    have hmem := henc c hcIcc
+    rw [hfp] at hmem
+    exact absurd hmem h0
+  intro u hu v hv hfu hfv
+  rcases le_total u v with h | h
+  · rcases eq_or_lt_of_le h with rfl | hlt
+    · rfl
+    · exact key u hu v hv hlt hfu hfv
+  · rcases eq_or_lt_of_le h with rfl | hlt
+    · rfl
+    · exact (key v hv u hu hlt hfv hfu).symm
 
 end NewtonExistence
