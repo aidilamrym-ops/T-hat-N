@@ -1959,4 +1959,73 @@ theorem energy_monotonic_decay3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M)
     (le_trans (energy_diffuse3D N M K hN hM hK μ hμ0 hμ1 _)
       (le_of_eq (energy_advect3D N M K hN _)))
 
+/-! ## Multi-step horizon: energy never exceeds its initial value.
+
+Each axis below composes its one-step theorem by induction. The
+trajectory and per-step pressures are explicit arguments; the step
+relation and Poisson contract are explicit hypotheses per step. -/
+
+theorem energy_monotonic_k_steps1D (N : ℕ) (hN : 0 < N) (μ c C : ℚ)
+    (hμ0 : 0 ≤ μ) (hμ1 : 2 * μ ≤ 1) (hc : c * C = 1) (hC : 0 < C)
+    (traj : ℕ → FluidLattice N) (ps : ℕ → Fin N → ℚ)
+    (hstep : ∀ n, traj (n + 1)
+      = full_ns_step N hN μ c (traj n) (ps n))
+    (hpois : ∀ n, ∀ i, lapAt N hN (ps n) i
+      = C * bdivAt N hN (godunov_predict N hN μ (traj n)).vel i)
+    (k : ℕ) :
+    totalEnergy N (traj k) ≤ totalEnergy N (traj 0) := by
+  induction k with
+  | zero => exact le_rfl
+  | succ k ih =>
+    calc totalEnergy N (traj (k + 1))
+        = totalEnergy N (full_ns_step N hN μ c (traj k) (ps k)) := by
+          rw [hstep k]
+      _ ≤ totalEnergy N (traj k) :=
+          energy_monotonic_decay N hN μ c C hμ0 hμ1 hc hC _ _ (hpois k)
+      _ ≤ totalEnergy N (traj 0) := ih
+
+theorem energy_monotonic_k_steps2D (N M : ℕ) (hN : 0 < N) (hM : 0 < M)
+    (μ c C : ℚ) (hμ0 : 0 ≤ μ) (hμ1 : 4 * μ ≤ 1) (hc : c * C = 1)
+    (hC : 0 < C) (traj : ℕ → FluidLattice2D N M)
+    (ps : ℕ → Fin N × Fin M → ℚ)
+    (hstep : ∀ n, traj (n + 1)
+      = full_ns_step2D N M hN hM μ c (traj n) (ps n))
+    (hpois : ∀ n, ∀ ij, lap2D N M hN hM (ps n) ij
+      = C * bdiv2D N M hN hM (godunov2D N M hN hM μ (traj n)).vel ij)
+    (k : ℕ) :
+    totalEnergy2D N M (traj k) ≤ totalEnergy2D N M (traj 0) := by
+  induction k with
+  | zero => exact le_rfl
+  | succ k ih =>
+    calc totalEnergy2D N M (traj (k + 1))
+        = totalEnergy2D N M (full_ns_step2D N M hN hM μ c (traj k) (ps k)) := by
+          rw [hstep k]
+      _ ≤ totalEnergy2D N M (traj k) :=
+          energy_monotonic_decay2D N M hN hM μ c C hμ0 hμ1 hc hC _ _
+            (hpois k)
+      _ ≤ totalEnergy2D N M (traj 0) := ih
+
+theorem energy_monotonic_k_steps3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M)
+    (hK : 0 < K) (μ c C : ℚ) (hμ0 : 0 ≤ μ) (hμ1 : 6 * μ ≤ 1)
+    (hc : c * C = 1) (hC : 0 < C) (traj : ℕ → FluidLattice3D N M K)
+    (ps : ℕ → (Fin N × Fin M) × Fin K → ℚ)
+    (hstep : ∀ n, traj (n + 1)
+      = full_ns_step3D N M K hN hM hK μ c (traj n) (ps n))
+    (hpois : ∀ n, ∀ ijk, lap3D N M K hN hM hK (ps n) ijk
+      = C * bdiv3D N M K hN hM hK
+        (godunov3D N M K hN hM hK μ (traj n)).vel ijk)
+    (k : ℕ) :
+    totalEnergy3D N M K (traj k) ≤ totalEnergy3D N M K (traj 0) := by
+  induction k with
+  | zero => exact le_rfl
+  | succ k ih =>
+    calc totalEnergy3D N M K (traj (k + 1))
+        = totalEnergy3D N M K
+            (full_ns_step3D N M K hN hM hK μ c (traj k) (ps k)) := by
+          rw [hstep k]
+      _ ≤ totalEnergy3D N M K (traj k) :=
+          energy_monotonic_decay3D N M K hN hM hK μ c C hμ0 hμ1 hc hC _ _
+            (hpois k)
+      _ ≤ totalEnergy3D N M K (traj 0) := ih
+
 end NavierStokesCore

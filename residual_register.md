@@ -208,6 +208,7 @@ end NavierStokesCore
 | FRONTIER-DEPTH z3 sat first zero; T-hat-N honest skip | CLOSED |
 | HODGE-GRAM exact Sylvester (pos/neg/undet), pivoted det | CLOSED |
 | F17-LN1 Lean kernel 1D+2D+3D (lake build GREEN, axioms: propext/choice/Quot only) | CLOSED |
+| CORR-SBP central SBP enclosure N=4/N=8, radii < 1e-70 | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
-Suites at seal: isolated `35 passed, 1 skipped`; main `139 passed`; `exit 0`.
+Suites at seal: isolated `37 passed, 1 skipped`; main `141 passed`; `exit 0`.
