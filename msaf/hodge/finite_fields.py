@@ -1,18 +1,21 @@
 """Finite-field extension machinery for Picard bounds (F_{2^n}).
 
 SCOPE (binding): exact F_{2^n} arithmetic (bitmask polynomials),
-verified irreducibles, and NAIVE projective enumeration giving
-Frobenius traces t_n = #X(F_{2^n}) - 1 - 2^{2n} for the Fermat
-quartic. Measured exactly: t_1..t_6 = 2,4,8,16,32,64 (note t_n =
-2^n throughout -- an observation, not a theorem).
+verified irreducibles, and NAIVE projective enumeration. The counts
+below are exact integer data validating the machinery -- but they
+are NOT K3 Frobenius data in characteristic 2: over F_2,
+x^4+y^4+z^4+w^4 = (x+y+z+w)^4 (Freshman's dream), i.e. the
+"quartic" is a non-reduced quadruple plane, everywhere singular,
+and K3 vanishing/Weil claims do not apply. (Sanity: the counts
+equal q^2+q+1 = #P^2(F_q), exactly as a fat plane should.)
+The K3 Picard program needs ODD characteristic (F_3/F_5, smooth)
+plus extensions there: mapped next increment, explicitly not
+claimed. Measured exactly: t_1..t_3 = 2, 4, 8 as raw counts.
 
 HARD WALL (measured): naive enumeration costs O(2^{3n}) -- 34 s at
-n = 6; n = 11 (needed for the full degree-22 Frobenius polynomial)
-is infeasible this way (centuries). The mapped upgrade is Jacobi
-character sums: O(2^n) per trace, exact for diagonal hypersurfaces.
-van Luijk upper bounds are explicitly NOT claimed until that
-upgrade lands and its counts cross-validate against these naive
-values on n <= 6.
+n = 6. van Luijk upper bounds are explicitly NOT claimed until
+odd-characteristic extensions plus Jacobi O(q) counting land and
+cross-validate here.
 """
 from __future__ import annotations
 
