@@ -9,7 +9,7 @@ ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
 - Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338272.svg)](https://doi.org/10.5281/zenodo.23338272)
-- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.8.5-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.8.5-alpha) (current: 139 passed)
+- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.11.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.11.0-alpha) (current: 141 passed)
 - License: MIT - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
@@ -210,7 +210,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (139 tests, every landmine pinned)
+### 3.2 Regression Suite (141 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -333,7 +333,7 @@ now anchored to the workspace root derived from the module location.
 
 ## SECTION 5: FINITE HYDRODYNAMIC LATTICE & MILLENNIUM FRONTIER
 
-Sealed through `v1.8.5-alpha` (main `139 passed`, isolated `35 passed +
+Sealed through `v1.11.0-alpha` (main `141 passed`, isolated `37 passed +
 1 honest skip`, exit 0). Full derivations in
 [`reports/finite_hydrodynamic_lattices.md`](reports/finite_hydrodynamic_lattices.md)
 (Chapters 1-3) and the machine-checked Lean kernel in [`lean/NavierStokesCore.lean`](lean/NavierStokesCore.lean)
@@ -403,6 +403,10 @@ work, no Riemann or Hodge proof. See `PROVEN VS POSTULATED` above and
 | V(L) | Ledger verification identity (chain + replay) | Sec. 3.4 |
 | chi_q_n | Dirichlet character, modulus q, number n | Sec. 2.3 |
 | Z(t) | Hardy Z-function of a real character | Sec. 2.3 |
+| E(u) | Discrete kinetic energy, sum of exact rational squares | Sec. 5 |
+| Godunov split | Sequential advect-then-diffuse evolution step | Sec. 5.1 |
+| SBP | Summation-by-parts identity (discrete adjoint calculus) | Sec. 5.2 |
+| Gram / Sylvester | Exact rational cycle pairing + definiteness gate | Sec. 5.3 |
 
 ## PROVEN VS POSTULATED (STANDING DISCLOSURE)
 
@@ -412,6 +416,14 @@ enclosures, the Dirichlet brackets, the hash chains and their independent
 replay. Postulated, not derived: sigma = 0.5 as a universal statement
 (every result carries `global_claim_supported = False`); the decay law with
 B ~= 0.115 (both entropy paths reported side by side).
+
+Machine-checked in Lean (`lake build` green, standard axioms only):
+1D/2D/3D Chorin energy estimates and the central-variant estimate, each
+conditional on explicit hypotheses (CFL bounds, solver contract); plus a
+no-go theorem proving the naive 7-point/central pairing admits no such
+estimate. The Lean model and the Python kernel are separate artifacts:
+their correspondence is locked only where regression tests measure it
+(central SBP enclosures), not by construction.
 
 Session memory and Terminus log: [`brain.md`](brain.md).
 Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
@@ -425,10 +437,9 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
   restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
-- `msaf/tests/` - regression suite (139 tests)
-- `lean/` - Lean 4 finite-lattice blueprint (`NavierStokesCore.lean`)
+- `msaf/tests/` - regression suite (141 tests)
+- `lean/` - Lean 4 machine-checked kernel 1D/2D/3D + central variant (`NavierStokesCore.lean`, `lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
-- `msaf/tests/` - regression suite (139 tests)
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py)
 - `harness/` - release gate and math renderer
 - `ledger/` - append-only evidence chains; `reports/` - integer pixel reports
@@ -438,6 +449,7 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
 ```text
 Amry, Muhammad Aidil. T-hat-N: Matrix-constraint Spectral Analysis Framework.
 v1.1.0. Zenodo. https://doi.org/10.5281/zenodo.23338272
+Current development line: v1.11.0-alpha (GitHub releases).
 ```
 
 ## LICENSE
