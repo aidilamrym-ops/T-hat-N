@@ -9,7 +9,7 @@ ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
 - Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338272.svg)](https://doi.org/10.5281/zenodo.23338272)
-- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0)
+- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.8.5-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.8.5-alpha) (current: 139 passed)
 - License: MIT - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
@@ -23,6 +23,7 @@ installation, so the archive stays self-contained forever.
 - [Section 2: Spectrum Mechanics and Critical Line Lock](#section-2-the-spectrum-mechanics--critical-line-lock)
 - [Section 3: Step-by-Step Reproducibility Manual](#section-3-step-by-step-reproducibility-manual-how-to-run-audit)
 - [Section 4: Recent Audit Kernel Amendments (Landmines L31-L35)](#section-4-recent-audit-kernel-amendments-landmines-l31-l35)
+- [Section 5: Finite Hydrodynamic Lattice & Millennium Frontier](#section-5-finite-hydrodynamic-lattice--millennium-frontier)
 - [Symbol Glossary](#symbol-glossary)
 - [Proven vs Postulated](#proven-vs-postulated-standing-disclosure)
 - [Repository Layout](#repository-layout)
@@ -209,7 +210,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (86 tests, every landmine pinned)
+### 3.2 Regression Suite (139 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -330,6 +331,56 @@ now anchored to the workspace root derived from the module location.
 
 ---
 
+## SECTION 5: FINITE HYDRODYNAMIC LATTICE & MILLENNIUM FRONTIER
+
+Sealed through `v1.8.5-alpha` (main `139 passed`, isolated `35 passed +
+1 honest skip`, exit 0). Full derivations in
+[`reports/finite_hydrodynamic_lattices.md`](reports/finite_hydrodynamic_lattices.md)
+(Chapters 1-3) and the Lean blueprint in [`lean/NavierStokesCore.lean`](lean/NavierStokesCore.lean)
+(0 `sorry` / `admit` / `unsafe`).
+
+### 5.1 Fractional-step Navier-Stokes loop (`msaf/navier_stokes/`)
+
+- Sequential Godunov splitting (advect-then-diffuse) with Planck-tick
+  time accounting; kinetic energy contracts strictly every step.
+- Chorin restoring projection (`dP = (rho/dt) div u*`): divergence
+  balls contain exact zero after every step, including rotation fields
+  with non-zero `tr(G^2)`.
+- Adaptive precision ramp: +128-bit jumps past the 1e-72 wire, 1024-bit
+  hard cap via `ResolutionAlarm` (256-bit run trips cleanly at step 3;
+  384-bit run holds 10 steps at 1e-100 radii).
+- Hermetic 2D + 3D renderers (`visualizer.py`, 3000x2400 px,
+  display-only floats, lattice never mutated).
+
+### 5.2 Measured metrology (256-bit unless noted)
+
+| Quantity | Measured |
+|---|---|
+| Multi-grid pivots N = 16 / 32 / 64 (262,144 cells) | `CERTIFIED_POSITIVE`, half-width `1.73e-77` |
+| 3-grid convergence order (N = 4/8/16) | `2.14 -> 2.03` vs theory `2.0` |
+| Inviscid scaling D(nu), nu = 1e-1..1e-4 | linear `10.0000x`/decade; nu = 0 refused |
+| Periodic-box tails (N = 16) | background-free quotient `1.9519` vs `2.0`; far-field `0.61%`; radii `< 1e-70` |
+| Z3 double-entry, first zero | `sat`, `[0.5, 0.5]` at 30 decimals (conformance, not proof) |
+| Hodge Gram, exact QQ Sylvester | `POSITIVE/NEGATIVE_DEFINITE`, `UNDETERMINED` on zero minor |
+
+### 5.3 Frontier scaffolding (`msaf/milenium_frontier/`, proofs: none)
+
+- `PureRiemannVerify`: interval-Newton localization + Z3 conformance
+  cross-check. Containment of 0.5 is conformance, never a global claim
+  (same warning as `certify_sigma_one_half`).
+- `HodgeLattice`: finite rational (p,p) cycles, exact `Fraction` Gram
+  pairing, pivoted Sylvester definiteness with loud `UNDETERMINED`.
+- Standing scope: scaffolding only. No Millennium result is claimed.
+
+### 5.4 What is NOT claimed
+
+No global Navier-Stokes regularity, no refutation of any third party's
+work, no Riemann or Hodge proof. See `PROVEN VS POSTULATED` above and
+[`reports/OPENAI_NS_REFUTATION_PRESS_RELEASE.md`](reports/OPENAI_NS_REFUTATION_PRESS_RELEASE.md)
+(scope notice binding).
+
+---
+
 ## SYMBOL GLOSSARY
 
 | Symbol | Meaning | Defined |
@@ -368,8 +419,14 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
 - `msaf/` - kernel: precision, constants, grid, certificates, operators,
   Guinand-Weil matrices, budget, zeta inversion, evolution, visualizer,
   Dirichlet bracketing, final audit
+- `msaf/navier_stokes/` - finite hydrodynamic lattice: Godunov loop,
+  restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
+- `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
+  conformance, rational Hodge cycles (no proofs claimed)
+- `msaf/tests/` - regression suite (139 tests)
+- `lean/` - Lean 4 finite-lattice blueprint (`NavierStokesCore.lean`)
 - `msaf_core_lattice.py` - the four mandated entry points
-- `msaf/tests/` - regression suite (86 tests)
+- `msaf/tests/` - regression suite (139 tests)
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py)
 - `harness/` - release gate and math renderer
 - `ledger/` - append-only evidence chains; `reports/` - integer pixel reports
