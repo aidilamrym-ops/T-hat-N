@@ -50,10 +50,14 @@
 | RH-COUNT-10 exactly ten zeros on [0,50] (COMPLETE, 0 stuck) | CLOSED |
 | HODGE-PERIODS AGM tau triple-validated (i, j-match, lambda-orbit) | CLOSED |
 | HODGE-COUNT Fermat quartic 7/16/0 over F2/F3/F5, machine-held | CLOSED |
-| HODGE-FQ F_{2^n} machinery, traces t_1..3, O(2^3n) wall mapped | CLOSED |
+| TOOL-SYNTAX same-line docstring closes def suite (fixed x2, repo audited) | CLOSED |
+| CHAR2-DEGENERACY quartic = fat plane in char 2; K3 claims fenced to odd p | CLOSED |
+| HODGE-FQ F_{2^n} machinery, traces t_1..3, O(2^3n) wall mapped | CLOSED (machinery; K3 reading retracted below) |
+| CHAR2-DEGENERACY quartic = fat plane in char 2; K3 claims fenced to odd p | CLOSED |
+| HODGE-ODD-PICARD K3 program needs odd-p extensions + Jacobi (char-2 degenerate) | OPEN (mapped) |
 | TURING-NT N(T) consistency table + explicit G1/G2/G3 gaps | CLOSED |
 | MOORE-PREM all 3 Banach premises hold on halo-lifted gamma1 box | CLOSED |
 | VERDICT-GAP floor-branch never counts (pinned, no-zero-ball demo) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
-Suites at seal: isolated `50 passed, 1 skipped`; main `167 passed`; `exit 0`.
+Suites at seal: isolated `52 passed, 1 skipped`; main `169 passed`; `exit 0`.

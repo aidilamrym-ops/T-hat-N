@@ -6,7 +6,10 @@ It does NOT compute Picard ranks yet (that needs F_{p^n} traces +
 van Luijk bounds: mapped next increment, explicitly not claimed).
 Hand-derived oracles (each re-verified after the machine corrected
 two human slips: scalar-multiple double counting, and confusing
-nonzero-counts with fourth-power sums):
+nonzero-counts with fourth-power sums). Smoothness note: the
+quartic is smooth over F_3/F_5 (4 != 0 there) but DEGENERATE over
+F_2 -- see ``test_char2_degeneracy``; F_2 counts validate machinery
+only, never K3 claims:
 - #X(F_2) = 7: a^4 = a over F_2, so x+y+z+w = 0; 8 affine
   solutions minus the origin = 7 (4 affine + 3 at infinity).
 - #X(F_3) = 16: fourth powers lie in {0,1}, so the projective sum
@@ -20,7 +23,7 @@ nonzero-counts with fourth-power sums):
 """
 from __future__ import annotations
 
-__all__ = ["count_fermat_quartic"]
+__all__ = ["count_fermat_quartic", "is_frobenius_degenerate"]
 
 
 def _reject_float(value, name: str) -> None:
@@ -93,3 +96,39 @@ def count_fermat_quartic(p: int) -> dict:
             f"chart decomposition failed: {total} != {affine} + {infinity}"
         )
     return {"p": p, "total": total, "affine": affine, "infinity": infinity}
+
+
+def is_frobenius_degenerate(
+    exponents: list[list[int]], p: int
+) -> bool:
+    """True iff every monomial exponent is divisible by ``p``.
+
+    Then ``F(x) = G(x_0^p, ..., x_n^p)``: all partial derivatives
+    vanish identically mod ``p`` (each brings down a multiple of
+    ``p``), so the hypersurface is everywhere singular and K3
+    Picard claims are void in characteristic ``p``. This gate
+    exists because the Fermat quartic passed counting tests in
+    characteristic 2 while being a quadruple plane -- never again:
+    every future Picard surface must clear this check first.
+    Exact integer arithmetic; ``p`` need only satisfy ``p >= 2``.
+    """
+    _reject_float(p, "p")
+    if isinstance(p, bool):
+        raise TypeError("p: bool refused")
+    p = int(p)
+    if p < 2:
+        raise ValueError(f"p must be >= 2, got {p}")
+    if not exponents:
+        raise ValueError("empty exponent list refused")
+    for row in exponents:
+        if not row:
+            raise ValueError("empty monomial refused")
+        for e in row:
+            if isinstance(e, (float, bool)):
+                raise TypeError("exponent: float/bool leakage refused")
+            e = int(e)
+            if e < 0:
+                raise ValueError("negative exponent refused")
+            if e % p != 0:
+                return False
+    return True
