@@ -366,6 +366,7 @@ propext + Classical.choice + Quot.sound only).
 | Hodge Gram, exact QQ Sylvester | `POSITIVE/NEGATIVE_DEFINITE`, `UNDETERMINED` on zero minor |
 | Moore box (Lean, Banach) | Newton map + Lipschitz < 1 ⟹ exactly one zero (standard axioms) |
 | Moore-MVT (Lean) | Lipschitz derived from derivative bound; subtype-scoped theorem |
+| Brouwer-Icc (Lean) | continuous self-map of interval has fixed point (IVT) |
 | RH certified count, [10, 24.5] x [0.49, 0.51] | exactly 2 (strict Newton isolation + full exclusion) |
 | RH certified count, [0, 50] x [0.49, 0.51] | exactly 10 (COMPLETE, 0 stuck, 7041 evals) |
 | Moore premises, halo-lifted gamma1 box | MapsTo + clean derivative + Lipschitz K<<1, all HOLD |

@@ -111,4 +111,49 @@ theorem moore_box_of_deriv_bound (a b : ℝ) (hab : a < b) (f f' : ℝ → ℝ)
   moore_box a b hab f f' hne hmap K hK
     (newton_lipschitz_of_deriv_bound a b f f' K hmap hdiff hbound)
 
+/-! ## Moore-test form (flagship in progress): Brouwer fixed point.
+
+The counter's soundness gate is the single-step Moore test, not the
+Banach iteration above. Its formalization needs interval images as
+sets plus a fixed-point principle. This increment lands Brouwer on a
+closed interval (via IVT) and the Moore-operator vocabulary as plain
+definitions. Existence/uniqueness through the operator is the next
+increment, explicitly not claimed yet. -/
+
+/-- Brouwer fixed point on a closed interval (proved via IVT on the
+    displacement map). -/
+theorem brouwer_Icc (a b : ℝ) (hab : a ≤ b) (g : ℝ → ℝ)
+    (hg : Continuous g)
+    (hmap : Set.MapsTo g (Set.Icc a b) (Set.Icc a b)) :
+    ∃ x ∈ Set.Icc a b, g x = x := by
+  by_cases ha : g a = a
+  · exact ⟨a, Set.left_mem_Icc.mpr hab, ha⟩
+  · by_cases hb : g b = b
+    · exact ⟨b, Set.right_mem_Icc.mpr hab, hb⟩
+    · have hga : a ≤ g a :=
+        (Set.mem_Icc.mp (hmap (Set.left_mem_Icc.mpr hab))).1
+      have hgb : g b ≤ b :=
+        (Set.mem_Icc.mp (hmap (Set.right_mem_Icc.mpr hab))).2
+      have hapos : 0 < g a - a :=
+        sub_pos.mpr (lt_of_le_of_ne hga (fun h => ha h.symm))
+      have hbneg : g b - b < 0 :=
+        sub_neg.mpr (lt_of_le_of_ne hgb hb)
+      have hcont : ContinuousOn (fun x => x - g x) (Set.Icc a b) :=
+        (continuous_id.sub hg).continuousOn
+      have hka : (fun x => x - g x) a < 0 := by
+        show a - g a < 0
+        linarith [hapos]
+      have hkb : 0 < (fun x => x - g x) b := by
+        show 0 < b - g b
+        linarith [hbneg]
+      obtain ⟨c, hcmem, hceq⟩ := intermediate_value_Icc hab hcont
+        ⟨le_of_lt hka, le_of_lt hkb⟩
+      exact ⟨c, hcmem, (sub_eq_zero.mp hceq).symm⟩
+
+/-- Moore operator image: `N(X) = m - f(m)/F'(X)` as an explicit
+    image set over the derivative-image set `D`. Plain definition;
+    the existence theorem through it is future work. -/
+def mooreImage (m : ℝ) (f : ℝ → ℝ) (D : Set ℝ) : Set ℝ :=
+  (fun d => m - f m / d) '' D
+
 end NewtonExistence
