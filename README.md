@@ -337,7 +337,7 @@ Sealed through `v1.8.5-alpha` (main `139 passed`, isolated `35 passed +
 1 honest skip`, exit 0). Full derivations in
 [`reports/finite_hydrodynamic_lattices.md`](reports/finite_hydrodynamic_lattices.md)
 (Chapters 1-3) and the machine-checked Lean kernel in [`lean/NavierStokesCore.lean`](lean/NavierStokesCore.lean)
-(`lake build` green: 1D channel + 2D periodic + 3D energy estimates,
+(`lake build` green: 1D/2D/3D + central-variant energy estimates,
 0 `sorry` / `admit` / `unsafe`, `#print axioms`:
 propext + Classical.choice + Quot.sound only).
 

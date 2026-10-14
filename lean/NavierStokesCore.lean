@@ -2028,4 +2028,194 @@ theorem energy_monotonic_k_steps3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M)
             (hpois k)
       _ ≤ totalEnergy3D N M K (traj 0) := ih
 
+/-! ## Central-difference variant (honest reformulation, 1D channel).
+
+The naive pairing (7-point Laplacian with central gradient) does NOT
+satisfy the second summation-by-parts identity -- a machine-checked
+counterexample closes this section. What IS true: first-order central
+SBP holds, and the WIDE Laplacian `divC (gradC p)` (the exact adjoint
+pair) recovers the full dissipative estimate. -/
+
+/-- Central-difference gradient and divergence (scalar fields). -/
+def gradC (N : ℕ) (hN : 0 < N) (p : Fin N → ℚ) (i : Fin N) : ℚ :=
+  (p (fwd N hN i) - p (bwd N hN i)) / 2
+
+def divC (N : ℕ) (hN : 0 < N) (a : Fin N → ℚ) (i : Fin N) : ℚ :=
+  (a (fwd N hN i) - a (bwd N hN i)) / 2
+
+/-- First-order central SBP (proved; both shift directions used). -/
+lemma sbp_central (N : ℕ) (hN : 0 < N) (a p : Fin N → ℚ) :
+    ∑ i, a i * gradC N hN p i = -∑ i, divC N hN a i * p i := by
+  have e : ∀ i ∈ (Finset.univ : Finset (Fin N)),
+      a i * gradC N hN p i
+        = (a i * p (fwd N hN i) - a i * p (bwd N hN i)) / 2 := by
+    intro i _
+    simp only [gradC]
+    ring
+  have d : ∀ i ∈ (Finset.univ : Finset (Fin N)),
+      divC N hN a i * p i
+        = (a (fwd N hN i) * p i - a (bwd N hN i) * p i) / 2 := by
+    intro i _
+    simp only [divC]
+    ring
+  rw [Finset.sum_congr rfl e, Finset.sum_congr rfl d]
+  simp only [← Finset.sum_div, Finset.sum_sub_distrib]
+  have r1 : ∑ i, a i * p (fwd N hN i) = ∑ i, a (bwd N hN i) * p i := by
+    have hstep := sum_fwd_to_bwd N hN (fun x y => a x * p y)
+    have q1 : (∑ i, a i * p (fwd N hN i))
+        = ∑ i, (fun x y => a x * p y) i (fwd N hN i) := rfl
+    have q2 : (∑ i, (fun x y => a x * p y) (bwd N hN i) i)
+        = ∑ i, a (bwd N hN i) * p i := rfl
+    rw [q1, hstep, q2]
+  have r2 : ∑ i, a i * p (bwd N hN i) = ∑ i, a (fwd N hN i) * p i := by
+    have hstep := sum_fwd_to_bwd N hN (fun x y => a y * p x)
+    have q1 : (∑ i, a i * p (bwd N hN i))
+        = ∑ i, (fun x y => a y * p x) (bwd N hN i) i := rfl
+    have q2 : (∑ i, (fun x y => a y * p x) i (fwd N hN i))
+        = ∑ i, a (fwd N hN i) * p i := rfl
+    rw [q1, ← hstep, q2]
+  rw [r1, r2]
+  ring
+
+/-- Wide Laplacian: the exact adjoint pair `divC (gradC p)`. -/
+def lapWide (N : ℕ) (hN : 0 < N) (p : Fin N → ℚ) (i : Fin N) : ℚ :=
+  divC N hN (gradC N hN p) i
+
+/-- Wide Laplacian is negative-semidefinite (self-pairing of SBP-I). -/
+lemma sbp_lap_wide_neg (N : ℕ) (hN : 0 < N) (p : Fin N → ℚ) :
+    ∑ i, lapWide N hN p i * p i = -∑ i, (gradC N hN p i) ^ 2 := by
+  have h := sbp_central N hN (gradC N hN p) p
+  have g1 : ∑ i, (gradC N hN p i) ^ 2
+      = ∑ i, gradC N hN p i * gradC N hN p i :=
+    Finset.sum_congr rfl (fun i _ => pow_two _)
+  have g2 : ∑ i, lapWide N hN p i * p i
+      = ∑ i, divC N hN (gradC N hN p) i * p i :=
+    Finset.sum_congr rfl (fun i _ => rfl)
+  rw [g1, g2]
+  linear_combination h
+
+/-- Central projection correction on the x-channel. -/
+def projectC (N : ℕ) (hN : 0 < N) (c : ℚ) (L : FluidLattice N)
+    (p : Fin N → ℚ) : FluidLattice N :=
+  ⟨fun i => ⟨(L.vel i).x - c * gradC N hN p i, (L.vel i).y,
+    (L.vel i).z⟩⟩
+
+/-- Central projection dissipates energy under the WIDE solver
+    contract `Δ_wide p = C · divC u*`. -/
+lemma energy_projectC (N : ℕ) (hN : 0 < N) (c C : ℚ) (hc : c * C = 1)
+    (hC : 0 < C) (L : FluidLattice N) (p : Fin N → ℚ)
+    (hPoissonW : ∀ i, lapWide N hN p i
+      = C * divC N hN (fun j => (L.vel j).x) i) :
+    totalEnergy N (projectC N hN c L p) ≤ totalEnergy N L := by
+  have hCne : C ≠ 0 := hC.ne'
+  have hS2nn : 0 ≤ ∑ i, (gradC N hN p i) ^ 2 :=
+    Finset.sum_nonneg (fun i _ => sq_nonneg _)
+  have hlink : ∑ i, (L.vel i).x * gradC N hN p i
+      = (1 / C) * ∑ i, (gradC N hN p i) ^ 2 := by
+    have h1 : ∑ i, (L.vel i).x * gradC N hN p i
+        = -∑ i, divC N hN (fun j => (L.vel j).x) i * p i :=
+      sbp_central N hN _ _
+    have h2 := sbp_lap_wide_neg N hN p
+    have h3 : ∑ i, divC N hN (fun j => (L.vel j).x) i * p i
+        = (1 / C) * ∑ i, lapWide N hN p i * p i := by
+      have hper : ∀ i : Fin N, divC N hN (fun j => (L.vel j).x) i * p i
+          = (1 / C) * (lapWide N hN p i * p i) := by
+        intro i
+        rw [hPoissonW i]
+        field_simp
+      rw [Finset.sum_congr rfl (fun i _ => hper i), ← Finset.mul_sum]
+    rw [h1, h3, h2]
+    ring
+  have hE : totalEnergy N (projectC N hN c L p)
+      = totalEnergy N L - c ^ 2 * ∑ i, (gradC N hN p i) ^ 2 := by
+    have hexpand : totalEnergy N (projectC N hN c L p)
+        = ∑ i, ((L.vel i).x - c * gradC N hN p i) ^ 2
+          + ∑ i, ((L.vel i).y) ^ 2 + ∑ i, ((L.vel i).z) ^ 2 := by
+      have rfl_expand : totalEnergy N (projectC N hN c L p)
+          = ∑ i, ((((L.vel i).x - c * gradC N hN p i) ^ 2
+            + ((L.vel i).y) ^ 2) + ((L.vel i).z) ^ 2) := rfl
+      rw [rfl_expand]
+      simp only [Finset.sum_add_distrib]
+    have hexpand0 : totalEnergy N L
+        = ∑ i, ((L.vel i).x) ^ 2 + ∑ i, ((L.vel i).y) ^ 2
+          + ∑ i, ((L.vel i).z) ^ 2 := by
+      have rfl_expand0 : totalEnergy N L
+          = ∑ i, ((((L.vel i).x) ^ 2 + ((L.vel i).y) ^ 2)
+            + ((L.vel i).z) ^ 2) := rfl
+      rw [rfl_expand0]
+      simp only [Finset.sum_add_distrib]
+    rw [hexpand, hexpand0]
+    have hsq : ∀ i : Fin N, ((L.vel i).x - c * gradC N hN p i) ^ 2
+        = ((L.vel i).x) ^ 2 - 2 * c * ((L.vel i).x * gradC N hN p i)
+          + c ^ 2 * (gradC N hN p i) ^ 2 := by
+      intro i
+      ring
+    rw [Finset.sum_congr rfl (fun i _ => hsq i)]
+    simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+    have t1 : ∑ i, (2 * c * ((L.vel i).x * gradC N hN p i))
+        = 2 * c * ∑ i, (L.vel i).x * gradC N hN p i :=
+      (Finset.mul_sum _ _ _).symm
+    have t2 : ∑ i, (c ^ 2 * (gradC N hN p i) ^ 2)
+        = c ^ 2 * ∑ i, (gradC N hN p i) ^ 2 :=
+      (Finset.mul_sum _ _ _).symm
+    rw [t1, t2, hlink]
+    have hcC : c * (1 / C) = c ^ 2 := by
+      field_simp
+      nlinarith [hc]
+    rw [show (2 : ℚ) * c * ((1 / C) * ∑ i, (gradC N hN p i) ^ 2)
+        = 2 * (c * (1 / C)) * ∑ i, (gradC N hN p i) ^ 2 by ring, hcC]
+    ring
+  have hdrop : 0 ≤ c ^ 2 * ∑ i, (gradC N hN p i) ^ 2 :=
+    mul_nonneg (sq_nonneg _) hS2nn
+  linarith
+
+/-- Central full step and its energy theorem (wide-Poisson contract). -/
+def full_ns_stepC (N : ℕ) (hN : 0 < N) (μ c : ℚ) (L : FluidLattice N)
+    (p : Fin N → ℚ) : FluidLattice N :=
+  projectC N hN c (godunov_predict N hN μ L) p
+
+theorem energy_monotonic_decayC (N : ℕ) (hN : 0 < N) (μ c C : ℚ)
+    (hμ0 : 0 ≤ μ) (hμ1 : 2 * μ ≤ 1) (hc : c * C = 1) (hC : 0 < C)
+    (L : FluidLattice N) (p : Fin N → ℚ)
+    (hPoissonW : ∀ i, lapWide N hN p i
+      = C * divC N hN
+        (fun j => ((godunov_predict N hN μ L).vel j).x) i) :
+    totalEnergy N (full_ns_stepC N hN μ c L p) ≤ totalEnergy N L :=
+  le_trans (energy_projectC N hN c C hc hC _ _ hPoissonW)
+    (le_trans (energy_diffuse N hN μ hμ0 hμ1 _)
+      (le_of_eq (energy_advect N hN _)))
+
+/-- Point-mass field on four cells. -/
+def delta4 : Fin 4 → ℚ := Pi.single 0 1
+
+/-- No-go theorem: the 7-point Laplacian paired with the CENTRAL
+    gradient does NOT satisfy the second SBP identity. Both sides
+    evaluate to closed values (-2 vs -1/2); the claim is a witnessed
+    inequality, never a gap. -/
+theorem central_pairing_fails :
+    ∑ i, lapAt 4 (by norm_num) delta4 i * delta4 i
+      ≠ -∑ i, (gradC 4 (by norm_num) delta4 i) ^ 2 := by
+  have f0 : fwd 4 (by norm_num) 0 = 1 := by decide
+  have f1 : fwd 4 (by norm_num) 1 = 2 := by decide
+  have f2 : fwd 4 (by norm_num) 2 = 3 := by decide
+  have f3 : fwd 4 (by norm_num) 3 = 0 := by decide
+  have b0 : bwd 4 (by norm_num) 0 = 3 := by decide
+  have b1 : bwd 4 (by norm_num) 1 = 0 := by decide
+  have b2 : bwd 4 (by norm_num) 2 = 1 := by decide
+  have b3 : bwd 4 (by norm_num) 3 = 2 := by decide
+  have d0 : delta4 0 = 1 := Pi.single_eq_same 0 1
+  have d1 : delta4 1 = 0 := Pi.single_eq_of_ne (by decide) 1
+  have d2 : delta4 2 = 0 := Pi.single_eq_of_ne (by decide) 1
+  have d3 : delta4 3 = 0 := Pi.single_eq_of_ne (by decide) 1
+  have hL : ∑ i, lapAt 4 (by norm_num) delta4 i * delta4 i = -2 := by
+    rw [Fin.sum_univ_four]
+    simp only [lapAt, f0, f1, f2, f3, b0, b1, b2, b3, d0, d1, d2, d3]
+    norm_num
+  have hR : -∑ i, (gradC 4 (by norm_num) delta4 i) ^ 2 = -(1 / 2) := by
+    rw [Fin.sum_univ_four]
+    simp only [gradC, f0, f1, f2, f3, b0, b1, b2, b3, d0, d1, d2, d3]
+    norm_num
+  rw [hL, hR]
+  norm_num
+
 end NavierStokesCore
