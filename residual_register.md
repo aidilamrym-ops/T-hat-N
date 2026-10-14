@@ -35,6 +35,7 @@
 | F17-LN1 Lean kernel 1D+2D+3D (lake build GREEN, axioms: propext/choice/Quot only) | CLOSED |
 | LEAN-CENTRAL wide-Laplacian estimate + machine-checked no-go | CLOSED |
 | LEAN-CUBIC N^3 direct instance (1-step + horizon) | CLOSED |
+| LEAN-MOORE interval-Newton existence (Banach, standard axioms) | CLOSED |
 | BAB 4.0-4.2 (Lean estimates, no-go, correspondence limits) | CLOSED |
 | LONG-RUN 20 steps clean at 384-bit, 42x/step locked, ~25-step horizon | CLOSED |
 | N128-CAP refusal instant via MatrixDimensionViolation | CLOSED |

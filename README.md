@@ -364,6 +364,7 @@ propext + Classical.choice + Quot.sound only).
 | Periodic-box tails (N = 16) | background-free quotient `1.9519` vs `2.0`; far-field `0.61%`; radii `< 1e-70` |
 | Z3 double-entry, first zero | `sat`, `[0.5, 0.5]` at 30 decimals (conformance, not proof) |
 | Hodge Gram, exact QQ Sylvester | `POSITIVE/NEGATIVE_DEFINITE`, `UNDETERMINED` on zero minor |
+| Moore box (Lean, Banach) | Newton map + Lipschitz < 1 ⟹ exactly one zero (standard axioms) |
 | RH certified count, [10, 24.5] x [0.49, 0.51] | exactly 2 (strict Newton isolation + full exclusion) |
 
 ### 5.3 Frontier scaffolding (`msaf/milenium_frontier/`, proofs: none)
@@ -439,7 +440,7 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
 - `msaf/tests/` - regression suite (153 tests)
-- `lean/` - Lean 4 machine-checked kernel 1D/2D/3D + central variant (`NavierStokesCore.lean`, `lake build` green)
+- `lean/` - Lean 4 machine-checked kernels 1D/2D/3D + central variant + Moore box (`lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py)
 - `harness/` - release gate and math renderer

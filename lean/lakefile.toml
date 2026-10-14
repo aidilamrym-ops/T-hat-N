@@ -1,6 +1,6 @@
 name = "that_n_lean"
 version = "0.1.0"
-defaultTargets = ["NavierStokesCore"]
+defaultTargets = ["NavierStokesCore", "NewtonExistence"]
 
 [[require]]
 name = "mathlib"
@@ -9,3 +9,6 @@ rev = "v4.33.1"
 
 [[lean_lib]]
 name = "NavierStokesCore"
+
+[[lean_lib]]
+name = "NewtonExistence"
