@@ -9,7 +9,7 @@ ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
 - Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338272.svg)](https://doi.org/10.5281/zenodo.23338272)
-- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.11.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.11.0-alpha) (current: 141 passed)
+- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.13.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.13.0-alpha) (current: 143 passed)
 - License: MIT - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
@@ -210,7 +210,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (141 tests, every landmine pinned)
+### 3.2 Regression Suite (143 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -437,7 +437,7 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
   restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
-- `msaf/tests/` - regression suite (141 tests)
+- `msaf/tests/` - regression suite (143 tests)
 - `lean/` - Lean 4 machine-checked kernel 1D/2D/3D + central variant (`NavierStokesCore.lean`, `lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py)

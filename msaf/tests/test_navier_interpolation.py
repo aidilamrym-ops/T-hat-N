@@ -351,6 +351,44 @@ def test_full_loop_incompressibility_preservation():
     assert jumps >= 1
 
 
+def test_materialisation_cap_n128_refused():
+    """N=128 (2M cells) is refused before allocation, instantly."""
+    from msaf.navier_stokes.fluid_lattice import MatrixDimensionViolation
+
+    with pytest.raises(MatrixDimensionViolation):
+        FluidLattice(128, "0.1", "1")
+
+
+def test_long_run_enclosure_growth_384bit():
+    """20 restoring steps at 384-bit: geometric ~42x/step inflation measured.
+
+    Rotation field, dt=1e-43: widths 1.9e-114 -> 1.7e-83, divergence TRUE
+    throughout, wire (1e-72) still 11 orders away at step 20. Locks the
+    measured growth factor band and the ~25-step horizon estimate.
+    """
+    from flint import arb as _arb2
+    from flint import ctx as _ctx2
+
+    rot = FluidLattice(4, "0.0001", "1", 384)
+    for i in range(4):
+        for j in range(4):
+            for ll in range(4):
+                rot.set_cell(i, j, ll, (f"{5 - j}e-1", f"{-25 + 10 * i}e-2", "0.1"))
+    try:
+        prev = None
+        for _ in range(20):
+            rot.evolve_full_ns_step("1e-43", "1.0")
+            assert rot.divergence_contains_zero_everywhere() is True
+            w = float(rot.max_divergence_half_width().mid())
+            if prev is not None:
+                assert 30.0 < w / prev < 60.0
+            prev = w
+        assert bool(rot.max_divergence_half_width() < _arb2("1e-72")) is True
+        assert bool(rot.kinetic_energy().upper() < _arb2("1.0")) is True
+    finally:
+        _ctx2.prec = 256
+
+
 def test_viscous_diffusion_decay():
     """Sequential advect-then-diffuse dissipates energy, spikes included.
 

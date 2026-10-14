@@ -211,8 +211,10 @@ end NavierStokesCore
 | LEAN-CENTRAL wide-Laplacian estimate + machine-checked no-go | CLOSED |
 | LEAN-CUBIC N^3 direct instance (1-step + horizon) | CLOSED |
 | BAB 4.0-4.2 (Lean estimates, no-go, correspondence limits) | CLOSED |
+| LONG-RUN 20 steps clean at 384-bit, 42x/step locked, ~25-step horizon | CLOSED |
+| N128-CAP refusal instant via MatrixDimensionViolation | CLOSED |
 | CORR-SBP central SBP enclosure N=4/N=8, radii < 1e-70 | CLOSED |
 | CI GitHub Actions green (pytest 141 + lake build + sensor) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
-Suites at seal: isolated `37 passed, 1 skipped`; main `141 passed`; `exit 0`.
+Suites at seal: isolated `39 passed, 1 skipped`; main `143 passed`; `exit 0`.
