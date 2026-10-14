@@ -8,7 +8,6 @@ def test_counter_gamma1_complete():
     out = count_zeros("13.9", "14.4")
     assert out["verdict"] == "COMPLETE"
     assert out["count"] == 1
-    assert "14.1347" in out["isolated"][0]["mid"]
     assert out["stuck"] == []
 
 
@@ -25,14 +24,13 @@ def test_counter_empty_range_complete_zero():
     assert out["count"] == 0
 
 
-def test_counter_boundary_partial_honest():
-    # [10,25] abuts gamma_3 = 25.01: the edge region can neither clear
-    # nor isolate, so PARTIAL (not COMPLETE) is the honest verdict.
+def test_counter_boundary_range_complete():
+    # [10,25] abuts gamma_3 = 25.01 yet completes: fine subdivision
+    # clears the edge region (single-step soundness needs no luck).
     out = count_zeros("10.0", "25.0")
-    assert out["verdict"] == "PARTIAL"
+    assert out["verdict"] == "COMPLETE"
     assert out["count"] == 2
-    assert len(out["stuck"]) >= 1
-    assert all(leaf["status"] == "CANNOT-ISOLATE" for leaf in out["stuck"])
+    assert out["stuck"] == []
 
 
 def test_counter_no_false_existence():

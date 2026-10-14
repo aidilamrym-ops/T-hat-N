@@ -1,22 +1,27 @@
 """Certified zero counter over bounded rectangles.
 
-SOUNDNESS CONTRACT (binding): a zero is counted if and only if
-``locate_zero`` returns the STRICT verdict ``ZERO-LOCALIZED`` with
-``newton_contained`` and ``derivative_excludes_zero`` all true on a
-box of the disjoint partition tree -- the interval-Newton existence
-theorem then yields exactly one zero in that box. The
-``ZERO-LOCALIZED-AT-PRECISION-FLOOR`` branch (uncontained) NEVER
-counts: it fires on balls that can provably contain no zero at all.
+SOUNDNESS CONTRACT (binding): a zero is counted if and only if a
+SINGLE interval Newton step on that exact box returns contained with
+a derivative excluding zero -- the Moore test, which yields existence
+AND uniqueness in that box. Boxes come from a disjoint partition
+tree, so counted zeros are provably distinct. The multi-step
+``locate_zero`` verdicts (including the uncontained
+``ZERO-LOCALIZED-AT-PRECISION-FLOOR`` branch, which fires on balls
+that can provably contain no zero at all) NEVER count here.
 Excluded boxes contribute zero by rigorous xi evaluation. Anything
 else is reported stuck (CANNOT-ISOLATE); the verdict is then PARTIAL
 with a certified lower bound, never a silent COMPLETE.
+
+Note: the Lean kernel (`NewtonExistence.moore_box`) currently covers
+the Banach-iteration form; the Moore-test form used here is its
+documented next formalization target.
 """
 from __future__ import annotations
 
 from flint import acb, arb, ctx
 
 from msaf.riemann.exclusion import certify_box_absent
-from msaf.zeta_inversion import locate_zero
+from msaf.zeta_inversion import interval_newton_step
 
 __all__ = ["count_zeros"]
 
@@ -38,7 +43,7 @@ def count_zeros(
     t_hi_str: str,
     sig_lo_str: str = "0.49",
     sig_hi_str: str = "0.51",
-    max_depth: int = 14,
+    max_depth: int = 24,
     min_width_str: str = "1e-4",
     prec_bits: int = 256,
 ) -> dict:
@@ -49,9 +54,7 @@ def count_zeros(
     scope by construction, and COMPLETE means complete within it.
     Subdivision bisects whichever dimension is wider (2D adaptive),
     since sigma-driven enclosure width can otherwise block exclusion
-    no matter how finely t is split. (This loop duplicates the sweep
-    shape of ``exclusion.sweep_exclusion`` deliberately: counting
-    interleaves Newton isolation per box, a different algorithm.)
+    no matter how finely t is split.
     """
     for name, val in (
         ("t_lo_str", t_lo_str),
@@ -82,19 +85,15 @@ def count_zeros(
         evaluated += 1
         if certify_box_absent(box)["absent"]:
             continue
-        res = locate_zero(box, 20)
-        strict = (
-            res.verdict == "ZERO-LOCALIZED"
-            and bool(res.newton_contained)
-            and bool(res.derivative_excludes_zero)
-        )
-        if strict:
+        step = interval_newton_step(box, 12)
+        if bool(step.contained) and bool(step.derivative_excludes_zero):
             isolated.append(
                 {
-                    "mid": res.final_ball.mid().str(14),
+                    "mid": step.refined.mid().str(14),
                     "t_lo": tlo.str(12, radius=False),
                     "t_hi": thi.str(12, radius=False),
-                    "iterations": res.iterations,
+                    "sig_lo": slo.str(12, radius=False),
+                    "sig_hi": shi.str(12, radius=False),
                 }
             )
         elif depth >= max_depth or (
