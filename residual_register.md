@@ -59,8 +59,9 @@
 | CHAR2-DEGENERACY quartic = fat plane in char 2; K3 claims fenced to odd p | CLOSED |
 | HODGE-ODD-PICARD K3 program needs odd-p extensions + Jacobi (char-2 degenerate) | OPEN (mapped) |
 | TURING-NT N(T) consistency table + explicit G1/G2/G3 gaps | CLOSED |
+| TURING-G1A contour zero-free certificates (gamma1 + flagship ALL-CLEAR) | CLOSED |
 | MOORE-PREM all 3 Banach premises hold on halo-lifted gamma1 box | CLOSED |
 | VERDICT-GAP floor-branch never counts (pinned, no-zero-ball demo) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
-Suites at seal: isolated `67 passed, 1 skipped`; main `184 passed`; `exit 0`.
+Suites at seal: isolated `67 passed, 1 skipped`; main `190 passed`; `exit 0`.

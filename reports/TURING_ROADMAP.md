@@ -23,6 +23,13 @@ A full Turing verification "RH true up to T" needs, beyond counting:
   boundary) agreeing with the Newton count. Guards against a zero
   missed by BOTH Newton and exclusion (e.g., multiple close zeros
   defeating isolation). Status: OPEN, unmapped in code.
+  - (G1-a) **Contour zero-free certificate** (`msaf/riemann/boundary.py`):
+    adaptive per-edge subdivision; a segment clears only when its xi
+    ball excludes zero. Gamma1 box and flagship [0,50] contour both
+    ALL-CLEAR; edge-at-zero honestly INCONCLUSIVE. Status: CLOSED
+    (prerequisite; not itself a count).
+  - (G1-b) **Winding number** (arg variation along the cleared contour):
+    still OPEN -- the actual independent count.
 - (G2) **Explicit S(T) bounds** (Backlund/Trudgian type): a proven
   inequality `|S(T)| ≤ B(T)` to compare against `N(T) - main(T)`.
   Without it, agreement in the table above constrains nothing.
