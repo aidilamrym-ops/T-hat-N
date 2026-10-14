@@ -100,8 +100,9 @@ def shiftPerm (N : ℕ) (hN : 0 < N) : Equiv.Perm (Fin N) where
     show (((i.val + N - 1) % N) + 1) % N = i.val
     exact mod_shift_cancel_right N hN _ i.isLt
 
-/-- Reindexing helper: pointwise pullback along any permutation. -/
-lemma sum_perm (N : ℕ) (e : Equiv.Perm (Fin N)) (f g : Fin N → ℚ)
+/-- Reindexing helper: pointwise pullback along any permutation,
+    over any finite index type (1D chains and product lattices). -/
+lemma sum_perm {α : Type*} [Fintype α] (e : Equiv.Perm α) (f g : α → ℚ)
     (h : ∀ i, f i = g (e i)) : ∑ i, f i = ∑ i, g i :=
   Fintype.sum_equiv e f g h
 
@@ -430,5 +431,605 @@ theorem energy_monotonic_decay (N : ℕ) (hN : 0 < N) (μ c C : ℚ)
   le_trans (energy_project N hN c C hc hC _ _ hPoisson)
     (le_trans (energy_diffuse N hN μ hμ0 hμ1 _)
       (le_of_eq (energy_advect N hN _)))
+
+/-! ## 2D periodic lattice (gradual dimension lift, forward structure kept).
+
+Index type `Fin N × Fin M`; shifts act per axis. All 1D lemmas above
+are reused untouched; only axis-wise reindexing is new. -/
+
+/-- Axis shifts as genuine permutations (product of 1D shift with identity). -/
+def shiftPermX (N M : ℕ) (hN : 0 < N) : Equiv.Perm (Fin N × Fin M) :=
+  Equiv.prodCongr (shiftPerm N hN) (Equiv.refl _)
+
+def shiftPermY (N M : ℕ) (hM : 0 < M) : Equiv.Perm (Fin N × Fin M) :=
+  Equiv.prodCongr (Equiv.refl _) (shiftPerm M hM)
+
+/-- Reindex a product sum along the first axis. -/
+lemma sum_prod_fst (N M : ℕ) (hN : 0 < N) (F : Fin N → Fin M → ℚ) :
+    ∑ ij : Fin N × Fin M, F (fwd N hN ij.1) ij.2
+      = ∑ ij : Fin N × Fin M, F ij.1 ij.2 :=
+  sum_perm (shiftPermX N M hN) _ _ (fun _ => rfl)
+
+/-- Reindex a product sum along the second axis. -/
+lemma sum_prod_snd (N M : ℕ) (hM : 0 < M) (F : Fin N → Fin M → ℚ) :
+    ∑ ij : Fin N × Fin M, F ij.1 (fwd M hM ij.2)
+      = ∑ ij : Fin N × Fin M, F ij.1 ij.2 :=
+  sum_perm (shiftPermY N M hM) _ _ (fun _ => rfl)
+
+/-- Backward variants (symmetric permutations). -/
+lemma sum_prod_fst_bwd (N M : ℕ) (hN : 0 < N) (F : Fin N → Fin M → ℚ) :
+    ∑ ij : Fin N × Fin M, F (bwd N hN ij.1) ij.2
+      = ∑ ij : Fin N × Fin M, F ij.1 ij.2 :=
+  sum_perm (shiftPermX N M hN).symm _ _ (fun _ => rfl)
+
+lemma sum_prod_snd_bwd (N M : ℕ) (hM : 0 < M) (F : Fin N → Fin M → ℚ) :
+    ∑ ij : Fin N × Fin M, F ij.1 (bwd M hM ij.2)
+      = ∑ ij : Fin N × Fin M, F ij.1 ij.2 :=
+  sum_perm (shiftPermY N M hM).symm _ _ (fun _ => rfl)
+
+/-- 2D lattice, energy, and x-advection (invariance proved). -/
+structure FluidLattice2D (N M : ℕ) where
+  vel : Fin N × Fin M → CellVelocity
+
+def totalEnergy2D (N M : ℕ) (L : FluidLattice2D N M) : ℚ :=
+  ∑ ij, cellEnergy (L.vel ij)
+
+def advect2D (N M : ℕ) (hN : 0 < N) (L : FluidLattice2D N M) :
+    FluidLattice2D N M :=
+  ⟨fun ij => L.vel (fwd N hN ij.1, ij.2)⟩
+
+lemma energy_advect2D (N M : ℕ) (hN : 0 < N) (L : FluidLattice2D N M) :
+    totalEnergy2D N M (advect2D N M hN L) = totalEnergy2D N M L := by
+  unfold totalEnergy2D advect2D
+  simp only
+  exact sum_prod_fst N M hN (fun i j => cellEnergy (L.vel (i, j)))
+
+/-- Five-point stencil diffusion with explicit CFL bound. -/
+def diffuse2D (N M : ℕ) (hN : 0 < N) (hM : 0 < M) (μ : ℚ)
+    (L : FluidLattice2D N M) : FluidLattice2D N M :=
+  ⟨fun ij =>
+    ⟨(1 - 4 * μ) * (L.vel ij).x
+        + μ * (L.vel (fwd N hN ij.1, ij.2)).x
+        + μ * (L.vel (bwd N hN ij.1, ij.2)).x
+        + μ * (L.vel (ij.1, fwd M hM ij.2)).x
+        + μ * (L.vel (ij.1, bwd M hM ij.2)).x,
+     (1 - 4 * μ) * (L.vel ij).y
+        + μ * (L.vel (fwd N hN ij.1, ij.2)).y
+        + μ * (L.vel (bwd N hN ij.1, ij.2)).y
+        + μ * (L.vel (ij.1, fwd M hM ij.2)).y
+        + μ * (L.vel (ij.1, bwd M hM ij.2)).y,
+     (1 - 4 * μ) * (L.vel ij).z
+        + μ * (L.vel (fwd N hN ij.1, ij.2)).z
+        + μ * (L.vel (bwd N hN ij.1, ij.2)).z
+        + μ * (L.vel (ij.1, fwd M hM ij.2)).z
+        + μ * (L.vel (ij.1, bwd M hM ij.2)).z⟩⟩
+
+/-- Five-term variance identity: squares stay convex. -/
+lemma convex_sq5 (μ a b c d e : ℚ) (hμ0 : 0 ≤ μ) (hμ1 : 4 * μ ≤ 1) :
+    ((1 - 4 * μ) * a + μ * b + μ * c + μ * d + μ * e) ^ 2
+      ≤ (1 - 4 * μ) * a ^ 2 + μ * b ^ 2 + μ * c ^ 2
+        + μ * d ^ 2 + μ * e ^ 2 := by
+  have hα : 0 ≤ 1 - 4 * μ := by linarith
+  have w : 0 ≤ μ * (1 - 4 * μ) := mul_nonneg hμ0 hα
+  have w2 : 0 ≤ μ * μ := mul_nonneg hμ0 hμ0
+  have e1 : 0 ≤ μ * (1 - 4 * μ) * (a - b) ^ 2 :=
+    mul_nonneg w (sq_nonneg _)
+  have e2 : 0 ≤ μ * (1 - 4 * μ) * (a - c) ^ 2 :=
+    mul_nonneg w (sq_nonneg _)
+  have e3 : 0 ≤ μ * (1 - 4 * μ) * (a - d) ^ 2 :=
+    mul_nonneg w (sq_nonneg _)
+  have e4 : 0 ≤ μ * (1 - 4 * μ) * (a - e) ^ 2 :=
+    mul_nonneg w (sq_nonneg _)
+  have f1 : 0 ≤ μ * μ * (b - c) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f2 : 0 ≤ μ * μ * (b - d) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f3 : 0 ≤ μ * μ * (b - e) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f4 : 0 ≤ μ * μ * (c - d) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f5 : 0 ≤ μ * μ * (c - e) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f6 : 0 ≤ μ * μ * (d - e) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have hsum : (1 - 4 * μ) * a ^ 2 + μ * b ^ 2 + μ * c ^ 2 + μ * d ^ 2
+      + μ * e ^ 2 - ((1 - 4 * μ) * a + μ * b + μ * c + μ * d + μ * e) ^ 2
+      = μ * (1 - 4 * μ) * (a - b) ^ 2 + μ * (1 - 4 * μ) * (a - c) ^ 2
+        + μ * (1 - 4 * μ) * (a - d) ^ 2 + μ * (1 - 4 * μ) * (a - e) ^ 2
+        + μ * μ * (b - c) ^ 2 + μ * μ * (b - d) ^ 2 + μ * μ * (b - e) ^ 2
+        + μ * μ * (c - d) ^ 2 + μ * μ * (c - e) ^ 2
+        + μ * μ * (d - e) ^ 2 := by ring
+  linarith
+
+/-- Scalar 5-point diffusion contracts the sum of squares. -/
+lemma scalar_diffuse2D (N M : ℕ) (hN : 0 < N) (hM : 0 < M) (μ : ℚ)
+    (hμ0 : 0 ≤ μ) (hμ1 : 4 * μ ≤ 1)
+    (a b c d e : Fin N × Fin M → ℚ)
+    (hb : ∀ ij, b ij = a (fwd N hN ij.1, ij.2))
+    (hc : ∀ ij, c ij = a (bwd N hN ij.1, ij.2))
+    (hd : ∀ ij, d ij = a (ij.1, fwd M hM ij.2))
+    (he : ∀ ij, e ij = a (ij.1, bwd M hM ij.2)) :
+    ∑ ij, ((1 - 4 * μ) * a ij + μ * b ij + μ * c ij + μ * d ij
+        + μ * e ij) ^ 2 ≤ ∑ ij, (a ij) ^ 2 := by
+  calc ∑ ij, ((1 - 4 * μ) * a ij + μ * b ij + μ * c ij + μ * d ij
+          + μ * e ij) ^ 2
+      ≤ ∑ ij, ((1 - 4 * μ) * (a ij) ^ 2 + μ * (b ij) ^ 2 + μ * (c ij) ^ 2
+          + μ * (d ij) ^ 2 + μ * (e ij) ^ 2) :=
+        Finset.sum_le_sum
+          (fun ij _ => convex_sq5 μ (a ij) (b ij) (c ij) (d ij) (e ij)
+            hμ0 hμ1)
+    _ = (1 - 4 * μ) * ∑ ij, (a ij) ^ 2 + μ * ∑ ij, (b ij) ^ 2
+          + μ * ∑ ij, (c ij) ^ 2 + μ * ∑ ij, (d ij) ^ 2
+          + μ * ∑ ij, (e ij) ^ 2 := by
+        simp only [Finset.sum_add_distrib, ← Finset.mul_sum]
+    _ = ∑ ij, (a ij) ^ 2 := by
+        have hfun1 : (fun ij => (b ij) ^ 2)
+            = (fun ij => (a (fwd N hN ij.1, ij.2)) ^ 2) :=
+          funext (fun ij => by rw [hb ij])
+        have hfun2 : (fun ij => (c ij) ^ 2)
+            = (fun ij => (a (bwd N hN ij.1, ij.2)) ^ 2) :=
+          funext (fun ij => by rw [hc ij])
+        have hfun3 : (fun ij => (d ij) ^ 2)
+            = (fun ij => (a (ij.1, fwd M hM ij.2)) ^ 2) :=
+          funext (fun ij => by rw [hd ij])
+        have hfun4 : (fun ij => (e ij) ^ 2)
+            = (fun ij => (a (ij.1, bwd M hM ij.2)) ^ 2) :=
+          funext (fun ij => by rw [he ij])
+        have r1 : ∑ ij, (b ij) ^ 2 = ∑ ij, (a ij) ^ 2 := by
+          rw [hfun1]
+          exact sum_prod_fst N M hN (fun i j => (a (i, j)) ^ 2)
+        have r2 : ∑ ij, (c ij) ^ 2 = ∑ ij, (a ij) ^ 2 := by
+          rw [hfun2]
+          exact sum_prod_fst_bwd N M hN (fun i j => (a (i, j)) ^ 2)
+        have r3 : ∑ ij, (d ij) ^ 2 = ∑ ij, (a ij) ^ 2 := by
+          rw [hfun3]
+          exact sum_prod_snd N M hM (fun i j => (a (i, j)) ^ 2)
+        have r4 : ∑ ij, (e ij) ^ 2 = ∑ ij, (a ij) ^ 2 := by
+          rw [hfun4]
+          exact sum_prod_snd_bwd N M hM (fun i j => (a (i, j)) ^ 2)
+        rw [r1, r2, r3, r4]
+        ring
+
+/-- 2D diffusion contracts total energy (three components). -/
+lemma energy_diffuse2D (N M : ℕ) (hN : 0 < N) (hM : 0 < M) (μ : ℚ)
+    (hμ0 : 0 ≤ μ) (hμ1 : 4 * μ ≤ 1) (L : FluidLattice2D N M) :
+    totalEnergy2D N M (diffuse2D N M hN hM μ L) ≤ totalEnergy2D N M L := by
+  have hx := scalar_diffuse2D N M hN hM μ hμ0 hμ1
+    (fun ij => (L.vel ij).x) (fun ij => (L.vel (fwd N hN ij.1, ij.2)).x)
+    (fun ij => (L.vel (bwd N hN ij.1, ij.2)).x)
+    (fun ij => (L.vel (ij.1, fwd M hM ij.2)).x)
+    (fun ij => (L.vel (ij.1, bwd M hM ij.2)).x)
+    (fun ij => rfl) (fun ij => rfl) (fun ij => rfl) (fun ij => rfl)
+  have hy := scalar_diffuse2D N M hN hM μ hμ0 hμ1
+    (fun ij => (L.vel ij).y) (fun ij => (L.vel (fwd N hN ij.1, ij.2)).y)
+    (fun ij => (L.vel (bwd N hN ij.1, ij.2)).y)
+    (fun ij => (L.vel (ij.1, fwd M hM ij.2)).y)
+    (fun ij => (L.vel (ij.1, bwd M hM ij.2)).y)
+    (fun ij => rfl) (fun ij => rfl) (fun ij => rfl) (fun ij => rfl)
+  have hz := scalar_diffuse2D N M hN hM μ hμ0 hμ1
+    (fun ij => (L.vel ij).z) (fun ij => (L.vel (fwd N hN ij.1, ij.2)).z)
+    (fun ij => (L.vel (bwd N hN ij.1, ij.2)).z)
+    (fun ij => (L.vel (ij.1, fwd M hM ij.2)).z)
+    (fun ij => (L.vel (ij.1, bwd M hM ij.2)).z)
+    (fun ij => rfl) (fun ij => rfl) (fun ij => rfl) (fun ij => rfl)
+  have hexpand : totalEnergy2D N M (diffuse2D N M hN hM μ L)
+      = ∑ ij, ((1 - 4 * μ) * (L.vel ij).x
+          + μ * (L.vel (fwd N hN ij.1, ij.2)).x
+          + μ * (L.vel (bwd N hN ij.1, ij.2)).x
+          + μ * (L.vel (ij.1, fwd M hM ij.2)).x
+          + μ * (L.vel (ij.1, bwd M hM ij.2)).x) ^ 2
+        + ∑ ij, ((1 - 4 * μ) * (L.vel ij).y
+          + μ * (L.vel (fwd N hN ij.1, ij.2)).y
+          + μ * (L.vel (bwd N hN ij.1, ij.2)).y
+          + μ * (L.vel (ij.1, fwd M hM ij.2)).y
+          + μ * (L.vel (ij.1, bwd M hM ij.2)).y) ^ 2
+        + ∑ ij, ((1 - 4 * μ) * (L.vel ij).z
+          + μ * (L.vel (fwd N hN ij.1, ij.2)).z
+          + μ * (L.vel (bwd N hN ij.1, ij.2)).z
+          + μ * (L.vel (ij.1, fwd M hM ij.2)).z
+          + μ * (L.vel (ij.1, bwd M hM ij.2)).z) ^ 2 := by
+    have rfl_expand : totalEnergy2D N M (diffuse2D N M hN hM μ L)
+        = ∑ ij, ((((1 - 4 * μ) * (L.vel ij).x
+            + μ * (L.vel (fwd N hN ij.1, ij.2)).x
+            + μ * (L.vel (bwd N hN ij.1, ij.2)).x
+            + μ * (L.vel (ij.1, fwd M hM ij.2)).x
+            + μ * (L.vel (ij.1, bwd M hM ij.2)).x) ^ 2
+          + ((1 - 4 * μ) * (L.vel ij).y
+            + μ * (L.vel (fwd N hN ij.1, ij.2)).y
+            + μ * (L.vel (bwd N hN ij.1, ij.2)).y
+            + μ * (L.vel (ij.1, fwd M hM ij.2)).y
+            + μ * (L.vel (ij.1, bwd M hM ij.2)).y) ^ 2)
+          + ((1 - 4 * μ) * (L.vel ij).z
+            + μ * (L.vel (fwd N hN ij.1, ij.2)).z
+            + μ * (L.vel (bwd N hN ij.1, ij.2)).z
+            + μ * (L.vel (ij.1, fwd M hM ij.2)).z
+            + μ * (L.vel (ij.1, bwd M hM ij.2)).z) ^ 2) := rfl
+    rw [rfl_expand]
+    simp only [Finset.sum_add_distrib]
+  have hexpand0 : totalEnergy2D N M L
+      = ∑ ij, ((L.vel ij).x) ^ 2 + ∑ ij, ((L.vel ij).y) ^ 2
+        + ∑ ij, ((L.vel ij).z) ^ 2 := by
+    have rfl_expand0 : totalEnergy2D N M L
+        = ∑ ij, ((((L.vel ij).x) ^ 2 + ((L.vel ij).y) ^ 2)
+          + ((L.vel ij).z) ^ 2) := rfl
+    rw [rfl_expand0]
+    simp only [Finset.sum_add_distrib]
+  rw [hexpand, hexpand0]
+  linarith
+
+/-- Two-sided axis shift for bilinear product sums (X axis). -/
+lemma sum_prod_fwd_to_bwdX (N M : ℕ) (hN : 0 < N)
+    (F : Fin N × Fin M → Fin N × Fin M → ℚ) :
+    ∑ ij, F ij (fwd N hN ij.1, ij.2)
+      = ∑ ij, F (bwd N hN ij.1, ij.2) ij := by
+  have r : ∀ ij, F ij (fwd N hN ij.1, ij.2)
+      = F (bwd N hN (fwd N hN ij.1), ij.2) (fwd N hN ij.1, ij.2) := by
+    intro ij
+    rw [show bwd N hN (fwd N hN ij.1) = ij.1 from
+      (shiftPerm N hN).left_inv ij.1]
+  rw [Finset.sum_congr rfl (fun ij _ => r ij)]
+  exact Equiv.sum_comp (shiftPermX N M hN)
+    (fun kl => F (bwd N hN kl.1, kl.2) kl)
+
+/-- Two-sided axis shift for bilinear product sums (Y axis). -/
+lemma sum_prod_fwd_to_bwdY (N M : ℕ) (hM : 0 < M)
+    (F : Fin N × Fin M → Fin N × Fin M → ℚ) :
+    ∑ ij, F ij (ij.1, fwd M hM ij.2)
+      = ∑ ij, F (ij.1, bwd M hM ij.2) ij := by
+  have r : ∀ ij, F ij (ij.1, fwd M hM ij.2)
+      = F (ij.1, bwd M hM (fwd M hM ij.2)) (ij.1, fwd M hM ij.2) := by
+    intro ij
+    rw [show bwd M hM (fwd M hM ij.2) = ij.2 from
+      (shiftPerm M hM).left_inv ij.2]
+  rw [Finset.sum_congr rfl (fun ij _ => r ij)]
+  exact Equiv.sum_comp (shiftPermY N M hM)
+    (fun kl => F (kl.1, bwd M hM kl.2) kl)
+
+/-- Forward-difference pressure gradients (kept structure). -/
+def gradX (N M : ℕ) (hN : 0 < N) (p : Fin N × Fin M → ℚ)
+    (ij : Fin N × Fin M) : ℚ :=
+  p (fwd N hN ij.1, ij.2) - p ij
+
+def gradY (N M : ℕ) (hM : 0 < M) (p : Fin N × Fin M → ℚ)
+    (ij : Fin N × Fin M) : ℚ :=
+  p (ij.1, fwd M hM ij.2) - p ij
+
+/-- Backward-difference divergence (adjoint pair). -/
+def bdiv2D (N M : ℕ) (hN : 0 < N) (hM : 0 < M)
+    (u : Fin N × Fin M → CellVelocity) (ij : Fin N × Fin M) : ℚ :=
+  ((u ij).x - (u (bwd N hN ij.1, ij.2)).x)
+    + ((u ij).y - (u (ij.1, bwd M hM ij.2)).y)
+
+/-- Summation by parts I in 2D (both axes, proved). -/
+lemma sbp_grad_div2D (N M : ℕ) (hN : 0 < N) (hM : 0 < M)
+    (u : Fin N × Fin M → CellVelocity) (p : Fin N × Fin M → ℚ) :
+    (∑ ij, (u ij).x * gradX N M hN p ij)
+        + (∑ ij, (u ij).y * gradY N M hM p ij)
+      = -∑ ij, bdiv2D N M hN hM u ij * p ij := by
+  have hX : ∑ ij, (u ij).x * gradX N M hN p ij
+      = ∑ ij, (u (bwd N hN ij.1, ij.2)).x * p ij
+        - ∑ ij, (u ij).x * p ij := by
+    have e : ∀ ij ∈ (Finset.univ : Finset (Fin N × Fin M)),
+        (u ij).x * gradX N M hN p ij
+          = (u ij).x * p (fwd N hN ij.1, ij.2) - (u ij).x * p ij := by
+      intro ij _
+      simp only [gradX, mul_sub]
+    rw [Finset.sum_congr rfl e, Finset.sum_sub_distrib]
+    have hstep := sum_prod_fwd_to_bwdX N M hN (fun a b => (u a).x * p b)
+    have r1 : (∑ ij, (u ij).x * p (fwd N hN ij.1, ij.2))
+        = ∑ ij, (fun a b => (u a).x * p b) ij (fwd N hN ij.1, ij.2) := rfl
+    have r2 : (∑ ij, (fun a b => (u a).x * p b) (bwd N hN ij.1, ij.2) ij)
+        = ∑ ij, (u (bwd N hN ij.1, ij.2)).x * p ij := rfl
+    rw [r1, hstep, r2]
+  have hY : ∑ ij, (u ij).y * gradY N M hM p ij
+      = ∑ ij, (u (ij.1, bwd M hM ij.2)).y * p ij
+        - ∑ ij, (u ij).y * p ij := by
+    have e : ∀ ij ∈ (Finset.univ : Finset (Fin N × Fin M)),
+        (u ij).y * gradY N M hM p ij
+          = (u ij).y * p (ij.1, fwd M hM ij.2) - (u ij).y * p ij := by
+      intro ij _
+      simp only [gradY, mul_sub]
+    rw [Finset.sum_congr rfl e, Finset.sum_sub_distrib]
+    have hstep := sum_prod_fwd_to_bwdY N M hM (fun a b => (u a).y * p b)
+    have r1 : (∑ ij, (u ij).y * p (ij.1, fwd M hM ij.2))
+        = ∑ ij, (fun a b => (u a).y * p b) ij (ij.1, fwd M hM ij.2) := rfl
+    have r2 : (∑ ij, (fun a b => (u a).y * p b) (ij.1, bwd M hM ij.2) ij)
+        = ∑ ij, (u (ij.1, bwd M hM ij.2)).y * p ij := rfl
+    rw [r1, hstep, r2]
+  rw [hX, hY]
+  simp only [bdiv2D, add_mul, sub_mul, Finset.sum_add_distrib,
+    Finset.sum_sub_distrib]
+  ring
+
+/-- Axis Laplacians and their sum. -/
+def lapX (N M : ℕ) (hN : 0 < N) (p : Fin N × Fin M → ℚ)
+    (ij : Fin N × Fin M) : ℚ :=
+  p (fwd N hN ij.1, ij.2) - 2 * p ij + p (bwd N hN ij.1, ij.2)
+
+def lapY (N M : ℕ) (hM : 0 < M) (p : Fin N × Fin M → ℚ)
+    (ij : Fin N × Fin M) : ℚ :=
+  p (ij.1, fwd M hM ij.2) - 2 * p ij + p (ij.1, bwd M hM ij.2)
+
+def lap2D (N M : ℕ) (hN : 0 < N) (hM : 0 < M) (p : Fin N × Fin M → ℚ)
+    (ij : Fin N × Fin M) : ℚ :=
+  lapX N M hN p ij + lapY N M hM p ij
+
+/-- X-axis Laplacian is negative-semidefinite (proved). -/
+lemma sbp_lap_negX (N M : ℕ) (hN : 0 < N) (p : Fin N × Fin M → ℚ) :
+    ∑ ij, lapX N M hN p ij * p ij = -∑ ij, (gradX N M hN p ij) ^ 2 := by
+  have e1 : ∑ ij, p (fwd N hN ij.1, ij.2) * p ij
+      = ∑ ij, p ij * p (fwd N hN ij.1, ij.2) :=
+    Finset.sum_congr rfl (fun ij _ => mul_comm _ _)
+  have e2 : ∑ ij, p (bwd N hN ij.1, ij.2) * p ij
+      = ∑ ij, p ij * p (fwd N hN ij.1, ij.2) := by
+    have hstep := sum_prod_fwd_to_bwdX N M hN (fun a b => p a * p b)
+    have r1 : (∑ ij, p (bwd N hN ij.1, ij.2) * p ij)
+        = ∑ ij, (fun a b => p a * p b) (bwd N hN ij.1, ij.2) ij := rfl
+    have r2 : (∑ ij, (fun a b => p a * p b) ij (fwd N hN ij.1, ij.2))
+        = ∑ ij, p ij * p (fwd N hN ij.1, ij.2) := rfl
+    rw [r1, ← hstep, r2]
+  have e3 : ∑ ij : Fin N × Fin M, (p (fwd N hN ij.1, ij.2)) ^ 2
+      = ∑ ij : Fin N × Fin M, (p ij) ^ 2 :=
+    sum_prod_fst N M hN (fun i j => (p (i, j)) ^ 2)
+  have e4 : ∀ ij : Fin N × Fin M, (gradX N M hN p ij) ^ 2
+      = (p (fwd N hN ij.1, ij.2)) ^ 2
+        - 2 * (p (fwd N hN ij.1, ij.2) * p ij) + (p ij) ^ 2 := by
+    intro ij
+    simp only [gradX]
+    ring
+  have e5 : ∀ ij : Fin N × Fin M, lapX N M hN p ij * p ij
+      = p (fwd N hN ij.1, ij.2) * p ij - 2 * (p ij) ^ 2
+        + p (bwd N hN ij.1, ij.2) * p ij := by
+    intro ij
+    simp only [lapX]
+    ring
+  calc ∑ ij, lapX N M hN p ij * p ij
+      = ∑ ij, (p (fwd N hN ij.1, ij.2) * p ij - 2 * (p ij) ^ 2
+          + p (bwd N hN ij.1, ij.2) * p ij) :=
+        Finset.sum_congr rfl (fun ij _ => e5 ij)
+    _ = ∑ ij, p (fwd N hN ij.1, ij.2) * p ij - ∑ ij, (2 * (p ij) ^ 2)
+          + ∑ ij, p (bwd N hN ij.1, ij.2) * p ij := by
+        simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+    _ = 2 * ∑ ij, p ij * p (fwd N hN ij.1, ij.2)
+          - 2 * ∑ ij, (p ij) ^ 2 := by
+        have sB : ∑ ij, (2 * (p ij) ^ 2) = 2 * ∑ ij, (p ij) ^ 2 :=
+          (Finset.mul_sum _ _ _).symm
+        rw [e1, e2, sB]
+        ring
+    _ = -∑ ij, (gradX N M hN p ij) ^ 2 := by
+        have g1 : ∑ ij, (gradX N M hN p ij) ^ 2
+            = ∑ ij, ((p (fwd N hN ij.1, ij.2)) ^ 2
+              - 2 * (p (fwd N hN ij.1, ij.2) * p ij))
+              + ∑ ij, (p ij) ^ 2 := by
+          have hcongr : ∀ ij ∈ (Finset.univ : Finset (Fin N × Fin M)),
+              (gradX N M hN p ij) ^ 2
+                = (p (fwd N hN ij.1, ij.2)) ^ 2
+                  - 2 * (p (fwd N hN ij.1, ij.2) * p ij) + (p ij) ^ 2 :=
+            fun ij _ => e4 ij
+          rw [Finset.sum_congr rfl hcongr]
+          simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+        rw [g1]
+        have g2 : ∑ ij : Fin N × Fin M, ((p (fwd N hN ij.1, ij.2)) ^ 2
+            - 2 * (p (fwd N hN ij.1, ij.2) * p ij))
+            = ∑ ij : Fin N × Fin M, (p (fwd N hN ij.1, ij.2)) ^ 2
+              - ∑ ij : Fin N × Fin M,
+                (2 * (p (fwd N hN ij.1, ij.2) * p ij)) :=
+          Finset.sum_sub_distrib _ _
+        rw [g2, e3]
+        have sD : ∑ ij : Fin N × Fin M, (2 * (p (fwd N hN ij.1, ij.2) * p ij))
+            = 2 * ∑ ij, p (fwd N hN ij.1, ij.2) * p ij :=
+          (Finset.mul_sum _ _ _).symm
+        rw [sD, e1]
+        ring
+
+/-- Y-axis Laplacian is negative-semidefinite (proved). -/
+lemma sbp_lap_negY (N M : ℕ) (hM : 0 < M) (p : Fin N × Fin M → ℚ) :
+    ∑ ij, lapY N M hM p ij * p ij = -∑ ij, (gradY N M hM p ij) ^ 2 := by
+  have e1 : ∑ ij, p (ij.1, fwd M hM ij.2) * p ij
+      = ∑ ij, p ij * p (ij.1, fwd M hM ij.2) :=
+    Finset.sum_congr rfl (fun ij _ => mul_comm _ _)
+  have e2 : ∑ ij, p (ij.1, bwd M hM ij.2) * p ij
+      = ∑ ij, p ij * p (ij.1, fwd M hM ij.2) := by
+    have hstep := sum_prod_fwd_to_bwdY N M hM (fun a b => p a * p b)
+    have r1 : (∑ ij, p (ij.1, bwd M hM ij.2) * p ij)
+        = ∑ ij, (fun a b => p a * p b) (ij.1, bwd M hM ij.2) ij := rfl
+    have r2 : (∑ ij, (fun a b => p a * p b) ij (ij.1, fwd M hM ij.2))
+        = ∑ ij, p ij * p (ij.1, fwd M hM ij.2) := rfl
+    rw [r1, ← hstep, r2]
+  have e3 : ∑ ij : Fin N × Fin M, (p (ij.1, fwd M hM ij.2)) ^ 2
+      = ∑ ij : Fin N × Fin M, (p ij) ^ 2 :=
+    sum_prod_snd N M hM (fun i j => (p (i, j)) ^ 2)
+  have e4 : ∀ ij : Fin N × Fin M, (gradY N M hM p ij) ^ 2
+      = (p (ij.1, fwd M hM ij.2)) ^ 2
+        - 2 * (p (ij.1, fwd M hM ij.2) * p ij) + (p ij) ^ 2 := by
+    intro ij
+    simp only [gradY]
+    ring
+  have e5 : ∀ ij : Fin N × Fin M, lapY N M hM p ij * p ij
+      = p (ij.1, fwd M hM ij.2) * p ij - 2 * (p ij) ^ 2
+        + p (ij.1, bwd M hM ij.2) * p ij := by
+    intro ij
+    simp only [lapY]
+    ring
+  calc ∑ ij, lapY N M hM p ij * p ij
+      = ∑ ij, (p (ij.1, fwd M hM ij.2) * p ij - 2 * (p ij) ^ 2
+          + p (ij.1, bwd M hM ij.2) * p ij) :=
+        Finset.sum_congr rfl (fun ij _ => e5 ij)
+    _ = ∑ ij, p (ij.1, fwd M hM ij.2) * p ij - ∑ ij, (2 * (p ij) ^ 2)
+          + ∑ ij, p (ij.1, bwd M hM ij.2) * p ij := by
+        simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+    _ = 2 * ∑ ij, p ij * p (ij.1, fwd M hM ij.2)
+          - 2 * ∑ ij, (p ij) ^ 2 := by
+        have sB : ∑ ij, (2 * (p ij) ^ 2) = 2 * ∑ ij, (p ij) ^ 2 :=
+          (Finset.mul_sum _ _ _).symm
+        rw [e1, e2, sB]
+        ring
+    _ = -∑ ij, (gradY N M hM p ij) ^ 2 := by
+        have g1 : ∑ ij, (gradY N M hM p ij) ^ 2
+            = ∑ ij, ((p (ij.1, fwd M hM ij.2)) ^ 2
+              - 2 * (p (ij.1, fwd M hM ij.2) * p ij))
+              + ∑ ij, (p ij) ^ 2 := by
+          have hcongr : ∀ ij ∈ (Finset.univ : Finset (Fin N × Fin M)),
+              (gradY N M hM p ij) ^ 2
+                = (p (ij.1, fwd M hM ij.2)) ^ 2
+                  - 2 * (p (ij.1, fwd M hM ij.2) * p ij) + (p ij) ^ 2 :=
+            fun ij _ => e4 ij
+          rw [Finset.sum_congr rfl hcongr]
+          simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+        rw [g1]
+        have g2 : ∑ ij : Fin N × Fin M, ((p (ij.1, fwd M hM ij.2)) ^ 2
+            - 2 * (p (ij.1, fwd M hM ij.2) * p ij))
+            = ∑ ij : Fin N × Fin M, (p (ij.1, fwd M hM ij.2)) ^ 2
+              - ∑ ij : Fin N × Fin M,
+                (2 * (p (ij.1, fwd M hM ij.2) * p ij)) :=
+          Finset.sum_sub_distrib _ _
+        rw [g2, e3]
+        have sD : ∑ ij : Fin N × Fin M, (2 * (p (ij.1, fwd M hM ij.2) * p ij))
+            = 2 * ∑ ij, p (ij.1, fwd M hM ij.2) * p ij :=
+          (Finset.mul_sum _ _ _).symm
+        rw [sD, e1]
+        ring
+
+/-- Full 2D Laplacian is negative-semidefinite (both axes). -/
+lemma sbp_lap_neg2D (N M : ℕ) (hN : 0 < N) (hM : 0 < M)
+    (p : Fin N × Fin M → ℚ) :
+    ∑ ij, lap2D N M hN hM p ij * p ij
+      = -(∑ ij, (gradX N M hN p ij) ^ 2
+        + ∑ ij, (gradY N M hM p ij) ^ 2) := by
+  have hX := sbp_lap_negX N M hN p
+  have hY := sbp_lap_negY N M hM p
+  have hsplit : ∀ ij ∈ (Finset.univ : Finset (Fin N × Fin M)),
+      lap2D N M hN hM p ij * p ij
+        = lapX N M hN p ij * p ij + lapY N M hM p ij * p ij := by
+    intro ij _
+    simp only [lap2D, add_mul]
+  rw [Finset.sum_congr rfl hsplit, Finset.sum_add_distrib, hX, hY]
+  ring
+
+/-- 2D Chorin projection (x via gradX, y via gradY). -/
+def project2D (N M : ℕ) (hN : 0 < N) (hM : 0 < M) (c : ℚ)
+    (L : FluidLattice2D N M) (p : Fin N × Fin M → ℚ) : FluidLattice2D N M :=
+  ⟨fun ij => ⟨(L.vel ij).x - c * gradX N M hN p ij,
+    (L.vel ij).y - c * gradY N M hM p ij, (L.vel ij).z⟩⟩
+
+/-- 2D projection dissipates energy under the solver contract. -/
+lemma energy_project2D (N M : ℕ) (hN : 0 < N) (hM : 0 < M) (c C : ℚ)
+    (hc : c * C = 1) (hC : 0 < C) (L : FluidLattice2D N M)
+    (p : Fin N × Fin M → ℚ)
+    (hPoisson : ∀ ij, lap2D N M hN hM p ij
+      = C * bdiv2D N M hN hM L.vel ij) :
+    totalEnergy2D N M (project2D N M hN hM c L p)
+      ≤ totalEnergy2D N M L := by
+  have hCne : C ≠ 0 := hC.ne'
+  have hSnn : 0 ≤ ∑ ij, (gradX N M hN p ij) ^ 2
+      + ∑ ij, (gradY N M hM p ij) ^ 2 := by
+    apply add_nonneg
+    · exact Finset.sum_nonneg (fun ij _ => sq_nonneg _)
+    · exact Finset.sum_nonneg (fun ij _ => sq_nonneg _)
+  have hlink2D : (∑ ij, (L.vel ij).x * gradX N M hN p ij)
+        + (∑ ij, (L.vel ij).y * gradY N M hM p ij)
+      = (1 / C) * (∑ ij, (gradX N M hN p ij) ^ 2
+        + ∑ ij, (gradY N M hM p ij) ^ 2) := by
+    have h1 := sbp_grad_div2D N M hN hM L.vel p
+    have h2 := sbp_lap_neg2D N M hN hM p
+    have h3 : ∑ ij, bdiv2D N M hN hM L.vel ij * p ij
+        = (1 / C) * ∑ ij, lap2D N M hN hM p ij * p ij := by
+      have hper : ∀ ij : Fin N × Fin M, bdiv2D N M hN hM L.vel ij * p ij
+          = (1 / C) * (lap2D N M hN hM p ij * p ij) := by
+        intro ij
+        rw [hPoisson ij]
+        field_simp
+      rw [Finset.sum_congr rfl (fun ij _ => hper ij), ← Finset.mul_sum]
+    rw [h1, h3, h2]
+    ring
+  have hE : totalEnergy2D N M (project2D N M hN hM c L p)
+      = totalEnergy2D N M L - c ^ 2 * (∑ ij, (gradX N M hN p ij) ^ 2
+        + ∑ ij, (gradY N M hM p ij) ^ 2) := by
+    have hexpand : totalEnergy2D N M (project2D N M hN hM c L p)
+        = ∑ ij, ((L.vel ij).x - c * gradX N M hN p ij) ^ 2
+          + ∑ ij, ((L.vel ij).y - c * gradY N M hM p ij) ^ 2
+          + ∑ ij, ((L.vel ij).z) ^ 2 := by
+      have rfl_expand : totalEnergy2D N M (project2D N M hN hM c L p)
+          = ∑ ij, ((((L.vel ij).x - c * gradX N M hN p ij) ^ 2
+            + ((L.vel ij).y - c * gradY N M hM p ij) ^ 2)
+            + ((L.vel ij).z) ^ 2) := rfl
+      rw [rfl_expand]
+      simp only [Finset.sum_add_distrib]
+    have hexpand0 : totalEnergy2D N M L
+        = ∑ ij, ((L.vel ij).x) ^ 2 + ∑ ij, ((L.vel ij).y) ^ 2
+          + ∑ ij, ((L.vel ij).z) ^ 2 := by
+      have rfl_expand0 : totalEnergy2D N M L
+          = ∑ ij, ((((L.vel ij).x) ^ 2 + ((L.vel ij).y) ^ 2)
+            + ((L.vel ij).z) ^ 2) := rfl
+      rw [rfl_expand0]
+      simp only [Finset.sum_add_distrib]
+    rw [hexpand, hexpand0]
+    have hx : ∀ ij : Fin N × Fin M,
+        ((L.vel ij).x - c * gradX N M hN p ij) ^ 2
+          = ((L.vel ij).x) ^ 2 - 2 * c * ((L.vel ij).x * gradX N M hN p ij)
+            + c ^ 2 * (gradX N M hN p ij) ^ 2 := by
+      intro ij
+      ring
+    have hy : ∀ ij : Fin N × Fin M,
+        ((L.vel ij).y - c * gradY N M hM p ij) ^ 2
+          = ((L.vel ij).y) ^ 2 - 2 * c * ((L.vel ij).y * gradY N M hM p ij)
+            + c ^ 2 * (gradY N M hM p ij) ^ 2 := by
+      intro ij
+      ring
+    rw [Finset.sum_congr rfl (fun ij _ => hx ij),
+      Finset.sum_congr rfl (fun ij _ => hy ij)]
+    simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+    have t1x : ∑ ij, (2 * c * ((L.vel ij).x * gradX N M hN p ij))
+        = 2 * c * ∑ ij, (L.vel ij).x * gradX N M hN p ij :=
+      (Finset.mul_sum _ _ _).symm
+    have t1y : ∑ ij, (2 * c * ((L.vel ij).y * gradY N M hM p ij))
+        = 2 * c * ∑ ij, (L.vel ij).y * gradY N M hM p ij :=
+      (Finset.mul_sum _ _ _).symm
+    have t2x : ∑ ij, (c ^ 2 * (gradX N M hN p ij) ^ 2)
+        = c ^ 2 * ∑ ij, (gradX N M hN p ij) ^ 2 :=
+      (Finset.mul_sum _ _ _).symm
+    have t2y : ∑ ij, (c ^ 2 * (gradY N M hM p ij) ^ 2)
+        = c ^ 2 * ∑ ij, (gradY N M hM p ij) ^ 2 :=
+      (Finset.mul_sum _ _ _).symm
+    rw [t1x, t1y, t2x, t2y]
+    have hC : 2 * c * (∑ ij, (L.vel ij).x * gradX N M hN p ij)
+        + 2 * c * (∑ ij, (L.vel ij).y * gradY N M hM p ij)
+        = 2 * (c * c) * (∑ ij, (gradX N M hN p ij) ^ 2
+          + ∑ ij, (gradY N M hM p ij) ^ 2) := by
+      have hcC : c * (1 / C) = c ^ 2 := by
+        field_simp
+        nlinarith [hc]
+      have step3 : (2 : ℚ) * (c * (1 / C)) = 2 * (c * c) := by
+        nlinarith [hcC]
+      calc 2 * c * (∑ ij, (L.vel ij).x * gradX N M hN p ij)
+            + 2 * c * (∑ ij, (L.vel ij).y * gradY N M hM p ij)
+          = 2 * c * ((∑ ij, (L.vel ij).x * gradX N M hN p ij)
+            + (∑ ij, (L.vel ij).y * gradY N M hM p ij)) := by ring
+        _ = 2 * c * ((1 / C) * (∑ ij, (gradX N M hN p ij) ^ 2
+            + ∑ ij, (gradY N M hM p ij) ^ 2)) := by rw [hlink2D]
+        _ = 2 * (c * (1 / C)) * (∑ ij, (gradX N M hN p ij) ^ 2
+            + ∑ ij, (gradY N M hM p ij) ^ 2) := by ring
+        _ = 2 * (c * c) * (∑ ij, (gradX N M hN p ij) ^ 2
+            + ∑ ij, (gradY N M hM p ij) ^ 2) := by rw [step3]
+    linear_combination -hC
+  have hdrop : 0 ≤ c ^ 2 * (∑ ij, (gradX N M hN p ij) ^ 2
+      + ∑ ij, (gradY N M hM p ij) ^ 2) :=
+    mul_nonneg (sq_nonneg _) hSnn
+  linarith
+
+/-- 2D Godunov predictor and full fractional step. -/
+def godunov2D (N M : ℕ) (hN : 0 < N) (hM : 0 < M) (μ : ℚ)
+    (L : FluidLattice2D N M) : FluidLattice2D N M :=
+  diffuse2D N M hN hM μ (advect2D N M hN L)
+
+def full_ns_step2D (N M : ℕ) (hN : 0 < N) (hM : 0 < M) (μ c : ℚ)
+    (L : FluidLattice2D N M) (p : Fin N × Fin M → ℚ) : FluidLattice2D N M :=
+  project2D N M hN hM c (godunov2D N M hN hM μ L) p
+
+/-- Main theorem in 2D: one full step never increases energy. -/
+theorem energy_monotonic_decay2D (N M : ℕ) (hN : 0 < N) (hM : 0 < M)
+    (μ c C : ℚ) (hμ0 : 0 ≤ μ) (hμ1 : 4 * μ ≤ 1) (hc : c * C = 1)
+    (hC : 0 < C) (L : FluidLattice2D N M) (p : Fin N × Fin M → ℚ)
+    (hPoisson : ∀ ij, lap2D N M hN hM p ij
+      = C * bdiv2D N M hN hM (godunov2D N M hN hM μ L).vel ij) :
+    totalEnergy2D N M (full_ns_step2D N M hN hM μ c L p)
+      ≤ totalEnergy2D N M L :=
+  le_trans (energy_project2D N M hN hM c C hc hC _ _ hPoisson)
+    (le_trans (energy_diffuse2D N M hN hM μ hμ0 hμ1 _)
+      (le_of_eq (energy_advect2D N M hN _)))
 
 end NavierStokesCore
