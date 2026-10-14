@@ -50,9 +50,10 @@
 | RH-COUNT-10 exactly ten zeros on [0,50] (COMPLETE, 0 stuck) | CLOSED |
 | HODGE-PERIODS AGM tau triple-validated (i, j-match, lambda-orbit) | CLOSED |
 | HODGE-COUNT Fermat quartic 7/16/0 over F2/F3/F5, machine-held | CLOSED |
+| HODGE-FQ F_{2^n} machinery, traces t_1..3, O(2^3n) wall mapped | CLOSED |
 | TURING-NT N(T) consistency table + explicit G1/G2/G3 gaps | CLOSED |
 | MOORE-PREM all 3 Banach premises hold on halo-lifted gamma1 box | CLOSED |
 | VERDICT-GAP floor-branch never counts (pinned, no-zero-ball demo) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
-Suites at seal: isolated `47 passed, 1 skipped`; main `164 passed`; `exit 0`.
+Suites at seal: isolated `50 passed, 1 skipped`; main `167 passed`; `exit 0`.
