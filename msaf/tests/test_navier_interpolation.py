@@ -221,6 +221,24 @@ def test_pressure_rejects_float():
         lat.compute_pressure_field(1.0)  # type: ignore[arg-type]
 
 
+def test_pressure_dynamic_convergence_achieved():
+    lat = FluidLattice(4, "0.0001", "1")
+    lat.set_uniform("0.5", "-0.25", "0.1")
+    lat.set_cell(1, 1, 1, ("0.6", "-0.2", "0.15"))
+    p = lat.compute_pressure_field("1.0", "1e-75", 1000)
+    assert len(p) == lat.ncells
+    assert all(bool(v.is_finite()) for v in p)
+    assert 1 <= lat._last_pressure_iters <= 10
+
+
+def test_pressure_divergence_alarm_on_noise():
+    lat = FluidLattice(4, "0.0001", "1")
+    lat.set_uniform("0.5", "-0.25", "0.1")
+    lat.set_cell(1, 1, 1, ("0.6", "-0.2", "0.15"))
+    with pytest.raises(ResolutionAlarm):
+        lat.compute_pressure_field("1.0", "1e-300", 1000)
+
+
 def test_pressure_uniform_field():
     lat = FluidLattice(4, "0.0001", "1")
     lat.set_uniform("0.5", "-0.25", "0.1")
@@ -262,3 +280,150 @@ def test_pressure_ascii_rendering_boundaries():
         lat.render_pressure_slice_ascii(4)
     with pytest.raises(ValueError):
         lat.render_pressure_slice_ascii(-1)
+
+
+def test_full_loop_incompressibility_preservation():
+    """Fractional-step loop preserves solenoidality incl. rotation fields.
+
+    Shear u=(f(j),-0.25,0.1) is discretely divergence-free: 10 sequential
+    evolve_full_ns_step("1e-43","1.0") keep (a) divergence TRUE, (b) energy
+    bounded < 1.0, (c) float inputs rejected. Restoring projection
+    (Δp=(rho/dt)div u*) clears divergence by construction: a rotation
+    field (nonzero tr(G^2)) now completes 10 steps alarm-free with
+    divergence TRUE throughout (384-bit working precision; 256-bit run
+    instead demonstrates the guard: tripwire fires, escalation raises
+    ResolutionAlarm rather than going vacuous).
+    """
+    from flint import arb as _arb
+
+    lat = FluidLattice(4, "0.0001", "1", 384)  # elevated working precision:
+    # sustained stepping inflates widths ~40x/projection at any precision,
+    # so long runs start high; the reactive ramp below remains as guard.
+    for i in range(4):
+        for j in range(4):
+            for ll in range(4):
+                lat.set_cell(i, j, ll, (f"{5 - j}e-1", "-0.25", "0.1"))
+    with pytest.raises(TypeError):
+        lat.evolve_full_ns_step(1e-43, "1.0")  # type: ignore[arg-type]
+    with pytest.raises(TypeError):
+        lat.evolve_full_ns_step("1e-43", 1.0)  # type: ignore[arg-type]
+    assert lat.divergence_contains_zero_everywhere() is True
+    for _ in range(10):
+        lat.evolve_full_ns_step("1e-43", "1.0")
+    assert lat.divergence_contains_zero_everywhere() is True
+    assert bool(lat.kinetic_energy().upper() < _arb("1.0")) is True
+    assert lat.elapsed_ticks() == 10
+    rot = FluidLattice(4, "0.0001", "1", 384)
+    for i in range(4):
+        for j in range(4):
+            for ll in range(4):
+                rot.set_cell(i, j, ll, (f"{5 - j}e-1", f"{-25 + 10 * i}e-2", "0.1"))
+    assert rot.divergence_contains_zero_everywhere() is True
+    from flint import ctx as _ctx
+
+    try:
+        for _ in range(10):
+            rot.evolve_full_ns_step("1e-43", "1.0")
+            assert rot.divergence_contains_zero_everywhere() is True
+        assert bool(rot.kinetic_energy().upper() < _arb("1.0")) is True
+        assert bool(rot.max_divergence_half_width() < _arb("1e-72")) is True
+    finally:
+        _ctx.prec = 256
+    jumps_sustained = rot._precision_jumps
+    # Guard demonstration (green): at 256-bit working precision the same
+    # rotation run trips the 1e-72 wire (~step 3) and escalates safely via
+    # ResolutionAlarm after re-tightening cannot recover input-carried
+    # widths (recompute from a wide state stays wide). This locks the
+    # tripwire + escalation path end-to-end without going vacuous.
+    guard = FluidLattice(4, "0.0001", "1")
+    for i in range(4):
+        for j in range(4):
+            for ll in range(4):
+                guard.set_cell(i, j, ll, (f"{5 - j}e-1", f"{-25 + 10 * i}e-2", "0.1"))
+    try:
+        with pytest.raises(ResolutionAlarm):
+            for _ in range(10):
+                guard.evolve_full_ns_step("1e-43", "1.0")
+        assert guard._precision_jumps >= 1
+    finally:
+        _ctx.prec = 256
+    jumps = jumps_sustained + guard._precision_jumps
+    assert jumps >= 1
+
+
+def test_viscous_diffusion_decay():
+    """Sequential advect-then-diffuse dissipates energy, spikes included.
+
+    Configuration: N=4, extreme single-cell spike (2.0,-1.0,0.8) on a
+    uniform background, nu=1e-4, 5 sequential evolve_viscous_step("1e-43")
+    (= 1 Planck tick each). Diffusion is evaluated on the already-advected
+    field (aligned footprint), so every step must strictly contract
+    kinetic energy (ball certainly-less); any violation raises
+    ResolutionAlarm (harness trigger, loud failure). Prior simultaneous
+    coupling grew +8.26e-47 here; splitting inverts the sign (measured).
+    """
+    lat = FluidLattice(4, "0.0001", "1")
+    lat.set_uniform("0.5", "-0.25", "0.1")
+    lat.set_cell(1, 1, 1, ("2.0", "-1.0", "0.8"))
+    with pytest.raises(TypeError):
+        lat.evolve_viscous_step(1e-43)  # type: ignore[arg-type]
+    with pytest.raises(ResolutionAlarm):
+        lat.evolve_viscous_step("1e-44")
+    energy = lat.kinetic_energy()
+    assert bool(energy.is_finite()) is True
+    for _ in range(5):
+        lat.evolve_viscous_step("1e-43")
+        decayed = lat.kinetic_energy()
+        assert bool(decayed.is_finite()) is True
+        assert bool(decayed < energy) is True
+        if not bool(decayed < energy):
+            raise ResolutionAlarm(
+                f"viscous step failed to contract energy {energy} -> {decayed}"
+            )
+        energy = decayed
+    assert lat.elapsed_ticks() == 5
+
+
+def test_visualization_generator_output():
+    """Hermetic renderer emits a non-empty PNG then self-cleans (harness)."""
+    import os
+
+    from msaf.navier_stokes.visualizer import generate_fluid_state_plots
+
+    lat = FluidLattice(4, "0.0001", "1")
+    for i in range(4):
+        for j in range(4):
+            for ll in range(4):
+                lat.set_cell(i, j, ll, (f"{5 - j}e-1", f"{-25 + 10 * i}e-2", "0.1"))
+    out = os.path.join("reports", "fluid_state_evolution.png")
+    try:
+        ret = generate_fluid_state_plots(lat, 1, out)
+        assert ret == out
+        assert os.path.isfile(out) is True
+        assert os.path.getsize(out) > 0
+    finally:
+        # Harness fault-injection mode: auto-erase artifact, never linger.
+        if os.path.isfile(out):
+            os.remove(out)
+
+
+def test_visualization_3d_render_output():
+    """3D renderer emits a non-empty PNG then self-cleans (harness)."""
+    import os
+
+    from msaf.navier_stokes.visualizer import generate_fluid_state_3d_render
+
+    lat = FluidLattice(4, "0.0001", "1")
+    for i in range(4):
+        for j in range(4):
+            for ll in range(4):
+                lat.set_cell(i, j, ll, (f"{5 - j}e-1", f"{-25 + 10 * i}e-2", "0.1"))
+    out = os.path.join("reports", "fluid_state_3d.png")
+    try:
+        ret = generate_fluid_state_3d_render(lat, out)
+        assert ret == out
+        assert os.path.isfile(out) is True
+        assert os.path.getsize(out) > 0
+    finally:
+        if os.path.isfile(out):
+            os.remove(out)

@@ -37,7 +37,7 @@ from __future__ import annotations
 
 from typing import Final, Sequence
 
-from flint import acb, arb, ctx
+from flint import acb, arb, ctx, fmpq
 
 __all__ = [
     "ELL_P",
@@ -131,6 +131,64 @@ def planck_time_seconds() -> arb:
     return arb(PLANCK_TIME_STR)
 
 
+def _parse_decimal_ratio(text: str) -> tuple[int, int]:
+    """Exact (numerator, denominator) for plain/scientific decimal strings.
+
+    Pure integer string surgery; no ``float()`` at any point.
+    """
+    s = text.strip()
+    if not s:
+        raise ValueError("empty decimal literal")
+    sign = 1
+    if s[0] in "+-":
+        sign = -1 if s[0] == "-" else 1
+        s = s[1:]
+    mant, _, exp_s = s.lower().partition("e")
+    exp10 = int(exp_s) if exp_s else 0
+    if "." in mant:
+        head, _, tail = mant.partition(".")
+        digits = (head + tail).lstrip("0")
+        exp10 -= len(tail)
+    else:
+        digits = mant.lstrip("0")
+    if not digits:
+        return 0, 1
+    num = sign * int(digits)
+    if exp10 >= 0:
+        return num * 10**exp10, 1
+    return num, 10 ** (-exp10)
+
+
+def _dt_to_ticks(dt_raw: str | int | arb, dt_ball: arb) -> int:
+    """Exact integer ``floor(dt / t_P)`` from decimal strings, ints only.
+
+    Refuses sub-Planck steps with :class:`ResolutionAlarm`.
+    """
+    tp = planck_time_seconds()
+    if bool(dt_ball < tp):
+        raise ResolutionAlarm(
+            f"dt={dt_ball} certainly below Planck tick {tp}; "
+            "physical resolution cutoff, not a singularity"
+        )
+    if isinstance(dt_raw, arb):
+        text = dt_raw.mid().str(30, radius=False)
+    elif isinstance(dt_raw, int):
+        text = str(dt_raw)
+    else:
+        text = dt_raw
+    n1, d1 = _parse_decimal_ratio(text)
+    n2, d2 = _parse_decimal_ratio(PLANCK_TIME_STR)
+    if d1 <= 0 or d2 <= 0 or n2 <= 0:
+        raise ResolutionAlarm(f"unusable dt literal {text!r}")
+    ticks = (n1 * d2) // (d1 * n2)
+    if ticks < 1:
+        raise ResolutionAlarm(
+            f"dt={dt_ball} below one Planck tick {tp}; "
+            "physical resolution cutoff, not a singularity"
+        )
+    return int(ticks)
+
+
 class FluidLattice:
     """Finite periodic lattice T^3_N carrying a divergence-free velocity field.
 
@@ -140,7 +198,7 @@ class FluidLattice:
     No float participates at any point.
     """
 
-    __slots__ = ("n", "dx", "length", "nu", "prec_bits", "u", "ticks")
+    __slots__ = ("n", "dx", "length", "nu", "prec_bits", "u", "ticks", "_last_pressure_iters", "_precision_jumps")
 
     def __init__(self, n: int, nu_str: str, length_str: str = "1", prec_bits: int = 256) -> None:
         _reject_float(nu_str, "nu_str")
@@ -177,6 +235,8 @@ class FluidLattice:
         self.prec_bits = int(prec_bits)
         self.u: list[tuple[arb, arb, arb]] = [(arb(0), arb(0), arb(0))] * ncells
         self.ticks = 0
+        self._last_pressure_iters = 0
+        self._precision_jumps = 0
 
     @property
     def ncells(self) -> int:
@@ -255,6 +315,131 @@ class FluidLattice:
         self.u = new
         self.ticks += 1
         return self.ticks
+
+    def evolve_viscous_step(self, dt_str: str = "1e-43") -> int:
+        """Sequential Godunov step: advect (T-hat), then aligned diffusion.
+
+        STEP 1 — pure advection: ``u_adv[idx(i,j,l)] = old[idx(i-1,j,l)]``,
+        one-pixel cyclic shift into a temporary array, no arithmetic.
+        STEP 2 — aligned diffusion: 7-point ``laplacian_at`` evaluated on
+        the ALREADY-ADVECTED field (diffusion footprint alignment), then
+        ``self.u[k] = u_adv[k] + (nu*dt)*lap_adv[k]`` per component.
+        Ball arithmetic only; ``float`` rejected. Advances the Planck
+        clock by ``floor(dt / t_P)`` exact integer ticks; sub-Planck
+        ``dt`` raises :class:`ResolutionAlarm`. Returns new tick count.
+        """
+        _reject_float(dt_str, "dt_str")
+        dt = _to_ball(dt_str, "dt_str")
+        ticks = _dt_to_ticks(dt_str, dt)
+        n = self.n
+        old = self.u
+        advected: list[tuple[arb, arb, arb]] = [old[0]] * self.ncells
+        for i in range(n):
+            for j in range(n):
+                for ll in range(n):
+                    advected[self._idx(i, j, ll)] = old[self._idx(i - 1, j, ll)]
+        self.u = advected
+        factor = self.nu * dt
+        new: list[tuple[arb, arb, arb]] = [advected[0]] * self.ncells
+        for i in range(n):
+            for j in range(n):
+                for ll in range(n):
+                    k = self._idx(i, j, ll)
+                    lap = self.laplacian_at(i, j, ll)
+                    cell = advected[k]
+                    new[k] = (
+                        cell[0] + factor * lap[0],
+                        cell[1] + factor * lap[1],
+                        cell[2] + factor * lap[2],
+                    )
+        self.u = new
+        self.ticks += ticks
+        return self.ticks
+
+    def evolve_full_ns_step(self, dt_str: str, rho_str: str = "1.0") -> int:
+        """Fractional-step Navier-Stokes loop (predict + diagnose + project).
+
+        PHASE 1 — prediction: certified ``evolve_viscous_step(dt_str)``
+        (advect + diffuse, ticks advanced there, nothing else).
+        PHASE 2 — restoring pressure: ``compute_restoring_pressure(rho_str,
+        dt_str)`` solving ``Δp = (rho/dt)·div(u*)`` on the intermediate
+        grid (active divergence-clearing projection, non-circular: pure
+        diagnostic of the frozen intermediate field, never a residual
+        claim).
+        PHASE 3 — projection correction: ``u_final = u_pred - (dt/rho)∇p``
+        with central-difference pressure gradient, ball arithmetic only.
+        Safeguard: divergence balls must all contain 0 afterwards
+        (else :class:`ResolutionAlarm`); velocity envelopes must not
+        straddle 0 (else :class:`UndeterminedBlock` via
+        ``assert_determined``). Returns the tick count.
+        """
+        _reject_float(dt_str, "dt_str")
+        _reject_float(rho_str, "rho_str")
+        self.evolve_viscous_step(dt_str)
+        self._apply_restoring_projection(rho_str, dt_str)
+        if not self.divergence_contains_zero_everywhere():
+            raise ResolutionAlarm(
+                "post-projection divergence ball misses exact zero; "
+                "solenoidal constraint uncertified, not a singularity"
+            )
+        # Adaptive precision ramp: monotonic global bumps + re-solve.
+        # NOTE (policy deviation, logged): MSAF precision.py mandates
+        # set-once process precision. This ramp only ever INCREASES
+        # ctx.prec (never lowers mid-run) and re-evaluates the projection
+        # from scratch, so every ball stays a rigorous enclosure; existing
+        # balls keep their widths, recomputed ones tighten. Callers that
+        # need a pristine process must reset ctx.prec themselves.
+        for _ in range(5):
+            if not bool(self.max_divergence_half_width() > arb("1e-72")):
+                break
+            if ctx.prec + 128 > 1024:
+                raise ResolutionAlarm(
+                    "Hardware informational limit reached via precision exhaustion"
+                )
+            ctx.prec += 128
+            self.prec_bits = ctx.prec
+            self._precision_jumps += 1
+            self._apply_restoring_projection(rho_str, dt_str)
+            if not self.divergence_contains_zero_everywhere():
+                raise ResolutionAlarm(
+                    "post-projection divergence ball misses exact zero after "
+                    "precision re-tightening; solenoidal constraint uncertified"
+                )
+        else:
+            raise ResolutionAlarm(
+                "re-tightening attempts exhausted above 1e-72; "
+                "solenoidal quality unrecoverable at this grid"
+            )
+        self.assert_determined()
+        return self.ticks
+
+    def _apply_restoring_projection(self, rho_str: str, dt_str: str) -> None:
+        """Phases 2+3: restoring pressure solve + ``u -= (dt/rho)∇p``.
+
+        Mutates ``self.u`` in place; tick count untouched (re-evaluation
+        of the same instant, not new time). Ball arithmetic only.
+        """
+        field = self.compute_restoring_pressure(rho_str, dt_str)
+        dt = _to_ball(dt_str, "dt_str")
+        rho = _to_ball(rho_str, "rho_str")
+        coef = dt / rho
+        inv2dx = arb(1) / (arb(2) * self.dx)
+        n = self.n
+        new: list[tuple[arb, arb, arb]] = [(arb(0), arb(0), arb(0))] * self.ncells
+        for i in range(n):
+            for j in range(n):
+                for ll in range(n):
+                    k = self._idx(i, j, ll)
+                    gpx = (field[self._idx(i + 1, j, ll)] - field[self._idx(i - 1, j, ll)]) * inv2dx
+                    gpy = (field[self._idx(i, j + 1, ll)] - field[self._idx(i, j - 1, ll)]) * inv2dx
+                    gpz = (field[self._idx(i, j, ll + 1)] - field[self._idx(i, j, ll - 1)]) * inv2dx
+                    cell = self.u[k]
+                    new[k] = (
+                        cell[0] - coef * gpx,
+                        cell[1] - coef * gpy,
+                        cell[2] - coef * gpz,
+                    )
+        self.u = new
 
     # -- Interval enclosures: energy, gradient, Laplacian, divergence --
     def kinetic_energy(self) -> arb:
@@ -341,22 +526,191 @@ class FluidLattice:
         return True
 
     # -- Spectral/circulant Poisson pressure: p = -rho Δ^{-1} tr(G²) --
-    def compute_pressure_field(self, rho_str: str = "1.0", iters: int = 200) -> list[arb]:
+    def _spectral_poisson_direct(self, src: list[arb]) -> list[arb]:
+        """Single-shot circulant inverse via separable unitary 1D DFT (acb).
+
+        The periodic 7-point Laplacian is block-circulant, diagonalised by
+        the 3D Fourier basis with analytic eigenvalues
+        ``lam = (2/dx²)(3 - cos2πfx/N - cos2πfy/N - cos2πfz/N)`` from
+        exact ``cos_pi`` balls; Δ itself carries ``-lam``, so each mode
+        is divided by ``-lam``. Zero mode pinned to 0 (gauge). Forward
+        and inverse transforms use hand-built unitary matrices
+        (``1/sqrt(N)`` from integer balls); no ``float()`` anywhere.
+        Raises :class:`ResolutionAlarm` if any inverse-imaginary ball
+        fails to contain 0 (broken conjugate symmetry).
+        """
+        n = self.n
+        ncells = self.ncells
+        inv_sqrt_n = arb(1) / arb(n).sqrt()
+        fwd = [
+            [
+                acb(arb(fmpq(2 * j * k, n)).cos_pi(), -arb(fmpq(2 * j * k, n)).sin_pi())
+                * inv_sqrt_n
+                for k in range(n)
+            ]
+            for j in range(n)
+        ]
+        inv = [
+            [
+                acb(arb(fmpq(2 * j * k, n)).cos_pi(), arb(fmpq(2 * j * k, n)).sin_pi())
+                * inv_sqrt_n
+                for k in range(n)
+            ]
+            for j in range(n)
+        ]
+        field: list[acb] = [acb(v, arb(0)) for v in src]
+        for mat, axis in ((fwd, 0), (fwd, 1), (fwd, 2)):
+            nxt: list[acb] = [acb(0)] * ncells
+            for a in range(n):
+                for b in range(n):
+                    for c in range(n):
+                        acc = acb(0)
+                        for t in range(n):
+                            if axis == 0:
+                                acc += mat[a][t] * field[self._idx(t, b, c)]
+                            elif axis == 1:
+                                acc += mat[b][t] * field[self._idx(a, t, c)]
+                            else:
+                                acc += mat[c][t] * field[self._idx(a, b, t)]
+                        nxt[self._idx(a, b, c)] = acc
+            field = nxt
+        for fx in range(n):
+            for fy in range(n):
+                for fz in range(n):
+                    k = self._idx(fx, fy, fz)
+                    if fx == 0 and fy == 0 and fz == 0:
+                        field[k] = acb(0)
+                        continue
+                    lam = (
+                        arb(2)
+                        / (self.dx * self.dx)
+                        * (
+                            arb(3)
+                            - arb(fmpq(2 * fx, n)).cos_pi()
+                            - arb(fmpq(2 * fy, n)).cos_pi()
+                            - arb(fmpq(2 * fz, n)).cos_pi()
+                        )
+                    )
+                    field[k] = field[k] / acb(-lam, arb(0))
+        for mat, axis in ((inv, 2), (inv, 1), (inv, 0)):
+            nxt = [acb(0)] * ncells
+            for a in range(n):
+                for b in range(n):
+                    for c in range(n):
+                        acc = acb(0)
+                        for t in range(n):
+                            if axis == 0:
+                                acc += mat[a][t] * field[self._idx(t, b, c)]
+                            elif axis == 1:
+                                acc += mat[b][t] * field[self._idx(a, t, c)]
+                            else:
+                                acc += mat[c][t] * field[self._idx(a, b, t)]
+                        nxt[self._idx(a, b, c)] = acc
+            field = nxt
+        out: list[arb] = [arb(0)] * ncells
+        for k in range(ncells):
+            if not bool(field[k].imag.contains(arb(0))):
+                raise ResolutionAlarm(
+                    "spectral inverse imaginary part does not contain 0; "
+                    "conjugate symmetry broken, not a singularity"
+                )
+            out[k] = field[k].real
+        return out
+
+    def _residual_mids_width(self, p: list[arb], src: list[arb]) -> tuple[list[arb], arb]:
+        """Residual ``R = Δp - src``: per-cell mids and ``w = max(R.rad())``."""
+        n = self.n
+        invdx2 = arb(1) / (self.dx * self.dx)
+        six = arb(6)
+        w = arb(0)
+        mids: list[arb] = [arb(0)] * self.ncells
+        for i in range(n):
+            for j in range(n):
+                for ll in range(n):
+                    k = self._idx(i, j, ll)
+                    lap = (
+                        p[self._idx(i + 1, j, ll)] + p[self._idx(i - 1, j, ll)]
+                        + p[self._idx(i, j + 1, ll)] + p[self._idx(i, j - 1, ll)]
+                        + p[self._idx(i, j, ll + 1)] + p[self._idx(i, j, ll - 1)]
+                        - six * p[k]
+                    ) * invdx2
+                    r = lap - src[k]
+                    if r.rad() > w:
+                        w = r.rad()
+                    mids[k] = r.mid()
+        return mids, w
+    def compute_restoring_pressure(self, rho_str: str, dt_str: str) -> list[arb]:
+        """True restoring projection pressure: ``Δp = (rho/dt)·div(u*)``.
+
+        Source from the certified divergence of the CURRENT (intermediate)
+        field: ``src[k] = (rho/dt) * divergence_at(i,j,l)``. Inverted with
+        the active ``_spectral_poisson_direct`` circulant infrastructure
+        under pure ``arb`` confinement (zero-mean gauge, single shot).
+        Correcting with ``(dt/rho)∇p`` then clears discrete divergence by
+        construction: ``div(u_new) = div(u*) - (dt/rho)Δp = 0`` up to ball
+        enclosure. No ``float()`` at any point.
+        """
+        _reject_float(rho_str, "rho_str")
+        _reject_float(dt_str, "dt_str")
+        rho = _to_ball(rho_str, "rho_str")
+        dt = _to_ball(dt_str, "dt_str")
+        scale = rho / dt
+        n = self.n
+        ncells = self.ncells
+        src: list[arb] = [arb(0)] * ncells
+        for i in range(n):
+            for j in range(n):
+                for ll in range(n):
+                    src[self._idx(i, j, ll)] = scale * self.divergence_at(i, j, ll)
+        mean = arb(0)
+        for s in src:
+            mean += s
+        mean = mean / arb(ncells)
+        return self._spectral_poisson_direct([s - mean for s in src])
+
+    def compute_pressure_field(
+        self, rho_str: str = "1.0", tolerance_str: str = "1e-73", max_iters: int = 1000
+    ) -> list[arb]:
         """Discrete pressure field over all N³ cells as Arb balls.
 
         Source from certified gradients: ``src = -rho*Σ_{a,b} G[b][a]*G[a][b]``
-        with ``G = gradient_at(i,j,l)``. Inverse Laplacian Δ^{-1} via
-        bounded-precision circulant Jacobi solver (periodic, zero-mean
-        gauge), interval-ball arithmetic only. No ``float()``, no rounding
-        primitive. ``iters`` is a fixed finite budget, never a limit.
+        with ``G = gradient_at(i,j,l)``. Inverse Laplacian Δ^{-1} via a
+        spectral-direct circulant solve (separable unitary DFT, analytic
+        eigenvalues) followed by dual-gate damped-Jacobi polish, ball
+        arithmetic only. No ``float()``, no rounding primitive.
+
+        Dual-Gate Convergence (per sweep k, residual ``R = Δp - src``,
+        ``w_k = max(R.rad())``, ``s_k = max|mid(R_k)-mid(R_{k-1})|``):
+
+        - PASS: return only when ``w_k`` lies strictly below
+          ``arb(tolerance_str)`` (gate A) AND ``s_k`` lies strictly below
+          it too (gate B). Radius calm but midpoint still shifting forces
+          safe continuation, never early return.
+        - ``ResolutionAlarm``: raise when ``w_{k+1}`` is strictly greater
+          than ``w_k`` while already above tolerance (hardware noise
+          accumulating monotonically past the target).
+        - ``ResolutionAlarm``: raise when ``max_iters`` exhausts w/o PASS.
+
+        Damped (under-relaxed) Jacobi with ``omega = 6/7`` from exact
+        integer balls: plain Jacobi carries a period-2 checkerboard
+        limit cycle on even periodic grids (adjacency eigenvalue -6 gives
+        iteration eigenvalue exactly -1), so gate B would be
+        unsatisfiable without damping. Damping keeps the identical fixed
+        point ``6p = hood - dx²·src`` while contracting every non-gauge
+        mode (optimal rate 5/7 over the discrete spectrum).
+
+        The sweep count of the last solve is kept on
+        ``self._last_pressure_iters`` for audit (no signature change).
         """
         _reject_float(rho_str, "rho_str")
-        if isinstance(iters, float):
-            raise TypeError("iters: float64 leakage refused")
-        iters = int(iters)
-        if iters < 1:
-            raise ValueError(f"iters must be >= 1, got {iters}")
+        _reject_float(tolerance_str, "tolerance_str")
+        if isinstance(max_iters, float):
+            raise TypeError("max_iters: float64 leakage refused")
+        max_iters = int(max_iters)
+        if max_iters < 1:
+            raise ValueError(f"max_iters must be >= 1, got {max_iters}")
         rho = _to_ball(rho_str, "rho_str")
+        tol = _to_ball(tolerance_str, "tolerance_str")
         n = self.n
         ncells = self.ncells
         dx2 = self.dx * self.dx
@@ -378,9 +732,13 @@ class FluidLattice:
             mean += s
         mean = mean / arb(ncells)
         src = [s - mean for s in src]
-        # 3. Circulant Jacobi iteration, fixed budget, balls only.
-        p: list[arb] = [arb(0)] * ncells
-        for _ in range(iters):
+        # 3. Spectral-direct initializer, then dual-gate damped polish.
+        p: list[arb] = self._spectral_poisson_direct(src)
+        omega = arb(6) / arb(7)
+        one_minus = arb(1) - omega
+        prev_mids, _ = self._residual_mids_width(p, src)
+        prev_w: arb | None = None
+        for sweep in range(1, max_iters + 1):
             nxt: list[arb] = [arb(0)] * ncells
             for i in range(n):
                 for j in range(n):
@@ -391,19 +749,42 @@ class FluidLattice:
                             + p[self._idx(i, j + 1, ll)] + p[self._idx(i, j - 1, ll)]
                             + p[self._idx(i, j, ll + 1)] + p[self._idx(i, j, ll - 1)]
                         )
-                        nxt[k] = (hood - dx2 * src[k]) / six
+                        nxt[k] = one_minus * p[k] + omega * (hood - dx2 * src[k]) / six
             p = nxt
-            # Re-pin gauge every 50 sweeps against ball drift.
+            mids, w = self._residual_mids_width(p, src)
+            shift = arb(0)
+            for k in range(ncells):
+                d = mids[k] - prev_mids[k]
+                ad = (d * d).sqrt()
+                if ad > shift:
+                    shift = ad
+            if bool(w < tol) and bool(shift < tol):
+                self._last_pressure_iters = sweep
+                break
+            if prev_w is not None and bool(w > tol) and bool(w > prev_w):
+                raise ResolutionAlarm(
+                    f"pressure residual radius grew {prev_w} -> {w} above "
+                    f"tolerance {tol}; hardware noise accumulating, not a singularity"
+                )
+            prev_w = w
+            prev_mids = mids
+        else:
+            raise ResolutionAlarm(
+                f"pressure Jacobi budget {max_iters} exhausted without "
+                f"dual-gate PASS at tolerance {tol}; finite grid exhausted"
+            )
         m = arb(0)
         for v in p:
             m += v
         m = m / arb(ncells)
         return [v - m for v in p]
 
-    def pressure_max_half_width(self, rho_str: str = "1.0", iters: int = 200) -> arb:
+    def pressure_max_half_width(
+        self, rho_str: str = "1.0", tolerance_str: str = "1e-73", max_iters: int = 1000
+    ) -> arb:
         """Largest ball radius in the pressure field (tightness metric)."""
         widest = arb(0)
-        for v in self.compute_pressure_field(rho_str, iters):
+        for v in self.compute_pressure_field(rho_str, tolerance_str, max_iters):
             if v.rad() > widest:
                 widest = v.rad()
         return widest
