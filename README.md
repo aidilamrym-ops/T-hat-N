@@ -365,12 +365,14 @@ propext + Classical.choice + Quot.sound only).
 | Z3 double-entry, first zero | `sat`, `[0.5, 0.5]` at 30 decimals (conformance, not proof) |
 | Hodge Gram, exact QQ Sylvester | `POSITIVE/NEGATIVE_DEFINITE`, `UNDETERMINED` on zero minor |
 | Moore box (Lean, Banach) | Newton map + Lipschitz < 1 ⟹ exactly one zero (standard axioms) |
+| Moore test (Lean) | inclusion + clean enclosure ⟹ exactly one zero (trichotomy+MVT) |
 | Moore test (Lean) | inclusion + clean enclosure ⟹ zero exists (trichotomy+MVT); uniqueness companion |
 | Moore uniqueness (Lean, Rolle/MVT) | clean derivative enclosure ⟹ at most one zero per box |
 | Moore-MVT (Lean) | Lipschitz derived from derivative bound; subtype-scoped theorem |
 | Brouwer-Icc (Lean) | continuous self-map of interval has fixed point (IVT) |
 | RH certified count, [10, 24.5] x [0.49, 0.51] | exactly 2 (strict Newton isolation + full exclusion) |
 | RH certified count, [0, 50] x [0.49, 0.51] | exactly 10 (COMPLETE, 0 stuck, 7041 evals) |
+| Turing N(T) table (T=10/25/50) | consistency only; G1/G2/G3 gaps mapped OPEN |
 | Moore premises, halo-lifted gamma1 box | MapsTo + clean derivative + Lipschitz K<<1, all HOLD |
 
 ### 5.3 Frontier scaffolding (`msaf/milenium_frontier/`, proofs: none)

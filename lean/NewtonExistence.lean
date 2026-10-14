@@ -461,4 +461,26 @@ theorem moore_test_existence (a b m : ℝ) (hab : a < b)
       exact exists_zero_of_sign_change a b f hcont x₀ hx₀ hx0le
         x₁ hx₁ hx1ge
 
+/-- Moore test, closed form: inclusion plus clean enclosure yields
+    exactly one zero (existence + uniqueness combined). This is the
+    complete formal counterpart of the Python counter's soundness
+    gate: every counted box carries exactly one zero, no more. -/
+theorem moore_test (a b m : ℝ) (hab : a < b)
+    (hm : m ∈ Set.Icc a b) (f f' : ℝ → ℝ)
+    (hcont : ContinuousOn f (Set.Icc a b))
+    (hdiff : ∀ x ∈ Set.Icc a b, HasDerivAt f (f' x) x)
+    (l u : ℝ)
+    (henc : ∀ x ∈ Set.Icc a b, f' x ∈ Set.Icc l u)
+    (hD0 : 0 ∉ Set.Icc l u)
+    (hN : Set.image (fun d => m - f m / d) (Set.Icc l u)
+      ⊆ Set.Icc a b) :
+    ∃! z ∈ Set.Icc a b, f z = 0 := by
+  obtain ⟨z, hzm, hfz⟩ := moore_test_existence a b m hab hm f f'
+    hcont hdiff l u henc hD0 hN
+  refine ⟨z, ⟨hzm, hfz⟩, ?_⟩
+  intro y hy
+  obtain ⟨hym, hfy⟩ := hy
+  exact moore_unique_of_deriv_exclusion a b f f' hcont hdiff _
+    henc hD0 y hym z hzm hfy hfz
+
 end NewtonExistence
