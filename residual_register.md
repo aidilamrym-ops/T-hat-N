@@ -40,6 +40,9 @@
 | N128-CAP refusal instant via MatrixDimensionViolation | CLOSED |
 | CORR-SBP central SBP enclosure N=4/N=8, radii < 1e-70 | CLOSED |
 | CI GitHub Actions green (pytest 143 + lake build + sensor) | CLOSED |
+| RH-EXCL exclusion sweep msaf/riemann/ (absent/inconclusive honest) | CLOSED |
+| RH-COUNT certified count 2 on [10,24.5], strict-existence only | CLOSED |
+| VERDICT-GAP floor-branch never counts (pinned, no-zero-ball demo) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
-Suites at seal: isolated `39 passed, 1 skipped`; main `143 passed`; `exit 0`.
+Suites at seal: isolated `39 passed, 1 skipped`; main `153 passed`; `exit 0`.

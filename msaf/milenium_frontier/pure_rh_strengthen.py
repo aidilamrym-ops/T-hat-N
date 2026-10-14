@@ -48,7 +48,16 @@ class PureRiemannVerify:
         return acb(re_b, im_b)
 
     def localize(self, re_str: str, im_str: str, max_iter: int = 20) -> dict:
-        """Wrap ``locate_zero``; returns its verdict dict fields as-is."""
+        """Wrap ``locate_zero``; returns its verdict dict fields as-is.
+
+        ``existence_proven`` is True ONLY for the strict verdict
+        ``ZERO-LOCALIZED`` with containment and clean derivative --
+        the interval-Newton existence theorem then yields exactly one
+        zero in the ball. The ``ZERO-LOCALIZED-AT-PRECISION-FLOOR``
+        branch carries no existence claim (it fires on balls that can
+        provably contain no zero); callers must check this flag, never
+        the verdict prefix alone.
+        """
         from msaf.zeta_inversion import locate_zero
 
         if isinstance(max_iter, float):
@@ -59,6 +68,11 @@ class PureRiemannVerify:
             "iterations": result.iterations,
             "derivative_excludes_zero": result.derivative_excludes_zero,
             "newton_contained": result.newton_contained,
+            "existence_proven": bool(
+                result.verdict == "ZERO-LOCALIZED"
+                and result.newton_contained
+                and result.derivative_excludes_zero
+            ),
             "global_claim_supported": result.global_claim_supported,
         }
 

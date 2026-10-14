@@ -9,7 +9,7 @@ ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
 - Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338272.svg)](https://doi.org/10.5281/zenodo.23338272)
-- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.13.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.13.0-alpha) (current: 143 passed)
+- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.14.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.14.0-alpha) (current: 153 passed)
 - License: MIT - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
@@ -210,7 +210,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (143 tests, every landmine pinned)
+### 3.2 Regression Suite (153 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -333,7 +333,7 @@ now anchored to the workspace root derived from the module location.
 
 ## SECTION 5: FINITE HYDRODYNAMIC LATTICE & MILLENNIUM FRONTIER
 
-Sealed through `v1.13.0-alpha` (main `143 passed`, isolated `39 passed +
+Sealed through `v1.14.0-alpha` (main `153 passed`, isolated `39 passed +
 1 honest skip`, exit 0). Full derivations in
 [`reports/finite_hydrodynamic_lattices.md`](reports/finite_hydrodynamic_lattices.md)
 (Chapters 1-3) and the machine-checked Lean kernel in [`lean/NavierStokesCore.lean`](lean/NavierStokesCore.lean)
@@ -364,6 +364,7 @@ propext + Classical.choice + Quot.sound only).
 | Periodic-box tails (N = 16) | background-free quotient `1.9519` vs `2.0`; far-field `0.61%`; radii `< 1e-70` |
 | Z3 double-entry, first zero | `sat`, `[0.5, 0.5]` at 30 decimals (conformance, not proof) |
 | Hodge Gram, exact QQ Sylvester | `POSITIVE/NEGATIVE_DEFINITE`, `UNDETERMINED` on zero minor |
+| RH certified count, [10, 24.5] x [0.49, 0.51] | exactly 2 (strict Newton isolation + full exclusion) |
 
 ### 5.3 Frontier scaffolding (`msaf/milenium_frontier/`, proofs: none)
 
@@ -437,7 +438,7 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
   restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
-- `msaf/tests/` - regression suite (143 tests)
+- `msaf/tests/` - regression suite (153 tests)
 - `lean/` - Lean 4 machine-checked kernel 1D/2D/3D + central variant (`NavierStokesCore.lean`, `lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py)
