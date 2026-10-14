@@ -9,7 +9,7 @@ ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
 - Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338272.svg)](https://doi.org/10.5281/zenodo.23338272)
-- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.17.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.17.0-alpha) (current: 155 passed)
+- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.18.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.18.0-alpha) (current: 156 passed)
 - License: MIT - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
@@ -210,7 +210,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (155 tests, every landmine pinned)
+### 3.2 Regression Suite (156 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -333,7 +333,7 @@ now anchored to the workspace root derived from the module location.
 
 ## SECTION 5: FINITE HYDRODYNAMIC LATTICE & MILLENNIUM FRONTIER
 
-Sealed through `v1.17.0-alpha` (main `155 passed`, isolated `39 passed +
+Sealed through `v1.18.0-alpha` (main `156 passed`, isolated `39 passed +
 1 honest skip`, exit 0). Full derivations in
 [`reports/finite_hydrodynamic_lattices.md`](reports/finite_hydrodynamic_lattices.md)
 (Chapters 1-3) and the machine-checked Lean kernel in [`lean/NavierStokesCore.lean`](lean/NavierStokesCore.lean)
@@ -367,6 +367,7 @@ propext + Classical.choice + Quot.sound only).
 | Moore box (Lean, Banach) | Newton map + Lipschitz < 1 ⟹ exactly one zero (standard axioms) |
 | Moore-MVT (Lean) | Lipschitz derived from derivative bound; subtype-scoped theorem |
 | RH certified count, [10, 24.5] x [0.49, 0.51] | exactly 2 (strict Newton isolation + full exclusion) |
+| RH certified count, [0, 50] x [0.49, 0.51] | exactly 10 (COMPLETE, 0 stuck, 7041 evals) |
 | Moore premises, halo-lifted gamma1 box | MapsTo + clean derivative + Lipschitz K<<1, all HOLD |
 
 ### 5.3 Frontier scaffolding (`msaf/milenium_frontier/`, proofs: none)
@@ -441,7 +442,7 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
   restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
-- `msaf/tests/` - regression suite (155 tests)
+- `msaf/tests/` - regression suite (156 tests)
 - `lean/` - Lean 4 machine-checked kernels 1D/2D/3D + central variant + Moore box (`lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py)

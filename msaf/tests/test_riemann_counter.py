@@ -33,6 +33,15 @@ def test_counter_boundary_range_complete():
     assert out["stuck"] == []
 
 
+def test_counter_range_zero_fifty_complete_ten():
+    # Flagship bounded result: exactly the ten known zeros live in
+    # [0.49,0.51] x [0,50]; nothing else, nothing stuck. (~14 s.)
+    out = count_zeros("0.0", "50.0")
+    assert out["verdict"] == "COMPLETE"
+    assert out["count"] == 10
+    assert out["stuck"] == []
+
+
 def test_counter_no_false_existence():
     # Locks the inherited verdict boundary: a point seed far from any
     # zero must NEVER satisfy the strict existence criteria, even

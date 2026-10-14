@@ -44,8 +44,9 @@
 | CI GitHub Actions green (pytest 143 + lake build + sensor) | CLOSED |
 | RH-EXCL exclusion sweep msaf/riemann/ (absent/inconclusive honest) | CLOSED |
 | RH-COUNT certified count 2 on [10,24.5], strict-existence only | CLOSED |
+| RH-COUNT-10 exactly ten zeros on [0,50] (COMPLETE, 0 stuck) | CLOSED |
 | MOORE-PREM all 3 Banach premises hold on halo-lifted gamma1 box | CLOSED |
 | VERDICT-GAP floor-branch never counts (pinned, no-zero-ball demo) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
-Suites at seal: isolated `39 passed, 1 skipped`; main `155 passed`; `exit 0`.
+Suites at seal: isolated `39 passed, 1 skipped`; main `156 passed`; `exit 0`.
