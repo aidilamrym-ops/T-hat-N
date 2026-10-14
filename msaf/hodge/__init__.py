@@ -8,4 +8,10 @@ points only (principal real square roots, no branch ambiguity).
 """
 from __future__ import annotations
 
-__all__ = ["periods"]
+__all__ = [
+    "periods",
+    "point_count",
+    "finite_fields",
+    "odd_fields",
+    "picard_bound",
+]

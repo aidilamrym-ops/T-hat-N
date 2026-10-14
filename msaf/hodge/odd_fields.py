@@ -281,6 +281,29 @@ def _trace_to_fp(a: list[int], mod: list[int], p: int, n: int) -> int:
     return t[0] % p if t else 0
 
 
+def _trace_form(n: int, p: int, mod: list[int]) -> list[int]:
+    """Tr(basis_j) in F_p for j = 0..n-1 (reference computation).
+
+    The trace a -> a + a^p + ... + a^{p^{n-1}} is F_p-linear, so
+    Tr(a) = sum_j a_j * Tr(x^j) mod p: n scalar ops per element
+    instead of n Frobenius iterations (the per-element cost that
+    dominated large-q Jacobi runs). Locked against _trace_to_fp.
+    """
+    t = []
+    for j in range(n):
+        b = [0] * n
+        b[j] = 1
+        t.append(_trace_to_fp(b, mod, p, n))
+    return t
+
+
+def _trace_lin(a: list[int], tvec: list[int], p: int) -> int:
+    s = 0
+    for aj, tj in zip(a, tvec):
+        s += aj * tj
+    return s % p
+
+
 def _round_ball_to_int(v: acb, what: str) -> int:
     if not bool(v.real.rad() < arb("0.25")) or not bool(
         v.imag.rad() < arb("0.25")
@@ -336,21 +359,23 @@ def jacobi_trace(n: int, p: int = 3, prec_bits: int = 256) -> dict:
         )
 
     omega = zeta(1, p)
-
-    def chi_pow(a: list[int], j: int) -> acb:
-        if all(v == 0 for v in a):
-            return acb(0)
-        return zeta((j * dlog[_pad(a, n)]) % e, e)
-
-    def psi(a: list[int]) -> acb:
-        return omega ** _trace_to_fp(a, mod, p, n)
-
-    taus = []
-    for j in range(e):
-        s = acb(0)
-        for a in elems:
-            s += chi_pow(a, j) * psi(a)
-        taus.append(s)
+    # Hot-loop rule: only table lookups and acb add/mul. Evaluating
+    # zeta (arb cos/sin) and omega**t per element per character cost
+    # 288 s at q = 59049; precomputed chi/psi tables make the same
+    # certified computation ~30x cheaper. chi_j(g^d) = zeta(j*d mod e).
+    chi_tab = [[zeta((j * d) % e, e) for d in range(e)] for j in range(e)]
+    psi_tab = [omega**t for t in range(p)]
+    tvec = _trace_form(n, p, mod)
+    zero = _pad([0], n)
+    taus = [acb(0)] * e
+    for a in elems:
+        a_pad = _pad(a, n)
+        if a_pad == zero:
+            continue  # chi(0) = 0 for every character
+        pt = psi_tab[_trace_lin(a_pad, tvec, p)]
+        dl = dlog[a_pad] % e
+        for j in range(e):
+            taus[j] += chi_tab[j][dl] * pt
     total = acb(0)
     for c in range(e):
         sc = acb(1) + sum(

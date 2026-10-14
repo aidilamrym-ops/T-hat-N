@@ -25,3 +25,26 @@ def test_jacobi_input_gates():
         jacobi_trace(1.0, 3)  # type: ignore[arg-type]
     with pytest.raises(ValueError):
         jacobi_trace(1, 2)
+
+
+def test_trace_form_linear_lock():
+    # Tr is F_p-linear: the fast dot-product form (used in the Jacobi
+    # hot loop) must agree with the reference Frobenius iteration.
+    import random
+
+    from msaf.hodge.odd_fields import (
+        _field_elements,
+        _trace_form,
+        _trace_lin,
+        _trace_to_fp,
+        find_modulus,
+    )
+
+    for n, p in ((3, 3), (4, 3), (5, 3), (6, 5)):
+        mod = find_modulus(n, p)
+        tvec = _trace_form(n, p, mod)
+        assert tvec[0] == n % p  # Tr(1) = n mod p
+        elems = _field_elements(n, p)
+        random.seed(0)
+        for a in random.sample(elems, min(100, len(elems))):
+            assert _trace_to_fp(a, mod, p, n) == _trace_lin(a, tvec, p)
