@@ -9,7 +9,7 @@ ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
 - Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338272.svg)](https://doi.org/10.5281/zenodo.23338272)
-- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.31.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.31.0-alpha) (current: 204 passed)
+- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.32.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.32.0-alpha) (current: 207 passed)
 - License: MIT - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
@@ -210,7 +210,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (204 tests, every landmine pinned)
+### 3.2 Regression Suite (207 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -333,7 +333,7 @@ now anchored to the workspace root derived from the module location.
 
 ## SECTION 5: FINITE HYDRODYNAMIC LATTICE & MILLENNIUM FRONTIER
 
-Sealed through `v1.31.0-alpha` (main `204 passed`, isolated `75 passed +
+Sealed through `v1.32.0-alpha` (main `207 passed`, isolated `75 passed +
 1 honest skip`, exit 0). Full derivations in
 [`reports/finite_hydrodynamic_lattices.md`](reports/finite_hydrodynamic_lattices.md)
 (Chapters 1-3) and the machine-checked Lean kernel in [`lean/NavierStokesCore.lean`](lean/NavierStokesCore.lean)
@@ -370,6 +370,7 @@ propext + Classical.choice + Quot.sound only).
 | Picard bound (van Luijk) | Newton + FE(dim_x) + Moebius mult-count; K3 F_3 pipeline: bound 22 = b_2 |
 | Exact F_5 counts (Davenport-Hasse, Z[zeta_20]) | locked n=1..12; exact matches ball sweep n=1..7 |
 | Fermat K3 over F_5 | traces a_1..a_11 exact; Picard bound 20 (non-vacuous: F_3 gave 22) |
+| Fermat K3, other primes | bound 20 for p=5,13,17,29,37,41: family at its geometric ceiling |
 | Frobenius-degeneracy gate | exponent-divisibility check, char-2 witness locked |
 | F_{2^n} traces | t_1..t_3 locked; O(2^3n) wall mapped, Jacobi upgrade pending |
 | Moore box (Lean, Banach) | Newton map + Lipschitz < 1 ⟹ exactly one zero (standard axioms) |
@@ -455,7 +456,7 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
   restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
-- `msaf/tests/` - regression suite (204 tests)
+- `msaf/tests/` - regression suite (207 tests)
 - `lean/` - Lean 4 machine-checked kernels 1D/2D/3D + central variant + Moore box (`lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py)
