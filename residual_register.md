@@ -207,7 +207,7 @@ end NavierStokesCore
 | FRONTIER milenium_frontier/ (RH scaffold + Hodge scaffold, lazy zeta) | CLOSED |
 | FRONTIER-DEPTH z3 sat first zero; T-hat-N honest skip | CLOSED |
 | HODGE-GRAM exact Sylvester (pos/neg/undet), pivoted det | CLOSED |
-| F17-LN1 Lean kernel 1D+2D (lake build GREEN, axioms: propext/choice/Quot only) | CLOSED |
+| F17-LN1 Lean kernel 1D+2D+3D (lake build GREEN, axioms: propext/choice/Quot only) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
 Suites at seal: isolated `35 passed, 1 skipped`; main `139 passed`; `exit 0`.

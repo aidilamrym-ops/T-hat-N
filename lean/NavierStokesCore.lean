@@ -1032,4 +1032,931 @@ theorem energy_monotonic_decay2D (N M : ℕ) (hN : 0 < N) (hM : 0 < M)
     (le_trans (energy_diffuse2D N M hN hM μ hμ0 hμ1 _)
       (le_of_eq (energy_advect2D N M hN _)))
 
+/-! ## 3D periodic lattice (stencil-7, all three channels corrected).
+
+Index type `(Fin N × Fin M) × Fin K`, addressed as `ijk.1.1`,
+`ijk.1.2`, `ijk.2`. Same forward-gradient structure, one more axis. -/
+
+/-- Axis shifts as genuine permutations (nested `prodCongr`). -/
+def shiftPerm3DX (N M K : ℕ) (hN : 0 < N)
+    : Equiv.Perm ((Fin N × Fin M) × Fin K) :=
+  Equiv.prodCongr (Equiv.prodCongr (shiftPerm N hN) (Equiv.refl _))
+    (Equiv.refl _)
+
+def shiftPerm3DY (N M K : ℕ) (hM : 0 < M)
+    : Equiv.Perm ((Fin N × Fin M) × Fin K) :=
+  Equiv.prodCongr (Equiv.prodCongr (Equiv.refl _) (shiftPerm M hM))
+    (Equiv.refl _)
+
+def shiftPerm3DZ (N M K : ℕ) (hK : 0 < K)
+    : Equiv.Perm ((Fin N × Fin M) × Fin K) :=
+  Equiv.prodCongr (Equiv.refl _) (shiftPerm K hK)
+
+/-- Product-sum reindexing along each axis, both directions. -/
+lemma sum_3d_fst (N M K : ℕ) (hN : 0 < N) (F : Fin N → Fin M → Fin K → ℚ) :
+    ∑ ijk : (Fin N × Fin M) × Fin K, F (fwd N hN ijk.1.1) ijk.1.2 ijk.2
+      = ∑ ijk : (Fin N × Fin M) × Fin K, F ijk.1.1 ijk.1.2 ijk.2 :=
+  sum_perm (shiftPerm3DX N M K hN) _ _ (fun _ => rfl)
+
+lemma sum_3d_fst_bwd (N M K : ℕ) (hN : 0 < N)
+    (F : Fin N → Fin M → Fin K → ℚ) :
+    ∑ ijk : (Fin N × Fin M) × Fin K, F (bwd N hN ijk.1.1) ijk.1.2 ijk.2
+      = ∑ ijk : (Fin N × Fin M) × Fin K, F ijk.1.1 ijk.1.2 ijk.2 :=
+  sum_perm (shiftPerm3DX N M K hN).symm _ _ (fun _ => rfl)
+
+lemma sum_3d_snd (N M K : ℕ) (hM : 0 < M) (F : Fin N → Fin M → Fin K → ℚ) :
+    ∑ ijk : (Fin N × Fin M) × Fin K, F ijk.1.1 (fwd M hM ijk.1.2) ijk.2
+      = ∑ ijk : (Fin N × Fin M) × Fin K, F ijk.1.1 ijk.1.2 ijk.2 :=
+  sum_perm (shiftPerm3DY N M K hM) _ _ (fun _ => rfl)
+
+lemma sum_3d_snd_bwd (N M K : ℕ) (hM : 0 < M)
+    (F : Fin N → Fin M → Fin K → ℚ) :
+    ∑ ijk : (Fin N × Fin M) × Fin K, F ijk.1.1 (bwd M hM ijk.1.2) ijk.2
+      = ∑ ijk : (Fin N × Fin M) × Fin K, F ijk.1.1 ijk.1.2 ijk.2 :=
+  sum_perm (shiftPerm3DY N M K hM).symm _ _ (fun _ => rfl)
+
+lemma sum_3d_trd (N M K : ℕ) (hK : 0 < K) (F : Fin N → Fin M → Fin K → ℚ) :
+    ∑ ijk : (Fin N × Fin M) × Fin K, F ijk.1.1 ijk.1.2 (fwd K hK ijk.2)
+      = ∑ ijk : (Fin N × Fin M) × Fin K, F ijk.1.1 ijk.1.2 ijk.2 :=
+  sum_perm (shiftPerm3DZ N M K hK) _ _ (fun _ => rfl)
+
+lemma sum_3d_trd_bwd (N M K : ℕ) (hK : 0 < K)
+    (F : Fin N → Fin M → Fin K → ℚ) :
+    ∑ ijk : (Fin N × Fin M) × Fin K, F ijk.1.1 ijk.1.2 (bwd K hK ijk.2)
+      = ∑ ijk : (Fin N × Fin M) × Fin K, F ijk.1.1 ijk.1.2 ijk.2 :=
+  sum_perm (shiftPerm3DZ N M K hK).symm _ _ (fun _ => rfl)
+
+/-- 3D lattice, energy, and x-advection (invariance proved). -/
+structure FluidLattice3D (N M K : ℕ) where
+  vel : (Fin N × Fin M) × Fin K → CellVelocity
+
+def totalEnergy3D (N M K : ℕ) (L : FluidLattice3D N M K) : ℚ :=
+  ∑ ijk, cellEnergy (L.vel ijk)
+
+def advect3D (N M K : ℕ) (hN : 0 < N) (L : FluidLattice3D N M K) :
+    FluidLattice3D N M K :=
+  ⟨fun ijk => L.vel ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)⟩
+
+lemma energy_advect3D (N M K : ℕ) (hN : 0 < N) (L : FluidLattice3D N M K) :
+    totalEnergy3D N M K (advect3D N M K hN L) = totalEnergy3D N M K L := by
+  unfold totalEnergy3D advect3D
+  simp only
+  exact sum_3d_fst N M K hN (fun i j k => cellEnergy (L.vel ((i, j), k)))
+
+/-- Two-sided shifts for bilinear product sums (X axis). -/
+lemma sum_3d_fwd_to_bwdX (N M K : ℕ) (hN : 0 < N)
+    (F : ((Fin N × Fin M) × Fin K) → ((Fin N × Fin M) × Fin K) → ℚ) :
+    ∑ ijk, F ijk ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)
+      = ∑ ijk, F ((bwd N hN ijk.1.1, ijk.1.2), ijk.2) ijk := by
+  have r : ∀ ijk, F ijk ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)
+      = F ((bwd N hN (fwd N hN ijk.1.1), ijk.1.2), ijk.2)
+        ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) := by
+    intro ijk
+    rw [show bwd N hN (fwd N hN ijk.1.1) = ijk.1.1 from
+      (shiftPerm N hN).left_inv ijk.1.1]
+  rw [Finset.sum_congr rfl (fun ijk _ => r ijk)]
+  exact Equiv.sum_comp (shiftPerm3DX N M K hN)
+    (fun kl => F ((bwd N hN kl.1.1, kl.1.2), kl.2) kl)
+
+/-- Two-sided shifts for bilinear product sums (Y axis). -/
+lemma sum_3d_fwd_to_bwdY (N M K : ℕ) (hM : 0 < M)
+    (F : ((Fin N × Fin M) × Fin K) → ((Fin N × Fin M) × Fin K) → ℚ) :
+    ∑ ijk, F ijk ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)
+      = ∑ ijk, F ((ijk.1.1, bwd M hM ijk.1.2), ijk.2) ijk := by
+  have r : ∀ ijk, F ijk ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)
+      = F ((ijk.1.1, bwd M hM (fwd M hM ijk.1.2)), ijk.2)
+        ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) := by
+    intro ijk
+    rw [show bwd M hM (fwd M hM ijk.1.2) = ijk.1.2 from
+      (shiftPerm M hM).left_inv ijk.1.2]
+  rw [Finset.sum_congr rfl (fun ijk _ => r ijk)]
+  exact Equiv.sum_comp (shiftPerm3DY N M K hM)
+    (fun kl => F ((kl.1.1, bwd M hM kl.1.2), kl.2) kl)
+
+/-- Two-sided shifts for bilinear product sums (Z axis). -/
+lemma sum_3d_fwd_to_bwdZ (N M K : ℕ) (hK : 0 < K)
+    (F : ((Fin N × Fin M) × Fin K) → ((Fin N × Fin M) × Fin K) → ℚ) :
+    ∑ ijk, F ijk ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)
+      = ∑ ijk, F ((ijk.1.1, ijk.1.2), bwd K hK ijk.2) ijk := by
+  have r : ∀ ijk, F ijk ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)
+      = F ((ijk.1.1, ijk.1.2), bwd K hK (fwd K hK ijk.2))
+        ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) := by
+    intro ijk
+    rw [show bwd K hK (fwd K hK ijk.2) = ijk.2 from
+      (shiftPerm K hK).left_inv ijk.2]
+  rw [Finset.sum_congr rfl (fun ijk _ => r ijk)]
+  exact Equiv.sum_comp (shiftPerm3DZ N M K hK)
+    (fun kl => F ((kl.1.1, kl.1.2), bwd K hK kl.2) kl)
+
+/-- Seven-point stencil diffusion with explicit CFL bound. -/
+def diffuse3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M) (hK : 0 < K) (μ : ℚ)
+    (L : FluidLattice3D N M K) : FluidLattice3D N M K :=
+  ⟨fun ijk =>
+    ⟨(1 - 6 * μ) * (L.vel ijk).x
+        + μ * (L.vel ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)).x
+        + μ * (L.vel ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).x
+        + μ * (L.vel ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)).x
+        + μ * (L.vel ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).x
+        + μ * (L.vel ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)).x
+        + μ * (L.vel ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).x,
+     (1 - 6 * μ) * (L.vel ijk).y
+        + μ * (L.vel ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)).y
+        + μ * (L.vel ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).y
+        + μ * (L.vel ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)).y
+        + μ * (L.vel ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).y
+        + μ * (L.vel ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)).y
+        + μ * (L.vel ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).y,
+     (1 - 6 * μ) * (L.vel ijk).z
+        + μ * (L.vel ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)).z
+        + μ * (L.vel ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).z
+        + μ * (L.vel ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)).z
+        + μ * (L.vel ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).z
+        + μ * (L.vel ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)).z
+        + μ * (L.vel ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).z⟩⟩
+
+/-- Seven-term variance identity: 6 center-neighbor + 15 neighbor pairs. -/
+lemma convex_sq7 (μ a b c d e f g : ℚ) (hμ0 : 0 ≤ μ) (hμ1 : 6 * μ ≤ 1) :
+    ((1 - 6 * μ) * a + μ * b + μ * c + μ * d + μ * e + μ * f + μ * g) ^ 2
+      ≤ (1 - 6 * μ) * a ^ 2 + μ * b ^ 2 + μ * c ^ 2 + μ * d ^ 2
+        + μ * e ^ 2 + μ * f ^ 2 + μ * g ^ 2 := by
+  have hα : 0 ≤ 1 - 6 * μ := by linarith
+  have w : 0 ≤ μ * (1 - 6 * μ) := mul_nonneg hμ0 hα
+  have w2 : 0 ≤ μ * μ := mul_nonneg hμ0 hμ0
+  have e1 : 0 ≤ μ * (1 - 6 * μ) * (a - b) ^ 2 :=
+    mul_nonneg w (sq_nonneg _)
+  have e2 : 0 ≤ μ * (1 - 6 * μ) * (a - c) ^ 2 :=
+    mul_nonneg w (sq_nonneg _)
+  have e3 : 0 ≤ μ * (1 - 6 * μ) * (a - d) ^ 2 :=
+    mul_nonneg w (sq_nonneg _)
+  have e4 : 0 ≤ μ * (1 - 6 * μ) * (a - e) ^ 2 :=
+    mul_nonneg w (sq_nonneg _)
+  have e5 : 0 ≤ μ * (1 - 6 * μ) * (a - f) ^ 2 :=
+    mul_nonneg w (sq_nonneg _)
+  have e6 : 0 ≤ μ * (1 - 6 * μ) * (a - g) ^ 2 :=
+    mul_nonneg w (sq_nonneg _)
+  have f1 : 0 ≤ μ * μ * (b - c) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f2 : 0 ≤ μ * μ * (b - d) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f3 : 0 ≤ μ * μ * (b - e) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f4 : 0 ≤ μ * μ * (b - f) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f5 : 0 ≤ μ * μ * (b - g) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f6 : 0 ≤ μ * μ * (c - d) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f7 : 0 ≤ μ * μ * (c - e) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f8 : 0 ≤ μ * μ * (c - f) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f9 : 0 ≤ μ * μ * (c - g) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f10 : 0 ≤ μ * μ * (d - e) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f11 : 0 ≤ μ * μ * (d - f) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f12 : 0 ≤ μ * μ * (d - g) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f13 : 0 ≤ μ * μ * (e - f) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f14 : 0 ≤ μ * μ * (e - g) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have f15 : 0 ≤ μ * μ * (f - g) ^ 2 := mul_nonneg w2 (sq_nonneg _)
+  have hsum : (1 - 6 * μ) * a ^ 2 + μ * b ^ 2 + μ * c ^ 2 + μ * d ^ 2
+      + μ * e ^ 2 + μ * f ^ 2 + μ * g ^ 2
+      - ((1 - 6 * μ) * a + μ * b + μ * c + μ * d + μ * e + μ * f
+        + μ * g) ^ 2
+      = μ * (1 - 6 * μ) * (a - b) ^ 2 + μ * (1 - 6 * μ) * (a - c) ^ 2
+        + μ * (1 - 6 * μ) * (a - d) ^ 2 + μ * (1 - 6 * μ) * (a - e) ^ 2
+        + μ * (1 - 6 * μ) * (a - f) ^ 2 + μ * (1 - 6 * μ) * (a - g) ^ 2
+        + μ * μ * (b - c) ^ 2 + μ * μ * (b - d) ^ 2 + μ * μ * (b - e) ^ 2
+        + μ * μ * (b - f) ^ 2 + μ * μ * (b - g) ^ 2 + μ * μ * (c - d) ^ 2
+        + μ * μ * (c - e) ^ 2 + μ * μ * (c - f) ^ 2 + μ * μ * (c - g) ^ 2
+        + μ * μ * (d - e) ^ 2 + μ * μ * (d - f) ^ 2 + μ * μ * (d - g) ^ 2
+        + μ * μ * (e - f) ^ 2 + μ * μ * (e - g) ^ 2
+        + μ * μ * (f - g) ^ 2 := by ring
+  linarith
+
+/-- Scalar 7-point diffusion contracts the sum of squares. -/
+lemma scalar_diffuse3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M) (hK : 0 < K)
+    (μ : ℚ) (hμ0 : 0 ≤ μ) (hμ1 : 6 * μ ≤ 1)
+    (a b c d e f g : (Fin N × Fin M) × Fin K → ℚ)
+    (hb : ∀ ijk, b ijk = a ((fwd N hN ijk.1.1, ijk.1.2), ijk.2))
+    (hc : ∀ ijk, c ijk = a ((bwd N hN ijk.1.1, ijk.1.2), ijk.2))
+    (hd : ∀ ijk, d ijk = a ((ijk.1.1, fwd M hM ijk.1.2), ijk.2))
+    (he : ∀ ijk, e ijk = a ((ijk.1.1, bwd M hM ijk.1.2), ijk.2))
+    (hf : ∀ ijk, f ijk = a ((ijk.1.1, ijk.1.2), fwd K hK ijk.2))
+    (hg : ∀ ijk, g ijk = a ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)) :
+    ∑ ijk, ((1 - 6 * μ) * a ijk + μ * b ijk + μ * c ijk + μ * d ijk
+        + μ * e ijk + μ * f ijk + μ * g ijk) ^ 2
+      ≤ ∑ ijk, (a ijk) ^ 2 := by
+  calc ∑ ijk, ((1 - 6 * μ) * a ijk + μ * b ijk + μ * c ijk + μ * d ijk
+          + μ * e ijk + μ * f ijk + μ * g ijk) ^ 2
+      ≤ ∑ ijk, ((1 - 6 * μ) * (a ijk) ^ 2 + μ * (b ijk) ^ 2
+          + μ * (c ijk) ^ 2 + μ * (d ijk) ^ 2 + μ * (e ijk) ^ 2
+          + μ * (f ijk) ^ 2 + μ * (g ijk) ^ 2) :=
+        Finset.sum_le_sum
+          (fun ijk _ => convex_sq7 μ (a ijk) (b ijk) (c ijk) (d ijk)
+            (e ijk) (f ijk) (g ijk) hμ0 hμ1)
+    _ = (1 - 6 * μ) * ∑ ijk, (a ijk) ^ 2 + μ * ∑ ijk, (b ijk) ^ 2
+          + μ * ∑ ijk, (c ijk) ^ 2 + μ * ∑ ijk, (d ijk) ^ 2
+          + μ * ∑ ijk, (e ijk) ^ 2 + μ * ∑ ijk, (f ijk) ^ 2
+          + μ * ∑ ijk, (g ijk) ^ 2 := by
+        simp only [Finset.sum_add_distrib, ← Finset.mul_sum]
+    _ = ∑ ijk, (a ijk) ^ 2 := by
+        have hfun1 : (fun ijk => (b ijk) ^ 2)
+            = (fun ijk => (a ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)) ^ 2) :=
+          funext (fun ijk => by rw [hb ijk])
+        have hfun2 : (fun ijk => (c ijk) ^ 2)
+            = (fun ijk => (a ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)) ^ 2) :=
+          funext (fun ijk => by rw [hc ijk])
+        have hfun3 : (fun ijk => (d ijk) ^ 2)
+            = (fun ijk => (a ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)) ^ 2) :=
+          funext (fun ijk => by rw [hd ijk])
+        have hfun4 : (fun ijk => (e ijk) ^ 2)
+            = (fun ijk => (a ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)) ^ 2) :=
+          funext (fun ijk => by rw [he ijk])
+        have hfun5 : (fun ijk => (f ijk) ^ 2)
+            = (fun ijk => (a ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)) ^ 2) :=
+          funext (fun ijk => by rw [hf ijk])
+        have hfun6 : (fun ijk => (g ijk) ^ 2)
+            = (fun ijk => (a ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)) ^ 2) :=
+          funext (fun ijk => by rw [hg ijk])
+        have r1 : ∑ ijk, (b ijk) ^ 2 = ∑ ijk, (a ijk) ^ 2 := by
+          rw [hfun1]
+          exact sum_3d_fst N M K hN (fun i j k => (a ((i, j), k)) ^ 2)
+        have r2 : ∑ ijk, (c ijk) ^ 2 = ∑ ijk, (a ijk) ^ 2 := by
+          rw [hfun2]
+          exact sum_3d_fst_bwd N M K hN (fun i j k => (a ((i, j), k)) ^ 2)
+        have r3 : ∑ ijk, (d ijk) ^ 2 = ∑ ijk, (a ijk) ^ 2 := by
+          rw [hfun3]
+          exact sum_3d_snd N M K hM (fun i j k => (a ((i, j), k)) ^ 2)
+        have r4 : ∑ ijk, (e ijk) ^ 2 = ∑ ijk, (a ijk) ^ 2 := by
+          rw [hfun4]
+          exact sum_3d_snd_bwd N M K hM (fun i j k => (a ((i, j), k)) ^ 2)
+        have r5 : ∑ ijk, (f ijk) ^ 2 = ∑ ijk, (a ijk) ^ 2 := by
+          rw [hfun5]
+          exact sum_3d_trd N M K hK (fun i j k => (a ((i, j), k)) ^ 2)
+        have r6 : ∑ ijk, (g ijk) ^ 2 = ∑ ijk, (a ijk) ^ 2 := by
+          rw [hfun6]
+          exact sum_3d_trd_bwd N M K hK (fun i j k => (a ((i, j), k)) ^ 2)
+        rw [r1, r2, r3, r4, r5, r6]
+        ring
+
+/-- 3D diffusion contracts total energy (three components). -/
+lemma energy_diffuse3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M) (hK : 0 < K)
+    (μ : ℚ) (hμ0 : 0 ≤ μ) (hμ1 : 6 * μ ≤ 1) (L : FluidLattice3D N M K) :
+    totalEnergy3D N M K (diffuse3D N M K hN hM hK μ L)
+      ≤ totalEnergy3D N M K L := by
+  have hx := scalar_diffuse3D N M K hN hM hK μ hμ0 hμ1
+    (fun ijk => (L.vel ijk).x)
+    (fun ijk => (L.vel ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)).x)
+    (fun ijk => (L.vel ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).x)
+    (fun ijk => (L.vel ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)).x)
+    (fun ijk => (L.vel ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).x)
+    (fun ijk => (L.vel ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)).x)
+    (fun ijk => (L.vel ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).x)
+    (fun ijk => rfl) (fun ijk => rfl) (fun ijk => rfl)
+    (fun ijk => rfl) (fun ijk => rfl) (fun ijk => rfl)
+  have hy := scalar_diffuse3D N M K hN hM hK μ hμ0 hμ1
+    (fun ijk => (L.vel ijk).y)
+    (fun ijk => (L.vel ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)).y)
+    (fun ijk => (L.vel ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).y)
+    (fun ijk => (L.vel ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)).y)
+    (fun ijk => (L.vel ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).y)
+    (fun ijk => (L.vel ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)).y)
+    (fun ijk => (L.vel ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).y)
+    (fun ijk => rfl) (fun ijk => rfl) (fun ijk => rfl)
+    (fun ijk => rfl) (fun ijk => rfl) (fun ijk => rfl)
+  have hz := scalar_diffuse3D N M K hN hM hK μ hμ0 hμ1
+    (fun ijk => (L.vel ijk).z)
+    (fun ijk => (L.vel ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)).z)
+    (fun ijk => (L.vel ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).z)
+    (fun ijk => (L.vel ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)).z)
+    (fun ijk => (L.vel ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).z)
+    (fun ijk => (L.vel ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)).z)
+    (fun ijk => (L.vel ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).z)
+    (fun ijk => rfl) (fun ijk => rfl) (fun ijk => rfl)
+    (fun ijk => rfl) (fun ijk => rfl) (fun ijk => rfl)
+  have hexpand : totalEnergy3D N M K (diffuse3D N M K hN hM hK μ L)
+      = ∑ ijk, ((1 - 6 * μ) * (L.vel ijk).x
+          + μ * (L.vel ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)).x
+          + μ * (L.vel ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).x
+          + μ * (L.vel ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)).x
+          + μ * (L.vel ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).x
+          + μ * (L.vel ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)).x
+          + μ * (L.vel ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).x) ^ 2
+        + ∑ ijk, ((1 - 6 * μ) * (L.vel ijk).y
+          + μ * (L.vel ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)).y
+          + μ * (L.vel ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).y
+          + μ * (L.vel ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)).y
+          + μ * (L.vel ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).y
+          + μ * (L.vel ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)).y
+          + μ * (L.vel ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).y) ^ 2
+        + ∑ ijk, ((1 - 6 * μ) * (L.vel ijk).z
+          + μ * (L.vel ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)).z
+          + μ * (L.vel ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).z
+          + μ * (L.vel ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)).z
+          + μ * (L.vel ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).z
+          + μ * (L.vel ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)).z
+          + μ * (L.vel ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).z) ^ 2 := by
+    have rfl_expand : totalEnergy3D N M K (diffuse3D N M K hN hM hK μ L)
+        = ∑ ijk, ((((1 - 6 * μ) * (L.vel ijk).x
+            + μ * (L.vel ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)).x
+            + μ * (L.vel ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).x
+            + μ * (L.vel ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)).x
+            + μ * (L.vel ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).x
+            + μ * (L.vel ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)).x
+            + μ * (L.vel ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).x) ^ 2
+          + ((1 - 6 * μ) * (L.vel ijk).y
+            + μ * (L.vel ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)).y
+            + μ * (L.vel ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).y
+            + μ * (L.vel ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)).y
+            + μ * (L.vel ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).y
+            + μ * (L.vel ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)).y
+            + μ * (L.vel ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).y) ^ 2)
+          + ((1 - 6 * μ) * (L.vel ijk).z
+            + μ * (L.vel ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)).z
+            + μ * (L.vel ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).z
+            + μ * (L.vel ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)).z
+            + μ * (L.vel ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).z
+            + μ * (L.vel ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)).z
+            + μ * (L.vel ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).z) ^ 2) := rfl
+    rw [rfl_expand]
+    simp only [Finset.sum_add_distrib]
+  have hexpand0 : totalEnergy3D N M K L
+      = ∑ ijk, ((L.vel ijk).x) ^ 2 + ∑ ijk, ((L.vel ijk).y) ^ 2
+        + ∑ ijk, ((L.vel ijk).z) ^ 2 := by
+    have rfl_expand0 : totalEnergy3D N M K L
+        = ∑ ijk, ((((L.vel ijk).x) ^ 2 + ((L.vel ijk).y) ^ 2)
+          + ((L.vel ijk).z) ^ 2) := rfl
+    rw [rfl_expand0]
+    simp only [Finset.sum_add_distrib]
+  rw [hexpand, hexpand0]
+  linarith
+
+/-- Forward-difference pressure gradients (3 axes, kept structure). -/
+def gradX3D (N M K : ℕ) (hN : 0 < N) (p : (Fin N × Fin M) × Fin K → ℚ)
+    (ijk : (Fin N × Fin M) × Fin K) : ℚ :=
+  p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) - p ijk
+
+def gradY3D (N M K : ℕ) (hM : 0 < M) (p : (Fin N × Fin M) × Fin K → ℚ)
+    (ijk : (Fin N × Fin M) × Fin K) : ℚ :=
+  p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) - p ijk
+
+def gradZ3D (N M K : ℕ) (hK : 0 < K) (p : (Fin N × Fin M) × Fin K → ℚ)
+    (ijk : (Fin N × Fin M) × Fin K) : ℚ :=
+  p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) - p ijk
+
+/-- Backward-difference divergence (adjoint triple). -/
+def bdiv3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M) (hK : 0 < K)
+    (u : (Fin N × Fin M) × Fin K → CellVelocity)
+    (ijk : (Fin N × Fin M) × Fin K) : ℚ :=
+  ((u ijk).x - (u ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).x)
+    + ((u ijk).y - (u ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).y)
+    + ((u ijk).z - (u ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).z)
+
+/-- Summation by parts I in 3D (all three axes, proved). -/
+lemma sbp_grad_div3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M) (hK : 0 < K)
+    (u : (Fin N × Fin M) × Fin K → CellVelocity)
+    (p : (Fin N × Fin M) × Fin K → ℚ) :
+    (∑ ijk, (u ijk).x * gradX3D N M K hN p ijk)
+        + (∑ ijk, (u ijk).y * gradY3D N M K hM p ijk)
+        + (∑ ijk, (u ijk).z * gradZ3D N M K hK p ijk)
+      = -∑ ijk, bdiv3D N M K hN hM hK u ijk * p ijk := by
+  have hX : ∑ ijk, (u ijk).x * gradX3D N M K hN p ijk
+      = ∑ ijk, (u ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).x * p ijk
+        - ∑ ijk, (u ijk).x * p ijk := by
+    have e : ∀ ijk ∈ (Finset.univ : Finset ((Fin N × Fin M) × Fin K)),
+        (u ijk).x * gradX3D N M K hN p ijk
+          = (u ijk).x * p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)
+            - (u ijk).x * p ijk := by
+      intro ijk _
+      simp only [gradX3D, mul_sub]
+    rw [Finset.sum_congr rfl e, Finset.sum_sub_distrib]
+    have hstep := sum_3d_fwd_to_bwdX N M K hN (fun a b => (u a).x * p b)
+    have r1 : (∑ ijk, (u ijk).x * p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2))
+        = ∑ ijk, (fun a b => (u a).x * p b) ijk
+          ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) := rfl
+    have r2 : (∑ ijk, (fun a b => (u a).x * p b)
+          ((bwd N hN ijk.1.1, ijk.1.2), ijk.2) ijk)
+        = ∑ ijk, (u ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)).x * p ijk := rfl
+    rw [r1, hstep, r2]
+  have hY : ∑ ijk, (u ijk).y * gradY3D N M K hM p ijk
+      = ∑ ijk, (u ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).y * p ijk
+        - ∑ ijk, (u ijk).y * p ijk := by
+    have e : ∀ ijk ∈ (Finset.univ : Finset ((Fin N × Fin M) × Fin K)),
+        (u ijk).y * gradY3D N M K hM p ijk
+          = (u ijk).y * p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)
+            - (u ijk).y * p ijk := by
+      intro ijk _
+      simp only [gradY3D, mul_sub]
+    rw [Finset.sum_congr rfl e, Finset.sum_sub_distrib]
+    have hstep := sum_3d_fwd_to_bwdY N M K hM (fun a b => (u a).y * p b)
+    have r1 : (∑ ijk, (u ijk).y * p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2))
+        = ∑ ijk, (fun a b => (u a).y * p b) ijk
+          ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) := rfl
+    have r2 : (∑ ijk, (fun a b => (u a).y * p b)
+          ((ijk.1.1, bwd M hM ijk.1.2), ijk.2) ijk)
+        = ∑ ijk, (u ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)).y * p ijk := rfl
+    rw [r1, hstep, r2]
+  have hZ : ∑ ijk, (u ijk).z * gradZ3D N M K hK p ijk
+      = ∑ ijk, (u ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).z * p ijk
+        - ∑ ijk, (u ijk).z * p ijk := by
+    have e : ∀ ijk ∈ (Finset.univ : Finset ((Fin N × Fin M) × Fin K)),
+        (u ijk).z * gradZ3D N M K hK p ijk
+          = (u ijk).z * p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)
+            - (u ijk).z * p ijk := by
+      intro ijk _
+      simp only [gradZ3D, mul_sub]
+    rw [Finset.sum_congr rfl e, Finset.sum_sub_distrib]
+    have hstep := sum_3d_fwd_to_bwdZ N M K hK (fun a b => (u a).z * p b)
+    have r1 : (∑ ijk, (u ijk).z * p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2))
+        = ∑ ijk, (fun a b => (u a).z * p b) ijk
+          ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) := rfl
+    have r2 : (∑ ijk, (fun a b => (u a).z * p b)
+          ((ijk.1.1, ijk.1.2), bwd K hK ijk.2) ijk)
+        = ∑ ijk, (u ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)).z * p ijk := rfl
+    rw [r1, hstep, r2]
+  rw [hX, hY, hZ]
+  simp only [bdiv3D, add_mul, sub_mul, Finset.sum_add_distrib,
+    Finset.sum_sub_distrib]
+  ring
+
+/-- Axis Laplacians and their sum (stencil-7 split). -/
+def lapX3D (N M K : ℕ) (hN : 0 < N) (p : (Fin N × Fin M) × Fin K → ℚ)
+    (ijk : (Fin N × Fin M) × Fin K) : ℚ :=
+  p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) - 2 * p ijk
+    + p ((bwd N hN ijk.1.1, ijk.1.2), ijk.2)
+
+def lapY3D (N M K : ℕ) (hM : 0 < M) (p : (Fin N × Fin M) × Fin K → ℚ)
+    (ijk : (Fin N × Fin M) × Fin K) : ℚ :=
+  p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) - 2 * p ijk
+    + p ((ijk.1.1, bwd M hM ijk.1.2), ijk.2)
+
+def lapZ3D (N M K : ℕ) (hK : 0 < K) (p : (Fin N × Fin M) × Fin K → ℚ)
+    (ijk : (Fin N × Fin M) × Fin K) : ℚ :=
+  p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) - 2 * p ijk
+    + p ((ijk.1.1, ijk.1.2), bwd K hK ijk.2)
+
+def lap3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M) (hK : 0 < K)
+    (p : (Fin N × Fin M) × Fin K → ℚ)
+    (ijk : (Fin N × Fin M) × Fin K) : ℚ :=
+  lapX3D N M K hN p ijk + lapY3D N M K hM p ijk + lapZ3D N M K hK p ijk
+
+/-- X-axis Laplacian is negative-semidefinite (proved). -/
+lemma sbp_lap_negX3D (N M K : ℕ) (hN : 0 < N)
+    (p : (Fin N × Fin M) × Fin K → ℚ) :
+    ∑ ijk, lapX3D N M K hN p ijk * p ijk
+      = -∑ ijk, (gradX3D N M K hN p ijk) ^ 2 := by
+  have e1 : ∑ ijk : (Fin N × Fin M) × Fin K,
+        p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk
+      = ∑ ijk : (Fin N × Fin M) × Fin K,
+        p ijk * p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) :=
+    Finset.sum_congr rfl (fun ijk _ => mul_comm _ _)
+  have e2 : ∑ ijk : (Fin N × Fin M) × Fin K,
+        p ((bwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk
+      = ∑ ijk : (Fin N × Fin M) × Fin K,
+        p ijk * p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) := by
+    have hstep := sum_3d_fwd_to_bwdX N M K hN (fun a b => p a * p b)
+    have r1 : (∑ ijk : (Fin N × Fin M) × Fin K,
+          p ((bwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk)
+        = ∑ ijk, (fun a b => p a * p b)
+          ((bwd N hN ijk.1.1, ijk.1.2), ijk.2) ijk := rfl
+    have r2 : (∑ ijk, (fun a b => p a * p b) ijk
+          ((fwd N hN ijk.1.1, ijk.1.2), ijk.2))
+        = ∑ ijk : (Fin N × Fin M) × Fin K,
+          p ijk * p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) := rfl
+    rw [r1, ← hstep, r2]
+  have e3 : ∑ ijk : (Fin N × Fin M) × Fin K,
+        (p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)) ^ 2
+      = ∑ ijk : (Fin N × Fin M) × Fin K, (p ijk) ^ 2 :=
+    sum_3d_fst N M K hN (fun i j k => (p ((i, j), k)) ^ 2)
+  have e4 : ∀ ijk : (Fin N × Fin M) × Fin K,
+      (gradX3D N M K hN p ijk) ^ 2
+      = (p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)) ^ 2
+        - 2 * (p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk)
+        + (p ijk) ^ 2 := by
+    intro ijk
+    simp only [gradX3D]
+    ring
+  have e5 : ∀ ijk : (Fin N × Fin M) × Fin K,
+      lapX3D N M K hN p ijk * p ijk
+      = p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk - 2 * (p ijk) ^ 2
+        + p ((bwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk := by
+    intro ijk
+    simp only [lapX3D]
+    ring
+  calc ∑ ijk, lapX3D N M K hN p ijk * p ijk
+      = ∑ ijk : (Fin N × Fin M) × Fin K,
+          (p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk - 2 * (p ijk) ^ 2
+          + p ((bwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk) :=
+        Finset.sum_congr rfl (fun ijk _ => e5 ijk)
+    _ = ∑ ijk : (Fin N × Fin M) × Fin K,
+            p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk
+          - ∑ ijk : (Fin N × Fin M) × Fin K, (2 * (p ijk) ^ 2)
+          + ∑ ijk : (Fin N × Fin M) × Fin K,
+            p ((bwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk := by
+        simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+    _ = 2 * ∑ ijk : (Fin N × Fin M) × Fin K,
+            p ijk * p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)
+          - 2 * ∑ ijk : (Fin N × Fin M) × Fin K, (p ijk) ^ 2 := by
+        have sB : ∑ ijk : (Fin N × Fin M) × Fin K, (2 * (p ijk) ^ 2)
+            = 2 * ∑ ijk : (Fin N × Fin M) × Fin K, (p ijk) ^ 2 :=
+          (Finset.mul_sum _ _ _).symm
+        rw [e1, e2, sB]
+        ring
+    _ = -∑ ijk, (gradX3D N M K hN p ijk) ^ 2 := by
+        have g1 : ∑ ijk, (gradX3D N M K hN p ijk) ^ 2
+            = ∑ ijk : (Fin N × Fin M) × Fin K,
+              ((p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)) ^ 2
+              - 2 * (p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk))
+              + ∑ ijk : (Fin N × Fin M) × Fin K, (p ijk) ^ 2 := by
+          have hcongr : ∀ ijk ∈ (Finset.univ : Finset ((Fin N × Fin M) × Fin K)),
+              (gradX3D N M K hN p ijk) ^ 2
+                = (p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)) ^ 2
+                  - 2 * (p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk)
+                  + (p ijk) ^ 2 := fun ijk _ => e4 ijk
+          rw [Finset.sum_congr rfl hcongr]
+          simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+        rw [g1]
+        have g2 : ∑ ijk : (Fin N × Fin M) × Fin K,
+              ((p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)) ^ 2
+              - 2 * (p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk))
+            = ∑ ijk : (Fin N × Fin M) × Fin K,
+                (p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2)) ^ 2
+              - ∑ ijk : (Fin N × Fin M) × Fin K,
+                (2 * (p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk)) :=
+          Finset.sum_sub_distrib _ _
+        rw [g2, e3]
+        have sD : ∑ ijk : (Fin N × Fin M) × Fin K,
+              (2 * (p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk))
+            = 2 * ∑ ijk : (Fin N × Fin M) × Fin K,
+              p ((fwd N hN ijk.1.1, ijk.1.2), ijk.2) * p ijk :=
+          (Finset.mul_sum _ _ _).symm
+        rw [sD, e1]
+        ring
+
+/-- Y-axis Laplacian is negative-semidefinite (proved). -/
+lemma sbp_lap_negY3D (N M K : ℕ) (hM : 0 < M)
+    (p : (Fin N × Fin M) × Fin K → ℚ) :
+    ∑ ijk, lapY3D N M K hM p ijk * p ijk
+      = -∑ ijk, (gradY3D N M K hM p ijk) ^ 2 := by
+  have e1 : ∑ ijk : (Fin N × Fin M) × Fin K,
+        p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) * p ijk
+      = ∑ ijk : (Fin N × Fin M) × Fin K,
+        p ijk * p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) :=
+    Finset.sum_congr rfl (fun ijk _ => mul_comm _ _)
+  have e2 : ∑ ijk : (Fin N × Fin M) × Fin K,
+        p ((ijk.1.1, bwd M hM ijk.1.2), ijk.2) * p ijk
+      = ∑ ijk : (Fin N × Fin M) × Fin K,
+        p ijk * p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) := by
+    have hstep := sum_3d_fwd_to_bwdY N M K hM (fun a b => p a * p b)
+    have r1 : (∑ ijk : (Fin N × Fin M) × Fin K,
+          p ((ijk.1.1, bwd M hM ijk.1.2), ijk.2) * p ijk)
+        = ∑ ijk, (fun a b => p a * p b)
+          ((ijk.1.1, bwd M hM ijk.1.2), ijk.2) ijk := rfl
+    have r2 : (∑ ijk, (fun a b => p a * p b) ijk
+          ((ijk.1.1, fwd M hM ijk.1.2), ijk.2))
+        = ∑ ijk : (Fin N × Fin M) × Fin K,
+          p ijk * p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) := rfl
+    rw [r1, ← hstep, r2]
+  have e3 : ∑ ijk : (Fin N × Fin M) × Fin K,
+        (p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)) ^ 2
+      = ∑ ijk : (Fin N × Fin M) × Fin K, (p ijk) ^ 2 :=
+    sum_3d_snd N M K hM (fun i j k => (p ((i, j), k)) ^ 2)
+  have e4 : ∀ ijk : (Fin N × Fin M) × Fin K,
+      (gradY3D N M K hM p ijk) ^ 2
+      = (p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)) ^ 2
+        - 2 * (p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) * p ijk)
+        + (p ijk) ^ 2 := by
+    intro ijk
+    simp only [gradY3D]
+    ring
+  have e5 : ∀ ijk : (Fin N × Fin M) × Fin K,
+      lapY3D N M K hM p ijk * p ijk
+      = p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) * p ijk - 2 * (p ijk) ^ 2
+        + p ((ijk.1.1, bwd M hM ijk.1.2), ijk.2) * p ijk := by
+    intro ijk
+    simp only [lapY3D]
+    ring
+  calc ∑ ijk, lapY3D N M K hM p ijk * p ijk
+      = ∑ ijk : (Fin N × Fin M) × Fin K,
+          (p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) * p ijk - 2 * (p ijk) ^ 2
+          + p ((ijk.1.1, bwd M hM ijk.1.2), ijk.2) * p ijk) :=
+        Finset.sum_congr rfl (fun ijk _ => e5 ijk)
+    _ = ∑ ijk : (Fin N × Fin M) × Fin K,
+            p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) * p ijk
+          - ∑ ijk : (Fin N × Fin M) × Fin K, (2 * (p ijk) ^ 2)
+          + ∑ ijk : (Fin N × Fin M) × Fin K,
+            p ((ijk.1.1, bwd M hM ijk.1.2), ijk.2) * p ijk := by
+        simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+    _ = 2 * ∑ ijk : (Fin N × Fin M) × Fin K,
+            p ijk * p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)
+          - 2 * ∑ ijk : (Fin N × Fin M) × Fin K, (p ijk) ^ 2 := by
+        have sB : ∑ ijk : (Fin N × Fin M) × Fin K, (2 * (p ijk) ^ 2)
+            = 2 * ∑ ijk : (Fin N × Fin M) × Fin K, (p ijk) ^ 2 :=
+          (Finset.mul_sum _ _ _).symm
+        rw [e1, e2, sB]
+        ring
+    _ = -∑ ijk, (gradY3D N M K hM p ijk) ^ 2 := by
+        have g1 : ∑ ijk, (gradY3D N M K hM p ijk) ^ 2
+            = ∑ ijk : (Fin N × Fin M) × Fin K,
+              ((p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)) ^ 2
+              - 2 * (p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) * p ijk))
+              + ∑ ijk : (Fin N × Fin M) × Fin K, (p ijk) ^ 2 := by
+          have hcongr : ∀ ijk ∈ (Finset.univ : Finset ((Fin N × Fin M) × Fin K)),
+              (gradY3D N M K hM p ijk) ^ 2
+                = (p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)) ^ 2
+                  - 2 * (p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) * p ijk)
+                  + (p ijk) ^ 2 := fun ijk _ => e4 ijk
+          rw [Finset.sum_congr rfl hcongr]
+          simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+        rw [g1]
+        have g2 : ∑ ijk : (Fin N × Fin M) × Fin K,
+              ((p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)) ^ 2
+              - 2 * (p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) * p ijk))
+            = ∑ ijk : (Fin N × Fin M) × Fin K,
+                (p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2)) ^ 2
+              - ∑ ijk : (Fin N × Fin M) × Fin K,
+                (2 * (p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) * p ijk)) :=
+          Finset.sum_sub_distrib _ _
+        rw [g2, e3]
+        have sD : ∑ ijk : (Fin N × Fin M) × Fin K,
+              (2 * (p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) * p ijk))
+            = 2 * ∑ ijk : (Fin N × Fin M) × Fin K,
+              p ((ijk.1.1, fwd M hM ijk.1.2), ijk.2) * p ijk :=
+          (Finset.mul_sum _ _ _).symm
+        rw [sD, e1]
+        ring
+
+/-- Z-axis Laplacian is negative-semidefinite (proved). -/
+lemma sbp_lap_negZ3D (N M K : ℕ) (hK : 0 < K)
+    (p : (Fin N × Fin M) × Fin K → ℚ) :
+    ∑ ijk, lapZ3D N M K hK p ijk * p ijk
+      = -∑ ijk, (gradZ3D N M K hK p ijk) ^ 2 := by
+  have e1 : ∑ ijk : (Fin N × Fin M) × Fin K,
+        p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) * p ijk
+      = ∑ ijk : (Fin N × Fin M) × Fin K,
+        p ijk * p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) :=
+    Finset.sum_congr rfl (fun ijk _ => mul_comm _ _)
+  have e2 : ∑ ijk : (Fin N × Fin M) × Fin K,
+        p ((ijk.1.1, ijk.1.2), bwd K hK ijk.2) * p ijk
+      = ∑ ijk : (Fin N × Fin M) × Fin K,
+        p ijk * p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) := by
+    have hstep := sum_3d_fwd_to_bwdZ N M K hK (fun a b => p a * p b)
+    have r1 : (∑ ijk : (Fin N × Fin M) × Fin K,
+          p ((ijk.1.1, ijk.1.2), bwd K hK ijk.2) * p ijk)
+        = ∑ ijk, (fun a b => p a * p b)
+          ((ijk.1.1, ijk.1.2), bwd K hK ijk.2) ijk := rfl
+    have r2 : (∑ ijk, (fun a b => p a * p b) ijk
+          ((ijk.1.1, ijk.1.2), fwd K hK ijk.2))
+        = ∑ ijk : (Fin N × Fin M) × Fin K,
+          p ijk * p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) := rfl
+    rw [r1, ← hstep, r2]
+  have e3 : ∑ ijk : (Fin N × Fin M) × Fin K,
+        (p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)) ^ 2
+      = ∑ ijk : (Fin N × Fin M) × Fin K, (p ijk) ^ 2 :=
+    sum_3d_trd N M K hK (fun i j k => (p ((i, j), k)) ^ 2)
+  have e4 : ∀ ijk : (Fin N × Fin M) × Fin K,
+      (gradZ3D N M K hK p ijk) ^ 2
+      = (p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)) ^ 2
+        - 2 * (p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) * p ijk)
+        + (p ijk) ^ 2 := by
+    intro ijk
+    simp only [gradZ3D]
+    ring
+  have e5 : ∀ ijk : (Fin N × Fin M) × Fin K,
+      lapZ3D N M K hK p ijk * p ijk
+      = p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) * p ijk - 2 * (p ijk) ^ 2
+        + p ((ijk.1.1, ijk.1.2), bwd K hK ijk.2) * p ijk := by
+    intro ijk
+    simp only [lapZ3D]
+    ring
+  calc ∑ ijk, lapZ3D N M K hK p ijk * p ijk
+      = ∑ ijk : (Fin N × Fin M) × Fin K,
+          (p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) * p ijk - 2 * (p ijk) ^ 2
+          + p ((ijk.1.1, ijk.1.2), bwd K hK ijk.2) * p ijk) :=
+        Finset.sum_congr rfl (fun ijk _ => e5 ijk)
+    _ = ∑ ijk : (Fin N × Fin M) × Fin K,
+            p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) * p ijk
+          - ∑ ijk : (Fin N × Fin M) × Fin K, (2 * (p ijk) ^ 2)
+          + ∑ ijk : (Fin N × Fin M) × Fin K,
+            p ((ijk.1.1, ijk.1.2), bwd K hK ijk.2) * p ijk := by
+        simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+    _ = 2 * ∑ ijk : (Fin N × Fin M) × Fin K,
+            p ijk * p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)
+          - 2 * ∑ ijk : (Fin N × Fin M) × Fin K, (p ijk) ^ 2 := by
+        have sB : ∑ ijk : (Fin N × Fin M) × Fin K, (2 * (p ijk) ^ 2)
+            = 2 * ∑ ijk : (Fin N × Fin M) × Fin K, (p ijk) ^ 2 :=
+          (Finset.mul_sum _ _ _).symm
+        rw [e1, e2, sB]
+        ring
+    _ = -∑ ijk, (gradZ3D N M K hK p ijk) ^ 2 := by
+        have g1 : ∑ ijk, (gradZ3D N M K hK p ijk) ^ 2
+            = ∑ ijk : (Fin N × Fin M) × Fin K,
+              ((p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)) ^ 2
+              - 2 * (p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) * p ijk))
+              + ∑ ijk : (Fin N × Fin M) × Fin K, (p ijk) ^ 2 := by
+          have hcongr : ∀ ijk ∈ (Finset.univ : Finset ((Fin N × Fin M) × Fin K)),
+              (gradZ3D N M K hK p ijk) ^ 2
+                = (p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)) ^ 2
+                  - 2 * (p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) * p ijk)
+                  + (p ijk) ^ 2 := fun ijk _ => e4 ijk
+          rw [Finset.sum_congr rfl hcongr]
+          simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+        rw [g1]
+        have g2 : ∑ ijk : (Fin N × Fin M) × Fin K,
+              ((p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)) ^ 2
+              - 2 * (p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) * p ijk))
+            = ∑ ijk : (Fin N × Fin M) × Fin K,
+                (p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2)) ^ 2
+              - ∑ ijk : (Fin N × Fin M) × Fin K,
+                (2 * (p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) * p ijk)) :=
+          Finset.sum_sub_distrib _ _
+        rw [g2, e3]
+        have sD : ∑ ijk : (Fin N × Fin M) × Fin K,
+              (2 * (p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) * p ijk))
+            = 2 * ∑ ijk : (Fin N × Fin M) × Fin K,
+              p ((ijk.1.1, ijk.1.2), fwd K hK ijk.2) * p ijk :=
+          (Finset.mul_sum _ _ _).symm
+        rw [sD, e1]
+        ring
+
+/-- Full 3D Laplacian is negative-semidefinite (all three axes). -/
+lemma sbp_lap_neg3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M) (hK : 0 < K)
+    (p : (Fin N × Fin M) × Fin K → ℚ) :
+    ∑ ijk, lap3D N M K hN hM hK p ijk * p ijk
+      = -(∑ ijk, (gradX3D N M K hN p ijk) ^ 2
+        + ∑ ijk, (gradY3D N M K hM p ijk) ^ 2
+        + ∑ ijk, (gradZ3D N M K hK p ijk) ^ 2) := by
+  have hX := sbp_lap_negX3D N M K hN p
+  have hY := sbp_lap_negY3D N M K hM p
+  have hZ := sbp_lap_negZ3D N M K hK p
+  have hsplit : ∀ ijk ∈ (Finset.univ : Finset ((Fin N × Fin M) × Fin K)),
+      lap3D N M K hN hM hK p ijk * p ijk
+        = lapX3D N M K hN p ijk * p ijk
+          + lapY3D N M K hM p ijk * p ijk
+          + lapZ3D N M K hK p ijk * p ijk := by
+    intro ijk _
+    simp only [lap3D, add_mul]
+  rw [Finset.sum_congr rfl hsplit]
+  simp only [Finset.sum_add_distrib]
+  rw [hX, hY, hZ]
+  ring
+
+/-- 3D Chorin projection (all three channels, matching the runtime). -/
+def project3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M) (hK : 0 < K) (c : ℚ)
+    (L : FluidLattice3D N M K) (p : (Fin N × Fin M) × Fin K → ℚ)
+    : FluidLattice3D N M K :=
+  ⟨fun ijk => ⟨(L.vel ijk).x - c * gradX3D N M K hN p ijk,
+    (L.vel ijk).y - c * gradY3D N M K hM p ijk,
+    (L.vel ijk).z - c * gradZ3D N M K hK p ijk⟩⟩
+
+/-- 3D projection dissipates energy under the solver contract. -/
+lemma energy_project3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M) (hK : 0 < K)
+    (c C : ℚ) (hc : c * C = 1) (hC : 0 < C) (L : FluidLattice3D N M K)
+    (p : (Fin N × Fin M) × Fin K → ℚ)
+    (hPoisson : ∀ ijk, lap3D N M K hN hM hK p ijk
+      = C * bdiv3D N M K hN hM hK L.vel ijk) :
+    totalEnergy3D N M K (project3D N M K hN hM hK c L p)
+      ≤ totalEnergy3D N M K L := by
+  have hCne : C ≠ 0 := hC.ne'
+  have hSnn : 0 ≤ ∑ ijk, (gradX3D N M K hN p ijk) ^ 2
+      + ∑ ijk, (gradY3D N M K hM p ijk) ^ 2
+      + ∑ ijk, (gradZ3D N M K hK p ijk) ^ 2 := by
+    apply add_nonneg
+    · apply add_nonneg
+      · exact Finset.sum_nonneg (fun ijk _ => sq_nonneg _)
+      · exact Finset.sum_nonneg (fun ijk _ => sq_nonneg _)
+    · exact Finset.sum_nonneg (fun ijk _ => sq_nonneg _)
+  have hlink3D : (∑ ijk, (L.vel ijk).x * gradX3D N M K hN p ijk)
+        + (∑ ijk, (L.vel ijk).y * gradY3D N M K hM p ijk)
+        + (∑ ijk, (L.vel ijk).z * gradZ3D N M K hK p ijk)
+      = (1 / C) * (∑ ijk, (gradX3D N M K hN p ijk) ^ 2
+        + ∑ ijk, (gradY3D N M K hM p ijk) ^ 2
+        + ∑ ijk, (gradZ3D N M K hK p ijk) ^ 2) := by
+    have h1 := sbp_grad_div3D N M K hN hM hK L.vel p
+    have h2 := sbp_lap_neg3D N M K hN hM hK p
+    have h3 : ∑ ijk, bdiv3D N M K hN hM hK L.vel ijk * p ijk
+        = (1 / C) * ∑ ijk, lap3D N M K hN hM hK p ijk * p ijk := by
+      have hper : ∀ ijk : (Fin N × Fin M) × Fin K,
+          bdiv3D N M K hN hM hK L.vel ijk * p ijk
+          = (1 / C) * (lap3D N M K hN hM hK p ijk * p ijk) := by
+        intro ijk
+        rw [hPoisson ijk]
+        field_simp
+      rw [Finset.sum_congr rfl (fun ijk _ => hper ijk), ← Finset.mul_sum]
+    rw [h1, h3, h2]
+    ring
+  have hE : totalEnergy3D N M K (project3D N M K hN hM hK c L p)
+      = totalEnergy3D N M K L - c ^ 2 * (∑ ijk, (gradX3D N M K hN p ijk) ^ 2
+        + ∑ ijk, (gradY3D N M K hM p ijk) ^ 2
+        + ∑ ijk, (gradZ3D N M K hK p ijk) ^ 2) := by
+    have hexpand : totalEnergy3D N M K (project3D N M K hN hM hK c L p)
+        = ∑ ijk, ((L.vel ijk).x - c * gradX3D N M K hN p ijk) ^ 2
+          + ∑ ijk, ((L.vel ijk).y - c * gradY3D N M K hM p ijk) ^ 2
+          + ∑ ijk, ((L.vel ijk).z - c * gradZ3D N M K hK p ijk) ^ 2 := by
+      have rfl_expand : totalEnergy3D N M K (project3D N M K hN hM hK c L p)
+          = ∑ ijk, ((((L.vel ijk).x - c * gradX3D N M K hN p ijk) ^ 2
+            + ((L.vel ijk).y - c * gradY3D N M K hM p ijk) ^ 2)
+            + ((L.vel ijk).z - c * gradZ3D N M K hK p ijk) ^ 2) := rfl
+      rw [rfl_expand]
+      simp only [Finset.sum_add_distrib]
+    have hexpand0 : totalEnergy3D N M K L
+        = ∑ ijk, ((L.vel ijk).x) ^ 2 + ∑ ijk, ((L.vel ijk).y) ^ 2
+          + ∑ ijk, ((L.vel ijk).z) ^ 2 := by
+      have rfl_expand0 : totalEnergy3D N M K L
+          = ∑ ijk, ((((L.vel ijk).x) ^ 2 + ((L.vel ijk).y) ^ 2)
+            + ((L.vel ijk).z) ^ 2) := rfl
+      rw [rfl_expand0]
+      simp only [Finset.sum_add_distrib]
+    rw [hexpand, hexpand0]
+    have hx : ∀ ijk : (Fin N × Fin M) × Fin K,
+        ((L.vel ijk).x - c * gradX3D N M K hN p ijk) ^ 2
+          = ((L.vel ijk).x) ^ 2
+            - 2 * c * ((L.vel ijk).x * gradX3D N M K hN p ijk)
+            + c ^ 2 * (gradX3D N M K hN p ijk) ^ 2 := by
+      intro ijk
+      ring
+    have hy : ∀ ijk : (Fin N × Fin M) × Fin K,
+        ((L.vel ijk).y - c * gradY3D N M K hM p ijk) ^ 2
+          = ((L.vel ijk).y) ^ 2
+            - 2 * c * ((L.vel ijk).y * gradY3D N M K hM p ijk)
+            + c ^ 2 * (gradY3D N M K hM p ijk) ^ 2 := by
+      intro ijk
+      ring
+    have hz : ∀ ijk : (Fin N × Fin M) × Fin K,
+        ((L.vel ijk).z - c * gradZ3D N M K hK p ijk) ^ 2
+          = ((L.vel ijk).z) ^ 2
+            - 2 * c * ((L.vel ijk).z * gradZ3D N M K hK p ijk)
+            + c ^ 2 * (gradZ3D N M K hK p ijk) ^ 2 := by
+      intro ijk
+      ring
+    rw [Finset.sum_congr rfl (fun ijk _ => hx ijk),
+      Finset.sum_congr rfl (fun ijk _ => hy ijk),
+      Finset.sum_congr rfl (fun ijk _ => hz ijk)]
+    simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+    have t1x : ∑ ijk, (2 * c * ((L.vel ijk).x * gradX3D N M K hN p ijk))
+        = 2 * c * ∑ ijk, (L.vel ijk).x * gradX3D N M K hN p ijk :=
+      (Finset.mul_sum _ _ _).symm
+    have t1y : ∑ ijk, (2 * c * ((L.vel ijk).y * gradY3D N M K hM p ijk))
+        = 2 * c * ∑ ijk, (L.vel ijk).y * gradY3D N M K hM p ijk :=
+      (Finset.mul_sum _ _ _).symm
+    have t1z : ∑ ijk, (2 * c * ((L.vel ijk).z * gradZ3D N M K hK p ijk))
+        = 2 * c * ∑ ijk, (L.vel ijk).z * gradZ3D N M K hK p ijk :=
+      (Finset.mul_sum _ _ _).symm
+    have t2x : ∑ ijk, (c ^ 2 * (gradX3D N M K hN p ijk) ^ 2)
+        = c ^ 2 * ∑ ijk, (gradX3D N M K hN p ijk) ^ 2 :=
+      (Finset.mul_sum _ _ _).symm
+    have t2y : ∑ ijk, (c ^ 2 * (gradY3D N M K hM p ijk) ^ 2)
+        = c ^ 2 * ∑ ijk, (gradY3D N M K hM p ijk) ^ 2 :=
+      (Finset.mul_sum _ _ _).symm
+    have t2z : ∑ ijk, (c ^ 2 * (gradZ3D N M K hK p ijk) ^ 2)
+        = c ^ 2 * ∑ ijk, (gradZ3D N M K hK p ijk) ^ 2 :=
+      (Finset.mul_sum _ _ _).symm
+    rw [t1x, t1y, t1z, t2x, t2y, t2z]
+    have hC : 2 * c * (∑ ijk, (L.vel ijk).x * gradX3D N M K hN p ijk)
+        + 2 * c * (∑ ijk, (L.vel ijk).y * gradY3D N M K hM p ijk)
+        + 2 * c * (∑ ijk, (L.vel ijk).z * gradZ3D N M K hK p ijk)
+        = 2 * (c * c) * (∑ ijk, (gradX3D N M K hN p ijk) ^ 2
+          + ∑ ijk, (gradY3D N M K hM p ijk) ^ 2
+          + ∑ ijk, (gradZ3D N M K hK p ijk) ^ 2) := by
+      have hcC : c * (1 / C) = c ^ 2 := by
+        field_simp
+        nlinarith [hc]
+      have step3 : (2 : ℚ) * (c * (1 / C)) = 2 * (c * c) := by
+        nlinarith [hcC]
+      calc 2 * c * (∑ ijk, (L.vel ijk).x * gradX3D N M K hN p ijk)
+            + 2 * c * (∑ ijk, (L.vel ijk).y * gradY3D N M K hM p ijk)
+            + 2 * c * (∑ ijk, (L.vel ijk).z * gradZ3D N M K hK p ijk)
+          = 2 * c * ((∑ ijk, (L.vel ijk).x * gradX3D N M K hN p ijk)
+            + (∑ ijk, (L.vel ijk).y * gradY3D N M K hM p ijk)
+            + (∑ ijk, (L.vel ijk).z * gradZ3D N M K hK p ijk)) := by ring
+        _ = 2 * c * ((1 / C) * (∑ ijk, (gradX3D N M K hN p ijk) ^ 2
+            + ∑ ijk, (gradY3D N M K hM p ijk) ^ 2
+            + ∑ ijk, (gradZ3D N M K hK p ijk) ^ 2)) := by rw [hlink3D]
+        _ = 2 * (c * (1 / C)) * (∑ ijk, (gradX3D N M K hN p ijk) ^ 2
+            + ∑ ijk, (gradY3D N M K hM p ijk) ^ 2
+            + ∑ ijk, (gradZ3D N M K hK p ijk) ^ 2) := by ring
+        _ = 2 * (c * c) * (∑ ijk, (gradX3D N M K hN p ijk) ^ 2
+            + ∑ ijk, (gradY3D N M K hM p ijk) ^ 2
+            + ∑ ijk, (gradZ3D N M K hK p ijk) ^ 2) := by rw [step3]
+    linear_combination -hC
+  have hdrop : 0 ≤ c ^ 2 * (∑ ijk, (gradX3D N M K hN p ijk) ^ 2
+      + ∑ ijk, (gradY3D N M K hM p ijk) ^ 2
+      + ∑ ijk, (gradZ3D N M K hK p ijk) ^ 2) :=
+    mul_nonneg (sq_nonneg _) hSnn
+  linarith
+
+/-- 3D Godunov predictor and full fractional step. -/
+def godunov3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M) (hK : 0 < K) (μ : ℚ)
+    (L : FluidLattice3D N M K) : FluidLattice3D N M K :=
+  diffuse3D N M K hN hM hK μ (advect3D N M K hN L)
+
+def full_ns_step3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M) (hK : 0 < K)
+    (μ c : ℚ) (L : FluidLattice3D N M K) (p : (Fin N × Fin M) × Fin K → ℚ)
+    : FluidLattice3D N M K :=
+  project3D N M K hN hM hK c (godunov3D N M K hN hM hK μ L) p
+
+/-- Main theorem in 3D: one full step never increases energy. -/
+theorem energy_monotonic_decay3D (N M K : ℕ) (hN : 0 < N) (hM : 0 < M)
+    (hK : 0 < K) (μ c C : ℚ) (hμ0 : 0 ≤ μ) (hμ1 : 6 * μ ≤ 1)
+    (hc : c * C = 1) (hC : 0 < C) (L : FluidLattice3D N M K)
+    (p : (Fin N × Fin M) × Fin K → ℚ)
+    (hPoisson : ∀ ijk, lap3D N M K hN hM hK p ijk
+      = C * bdiv3D N M K hN hM hK (godunov3D N M K hN hM hK μ L).vel ijk) :
+    totalEnergy3D N M K (full_ns_step3D N M K hN hM hK μ c L p)
+      ≤ totalEnergy3D N M K L :=
+  le_trans (energy_project3D N M K hN hM hK c C hc hC _ _ hPoisson)
+    (le_trans (energy_diffuse3D N M K hN hM hK μ hμ0 hμ1 _)
+      (le_of_eq (energy_advect3D N M K hN _)))
+
 end NavierStokesCore
