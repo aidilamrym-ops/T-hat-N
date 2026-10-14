@@ -201,6 +201,10 @@ end NavierStokesCore
 | BAB 3.2 (MATERIALISATION_CAP = 1_000_000, N=128 guard) | CLOSED |
 | VIS renderer (msaf/navier_stokes/visualizer.py, 86 lines, 3000x2400) | CLOSED |
 | VIS-3D renderer (generate_fluid_state_3d_render, 139 lines, N^3 quiver) | CLOSED |
-| Multi-grid order / R³ tails / ν→0 | OPEN (mapped) |
+| CONV-ORDER 3-grid N=4/8/16: 2.14 -> 2.03 (theory 2.0), radii < 1e-70 | CLOSED |
+| NU-LIMIT D(nu) linear 10.0000x/decade 1e-1..1e-4, nu=0 refused | CLOSED |
+| TAILS quotient 1.9519 (theory 2.0), far-field 0.61%, radii < 1e-70 | CLOSED |
+| FRONTIER milenium_frontier/ (RH scaffold + Hodge scaffold, lazy zeta) | CLOSED |
+| ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
-Suites at seal: isolated `25 passed`; main `128 passed`; `exit 0`.
+Suites at seal: isolated `34 passed`; main `137 passed`; `exit 0`.
