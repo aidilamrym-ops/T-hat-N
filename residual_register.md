@@ -60,8 +60,9 @@
 | HODGE-ODD-PICARD K3 program needs odd-p extensions + Jacobi (char-2 degenerate) | OPEN (mapped) |
 | TURING-NT N(T) consistency table + explicit G1/G2/G3 gaps | CLOSED |
 | TURING-G1A contour zero-free certificates (gamma1 + flagship ALL-CLEAR) | CLOSED |
+| TURING-G1B certified winding (gamma1 1 / 2-zero 2 / flagship 10, cross-locked) | CLOSED |
 | MOORE-PREM all 3 Banach premises hold on halo-lifted gamma1 box | CLOSED |
 | VERDICT-GAP floor-branch never counts (pinned, no-zero-ball demo) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
-Suites at seal: isolated `67 passed, 1 skipped`; main `190 passed`; `exit 0`.
+Suites at seal: isolated `67 passed, 1 skipped`; main `196 passed`; `exit 0`.

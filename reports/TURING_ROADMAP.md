@@ -28,8 +28,12 @@ A full Turing verification "RH true up to T" needs, beyond counting:
     ball excludes zero. Gamma1 box and flagship [0,50] contour both
     ALL-CLEAR; edge-at-zero honestly INCONCLUSIVE. Status: CLOSED
     (prerequisite; not itself a count).
-  - (G1-b) **Winding number** (arg variation along the cleared contour):
-    still OPEN -- the actual independent count.
+  - (G1-b) **Winding number** (`msaf/riemann/winding.py`): endpoint
+    unwrapping with homotopy-exact steps (rotation-invariant change,
+    per-step branch margin pi/2, cut dodged by octant rotations).
+    Gamma1 -> 1, [10,24.5] -> 2, flagship [0,50] -> 10, all COMPUTED
+    and agreeing with the Newton counter; contour-through-zero
+    honestly INCONCLUSIVE. Status: CLOSED.
 - (G2) **Explicit S(T) bounds** (Backlund/Trudgian type): a proven
   inequality `|S(T)| ≤ B(T)` to compare against `N(T) - main(T)`.
   Without it, agreement in the table above constrains nothing.
