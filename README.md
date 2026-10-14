@@ -9,7 +9,7 @@ ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
 - Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338272.svg)](https://doi.org/10.5281/zenodo.23338272)
-- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.19.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.19.0-alpha) (current: 160 passed)
+- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.22.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.22.0-alpha) (current: 160 passed)
 - License: MIT - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
@@ -333,7 +333,7 @@ now anchored to the workspace root derived from the module location.
 
 ## SECTION 5: FINITE HYDRODYNAMIC LATTICE & MILLENNIUM FRONTIER
 
-Sealed through `v1.19.0-alpha` (main `160 passed`, isolated `43 passed +
+Sealed through `v1.22.0-alpha` (main `160 passed`, isolated `43 passed +
 1 honest skip`, exit 0). Full derivations in
 [`reports/finite_hydrodynamic_lattices.md`](reports/finite_hydrodynamic_lattices.md)
 (Chapters 1-3) and the machine-checked Lean kernel in [`lean/NavierStokesCore.lean`](lean/NavierStokesCore.lean)
