@@ -1,6 +1,11 @@
 # Turing Roadmap: From Certified Counting to Bounded Verification
 
-## Status: measurement complete, proof machinery mapped (OPEN)
+## Status: Turing implementation track CLOSED as designed (v1.29.0)
+
+G1 is sealed by code (G1-a + G1-b, cross-locked against Newton).
+G2/G3 are MAPPED OPEN by nature -- pure-analysis research and
+design scope respectively, explicitly NOT incremental implementation
+work; no code action is planned for them in this track.
 
 ### 1. Measured N(T) (certified counts, 256-bit)
 
@@ -22,7 +27,8 @@ A full Turing verification "RH true up to T" needs, beyond counting:
   zeros in the rectangle (e.g., via variation of arg xi along the
   boundary) agreeing with the Newton count. Guards against a zero
   missed by BOTH Newton and exclusion (e.g., multiple close zeros
-  defeating isolation). Status: OPEN, unmapped in code.
+  defeating isolation). Status: CLOSED (G1-a + G1-b sealed and
+  cross-locked; see below).
   - (G1-a) **Contour zero-free certificate** (`msaf/riemann/boundary.py`):
     adaptive per-edge subdivision; a segment clears only when its xi
     ball excludes zero. Gamma1 box and flagship [0,50] contour both
@@ -37,15 +43,24 @@ A full Turing verification "RH true up to T" needs, beyond counting:
 - (G2) **Explicit S(T) bounds** (Backlund/Trudgian type): a proven
   inequality `|S(T)| ≤ B(T)` to compare against `N(T) - main(T)`.
   Without it, agreement in the table above constrains nothing.
-  Status: OPEN, pure analysis research.
+  Status: MAPPED OPEN -- pure analysis research, not incremental
+  implementation work; no code action planned in this track.
 - (G3) **Off-line zeros**: our rectangles cover sigma ∈ [0.49, 0.51].
   A Turing claim needs the FULL critical strip (or a functional-equation
-  reduction argument made explicit). Status: OPEN by design scope.
+  reduction argument made explicit). Status: MAPPED OPEN by design
+  scope (strip width is an explicit scope decision); widening is a
+  design decision, not current work; no action planned in this track.
 
 ### 3. What is already closed
 
 - Certified counting with completeness-in-rectangle (`msaf/riemann/`,
   `RH-COUNT`, `RH-COUNT-10`).
+- Contour zero-free certificates, gamma1 + flagship ALL-CLEAR
+  (`msaf/riemann/boundary.py`, `TURING-G1A`).
+- Certified winding numbers cross-locked vs Newton (gamma1 1,
+  [10,24.5] 2, flagship 10; `msaf/riemann/winding.py`, `TURING-G1B`).
+  G1 as a whole is therefore closed: two independent algorithms
+  agree on every tested rectangle.
 - Moore-test existence+uniqueness, machine-checked
   (`lean/NewtonExistence.lean`).
 - Verdict-gap fencing (floor branch never counts).
