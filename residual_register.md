@@ -209,6 +209,8 @@ end NavierStokesCore
 | HODGE-GRAM exact Sylvester (pos/neg/undet), pivoted det | CLOSED |
 | F17-LN1 Lean kernel 1D+2D+3D (lake build GREEN, axioms: propext/choice/Quot only) | CLOSED |
 | LEAN-CENTRAL wide-Laplacian estimate + machine-checked no-go | CLOSED |
+| LEAN-CUBIC N^3 direct instance (1-step + horizon) | CLOSED |
+| BAB 4.0-4.2 (Lean estimates, no-go, correspondence limits) | CLOSED |
 | CORR-SBP central SBP enclosure N=4/N=8, radii < 1e-70 | CLOSED |
 | CI GitHub Actions green (pytest 141 + lake build + sensor) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |

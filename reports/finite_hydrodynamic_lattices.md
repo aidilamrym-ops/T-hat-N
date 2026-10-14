@@ -218,3 +218,64 @@ Any operational request with `N^3 * sizeof(CellVelocity) > MATERIALISATION_CAP` 
 - R-NS-SPEC OPEN (R³ decay tails, ν→0 limit, 3-grid convergence order)
 
 Suites at seal: isolated `21 passed`; main `126 passed`; `exit 0`.
+
+## BAB 4.0: MACHINE-CHECKED ENERGY ESTIMATES (LEAN 4)
+
+The file `lean/NavierStokesCore.lean` carries machine-checked discrete
+Chorin energy estimates over finite periodic lattices (`lake build`
+green; `#print axioms` shows propext, Classical.choice, Quot.sound
+only; zero `sorry`/`admit`/`unsafe` tokens). Coordinates are `Fin N`
+(never R); velocities are exact rational triples.
+
+| Model | Grid | Diffusion (CFL) | Theorem |
+|---|---|---|---|
+| 1D channel | `Fin N` | 3-point, `2mu <= 1` | `energy_monotonic_decay` |
+| 2D periodic | `Fin N x Fin M` | stencil-5, `4mu <= 1` | `energy_monotonic_decay2D` |
+| 3D rectangular | `(Fin N x Fin M) x Fin K` | stencil-7, `6mu <= 1` | `energy_monotonic_decay3D` |
+| 3D cubic | N^3 array (direct instance) | stencil-7 | `energy_monotonic_decay_cubic` |
+
+Each estimate has the shape `E(u^{n+1}) <= E(u*) <= E(u_adv) = E(u^n)`,
+proved from three verified links: permutation advection, convex
+diffusion (pointwise variance identities: 3, 10, and 21 pairs), and a
+projection dissipative via two PROVED summation-by-parts identities
+plus the solver contract `Dp = C Div u*` as an explicit hypothesis.
+Multi-step horizons (`E(traj k) <= E(traj 0)`) follow by induction in
+all three dimensions.
+
+## BAB 4.1: CENTRAL VARIANT AND THE NO-GO THEOREM
+
+The forward-gradient structure above is load-bearing, and this is
+proved rather than asserted. The file contains:
+
+- `sbp_central`: first-order central SBP holds (proved, both shift
+  directions).
+- `lapWide` (`divC` composed with `gradC`): the exact adjoint pair,
+  negative-semidefinite by self-pairing, recovering the full
+  dissipative estimate (`energy_monotonic_decayC`).
+- `central_pairing_fails`: the naive pairing (7-point Laplacian with
+  central gradient) does NOT satisfy the second SBP identity. On N=4
+  with a point mass, both sides evaluate to closed values (-2 vs -1/2).
+  This locks WHY the forward structure is used, and constrains the
+  Python kernel honestly: its 7-point/central combination enjoys no
+  such estimate (hence the empirical guard architecture, not claimed
+  estimates).
+
+## BAB 4.2: CORRESPONDENCE AND ITS DOCUMENTED LIMITS
+
+The Lean model and `msaf/navier_stokes/fluid_lattice.py` are separate
+artifacts. Their contact is measured, not constructed:
+`msaf/tests/test_sbp_correspondence.py` locks central SBP enclosures
+(N=4/N=8, radii < 1e-70). Everything beyond that contact -- solver
+contracts, enclosure widths, multi-step behavior -- lives on the
+Python side under ball arithmetic and is NOT transferred by the Lean
+proofs. The theorems prove the discrete mathematics sound; the
+runtime proves the enclosures tight.
+
+### R. RESIDUAL REGISTER (updated)
+
+- BAB 4.0 CLOSED (1D/2D/3D + cubic machine-checked estimates)
+- BAB 4.1 CLOSED (central variant + no-go theorem)
+- BAB 4.2 CLOSED (correspondence scope documented)
+- CONV-ORDER, NU-LIMIT, TAILS, CORR-SBP, CI: CLOSED (see OMEGA register)
+
+Suites at seal: isolated `37 passed, 1 skipped`; main `141 passed`; `exit 0`.

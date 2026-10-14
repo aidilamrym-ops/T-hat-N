@@ -2218,4 +2218,29 @@ theorem central_pairing_fails :
   rw [hL, hR]
   norm_num
 
+/-- Cubic specialization: the rectangular theorems cover N^3 arrays
+    (the mandate's letter) as a direct instance. -/
+theorem energy_monotonic_decay_cubic (N : ℕ) (hN : 0 < N) (μ c C : ℚ)
+    (hμ0 : 0 ≤ μ) (hμ1 : 6 * μ ≤ 1) (hc : c * C = 1) (hC : 0 < C)
+    (L : FluidLattice3D N N N) (p : (Fin N × Fin N) × Fin N → ℚ)
+    (hPoisson : ∀ ijk, lap3D N N N hN hN hN p ijk
+      = C * bdiv3D N N N hN hN hN (godunov3D N N N hN hN hN μ L).vel ijk) :
+    totalEnergy3D N N N (full_ns_step3D N N N hN hN hN μ c L p)
+      ≤ totalEnergy3D N N N L :=
+  energy_monotonic_decay3D N N N hN hN hN μ c C hμ0 hμ1 hc hC L p hPoisson
+
+theorem energy_monotonic_k_steps_cubic (N : ℕ) (hN : 0 < N) (μ c C : ℚ)
+    (hμ0 : 0 ≤ μ) (hμ1 : 6 * μ ≤ 1) (hc : c * C = 1) (hC : 0 < C)
+    (traj : ℕ → FluidLattice3D N N N)
+    (ps : ℕ → (Fin N × Fin N) × Fin N → ℚ)
+    (hstep : ∀ n, traj (n + 1)
+      = full_ns_step3D N N N hN hN hN μ c (traj n) (ps n))
+    (hpois : ∀ n, ∀ ijk, lap3D N N N hN hN hN (ps n) ijk
+      = C * bdiv3D N N N hN hN hN
+        (godunov3D N N N hN hN hN μ (traj n)).vel ijk)
+    (k : ℕ) :
+    totalEnergy3D N N N (traj k) ≤ totalEnergy3D N N N (traj 0) :=
+  energy_monotonic_k_steps3D N N N hN hN hN μ c C hμ0 hμ1 hc hC traj ps
+    hstep hpois k
+
 end NavierStokesCore
