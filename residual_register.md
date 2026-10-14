@@ -32,6 +32,7 @@
 | FRONTIER milenium_frontier/ (RH scaffold + Hodge scaffold, lazy zeta) | CLOSED |
 | FRONTIER-DEPTH z3 sat first zero; T-hat-N honest skip | CLOSED |
 | LEAN-MOORE-MVT Lipschitz from deriv bound, subtype theorem | CLOSED |
+| LEAN-MOORE-TEST existence via trichotomy+MVT endpoints | CLOSED |
 | LEAN-MOORE-UNIQUE at most one zero per clean-derivative box | CLOSED |
 | LEAN-BROUWER fixed point on Icc via IVT + Moore-image vocabulary | CLOSED |
 | HODGE-GRAM exact Sylvester (pos/neg/undet), pivoted det | CLOSED |

@@ -365,6 +365,7 @@ propext + Classical.choice + Quot.sound only).
 | Z3 double-entry, first zero | `sat`, `[0.5, 0.5]` at 30 decimals (conformance, not proof) |
 | Hodge Gram, exact QQ Sylvester | `POSITIVE/NEGATIVE_DEFINITE`, `UNDETERMINED` on zero minor |
 | Moore box (Lean, Banach) | Newton map + Lipschitz < 1 ⟹ exactly one zero (standard axioms) |
+| Moore test (Lean) | inclusion + clean enclosure ⟹ zero exists (trichotomy+MVT); uniqueness companion |
 | Moore uniqueness (Lean, Rolle/MVT) | clean derivative enclosure ⟹ at most one zero per box |
 | Moore-MVT (Lean) | Lipschitz derived from derivative bound; subtype-scoped theorem |
 | Brouwer-Icc (Lean) | continuous self-map of interval has fixed point (IVT) |
