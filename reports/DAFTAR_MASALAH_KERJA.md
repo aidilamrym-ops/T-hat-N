@@ -65,6 +65,17 @@ BSD dicek sebagai persamaan rasional. TERKUNCI bila 5/5 cocok dua
 implementasi independen. Modul baru: descent + simbol modular.
 Reuse: counting kurva, enclosure ball, pola cross-lock.
 
+Measured capability (probe, dihapus setelah mengunci angka di sini):
+naive #E(F_p) eksak, gerbang Hasse lolos di semua p, naive==Legendre
+di p=101,499; ~84 ms/prima di p~500; semua-p-s.d.-10^3 ~57 dtk,
+s.d.-10^4 ~12 jam (naive, Python). Konsekuensi: L(E,1) eksak HARUS
+via simbol modular (rasional-eksak), bukan produk Euler; counting
+naive hanya untuk sanity s.d. 10^3 (atau jalur Legendre tervektorisasi,
+pola yang sama dengan counter kuartik). Peringatan ID-model, tercatat:
+model "11a1" dari ingatan berdiskriminan -51931 = 11 x 4721, BUKAN
+-11 -- identitas Cremona tetap unverified sampai milestone Q1 sendiri;
+probe tidak mengunci fakta apa pun tentang kurva bernama mana pun.
+
 **Q2 — Sensus twin prime.** Fragmen: semua pasangan twin + gap
 maksimal s.d. N (N dari anggaran ukur-dulu; mulai 10^9). TERKUNCI
 bila dua sieve independen (segmented, implementasi terpisah) sepakat

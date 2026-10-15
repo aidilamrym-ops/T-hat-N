@@ -16,4 +16,5 @@ __all__ = [
     "picard_bound",
     "gauss_exact",
     "fermat_k3",
+    "crt_combine",
 ]

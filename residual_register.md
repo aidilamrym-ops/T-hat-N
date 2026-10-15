@@ -68,6 +68,8 @@
 | PROBLEM-QUEUE disposition of all 20 problems + ordered work queue (reports/DAFTAR_MASALAH_KERJA.md) | CLOSED (planning doc, untagged by rule) |
 | LEAN-AXIOM-AUDIT 73/73 declarations audited, standard axioms only (was claimed, never run) | CLOSED |
 | HODGE-CH Couveignes-Henocq modular Frobenius (k<=7 counts -> char poly mod l -> CRT) | OPEN (measured wall) |
+| HODGE-CH-COMB CRT combiner + oracle gate sealed, rehearsal green (residue engine open) | SEALED-PARTIAL |
+| BSD-PILOT-MEASURE naive #E(F_p) wall measured; exact L(E,1) must go via modular symbols | CLOSED |
 | CHAR2-DEGENERACY quartic = fat plane in char 2; K3 claims fenced to odd p | CLOSED |
 | HODGE-ODD-PICARD K3 program needs odd-p extensions + Jacobi (char-2 degenerate) | OPEN (mapped) |
 | TURING-NT N(T) consistency table + explicit G1/G2/G3 gaps | CLOSED |
@@ -77,4 +79,4 @@
 | VERDICT-GAP floor-branch never counts (pinned, no-zero-ball demo) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
-Suites at seal: isolated `104 passed, 2 skipped`; main `234 passed`; `exit 0`.
+Suites at seal: isolated `111 passed, 2 skipped`; main `241 passed`; `exit 0`.

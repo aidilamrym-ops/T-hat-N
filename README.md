@@ -9,7 +9,7 @@ ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
 - Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338272.svg)](https://doi.org/10.5281/zenodo.23338272)
-- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.34.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.34.0-alpha) (current: 221 passed)
+- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.37.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.37.0-alpha) (current: 241 passed)
 - License: MIT - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
@@ -210,7 +210,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (221 tests, every landmine pinned)
+### 3.2 Regression Suite (241 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -333,7 +333,7 @@ now anchored to the workspace root derived from the module location.
 
 ## SECTION 5: FINITE HYDRODYNAMIC LATTICE & MILLENNIUM FRONTIER
 
-Sealed through `v1.34.0-alpha` (main `221 passed`, isolated `92 passed +
+Sealed through `v1.37.0-alpha` (main `241 passed`, isolated `111 passed +
 1 honest skip`, exit 0). Full derivations in
 [`reports/finite_hydrodynamic_lattices.md`](reports/finite_hydrodynamic_lattices.md)
 (Chapters 1-3) and the machine-checked Lean kernel in [`lean/NavierStokesCore.lean`](lean/NavierStokesCore.lean)
@@ -374,6 +374,8 @@ propext + Classical.choice + Quot.sound only).
 | General quartic over F_3 | Groebner smoothness witness + exact counts; Weil gate armed |
 | Vectorised counter | exact vs brute at k<=3; Fermat 16/154/784 three-way locked; k=8 in 70 s |
 | Hodge program closure | measured status, walls and non-claims: [`reports/HODGE_CLOSURE.md`](reports/HODGE_CLOSURE.md) |
+| CH spec + CRT combiner | spec [`reports/HODGE_CH_SPEC.md`](reports/HODGE_CH_SPEC.md); exact Garner + Weil cert (M > 2B) + oracle gate, rehearsal green |
+| BSD pilot measurement | naive #E(F_p) ~84 ms/prime at p~500; to 10^4 ~12 h -> modular symbols required for exact L(E,1) |
 | Work queue (20 problems) | disposition + ordered queue + rules: [`reports/DAFTAR_MASALAH_KERJA.md`](reports/DAFTAR_MASALAH_KERJA.md) |
 | Frobenius-degeneracy gate | exponent-divisibility check, char-2 witness locked |
 | F_{2^n} traces | t_1..t_3 locked; O(2^3n) wall mapped, Jacobi upgrade pending |
@@ -460,7 +462,7 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
   restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
-- `msaf/tests/` - regression suite (221 tests)
+- `msaf/tests/` - regression suite (241 tests)
 - `lean/` - Lean 4 machine-checked kernels 1D/2D/3D + central variant + Moore box (`lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py)
