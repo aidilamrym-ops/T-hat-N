@@ -61,6 +61,7 @@
 | HODGE-FERMAT-SAT bound = 20 for p=5,13,17,29,37,41 (family at geometric ceiling) | CLOSED (negative result) |
 | HODGE-GENERAL-QUARTIC Groebner smoothness witness + brute counter, Weil gate | CLOSED |
 | HODGE-VEC-COUNTER validated vectorised Legendre-sum counter (Fermat 3-way lock) | CLOSED |
+| HODGE-CLOSURE measured status, walls, non-claims (reports/HODGE_CLOSURE.md) | CLOSED |
 | HODGE-CH Couveignes-Henocq modular Frobenius (k<=7 counts -> char poly mod l -> CRT) | OPEN (measured wall) |
 | CHAR2-DEGENERACY quartic = fat plane in char 2; K3 claims fenced to odd p | CLOSED |
 | HODGE-ODD-PICARD K3 program needs odd-p extensions + Jacobi (char-2 degenerate) | OPEN (mapped) |
