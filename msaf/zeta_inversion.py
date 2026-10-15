@@ -119,19 +119,50 @@ def evaluate_xi(s: acb) -> acb:
 
         xi(s) = 1/2 * s * (s - 1) * pi^(-s/2) * Gamma(s/2) * zeta(s)
 
-    No special case is taken at s = 0 or s = 1. Those points are perfectly
-    regular for xi, which satisfies xi(0) = xi(1) = 1/2. A blueprint that
-    returns zero there would be injecting a fake root into the search, and a
-    fake root is the most damaging possible defect in a zero-finding kernel.
+    TWO REMOVABLE SINGULARITIES, both handled by exact identities
+    -----------------------------------------------------------
+    The literal product above is nan at s = 0 and s = 1: it evaluates
+    0 * infinity (Gamma's pole at 0, zeta's pole at 1). That is not a
+    cosmetic problem. `test_xi_is_regular_at_zero_and_one` existed to
+    assert xi(0) = xi(1) = 1/2 and it PASSED -- on a nan, because
+    Arb's `contains(0)` answers True for nan. The docstring below used
+    to claim "no special case is taken at s = 0 or s = 1"; the code did
+    take one, by returning no information at all.
+
+    Both points are fixed with identities, not with a lookup table, so
+    no fake value can be injected at a pole:
+
+    (1) s * Gamma(s/2) = 2 * Gamma(1 + s/2)   [exact, everywhere]
+
+        which removes Gamma's pole at s = 0. The prefactor collapses to
+        Gamma(1 + t/2) * (t - 1) * pi^(-t/2) * zeta(t), and at t = 0
+        that is 1 * (-1) * 1 * (-1/2) = 1/2, the correct xi(0).
+
+    (2) xi(s) = xi(1 - s)                        [exact, the functional
+                                                  equation]
+
+        used to move the evaluation away from whichever pole is nearer:
+        when the ball's real midpoint is above 1/2 the reflected ball is
+        evaluated instead. Reflection is an isometry, so the supremum of
+        |xi - c| over the ball -- which is what an enclosure means -- is
+        unchanged, and the radius of the enclosing ball is unchanged. The
+        poles at 0 and 1 are then symmetric: exactly one of the two
+        evaluated points can be near a pole, and it is never near 1.
+
+    Verified: xi(0) and xi(1) are now exact 1/2, and the counter's
+    cross-checks (Fermat rehearsal, Weil a_11 search) reproduce their
+    recorded values.
     """
-    half = acb("0.5")
-    two = acb(2)
-    pi = acb.pi()
-    polynomial = half * s * (s - acb(1))
-    exponential = (-s / two) * pi.log()
-    gamma_factor = (s / two).gamma()
-    zeta_factor = s.zeta()
-    return polynomial * exponential.exp() * gamma_factor * zeta_factor
+    # Reflection test on the real midpoint; a ball with a nan real part
+    # fails the comparison and takes the direct branch, which is the
+    # safe default because the direct branch has no pole at t = 0.
+    if s.real.mid() > arb(1) / arb(2):
+        t = acb(1) - s
+    else:
+        t = s
+    gamma_shifted = (acb(1) + t / acb(2)).gamma()
+    return gamma_shifted * (t - acb(1)) * ((-t / acb(2)) * acb.pi().log()).exp() \
+        * t.zeta()
 
 
 def xi_taylor(s_center: acb, degree: int = DEFAULT_TAYLOR_DEGREE) -> acb_series:
