@@ -4,6 +4,17 @@ SCOPE (binding): every top-level theorem/lemma in `lean/*.lean` must
 (a) contain no placeholder token, and (b) depend on no axiom beyond
 propext, Classical.choice, Quot.sound.
 
+OUT OF SCOPE, and named rather than forgotten: `lean/spec/` is outside
+this glob on purpose. It holds `XiAnalyticSpec.lean`, the conditional
+derivation of `xi > 0` on the reals from six DECLARED analytic
+obligations (zeta's three sign regions, gamma's positivity, two
+removable values, xi's functional equation). Those six cannot be
+discharged with the pinned Mathlib v4.33.1, which has no analytic zeta
+and no `Real.gamma_pos` at all, so the file is a specification. Keeping
+it in one named place is what lets this audit stay strict instead of
+being widened until it cannot fail. The probe files that print its
+axiom footprint live there too.
+
 This is the audit the register CLAIMED but never executed. An earlier
 revision reported "PASS" while auditing ZERO declarations, because
 `lake build` does not compile the generated audit files (unknown
@@ -39,11 +50,51 @@ def _lean_sources() -> list[Path]:
     return sorted(p for p in LEAN_DIR.glob("*.lean"))
 
 
+def _strip_comments(text: str) -> str:
+    """Remove Lean's `--` line comments and nested `/- ... -/` blocks.
+
+    The declaration scanner used to read raw source, so a docstring whose
+    line began with the word `theorem` -- which is how prose about a
+    theorem naturally wraps -- was harvested as if it were a declaration.
+    The audit then failed with `Unknown constant XiNoRealZero.stands`,
+    a nonsense theorem name lifted out of a sentence. Found by running
+    it, not by reading it twice.
+
+    Nesting is counted rather than regexed: `/-- ... -/` docstrings may
+    contain `/-- ... -/` docstrings, and a non-greedy regex would stop at
+    the first inner closer and leave the tail looking like code.
+    """
+    out: list[str] = []
+    i, n = 0, len(text)
+    depth = 0
+    while i < n:
+        if depth == 0 and text.startswith("--", i):
+            j = text.find("\n", i)
+            i = n if j < 0 else j
+            continue
+        if text.startswith("/-", i):
+            depth += 1
+            i += 2
+            out.append(" " if depth == 1 else " ")
+            continue
+        if depth > 0 and text.startswith("-/", i):
+            depth -= 1
+            i += 2
+            continue
+        if depth == 0:
+            out.append(text[i])
+        else:
+            out.append("\n" if text[i] == "\n" else " ")
+        i += 1
+    return "".join(out)
+
+
 def _declarations(text: str) -> list[str]:
+    stripped = _strip_comments(text)
     return [
         m.group(2)
         for m in re.finditer(
-            r"^(theorem|lemma)\s+([A-Za-z_][A-Za-z0-9_'.]*)", text, re.M
+            r"^(theorem|lemma)\s+([A-Za-z_][A-Za-z0-9_'.]*)", stripped, re.M
         )
     ]
 
@@ -60,9 +111,11 @@ def test_no_placeholders_in_lean_sources():
     forbidden = re.compile(r"\b(sorry|admit|unsafe|native_decide)\b")
     for path in sources:
         text = path.read_text(encoding="utf-8")
-        stripped = "\n".join(
-            re.sub(r"--.*$", "", line) for line in text.splitlines()
-        )
+        # Comments are stripped here for the same reason as in the
+        # declaration scan: a forbidden word quoted in prose is not a
+        # placeholder, and a placeholder quoted in prose is not one
+        # either. Only code is scanned.
+        stripped = _strip_comments(text)
         hit = forbidden.search(stripped)
         assert hit is None, f"{path.name}: placeholder {hit.group(0)!r}"
 

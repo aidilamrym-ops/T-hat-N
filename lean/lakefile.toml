@@ -1,6 +1,6 @@
 name = "that_n_lean"
 version = "0.1.0"
-defaultTargets = ["NavierStokesCore", "NewtonExistence"]
+defaultTargets = ["NavierStokesCore", "NewtonExistence", "XiNoRealZero", "ComplexMoore"]
 
 [[require]]
 name = "mathlib"
@@ -12,3 +12,21 @@ name = "NavierStokesCore"
 
 [[lean_lib]]
 name = "NewtonExistence"
+
+# Audited sources: every declaration must depend only on propext,
+# Classical.choice and Quot.sound (enforced by
+# msaf/tests/test_lean_axiom_audit.py). XiNoRealZero closes the C-to-R
+# bridge by a type-level obstruction; ComplexMoore proves the symmetric
+# Minkowski widening budget lemmas. Neither declares an axiom.
+[[lean_lib]]
+name = "XiNoRealZero"
+
+[[lean_lib]]
+name = "ComplexMoore"
+
+# lean/spec/ is deliberately NOT registered as a library. It holds
+# XiAnalyticSpec.lean, the conditional derivation of xi > 0 on the reals
+# from six declared analytic obligations that Mathlib v4.33.1 cannot
+# supply. Registering it would put six non-standard axioms inside the
+# audited glob; leaving it unregistered keeps it in the repository,
+# reviewable and named, without pretending it is proved.
