@@ -24,7 +24,7 @@ CROSS_CHECKED = {
 # locked: vectorised counts beyond the brute-force reach
 SMOOTH_TRACES = {
     1: 16, 2: 82, 3: 703, 4: 6562, 5: 58321, 6: 533629,
-    7: 4787344, 8: 43046722,
+    7: 4787344, 8: 43046722, 9: 387400807, 10: 3487079647,
 }
 
 
@@ -52,6 +52,29 @@ def test_smooth_traces_locked():
         assert count_quartic_vector(SMOOTH, k, 3) == SMOOTH_TRACES[k]
     # k = 7, 8 measured offline (7.1 s, 70 s), locked here:
     # 4787344 and 43046722, both with |a_k| inside the Weil envelope.
+    # k = 9, 10 from the offline artifact (715.8 s, 6711.8 s):
+    # 387400807 (a_9 = -19683) and 3487079647 (a_10 = 295245).
+    # Single-source (vector counter only -- the ball sweep cannot reach
+    # these degrees), Weil-gated, surface-identity-checked by the
+    # artifact test; honestly labeled, not cross-validated.
+    assert SMOOTH_TRACES[9] == 387400807
+    assert SMOOTH_TRACES[10] == 3487079647
+    assert SMOOTH_TRACES[9] - 1 - 3**18 == -19683
+    assert SMOOTH_TRACES[10] - 1 - 3**20 == 295245
+    # Tie the hand-typed constants above to the machine-written
+    # artifact (a transcription slip would otherwise pass silently).
+    import json
+    from pathlib import Path
+
+    artifact = json.loads(
+        (
+            Path(__file__).resolve().parents[2]
+            / "reports"
+            / "hodge_quartic_f3_traces.json"
+        ).read_text(encoding="utf-8")
+    )
+    for k in (9, 10):
+        assert SMOOTH_TRACES[k] == int(artifact["counts"][str(k)])
 
 
 def test_traces_respect_weil():
