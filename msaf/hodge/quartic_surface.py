@@ -26,8 +26,11 @@ from itertools import product
 
 __all__ = [
     "count_quartic_brute",
+    "count_quartic_vector",
+    "check_vector_against_brute",
     "groebner_contains_one",
     "is_smooth_branch",
+    "assert_weil",
     "quartic_traces",
 ]
 
@@ -391,6 +394,201 @@ def is_smooth_branch(coeffs, p=3) -> bool:
         if not groebner_contains_one(polys, p):
             return False
     return True
+
+
+class _VecTables:
+    """NumPy tables for GF(p^k): log/exp plus 5-bit packed digits.
+
+    Elements are carried as base-3 digit integers; ``packed`` re-encodes
+    a value with 5 bits per digit so that field addition becomes plain
+    integer addition of at most 15 summands (digit <= 2 each, so 30 <
+    32 and NO carry ever crosses a digit boundary -- verified below
+    against the brute counter).
+    """
+
+    def __init__(self, k: int, p: int = 3) -> None:
+        from msaf.hodge.odd_fields import find_modulus
+
+        self.k = k
+        self.p = p
+        self.q = p**k
+        self.order = self.q - 1
+        mod = find_modulus(k, p)
+        self.mod = mod
+        one = [1] + [0] * (k - 1)
+
+        def mul(a, b):
+            return _mul(a, b, mod, k, p)
+
+        gen = None
+        for cand in range(1, self.q):
+            a = [0] * k
+            t = cand
+            for i in range(k):
+                a[i] = t % p
+                t //= p
+            if all(c == 0 for c in a):
+                continue
+            if _pw(a, self.order, mod, k, p) == one and all(
+                _pw(a, self.order // d, mod, k, p) != one
+                for d in _prime_factors(self.order)
+            ):
+                gen = a
+                break
+        if gen is None:
+            raise RuntimeError(f"no generator for GF({p}^{k})")
+        self.gen = gen
+        import numpy as np
+
+        exp_idx = np.empty(self.order, dtype=np.int64)
+        log_of = np.full(self.q, -1, dtype=np.int64)
+        cur = [0] * k
+        cur[0] = 1
+        for i in range(self.order):
+            v = 0
+            for d, c in enumerate(cur):
+                v += c * p**d
+            exp_idx[i] = v
+            log_of[v] = i
+            cur = mul(cur, gen)
+        if cur != [1] + [0] * (k - 1):
+            raise RuntimeError("generator search produced wrong order")
+        self.exp_vals = exp_idx
+        self.log_of = log_of
+        # 5-bit packed digit encoding
+        packed = np.zeros(self.q, dtype=np.int64)
+        for v in range(self.q):
+            t = v
+            acc = 0
+            for d in range(k):
+                acc += (t % p) << (5 * d)
+                t //= p
+            packed[v] = acc
+        self.packed = packed
+        self.log_scalar = {}
+        for v in range(self.q):
+            if log_of[v] >= 0:
+                self.log_scalar[v] = int(log_of[v])
+
+    def log_index(self, value: int) -> int:
+        li = int(self.log_of[value])
+        return li if li >= 0 else 0
+
+
+def _prime_factors(m: int) -> list[int]:
+    out: list[int] = []
+    d = 2
+    while d * d <= m:
+        if m % d == 0:
+            out.append(d)
+            while m % d == 0:
+                m //= d
+        d += 1
+    if m > 1:
+        out.append(m)
+    return out
+
+
+def count_quartic_vector(coeffs, k: int, p: int = 3, chunk: int = 4_000_000) -> int:
+    """Vectorised exact count of #X(F_{p^k}) for X = {w^2 = f}.
+
+    Same mathematics as `count_quartic_brute` (sum of 1 + chi(f) over
+    the q^2 points of the chart z = 1, divided by q - 1 because each
+    projective point has q - 1 representatives on that chart). The
+    only difference is speed: the grid is processed in flat chunks so
+    memory stays bounded regardless of q, products go through
+    log/exp tables, and field addition is integer addition of 5-bit
+    packed digits (no carries, since at most 15 monomials with digits
+    <= 2 sum to <= 30 < 32).
+
+    ALWAYS cross-validate this against `count_quartic_brute` at small
+    k: an earlier vectorised draft disagreed with brute force and had
+    to be thrown away. `check_vector_against_brute` does exactly that.
+    """
+    if isinstance(k, float) or isinstance(p, float):
+        raise TypeError("k/p: float64 leakage refused")
+    k, p = int(k), int(p)
+    if p < 3 or p % 2 == 0:
+        raise ValueError(f"p must be an odd prime >= 3, got {p}")
+    if k < 1:
+        raise ValueError(f"k must be >= 1, got {k}")
+    import numpy as np
+
+    tb = _VecTables(k, p)
+    q = tb.q
+    order = tb.order
+    chart_terms = []
+    infinity_terms = []
+    for (i, j), c in coeffs.items():
+        w = 4 - i - j
+        if w < 0 or c % p == 0:
+            continue
+        entry = (i, j, int(c) % p, tb.log_index(int(c) % p))
+        chart_terms.append(entry)
+        if w == 0:  # only these survive on the line z = 0
+            infinity_terms.append(entry)
+    if not chart_terms:
+        raise ValueError("quartic form is identically zero")
+
+    def grid_sum(terms) -> int:
+        acc_total = 0
+        n_cells = q * q
+        for start in range(0, n_cells, chunk):
+            stop = min(start + chunk, n_cells)
+            flat = np.arange(start, stop, dtype=np.int64)
+            xs = flat // q
+            ys = flat - xs * q
+            lx = tb.log_of[xs]
+            ly = tb.log_of[ys]
+            acc = np.zeros(stop - start, dtype=np.int64)
+            for (i, j, _c, lc) in terms:
+                idx = (i * lx + j * ly + lc) % order
+                mask = np.ones(stop - start, dtype=bool)
+                if i > 0:
+                    mask &= xs != 0
+                if j > 0:
+                    mask &= ys != 0
+                vals = tb.exp_vals[np.where(mask, idx, 0)]
+                acc += np.where(mask, tb.packed[vals], 0)
+            val = np.zeros(stop - start, dtype=np.int64)
+            for d in range(k):
+                dig = ((acc >> (5 * d)) & 31) % p
+                val += dig * (p**d)
+            lg = tb.log_of[val]
+            half = order // 2
+            chi = np.where((lg * half) % order == 0, 1, -1).astype(np.int64)
+            chi[val == 0] = 0
+            acc_total += int((1 + chi).sum())
+        return acc_total
+
+    # The chart z = 1 is NORMALISED: its q^2 cells are q^2 distinct
+    # projective points, so no division. The line z = 0 carries q + 1
+    # points, each with q - 1 representatives among the q^2 cells, so
+    # it is summed (minus the (0,0) cell, which is not a point) and
+    # divided by q - 1. Two separate slips lived here: omitting the
+    # line entirely (returned 6 where brute force gives 16), and
+    # dividing the normalised chart as well.
+    chart = grid_sum(chart_terms)
+    infinity = grid_sum(infinity_terms) - 1
+    if infinity % order != 0:
+        raise RuntimeError(
+            f"infinity sum {infinity + 1} not divisible by q-1 = {order}"
+        )
+    return chart + infinity // order
+
+
+def check_vector_against_brute(coeffs, kmax: int = 3, p: int = 3) -> dict:
+    """Hard gate: the vectorised counter must equal brute force exactly."""
+    out = {}
+    for k in range(1, kmax + 1):
+        b = count_quartic_brute(coeffs, k, p)
+        v = count_quartic_vector(coeffs, k, p)
+        if b != v:
+            raise RuntimeError(
+                f"vectorised counter disagrees at k={k}: {v} vs brute {b}"
+            )
+        out[k] = b
+    return out
 
 
 def assert_weil(a: int, k: int, q: int) -> None:

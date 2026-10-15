@@ -60,6 +60,7 @@
 | HODGE-K3F5 Fermat K3 over F_5: traces a_1..a_11, bound 20 (non-vacuous vs 22) | CLOSED |
 | HODGE-FERMAT-SAT bound = 20 for p=5,13,17,29,37,41 (family at geometric ceiling) | CLOSED (negative result) |
 | HODGE-GENERAL-QUARTIC Groebner smoothness witness + brute counter, Weil gate | CLOSED |
+| HODGE-VEC-COUNTER validated vectorised Legendre-sum counter (Fermat 3-way lock) | CLOSED |
 | HODGE-CH Couveignes-Henocq modular Frobenius (k<=7 counts -> char poly mod l -> CRT) | OPEN (measured wall) |
 | CHAR2-DEGENERACY quartic = fat plane in char 2; K3 claims fenced to odd p | CLOSED |
 | HODGE-ODD-PICARD K3 program needs odd-p extensions + Jacobi (char-2 degenerate) | OPEN (mapped) |
@@ -70,4 +71,4 @@
 | VERDICT-GAP floor-branch never counts (pinned, no-zero-ball demo) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
-Suites at seal: isolated `78 passed, 1 skipped`; main `215 passed`; `exit 0`.
+Suites at seal: isolated `92 passed, 1 skipped`; main `221 passed`; `exit 0`.
