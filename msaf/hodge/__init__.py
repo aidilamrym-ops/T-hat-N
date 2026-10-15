@@ -17,4 +17,5 @@ __all__ = [
     "gauss_exact",
     "fermat_k3",
     "crt_combine",
+    "weil_search",
 ]

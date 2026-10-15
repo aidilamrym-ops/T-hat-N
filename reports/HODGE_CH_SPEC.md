@@ -1,6 +1,29 @@
-# HODGE-CH Specification: the Last Trace via Couveignes–Henocq
+# HODGE-CH Specification: the Last Trace via Couveignes-Henocq
 
-Status: SPECIFICATION + combiner sealed; residue engine OPEN.
+Status (2026-10-15): OPTION 2 ADOPTED, HODGE-CH CLOSED for the smooth
+quartic over F_3. The enumeration isolated a_11 = 354294 uniquely
+(1 of 708,588 class members) and the Fermat full-method rehearsal
+recovered its known truth uniquely -- the spec's own decision rule
+fired. The residue-engine path (option 1/3) is retired for this
+surface, NOT implemented: it answered nothing option 2 left open.
+
+Deviations from §3, recorded honestly (not silently):
+- §3.3 asked leave-one-out over k = 1..10. Interior drops are
+  ill-posed (Newton needs consecutive traces), so "dropping p_5 and
+  recovering it" is not an experiment that exists. Substituted:
+  (a) full-method rehearsal on Fermat F_3 (all 11 traces known
+  independently; same code; nonzero-middle path; unique recovery);
+  (b) regime analysis of discriminating power (Lakatos bias at small
+  coefficients named and bounded; truth-regime teeth measured at
+  708587/708588 rejections + a truth-scale rejection control).
+- §3.2 (oracle residues): the adopted method determines the integer
+  directly, emitting no residues; the CRT combiner stays sealed and
+  tested but unused here. The rehearsal serves as the oracle-grade
+  check the gate was built for.
+- The completed bound is 22 = b_2 (vacuous as an upper bound), with
+  orbit-complete eigenvalue orders {1:2, 2:2, 6:2, 7:6, 10:4, 14:6}:
+  the surface is supersingular, and the exact Weil polynomial (not
+  the bound) is the result.
 Target: the single missing trace a_11 of the certified smooth
 quartic over F_3 (ten exact traces a_1..a_10 serve as the oracle;
 a_10 pending the offline artifact).

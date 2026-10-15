@@ -182,6 +182,30 @@ dibuktikan hidup — pelajaran yang KITA petik dengan cara keras
 - **[ADOPT-3]** Sel status-tool per-run (NOT RUN ditulis eksplisit,
   pola OMEGATrackC) — diadopsi untuk run berat kita (offline k=10
   sudah mencatat elapsed; format diselaraskan berikutnya).
-- Yang TIDAK diadopsi: headline anti-turing-pnp (B-AT1), doktrin
-  piksel/decoder (spekulasi fisika, bukan matematika), angka tanpa
-  atribusi (pelajaran B-GW1 justru memperkuat praktik kita).
+## 6. FIXES APPLIED — anti-turing-pnp (2026-10-15, pushed, CI green)
+
+- Kernel builds green LOCALLY (`lake env lean`, exit 0, no warnings)
+  and REMOTELY (`lake build`, 8707 jobs, exit 0); `#print axioms`
+  6/6 = exactly propext/choice/Quot.sound (measured in-repo, not
+  inferred).
+- lakefile rewritten to the current Lake DSL (`open Lake DDList` had
+  been removed from Lake; no modern lake could parse the config) +
+  mathlib pinned @ v4.33.1 (manifest rev == tag sha, verified);
+  lake-manifest.json committed; `.gitignore` + CI added.
+- 4 proofs repaired (lemma names absent from Mathlib v4.33.1; one
+  removed step unprovable-false at zero gradient; GT/LT instance
+  matching; atom-orphaning `dsimp` + `linarith` closer).
+- B-AT1: headline scoped to relaxation bounds + GAP-PNP.md (G1-G4);
+  entailment still open BY NATURE (no bridge exists here).
+- B-AT2: cells read the measured footprint. B-AT3: 6, mechanical.
+  B-AT4: StateDim deleted; finite-sum naming. B-AT5: batch scope
+  notes (batch 2 = n >= 100 instance; Lean covers general n >= 1).
+- Z3 scripts fail-closed (exit codes); both batches re-ran UNSAT.
+- CI history kept honest: one sensor trip (slogan prose matched the
+  token pattern -- fixed by rewording, discipline documented), one
+  transient download failure (rerun green). Neither hidden.
+- The provided tokens were NOT used (gh keyring auth sufficed);
+  owner to revoke them regardless.
+- Remaining repos (gw-spectral-map, guinand-weil-rigorous-numerics,
+  the-asymmetric-wager-msaf): queued next, one by one. No files were
+  written to any repo except the one being fixed.

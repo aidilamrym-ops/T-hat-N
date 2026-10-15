@@ -67,7 +67,9 @@
 | HODGE-CLOSURE measured status, walls, non-claims (reports/HODGE_CLOSURE.md) | CLOSED |
 | PROBLEM-QUEUE disposition of all 20 problems + ordered work queue (reports/DAFTAR_MASALAH_KERJA.md) | CLOSED (planning doc, untagged by rule) |
 | LEAN-AXIOM-AUDIT 73/73 declarations audited, standard axioms only (was claimed, never run) | CLOSED |
-| HODGE-CH Couveignes-Henocq modular Frobenius (k<=7 counts -> char poly mod l -> CRT) | OPEN (measured wall) |
+| HODGE-CH last trace via Weil search (option 2 adopted, residue path retired) | CLOSED |
+| HODGE-A11 a_11 = 354294 unique of 708588 (Weil search); rehearsal recovers Fermat truth | CLOSED |
+| HODGE-WEIL-SEARCH exact circle test (reciprocity+Chebyshev+Sturm) + Ramanujan verifier | CLOSED |
 | HODGE-CH-COMB CRT combiner + oracle gate sealed, rehearsal green (residue engine open) | SEALED-PARTIAL |
 | BSD-PILOT-MEASURE naive #E(F_p) wall measured; exact L(E,1) must go via modular symbols | CLOSED |
 | CHAR2-DEGENERACY quartic = fat plane in char 2; K3 claims fenced to odd p | CLOSED |
@@ -79,4 +81,4 @@
 | VERDICT-GAP floor-branch never counts (pinned, no-zero-ball demo) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
-Suites at seal: isolated `111 passed, 2 skipped`; main `241 passed`; `exit 0`.
+Suites at seal: isolated `120 passed, 2 skipped`; main `250 passed`; `exit 0`.
