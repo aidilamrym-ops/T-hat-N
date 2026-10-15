@@ -31,6 +31,15 @@ DAN sha256 arsip.
 
 ## 2. YANG BELUM SELESAI — baca sebelum starting apa pun
 
+### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
+
+`msaf/certify.py` mengesahkan `nan` sebagai nol (Arb menjawab True untuk
+`arb('nan').contains(0)`), dan `msaf/zeta_inversion.py` mengembalikan
+`nan` tepat di s = 0 dan s = 1. Keduanya diperbaiki di commit `c4f4e4a`
+dengan identitas eksak, bukan tabel nilai; 311 tes hijau. Laporan penuh
++ residual terbuka (presisi global bocor di 4 modul tes lama):
+`reports/NONFINITE_DEFECT.md`.
+
 ### 2.1 the-asymmetric-wager-msaf: branch audit belum di-merge, WIP user ada
 
 - **Lokal** `D:\THE ASYMMETRIC WAGER` ada di branch `audit-fixes-bmw`
@@ -60,16 +69,31 @@ TOOL NOT RUN), 3 NOT RUN → suite `INCOMPLETE`. Itu perilaku yang benar,
 bukan regresi. Di workspace penulis (corpus ada) suite jalan penuh.
 Bukti keluaran bersih: `reports/TAW_clean_worktree_suite.txt`.
 
-### 2.3 Jembatan Riemann yang masih terbuka: `CORR-MOORE-COMPLEX`
+### 2.3 Jembatan Riemann `CORR-MOORE-COMPLEX` — plans were WRONG, read this
 
-Satu-satunya hal yang secara logis menghalangi trek RH. Yang ada:
-`verify_moore_premises(box, degree=12)` di
-`msaf/riemann/moore_premises.py` membuktikan (a) invariansi, (b) turunan
-bersih, (c) Lipschitz < 1 **pada bola kompleks**. Yang belum: transfer
-C→R diformalisasi di Lean (`lean/NewtonExistence.lean` punya padanan
-real-interval). Fungsinya sudah mengembalikan kunci `scope` di **setiap**
-jalur keluar — jangan dihapus, itu yang mencegah klaim berlebih.
-Saran urutan: formalkan gate kompleks itu di Lean → Q1 BSD.
+Satu-satunya hal yang secara logis menghalangi trek RH. **Rencana lama
+("formalkan gate Moore kompleks di Lean") keliru dan sudah dikoreksi.**
+
+`moore_test` di `lean/NewtonExistence.lean:473` dinyatakan atas interval
+**ℝ**: `f : ℝ → ℝ`, kesimpulan `∃ z ∈ Set.Icc a b, f z = 0`. Nol yang
+dihitung program ada di bola **kompleks** di garis kritikal, dan ξ tidak
+punya nol real. Jadi transfer C→R bukan sekadar "belum diformalisasi" —
+secara struktural mustahil sebagai pernyataan itu berdiri. Menutupnya
+ berarti memformalkan Moore atau prinsip argumen **di ℂ**: pengembangan
+Lean baru, bukan porting.
+
+Konsekuensi urutan yang disarankan:
+
+1. Tutup RH dengan **batasan terukur, bukan jembatan**: buktikan di Lean
+   bahwa ξ tidak punya nol real (maka sertifikat real mustahil ada),
+   lalu segel RH sebagai PARTIAL dengan landasan yang jujur dan disebut:
+   "ball arithmetic + winding cross-check". Hasil yang bisa disegel.
+2. Masukkan "Moore/Rouché di ℂ di Lean" ke **B-list** sebagai prasyarat
+   kapabilitas — pola yang sama dengan "integrator ODE tervalidasi"
+   yang sudah tercatat di `DAFTAR_MASALAH_KERJA.md` §4.
+3. Baru Q1 BSD, dan pilot terukur lebih dulu. Bukti bahwa jalur ini
+   terpisah: `msaf/hodge/weil_search.py` tidak memanggil
+   `evaluate_xi`, jadi pekerjaan F₃ dan kernel ξ tidak berinteraksi.
 
 ---
 
@@ -107,8 +131,13 @@ Saran urutan: formalkan gate kompleks itu di Lean → Q1 BSD.
 | Test suite (250) | `msaf/tests/` |
 | Bukti JSON | `reports/*.json` |
 
-**Artefak user — JANGAN pernah disentuh:** `20_masalah_matematika_fisika_tersulit.md`
-dan `reports/diagram.txt`. Keduanya sengaja tidak di-commit.
+**Artefak user yang SUDAH DIHAPUS (atas perintah pemilik, 2026-10-15):**
+`20_masalah_matematika_fisika_tersulit.md` dan `reports/diagram.txt`
+— keduanya tidak pernah ada di riwayat git, jadi penghapusannya permanen
+dan tidak dapat dibatalkan. Tidak ada pengetahuan yang hilang: disposisi
+kedelapan belas masalah sudah tercermin penuh di
+`reports/DAFTAR_MASALAH_KERJA.md` §2, dan `diagram.txt` hanya diagram
+ASCII dua jalur yang sudah usang. Jangan cari-cari keduanya di repo.
 
 ---
 
