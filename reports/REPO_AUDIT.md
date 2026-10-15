@@ -209,3 +209,21 @@ dibuktikan hidup — pelajaran yang KITA petik dengan cara keras
 - Remaining repos (gw-spectral-map, guinand-weil-rigorous-numerics,
   the-asymmetric-wager-msaf): queued next, one by one. No files were
   written to any repo except the one being fixed.
+
+## 7. FIXES APPLIED — gw-spectral-map (2026-10-15, pushed, CI green)
+
+- B-SM1: S1/S2 verdict lines now point at the producing machinery
+  (OMEGA gw_montgomery.py:562 + K5 fixture gw_mont_pipeline_check.py:195,256)
+  and state the certified-spectrum re-run is QUEUED.
+- B-SM2: ambig sensitivity MEASURED (17/17 + 0 conflicts at 1e-7/1e-6/1e-5;
+  only granularity moves 9/1, 8/1, 7/1) — recorded, not assumed.
+- B-SM3: endpoint-convention test 5/5 PASS (exact-hit -> UNDETERMINED;
+  strict-below exact); convention documented in NOTES section D.
+- B-SM4: results/MANIFEST.sha256 + stdlib verifier (roundtrip green).
+- CI added (py_compile + sm_dual + manifest + endpoint loud-SKIP +
+  sibling-gated selftests). CI history honest: one CRLF/LF manifest
+  failure (all 7 files flagged drifted on Linux checkouts) fixed at
+  the root (LF-normalized hashing — immune to checkout style).
+- Verified locally first: sm_dual PASS, sturm 10/10, brackets 17/17
+  (matches README), endpoint 5/5 — via a sibling tree wired in temp
+  (nested copy), both repos otherwise untouched.
