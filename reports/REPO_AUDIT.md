@@ -206,9 +206,6 @@ dibuktikan hidup — pelajaran yang KITA petik dengan cara keras
   transient download failure (rerun green). Neither hidden.
 - The provided tokens were NOT used (gh keyring auth sufficed);
   owner to revoke them regardless.
-- Remaining repos (gw-spectral-map, guinand-weil-rigorous-numerics,
-  the-asymmetric-wager-msaf): queued next, one by one. No files were
-  written to any repo except the one being fixed.
 
 ## 7. FIXES APPLIED — gw-spectral-map (2026-10-15, pushed, CI green)
 
@@ -227,3 +224,27 @@ dibuktikan hidup — pelajaran yang KITA petik dengan cara keras
 - Verified locally first: sm_dual PASS, sturm 10/10, brackets 17/17
   (matches README), endpoint 5/5 — via a sibling tree wired in temp
   (nested copy), both repos otherwise untouched.
+
+## 8. FIXES APPLIED — guinand-weil-rigorous-numerics (2026-10-15, pushed, CI green)
+
+- B-GW1: cross-check now requires ATTRIBUTION (full-precision pair
+  within +-3 lines of a naming line, narrow per-constant patterns);
+  verified 3/3 attributed MATCHes on unmodified files. A backslash-
+  counting scare during implementation (patterns looked broken) was
+  settled by execution, not by eye.
+- B-GW2: bidirectional CLAIMS <-> `by norm_num` pairing, exact set
+  match. Caught real drift shape: one proof spanned two lines
+  (missed by line-anchored drafts twice); golfed
+  `tolerance_fails_the_coarse_bound` to bare `by norm_num` (green
+  rebuild verified in our toolchain) and switched the parser to
+  block-scan with exact-equality proof match (zero backslash risk
+  in the final form). Pairing: 7/7 empty. `--emit-only` added for
+  solver-less environments.
+- Semantic check (scratch, not committed): all 8 negations (combined
+  + 7 singles) independently UNSAT via z3 bindings; --emit-only exit
+  0 with byte-identical SMT size (1533).
+- One Lean proof golfed (comment preserves the record); the kernel
+  was verified green BEFORE touching (baseline) and stays green.
+- CI added (py_compile + --emit-only + solver-presence gate); green,
+  with pairing/MATCH lines verified in the CI log itself (not just
+  the conclusion).
