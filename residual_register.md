@@ -59,7 +59,8 @@
 | HODGE-EXACT Davenport-Hasse lifted Jacobi sums in Z[zeta_4p], all F_5 counts | CLOSED |
 | HODGE-K3F5 Fermat K3 over F_5: traces a_1..a_11, bound 20 (non-vacuous vs 22) | CLOSED |
 | HODGE-FERMAT-SAT bound = 20 for p=5,13,17,29,37,41 (family at geometric ceiling) | CLOSED (negative result) |
-| HODGE-LOWRANK-K3 informative bound < 20 needs a low-rank K3; char-2 AS attempt singular at z=0 | OPEN (mapped) |
+| HODGE-GENERAL-QUARTIC Groebner smoothness witness + brute counter, Weil gate | CLOSED |
+| HODGE-CH Couveignes-Henocq modular Frobenius (k<=7 counts -> char poly mod l -> CRT) | OPEN (measured wall) |
 | CHAR2-DEGENERACY quartic = fat plane in char 2; K3 claims fenced to odd p | CLOSED |
 | HODGE-ODD-PICARD K3 program needs odd-p extensions + Jacobi (char-2 degenerate) | OPEN (mapped) |
 | TURING-NT N(T) consistency table + explicit G1/G2/G3 gaps | CLOSED |
@@ -69,4 +70,4 @@
 | VERDICT-GAP floor-branch never counts (pinned, no-zero-ball demo) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
-Suites at seal: isolated `75 passed, 1 skipped`; main `207 passed`; `exit 0`.
+Suites at seal: isolated `78 passed, 1 skipped`; main `215 passed`; `exit 0`.
