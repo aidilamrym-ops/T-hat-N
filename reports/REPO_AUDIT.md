@@ -248,3 +248,102 @@ dibuktikan hidup — pelajaran yang KITA petik dengan cara keras
 - CI added (py_compile + --emit-only + solver-presence gate); green,
   with pairing/MATCH lines verified in the CI log itself (not just
   the conclusion).
+
+## 9. FIXES APPLIED - the-asymmetric-wager-msaf (2026-10-15, pushed, CI green)
+
+Branch `audit-fixes-bmw`, commit `66310cf`. CI is new (the repo had none):
+`.github/workflows/claims.yml` on ubuntu + windows, green at that commit,
+with the three verdicts visible in the log itself, not just the conclusion
+(`FIXTURES: PASS -- 19`, `CHECKSUM: PASS -- 106 files`,
+`report_claim_check: PASS`).
+
+- **B-MW1 - history anchors tiered (root fix, not a patch).** `now`,
+  `->` and bare `F\d`/`A\d` were anchors in P5. They assert currency or
+  change, never history, and a bare phase tag dates its own clause, not
+  every number on the line. Removed. What remains is a date,
+  `at A5`/`at v1.9`, `then`, `as of`, or a bracketed era stamp `(A5)`.
+  The matcher was also case-sensitive, so `At F5's start, eleven root
+  gates were runnable` - a *correctly dated* sentence - was reported as
+  undated. Measured on eight planted defects: the old anchor set let
+  three through (`now`, `->`, bare tag), the new one lets none.
+  Blockquotes now count as quoted evidence, like fenced blocks.
+- **B-MW2 - unreadable documents skip loudly.** Non-UTF-8 and BOM files
+  vanished from the sweep without a word. They are now named, counted
+  and summarised in the final line.
+- **B-MW3 - the gate becomes falsifiable.** `claim_fixture_check.py`:
+  19 fixtures over a temp corpus, in three families - defects that MUST be
+  flagged, lines that must be ACCEPTED (including a positive control on
+  live values, so a gate that flags everything cannot pass), and loud
+  SKIPs. One blind spot it does not catch (`harnesses 21`, noun before
+  number) is recorded as an `expectedFailure` rather than forgotten; it
+  will start failing loudly the day someone closes it.
+- **B-MW4 (found by accident, fixed at the root).** `checksum_check.py`
+  counted the `.git` *file* of a linked worktree as workspace content, so
+  P3 failed in a worktree (106 vs 105) and passed in a clone. Manifest
+  scope must not depend on the shape of the checkout.
+- **B-MW5 - absent third-party tree is TOOL NOT RUN, not FAIL.**
+  `provenance_check.py` reported FAIL for a cited document living in
+  `Theory_of_Everything_Derivations/`, which `.gitignore` excludes: green
+  only on the author's machine, and its red indistinguishable from a real
+  defect. Its two sibling gates (`quantum_censorship_check.py`,
+  `tahap_uji_audit.py`) already exited 2 with a clear message; this one
+  was the outlier, and now matches the repo's own convention. Verified in
+  both directions: tree absent -> exit 2 with 7 checks named; tree present
+  with the file missing -> exit 1, FAIL.
+- **Cost paid honestly.** The new artefact moved the manifest 105 -> 106
+  rows, which made three live "105" claims defective. Brain.MD and README
+  were corrected to the live figure rather than dated around it, and
+  Brain.MD went v1.26 -> v1.27 with the change recorded in its footer.
+- **Process failure, recorded.** The doc patcher read files with universal
+  newlines and wrote LF, so A12_REPORT.md (the only CRLF file it touched)
+  was silently reflowed across 140 lines. Restored to CRLF, diff back to
+  two lines. F0_REPORT.md, KAMUS_PEMETAAN.md and `Tugas tambahan.md` are
+  still CRLF and were left untouched on purpose. A suite run in progress
+  against the mutated tree was killed rather than reported.
+
+## 10. ZENODO - 4 DOI baru terbit (2026-10-15)
+
+Route chosen by the operator: deposit only repositories whose gates are
+machine-verified and whose CI is green at the archived commit, and put
+the scope correction in the description rather than in the title's
+silence.
+
+| DOI | repository | commit | bytes | licence |
+|---|---|---|---|---|
+| 10.5281/zenodo.23392323 | guinand-weil-rigorous-numerics | 7f8f6e7f49 | 31 053 133 | MIT |
+| 10.5281/zenodo.23392641 | gw-spectral-map | 6dc9f9cebf | 29 287 | MIT |
+| 10.5281/zenodo.23392667 | anti-turing-pnp | 62b37f501f | 15 157 | MIT |
+| 10.5281/zenodo.23392745 | the-asymmetric-wager-msaf | 66310cfdc6 | 31 928 342 | MIT |
+
+All four verified afterwards: `doi.org` returns 200, each record carries
+`related_identifiers` pointing at its GitHub repository, and each
+description records the commit sha AND the archive sha256, so the artifact
+is verifiable rather than merely citable. Every description carries the
+same scope paragraph: this is an archive of a software state, and no
+Riemann-Hypothesis, P-versus-NP, Hodge/Picard, Navier-Stokes or
+BSD/Elliott-Halberstam resolution is asserted by it.
+
+**Two licence defects fixed before depositing.** `anti-turing-pnp` and
+`gw-spectral-map` shipped with no LICENSE file at all, while their
+siblings and their Zenodo records declare MIT. A DOI with a licence field
+would have recorded a permission the tree does not grant. Both now carry
+MIT (code) with CC-BY-4.0 for the manuscript in `anti-turing-pnp`,
+mirroring the pattern already approved in
+`guinand-weil-rigorous-numerics`; both licence files state that a licence
+covers documents, not conclusions.
+
+**Still without a DOI (11 public repositories, not yet audited):**
+AETHER-Z3-OMEGA, ASLC-OMEGA-LEDGER, T-hat-N (has 10.5281/zenodo.23340971,
+stale: 36 tags later), gnase-engine, jacobian-conjecture-audit,
+lagarias-criterion, navier-stokes-formalization,
+riemann-hypothesis-formalization, sovereign-enterprise-suite,
+the-asymmetric-wager-msaf-family017 (has 10.5281/zenodo.23279278),
+zeta-23-audit.
+
+**Blocker for the canonical route.** Zenodo's GitHub integration mints
+DOIs only from GitHub *releases*, and this account has **zero releases
+across all 15 public repositories**. Enabling the webhook also requires
+the owner to log in at zenodo.org and click Enable per repository; no API
+token can do it. Until that is done, future versions must be deposited by
+hand - which is what `msaf/zenodo_deposit.py` does, and it is written to
+refuse to invent a licence or a claim.
