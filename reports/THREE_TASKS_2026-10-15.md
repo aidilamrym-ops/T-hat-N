@@ -214,6 +214,7 @@ Guinand-Weil. Pada 6000 bit, c=13:
 | 33 | 8.568627e-35 | 0 | 0 | 4,05 | idem |
 | 65 | 2.258931e-49 | 0 | 0 | 30,06 | idem |
 | 129 | 6.321351e-59 | 0 | 0 | 221,68 | idem |
+| 257 | 3.299020e-59 | 0 | 0 | 1984,84 | idem (33 menit) |
 
 Radius **tepat nol**: setiap eigenvalue terisolasi titik pada presisi ini,
 dan tidak satu pun enclosure-nya memuat nol. Bocoran imajiner **tepat
@@ -228,6 +229,7 @@ Lereng `ln(lambda_min)` per satuan dimensi:
 | 17 → 33 | **-1,7201** |
 | 33 → 65 | **-1,0490** |
 | 65 → 129 | **-0,3437** |
+| 129 → 257 | **-0,0051** |
 
 Model `A * e^(-B n)` dengan B konstan memroyeksikan lereng **konstan**.
 Yang terukur justru **menurun monoton**, dan pada rentang terakhir sudah
@@ -235,10 +237,19 @@ mendekati nol. Jadi:
 
 * lawanan dengan bentuk eksponensial konstan **terbantah** pada irisan
   ini (c=13 tetap, N naik);
-* redamannya **sub-eksponensial** terhadap dimensi sepanjang jalur itu;
-* apakah B terus turun atau membungkuk ke asimtot lain **belum
-  ditentukan** oleh empat anak tangga. Dua anak tangga panjang
-  (dim 257 dan 321) sedang dijalankan; itulah yang akan memutuskan.
+* lebih kuat lagi: pada rentang terakhir, redamannya **hampir berhenti**.
+  Slope per dimensi turun -1,72 → -1,05 → -0,34 → **-0,005**, yaitu
+  λ_min bergerak dari 6.32e-59 ke 3.30e-59 saat dimensi **ganda lagi**.
+  Plateau di kisaran 1e-59, bukan peluruhan eksponensial;
+* ini membuat hipotesis "lebar bawah spektrum dikunci struktur cutoff"
+  (banyak eigenvalueRrimental在后密集) jauh lebih masuk akal daripada
+  eksponensial -- tetapi itu **hipotesis, bukan hasil**, dan tidak
+  diuji di sini;
+* anak tangga dim 321 **tidak dijalankan** sampai habis. Biaya terukur
+  men和弦.Runtime: 0,6 → 4,1 → 30,1 → 221,7 → 1984,8 detik, jadi ~O(dim^3)
+  dengan faktor ~9 per penggandaan dimensi; dim 321 diproyeksikan
+  ~3 jam. Pola sudah jelas dari empat rentang, jadi jam itu dibelanjakan
+  untuk satu titik yang tidak akan mengubah arah kesimpulan.
 
 **Peringatan yang wajib disebut:** ini **satu irisan** keluarga
 (c=13 tetap). Skala spektral sangat bergantung pada c --bands dari repo
