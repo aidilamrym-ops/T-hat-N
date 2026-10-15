@@ -65,6 +65,7 @@
 | HODGE-GENERAL-QUARTIC Groebner smoothness witness + brute counter, Weil gate | CLOSED |
 | HODGE-VEC-COUNTER validated vectorised Legendre-sum counter (Fermat 3-way lock) | CLOSED |
 | HODGE-CLOSURE measured status, walls, non-claims (reports/HODGE_CLOSURE.md) | CLOSED |
+| PROBLEM-QUEUE disposition of all 20 problems + ordered work queue (reports/DAFTAR_MASALAH_KERJA.md) | CLOSED (planning doc, untagged by rule) |
 | LEAN-AXIOM-AUDIT 73/73 declarations audited, standard axioms only (was claimed, never run) | CLOSED |
 | HODGE-CH Couveignes-Henocq modular Frobenius (k<=7 counts -> char poly mod l -> CRT) | OPEN (measured wall) |
 | CHAR2-DEGENERACY quartic = fat plane in char 2; K3 claims fenced to odd p | CLOSED |

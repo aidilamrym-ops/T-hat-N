@@ -1,0 +1,116 @@
+# Daftar Masalah Kerja — Antrian Terikat, Bukan Daftar Keinginan
+
+ turunan dari `20_masalah_matematika_fisika_tersulit.md` (berkas user,
+ tak tersentuh). Berkas ini milik program: tiap baris di sini punya
+ definisi "selesai versi kita" yang finit dan teruji mesin, atau
+ alasan eksplisit mengapa ia TIDAK masuk antrian.
+
+## 0. Aturan main (mengikat, bukan slogan)
+
+1. **Kunci-lalu-pindah.** Trek baru dimulai hanya dari state tersegel
+   (tes hijau → docs sinkron → commit + tag + push → CI hijau). Tidak
+   ada trek yang ditinggalkan setengah-jadi tanpa status PARTIAL jujur.
+2. **"Versi kita" berarti tiga hal, ketiganya wajib:**
+   - *terbukti* — dicek kernel (Lean) ATAU komputasi tersertifikasi
+     (enclosure rigorous / integer eksak) DITAMBAH kesepakatan dua
+     implementasi independen;
+   - *teruji* — terkunci test suite yang gagal keras bila salah;
+   - *dapat diuji global* — input eksak ter-commit, tanpa float,
+     siapa pun menjalankan ulang mendapat integer yang sama.
+3. **Tiap masalah dikerjakan sebagai FRAGMEN FINIT + BATAS TERKUNCI.**
+   Klaim global tidak pernah keluar dari berkas ini. Yang keluar
+   adalah: "sejauh ini tercapai, sampai di sini batasnya, dan ini
+   buktinya" — bukan keheningan terbuka.
+4. **Tag = hasil terverifikasi saja.** Dokumen rencana seperti berkas
+   ini di-commit tanpa tag.
+
+## 1. Prasyarat: segel berjalan selesai dulu
+
+Trek aktif (Turing TERTUTUP v1.30.0; Hodge TERTUTUP v1.35.0 dengan
+buntut offline k=10 + HODGE-CH OPEN) disegel penuh sebelum Q1 dibuka:
+artefak k=10 terkunci → CH untuk a_11 → bound kuartik (berapa pun
+nilainya, termasuk 20). Aturan §0.1 tanpa kecuali.
+
+## 2. Disposisi 20 masalah (semua, tanpa kecuali)
+
+| No | Masalah | Putusan | Alasan / fragmen finit |
+|---|---|---|---|
+| 1 | Riemann | TREK AKTIF | Hitungan nol terbatas + winding; G2/G3 riset/scope |
+| 3 | Hodge | TREK AKTIF | Bound Picard atas per-permukaan-per-lapangan; CH untuk a_11 |
+| 5 | Navier-Stokes | TREK AKTIF | Kernel diskrit tercek-Lean; regularitas global TAK tersentuh |
+| 6 | Birch–Swinnerton-Dyer | **Q1** | Rank via 2-descent eksak + L(E,1) simbol-modular rasional-eksak + regulator ball; formula BSD dicek per kurva |
+| 12 | Twin Prime | **Q2** | Sensus twin + rekor gap s.d. N; dua sieve independen sepakat |
+| 13 | abc | **Q3** | Sensus triple s.d. C + rekor kualitas; verifikasi ulang independen |
+| 2 | P vs NP | DAFTAR-B (formalisasi saja) | Barier (relativisasi/natural proofs) bilang TAK ADA serangan komputasional; yang mungkin hanya formalisasi fragmen (mis. Cook-Levin) di Lean |
+| 16 | Three-Body | DAFTAR-B (syarat) | Orbit figure-eight tervalidasi; SYARAT MASUK: integrator ODE tervalidasi dulu (kapabilitas baru) |
+| 19 | Anderson | DAFTAR-B (syarat) | Kriteria volume-hingga Germinet-Klein; SYARAT MASUK: enclosure probabilitas dulu |
+| 20 | Soliton | DAFTAR-B (syarat) | Indeks stabilitas via fungsi Evans terenclosure; SYARAT MASUK: sama dengan Three-Body |
+| 17 | Schanuel | DAFTAR-B (formalisasi saja) | Tak ada serangan komputasional; hanya formalisasi instans Lindemann-Weierstrass |
+| 4 | Yang-Mills mass gap | TIDAK MASUK | Butuh konstruksi QFT; tak ada yang bisa dihitung tools kami |
+| 7 | Renormalisasi QFT | TIDAK MASUK | Fondasi, bukan klaim komputasional |
+| 8 | Informasi black hole | TIDAK MASUK | Interpretasional; tak ada klaim terkunci yang mungkin |
+| 9 | Konstanta kosmologis | TIDAK MASUK | Puzzle fisika; energi vakum tak terhitung rigorous oleh kami |
+| 10 | Pengukuran kuantum | TIDAK MASUK | Interpretasional |
+| 11 | Gravitasi kuantum | TIDAK MASUK | Tak ada teori untuk dihitung |
+| 14 | Asimetri materi | TIDAK MASUK | Model-dependent, kosmologi |
+| 15 | Superkonduktivitas Tc-tinggi | TIDAK MASUK | Numerik Hubbard bukan rigorous-verifiable ala kita |
+| 18 | Cosmic censorship | TIDAK MASUK | PDE Einstein tervalidasi di luar jangkauan dekat |
+
+## 3. Antrian kerja (A-list: serangan komputasional langsung)
+
+**Q1 — BSD pilot.** Fragmen: 5 kurva rank 0 konduktor kecil (label
+Cremona eksplisit); rank 0 via 2-descent integer-eksak; L(E,1)/Omega
+via simbol modular (rasional eksak, tanpa float); identitas
+BSD dicek sebagai persamaan rasional. TERKUNCI bila 5/5 cocok dua
+implementasi independen. Modul baru: descent + simbol modular.
+Reuse: counting kurva, enclosure ball, pola cross-lock.
+
+**Q2 — Sensus twin prime.** Fragmen: semua pasangan twin + gap
+maksimal s.d. N (N dari anggaran ukur-dulu; mulai 10^9). TERKUNCI
+bila dua sieve independen (segmented, implementasi terpisah) sepakat
+integer-per-integer. Modul baru: sieve tersertifikasi.
+
+**Q3 — Sensus abc.** Fragmen: semua triple s.d. C + rekor kualitas
+q > 1.4 yang terverifikasi ulang independen. Modul baru: pencarian
+triple + pemeriksa kualitas.
+
+**Q4 — Ekstensi RH.** Fragmen: T = 100 dengan mesin yang sama
+(COMPLETE + winding cross-lock), DENGAN ukur-dinding-dulu. Latar:
+kerja literatur G2. Ini background, bukan trek utama.
+
+## 4. Daftar-B (pintu bersyarat, bukan janji)
+
+Masuk A-list hanya bila syaratnya terpenuhi TERLEBIH DULU sebagai
+milestone tersegel sendiri: integrator ODE tervalidasi (untuk
+Three-Body/Soliton), enclosure probabilitas (untuk Anderson),
+target formalisasi Lean yang dirumuskan presisi (untuk P-vs-NP/
+Schanuel). Tanpa itu mereka tetap di sini, tertulis, tidak dikerjakan.
+
+## 5. Catatan kejujuran tentang "actual infinity" (dibaca sebelum debat)
+
+Tiga hal yang benar sekaligus:
+
+(a) **Actual infinity tidak bisa "dipatahkan" oleh komputasi finit.**
+ Ia adalah pilihan aksioma fondasional (aksioma infinity ZFC; tipe
+ tak hingga + Classical.choice di Lean). Komputasi hingga hanya bisa
+ diam tentangnya — seperti penggaris yang diam tentang warna.
+
+(b) **Tools kita sendiri mengasumsikannya.** Bukti Lean kami
+ bergantung pada propext, Classical.choice, Quot.sound — choice atas
+ tipe tak hingga MENGHASILKAN objek infinit aktual (ultrafilter
+ nonprinsipal, well-ordering). Memakai Lean+Mathlib untuk mematahkan
+ actual infinity adalah kontradiksi performatif; Mathlib itu
+ infinitary sampai ke tulang. Audit aksioma 73/73 kami justru
+ MENDOKUMENTASIKAN ketergantungan ini, bukan menghilangkannya.
+
+(c) **Yang BISA dilakukan — dan itulah berkas ini:** metodologi
+ finitist untuk klaim kami sendiri. Setiap angka yang kami laporkan
+ berasal dari komputasi hingga dengan batas eksplisit; "tak hingga"
+ tak pernah muncul sebagai objek yang kami hitung — hanya sebagai
+ batas yang eksplisit kami tolak lewati (verdict PARTIAL/
+ INCONCLUSIVE, pagar scope, non-klaim tertulis). Setiap masalah
+ diubah dari "terbuka dan diam" menjadi "terukur sampai sini,
+ terkunci, dengan bukti" — itulah §0–§4 di atas.
+
+ Posisi jujur program ini bukan finitisme sebagai teorema, melainkan
+ **finitisme sebagai disiplin klaim**.

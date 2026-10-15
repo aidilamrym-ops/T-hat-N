@@ -374,6 +374,7 @@ propext + Classical.choice + Quot.sound only).
 | General quartic over F_3 | Groebner smoothness witness + exact counts; Weil gate armed |
 | Vectorised counter | exact vs brute at k<=3; Fermat 16/154/784 three-way locked; k=8 in 70 s |
 | Hodge program closure | measured status, walls and non-claims: [`reports/HODGE_CLOSURE.md`](reports/HODGE_CLOSURE.md) |
+| Work queue (20 problems) | disposition + ordered queue + rules: [`reports/DAFTAR_MASALAH_KERJA.md`](reports/DAFTAR_MASALAH_KERJA.md) |
 | Frobenius-degeneracy gate | exponent-divisibility check, char-2 witness locked |
 | F_{2^n} traces | t_1..t_3 locked; O(2^3n) wall mapped, Jacobi upgrade pending |
 | Moore box (Lean, Banach) | Newton map + Lipschitz < 1 ⟹ exactly one zero (standard axioms) |
