@@ -1,0 +1,106 @@
+{
+ "c": 13,
+ "prec_bits": 300,
+ "runs": [
+  {
+   "c": 13,
+   "N": 8,
+   "dim": 17,
+   "prec_bits": 300,
+   "exit": 0,
+   "seconds": 0.7,
+   "coverage": 1.0,
+   "individual": 8,
+   "clusters": [
+    {
+     "lo": -2.6609529984009992e-05,
+     "hi": 2.2715336433181585e-05,
+     "k": 9,
+     "width": 4.932486641719158e-05
+    }
+   ],
+   "conflicts": 0,
+   "lowest_lo": -2.6609529984009992e-05,
+   "lowest_hi": 2.2715336433181585e-05,
+   "lowest_kind": "cluster",
+   "lowest_width": 4.932486641719158e-05,
+   "magnitude_resolved": false,
+   "verdict": "CERTIFIED BRACKET, magnitude NOT resolved"
+  },
+  {
+   "c": 13,
+   "N": 16,
+   "dim": 33,
+   "prec_bits": 300,
+   "exit": 0,
+   "seconds": 1.2,
+   "coverage": 1.0,
+   "individual": 18,
+   "clusters": [
+    {
+     "lo": -3.338257132475881e-05,
+     "hi": 4.824762350224324e-05,
+     "k": 15,
+     "width": 8.163019482700204e-05
+    }
+   ],
+   "conflicts": 0,
+   "lowest_lo": -3.338257132475881e-05,
+   "lowest_hi": 4.824762350224324e-05,
+   "lowest_kind": "cluster",
+   "lowest_width": 8.163019482700204e-05,
+   "magnitude_resolved": false,
+   "verdict": "CERTIFIED BRACKET, magnitude NOT resolved"
+  },
+  {
+   "c": 13,
+   "N": 32,
+   "dim": 65,
+   "prec_bits": 300,
+   "exit": 0,
+   "seconds": 3.9,
+   "coverage": 1.0,
+   "individual": 45,
+   "clusters": [
+    {
+     "lo": -4.1140736459586846e-05,
+     "hi": 8.557374810168963e-05,
+     "k": 20,
+     "width": 0.0001267144845612765
+    }
+   ],
+   "conflicts": 0,
+   "lowest_lo": -4.1140736459586846e-05,
+   "lowest_hi": 8.557374810168963e-05,
+   "lowest_kind": "cluster",
+   "lowest_width": 0.0001267144845612765,
+   "magnitude_resolved": false,
+   "verdict": "CERTIFIED BRACKET, magnitude NOT resolved"
+  },
+  {
+   "c": 13,
+   "N": 64,
+   "dim": 129,
+   "prec_bits": 300,
+   "exit": 0,
+   "seconds": 52.7,
+   "coverage": 1.0,
+   "individual": 108,
+   "clusters": [
+    {
+     "lo": -5.146341280969751e-05,
+     "hi": 0.00016777719827765515,
+     "k": 21,
+     "width": 0.00021924061108735264
+    }
+   ],
+   "conflicts": 0,
+   "lowest_lo": -5.146341280969751e-05,
+   "lowest_hi": 0.00016777719827765515,
+   "lowest_kind": "cluster",
+   "lowest_width": 0.00021924061108735264,
+   "magnitude_resolved": false,
+   "verdict": "CERTIFIED BRACKET, magnitude NOT resolved"
+  }
+ ]
+}

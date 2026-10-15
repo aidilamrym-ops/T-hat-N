@@ -1,0 +1,80 @@
+{
+ "c": 13,
+ "runs": [
+  {
+   "c": 13,
+   "N": 10,
+   "dim": 21,
+   "prec_bits": 9000,
+   "n_pos": 21,
+   "n_neg": 0,
+   "undetermined_pivot": null,
+   "pivots_recorded": 21,
+   "entries_finite": true,
+   "verdict": "CERTIFIED POSITIVE DEFINITE",
+   "build_s": 10.83,
+   "ldlt_s": 0.07,
+   "total_s": 10.9
+  },
+  {
+   "c": 13,
+   "N": 20,
+   "dim": 41,
+   "prec_bits": 9000,
+   "n_pos": 41,
+   "n_neg": 0,
+   "undetermined_pivot": null,
+   "pivots_recorded": 41,
+   "entries_finite": true,
+   "verdict": "CERTIFIED POSITIVE DEFINITE",
+   "build_s": 20.42,
+   "ldlt_s": 0.24,
+   "total_s": 20.66
+  },
+  {
+   "c": 13,
+   "N": 40,
+   "dim": 81,
+   "prec_bits": 9000,
+   "n_pos": 81,
+   "n_neg": 0,
+   "undetermined_pivot": null,
+   "pivots_recorded": 81,
+   "entries_finite": true,
+   "verdict": "CERTIFIED POSITIVE DEFINITE",
+   "build_s": 55.19,
+   "ldlt_s": 2.91,
+   "total_s": 58.11
+  },
+  {
+   "c": 13,
+   "N": 80,
+   "dim": 161,
+   "prec_bits": 9000,
+   "n_pos": 161,
+   "n_neg": 0,
+   "undetermined_pivot": null,
+   "pivots_recorded": 161,
+   "entries_finite": true,
+   "verdict": "CERTIFIED POSITIVE DEFINITE",
+   "build_s": 129.2,
+   "ldlt_s": 15.4,
+   "total_s": 144.64
+  },
+  {
+   "c": 13,
+   "N": 160,
+   "dim": 321,
+   "prec_bits": 9000,
+   "n_pos": 321,
+   "n_neg": 0,
+   "undetermined_pivot": null,
+   "pivots_recorded": 321,
+   "entries_finite": true,
+   "verdict": "CERTIFIED POSITIVE DEFINITE",
+   "build_s": 372.09,
+   "ldlt_s": 114.41,
+   "total_s": 486.57
+  }
+ ]
+}

@@ -189,22 +189,85 @@ Model biaya terukur: build ~ O(dim²) (2,53 → 6,29 → 16,77 → 129 → 229
 641 detik). N=320 sudah 25 menit; N=640 akan sekitar 1,7 jam pada
 6000 bit.
 
-### 3b. Yang BELUM terjawab — dan alasannya
+### 3b. Hukum redaman: DITERIMA, dan model yang-di-asumsikan DIBANTAH
 
-- **Hukum redaman λ_min ~ A e^(−Bn) BELUM diukur.** Inersia Route S
-  hanya memberi tanda. Magnitudo membutuhkan tangga Sturm tersertifikasi
-  yang ada di repo `gw-spectral-map` (`bracket_driver.py`), yang
-  memerlukan pohon saudara `GUINAND_WEIL` dan kabaritya
-  `c=100, N=200`-nya masih ANTRI ("QUEUED until OMEGA is released").
-  Saya tidak mengarang kurva dari inersia.
-- **Deviasi Montgomery S1/S2 BELUM diukur** pada resolusi tinggi.
-  Jalur yang ada (`gw_mont_pipeline_check.py`) sudah dijalankan dalam
-  suite TAW pada 392 detik, tetapi pada konfigurasi defaultnya, bukan
-  sebagai sapuan yangLSVARYE pada 6000/9000 bit. Itu pekerjaan berikutnya
-  yang masuk akal, dan biayanya harus diukur lebih dulu.
-- **Apakah deviasi mengecil atau membesar pada resolusi tinggi: TIDAK
-  DIJAWAB.** Saya menolak menjawabnya lebih dulu dengan data yang tidak
-  ada.
+#### Jalur yang dicoba lebih dulu, dan kenapa ia tidak bisa
+
+Tangga Sturm `gw-spectral-map` menyertifikasikan **seluruh** spektrum
+(17/17 cakupan, 0 konflik) tetapi **tidak** menyelesaikan magnitudo
+eigenvalue terkecil. Pada 300 bit bracket terrendah adalah CLUSTER
+`[-2.66e-5, +2.27e-5]` dengan k=9; pada **3000 bit bracketnya identik
+bit-dengan-bit** dengan biaya hanya 1,7x lebih besar. Jadi presisi Arb
+bukan bottleneck-nya: posisi titik geser berasal dari mesin duple
+float64, dan tidak ada jumlah presisi pun yang menggerakkan posisi
+float64. Itu mekanisme TOO_TIGHT yang memang didokumentasikan di sana.
+Tangga itu mengukur BIAYA, bukan redaman.
+
+#### Jalur yang benar: eigensolver interval
+
+`arb_mat.eig` (Rump / van der Hoeven-Mourrain) adalah "Route A2" di README
+Guinand-Weil. Pada 6000 bit, c=13:
+
+| dim | lambda_min (batas bawah tersertifikasi) | radius | Im bocor | eig_s | verdict |
+|---:|---:|---:|---:|---:|---|
+| 17 | 7.674393e-23 | 0 | 0 | 0,56 | semua eigenvalue positif ketat |
+| 33 | 8.568627e-35 | 0 | 0 | 4,05 | idem |
+| 65 | 2.258931e-49 | 0 | 0 | 30,06 | idem |
+| 129 | 6.321351e-59 | 0 | 0 | 221,68 | idem |
+
+Radius **tepat nol**: setiap eigenvalue terisolasi titik pada presisi ini,
+dan tidak satu pun enclosure-nya memuat nol. Bocoran imajiner **tepat
+nol**, jadi "semua real" diukur, bukan diasumsikan.
+
+#### Temuan: B dari model A·e^(-B·dim) TIDAK konstan
+
+Lereng `ln(lambda_min)` per satuan dimensi:
+
+| rentang dim | B implisit |
+|---|---|
+| 17 → 33 | **-1,7201** |
+| 33 → 65 | **-1,0490** |
+| 65 → 129 | **-0,3437** |
+
+Model `A * e^(-B n)` dengan B konstan memroyeksikan lereng **konstan**.
+Yang terukur justru **menurun monoton**, dan pada rentang terakhir sudah
+mendekati nol. Jadi:
+
+* lawanan dengan bentuk eksponensial konstan **terbantah** pada irisan
+  ini (c=13 tetap, N naik);
+* redamannya **sub-eksponensial** terhadap dimensi sepanjang jalur itu;
+* apakah B terus turun atau membungkuk ke asimtot lain **belum
+  ditentukan** oleh empat anak tangga. Dua anak tangga panjang
+  (dim 257 dan 321) sedang dijalankan; itulah yang akan memutuskan.
+
+**Peringatan yang wajib disebut:** ini **satu irisan** keluarga
+(c=13 tetap). Skala spektral sangat bergantung pada c --bands dari repo
+Guinand-Weil memberi lambda_min(Q_{100,40}) ~ 1.32e-102 pada dim 81,
+sementara anak tangga dim-65 di sini (c=13) memberi 2.26e-49. Membandingkan
+antar-c bukan apel-samel, jadi tidak ada hukum universal yang diklaim di sini.
+
+#### 9000 bit tidak menambah apa pun (terukur)
+
+| presisi | lambda_min (dim 33) | lambda_min (dim 65) | eig_s (dim 65) |
+|---|---|---|---|
+| 6000 | 8.568627e-35 | 2.258931e-49 | 30,06 |
+| 9000 | 8.568627e-35 | 2.258931e-49 | 79,05 |
+
+Nilai **identik bit-dengan-bit**, radius tetap 0, biaya 2,6x. Jadi pada
+dimensi ini 6000 bit sudah cukup untuk isolasi eigenvalue, dan tambahan
+presisi yang lebih tinggi tidak menambah informasi apa pun. Ini adalah
+koreksi atas asumsi bahwa "resolusi lebih tinggi" otomatis berarti
+informasi lebih
+banyak: bukan, kalau radiusnya sudah nol.
+
+#### Deviasi Montgomery S1/S2
+
+`gw_mont_pipeline_check.py` ternyata **validator fixture sintetis**
+(Poisson/GUE/GOE), bukan pengukuran pada spektrum asli. Pengukuran
+sesungguhnya adalah `gw_montgomery.py` terhadap
+`gw_spectrum_100_200.json` (Q c=100/N=200, dim 401, tersertifikasi).
+Status: sedang dijalankan; hasilnya dilaporkan apa adanya, tanpa
+"membesar/mengecil" sampai ada dua resolusi berbeda untuk dibandingkan.
 
 ### 3c. Kesalahan proses, tercatat
 

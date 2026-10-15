@@ -1,0 +1,57 @@
+{
+ "c": 13,
+ "prec_bits": 9000,
+ "runs": [
+  {
+   "c": 13,
+   "N": 8,
+   "dim": 17,
+   "prec_bits": 9000,
+   "n_eigenvalues": 17,
+   "all_finite": true,
+   "imag_leak_upper": 0.0,
+   "lambda_min_lo": 7.674392556360189e-23,
+   "lambda_min_mid": 7.674392556360189e-23,
+   "lambda_min_rad": 0.0,
+   "lambda_max_hi": 2.6609529983704294,
+   "all_exclude_zero": true,
+   "build_s": 6.88,
+   "eig_s": 1.53,
+   "verdict": "CERTIFIED, all eigenvalues strictly positive"
+  },
+  {
+   "c": 13,
+   "N": 16,
+   "dim": 33,
+   "prec_bits": 9000,
+   "n_eigenvalues": 33,
+   "all_finite": true,
+   "imag_leak_upper": 0.0,
+   "lambda_min_lo": 8.568627478072444e-35,
+   "lambda_min_mid": 8.568627478072444e-35,
+   "lambda_min_rad": 0.0,
+   "lambda_max_hi": 3.338257132308795,
+   "all_exclude_zero": true,
+   "build_s": 15.11,
+   "eig_s": 10.98,
+   "verdict": "CERTIFIED, all eigenvalues strictly positive"
+  },
+  {
+   "c": 13,
+   "N": 32,
+   "dim": 65,
+   "prec_bits": 9000,
+   "n_eigenvalues": 65,
+   "all_finite": true,
+   "imag_leak_upper": 0.0,
+   "lambda_min_lo": 2.2589311905740533e-49,
+   "lambda_min_mid": 2.2589311905740533e-49,
+   "lambda_min_rad": 0.0,
+   "lambda_max_hi": 4.114073645476566,
+   "all_exclude_zero": true,
+   "build_s": 37.27,
+   "eig_s": 79.05,
+   "verdict": "CERTIFIED, all eigenvalues strictly positive"
+  }
+ ]
+}
