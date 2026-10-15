@@ -1,0 +1,144 @@
+# HANDOFF — titik sambung untuk sesi berikutnya
+
+Ditulis 2026-10-15, akhir sesi repo-audit + Zenodo.
+**Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
+(§1–4 verdict, §6–10 perbaikan tersegel) dan
+`reports/DAFTAR_MASALAH_KERJA.md` (antrean 20 masalah).
+
+Tidak ada konteks yang hidup hanya di dalam percakapan. Yang menentukan
+ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
+
+---
+
+## 1. Apa yang TERSEGEL (aman, tidak hilang)
+
+| Segel | Lokasi | Bukti |
+|---|---|---|
+| Audit 4 repo anak + 4 DOI Zenodo | commit `4f4f846` di repo kerja (remote `T-hat-N`, branch `main`) | `reports/REPO_AUDIT.md` §6–§10 |
+| Anti-turing-pnp | commit `62b37f50`, CI hijau | DOI 10.5281/zenodo.23392667 |
+| gw-spectral-map | commit `6dc9f9ce`, CI hijau | DOI 10.5281/zenodo.23392641 |
+| guinand-weil-rigorous-numerics | commit `7f8f6e7f`, CI hijau | DOI 10.5281/zenodo.23392323 |
+| the-asymmetric-wager-msaf | branch `audit-fixes-bmw` commit `b9958be`, CI hijau (ubuntu+windows) | DOI 10.5281/zenodo.23392745 |
+| Program msaf sendiri | tag `v1.39.0-alpha` (terbaru) | `msaf/tests` 250 passed |
+| Anti-Turing / P-vs-NP | v1.39.0-alpha, entails gap didokumentasikan | `GAP-PNP.md` |
+| Hodge → HODGE-CH | v1.38.0-alpha, polinomial Weil eksak | `reports/HODGE_CLOSURE.md`, `HODGE_CH_SPEC.md` |
+
+Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
+`related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
+DAN sha256 arsip.
+
+---
+
+## 2. YANG BELUM SELESAI — baca sebelum starting apa pun
+
+### 2.1 the-asymmetric-wager-msaf: branch audit belum di-merge, WIP user ada
+
+- **Lokal** `D:\THE ASYMMETRIC WAGER` ada di branch `audit-fixes-bmw`
+  pada `1eb28bb`. **Tiga commit audit belum ada secara lokal** —
+  `66310cf`, `04405ba`, `b9958be` (ada di remote). Mustahil di-merge
+  sekarang: working tree penuh WIP user yang tumpang tindih.
+- **WIP user yang tidak boleh diklampaui** (dimulai A23, masih belum di-commit):
+  `A16_REPORT.md`, `Brain.MD`, `CHECKSUM.sha256`, `README.md`,
+  `Skill.md`, `checksum_check.py`, `harness_check.py`, `suite_check.py`.
+- Untracked baru ( progresiva, jangan dihapus): `A24_REPORT.md`,
+  `A25_REPORT.md`, `A26_REPORT.md`, `harness/`, `h1_escape_gate.py`,
+  `math-main/`, `openai_math_audit/`, `OMEGA N800 EVIDENCE KIT/`, dan
+  lain-lain.
+- **Langkah berikutnya kalau repo ini mau ditutup:** user commit WIP-nya
+  dulu di `main`, baru `git merge audit-fixes-bmw`. Merge akan konflik di
+  `CHECKSUM.sha256` dan `Brain.MD` (keduanya berubah di kedua sisi) —
+  setelah merge, jalankan `python checksum_check.py --update` lalu
+  `python report_claim_check.py`, karena kedua gate itu yang mengikat
+  angkanya.
+
+### 2.2 Suite the-asymmetric-wager-msaf tidak akan hijau di clone kosong
+
+Terbukti dan sudah diperbaiki akarnya (`B-MW5`): empat gate butuh Z3
+atau corpus pihak ketiga `Theory_of_Everything_Derivations/` yang
+di-`.gitignore`. Di clone kosong: 12 ok, 1 FAIL_sebelum-perbaikan (kini
+TOOL NOT RUN), 3 NOT RUN → suite `INCOMPLETE`. Itu perilaku yang benar,
+bukan regresi. Di workspace penulis (corpus ada) suite jalan penuh.
+Bukti keluaran bersih: `reports/TAW_clean_worktree_suite.txt`.
+
+### 2.3 Jembatan Riemann yang masih terbuka: `CORR-MOORE-COMPLEX`
+
+Satu-satunya hal yang secara logis menghalangi trek RH. Yang ada:
+`verify_moore_premises(box, degree=12)` di
+`msaf/riemann/moore_premises.py` membuktikan (a) invariansi, (b) turunan
+bersih, (c) Lipschitz < 1 **pada bola kompleks**. Yang belum: transfer
+C→R diformalisasi di Lean (`lean/NewtonExistence.lean` punya padanan
+real-interval). Fungsinya sudah mengembalikan kunci `scope` di **setiap**
+jalur keluar — jangan dihapus, itu yang mencegah klaim berlebih.
+Saran urutan: formalkan gate kompleks itu di Lean → Q1 BSD.
+
+---
+
+## 3. Zenodo: jalur kanonik masih tertutup
+
+- Jalur kanonik (GitHub release → DOI otomatis) **tidak aktif**:
+  akun GitHub punya **0 release di 15 repo publik**, dan webhook
+  Zenodo↔GitHub hanya bisa diaktifkan pemilik lewat login browser
+  (zenodo.org → Settings → GitHub → Enable). Tidak ada API token yang
+  bisa melewati ini.
+- Jalur yang dipakai: `msaf/zenodo_deposit.py` (depositor API, menolak
+  mengarang lisensi/klaim, mencatat sha256, retry saat upload putus).
+- 11 repo publik masih tanpa DOI (menunggu audit, sesuai keputusan
+  operator: deposit hanya repo yang gate-nya hijau & CI hijau):
+  AETHER-Z3-OMEGA, ASLC-OMEGA-LEDGER, T-hat-N, gnase-engine,
+  jacobian-conjecture-audit, lagarias-criterion, navier-stokes-formalization,
+  riemann-hypothesis-formalization, sovereign-enterprise-suite,
+  the-asymmetric-wager-msaf-family017, zeta-23-audit.
+
+---
+
+## 4. Peta file (jangan menebak)
+
+| Isi | Lokasi |
+|---|---|
+| Audit 4 repo + Zenodo | `reports/REPO_AUDIT.md` |
+| Triage 3 jembatan (merah-team) | `reports/ADVERSARIAL_TRIAGE.md` |
+| Antrean 20 masalah + aturan main | `reports/DAFTAR_MASALAH_KERJA.md` |
+| Closure Hodge | `reports/HODGE_CLOSURE.md`, `reports/HODGE_CH_SPEC.md` |
+| Roadmap formalisasi | `reports/TURING_ROADMAP.md` |
+| Berek RH | `msaf/riemann/` (`winding.py`, `counter.py`, `moore_premises.py`, `boundary.py`, `exclusion.py`) |
+| Berek Hodge | `msaf/hodge/` (`weil_search.py`, `fermat_k3.py`, `gauss_exact.py`) |
+| Berek NS | `msaf/navier_stokes/`, kernel `lean/NavierStokesCore.lean` |
+| Kernel RH | `lean/NewtonExistence.lean` |
+| Test suite (250) | `msaf/tests/` |
+| Bukti JSON | `reports/*.json` |
+
+**Artefak user — JANGAN pernah disentuh:** `20_masalah_matematika_fisika_tersulit.md`
+dan `reports/diagram.txt`. Keduanya sengaja tidak di-commit.
+
+---
+
+## 5. Disiplin yang harus dilanjutkan
+
+1. Ball/integer eksak saja, `_reject_float()`, tanpa klaim tak terbatas.
+2. PARTIAL/INCONCLUSIVE harus keras dan kedengaran.
+3. Jangan pernah menambal titik buta — perbaiki akarnya, dokumentasikan
+   kalau memang tidak bisa.
+4. Segel = test hijau → docs/register sinkron → commit + tag + push →
+   CI hijau. Tidak ada tag untuk dokumen rencana saja.
+5. Kesalahan proses dicatat, disembunyikan tidak. Contoh yang sudah
+   tercatat: patcher reflow CRLF→LF diam-diam (A12_REPORT.md, sudah
+   dikembalikan); `git add -A` menyapu `MSG.txt` (CI yang menangkap).
+
+## 6. Jebakan lingkungan (hemat waktu sesi depan)
+
+- PowerShell tidak punya `grep`/`head`/`cat <<EOF`/`&&`. Pakai
+  `Select-String`, `Get-Content`, file sementara untuk patch.
+- `git commit -F` **gagal** kalau path mengandung spasi — tulis pesan
+  commit ke file di `C:\Users\usER\AppData\Local\Temp\opencode\`, jangan
+  menyalinnya ke dalam working tree sebelum `git add -A`.
+- Lean 4 v4.33.1 + Mathlib. Verifikasi nama lemma terhadap Mathlib
+  terpasang; several tidak ada
+  (`div_nonpos_of_nonneg_of_nonneg`, `pow_le_pow_of_le_right`,
+  `mul_le_of_le_one_right`, `div_le_one_of_le`) — yang ada antara lain
+  `div_nonpos_iff`, `Nat.le_self_pow`, `mul_le_mul_of_nonneg_left`.
+- Edit regex berbackslash dari shell rapuh → tulis skrip patch ke file.
+- `TEMP\opencode\repofix\` = klon sementara 4 repo anak + worktree TAW.
+  **Semua isinya sudah dipush**; hilang di sana tidak berarti hilang.
+- GitHub auth lewat keyring `gh` (tanpa token). Token Zenodo hanya
+  berlaku di dalam sesi tempat user give — jangan tulis ke berkas
+  mana pun.
