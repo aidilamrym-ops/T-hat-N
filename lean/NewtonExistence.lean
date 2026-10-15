@@ -463,8 +463,13 @@ theorem moore_test_existence (a b m : ℝ) (hab : a < b)
 
 /-- Moore test, closed form: inclusion plus clean enclosure yields
     exactly one zero (existence + uniqueness combined). This is the
-    complete formal counterpart of the Python counter's soundness
-    gate: every counted box carries exactly one zero, no more. -/
+    REAL-INTERVAL analogue of the Python counter's soundness gate,
+    not its formal counterpart: `counter.py` counts zeros in COMPLEX
+    balls (circular containment, series-enclosed derivative over the
+    whole ball), while everything in this file is stated over ℝ
+    intervals. The ℂ-to-ℝ transfer is unformalized; counted boxes are
+    certified by the ball arithmetic plus the winding cross-check,
+    never by this theorem alone. -/
 theorem moore_test (a b m : ℝ) (hab : a < b)
     (hm : m ∈ Set.Icc a b) (f f' : ℝ → ℝ)
     (hcont : ContinuousOn f (Set.Icc a b))

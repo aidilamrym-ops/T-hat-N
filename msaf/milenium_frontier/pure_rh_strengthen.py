@@ -85,8 +85,11 @@ class PureRiemannVerify:
     def z3_confirm_containment(self, re_str: str, im_str: str) -> dict:
         """Double-entry check of the reported real enclosure in Z3.
 
-        Extracts the enclosure's decimal lower/upper bounds (strings
-        only, no float) and asks Z3 whether ``lo <= 1/2 <= hi`` holds
+        Extracts 30-digit decimal printings of the enclosure's bound
+        balls (``.lower()``/``.upper()`` return balls, and
+        ``.str(30, radius=False)`` prints their midpoints -- these are
+        NOT certified bounds, and a boundary within ~1e-30 of 1/2 could
+        flip either way) and asks Z3 whether ``lo <= 1/2 <= hi`` holds
         over the Reals. ``sat`` confirms the *reported* enclosure
         contains 0.5; it is a conformance cross-check, not an
         independent proof of anything about zeta zeros.

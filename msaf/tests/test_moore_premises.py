@@ -20,6 +20,7 @@ def test_moore_premises_gamma1_hold():
     assert out["maps_to"] is True
     assert out["deriv_excludes_zero"] is True
     assert out["k_below_one"] is True
+    assert "analogue" in out["scope"] and "unformalized" in out["scope"]
 
 
 def test_moore_premises_zero_free_fail():

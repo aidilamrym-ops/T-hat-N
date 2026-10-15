@@ -77,7 +77,9 @@
 | TURING-NT N(T) consistency table + explicit G1/G2/G3 gaps | CLOSED |
 | TURING-G1A contour zero-free certificates (gamma1 + flagship ALL-CLEAR) | CLOSED |
 | TURING-G1B certified winding (gamma1 1 / 2-zero 2 / flagship 10, cross-locked) | CLOSED |
-| MOORE-PREM all 3 Banach premises hold on halo-lifted gamma1 box | CLOSED |
+| MOORE-PREM all 3 Banach premises hold on halo-lifted gamma1 box | CLOSED (complex-ball analogue of moore_box; C-to-R transfer unformalized) |
+| CORR-MOORE-COMPLEX complex-ball counter gate vs real-interval Lean theorems; drift fenced per-gate | OPEN (analogue only) |
+| ADVERSARIAL-TRIAGE red-team response: correspondence confirmed-gap, Z3/N_steps deflected with evidence | CLOSED |
 | VERDICT-GAP floor-branch never counts (pinned, no-zero-ball demo) | CLOSED |
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 

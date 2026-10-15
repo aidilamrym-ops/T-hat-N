@@ -1,7 +1,16 @@
-"""Moore-premise verifier: check the Lean theorem's hypotheses as enclosures.
+"""Moore-premise verifier: check the complex-ball ANALOGUE of the Lean
+theorem's hypotheses as enclosures.
 
 For an isolation box ``B`` (from a strict ``locate_zero`` run), this
-module verifies the exact premises of ``NewtonExistence.moore_box``:
+module checks the three Banach conditions (invariance, clean
+derivative, Lipschitz < 1) on complex balls with circular
+containment -- the same three conditions as
+``NewtonExistence.moore_box``, but ``moore_box`` is stated over real
+intervals while these boxes live in ℂ. The Banach principle transfers
+across complete metric spaces, but that transfer is itself
+unformalized: a PREMISES-HOLD verdict certifies the analogue
+conditions on this box, never the Lean theorem's literal premises.
+Every returned dict carries the ``scope`` key saying so.
 
 (a) invariance ``N(B) ⊆ B`` for the pointwise Newton map, by interval
     evaluation (circular containment, strict);
@@ -31,6 +40,13 @@ __all__ = ["second_derivative_over_ball", "verify_moore_premises"]
 def _reject_float(value, name: str) -> None:
     if isinstance(value, float):
         raise TypeError(f"{name}: float64 leakage refused")
+
+
+_SCOPE = (
+    "complex-ball analogue of NewtonExistence.moore_box premises "
+    "(invariance, clean derivative, Lipschitz); the C-to-R transfer "
+    "is unformalized"
+)
 
 
 def _component_radius_upper(s: acb) -> arb:
@@ -110,6 +126,7 @@ def verify_moore_premises(box: acb, degree: int = DEFAULT_TAYLOR_DEGREE) -> dict
             "deriv_excludes_zero": False,
             "lipschitz_K": "n/a",
             "k_below_one": False,
+            "scope": _SCOPE,
         }
     maps_to = bool(step.contained)
     f_ball = evaluate_xi(lifted)
@@ -126,4 +143,5 @@ def verify_moore_premises(box: acb, degree: int = DEFAULT_TAYLOR_DEGREE) -> dict
         "deriv_excludes_zero": True,
         "lipschitz_K": k_mag.str(8),
         "k_below_one": bool(k_below_one),
+        "scope": _SCOPE,
     }

@@ -9,7 +9,7 @@ ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
 - Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338272.svg)](https://doi.org/10.5281/zenodo.23338272)
-- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.38.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.38.0-alpha) (current: 250 passed)
+- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.39.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.39.0-alpha) (current: 250 passed)
 - License: MIT - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
@@ -333,7 +333,7 @@ now anchored to the workspace root derived from the module location.
 
 ## SECTION 5: FINITE HYDRODYNAMIC LATTICE & MILLENNIUM FRONTIER
 
-Sealed through `v1.38.0-alpha` (main `250 passed`, isolated `120 passed +
+Sealed through `v1.39.0-alpha` (main `250 passed`, isolated `120 passed +
 1 honest skip`, exit 0). Full derivations in
 [`reports/finite_hydrodynamic_lattices.md`](reports/finite_hydrodynamic_lattices.md)
 (Chapters 1-3) and the machine-checked Lean kernel in [`lean/NavierStokesCore.lean`](lean/NavierStokesCore.lean)
@@ -378,6 +378,7 @@ propext + Classical.choice + Quot.sound only).
 | BSD pilot measurement | naive #E(F_p) ~84 ms/prime at p~500; to 10^4 ~12 h -> modular symbols required for exact L(E,1) |
 | a_11 = 354294 (smooth quartic F_3) | unique of 708,588 Newton class; Fermat rehearsal recovers truth uniquely |
 | Weil circle test | reciprocity+Chebyshev+Sturm exact; Ramanujan orbit verifier; bound 22 vacuous-honest |
+| Adversarial triage (3 bridges) | correspondence confirmed-gap (fenced); Z3/N_steps deflected with evidence: [`reports/ADVERSARIAL_TRIAGE.md`](reports/ADVERSARIAL_TRIAGE.md) |
 | Work queue (20 problems) | disposition + ordered queue + rules: [`reports/DAFTAR_MASALAH_KERJA.md`](reports/DAFTAR_MASALAH_KERJA.md) |
 | Frobenius-degeneracy gate | exponent-divisibility check, char-2 witness locked |
 | F_{2^n} traces | t_1..t_3 locked; O(2^3n) wall mapped, Jacobi upgrade pending |
