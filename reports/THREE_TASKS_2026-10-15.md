@@ -264,10 +264,53 @@ banyak: bukan, kalau radiusnya sudah nol.
 
 `gw_mont_pipeline_check.py` ternyata **validator fixture sintetis**
 (Poisson/GUE/GOE), bukan pengukuran pada spektrum asli. Pengukuran
-sesungguhnya adalah `gw_montgomery.py` terhadap
-`gw_spectrum_100_200.json` (Q c=100/N=200, dim 401, tersertifikasi).
-Status: sedang dijalankan; hasilnya dilaporkan apa adanya, tanpa
-"membesar/mengecil" sampai ada dua resolusi berbeda untuk dibandingkan.
+sesungguhnya: `gw_montgomery.py` terhadap `gw_spectrum_100_200.json`
+(Q c=100/N=200, dim 401, gerbang G-M0 PASS dengan kelima bagian true),
+2000 sampelLandsurat per ensemble, seed 20260927, aturan
+**preregistrasi** ditaati (kedua chart selalu dilaporkan, chart yang
+mengUNTUNGkan tidak pernah dipilih setelah melihat hasil).
+
+#### S1 -- kurangi rasio celah bertetangga
+
+| chart | r_bar | n_ratios | verdict |
+|---|---:|---:|---|
+| T = ln(lambda), **PRIMARY** | 0,548557 | 399 | CONSISTENT WITH RMT (repulsion level hadir) |
+| L = lambda, SECONDARY | 0,190891 | 399 | INCONSISTENT WITH ALL THREE REFERENCES |
+
+**S1 FINAL: CHART-DEPENDENT (T dan L berbeda) -> INCONCLUSIVE.**
+
+Ini aturan preregistrasi bekerja persis seperti mestinya: dua chart
+saling bertentangan, dan pipeline **menolak memilih** chart yang
+menguntungkan. SE r_bar dari simulasi N-matched adalah 0,000718, jadi
+selisih 0,19 pada chart L bukan noise.
+
+#### S2 -- korelasi pasangan vs kernel Montgomery
+
+chi² dan p-value, chart T (primary), tiga bandwidth:
+
+| sigma_u | chi2_obs | p_GUE | p_Poisson |
+|---|---|---|---|
+| 0,3 | 11639,58 | 0,0000 | 0,9980 |
+| 0,5 | 1698,54 | 0,0000 | 0,5340 |
+| 1,0 | 816,32 | 0,0000 | 0,0075 |
+
+**S2 FINAL (keenam titik kisi agree): INCONSISTENT WITH MONTGOMERY AT
+THIS RESOLUTION.** 0 bin dibuang (E/bin minimum 38, maksimum 200).
+
+#### Apakah deviasi mengecil atau membesar? **TIDAK DIJAWAB**
+
+Skripnya sendiri menyebut plafon resolusinya: "RESOLUTION CEILING:
+N = 401 levels, 399 ratios, ~200 pairs/bin". Satu titik resolusi tidak
+dapat menjawab arah kecenderungan. Menjawabnya butuh **spektrum
+tersertifikasi kedua pada resolusi berbeda** lalu S1/S2 diulang pada
+keduanya -- itu eksperimennya, dan belum dijalankan. Yang bisasaid hari
+ini: pada N=401, statistik ini **tidak** bisa dibedakan dari kernel
+Montgomery, dan S1 bahkan gagal memberi verdict karena chart-nya
+saling bertentangan.
+
+Dan batasan yang harus dibaca harfiah: ini statistik dari SATU matriks
+yang terbangun dan finit. Bukan teorema Montgomery, bukan bukti RH,
+bukan bukti Weil-positivity, bukan penghitungan bilangan prima.
 
 ### 3c. Kesalahan proses, tercatat
 

@@ -47,14 +47,28 @@ DAN sha256 arsip.
   menyingkirkan nol **iff `T < a - r`**.
 - **Route S tersertifikasi ke dim 641** pada 6000 bit, 6/6
   CERTIFIED POSITIVE DEFINITE (`reports/gw_route_s_ladder.json`).
-- **BELUM terjawab:** hukum redaman `lambda_min ~ A e^(-Bn)` (inersia
-  hanya memberi tanda; magnitudo butuh tangga Sturm `gw-spectral-map`
-  yang kampanyenya masih QUEUED) dan deviasi Montgomery S1/S2 pada
-  resolusi tinggi. Jangan menggambar kurva dari inersia.
-- **Urutan berikutnya yang masuk akal:** ukur biaya `bracket_driver.py`
-  di dimensi kecil dulu → kalau terjangkau, turuni `B` dari brackets
-  tersertifikasi; kalau tidak, jalankan `gw_mont_pipeline_check.py` pada
-  6000/9000 bit dan laporkan S1/S2 apa adanya.
+- **Hukum redaman DITERIMA lewat `arb_mat.eig`, dan model yang diasumsikan
+  TERBANTAH.** Pada 6000 bit (c=13): λ_min ≥ 7.674e-23 (dim 17),
+  8.569e-35 (33), 2.259e-49 (65), 6.321e-59 (129) — radius **tepat nol**,
+  Im bocor **tepat nol**. Lereng `ln λ_min` per dimensi: −1,72 → −1,05 →
+  −0,34, jadi `A·e^(−Bn)` dengan B konstan **terbantah** pada irisan ini.
+  ⚠️ hanya satu irisan (c=13);across-c bukan apel-samel.
+- **9000 bit terbukti tidak menambah apa pun**: nilai identik
+  bit-dengan-bit dengan 6000 bit, radius tetap 0, biaya 2,6×.
+- **Tangga Sturm tidak bisa mengukur λ_min** dan alasannya mekanis:
+  bracket cluster identik pada 300 maupun 3000 bit, karena titik geser
+  dari mesin duble float64.
+- **S1/S2 terukur** pada `gw_spectrum_100_200.json` (dim 401, G-M0 PASS):
+  **S1 FINAL = INCONCLUSIVE** (chart T r_bar 0,5486 → RMT; chart L 0,1909
+  →inkonsisten; keduanya dilaporkan, aturan preregistrasi menolak memilih
+  chart menguntungkan), **S2 FINAL = INCONSISTENT WITH MONTGOMERY AT THIS
+  RESOLUTION** (chi² 11639/1699/816, p_GUE 0,0000 di semua bandwidth).
+  **"Mengecil atau membesar" TIDAK DIJAWAB** — butuh spektrum tersertifikasi
+  kedua pada resolusi berbeda; itu eksperimen berikutnya, belum dijalankan.
+- **Urutan berikutnya yang masuk akal:** (1) tunggu anak tangga λ_min
+  panjang (dim 257, 321) untuk memastikan arah B; (2) bangun spektrum
+  tersertifikasi kedua pada resolusi berbeda lalu ulangi S1/S2; (3) hanya
+  setelah itu boleh bicara hukum redaman sebagai hukum.
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 
