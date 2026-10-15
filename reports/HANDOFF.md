@@ -31,6 +31,31 @@ DAN sha256 arsip.
 
 ## 2. YANG BELUM SELESAI — baca sebelum starting apa pun
 
+### 2.0b [BARU, 2026-10-15 sore] Tiga tugas tertutup sebagian — baca `reports/THREE_TASKS_2026-10-15.md`
+
+- **Jembatan ℂ→ℝ tertutup** (`lean/XiNoRealZero.lean`, nol aksom baru —
+  diukur dengan `#print axioms`). Sertifikat real hanya bisa lahir dari
+  nol berpilar imajiner nol; fungsi yang tak pernah nol di sumbu real
+  tidak punya sertifikat real untuk interval **mana pun**.
+- **Paruh analitik = SPESIFIKASI, bukan bukti.** Mathlib v4.33.1 tidak
+  punya zeta analitik maupun `Real.gamma_pos`, jadi `lean/spec/XiAnalyticSpec.lean`
+  menurunkan `xi > 0` dari **enam kewajiban yang dideklarasikan**.
+  Paruh ini sengaja di luar `lean/*.lean` karena audit aksioma repo
+  menangkapnya — dan itu benar.
+- **Anggaran tanda Minkowski terbukti** (`lean/ComplexMoore.lean`):
+  enclosure `a ± r` yang dilebarkan symetris dengan `T` tetap
+  menyingkirkan nol **iff `T < a - r`**.
+- **Route S tersertifikasi ke dim 641** pada 6000 bit, 6/6
+  CERTIFIED POSITIVE DEFINITE (`reports/gw_route_s_ladder.json`).
+- **BELUM terjawab:** hukum redaman `lambda_min ~ A e^(-Bn)` (inersia
+  hanya memberi tanda; magnitudo butuh tangga Sturm `gw-spectral-map`
+  yang kampanyenya masih QUEUED) dan deviasi Montgomery S1/S2 pada
+  resolusi tinggi. Jangan menggambar kurva dari inersia.
+- **Urutan berikutnya yang masuk akal:** ukur biaya `bracket_driver.py`
+  di dimensi kecil dulu → kalau terjangkau, turuni `B` dari brackets
+  tersertifikasi; kalau tidak, jalankan `gw_mont_pipeline_check.py` pada
+  6000/9000 bit dan laporkan S1/S2 apa adanya.
+
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 
 `msaf/certify.py` mengesahkan `nan` sebagai nol (Arb menjawab True untuk
