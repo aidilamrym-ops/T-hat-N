@@ -272,6 +272,12 @@ def build_section(a: dict, b: dict, lad: dict, cap: dict) -> str:
     add("- **Provenance baseline.** `msaf/mont_run.txt` adalah salinan UTF-16 dari `gw_montgomery_100_200_run2.log` "
         "(baris r_bar dan chi^2 identik; beda 1 karakter akhir baris). Log `gw_montgomery_100_200.log` yang lebih lama "
         "tidak memuat statistik S1/S2 dan tidak dipakai.")
+    add("- **Audit presisi global untuk kampanye ini.** Ketiga modul baru diperiksa. `gw_route_s_ladder.py` dan "
+        "`capture_spectrum_201.py` memakai pola simpan/pulihkan `ctx.prec`; satu tulisan telanjang `mp.mp.dps = 100` "
+        "(presisi parsing gate G-M0c atas mid 60 digit) ditemukan di `capture_spectrum_201.py` dan diperbaiki di akar -- "
+        "nilai lama kini dipulihkan di `finally` bersama `ctx.prec`; restore-saja, tanpa efek numerik pada artefak yang "
+        "tersegel. `gw_resolution_delta.py` nol sentuhan presisi (murni teks). Delapan tulisan telanjang di modul tes "
+        "lama (OPEN di `NONFINITE_DEFECT.md`) tetap TIDAK disentuh, sesuai mandat.")
     add("")
     add("Batasan yang dibaca harfiah tetap sama: ini statistik dari dua matriks finit yang terbangun. Bukan teorema "
         "Montgomery, bukan bukti RH, bukan Weil-positivity, bukan penghitungan prima.")
