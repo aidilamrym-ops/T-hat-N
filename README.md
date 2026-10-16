@@ -10,6 +10,7 @@ equality: only by containment.
 
 - Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338272.svg)](https://doi.org/10.5281/zenodo.23338272)
 - Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha) (current: 311 passed)
+- Final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6)
 - License: MIT - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
@@ -26,7 +27,10 @@ verdict for the tested series: the deviation from RMT-GUE does **not** shrink
 with resolution (17 of 18 chi^2 cells at the 2000-surrogate floor; one cell
 at 0.0180; S1 chart-dependent at all three points; asymptotic direction
 open). Standalone offline dashboard:
-[`reports/gw_diagnostic_v3.html`](reports/gw_diagnostic_v3.html).
+[`reports/gw_diagnostic_v3.html`](reports/gw_diagnostic_v3.html). The
+consolidated LaTeX export of this campaign
+([`exports/research_paper.tex`](exports/research_paper.tex)) transcribes the
+sealed results and the process-defect register; it adds no new claims.
 
 ## Contents
 
@@ -802,6 +806,7 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
 - `msaf_core_lattice.py` - the four mandated entry points
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py)
 - `harness/` - release gate and math renderer
+- `exports/` - publication-grade consolidations of sealed campaigns: [`research_paper.tex`](exports/research_paper.tex) (Main Spectral Results of the 201/301/401 campaign + process-defect register; sealed-artifact transcription only)
 - `ledger/` - append-only evidence chains; `reports/` - integer pixel reports,
   the Guinand-Weil spectra JSONs and Montgomery logs, and the standalone
   dashboard `reports/gw_diagnostic_v3.html`
@@ -812,6 +817,7 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
 Amry, Muhammad Aidil. T-hat-N: Matrix-constraint Spectral Analysis Framework.
 v1.1.0. Zenodo. https://doi.org/10.5281/zenodo.23338272
 Current development line: v1.40.0-alpha (GitHub tags).
+Final certified delivery: v1.40.0-alpha-final-certified-delivery (GitHub tag).
 ```
 
 ## LICENSE

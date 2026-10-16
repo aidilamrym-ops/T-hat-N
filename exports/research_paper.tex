@@ -1,0 +1,443 @@
+% =====================================================================
+% T-hat-N (MSAF) export -- consolidated Main Spectral Results
+% Guinand-Weil three-resolution campaign (dim 201 / 301 / 401)
+% Campaign sealed 2026-10-15/16; this consolidation 2026-10-16.
+%
+% PROVENANCE RULES (binding)
+% ---------------------------------------------------------------------
+% Every number in this file is transcribed from sealed T-hat-N artifacts:
+%   reports/THREE_TASKS_2026-10-15.md    sections 4 and 5 (machine-extracted
+%       from the canonical logs by msaf/gw_resolution_delta.py)
+%   msaf/mont_run.txt                    dim-401 canonical measurement log
+%   reports/mont_run_100_100.txt         dim-201 canonical measurement log
+%   reports/mont_run_100_150.txt         dim-301 canonical measurement log
+%   reports/gw_spectrum_100_100.json     certified dim-201 spectrum
+%   reports/gw_spectrum_100_150.json     certified dim-301 spectrum
+%   reports/gw_route_s_ladder_c100.json  Route S sign ladder (c=100)
+%   README.md section 6                  formulas and instrument map
+%   reports/gw_diagnostic_v3.html        standalone dashboard (byte-stable)
+% If any discrepancy is ever found between this file and the sources,
+% the sources win. This file adds no new theorem, no new measurement and
+% no new interpretation; open questions stay open.
+% No numeric code was touched to produce it (no ctx.prec mutations).
+% Not compiled in the sealing environment (no TeX toolchain there); the
+% source is ASCII-only and uses standard packages only.
+% =====================================================================
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+
+\title{Main Spectral Results of the Guinand-Weil\\
+Three-Resolution Campaign (dim 201 / 301 / 401)}
+\author{Muhammad Aidil Amry\\ \small ORCID 0009-0002-9718-9710\\
+\small T-hat-N export, 2026-10-16}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent Three full spectra of the cutoff-free truncated Guinand-Weil
+block $\tau = W_{02} - W_R - W_p$ were certified at dimensions 201, 301
+and 401 (gate G-M0 PASS 5/5; inertia fully positive at every dimension:
+n\_pos = 201 / 301 / 401, n\_neg = 0). On the pre-registered Montgomery
+grid (2000 matched surrogates per ensemble, seed 20260927) the gap-ratio
+instrument S1 reads CHART-DEPENDENT, hence INCONCLUSIVE, at all three
+resolutions, and the pair-correlation instrument S2 reads INCONSISTENT
+WITH MONTGOMERY AT THIS RESOLUTION at all three: 17 of the 18 $\chi^2$
+cells sit exactly at the 2000-surrogate floor (printed as 0.0000) and
+the single off-floor cell reads $p_{GUE} = 0.0180$, still below the 0.05
+threshold. The pre-registered question -- does the deviation shrink as
+resolution grows? -- is answered for the tested series: it does
+\textbf{not} shrink. The asymptotic direction remains open (three finite
+points). Not claimed: Montgomery's theorem, evidence for RH, Weil
+positivity, prime counting, factorisation.
+\end{abstract}
+
+\section{Scope and provenance}
+
+This file is a publication-grade consolidation of already-sealed
+measurements of the T-hat-N repository (Matrix-constraint Spectral
+Analysis Framework). Sources: the three canonical measurement logs
+(\texttt{msaf/mont\_run.txt} for dim 401 in UTF-16; the UTF-8 logs
+\texttt{reports/mont\_run\_100\_100.txt} for dim 201 and
+\texttt{reports/mont\_run\_100\_150.txt} for dim 301), the certified
+spectrum files \texttt{reports/gw\_spectrum\_100\_100.json} and
+\texttt{reports/gw\_spectrum\_100\_150.json}, the Route S ladder
+\texttt{reports/gw\_route\_s\_ladder\_c100.json}, the machine-generated
+series record \texttt{reports/THREE\_TASKS\_2026-10-15.md} (sections 4
+and 5, written by \texttt{msaf/gw\_resolution\_delta.py}), the formula and
+instrument map in \texttt{README.md} section 6, and the standalone
+dashboard \texttt{reports/gw\_diagnostic\_v3.html}. Every number below is
+copied from those artifacts; nothing was retyped from memory, nothing was
+recomputed for this file, and no numeric code was modified (no
+\texttt{ctx.prec} mutations). The sealed documents classify the deep
+open question (structural signature versus finite-size effect) as open;
+this consolidation keeps it open.
+
+\section{The object, the gates, the instruments (recap)}
+
+\subsection{The object: the cutoff-free truncated Weil block}
+The campaign object is the cutoff-free truncated Guinand-Weil block
+$\tau = W_{02} - W_R - W_p$ of dimension $\dim = 2N+1$, every entry an
+arbitrary-precision ball with a rigorous error enclosure. With modes
+$n, m \in \{-N, \ldots, N\}$, $i = n + N$, $j = m + N$, $L = \ln c$,
+$\psi$ the digamma and $\psi_1$ the trigamma function:
+\begin{align*}
+W_{02}[i,j] &= \frac{32\,L\,\sinh^{2}(L/4)\,(L^{2} - 16\pi^{2} m n)}
+{(L^{2} + 16\pi^{2} m^{2})\,(L^{2} + 16\pi^{2} n^{2})},\\
+W_R[i,j] &= \kappa + 2\,\mathrm{CC}(|n|) + J - \tfrac{2}{L}\,\mathrm{XC}(|n|)
+\quad (n = m),\\
+W_R[i,j] &= \frac{S_s(m) - S_s(n)}{\pi\,(n - m)}, \quad
+S_s(nn) = \mathrm{sign}(nn)\,S(|nn|) \quad (n \neq m),\\
+W_p[i,j] &= \sum_{q = p^{a} \le c} \ln(p)\,q^{-1/2}\,\mathrm{qterm}(q),\\
+\mathrm{qterm}(q) &= 2\,(1 - \ln q / L)\,\cos(2\pi n \ln q / L)
+\quad (n = m),\\
+\mathrm{qterm}(q) &= \frac{\sin(2\pi m \ln q / L) - \sin(2\pi n \ln q / L)}
+{\pi\,(n - m)} \quad (n \neq m),\\
+\kappa &= \ln\!\bigl(4\pi\,(e^{L} - 1)/(e^{L} + 1)\bigr) + \gamma_E,\\
+J &= -2\ln(U + 1) + \ln(U^{2} + 1) + 2\arctan(U) + \ln 2 - \pi/2,
+\quad U = e^{L/2},\\
+S(n) &= \tfrac{1}{2}\,\mathrm{Im}\,\psi\!\bigl(\tfrac{1}{4} + i\pi n / L\bigr)
+- w_n\,G_S \quad (S(0) = 0),\\
+\mathrm{CC}(n) &= -\tfrac{1}{2}\,\bigl(\mathrm{Re}\,\psi\!\bigl(\tfrac{1}{4}
++ i\pi n / L\bigr) - \psi(1/4)\bigr) + G_{CC} \quad (\mathrm{CC}(0) = 0),\\
+\mathrm{XC}(n) &= \tfrac{1}{4}\,\mathrm{Re}\,\psi_1\!\bigl(\tfrac{1}{4}
++ i\pi n / L\bigr) - L\,G_{XC1} - G_{XC2},\\
+w_n &= 2\pi n / L.
+\end{align*}
+$G_S$, $G_{CC}$, $G_{XC1}$, $G_{XC2}$ are geometric sums over
+$c_k = 2k + 1/2$ carrying the rigorous additive tail remainder
+$\mathrm{rem} = 4\exp(-c_{k+1} L)/(1 - \exp(-2L))$. The prime-power
+cutoff $c$ admits exactly the terms $q = p^{a} \le c$ (9 terms for
+$c = 13$; 35 terms for $c = 100$). The assembly is cutoff-free in the
+archimedean parameter (no finite $T$ anywhere); the full derivation of
+the matrix definition lives in the companion repository
+(guinand-weil-rigorous-numerics, "Full derivation" section).
+
+\subsection{Gate G-M0 (capture)}
+Every spectrum used here passed, before any statistic was computed:
+(a) all eigenvalues finite; (b) all eigenvalues strictly positive,
+reproducing the certified inertia; (c) strictly increasing after sorting
+at 60-digit midpoints; and the two normalised momentum cross-checks at
+$10^{-300}$:
+\begin{equation*}
+\Bigl|\sum_k \lambda_k - \mathrm{tr}\,M\Bigr| \big/ |\mathrm{tr}\,M|
+< 10^{-300},
+\qquad
+\Bigl|\sum_k \lambda_k^{2} - \|M\|_F^{2}\Bigr| \big/ \|M\|_F^{2}
+< 10^{-300}.
+\end{equation*}
+Failure aborts: no statistics are ever computed from a file without
+G-M0 = PASS. The Route S sign certificate (interval LDL$^T$,
+Sylvester's criterion) proves positive definiteness and is never used as
+a magnitude; the Route A2 magnitudes come from the interval eigensolver
+(Rump / van der Hoeven--Mourrain). The scope limit is stated by the
+measurement script itself: NOT Montgomery's theorem, NOT evidence for
+RH, NOT Weil positivity, NOT prime counting, NOT factorisation.
+
+\subsection{S1: mean adjacent gap ratio (unfolding-free)}
+For levels $x_1 < \cdots < x_D$:
+\begin{equation*}
+s_i = x_{i+1} - x_i, \qquad
+r_i = \frac{\min(s_i, s_{i+1})}{\max(s_i, s_{i+1})}, \qquad
+\bar r = \mathrm{mean}_i\, r_i.
+\end{equation*}
+Charts T $= \ln \lambda$ (primary) and L $= \lambda$ (secondary); both
+are always reported and the flattering one is never chosen afterwards.
+References are matched-N simulations (GUE / GOE / Poisson, 2000 samples
+each, seed 20260927), never memorised constants. Verdicts:
+in-Poisson-only means CONSISTENT WITH POISSON; in-RMT-only means
+CONSISTENT WITH RMT; in both means NO DISCRIMINATION; in neither means
+INCONSISTENT WITH ALL; if the two charts disagree, CHART-DEPENDENT,
+hence INCONCLUSIVE.
+
+\subsection{S2: pair correlation versus the Montgomery kernel}
+Target kernel ($u$ = unfolded separation):
+\begin{equation*}
+R_2(u) = 1 - \Bigl(\frac{\sin(\pi u)}{\pi u}\Bigr)^{2}, \qquad R_2(0) = 0.
+\end{equation*}
+Unfolding (Gaussian-kernel smoothing of the counting function, adaptive
+bandwidth $\sigma_u$ times the local mean spacing $h_m$ from $\pm 10$
+neighbours; then rescaled so the mean gap is exactly 1):
+\begin{equation*}
+x_k = \sum_m \Phi\!\Bigl(\frac{y_k - y_m}{\sigma_u\, h_m}\Bigr).
+\end{equation*}
+Estimator (compared against the target pushed through the estimator's
+own smoothing -- the apples-to-apples fix; no threshold was moved):
+\begin{equation*}
+R_2^{\mathrm{est}}(u) = \frac{1}{D} \sum_{i \neq j}
+\mathrm{Gauss}_{\sigma_e}\!\bigl(u - (x_i - x_j)\bigr).
+\end{equation*}
+Grid: $\sigma_u \in \{0.3, 0.5, 1.0\} \times \{T, L\}$; estimator
+$\sigma_e = 0.5$ fixed; $u \in [0, 10)$ in 20 bins of width 0.5; bin
+weight $= 1 / (\text{GUE surrogate per-bin variance})$; bins with
+expected pair count below 5 are dropped and reported. Statistic and
+p-values (Poisson on the LOWER tail -- amendment \#1001631, registered
+before any real spectrum was read; the S1/S2 rules are pre-registration
+\#1001630):
+\begin{equation*}
+\chi^2_{\mathrm{obs}} = \!
+\sum_{\text{bins } E \ge 5}\!
+\frac{\bigl(c_b - T_{\sigma_e}(u_b)\bigr)^{2}}{\mathrm{Var}_{GUE}(b)},
+\qquad
+p_{GUE} = P[\chi^2_{GUE} \ge \chi^2_{\mathrm{obs}}],
+\qquad
+p_{Pois} = P[\chi^2_{Pois} \le \chi^2_{\mathrm{obs}}].
+\end{equation*}
+Verdict: $p_{GUE} \ge 0.05$ and $p_{Pois} < 0.05$ means CONSISTENT WITH
+MONTGOMERY/GUE, distinguishable from Poisson; both $\ge 0.05$ means NO
+DISCRIMINATION; $p_{GUE} < 0.05$ means INCONSISTENT WITH MONTGOMERY AT
+THIS RESOLUTION; the verdict must hold on all 6 grid points, otherwise
+UNSTABLE, hence INCONCLUSIVE (report the instability; never pick the
+favourable cell).
+
+\section{Main spectral results}
+
+\subsection{The rigid three-point matrix}
+Table~\ref{tab:matrix} is the exact three-point series record
+(\texttt{reports/THREE\_TASKS\_2026-10-15.md}, section 5.2), whose cells
+were machine-extracted there from the canonical logs by
+\texttt{msaf/gw\_resolution\_delta.py}. Raw $\chi^2$ is not cross-N
+comparable by construction (pair counts scale as $N^{2}/2$; bin weights
+are the matched-N GUE variances); the comparable statistic is the
+matched-N Monte-Carlo p-value.
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{@{}l p{3.4cm} p{3.4cm} p{3.4cm}@{}}
+\toprule
+Quantity & dim 201 & dim 301 & dim 401 \\
+\midrule
+Provenance & \texttt{c=100 N=100 dps=1806 prec=6000 algo=vdhoeven\_mourrain n=201} &
+\texttt{c=100 N=150 dps=1806 prec=6000 algo=vdhoeven\_mourrain n=301} &
+\texttt{c=100 N=200 dps=400 prec=2048 algo=vdhoeven\_mourrain n=401} \\
+$\lambda_{\min}$ (float) & \texttt{2.4366351145008994e-191} &
+\texttt{6.5771898716824545e-248} & \texttt{1.7372701741044778e-294} \\
+$\lambda_{\max}$ & \texttt{7.1571506955502118} &
+\texttt{7.8671659089293762} & \texttt{7.9954638264487512} \\
+spread (orders) & \texttt{191.467950} & \texttt{248.077778} &
+\texttt{294.662976} \\
+S1 chart T $\bar r$ (n\_ratios) & \texttt{0.620526 (199)} &
+\texttt{0.563504 (299)} & \texttt{0.548557 (399)} \\
+GUE matched-N reference (mean +- sd) & \texttt{0.599774 +- 0.020042} &
+\texttt{0.600043 +- 0.016401} & \texttt{0.599639 +- 0.014359} \\
+Distance of $\bar r$ T from the GUE mean (SD) & \texttt{+1.04} &
+\texttt{-2.23} & \texttt{-3.56} \\
+S1 chart L $\bar r$ & \texttt{0.131742} & \texttt{0.151834} &
+\texttt{0.190891} \\
+S1 FINAL & \texttt{CHART-DEPENDENT (T and L disagree) -> INCONCLUSIVE} &
+\texttt{CHART-DEPENDENT (T and L disagree) -> INCONCLUSIVE} &
+\texttt{CHART-DEPENDENT (T and L disagree) -> INCONCLUSIVE} \\
+S2 $\chi^2$ chart T ($\sigma_u$ 0.3 / 0.5 / 1.0) &
+\texttt{14621.8788 / 2146.3923 / 594.5661} &
+\texttt{12448.7407 / 1393.1679 / 869.3876} &
+\texttt{11639.5769 / 1698.5441 / 816.3241} \\
+S2 $\chi^2$ chart L & \texttt{47172.5984 / 10004.2942 / 4219.3598} &
+\texttt{107396.0291 / 15289.0448 / 5786.2945} &
+\texttt{137543.9721 / 18825.3487 / 6289.2525} \\
+S2 $p_{GUE}$ (6 points) & \texttt{0.0000} &
+\texttt{0.0000 ; 0.0180} & \texttt{0.0000} \\
+S2 $p_{Pois}$ chart T & \texttt{0.9910 / 0.8285 / 0.0245} &
+\texttt{0.9950 / 0.2390 / 0.0720} & \texttt{0.9980 / 0.5340 / 0.0075} \\
+S2 $p_{Pois}$ chart L & \texttt{1.0000 / 1.0000 / 1.0000} &
+\texttt{1.0000 / 1.0000 / 1.0000} & \texttt{1.0000 / 1.0000 / 1.0000} \\
+S2 FINAL & \texttt{INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION} &
+\texttt{INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION} &
+\texttt{INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION} \\
+\bottomrule
+\end{tabular}
+\caption{The rigid three-point matrix. The cell ``0.0000 ; 0.0180''
+(dim 301, $p_{GUE}$, 6-point block) is the single off-floor reading of
+the whole campaign; it stays below the 0.05 threshold. Full-precision
+midpoints as recorded: dim 201 =
+\texttt{2.43663511450089951654005401859e-191}; dim 301 =
+\texttt{6.57718987168245436989192354963e-248}; dim 401 is recorded as
+the float above in its canonical log (\texttt{msaf/mont\_run.txt}).}
+\label{tab:matrix}
+\end{table}
+
+\subsection{The S2 grid, cell by cell (18 cells)}
+Table~\ref{tab:grid} lists every one of the 18 cells
+(3 resolutions $\times$ 2 charts $\times$ 3 bandwidths) as
+``$\chi^2_{\mathrm{obs}}$ / $p_{GUE}$ / $p_{Pois}$''. Census: 17 of the
+18 cells sit exactly at the 2000-surrogate floor -- printed as 0.0000,
+meaning $\chi^2_{\mathrm{obs}}$ exceeds the $\chi^2$ of ALL 2000
+matched-N GUE realisations -- and the single off-floor cell (dim 301,
+chart T, $\sigma_u = 0.5$) reads $p_{GUE} = 0.0180$, still below the
+pre-registered 0.05 threshold. The maximum $p_{GUE}$ over the whole
+grid is therefore 0.0180; no cell climbs to consistency; S2 FINAL is
+INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION at all three
+resolutions.
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{@{}l l l l@{}}
+\toprule
+Resolution & $\sigma_u = 0.3$ & $\sigma_u = 0.5$ & $\sigma_u = 1.0$ \\
+\midrule
+dim 201, chart T & 14621.8788 / 0.0000 / 0.9910 & 2146.3923 / 0.0000 / 0.8285 & 594.5661 / 0.0000 / 0.0245 \\
+dim 201, chart L & 47172.5984 / 0.0000 / 1.0000 & 10004.2942 / 0.0000 / 1.0000 & 4219.3598 / 0.0000 / 1.0000 \\
+dim 301, chart T & 12448.7407 / 0.0000 / 0.9950 & 1393.1679 / 0.0180 / 0.2390 & 869.3876 / 0.0000 / 0.0720 \\
+dim 301, chart L & 107396.0291 / 0.0000 / 1.0000 & 15289.0448 / 0.0000 / 1.0000 & 5786.2945 / 0.0000 / 1.0000 \\
+dim 401, chart T & 11639.5769 / 0.0000 / 0.9980 & 1698.5441 / 0.0000 / 0.5340 & 816.3241 / 0.0000 / 0.0075 \\
+dim 401, chart L & 137543.9721 / 0.0000 / 1.0000 & 18825.3487 / 0.0000 / 1.0000 & 6289.2525 / 0.0000 / 1.0000 \\
+\bottomrule
+\end{tabular}
+\caption{All 18 S2 cells, transcribed from the canonical logs (values
+identical to the dashboard heatmap \texttt{reports/gw\_diagnostic\_v3.html}).}
+\label{tab:grid}
+\end{table}
+
+\subsection{The pre-registered question: measured answer}
+``Does the deviation shrink as resolution grows?'' -- measured verdict
+for the tested series: it does NOT shrink. There is no ascent toward
+consistency from 401 to 301 to 201 on the pre-registered grid; the one
+off-floor cell is a lift of the floor, not a landing. Honest limits, as
+measured: (i) three points are not an asymptote, so the direction of
+longer series stays open; (ii) raw $\chi^2$ is not cross-N comparable by
+construction (bin weights are the matched-N GUE variances), so the
+statement is about the verdict grid, not about a smooth curve;
+(iii) the resolution ceiling -- expected pairs per bin max 100.4 / 150.4
+/ 200.4 and min 19.0 / 28.5 / 38.0 at dim 201 / 301 / 401 -- was
+reached at every point.
+
+\subsection{Double-ensemble extremity at $\sigma_u = 0.3$}
+On the chart-T row, $\sigma_u = 0.3$, the observed statistic is extreme
+with respect to BOTH reference ensembles at all three resolutions:
+$p_{GUE} = 0.0000$ ($\chi^2_{\mathrm{obs}}$ exceeds every one of the
+2000 matched GUE draws) while the lower-tail $p_{Pois}$ reads 0.9910 /
+0.9950 / 0.9980 at dim 201 / 301 / 401, i.e.
+$\chi^2_{\mathrm{obs}}$ exceeds 99.10\% / 99.50\% / 99.80\% of the 2000
+matched Poisson draws. This double-extremity is a descriptive fact of
+the statistic on this bandwidth; it is not itself a pre-registered
+verdict. It is also bandwidth-specific, not grid-uniform: at
+$\sigma_u = 1.0$ (chart T) the lower-tail $p_{Pois}$ falls to 0.0245 /
+0.0720 / 0.0075 -- the observed statistic approaches or crosses the
+0.05 line on the ``distinguishable from Poisson'' side -- while
+$p_{GUE}$ stays 0.0000; and on chart L $p_{Pois}$ reads 1.0000 in all
+nine cells (raw $\chi^2$ up to 137543.9721) and is reported as-is. No
+cell was selected, moved or averaged.
+
+\subsection{Open classification: structural signature versus
+finite-size effect}
+The series establishes that the deviation shows no decay toward
+consistency over dim 201 -> 301 -> 401 and that the resolution ceiling
+was reached at every point; it therefore excludes a fast monotone
+finite-size truncation as the observed trend. The series does not
+classify the deviation as an inherent structural signature of the
+finite information lattice as opposed to a finite-size effect of some
+other (non-monotone) form: with one matrix per resolution, one matrix
+per point, and null ensembles floored at 2000 draws, that classification
+is not decidable from these statistics. The sealed record keeps the
+question open; this consolidation keeps it open.
+
+\subsection{Falsified pre-registered expectations, kept visible}
+The pre-registered expectation that the GOE and GUE references would
+not be separable was FALSIFIED at all three resolutions (measured gap
+0.069935 / 0.069737 / 0.069286 against standard errors 0.001417 /
+0.000947 / 0.000718, about 49 / 74 / 97 SE). A retracted S1 label
+(defect 17) and a vacuous $\sigma_u$ grid in run 1 (defect 15) are
+disclosed in the companion pipeline logs and were fixed at the root;
+they stay listed so that no reader has to trust a clean-looking log.
+
+\subsection{What is new, and what is not claimed}
+New and sealed: three certified spectra at dim 201 / 301 / 401 (G-M0
+PASS; inertia fully positive), including pure-ball 6000-bit chains for
+dim 201 and 301; the measured resolution verdict (floor census 17/18
+with the 0.0180 cell reported as-is); the certified magnitude record --
+$\lambda_{\min}$ down to 1.7372701741044778e-294 (dim 401) and
+6.5771898716824545e-248 (dim 301), with 6000-bit enclosure radii
+measured at e-1685 .. e-1728 (max radius 7.424315166e-1728 /
+4.957228557e-1685 / 1.009286479e-611 at dim 201 / 301 / 401), and the
+c=13 slice refuting the constant-B decay form with slopes -1.72, -1.05,
+-0.34; and the two-sided rails: verdicts move only by pre-registered
+rules, falsified expectations and retracted labels stay visible.
+NOT claimed: not Montgomery's theorem, not RH evidence, not Weil
+positivity, not prime counting, not factorisation. Every verdict is a
+statement about one finite deterministic matrix at a stated precision.
+
+\section{Technical appendix: process-defect register}
+The following entries transcribe the campaign's process record
+(\texttt{reports/THREE\_TASKS\_2026-10-15.md}, section 4.4, plus one
+serialisation rule); they are reproduced for total academic
+transparency.
+
+\begin{enumerate}
+\item \textbf{A flawed quick S2 script, VOIDed.} A fast reimplementation
+made before the canonical pipeline (\texttt{gw\_montgomery.py}) was
+found is doubly defective: the \texttt{sigma\_u} parameter is unused
+($\chi^2$ identical in all three bandwidths -- T: 2976.2575 three
+times; L: 40194.1146 three times) and its rank-based unfolding destroys
+the pair structure. All of its output is VOID and was removed; every
+number in this document comes from the canonical pipeline.
+\item \textbf{A wrong-scheme draft spectrum, deleted.} The first dim-201
+draft (float midpoints only, no radii, no gate) and its builder were
+removed; the replacement is the canonical capture with G-M0 PASS.
+\item \textbf{A blind CI sensor, fixed at the root.} The escape-token
+sensor swept \texttt{lean/spec/} (nine declarative axioms that are, by
+design, outside the Python audit glob), so CI went red on six
+consecutive pushes since \texttt{29afa19}. The fix (\texttt{1d591a8})
+keeps the kernel glob at zero hits and forbids
+\texttt{sorry}/\texttt{admit}/\texttt{unsafe} in the spec glob while
+freezing the axiom budget at exactly 9; CI returned green (run
+38832840886). The failure is recorded, not patched silently.
+\item \textbf{Provenance baseline.} \texttt{msaf/mont\_run.txt} is a
+UTF-16 copy of \texttt{gw\_montgomery\_100\_200\_run2.log} (the
+$\bar r$ and $\chi^2$ lines are identical; one trailing-character
+difference). The older \texttt{gw\_montgomery\_100\_200.log} does not
+contain the S1/S2 statistics and is not used.
+\item \textbf{Global precision audit for the campaign.} All three new
+modules were checked. \texttt{gw\_route\_s\_ladder.py} and
+\texttt{capture\_spectrum\_201.py} used a save/restore \texttt{ctx.prec}
+pattern; one bare \texttt{mp.mp.dps = 100} write was found in
+\texttt{capture\_spectrum\_201.py} and fixed at the root -- the old
+value is now restored in a \texttt{finally} block; the fix is
+restore-only and has no numeric effect on the sealed artifacts.
+\texttt{gw\_resolution\_delta.py} touches no precision at all (pure
+text). Eight bare writes in older test modules (OPEN in the non-finite
+defect register) remain untouched, per mandate.
+\item \textbf{Precision-hygiene rule for the e-1685..e-1728 radii.} The
+enclosure radii of the certified spectra are serialised as decimal
+STRINGS, never as floating-point JSON numbers: a binary64 round trip
+would collapse radii of order e-1685 (and e-1728) to a fake 0.0. The
+certified files (\texttt{reports/gw\_spectrum\_100\_100.json},
+\texttt{reports/gw\_spectrum\_100\_150.json}) therefore carry every
+radius as a string; any consumer re-parsing those fields must use exact
+decimal parsing. (This rule is the written constraint behind the
+campaign's extreme-precision radii; no other float-to-decimal defect is
+recorded in section 4.4.)
+\end{enumerate}
+
+Literal limits, restated: these are statistics of a finite set of
+constructed matrices. Not Montgomery's theorem, not a proof of RH, not
+Weil positivity, not a prime count.
+
+\section{Provenance and reproduction}
+Artifacts: the three canonical logs (dim 401:
+\texttt{msaf/mont\_run.txt}; dim 201:
+\texttt{reports/mont\_run\_100\_100.txt}; dim 301:
+\texttt{reports/mont\_run\_100\_150.txt}); the certified spectra
+\texttt{reports/gw\_spectrum\_100\_100.json} and
+\texttt{reports/gw\_spectrum\_100\_150.json}; the Route S ladders
+\texttt{reports/gw\_route\_s\_ladder.json} (c=13, dims 21..641, 6/6
+CERTIFIED POSITIVE DEFINITE) and
+\texttt{reports/gw\_route\_s\_ladder\_c100.json} (dims 201, 301, 2/2
+CERTIFIED POSITIVE DEFINITE); the machine-generated series record
+\texttt{reports/THREE\_TASKS\_2026-10-15.md} sections 4 and 5; and the
+standalone dashboard \texttt{reports/gw\_diagnostic\_v3.html}
+(byte-stable: a rerun of \texttt{msaf/gw\_dashboard\_v3.py --write}
+returns an identical 23{,}493-byte file, sha256
+89C7D5F948626BD51DE06F37534BDC4941D3793353DCB80B8557E10E2BED7322).
+Reproduce with \texttt{python msaf/gw\_resolution\_delta.py --write} and
+\texttt{python msaf/gw\_dashboard\_v3.py --write}; the Montgomery
+measurement itself reruns from the companion checkout
+(\texttt{gw\_montgomery.py reports/gw\_spectrum\_100\_150.json
+--samples 2000}). Regression suite of the repository: 311 tests. The
+campaign was sealed across commits \texttt{da93d19} (measurement close
++ dashboard lock), \texttt{28de2b8} (README section 6) and the
+consolidation commit carrying this file, which is flagged as the final
+certified delivery (tag \texttt{v1.40.0-alpha-final-certified-delivery}).
+This file is a transcription; if any discrepancy is found between it
+and the sources, the sources win.
+
+\end{document}
