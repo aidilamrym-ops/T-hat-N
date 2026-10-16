@@ -27,7 +27,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Anti-Turing / P-vs-NP | v1.39.0-alpha, entails gap didokumentasikan | `GAP-PNP.md` |
 | Hodge → HODGE-CH | v1.38.0-alpha, polinomial Weil eksak | `reports/HODGE_CLOSURE.md`, `HODGE_CH_SPEC.md` |
 | Resolusi kedua dim 201 + delta S1/S2 + perbaikan sensor CI | commits `1d591a8`, `da94306`, dan commit yang membawa baris ini; CI hijau run `38832840886` | `reports/THREE_TASKS_2026-10-15.md` §4 |
-| Seri tiga titik dim 201/301/401 + §5 + dashboard v3 | commit yang membawa baris ini | `reports/THREE_TASKS_2026-10-15.md` §5, `reports/gw_diagnostic_v3.html` |
+| Seri tiga titik dim 201/301/401 + §5 + dashboard v3 | commit `da93d19` dan commit yang membawa baris ini; CI hijau run `38850650775` | `reports/THREE_TASKS_2026-10-15.md` §5, `reports/gw_diagnostic_v3.html` |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
