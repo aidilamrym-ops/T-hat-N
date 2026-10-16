@@ -156,3 +156,56 @@ Tidak ada deviasi prosedural dari spec yang tercatat selama
 eksekusi ini. Dua catatan operasional direkam, bukan dipatch
 diam-diam: cap thread kinerja (bagian 1) dan reuse entri kanonik
 S5 dari run A dim 301 (bagian 1).
+
+## 8. Verifikasi independen engine B (S2 penuh) -- 2026-10-17
+
+- Harness `msaf/gw_engine_b_verify.py` (sha256 `485ab652...`; tidak
+  diubah pasca-peluncuran) menjalankan verifikasi independen bagian 5
+  spec pada skala penuh: 20000 sampel/ensemble, seed 20260927, dps 50,
+  dim 201/301/401, GUE + Poisson, 18 sel.
+- Run penuh selesai 2026-10-17 00:51:30 lokal; exit code 0 (file keluar
+  launcher: `STARTED 16/10/2026 22:20:26,63` / `EXITCODE=0`); total
+  9062 s. Artefak: `reports/gw_engine_b_verify.log` +
+  `reports/gw_engine_b_verify.json`.
+- Verdict (verbatim dari log):
+
+    ################################################################
+    # ENGINE B VERDICT (full)
+    #   B1 parsing      : PASS
+    #   B3 gate G-M0    : PASS
+    #   B2 observed grid: PASS-WITH-ENUMERATED-EXCEPTIONS
+    #   counts          : PASS
+    #   OVERALL         : PASS-WITH-ENUMERATED-EXCEPTIONS
+    ################################################################
+
+- Counts (verbatim dari log): `counts vs engine A: k_GUE 18/18 exact,
+  k_Pois 18/18 exact, all four tails 18/18`.
+- Guard CI `msaf/tests/test_gw_engine_b_full_artifact.py` memverifikasi
+  ulang dari artefak tersegel: 18/18 sel identik (B == grid refined A ==
+  nilai A dalam artefak) untuk k_GUE dan k_Pois; semua flag `exact_*`
+  true; verdict + manifest + baris verdict log dicek verbatim.
+- B1 census: dim 201/301/401 -- SEMUA radius (n=201/301/401 per dim) di
+  bawah rentang float64 dan akan menjadi fake-zero di binary64
+  (justifikasi parsing desimal); G-M0 direproduksi (a-e true) di ketiga
+  dim.
+- B2a grid: 720 bin dibandingkan; frozen OR 666/720; cabang 10-ulp
+  8/720; 9 sel chart-L `PASS_ENUMERATED_EDGE_CLUSTER` (6 bin cv
+  OR-fail + 0 tgt per sel; 15-21 anggota terenumerasi per sel; flips 2;
+  semua tercakup aturan pra-deklarasi di
+  `reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md`).
+- chi2 (informasional): semua |chi2_B - chi2_A_printed| <= 1e-3
+  (maksimum terukur dari artefak: 4.904769593849778e-05).
+- Manifest artefak: repo_head `451eec7`; script sha256 `485ab652...`;
+  instrument sha256 before=after `072910f2...` (rev `b0af0f51`);
+  python 3.14.4 / numpy 2.5.2 / scipy 1.18.0 / mpmath 1.3.0.
+- sha256 artefak (LF-normalised, checkout-stable; konvensi `stable_bytes`
+  v4): log `27743364ce1cabfe217b1a7a489524e5a463f8a3c1bdbbb4cb8ae71d8be0330d`,
+  json `f7b3eb01ebc82fbd4bafce57dc56c1cb55e830aa5eb55241ee1e71070a88d95f`,
+  log interupsi `6b83d9c09d394a82bdd64d978b5b8d39e9907e32f8ad537e8df48283c8e30253`.
+- Riwayat interupsi (append-only): R1 (terminasi eksternal 22:11 saat
+  dim 401; log parsial disimpan verbatim) + R2 (restart lingkungan
+  setelah run selesai; tidak ada efek) --
+  `reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md`.
+- Batas interpretasi (beku): sama seperti seluruh kampanye -- ini
+  reproduksi kriteria beku pada artefak numerik, bukan bukti RH dan
+  bukan teorema Montgomery.

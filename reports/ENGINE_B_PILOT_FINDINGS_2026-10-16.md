@@ -63,3 +63,39 @@ per cell fail BOTH branches of the frozen OR. Exact characterization:
 
 Pilot v2 (same day, final script revision) re-validates this treatment at
 the sealed 2000-sample scale before the full 20000-sample run starts.
+
+## R1 -- full-run interruption and detached relaunch (2026-10-16 22:11 / 22:20)
+
+The first full run (script sha256 485ab652..., launched 2026-10-16 ~21:02
+local) was terminated externally at 22:11:0x local during dim 401
+(GUE 1000/20000): the process tree vanished with no error output -- the log
+ends mid-progress, stderr carries no traceback, no exit code was recorded,
+and the hosting shell died without emitting its final line (the MCP bridge
+processes restarted at 22:12:12, consistent with an environment restart).
+Partial log preserved verbatim as
+`reports/gw_engine_b_verify_interrupted_2026-10-16_2211.log`. No artifact
+was written by the interrupted run. No module or instrument change was made
+(instrument sha256 unchanged 072910f2...; script sha256 unchanged 485ab652...).
+The run was relaunched detached (WMI-created process; launcher
+`C:\Users\usER\AppData\Local\Temp\opencode\run_engine_b_full.cmd`) so the
+verification process no longer depends on the agent-shell lifetime. The
+relaunched log header re-records script sha256 485ab652... and instrument
+sha256 072910f2... (both unchanged).
+
+## R2 -- environment restart after completion (2026-10-17)
+
+The relaunched full run COMPLETED before the environment restart. The
+launcher exit file (verbatim):
+
+    STARTED 16/10/2026 22:20:26,63
+    EXITCODE=0
+
+The log's final line is `wrote D:\Opencode AI Agent\reports\gw_engine_b_verify.json  (9062 s total)`;
+the artifact timestamp is 2026-10-17 00:51:30 local. The host was then
+restarted (the agent-shell background processes -- including the watcher --
+were cancelled by the restart; the user attributes the outage to a power
+interruption); the environment was found up again at ~05:39 local. No
+verification process was running at that point, no artifact was affected,
+and no re-run is needed: the completed log + JSON are the results of
+record. Header re-records (unchanged): script sha256 `485ab652...`;
+instrument sha256 `072910f2...`.

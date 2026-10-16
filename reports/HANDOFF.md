@@ -8,7 +8,7 @@ dashboard `reports/gw_diagnostic_v3.html`; README §6 memuat peta jalan
 kampanye + rumus instrumen lengkap). **Konsolidasi 2026-10-16:** manuskrip
 `exports/research_paper.tex` (Main Spectral Results + register cacat,
 transkripsi artefak tersegel saja) ditambahkan; dashboard v3 diuji ulang
-byte-stabil; delivery akhir ditandai tag `v1.40.0-alpha-final-certified-delivery`. **H0 lockdown (2026-10-16):** `docs/ZENODO_ACTIVATE.md` (panduan aktivasi webhook Zenodo) + template release + pra-registrasi amandemen lantai `reports/AMENDMENT_FLOOR_SPEC.md` (DIBEKUKAN, sha256 di §1) disegel; TIDAK ada komputasi baru dijalankan. **Deposit + release (2026-10-16):** delivery T-hat-N diamankan sebagai VERSI BARU record Zenodo via depositor API — DOI versi `10.5281/zenodo.23410894` (konsep `10.5281/zenodo.23338271`; arsip tarball commit `a37b50b`, sha256 `44bdfb87...`); release GitHub `v1.40.0-alpha-final-certified-delivery` diterbitkan via `gh`; skrip depositor diperluas (`--date`/`--version`, commit `3305221`). **H1 amandemen lantai (2026-10-16):** bagian (A)+(B) dari `reports/AMENDMENT_FLOOR_SPEC.md` (DIBEKUKAN) dieksekusi penuh — grid refined 20000 surrogat + array robustness C4 5-seed; hasil terukur, klasifikasi beku (NOT STABLE), dan falsifikasi ekspektasi pra-registrasi di §2.0c dan `reports/AMENDMENT_FLOOR_RESULTS.md`; manuskrip `exports/research_paper.tex` diamandemen bertanggal (section sebelum register cacat + pointer abstrak + catatan header). (C) engine B = sesi berikutnya.
+byte-stabil; delivery akhir ditandai tag `v1.40.0-alpha-final-certified-delivery`. **H0 lockdown (2026-10-16):** `docs/ZENODO_ACTIVATE.md` (panduan aktivasi webhook Zenodo) + template release + pra-registrasi amandemen lantai `reports/AMENDMENT_FLOOR_SPEC.md` (DIBEKUKAN, sha256 di §1) disegel; TIDAK ada komputasi baru dijalankan. **Deposit + release (2026-10-16):** delivery T-hat-N diamankan sebagai VERSI BARU record Zenodo via depositor API — DOI versi `10.5281/zenodo.23410894` (konsep `10.5281/zenodo.23338271`; arsip tarball commit `a37b50b`, sha256 `44bdfb87...`); release GitHub `v1.40.0-alpha-final-certified-delivery` diterbitkan via `gh`; skrip depositor diperluas (`--date`/`--version`, commit `3305221`). **H1 amandemen lantai (2026-10-16):** bagian (A)+(B) dari `reports/AMENDMENT_FLOOR_SPEC.md` (DIBEKUKAN) dieksekusi penuh — grid refined 20000 surrogat + array robustness C4 5-seed; hasil terukur, klasifikasi beku (NOT STABLE), dan falsifikasi ekspektasi pra-registrasi di §2.0c dan `reports/AMENDMENT_FLOOR_RESULTS.md`; manuskrip `exports/research_paper.tex` diamandemen bertanggal (section sebelum register cacat + pointer abstrak + catatan header). (C) engine B = sesi berikutnya. **H1 (C) engine B SELESAI (2026-10-17):** verifikasi independen S2 run penuh 20000 sampel — verdict `PASS-WITH-ENUMERATED-EXCEPTIONS`, counts 18/18 eksak vs engine A (exit 0, 9062 s); log + JSON tersegel di repo, riwayat interupsi R1/R2 di `reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md`, rincian §8 `reports/AMENDMENT_FLOOR_RESULTS.md`.
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
 `reports/DAFTAR_MASALAH_KERJA.md` (antrean 20 masalah).
@@ -37,6 +37,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | H0 lockdown + pra-registrasi amandemen lantai (H1) | commit yang membawa baris ini; dibangun di atas `a37b50b` (CI hijau run `38854261266` / `38854493402`); spesifikasi DIBEKUKAN, sha256 `3C9958BEE3021385B242B84B2ECDA136E15F35D5682C16FF690713830EFBB917` | `docs/ZENODO_ACTIVATE.md`, `reports/RELEASE_v1.40.0-alpha-final-certified-delivery.md`, `reports/AMENDMENT_FLOOR_SPEC.md` |
 | Deposit delivery T-hat-N (versi baru Zenodo) + release GitHub delivery | commit yang membawa baris ini; DOI versi `10.5281/zenodo.23410894` (konsep `10.5281/zenodo.23338271`); arsip tarball commit `a37b50b` sha256 `44bdfb87788b1f1da687b2d8e852641385b5c80de99c072768f6b67120198f61` (546.800 byte, md5 cocok), CI hijau run `38854261266` / `38854493402`; release `v1.40.0-alpha-final-certified-delivery` terbit via `gh` | `https://doi.org/10.5281/zenodo.23410894`, `msaf/zenodo_deposit.py` (commit `3305221`), halaman release |
 | Amandemen lantai H1 — grid refined 20000 surrogat + array robustness C4 5-seed | commit yang membawa baris ini; dibangun di atas rantai tooling H1 `993b0e8` → `2f6100e` → `32ac8dc` (CI hijau run `38888730255` untuk `32ac8dc`; catatan jujur: run pertama `993b0e8` GAGAL karena runner CI belum punya scipy — diperbaiki di akar oleh `2f6100e`, pin `scipy==1.18.0`); spec DIBEKUKAN sha256 `3C9958BEE3021385B242B84B2ECDA136E15F35D5682C16FF690713830EFBB917`; angka eksak (spec §6.5): C4 kanonik `1262/20000` = 6.31000e-02 (NO DISCRIMINATION AT N=401), pooled `5877/100000` = 5.87700e-02, homogenitas p = 2.01097e-22 → klasifikasi NOT STABLE (dispersion-dominated); 17/18 sel di lantai `0/20000` (bound `1.49775e-04`); ekspektasi pra-registrasi "semua cabang di bawah 0.05" TERFALSIFIKASI (4/5 seed ≥ 0.05) | `reports/AMENDMENT_FLOOR_RESULTS.md` (generator `msaf/gw_h1_report.py`), `reports/gw_h1_floor_refine.json`, `reports/h1_floor_refine_section.md`, 7 log `reports/mont_run_20000_*.txt` |
+| Amandemen lantai H1 — (C) verifikasi independen engine B (S2 penuh 20000) | commit yang membawa baris ini; dibangun di atas `84248da` (CI hijau run `38922309908`); verdict `PASS-WITH-ENUMERATED-EXCEPTIONS`, counts 18/18 eksak, exit 0, 9062 s | `reports/gw_engine_b_verify.log`, `reports/gw_engine_b_verify.json`, `reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md` (R1/R2), `msaf/tests/test_gw_engine_b_full_artifact.py` |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -104,8 +105,9 @@ DAN sha256 arsip.
 
 - **Pra-registrasi beku** `reports/AMENDMENT_FLOOR_SPEC.md` (sha256
   `3C9958BEE3021385B242B84B2ECDA136E15F35D5682C16FF690713830EFBB917`):
-  bagian (A) + (B) tuntas; (C) engine B = sesi berikutnya (arsitektur
-  dibekukan; tidak pernah verdict-bearing).
+  bagian (A) + (B) tuntas; **(C) engine B SELESAI 2026-10-17** — run penuh
+  lulus (lihat bullet terakhir; arsitektur dibekukan; tidak pernah
+  verdict-bearing).
 - **(A) Grid refined** (18 sel, 20000 surrogat/ensemble, seed 20260927):
   **17/18 sel k_GUE = 0/20000** → BOUND 95% `p_GUE < 1.49775e-04`
   (format "0.0000" pensiun), verdict INCONSISTENT tetap. Sel off-floor
@@ -136,6 +138,15 @@ DAN sha256 arsip.
 - **Batas interpretasi (beku):** NOT STABLE; bukan "physical"; bukan
   teorema Montgomery, bukan bukti RH. Seri resolusi keempat tetap
   tersisa.
+- **(C) Engine B SELESAI 2026-10-17:** verifikasi independen S2 run
+  penuh (20000 sampel/ensemble, seed 20260927) — exit 0, 9062 s;
+  verdict `PASS-WITH-ENUMERATED-EXCEPTIONS` (9 sel bersih + 9 sel
+  edge-cluster terenumerasi, 0 gagal); counts 18/18 eksak vs engine A
+  (k_GUE, k_Pois, four tails); artefak `reports/gw_engine_b_verify.log`
+  + `reports/gw_engine_b_verify.json`; guard CI
+  `msaf/tests/test_gw_engine_b_full_artifact.py`; riwayat R1/R2 di
+  `reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md`; rincian §8
+  `reports/AMENDMENT_FLOOR_RESULTS.md`.
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 
@@ -294,9 +305,13 @@ ASCII dua jalur yang sudah usang. Jangan cari-cari keduanya di repo.
 - Edit regex berbackslash dari shell rapuh → tulis skrip patch ke file.
 - `TEMP\opencode\repofix\` = klon sementara 4 repo anak + worktree TAW.
   **Semua isinya sudah dipush**; hilang di sana tidak berarti hilang.
-- GitHub auth lewat keyring `gh` (tanpa token). Token Zenodo hanya
-  berlaku di dalam sesi tempat user give — jangan tulis ke berkas
-  mana pun.
+- Token (status 2026-10-17): nilai plaintext TIDAK PERNAH ditulis ke
+  repo/chat/log. Keduanya tersimpan sebagai blob terenkripsi DPAPI
+  (scope user) di luar repo: `%USERPROFILE%\.config\zenodo_token.sec`
+  dan `%USERPROFILE%\.config\github_token.sec`; dekripsi hanya di titik
+  pakai, nilai tidak di-echo. GitHub auth juga lewat keyring `gh`.
+  Token Zenodo lama (64 char) sudah dicabut; token baru (60 char) valid
+  (keduanya diverifikasi API). Rotasi ditunda ke akhir proyek.
 - CI T-hat-N: sensor escape-token di `.github/workflows/ci.yml` wajib dua
   glob — kernel (0 hit, termasuk `axiom`) dan spec (`lean/spec/`: tanpa
   `sorry/admit/unsafe`, anggaran axiom dibekukan = 9). Axiom ke-10 di
