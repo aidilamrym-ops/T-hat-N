@@ -1,6 +1,9 @@
 # HANDOFF — titik sambung untuk sesi berikutnya
 
 Ditulis 2026-10-15, akhir sesi repo-audit + Zenodo.
+**Update 2026-10-16:** resolusi kedua (dim 201) diukur; sensor CI diperbaiki
+di akar; jawaban "mengecil atau membesar" di §2.0b dan
+`reports/THREE_TASKS_2026-10-15.md` §4.
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
 `reports/DAFTAR_MASALAH_KERJA.md` (antrean 20 masalah).
@@ -22,6 +25,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Program msaf sendiri | tag `v1.39.0-alpha` (terbaru) | `msaf/tests` 250 passed |
 | Anti-Turing / P-vs-NP | v1.39.0-alpha, entails gap didokumentasikan | `GAP-PNP.md` |
 | Hodge → HODGE-CH | v1.38.0-alpha, polinomial Weil eksak | `reports/HODGE_CLOSURE.md`, `HODGE_CH_SPEC.md` |
+| Resolusi kedua dim 201 + delta S1/S2 + perbaikan sensor CI | commits `1d591a8`, `da94306`, dan commit yang membawa baris ini; CI hijau run `38832840886` | `reports/THREE_TASKS_2026-10-15.md` §4 |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -58,17 +62,24 @@ DAN sha256 arsip.
 - **Tangga Sturm tidak bisa mengukur λ_min** dan alasannya mekanis:
   bracket cluster identik pada 300 maupun 3000 bit, karena titik geser
   dari mesin duble float64.
-- **S1/S2 terukur** pada `gw_spectrum_100_200.json` (dim 401, G-M0 PASS):
-  **S1 FINAL = INCONCLUSIVE** (chart T r_bar 0,5486 → RMT; chart L 0,1909
-  →inkonsisten; keduanya dilaporkan, aturan preregistrasi menolak memilih
-  chart menguntungkan), **S2 FINAL = INCONSISTENT WITH MONTGOMERY AT THIS
-  RESOLUTION** (chi² 11639/1699/816, p_GUE 0,0000 di semua bandwidth).
-  **"Mengecil atau membesar" TIDAK DIJAWAB** — butuh spektrum tersertifikasi
-  kedua pada resolusi berbeda; itu eksperimen berikutnya, belum dijalankan.
-- **Urutan berikutnya yang masuk akal:** (1) tunggu anak tangga λ_min
-  panjang (dim 257, 321) untuk memastikan arah B; (2) bangun spektrum
-  tersertifikasi kedua pada resolusi berbeda lalu ulangi S1/S2; (3) hanya
-  setelah itu boleh bicara hukum redaman sebagai hukum.
+- **S1/S2 terukur pada DUA resolusi.** dim 401 (`gw_spectrum_100_200.json`,
+  run2) dan dim 201 (c=100/N=100, 6000 bit, G-M0 PASS, 2026-10-16,
+  `reports/gw_spectrum_100_100.json`): **S1 FINAL = INCONCLUSIVE di
+  keduanya** (chart-dependence bertahan; r_bar T 0,5486 → 0,6205; L 0,1909
+  → 0,1317), **S2 FINAL = INCONSISTENT di keduanya** (p_GUE 0,0000 di
+  keenam titik kisi KEDUA resolusi — terkunci di lantai uji; 2000 surrogat
+  per ensemble, seed 20260927). **"Mengecil atau membesar" TERJAWAB pada
+  versi ujinya: TIDAK mengecil** — tidak ada pendakian menuju konsistensi
+  dari N=401 ke N=201; arah asimtotik tetap terbuka (seri lebih panjang).
+  Delta lengkap + cacat proses: `THREE_TASKS_2026-10-15.md` §4
+  (generator: `msaf/gw_resolution_delta.py`; log: `reports/mont_run_100_100.txt`).
+- **Urutan berikutnya yang masuk akal:** (1) anak tangga λ_min lebih
+  panjang kalau arah B mau dipastikan (dim 257/321; 321 belum tuntas);
+  (2) ~~spektrum kedua + S1/S2~~ **SELESAI 2026-10-16** — lihat bullet di
+  atas; (3) kalau tren Montgomery mau dikejar sungguhan: seri resolusi
+  ketiga/keempat (plafon ~100–200 pasangan/bin sudah terukur dua kali),
+  atau daya uji di atas lantai 2000 surrogat; (4) hanya setelah itu boleh
+  bicara hukum redaman sebagai hukum.
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 
@@ -167,7 +178,7 @@ Konsekuensi urutan yang disarankan:
 | Berek Hodge | `msaf/hodge/` (`weil_search.py`, `fermat_k3.py`, `gauss_exact.py`) |
 | Berek NS | `msaf/navier_stokes/`, kernel `lean/NavierStokesCore.lean` |
 | Kernel RH | `lean/NewtonExistence.lean` |
-| Test suite (250) | `msaf/tests/` |
+| Test suite (311) | `msaf/tests/` |
 | Bukti JSON | `reports/*.json` |
 
 **Artefak user yang SUDAH DIHAPUS (atas perintah pemilik, 2026-10-15):**
@@ -190,7 +201,10 @@ ASCII dua jalur yang sudah usang. Jangan cari-cari keduanya di repo.
    CI hijau. Tidak ada tag untuk dokumen rencana saja.
 5. Kesalahan proses dicatat, disembunyikan tidak. Contoh yang sudah
    tercatat: patcher reflow CRLF→LF diam-diam (A12_REPORT.md, sudah
-   dikembalikan); `git add -A` menyapu `MSG.txt` (CI yang menangkap).
+   dikembalikan); `git add -A` menyapu `MSG.txt` (CI yang menangkap);
+   penulisan laporan mode-teks Windows yang menggandakan CR (`\r\r\n`,
+   terdeteksi lewat diff seluruh baris; `msaf/gw_resolution_delta.py`
+   kini menormalisasi line-ending dan menulis byte eksak).
 
 ## 6. Jebakan lingkungan (hemat waktu sesi depan)
 
@@ -210,3 +224,10 @@ ASCII dua jalur yang sudah usang. Jangan cari-cari keduanya di repo.
 - GitHub auth lewat keyring `gh` (tanpa token). Token Zenodo hanya
   berlaku di dalam sesi tempat user give — jangan tulis ke berkas
   mana pun.
+- CI T-hat-N: sensor escape-token di `.github/workflows/ci.yml` wajib dua
+  glob — kernel (0 hit, termasuk `axiom`) dan spec (`lean/spec/`: tanpa
+  `sorry/admit/unsafe`, anggaran axiom dibekukan = 9). Axiom ke-10 di
+  spec = CI merah sampai ci.yml diedit sengaja.
+- `msaf/mont_run.txt` (log dim 401) ber-UTF-16 dengan BOM — baca eksplisit
+  `decode('utf-16')` (atau `type` via cmd). Log dim 201
+  (`reports/mont_run_100_100.txt`) UTF-8 murni.
