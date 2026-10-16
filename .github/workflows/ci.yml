@@ -36,6 +36,22 @@ jobs:
         run: lake exe cache get
       - name: Build kernel
         run: lake build
-      - name: Escape-token sensor (must be zero hits)
+      # lean/spec/ holds the CONDITIONAL specification (XiAnalyticSpec.lean):
+      # nine declared axioms -- two opaque analytic symbols plus the seven
+      # obligation lines -- that the pinned Mathlib cannot discharge. The
+      # Python 0-axiom audit already exempts the same glob by design
+      # (msaf/tests/test_lean_axiom_audit.py, "OUT OF SCOPE, and named rather
+      # than forgotten"). The kernel glob must stay at zero hits; the spec
+      # glob may not grow past the frozen budget without a deliberate edit
+      # here.
+      - name: Escape-token sensor -- kernel (must be zero hits)
         run: |
-          ! grep -rnE '\bsorry\b|\badmit\b|\bunsafe\b|^axiom\b' --include='*.lean' --exclude-dir=.lake .
+          ! grep -rnE '\bsorry\b|\badmit\b|\bunsafe\b|^axiom\b' --include='*.lean' --exclude-dir=.lake --exclude-dir=spec .
+      - name: Escape-token sensor -- spec (placeholders banned; axiom budget frozen)
+        run: |
+          ! grep -rnE '\bsorry\b|\badmit\b|\bunsafe\b' --include='*.lean' spec
+          echo "declared axioms in spec/:"
+          grep -rnE '^axiom\b' --include='*.lean' spec || true
+          n=$(grep -rhE '^axiom\b' --include='*.lean' spec | wc -l)
+          echo "spec/ axiom budget: $n / 9 (edit this step deliberately to move it)"
+          test "$n" -eq 9
