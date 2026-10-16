@@ -9,7 +9,7 @@ ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
 - Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338271.svg)](https://doi.org/10.5281/zenodo.23338271) (concept DOI, all versions; latest version v1.40.0-alpha: https://doi.org/10.5281/zenodo.23410894)
-- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha) (current: 311 passed)
+- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha) (current: 345 passed)
 - Final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
 - License: MIT - see [LICENSE](LICENSE)
 
@@ -18,17 +18,30 @@ Display equations below are versioned local SVG assets under
 [`harness/render_math.py`](harness/render_math.py) with no network and no TeX
 installation, so the archive stays self-contained forever.
 
-**New (2026-10-16) - Guinand-Weil interval spectra at three certified
-resolutions.** Section 6 maps the newest campaign: full spectra of the
-cutoff-free truncated Weil block `tau = W02 - WR - Wp` certified at dimensions
-201 / 301 / 401 (gate G-M0 PASS; inertia 201/0, 301/0, 401/0), and the
-Montgomery S1/S2 question answered on the pre-registered grid - measured
-verdict for the tested series: the deviation from RMT-GUE does **not** shrink
-with resolution (17 of 18 chi^2 cells at the 2000-surrogate floor; one cell
-at 0.0180; S1 chart-dependent at all three points; asymptotic direction
-open). Standalone offline dashboard:
-[`reports/gw_diagnostic_v3.html`](reports/gw_diagnostic_v3.html). The
-consolidated LaTeX export of this campaign
+**New (2026-10-17) - H1 floor-amendment closed (stages A + B + C).** The
+statistical floor of the Section 6 campaign was lifted from 2000 to 20000
+surrogates on the pre-registered 18-cell grid (A), the single cell that
+clears the floor was re-measured with a five-seed robustness array (B), and
+an independent engine-B harness (C; decimal-exact parsing, mpmath at 50 dps -
+a separate code path from engine A) re-derived the S2 statistics end-to-end:
+its full 20000-sample run reproduced every engine-A count exactly (18/18
+cells, all four tails). Overall verdict: `PASS-WITH-ENUMERATED-EXCEPTIONS`,
+zero failing cells; the one chart-L edge cluster is enumerated bin-by-bin
+under pre-declared rules, never excused. All sealed numbers, provenance
+hashes and the public-CI evidence are machine-extracted into
+[Section 7](#section-7-sealed-status-workflow-and-verification-chain); the
+standalone dashboards are
+[`v4`](reports/gw_diagnostic_v4.html) (English rebuild, current) and
+[`v3`](reports/gw_diagnostic_v3.html) (sealed, byte-identical). Frozen
+pre-registration:
+[`reports/AMENDMENT_FLOOR_SPEC.md`](reports/AMENDMENT_FLOOR_SPEC.md);
+results: [`reports/AMENDMENT_FLOOR_RESULTS.md`](reports/AMENDMENT_FLOOR_RESULTS.md)
+Section 8. Section 6 below remains the sealed three-resolution record: full
+Guinand-Weil spectra of the cutoff-free truncated Weil block `tau = W02 - WR
+- Wp` at dims 201 / 301 / 401 (gate G-M0 PASS; inertia 201/0, 301/0, 401/0),
+and the measured S1/S2 verdict for the tested series - the deviation from
+RMT-GUE does **not** shrink with resolution (S1 chart-dependent at all three
+points; asymptotic direction open). The consolidated LaTeX export
 ([`exports/research_paper.tex`](exports/research_paper.tex)) transcribes the
 sealed results and the process-defect register; it adds no new claims.
 
@@ -40,6 +53,7 @@ sealed results and the process-defect register; it adds no new claims.
 - [Section 4: Recent Audit Kernel Amendments (Landmines L31-L35)](#section-4-recent-audit-kernel-amendments-landmines-l31-l35)
 - [Section 5: Finite Hydrodynamic Lattice & Millennium Frontier](#section-5-finite-hydrodynamic-lattice--millennium-frontier)
 - [Section 6: Guinand-Weil Interval Spectra & the Montgomery Question (201/301/401)](#section-6-guinand-weil-interval-spectra--the-montgomery-question-201301401)
+- [Section 7: Sealed Status, Workflow and Verification Chain](#section-7-sealed-status-workflow-and-verification-chain)
 - [Symbol Glossary](#symbol-glossary)
 - [Proven vs Postulated](#proven-vs-postulated-standing-disclosure)
 - [Repository Layout](#repository-layout)
@@ -232,7 +246,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (311 tests, every landmine pinned)
+### 3.2 Regression Suite (345 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -669,7 +683,9 @@ New and sealed in this repository (each item replayable with 6.6):
 2. The measured resolution verdict on the pre-registered grid: the deviation
    from RMT-GUE does not shrink across the series; floor census 17/18 with
    the single 0.0180 cell reported as-is (the first movement off the pure
-   floor in the series).
+   floor in the series). The H1 floor-amendment (Section 7) later
+   re-measured that same cell at 20000 surrogates and sealed the amended
+   value as-is, next to the sealed 2000-surrogate value.
 3. The certified magnitude record: lambda_min down to `1.737e-294` (dim 401)
    and `6.577e-248` (dim 301), with 6000-bit enclosure radii measured at
    e-1685 .. e-1728; and the c=13 slice refuting the constant-B decay form
@@ -703,14 +719,21 @@ python msaf/capture_spectrum_201.py --c 100 --n 150
 # Montgomery S1/S2 measurement on a captured spectrum (run from the companion checkout)
 python gw_montgomery.py reports/gw_spectrum_100_150.json --samples 2000
 
-# Section 5 generator + standalone dashboard
+# Section 5 generator + standalone dashboards
 python msaf/gw_resolution_delta.py --write
 python msaf/gw_dashboard_v3.py --write
+python msaf/gw_dashboard_v4.py --write
+
+# H1 floor amendment + independent re-verification (Section 7)
+python msaf/gw_h1_extract.py               # refined grid + C4 array (parses the run logs)
+python msaf/gw_engine_b_verify.py --full   # independent engine-B run (writes JSON + log)
+python msaf/gw_readme.py --write           # README Section 7 block + diagrams
 ```
 
 Measured cost on the author's machine: build and eig 825.7 s (dim 201),
 3137.6 s (dim 301), 1862.2 s (dim 401); Route S LDL^T 57.1 s at dim 301; the
-full 2000-surrogate measurement is minutes per spectrum. Windows note:
+full 2000-surrogate measurement is minutes per spectrum; the engine-B full
+re-verification measured 9062.4 s. Windows note:
 `msaf/mont_run.txt` is UTF-16; all newer logs are UTF-8 without BOM, CRLF.
 
 ### 6.7 Roadmap (next moves, in order)
@@ -718,14 +741,171 @@ full 2000-surrogate measurement is minutes per spectrum. Windows note:
 1. extend the c=13 magnitude ladder to dims 257 and 321 - dim 321 already
    carries the sign certificate; the magnitudes are what is missing to
    settle the damping direction;
-2. a fourth resolution series, or more statistical power above the
-   2000-surrogate floor (the ceiling ~100-200 pairs per bin was measured
-   three times; the floor is 1/2000);
+2. a fourth resolution series: the statistical-power lever was executed as
+   the H1 floor-amendment (2026-10-17, Section 7) - the floor moved to
+   20000 surrogates and the single off-floor cell was re-measured with a
+   five-seed robustness array; the remaining lever is a wider N, not more
+   samples at fixed N (the ceiling ~100-200 pairs per bin was measured
+   three times);
 3. only then may the damping be discussed as a law (the single-slice
    refutation stays single-slice until more slices exist);
 4. the wider queue (four bridges, RH/Hodge status) stays in
    [`reports/HANDOFF.md`](reports/HANDOFF.md) and
    [`reports/DAFTAR_MASALAH_KERJA.md`](reports/DAFTAR_MASALAH_KERJA.md).
+
+---
+
+## SECTION 7: SEALED STATUS, WORKFLOW AND VERIFICATION CHAIN
+
+### 7.1 Project overview and measurement workflow
+
+The figure below is the working map of this repository: from the frozen
+interval instrument to the permanent archive. Every box names an artefact
+that exists in the repository (or in the companion checkout) and carries its
+own provenance hash; the numbers inside the figure are parsed from those
+artefacts when the figure is generated.
+
+<p align="center"><img src="docs/math/readme_workflow.svg" alt="Project overview and measurement workflow: instrument and capture, H1 campaign, independent engine-B re-verification, publication and proof"></p>
+
+Reading the map:
+
+1. **Instrument and capture.** The companion interval instrument
+   (`gw_montgomery.py`, frozen; sha256 hashed before and after the engine-B
+   run) builds the Guinand-Weil matrices and captures certified spectra for
+   dims 201 / 301 / 401; the raw measurement logs are committed
+   byte-for-byte as written.
+2. **H1 campaign (A + B).** A pre-registered amendment lifts the statistical
+   floor from 2000 to 20000 surrogates on an 18-cell grid, and a five-seed
+   robustness array probes the single cell that clears the floor. Verdicts
+   are recomputed from the logs and compared to the printed verdicts.
+3. **Independent re-verification (C).**
+   [`msaf/gw_engine_b_verify.py`](msaf/gw_engine_b_verify.py) - a separate
+   code path (decimal-exact parsing, mpmath at 50 dps) - re-derives the S2
+   statistics and reproduces every engine-A count exactly. The run's
+   continuity record (including an environment power event that happened
+   after the run had already completed and written its artefacts) is kept
+   append-only in
+   [`reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md`](reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md).
+4. **Publication and proof.** The dashboards (`v4` current, `v3` sealed),
+   the manuscript, and the Zenodo DOI; the seal is a green public CI run on
+   the content commit.
+
+### 7.2 The verification chain: why a number cannot be silently edited
+
+<p align="center"><img src="docs/math/readme_trustchain.svg" alt="Verification chain: raw artefacts, stable hashes, pinning in README, recomputation in CI, public CI runs, permanent archive"></p>
+
+The chain is mechanical: every figure in 7.3 is parsed from the committed
+artefacts when the block is generated; the block carries the full
+LF-normalised SHA-256 of each artefact; and
+[`msaf/tests/test_readme_guard.py`](msaf/tests/test_readme_guard.py)
+recomputes block and diagrams from the artefacts on every CI run, failing on
+any drift. Editing a number in the README without re-running the generator
+turns CI red; editing an artefact changes its hash and turns CI red; the
+frozen engine-B harness is additionally cross-checked against the sha256
+recorded in its own run manifest.
+
+### 7.3 Sealed status (machine-generated)
+
+<!-- BEGIN GENERATED BLOCK: sealed-status (msaf/gw_readme.py) -->
+_Machine-generated from the sealed artefacts in this repository; no number below is typed by hand._
+_Rebuild with `python msaf/gw_readme.py --write`; `msaf/tests/test_readme_guard.py` fails CI on any drift._
+
+**Stage A - refined grid (18 pre-registered cells, 20000 surrogates each).**
+Dims 201/301/401 x charts T/L x sigma_u 0.3/0.5/1.0, seed 20260927.
+
+| quantity | value |
+|---|---|
+| cells at the k_GUE floor | 17 / 18 (k_GUE = 0/20000; one-sided 95% upper bound < 1.49775e-04) |
+| first cell above the floor | dim 301, chart T, sigma_u 0.5: k_GUE = 1262/20000 = 6.31000e-02 (chi2_obs = 1367.616) |
+| at the sealed 2000-surrogate resolution | k_GUE = 36/2000 (re-measured by this grid) |
+| its recomputed verdict | NO DISCRIMINATION AT N=401 |
+| verdict recomputation, all cells | 18 / 18 printed == recomputed |
+
+**Stage B - five-seed robustness array on that cell** (seeds 20260927, 20261001, 20261002, 20261003, 20261004).
+
+| seed | k_GUE / 20000 | p_hat |
+|---|---|---|
+| 20260927 | 1262 | 0.0631 |
+| 20261001 | 960 | 0.048 |
+| 20261002 | 1289 | 0.06445 |
+| 20261003 | 1021 | 0.05105 |
+| 20261004 | 1345 | 0.06725 |
+| **pooled** | **5877 / 100000** | **0.05877** (95% CI 5.73201e-02 to 6.02456e-02) |
+
+Homogeneity across the five seeds: chi2 = 107.9299 (df 4), p = 2.01097e-22 -> classification: **NOT STABLE (homogeneity rejected at alpha = 0.01; dispersion-dominated)**.
+
+**Stage C - independent engine-B re-verification** (spec Section 5; decimal-exact parse, mpmath dps 50, seed 20260927, 20000 samples per dim; run 2026-10-17T00:51:30, 9062.4 s; artefact written).
+
+| check | verdict |
+|---|---|
+| B1 - decimal-exact parsing census (dims 201/301/401) | PASS |
+| B3 - gate G-M0 re-verification | PASS |
+| B2a - observed grid (720 bins, dps 50 vs float64) | PASS-WITH-ENUMERATED-EXCEPTIONS (frozen OR 666/720; tighter 10-ulp branch 8/720) |
+| B2b - counts (18 cells x 20000 samples) | PASS |
+| **overall** | **PASS-WITH-ENUMERATED-EXCEPTIONS** |
+
+Cell census: 9 clean + 9 enumerated edge-cluster + 0 failing. Enumeration of the 9 chart-L cells (pre-declared rules, applied uniformly): 6/20 cv bins outside the frozen OR (0/20 tgt bins); 2 histogram flips across one adjacent edge (0 via-A flips); 15-21 membership disagreements, all between adjacent bins within 1e-9 (0 boundary skips); worst |B - A| inside the enumerated bins 5.79922e-04. The cluster is enumerated bin-by-bin; nothing is excused.
+
+**Engine-B counts vs engine A - the reproduction table.** B values shown; A equals B in every entry (k_GUE, k_GUE lower tail, k_Pois, k_Pois upper tail: 18/18 cells, all four tails exact).
+
+| dim | chart | sigma_u | k_GUE | k_GUE low | k_Pois | k_Pois up |
+|---|---|---|---|---|---|---|
+| 201 | L | 0.3 | 0 | 20000 | 20000 | 0 |
+| 201 | L | 0.5 | 0 | 20000 | 20000 | 0 |
+| 201 | L | 1.0 | 0 | 20000 | 20000 | 0 |
+| 201 | T | 0.3 | 0 | 20000 | 19827 | 173 |
+| 201 | T | 0.5 | 0 | 20000 | 16287 | 3713 |
+| 201 | T | 1.0 | 0 | 20000 | 611 | 19389 |
+| 301 | L | 0.3 | 0 | 20000 | 20000 | 0 |
+| 301 | L | 0.5 | 0 | 20000 | 20000 | 0 |
+| 301 | L | 1.0 | 0 | 20000 | 20000 | 0 |
+| 301 | T | 0.3 | 0 | 20000 | 19878 | 122 |
+| 301 | T | 0.5 | 1262 | 18738 | 4807 | 15193 |
+| 301 | T | 1.0 | 0 | 20000 | 1736 | 18264 |
+| 401 | L | 0.3 | 0 | 20000 | 20000 | 0 |
+| 401 | L | 0.5 | 0 | 20000 | 20000 | 0 |
+| 401 | L | 1.0 | 0 | 20000 | 20000 | 0 |
+| 401 | T | 0.3 | 0 | 20000 | 19933 | 67 |
+| 401 | T | 0.5 | 0 | 20000 | 10544 | 9456 |
+| 401 | T | 1.0 | 0 | 20000 | 163 | 19837 |
+
+**Sealed artefact provenance** (SHA-256 over LF-normalised bytes - identical on Windows and CI checkouts).
+
+| artefact | bytes | sha256 |
+|---|---|---|
+| `reports/AMENDMENT_FLOOR_SPEC.md` | 10839 | `3c9958bee3021385b242b84b2ecda136e15f35d5682c16ff690713830efbb917` |
+| `reports/gw_h1_floor_refine.json` | 14870 | `4777d94f9ec533712b14cc097b9240e5c961790b3d9025f452b7c21aade6148f` |
+| `reports/gw_engine_b_verify.json` | 423434 | `f7b3eb01ebc82fbd4bafce57dc56c1cb55e830aa5eb55241ee1e71070a88d95f` |
+| `reports/gw_engine_b_verify.log` | 12320 | `27743364ce1cabfe217b1a7a489524e5a463f8a3c1bdbbb4cb8ae71d8be0330d` |
+| `reports/gw_diagnostic_v3.html` | 23493 | `89c7d5f948626bd51de06f37534bdc4941d3793353dcb80b8557e10e2bed7322` |
+| `reports/gw_diagnostic_v4.html` | 50465 | `c9ec26217f516a1a73527bc098addbc11a4935f6965d905d38a7dbeb7d95a8b6` |
+| `msaf/gw_engine_b_verify.py` | 46717 | `485ab6525531aa8ef9b5e499736331b600fdb205bb2a9b93cfa438ffa261fcea` |
+
+**Engine-B run manifest.** mode `full`; 20000 samples per dim; seed 20260927; mpmath dps 50; generated 2026-10-17T00:51:30; elapsed 9062.4 s; repository head `451eec7`; interval instrument sha256 before = after = `072910f232b15768...` (first 16 hex; full hash in the run manifest); python 3.14.4, numpy 2.5.2, scipy 1.18.0, mpmath 1.3.0.
+<!-- END GENERATED BLOCK: sealed-status -->
+
+### 7.4 Verify it yourself
+
+```bash
+# 1. recompute this whole section from the sealed artefacts (fast)
+python -m pytest msaf/tests/test_readme_guard.py -q
+
+# 2. the artefact guards for the sealed runs
+python -m pytest msaf/tests/test_gw_engine_b_full_artifact.py \
+                 msaf/tests/test_gw_dashboard_v4.py -q
+
+# 3. generator dry run: ASCII summary, no files written
+python msaf/gw_readme.py
+```
+
+The public CI runs that validated the H1 seal (jobs `python-tests` and
+`lean-kernel`): engine-B content commit `669a3c3` -> run
+[`38972531845`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/38972531845);
+documentation seal commit `251ada6` -> run
+[`38972862055`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/38972862055);
+dashboard v4 commit `84248da` -> run
+[`38922309908`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/38922309908).
+Version of record: [10.5281/zenodo.23410894](https://doi.org/10.5281/zenodo.23410894).
 
 ---
 
@@ -770,7 +950,9 @@ Weil spectrum in closed form, three localised zeros with certified
 enclosures, the Dirichlet brackets, the hash chains and their independent
 replay; plus the Section 6 campaign: three full Guinand-Weil captures at
 dim 201/301/401 through gate G-M0, the Route S inertia ladders, and the
-floor-locked S1/S2 verdicts. Postulated, not derived: sigma = 0.5 as a
+floor-locked S1/S2 verdicts; plus the H1 floor-amendment (Section 7): the
+refined 20000-surrogate grid, the five-seed robustness array, and the
+independent engine-B re-verification of the S2 counts. Postulated, not derived: sigma = 0.5 as a
 universal statement (every result carries `global_claim_supported = False`);
 the decay law with B ~= 0.115 (both entropy paths reported side by side) -
 and on the c=13 Guinand-Weil slice that constant-B form is refuted by
@@ -796,20 +978,25 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
 - `msaf/` campaign tools - `capture_spectrum_201.py` (G-M0-gated
   full-spectrum capture), `gw_route_s_ladder.py` (Route S inertia ladder),
   `lambda_min_eig_ladder.py` (Route A2 magnitudes), `gw_resolution_delta.py`
-  (Section 5 generator), `gw_dashboard_v3.py` (standalone dashboard generator)
+  (Section 5 generator), `gw_dashboard_v3.py` / `gw_dashboard_v4.py`
+  (dashboard generators; v4 current), `gw_h1_extract.py` (H1 amendment
+  extractor), `gw_engine_b_verify.py` (independent S2 re-verification),
+  `gw_readme.py` (README Section 7 generator)
 - `msaf/navier_stokes/` - finite hydrodynamic lattice: Godunov loop,
   restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
-- `msaf/tests/` - regression suite (311 tests)
+- `msaf/tests/` - regression suite (345 tests)
 - `lean/` - Lean 4 machine-checked kernels 1D/2D/3D + central variant + Moore box (`lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
-- `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py)
+- `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py); includes the generated workflow / verification-chain diagrams (Section 7)
 - `harness/` - release gate and math renderer
 - `exports/` - publication-grade consolidations of sealed campaigns: [`research_paper.tex`](exports/research_paper.tex) (Main Spectral Results of the 201/301/401 campaign + process-defect register; sealed-artifact transcription only)
 - `ledger/` - append-only evidence chains; `reports/` - integer pixel reports,
-  the Guinand-Weil spectra JSONs and Montgomery logs, and the standalone
-  dashboard `reports/gw_diagnostic_v3.html`
+  the Guinand-Weil spectra JSONs and Montgomery logs, the H1 amendment
+  spec / results / artefacts, the engine-B full-run JSON + log, and the
+  standalone dashboards `reports/gw_diagnostic_v3.html` (sealed) /
+  `reports/gw_diagnostic_v4.html` (current)
 
 ## CITATION
 

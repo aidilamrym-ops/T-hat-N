@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 306" width="100%" role="img" aria-label="verification chain: artefacts to permanent archive">
+<defs><marker id="arw2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#94a3b8"/></marker></defs>
+<text x="16" y="20" font-size="11" fill="#8a94a8" letter-spacing="1.4" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">VERIFICATION CHAIN · EVERY FIGURE TRACEABLE TO COMMITTED BYTES</text>
+<rect x="20.0" y="30" width="155" height="112" rx="9" fill="#f8fafd" stroke="#c9d4e4"/>
+<text x="32.0" y="56" font-size="12.5" font-weight="600" fill="#101828" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Raw artefacts</text>
+<text x="32.0" y="78.0" font-size="10.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">spectra · logs ·</text>
+<text x="32.0" y="93.0" font-size="10.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">dashboards · git</text>
+<line x1="177.0" y1="86" x2="198.0" y2="86" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arw2)"/>
+<rect x="200.0" y="30" width="155" height="112" rx="9" fill="#f8fafd" stroke="#c9d4e4"/>
+<text x="212.0" y="56" font-size="12.5" font-weight="600" fill="#101828" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Stable hash</text>
+<text x="212.0" y="78.0" font-size="10.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">sha256 over</text>
+<text x="212.0" y="93.0" font-size="10.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">CRLF→LF bytes</text>
+<line x1="357.0" y1="86" x2="378.0" y2="86" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arw2)"/>
+<rect x="380.0" y="30" width="155" height="112" rx="9" fill="#f8fafd" stroke="#c9d4e4"/>
+<text x="392.0" y="56" font-size="12.5" font-weight="600" fill="#101828" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Pinned in README</text>
+<text x="392.0" y="78.0" font-size="10.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">full hashes pinned,</text>
+<text x="392.0" y="93.0" font-size="10.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">plus guard tests</text>
+<line x1="537.0" y1="86" x2="558.0" y2="86" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arw2)"/>
+<rect x="560.0" y="30" width="155" height="112" rx="9" fill="#f8fafd" stroke="#c9d4e4"/>
+<text x="572.0" y="56" font-size="12.5" font-weight="600" fill="#101828" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Recompute in CI</text>
+<text x="572.0" y="78.0" font-size="10.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">test_readme_guard.py</text>
+<text x="572.0" y="93.0" font-size="10.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">fails on any drift</text>
+<line x1="717.0" y1="86" x2="738.0" y2="86" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arw2)"/>
+<rect x="740.0" y="30" width="155" height="112" rx="9" fill="#f8fafd" stroke="#c9d4e4"/>
+<text x="752.0" y="56" font-size="12.5" font-weight="600" fill="#101828" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Public CI run</text>
+<text x="752.0" y="78.0" font-size="10.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">pytest + guards</text>
+<text x="752.0" y="93.0" font-size="10.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">per commit · archived</text>
+<line x1="897.0" y1="86" x2="918.0" y2="86" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arw2)"/>
+<rect x="920.0" y="30" width="155" height="112" rx="9" fill="#f8fafd" stroke="#c9d4e4"/>
+<text x="932.0" y="56" font-size="12.5" font-weight="600" fill="#101828" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Permanent archive</text>
+<text x="932.0" y="78.0" font-size="10.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Zenodo DOI +</text>
+<text x="932.0" y="93.0" font-size="10.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">release tag · pinned</text>
+<rect x="20" y="162" width="1060" height="126" rx="9" fill="#ffffff" stroke="#d9e0ec"/>
+<text x="34" y="186" font-size="13" font-weight="600" fill="#101828" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Why a number cannot be silently edited</text>
+<text x="34" y="208.0" font-size="11.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">1. The sealed block in this section is parsed from the artefacts at build time; hand-editing README.md breaks it against the generator (CI red).</text>
+<text x="34" y="227.0" font-size="11.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">2. Editing an artefact changes its LF-normalised sha256, which no longer matches the hash pinned in this block (CI red on the drift tests).</text>
+<text x="34" y="246.0" font-size="11.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">3. The test suite re-verifies the artefacts themselves (engine-B artifact guard, dashboard guard, amendment-floor tests) on every commit.</text>
+<text x="34" y="265.0" font-size="11.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">4. The interval instrument is hashed before and after the engine-B run; both hashes must be equal (sha256 072910f2…).</text>
+</svg>
