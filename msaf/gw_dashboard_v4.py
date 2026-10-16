@@ -27,7 +27,9 @@ Design rules (operational spec, 2026-10-16; carried over from v3):
     at all -- offline and byte-replayable;
   * every number extracted at generation time; a missing file or pattern
     aborts with SystemExit (fail-loud, nothing guessed);
-  * byte-stable: no timestamps, no randomness; reruns are identical;
+  * byte-stable: no timestamps, no randomness; reruns are identical,
+    and provenance hashes are taken over newline-normalised bytes
+    (CRLF -> LF) so the rendered table is identical on every checkout;
   * honesty guards: the c=13 damping ladder and the c=100 Montgomery
     resolution series are drawn as SEPARATE, clearly labelled series --
     across-c is not apples-to-apples and the two are never merged; the
@@ -164,12 +166,22 @@ def esc(s) -> str:
             .replace(">", "&gt;"))
 
 
+def stable_bytes(path: Path) -> bytes:
+    """File bytes with CRLF normalised to LF (checkout-stable hashing).
+
+    core.autocrlf checkouts differ between Windows and Linux; the
+    provenance table must not. UTF-16 line endings (0D 00 0A 00) do not
+    contain the byte pair 0D 0A, so this is a no-op for the UTF-16 logs.
+    """
+    return path.read_bytes().replace(b"\r\n", b"\n")
+
+
 def short_hash(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+    return hashlib.sha256(stable_bytes(path)).hexdigest()[:12]
 
 
 def full_hash(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    return hashlib.sha256(stable_bytes(path)).hexdigest()
 
 
 def minus(s) -> str:
@@ -1082,6 +1094,10 @@ def render(ctx: dict) -> str:
                         for n, h in ctx["hashes"])
     panel6_body = (
         '<table class="hash">' + hash_rows + '</table>'
+        '<p class="note">Hash convention: sha256 over '
+        'newline-normalised bytes (CRLF \u2192 LF), first 12 hex '
+        'chars shown \u2014 identical on every checkout (Windows or '
+        'Linux).</p>'
         '<p class="scope"><b>Preserved predecessor:</b> '
         'reports/gw_diagnostic_v3.html \u2014 byte-identical, full '
         'sha256 <span class="mono">' + ctx["v3_full"] + '</span> '
