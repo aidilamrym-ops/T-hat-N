@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 """Capture the FULL certified spectrum of the Guinand-Weil matrix at
-(c, N) = (100, 100) -> dim 201, at 6000-bit precision, in the canonical
-schema of gw_spectrum_arb.py (so gw_montgomery.py can read it).
+(c, N) -> dim 2N+1, at `prec`-bit precision, in the canonical schema of
+gw_spectrum_arb.py (so gw_montgomery.py can read it). The file is named
+after its first run (2026-10-16: c=100, N=100, prec=6000 -> dim 201);
+the defaults reproduce that run exactly, and any resolution in the series
+can be captured with --c/--n/--prec.
 
 CHAIN (documented deviation from the dim-401 capture):
   dim-401 chain : mpmath dps=400 matrix -> decimal strings (gw_matrix_100_200_dps400.json)
                   -> arb parse at prec=2048 -> eig(algorithm=vdhoeven_mourrain)
-  THIS chain    : source_arb_ldlt_certify.build_arb_tau(100, 100, 6000)  [pure arb,
+  THIS chain    : source_arb_ldlt_certify.build_arb_tau(c, N, prec)  [pure arb,
                   no decimal serialization] -> eig(algorithm=vdhoeven_mourrain)
-                  at ctx.prec=6000.
-  The `dps` field records int(6000*log10(2)) = 1806 (decimal-digit equivalent of the
-  6000-bit arb precision). No mpmath decimal round trip was used in this chain.
+                  at ctx.prec=prec.
+  The `dps` field records int(prec*log10(2)) (= 1806 for 6000 bits; decimal-digit
+  equivalent of the arb precision). No mpmath decimal round trip was used here.
 
 GATE G-M0 (same logic as the canonical gw_spectrum_arb.py):
   G-M0a  all eigenvalues finite
@@ -22,13 +25,16 @@ Failure -> ABORT: no statistics are computed from this file.
 
 Honesty rules honoured: arb ball arithmetic only in the measurement; ctx.prec
 and mpmath's `mp.dps` are set inside and restored in `finally`; any failure
-prints as-is, never rounded into a verdict. Output -> reports/gw_spectrum_100_100.json.
+prints as-is, never rounded into a verdict. Output -> reports/gw_spectrum_{c}_{N}.json
+(defaults reproduce reports/gw_spectrum_100_100.json).
 
 usage:
-    python msaf/capture_spectrum_201.py
+    python msaf/capture_spectrum_201.py                    # dim 201 (first run)
+    python msaf/capture_spectrum_201.py --c 100 --n 150    # dim 301
 """
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import sys
@@ -39,7 +45,7 @@ GW = Path(os.environ.get("GW_DIR", r"C:/Users/usER/oracle-toe/GUINAND_WEIL"))
 if str(GW) not in sys.path:
     sys.path.insert(0, str(GW))
 
-OUT_PATH = Path(__file__).resolve().parents[1] / "reports" / "gw_spectrum_100_100.json"
+REPORTS = Path(__file__).resolve().parents[1] / "reports"
 
 
 def ckpt(msg):
@@ -57,13 +63,21 @@ def arb_rad_str(ball):
         return "0"
 
 
-def main() -> int:
+def main(argv=None) -> int:
     import mpmath as mp
     from flint import ctx
 
-    c, n_block, prec = 100, 100, 6000
+    ap = argparse.ArgumentParser(
+        description="Canonical full-spectrum capture, G-M0 gated. Defaults "
+                    "reproduce the first dim-201 run (c=100, N=100, 6000 bits).")
+    ap.add_argument("--c", type=int, default=100)
+    ap.add_argument("--n", type=int, default=100, help="block index N; dim = 2N+1")
+    ap.add_argument("--prec", type=int, default=6000)
+    args = ap.parse_args(argv)
+    c, n_block, prec = args.c, args.n, args.prec
+    out_path = REPORTS / ("gw_spectrum_%d_%d.json" % (c, n_block))
     dim = 2 * n_block + 1
-    dps_field = int(prec * 0.3010299956639812)  # log10(2) * 6000 = 1806.18
+    dps_field = int(prec * 0.3010299956639812)  # log10(2) * prec
 
     import source_arb_ldlt_certify as gw
 
@@ -217,11 +231,11 @@ def main() -> int:
             "build_seconds": round(t_build, 2),
             "moments_seconds": round(t_moments, 2),
         }
-        OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-        with open(OUT_PATH, "w", encoding="utf-8") as fh:
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, "w", encoding="utf-8") as fh:
             json.dump(payload, fh)
         ckpt("saved -> %s (%.2f MB, %d eigenvalues)"
-             % (OUT_PATH, OUT_PATH.stat().st_size / 1048576.0, len(ev)))
+             % (out_path, out_path.stat().st_size / 1048576.0, len(ev)))
         return 0 if ok else 1
     finally:
         ctx.prec = saved
