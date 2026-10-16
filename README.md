@@ -869,14 +869,14 @@ Cell census: 9 clean + 9 enumerated edge-cluster + 0 failing. Enumeration of the
 | 401 | T | 0.5 | 0 | 20000 | 10544 | 9456 |
 | 401 | T | 1.0 | 0 | 20000 | 163 | 19837 |
 
-**Sealed artefact provenance** (SHA-256 over LF-normalised bytes - identical on Windows and CI checkouts).
+**Sealed artefact provenance** (SHA-256 and byte counts over LF-normalised bytes - identical on Windows and CI checkouts).
 
 | artefact | bytes | sha256 |
 |---|---|---|
 | `reports/AMENDMENT_FLOOR_SPEC.md` | 10839 | `3c9958bee3021385b242b84b2ecda136e15f35d5682c16ff690713830efbb917` |
 | `reports/gw_h1_floor_refine.json` | 14870 | `4777d94f9ec533712b14cc097b9240e5c961790b3d9025f452b7c21aade6148f` |
 | `reports/gw_engine_b_verify.json` | 423434 | `f7b3eb01ebc82fbd4bafce57dc56c1cb55e830aa5eb55241ee1e71070a88d95f` |
-| `reports/gw_engine_b_verify.log` | 12320 | `27743364ce1cabfe217b1a7a489524e5a463f8a3c1bdbbb4cb8ae71d8be0330d` |
+| `reports/gw_engine_b_verify.log` | 12186 | `27743364ce1cabfe217b1a7a489524e5a463f8a3c1bdbbb4cb8ae71d8be0330d` |
 | `reports/gw_diagnostic_v3.html` | 23493 | `89c7d5f948626bd51de06f37534bdc4941d3793353dcb80b8557e10e2bed7322` |
 | `reports/gw_diagnostic_v4.html` | 50465 | `c9ec26217f516a1a73527bc098addbc11a4935f6965d905d38a7dbeb7d95a8b6` |
 | `msaf/gw_engine_b_verify.py` | 46717 | `485ab6525531aa8ef9b5e499736331b600fdb205bb2a9b93cfa438ffa261fcea` |

@@ -240,6 +240,10 @@ def collect() -> dict:
                                        "refine manifest")))
 
     # ---- provenance table -------------------------------------------------
+    # Byte counts AND hashes are taken over LF-normalised bytes only: raw
+    # st_size() is checkout-dependent (CRLF worktree vs LF on CI) and would
+    # make the block non-reproducible -- this exact defect failed CI run
+    # 38975016984 on its first appearance.
     prov = [
         ("reports/AMENDMENT_FLOOR_SPEC.md", SPEC_MD,
          "frozen pre-registration (authority)"),
@@ -256,8 +260,12 @@ def collect() -> dict:
         ("msaf/gw_engine_b_verify.py", ENGINE_B_SCRIPT,
          "stage C harness (frozen)"),
     ]
-    ctx["prov"] = [(name, path.stat().st_size, sha256_stable(path), note)
-                   for name, path, note in prov]
+    prov_rows = []
+    for name, path, note in prov:
+        st = stable_bytes(path)
+        prov_rows.append((name, len(st),
+                          hashlib.sha256(st).hexdigest(), note))
+    ctx["prov"] = prov_rows
 
     return ctx
 
@@ -360,8 +368,8 @@ def render_block(ctx: dict) -> str:
         add("| %d | %s | %s | %d | %d | %d | %d |"
             % (dim, chart, sigma, kg, kl, kp, ku))
     add("")
-    add("**Sealed artefact provenance** (SHA-256 over LF-normalised bytes - "
-        "identical on Windows and CI checkouts).")
+    add("**Sealed artefact provenance** (SHA-256 and byte counts over "
+        "LF-normalised bytes - identical on Windows and CI checkouts).")
     add("")
     add("| artefact | bytes | sha256 |")
     add("|---|---|---|")
