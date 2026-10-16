@@ -1,0 +1,20 @@
+{
+ "c": 100,
+ "runs": [
+  {
+   "c": 100,
+   "N": 100,
+   "dim": 201,
+   "prec_bits": 6000,
+   "n_pos": 201,
+   "n_neg": 0,
+   "undetermined_pivot": null,
+   "pivots_recorded": 201,
+   "entries_finite": true,
+   "verdict": "CERTIFIED POSITIVE DEFINITE",
+   "build_s": 244.49,
+   "ldlt_s": 12.59,
+   "total_s": 257.1
+  }
+ ]
+}
