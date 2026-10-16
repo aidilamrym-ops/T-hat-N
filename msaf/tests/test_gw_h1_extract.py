@@ -31,6 +31,12 @@ def test_cp95_two_sided_for_positive_k():
     assert 0.0 < lo < 360 / 20000 < hi < 0.021
 
 
+def test_cp95_all_successes_no_nan():
+    lo, hi = cp95(20000, 20000)
+    assert hi == 1.0
+    assert abs(lo - 0.025 ** (1.0 / 20000)) < 1e-12
+
+
 def test_p_field_zero_states_a_bound():
     hi = 1 - 0.05 ** (1.0 / 20000)
     assert p_field(0, 20000) == "0/20000 (p < %.5e, 95%% CP upper bound)" % hi

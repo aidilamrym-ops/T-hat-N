@@ -168,12 +168,15 @@ def parse_log(path):
 def cp95(k, n):
     """95% Clopper-Pearson interval.
 
-    k > 0: standard two-sided interval. k = 0: the frozen spec (section 3)
-    requires the one-sided 95% upper bound 1 - 0.05^(1/n) (rule of three),
-    labelled as a bound, never as a measured zero.
+    0 < k < n: standard two-sided interval. k = 0: the frozen spec
+    (section 3) requires the one-sided 95% upper bound 1 - 0.05^(1/n)
+    (rule of three), labelled as a bound, never as a measured zero.
+    k = n: upper bound is exactly 1.0.
     """
     if k == 0:
         return 0.0, 1.0 - 0.05 ** (1.0 / n)
+    if k == n:
+        return float(beta.ppf(0.025, n, 1)), 1.0
     lo = float(beta.ppf(0.025, k, n - k + 1))
     hi = float(beta.ppf(0.975, k + 1, n - k))
     return lo, hi
@@ -296,7 +299,7 @@ def main(argv):
         sl = sealed[dim]
         for chart, su in CELL_ORDER:
             key = "%s|%s" % (chart, su)
-            if log is None:
+            if log is None or key not in log.get("cells", {}):
                 grid.append({"dim": dim, "chart": chart,
                              "sigma_u": float(su), "status": "missing"})
                 continue
@@ -324,14 +327,15 @@ def main(argv):
 
     c4 = None
     log301 = refined.get(("A", 301))
-    if log301 is not None:
+    if log301 is not None and "T|0.5" in log301.get("cells", {}):
         ks = [log301["cells"]["T|0.5"]["k_gue"]]
         seeds_present = [20260927]
         for seed in (20261001, 20261002, 20261003, 20261004):
             blog = refined.get(("B", seed))
-            if blog is not None:
-                ks.append(blog["cells"]["T|0.5"]["k_gue"])
-                seeds_present.append(seed)
+            if blog is None or "T|0.5" not in blog.get("cells", {}):
+                continue  # missing or still-running: array stays INCOMPLETE
+            ks.append(blog["cells"]["T|0.5"]["k_gue"])
+            seeds_present.append(seed)
         if len(ks) == 5:
             c4 = classify_c4(ks)
             c4["seeds"] = seeds_present
@@ -357,26 +361,37 @@ def main(argv):
         json.dump(out, fh, indent=2)
         fh.write("\n")
 
+    target_map = {(201, "T", "0.3"): "C1", (301, "T", "0.3"): "C2",
+                  (401, "T", "0.3"): "C3", (301, "T", "0.5"): "C4"}
     lines = []
     lines.append("## Refined grid (A) -- 20000 surrogates per ensemble, "
                  "seed 20260927")
     lines.append("")
-    lines.append("| dim | chart | sigma_u | chi2_obs | k_GUE/20000 | "
-                 "p_GUE | CP95 GUE | k_Pois/20000 | verdict | sealed k/2000 "
-                 "| sealed p_GUE |")
-    lines.append("|---|---|---|---|---|---|---|---|---|---|---|")
+    lines.append("Target cells (pre-registered, spec section 2): C1 = "
+                 "201|T|0.3, C2 = 301|T|0.3, C3 = 401|T|0.3, C4 = 301|T|0.5. "
+                 "For these four cells the refined values SUPERSEDE the "
+                 "sealed values; sealed columns remain visible, never edited.")
+    lines.append("")
+    lines.append("| cell | dim | chart | sigma_u | chi2_obs | k_GUE/20000 | "
+                 "p_GUE | CP95 GUE | k_Pois/20000 | CP95 Pois | verdict | "
+                 "sealed k/2000 | sealed p_GUE |")
+    lines.append("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
     for rec in grid:
+        cell_id = target_map.get(
+            (rec["dim"], rec["chart"], "%.1f" % rec["sigma_u"]), "")
         if rec.get("status") == "missing":
-            lines.append("| %d | %s | %.1f | MISSING | | | | | | | |"
-                         % (rec["dim"], rec["chart"], rec["sigma_u"]))
+            lines.append("| %s | %d | %s | %.1f | MISSING"
+                         % (cell_id, rec["dim"], rec["chart"],
+                            rec["sigma_u"]) + " |" * 9)
             continue
-        lines.append("| %d | %s | %.1f | %.4f | %d/20000 | %s | %s | "
-                     "%d/20000 | %s | %d/2000 | %.4f |"
-                     % (rec["dim"], rec["chart"], rec["sigma_u"],
+        lines.append("| %s | %d | %s | %.1f | %.4f | %d/20000 | %s | %s | "
+                     "%d/20000 | %s | %s | %d/2000 | %.4f |"
+                     % (cell_id, rec["dim"], rec["chart"], rec["sigma_u"],
                         rec["chi2_obs"], rec["k_gue"],
                         p_field(rec["k_gue"], rec["n"]),
                         fmt_cp(*rec["cp95_gue"]), rec["k_pois"],
-                        rec["verdict_printed"][:44], rec["sealed_k_gue"],
+                        fmt_cp(*rec["cp95_pois"]),
+                        rec["verdict_printed"], rec["sealed_k_gue"],
                         rec["sealed_p_gue"]))
     lines.append("")
     if c4 is not None:
@@ -398,6 +413,11 @@ def main(argv):
         lines.append("Frozen decision tree classification: **%s**"
                      % c4["classification"])
         lines.append("")
+        if not c4["classification"].startswith("STABLE"):
+            lines.append("C4 flagged resolution-sensitive per frozen spec "
+                         "section 4; the verdict grid recomputation still uses "
+                         "the canonical 20000 value (number of record).")
+            lines.append("")
     else:
         lines.append("## Robustness array (B) -- INCOMPLETE")
         lines.append("")
