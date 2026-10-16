@@ -1,0 +1,26 @@
+################################################################################################
+# FULL SPECTRUM CAPTURE (c, N, prec) = (100, 100, 6000)  dim = 201
+# chain: build_arb_tau -> arb_mat.eig(algorithm=vdhoeven_mourrain), NO decimal round trip
+################################################################################################
+STAGE 1 -- build_arb_tau: 245.8 s
+STAGE 2 -- matrix moments: 0.2 s
+  trace(M)  = 425.189720076409736082989267129
+  ||M||_F^2 = 2060.90910850654324400970180006
+STAGE 3 -- eig: 825.7 s   201 eigenvalues returned
+
+GATE G-M0 -- EVALUATION
+  G-M0a finite : PASS (non-finite = 0)
+  G-M0b inertia: n+ = 201, n- = 0, indeterminate = 0 -> PASS
+           max |Im| (float): 0.0
+  G-M0c strictly increasing: PASS (violations = 0, count = 201)
+  G-M0d |sum(lam)-trace|/|trace| : 1e-inf -> PASS
+  G-M0e |sum(lam^2)-||M||F^2|/..: 1e-inf -> PASS
+  radius worst |rad|/|mid| : 1e-1536.5177 (level index 94)
+
+  >>> G-M0 PASS <<<
+
+SPECTRUM SUMMARY
+  lambda_min = 2.43663511450089951654005401859e-191
+  lambda_max = 7.15715069555021216336313518572
+  spread     = 191.467949663 orders
+saved -> D:\Opencode AI Agent\reports\gw_spectrum_100_100.json (0.03 MB, 201 eigenvalues)
