@@ -4,7 +4,8 @@ Ditulis 2026-10-15, akhir sesi repo-audit + Zenodo.
 **Update 2026-10-16:** resolusi kedua (dim 201) dan ketiga (dim 301) diukur;
 sensor CI diperbaiki di akar; jawaban "mengecil atau membesar" di §2.0b dan
 `reports/THREE_TASKS_2026-10-15.md` §4 + §5 (seri tiga titik 201/301/401,
-dashboard `reports/gw_diagnostic_v3.html`).
+dashboard `reports/gw_diagnostic_v3.html`; README §6 memuat peta jalan
+kampanye + rumus instrumen lengkap).
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
 `reports/DAFTAR_MASALAH_KERJA.md` (antrean 20 masalah).
@@ -28,6 +29,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Hodge → HODGE-CH | v1.38.0-alpha, polinomial Weil eksak | `reports/HODGE_CLOSURE.md`, `HODGE_CH_SPEC.md` |
 | Resolusi kedua dim 201 + delta S1/S2 + perbaikan sensor CI | commits `1d591a8`, `da94306`, dan commit yang membawa baris ini; CI hijau run `38832840886` | `reports/THREE_TASKS_2026-10-15.md` §4 |
 | Seri tiga titik dim 201/301/401 + §5 + dashboard v3 | commit `da93d19` dan commit yang membawa baris ini; CI hijau run `38850650775` | `reports/THREE_TASKS_2026-10-15.md` §5, `reports/gw_diagnostic_v3.html` |
+| README §6 (peta jalan lengkap + rumus instrumen) | commit `28de2b8` dan commit yang membawa baris ini; CI hijau run `38852216992` | `README.md` §6, aset `docs/math/gw_*.svg` |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
