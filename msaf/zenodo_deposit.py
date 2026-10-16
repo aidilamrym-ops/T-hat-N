@@ -20,6 +20,8 @@ What it refuses to do, on purpose
 Usage:
     C:\\Python314\\python.exe zenodo_deposit.py --repo OWNER/NAME --sha <full sha>
         [--license mit-license] [--draft-only] [--title "..."]
+        [--date YYYY-MM-DD] [--version "..."] [--deposition-id ID]
+        [--publish]
 
 The token is read from the ZENODO_TOKEN environment variable and is never
 written to disk by this script.
@@ -164,6 +166,11 @@ def main(argv):
                     help="appended verbatim to the description; use it to "
                          "state the repository's own verification story "
                          "rather than the generic CI line")
+    ap.add_argument("--date", default=None,
+                    help="publication date recorded in the metadata "
+                         "(default: today, local time)")
+    ap.add_argument("--version", default=None,
+                    help="version string recorded in the metadata")
     ap.add_argument("--deposition-id", default=None,
                     help="resume an existing draft instead of creating one")
     ap.add_argument("--publish", action="store_true",
@@ -211,7 +218,7 @@ def main(argv):
         "title": args.title,
         "description": desc,
         "creators": CREATORS,
-        "publication_date": "2026-10-15",
+        "publication_date": args.date or time.strftime("%Y-%m-%d"),
         "access_right": "open",
         "related_identifiers": [{
             "identifier": "https://github.com/%s" % owner_repo,
@@ -222,6 +229,8 @@ def main(argv):
     }
     if args.license:
         metadata["license"] = args.license
+    if args.version:
+        metadata["version"] = args.version
 
     if args.publish:
         done = post("%s/depositions/%s/actions/publish"
