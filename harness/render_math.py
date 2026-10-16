@@ -35,6 +35,30 @@ FORMULAS: dict[str, str] = {
                   r"e^{-\mathcal{B}\, n}$",
     "ncrit": r"$\mathcal{B}\,\log_2(e)\, n^2"
              r" + n\,\log_2(1/\mathcal{A}) - N_{\mathrm{steps}} = 0$",
+    "gw_tau": r"$\tau = W_{02} - W_R - W_p, \qquad \dim\tau = 2N+1$",
+    "gw_kernel": r"$R_2(u) = 1 - \left( \dfrac{\sin(\pi u)}{\pi u}"
+                 r" \right)^{2}, \qquad R_2(0) = 0$",
+    "gw_ratio": r"$s_i = x_{i+1} - x_i, \qquad r_i ="
+                r" \dfrac{\min(s_i,\, s_{i+1})}{\max(s_i,\, s_{i+1})},"
+                r" \qquad \bar{r} = \dfrac{1}{D-2}"
+                r" \sum_{i=1}^{D-2} r_i$",
+    "gw_unfold": r"$x_k = \sum_m \Phi\left("
+                 r" \dfrac{y_k - y_m}{\sigma_u\, h_m} \right)$",
+    "gw_estimator": r"$R_2^{\mathrm{est}}(u) = \dfrac{1}{D}"
+                    r" \sum_{i \neq j} G_{\sigma_e}\left("
+                    r" u - (x_i - x_j) \right)$",
+    "gw_chisq": r"$\chi^2_{\mathrm{obs}} = \sum_{E_b \geq 5}"
+                r" \dfrac{\left( c_b - T_{\sigma_e}(u_b) \right)^{2}}"
+                r"{\mathrm{Var}_{\mathrm{GUE}}(b)}$",
+    "gw_pvals": r"$p_{\mathrm{GUE}} = P\left[ \chi^2_{\mathrm{GUE}}"
+                r" \geq \chi^2_{\mathrm{obs}} \right], \qquad"
+                r" p_{\mathrm{Pois}} = P\left[ \chi^2_{\mathrm{Pois}}"
+                r" \leq \chi^2_{\mathrm{obs}} \right]$",
+    "gw_gate": r"$\dfrac{\left| \sum_k \lambda_k"
+               r" - \mathrm{tr}(M) \right|}{\left| \mathrm{tr}(M) \right|}"
+               r" < 10^{-300}, \qquad"
+               r" \dfrac{\left| \sum_k \lambda_k^2 - \Vert M \Vert_F^2 \right|}"
+               r"{\Vert M \Vert_F^2} < 10^{-300}$",
 }
 
 INK = "#1f2328"

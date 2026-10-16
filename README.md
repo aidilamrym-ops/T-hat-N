@@ -9,13 +9,24 @@ ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
 - Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338272.svg)](https://doi.org/10.5281/zenodo.23338272)
-- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.39.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.39.0-alpha) (current: 250 passed)
+- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha) (current: 311 passed)
 - License: MIT - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
 [`docs/math/`](docs/math/), rendered offline by
 [`harness/render_math.py`](harness/render_math.py) with no network and no TeX
 installation, so the archive stays self-contained forever.
+
+**New (2026-10-16) - Guinand-Weil interval spectra at three certified
+resolutions.** Section 6 maps the newest campaign: full spectra of the
+cutoff-free truncated Weil block `tau = W02 - WR - Wp` certified at dimensions
+201 / 301 / 401 (gate G-M0 PASS; inertia 201/0, 301/0, 401/0), and the
+Montgomery S1/S2 question answered on the pre-registered grid - measured
+verdict for the tested series: the deviation from RMT-GUE does **not** shrink
+with resolution (17 of 18 chi^2 cells at the 2000-surrogate floor; one cell
+at 0.0180; S1 chart-dependent at all three points; asymptotic direction
+open). Standalone offline dashboard:
+[`reports/gw_diagnostic_v3.html`](reports/gw_diagnostic_v3.html).
 
 ## Contents
 
@@ -24,6 +35,7 @@ installation, so the archive stays self-contained forever.
 - [Section 3: Step-by-Step Reproducibility Manual](#section-3-step-by-step-reproducibility-manual-how-to-run-audit)
 - [Section 4: Recent Audit Kernel Amendments (Landmines L31-L35)](#section-4-recent-audit-kernel-amendments-landmines-l31-l35)
 - [Section 5: Finite Hydrodynamic Lattice & Millennium Frontier](#section-5-finite-hydrodynamic-lattice--millennium-frontier)
+- [Section 6: Guinand-Weil Interval Spectra & the Montgomery Question (201/301/401)](#section-6-guinand-weil-interval-spectra--the-montgomery-question-201301401)
 - [Symbol Glossary](#symbol-glossary)
 - [Proven vs Postulated](#proven-vs-postulated-standing-disclosure)
 - [Repository Layout](#repository-layout)
@@ -163,6 +175,12 @@ and the critical-dimension equation solved on both entropy paths is:
 
 <p align="center"><img src="docs/math/ncrit.svg" alt="B log_2(e) n^2 + n log_2(1/A) - N_steps = 0"></p>
 
+Both objects above belong to the finite lattice of Section 1. The separate
+certified magnitude ladder of Section 6 is measured on the Guinand-Weil block
+tau (a different matrix family) against exactly this functional form; there
+the constant-`B` fit is refuted on the c=13 slice by measurement, and no
+cross-slice law is claimed.
+
 ### 2.3 Rigid 256-bit Measurement Table
 
 All values below are Arb/Acb enclosures at 256-bit working precision
@@ -210,7 +228,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (250 tests, every landmine pinned)
+### 3.2 Regression Suite (311 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -333,8 +351,8 @@ now anchored to the workspace root derived from the module location.
 
 ## SECTION 5: FINITE HYDRODYNAMIC LATTICE & MILLENNIUM FRONTIER
 
-Sealed through `v1.39.0-alpha` (main `250 passed`, isolated `120 passed +
-1 honest skip`, exit 0). Full derivations in
+Sealed through `v1.40.0-alpha` (main suite `311 passed`, including the
+non-finite-residual differential check; exit 0). Full derivations in
 [`reports/finite_hydrodynamic_lattices.md`](reports/finite_hydrodynamic_lattices.md)
 (Chapters 1-3) and the machine-checked Lean kernel in [`lean/NavierStokesCore.lean`](lean/NavierStokesCore.lean)
 (`lake build` green: 1D/2D/3D/cubic + central-variant energy estimates,
@@ -411,6 +429,302 @@ work, no Riemann or Hodge proof. See `PROVEN VS POSTULATED` above and
 
 ---
 
+## SECTION 6: GUINAND-WEIL INTERVAL SPECTRA & THE MONTGOMERY QUESTION (201/301/401)
+
+*Added 2026-10-16. This section maps the newest campaign: what was certified,
+with which instruments, what the measured answer is, and - stated with equal
+weight - what is deliberately NOT claimed. Process record:
+[`reports/THREE_TASKS_2026-10-15.md`](reports/THREE_TASKS_2026-10-15.md)
+Sections 4-5 and [`reports/HANDOFF.md`](reports/HANDOFF.md) Section 2.0b.
+Standalone offline dashboard (pure inline CSS and raw SVG, no external
+script, no CDN):
+[`reports/gw_diagnostic_v3.html`](reports/gw_diagnostic_v3.html).*
+
+### 6.1 The object: the cutoff-free truncated Weil block tau
+
+The campaign object is not the circulant Weil matrix of Section 2 (whose
+minimum magnitude is exactly 1 for every n - the L3 landmine). It is the
+cutoff-free truncated Guinand-Weil block tau = W02 - WR - Wp of dimension
+dim = 2N+1, every entry an `arb` ball with a rigorous error enclosure:
+
+<p align="center"><img src="docs/math/gw_tau.svg" alt="tau = W02 - WR - Wp, dim tau = 2N+1"></p>
+
+Blocks (modes n, m in {-N,...,N}; i = n+N, j = m+N; L = ln c; psi = digamma,
+psi1 = trigamma at 1/4 + i pi n / L; G_S, G_CC, G_XC1, G_XC2 are geometric
+sums over c_k = 2k + 1/2 with the rigorous additive tail remainder
+rem = 4 exp(-c_(k+1) L) / (1 - exp(-2 L))):
+
+```text
+W02[i,j] = 32 L sinh^2(L/4) (L^2 - 16 pi^2 m n) / ((L^2 + 16 pi^2 m^2) (L^2 + 16 pi^2 n^2))
+WR[i,j]  = kappa + 2 CC(|n|) + J - (2/L) XC(|n|)                          (n = m)
+         = (S_s(m) - S_s(n)) / (pi (n - m)),  S_s(nn) = sign(nn) S(|nn|)  (n != m)
+Wp[i,j]  = sum over q = p^a <= c of ln(p) q^(-1/2) qterm(q)
+  qterm  = 2 (1 - ln q / L) cos(2 pi n ln q / L)                          (n = m)
+         = (sin(2 pi m ln q / L) - sin(2 pi n ln q / L)) / (pi (n - m))   (n != m)
+kappa    = ln(4 pi (e^L - 1)/(e^L + 1)) + gamma_E
+J        = -2 ln(U + 1) + ln(U^2 + 1) + 2 atan(U) + ln 2 - pi/2,   U = e^(L/2)
+S(n)     = (1/2) Im psi(1/4 + i pi n / L) - w_n G_S                (S(0) = 0)
+CC(n)    = -(1/2) (Re psi(1/4 + i pi n / L) - psi(1/4)) + G_CC     (CC(0) = 0)
+XC(n)    = (1/4) Re psi1(1/4 + i pi n / L) - L G_XC1 - G_XC2
+w_n      = 2 pi n / L
+```
+
+`c` is the prime-power cutoff: every q = p^a <= c enters Wp with weight
+ln(p) q^(-1/2) (9 terms for c=13; 35 terms for c=100). Caution: this
+campaign `c` is not the circulant generator symbol of Section 2; the scripts
+and logs print it as `c=13` / `c=100`. The assembly is cutoff-free in the
+archimedean parameter (no finite T anywhere); the closed forms above and the
+full derivation of the matrix definition A_ij = W02 - WR - Wp live in the
+companion repository (`guinand-weil-rigorous-numerics`, "Full derivation"
+section of its README).
+
+### 6.2 Certification chain and gates
+
+- **Route S (sign).** `certified_inertia` runs an interval LDL^T
+  factorisation (Sylvester's criterion): strictly signed pivot balls give
+  proved pivot counts. All pivots positive and none negative means the
+  matrix is **CERTIFIED POSITIVE DEFINITE**, a rigorous statement about the
+  whole spectrum. Route S is a sign, not a magnitude; no lambda_min curve is
+  ever derived from it.
+- **Route A2 (magnitude).** `arb_mat.eig` (Rump / van der Hoeven--Mourrain
+  interval eigensolver) returns all eigenvalues as acb enclosures; the
+  smallest midpoint is the measured lambda_min. (The Sturm staircase cannot
+  measure lambda_min: its shift positions come from a float64 dual engine,
+  so it returns bit-identical cluster brackets at 300 and 3000 bits.)
+- **Gate G-M0 (capture).** (a) all eigenvalues finite; (b) all strictly
+  positive, reproducing the certified inertia n+/0; (c) strictly increasing
+  after sorting at 60-digit midpoints; (d) and (e) the two normalised
+  momentum cross-checks at 1e-300:
+
+<p align="center"><img src="docs/math/gw_gate.svg" alt="|sum lambda - tr M| / |tr M| &lt; 1e-300 and |sum lambda^2 - ||M||_F^2| / ||M||_F^2 &lt; 1e-300"></p>
+
+  Failure aborts: no statistics are ever computed from a file without
+  G-M0 = PASS.
+- **Chains.** dim 201 and dim 301 were built in pure `arb` at 6000 bits
+  (`build_arb_tau` then `eig`, no decimal round trip; the `dps` field = 1806
+  is the decimal-digit equivalent of the precision). dim 401 was captured
+  through the older documented chain (mpmath dps=400 matrix, decimal
+  strings, `arb` parse at 2048 bits); the deviation is declared in the
+  capture script docstring.
+
+### 6.3 The certified staircase (sign ladder + magnitude ladder)
+
+**Sign ladder (Route S, interval LDL^T).** c=13 at 6000 bits: dims 21, 41,
+81, 161, 321, 641, 6/6 CERTIFIED POSITIVE DEFINITE
+([`reports/gw_route_s_ladder.json`](reports/gw_route_s_ladder.json));
+c=100 at 6000 bits: dims 201, 301, 2/2 CERTIFIED POSITIVE DEFINITE
+([`reports/gw_route_s_ladder_c100.json`](reports/gw_route_s_ladder_c100.json)).
+The dim-401 matrix carries the same inertial certificate inside its capture
+(G-M0b: n+ = 401, n- = 0). A 9000-bit repeat over dims 21-321 kept every
+verdict.
+
+**Magnitude ladder (Route A2).** c=13 at 6000 bits, the four measured points
+([`reports/lambda_min_eig_ladder.json`](reports/lambda_min_eig_ladder.json)):
+
+| dim (N) | lambda_min | lambda_max | verdict |
+|---|---|---|---|
+| 17 (8) | `7.674392556360189e-23` | `2.6609529983704294` | CERTIFIED, all eigenvalues strictly positive |
+| 33 (16) | `8.568627478072444e-35` | `3.338257132308795` | CERTIFIED, all eigenvalues strictly positive |
+| 65 (32) | `2.2589311905740533e-49` | `4.114073645476566` | CERTIFIED, all eigenvalues strictly positive |
+| 129 (64) | `6.321351409477261e-59` | `5.146341280489336` | CERTIFIED, all eigenvalues strictly positive |
+
+Every enclosure excludes zero (`all_exclude_zero = true`). The float
+registry of this artifact records radius 0.0 and imaginary leak 0.0; the
+certified content is the exclusion of zero, not the float field. A 9000-bit
+repeat returns bit-identical midpoints at 2.6x the cost: more precision buys
+nothing at this slice. Slopes of ln lambda_min per dimension: -1.72, -1.05,
+-0.34 - the decay DAMPENS, so the assumed constant-B law
+lambda_min(n) ~ A exp(-B n) is REFUTED on this slice. One slice only (c=13);
+across-c is not apples-to-apples; no fitted exponent is printed anywhere
+(the scripts refuse it by design).
+
+c=100 at 6000 bits, the three campaign spectra:
+
+| dim | chain | lambda_min | lambda_max | spread (orders) | eig time |
+|---|---|---|---|---|---|
+| 201 | pure arb, 6000 bit | `2.4366351145008994e-191` | `7.1571506955502118` | 191.467950 | 825.7 s |
+| 301 | pure arb, 6000 bit | `6.5771898716824545e-248` | `7.8671659089293762` | 248.077778 | 3137.6 s |
+| 401 | dps400 then arb 2048 bit | `1.7372701741044778e-294` | `7.9954638264487512` | 294.662976 | 1862.2 s |
+
+Full-precision midpoints (decimal strings in the capture logs): dim 201
+`2.43663511450089951654005401859e-191`; dim 301
+`6.57718987168245436989192354963e-248`. Enclosure radii: max radius
+`7.424315166e-1728` (201 of 201 levels), `4.957228557e-1685` (301 of 301),
+`1.009286479e-611` (401 of 401); worst |rad|/|mid| = 1e-1536.52,
+1e-1437.12, 1e-317.24. The spread grows monotonically (191.47, then 248.08,
+then 294.66 orders): each newly certified resolution drives lambda_min
+further below the float64 floor, and the pre-registered ~295-order
+expectation materialised at dim 401 (294.662976). Artifacts:
+[`reports/gw_spectrum_100_100.json`](reports/gw_spectrum_100_100.json),
+[`reports/gw_spectrum_100_150.json`](reports/gw_spectrum_100_150.json),
+[`reports/gw_capture_100_150.log`](reports/gw_capture_100_150.log); the
+dim-401 run log is `msaf/mont_run.txt` (UTF-16) over the pre-existing dps400
+capture.
+
+### 6.4 The Montgomery question: instruments (pre-registered) and measured answer
+
+The only question this campaign can answer is the one the measurement script
+declares: can the unfolded spectral statistics of this finite, deterministic,
+constructed matrix be distinguished from the Montgomery/GUE kernel at its own
+N? All rules were pre-registered (brain entries #1001630 and #1001631)
+before any real eigenvalue was read; nothing may be tuned after seeing
+results. The scope limit is repeated in the script itself: NOT Montgomery's
+theorem (conditional on RH, about zeta zeros), NOT evidence for RH, NOT Weil
+positivity, NOT prime counting, NOT factorisation.
+
+**S1 - mean adjacent gap ratio (unfolding-free).** For D levels
+x_1 < ... < x_D:
+
+<p align="center"><img src="docs/math/gw_ratio.svg" alt="s_i = x_(i+1) - x_i; r_i = min(s_i, s_(i+1)) / max(s_i, s_(i+1)); r_bar = mean of r_i"></p>
+
+Charts T = ln(lambda) [primary] and L = lambda [secondary]; both are always
+reported and the flattering one is never chosen afterwards. References are
+matched-N simulations (GUE / GOE / Poisson, 2000 samples each, seed
+20260927), never memorised constants. Verdicts: in-Poisson-only means
+CONSISTENT WITH POISSON; in-RMT-only means CONSISTENT WITH RMT; in both
+means NO DISCRIMINATION; in neither means INCONSISTENT WITH ALL; if the two
+charts disagree, CHART-DEPENDENT, hence INCONCLUSIVE.
+
+**S2 - pair correlation vs the Montgomery kernel.**
+
+<p align="center"><img src="docs/math/gw_kernel.svg" alt="R2(u) = 1 - (sin(pi u)/(pi u))^2, R2(0) = 0"></p>
+
+Unfolding (Gaussian-kernel smoothing of the counting function, adaptive
+bandwidth sigma_u times local mean spacing):
+
+<p align="center"><img src="docs/math/gw_unfold.svg" alt="x_k = sum_m Phi((y_k - y_m) / (sigma_u h_m))"></p>
+
+with h_m the local mean spacing from +/-10 neighbours; x is then rescaled so
+the mean gap is exactly 1. Estimator and the target it is compared against
+(the target is the kernel pushed through the estimator's own sigma_e
+smoothing - the apples-to-apples fix; no threshold was moved):
+
+<p align="center"><img src="docs/math/gw_estimator.svg" alt="R2_est(u) = (1/D) sum over i != j of Gauss_sigma_e(u - (x_i - x_j))"></p>
+
+Grid: sigma_u in {0.3, 0.5, 1.0} times {T, L}; estimator sigma_e = 0.5 fixed;
+u in [0, 10) in 20 bins of width 0.5; bin weight = 1 / (GUE surrogate per-bin
+variance) - the pre-registered noise model; bins with expected pair count
+n R2(u) times 0.5 below 5 are dropped and reported. Statistic and p-values
+(Poisson on the LOWER tail - amendment #1001631, registered before any real
+spectrum was read):
+
+<p align="center"><img src="docs/math/gw_chisq.svg" alt="chi^2_obs = sum over bins with E >= 5 of (c_b - T_sigma_e(u_b))^2 / Var_GUE(b)"></p>
+
+<p align="center"><img src="docs/math/gw_pvals.svg" alt="p_GUE = P[chi2_GUE >= chi2_obs]; p_Pois = P[chi2_Pois <= chi2_obs]"></p>
+
+Verdict: p_GUE at least 0.05 and p_Pois below 0.05 means CONSISTENT WITH
+MONTGOMERY/GUE, distinguishable from Poisson; both at least 0.05 means NO
+DISCRIMINATION; p_GUE below 0.05 means INCONSISTENT WITH MONTGOMERY AT THIS
+RESOLUTION; the verdict must hold on all 6 grid points, otherwise UNSTABLE,
+hence INCONCLUSIVE (report the instability; never pick the favourable
+cell).
+
+**Measured answer across the three certified resolutions** (cell-by-cell
+deltas in THREE_TASKS Section 5 and the dashboard):
+
+| resolution (dim) | S1 r_bar T | S1 r_bar L | S1 final | S2 final |
+|---|---|---|---|---|
+| 201 | 0.620526 (in RMT) | 0.131742 (outside all three) | INCONCLUSIVE (chart-dependent) | INCONSISTENT |
+| 301 | 0.563504 (in RMT) | 0.151834 (outside all three) | INCONCLUSIVE (chart-dependent) | INCONSISTENT; one cell at 0.0180 |
+| 401 | 0.548557 (in RMT) | 0.190891 (outside all three) | INCONCLUSIVE (chart-dependent) | INCONSISTENT |
+
+Aggregate: 17 of the 18 chi^2 cells sit exactly at the 2000-surrogate floor
+(p_GUE prints as 0.0000); the single off-floor cell (dim 301, chart T,
+sigma_u = 0.5) reads p_GUE = 0.0180, still below the pre-registered 0.05
+threshold. Chart L lands outside all three references at all three
+resolutions; chart T is inside the pooled RMT corridor at all three, which
+is precisely what makes S1 chart-dependent rather than answered.
+
+**"Does the deviation shrink as resolution grows?" - measured verdict for
+the tested series: it does NOT shrink.** There is no ascent toward
+consistency from 401 to 301 to 201 on the pre-registered grid; the one
+off-floor cell is a lift of the floor, not a landing. Honest limits, as
+measured: (i) three points are not an asymptote, so the direction of longer
+series stays open; (ii) raw chi^2 is not cross-N comparable by construction
+(bin weights are the matched-N GUE variances), so the statement is about the
+verdict grid, not about a smooth curve; (iii) the resolution ceiling (~100,
+~150, ~200 pairs per bin at dim 201/301/401, i.e. n times 0.5) was reached
+at every point.
+
+**Falsified pre-registered expectations and process defects (kept as
+measured, never adjusted).** The pre-registered prediction that GOE and GUE
+would not be separable was FALSIFIED at all three resolutions (measured gap
+0.069935 / 0.069737 / 0.069286 against SE 0.001417 / 0.000947 / 0.000718,
+about 49 / 74 / 97 SE). A retracted r_bar label (defect 17) and a vacuous
+sigma_u grid in run #1 (defect 15) are disclosed in the companion pipeline
+logs and were fixed at the root - listed here so no reader has to trust a
+clean-looking log.
+
+### 6.5 What is new (and what is not)
+
+New and sealed in this repository (each item replayable with 6.6):
+
+1. Three certified spectra of the cutoff-free truncated Weil block at dim
+   201 / 301 / 401 (G-M0 PASS; inertia 201/0, 301/0, 401/0), including
+   pure-`arb` 6000-bit chains for dim 201 and 301.
+2. The measured resolution verdict on the pre-registered grid: the deviation
+   from RMT-GUE does not shrink across the series; floor census 17/18 with
+   the single 0.0180 cell reported as-is (the first movement off the pure
+   floor in the series).
+3. The certified magnitude record: lambda_min down to `1.737e-294` (dim 401)
+   and `6.577e-248` (dim 301), with 6000-bit enclosure radii measured at
+   e-1685 .. e-1728; and the c=13 slice refuting the constant-B decay form
+   while magnitudes collapse from e-23 to e-59 (damping slopes -1.72, -1.05,
+   -0.34).
+4. The two-sided rails: verdicts move only by pre-registered rules; falsified
+   expectations and retracted labels stay visible in the record.
+
+NOT claimed (the script's own scope limit, repeated here): not Montgomery's
+theorem, not RH evidence, not Weil positivity, not prime counting, not
+factorisation. Every verdict is a statement about one finite deterministic
+matrix at a stated precision - an enclosure, never absolute truth.
+
+### 6.6 Reproduce the campaign
+
+```bash
+python --version        # 3.14+; pip install "python-flint==0.9.0" numpy scipy mpmath
+export GW_DIR=...       # companion checkout containing source_arb_ldlt_certify.py
+
+# Route S sign ladder (c=13: dims 21..641; c=100: dims 201, 301)
+python msaf/gw_route_s_ladder.py --prec 6000 --ladder 10,20,40,80,160,320
+python msaf/gw_route_s_ladder.py --c 100 --prec 6000 --ladder 100,150 --out reports/gw_route_s_ladder_c100.json
+
+# Magnitude ladder (c=13: dims 17/33/65/129 at 6000 bits)
+python msaf/lambda_min_eig_ladder.py --prec 6000 --ladder 8,16,32,64
+
+# Full-spectrum capture through gate G-M0 (dim 201 default; dim 301)
+python msaf/capture_spectrum_201.py
+python msaf/capture_spectrum_201.py --c 100 --n 150
+
+# Montgomery S1/S2 measurement on a captured spectrum (run from the companion checkout)
+python gw_montgomery.py reports/gw_spectrum_100_150.json --samples 2000
+
+# Section 5 generator + standalone dashboard
+python msaf/gw_resolution_delta.py --write
+python msaf/gw_dashboard_v3.py --write
+```
+
+Measured cost on the author's machine: build and eig 825.7 s (dim 201),
+3137.6 s (dim 301), 1862.2 s (dim 401); Route S LDL^T 57.1 s at dim 301; the
+full 2000-surrogate measurement is minutes per spectrum. Windows note:
+`msaf/mont_run.txt` is UTF-16; all newer logs are UTF-8 without BOM, CRLF.
+
+### 6.7 Roadmap (next moves, in order)
+
+1. extend the c=13 magnitude ladder to dims 257 and 321 - dim 321 already
+   carries the sign certificate; the magnitudes are what is missing to
+   settle the damping direction;
+2. a fourth resolution series, or more statistical power above the
+   2000-surrogate floor (the ceiling ~100-200 pairs per bin was measured
+   three times; the floor is 1/2000);
+3. only then may the damping be discussed as a law (the single-slice
+   refutation stays single-slice until more slices exist);
+4. the wider queue (four bridges, RH/Hodge status) stays in
+   [`reports/HANDOFF.md`](reports/HANDOFF.md) and
+   [`reports/DAFTAR_MASALAH_KERJA.md`](reports/DAFTAR_MASALAH_KERJA.md).
+
+---
+
 ## SYMBOL GLOSSARY
 
 | Symbol | Meaning | Defined |
@@ -435,15 +749,29 @@ work, no Riemann or Hodge proof. See `PROVEN VS POSTULATED` above and
 | Godunov split | Sequential advect-then-diffuse evolution step | Sec. 5.1 |
 | SBP | Summation-by-parts identity (discrete adjoint calculus) | Sec. 5.2 |
 | Gram / Sylvester | Exact rational cycle pairing + definiteness gate | Sec. 5.3 |
+| tau, W02, WR, Wp | Cutoff-free truncated Guinand-Weil block and its three blocks | Sec. 6.1 |
+| c (Guinand-Weil) | Prime-power cutoff of tau; distinct from the circulant c of Sec. 2.1 | Sec. 6.1 |
+| N, dim | Mode bound -N..N; dim = 2N+1 | Sec. 6.1 |
+| G-M0 | Five-clause capture gate (finite, inertia, strict order, trace, Frobenius) | Sec. 6.2 |
+| Route S / Route A2 | Interval LDL^T inertia (sign) / interval eig-solver (magnitude) | Sec. 6.2 |
+| s_i, r_i, r_bar | Adjacent gaps; gap ratios; mean gap ratio (S1) | Sec. 6.4 |
+| R2(u) | Montgomery pair-correlation kernel 1 - (sin(pi u)/(pi u))^2 | Sec. 6.4 |
+| sigma_u / sigma_e | Unfolding bandwidth grid / estimator smoothing (fixed 0.5) | Sec. 6.4 |
+| chi^2_obs, p_GUE, p_Pois | Binned weighted discrepancy; surrogate tail p-values (S2) | Sec. 6.4 |
 
 ## PROVEN VS POSTULATED (STANDING DISCLOSURE)
 
 Proven by execution: the grid arithmetic, the operator certificates, the
 Weil spectrum in closed form, three localised zeros with certified
 enclosures, the Dirichlet brackets, the hash chains and their independent
-replay. Postulated, not derived: sigma = 0.5 as a universal statement
-(every result carries `global_claim_supported = False`); the decay law with
-B ~= 0.115 (both entropy paths reported side by side).
+replay; plus the Section 6 campaign: three full Guinand-Weil captures at
+dim 201/301/401 through gate G-M0, the Route S inertia ladders, and the
+floor-locked S1/S2 verdicts. Postulated, not derived: sigma = 0.5 as a
+universal statement (every result carries `global_claim_supported = False`);
+the decay law with B ~= 0.115 (both entropy paths reported side by side) -
+and on the c=13 Guinand-Weil slice that constant-B form is refuted by
+measurement (Section 6.3); magnitudes are measured, no fitted exponent is
+ever printed.
 
 Machine-checked in Lean (`lake build` green, standard axioms only):
 1D/2D/3D Chorin energy estimates and the central-variant estimate, each
@@ -461,23 +789,29 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
 - `msaf/` - kernel: precision, constants, grid, certificates, operators,
   Guinand-Weil matrices, budget, zeta inversion, evolution, visualizer,
   Dirichlet bracketing, final audit
+- `msaf/` campaign tools - `capture_spectrum_201.py` (G-M0-gated
+  full-spectrum capture), `gw_route_s_ladder.py` (Route S inertia ladder),
+  `lambda_min_eig_ladder.py` (Route A2 magnitudes), `gw_resolution_delta.py`
+  (Section 5 generator), `gw_dashboard_v3.py` (standalone dashboard generator)
 - `msaf/navier_stokes/` - finite hydrodynamic lattice: Godunov loop,
   restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
-- `msaf/tests/` - regression suite (250 tests)
+- `msaf/tests/` - regression suite (311 tests)
 - `lean/` - Lean 4 machine-checked kernels 1D/2D/3D + central variant + Moore box (`lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py)
 - `harness/` - release gate and math renderer
-- `ledger/` - append-only evidence chains; `reports/` - integer pixel reports
+- `ledger/` - append-only evidence chains; `reports/` - integer pixel reports,
+  the Guinand-Weil spectra JSONs and Montgomery logs, and the standalone
+  dashboard `reports/gw_diagnostic_v3.html`
 
 ## CITATION
 
 ```text
 Amry, Muhammad Aidil. T-hat-N: Matrix-constraint Spectral Analysis Framework.
 v1.1.0. Zenodo. https://doi.org/10.5281/zenodo.23338272
-Current development line: v1.11.0-alpha (GitHub releases).
+Current development line: v1.40.0-alpha (GitHub tags).
 ```
 
 ## LICENSE
