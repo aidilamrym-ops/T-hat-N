@@ -8,9 +8,9 @@ arithmetic (`arb` / `acb` / `arb_mat`, version 0.9.0). No floating-point value
 ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
-- Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338272.svg)](https://doi.org/10.5281/zenodo.23338272)
+- Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338271.svg)](https://doi.org/10.5281/zenodo.23338271) (concept DOI, all versions; latest version v1.40.0-alpha: https://doi.org/10.5281/zenodo.23410894)
 - Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha) (current: 311 passed)
-- Final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6)
+- Final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
 - License: MIT - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
@@ -815,7 +815,8 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
 
 ```text
 Amry, Muhammad Aidil. T-hat-N: Matrix-constraint Spectral Analysis Framework.
-v1.1.0. Zenodo. https://doi.org/10.5281/zenodo.23338272
+v1.40.0-alpha. Zenodo. https://doi.org/10.5281/zenodo.23410894
+Concept DOI (all versions): https://doi.org/10.5281/zenodo.23338271
 Current development line: v1.40.0-alpha (GitHub tags).
 Final certified delivery: v1.40.0-alpha-final-certified-delivery (GitHub tag).
 ```

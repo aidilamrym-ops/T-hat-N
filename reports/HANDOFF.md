@@ -8,7 +8,7 @@ dashboard `reports/gw_diagnostic_v3.html`; README §6 memuat peta jalan
 kampanye + rumus instrumen lengkap). **Konsolidasi 2026-10-16:** manuskrip
 `exports/research_paper.tex` (Main Spectral Results + register cacat,
 transkripsi artefak tersegel saja) ditambahkan; dashboard v3 diuji ulang
-byte-stabil; delivery akhir ditandai tag `v1.40.0-alpha-final-certified-delivery`. **H0 lockdown (2026-10-16):** `docs/ZENODO_ACTIVATE.md` (panduan aktivasi webhook Zenodo) + template release + pra-registrasi amandemen lantai `reports/AMENDMENT_FLOOR_SPEC.md` (DIBEKUKAN, sha256 di §1) disegel; TIDAK ada komputasi baru dijalankan.
+byte-stabil; delivery akhir ditandai tag `v1.40.0-alpha-final-certified-delivery`. **H0 lockdown (2026-10-16):** `docs/ZENODO_ACTIVATE.md` (panduan aktivasi webhook Zenodo) + template release + pra-registrasi amandemen lantai `reports/AMENDMENT_FLOOR_SPEC.md` (DIBEKUKAN, sha256 di §1) disegel; TIDAK ada komputasi baru dijalankan. **Deposit + release (2026-10-16):** delivery T-hat-N diamankan sebagai VERSI BARU record Zenodo via depositor API — DOI versi `10.5281/zenodo.23410894` (konsep `10.5281/zenodo.23338271`; arsip tarball commit `a37b50b`, sha256 `44bdfb87...`); release GitHub `v1.40.0-alpha-final-certified-delivery` diterbitkan via `gh`; skrip depositor diperluas (`--date`/`--version`, commit `3305221`).
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
 `reports/DAFTAR_MASALAH_KERJA.md` (antrean 20 masalah).
@@ -35,6 +35,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | README §6 (peta jalan lengkap + rumus instrumen) | commit `28de2b8` dan commit yang membawa baris ini; CI hijau run `38852216992` | `README.md` §6, aset `docs/math/gw_*.svg` |
 | Konsolidasi manuskrip + tag delivery akhir | commit yang membawa baris ini; dibangun di atas `28de2b8`/`86b161f` (CI hijau run `38852216992` / `38852448159`); tag `v1.40.0-alpha-final-certified-delivery` | `exports/research_paper.tex`, `reports/gw_diagnostic_v3.html` (sha256 `89C7D5F948626BD51DE06F37534BDC4941D3793353DCB80B8557E10E2BED7322`, byte-identik pasca rerun `--write`), `reports/THREE_TASKS_2026-10-15.md` §4.4 + §5 |
 | H0 lockdown + pra-registrasi amandemen lantai (H1) | commit yang membawa baris ini; dibangun di atas `a37b50b` (CI hijau run `38854261266` / `38854493402`); spesifikasi DIBEKUKAN, sha256 `3C9958BEE3021385B242B84B2ECDA136E15F35D5682C16FF690713830EFBB917` | `docs/ZENODO_ACTIVATE.md`, `reports/RELEASE_v1.40.0-alpha-final-certified-delivery.md`, `reports/AMENDMENT_FLOOR_SPEC.md` |
+| Deposit delivery T-hat-N (versi baru Zenodo) + release GitHub delivery | commit yang membawa baris ini; DOI versi `10.5281/zenodo.23410894` (konsep `10.5281/zenodo.23338271`); arsip tarball commit `a37b50b` sha256 `44bdfb87788b1f1da687b2d8e852641385b5c80de99c072768f6b67120198f61` (546.800 byte, md5 cocok), CI hijau run `38854261266` / `38854493402`; release `v1.40.0-alpha-final-certified-delivery` terbit via `gh` | `https://doi.org/10.5281/zenodo.23410894`, `msaf/zenodo_deposit.py` (commit `3305221`), halaman release |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -160,18 +161,31 @@ Konsekuensi urutan yang disarankan:
 
 ---
 
-## 3. Zenodo: jalur kanonik masih tertutup
+## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional
 
-- Jalur kanonik (GitHub release → DOI otomatis) **tidak aktif**:
-  akun GitHub punya **0 release di 15 repo publik**, dan webhook
-  Zenodo↔GitHub hanya bisa diaktifkan pemilik lewat login browser
-  (zenodo.org → Settings → GitHub → Enable). Tidak ada API token yang
-  bisa melewati ini.
-- Jalur yang dipakai: `msaf/zenodo_deposit.py` (depositor API, menolak
-  mengarang lisensi/klaim, mencatat sha256, retry saat upload putus).
-- 11 repo publik masih tanpa DOI (menunggu audit, sesuai keputusan
+- **2026-10-16: delivery T-hat-N terdeposit di Zenodo** lewat jalur
+  depositor API (`msaf/zenodo_deposit.py`, commit `3305221`) sebagai
+  VERSI BARU record T-hat-N: DOI versi `10.5281/zenodo.23410894`
+  (konsep `10.5281/zenodo.23338271`). Rantai konsep utuh: `v1.1.0`
+  (23338272) → `v1.2.0` (23340971) → `v1.40.0-alpha` (23410894).
+  Arsip = tarball commit `a37b50b` sha256
+  `44bdfb87788b1f1da687b2d8e852641385b5c80de99c072768f6b67120198f61`
+  (546.800 byte; md5 file di Zenodo cocok byte-exact); CI hijau di
+  commit arsip (`38854261266` / `38854493402`).
+- Draft `23410894` dibuat 2026-10-16 06:35 UTC (lewat UI; kemungkinan
+  percobaan pemilik), lalu difinalkan sesi ini: deskripsi draft lama
+  (teks "v1.2.0" warisan versi sebelumnya) diganti ke format teraudit;
+  cadangan JSON di luar repo.
+- Jalur kanonik webhook (GitHub release → DOI otomatis) tetap
+  **tidak aktif** — hanya pemilik via login browser
+  (zenodo.org → Settings → GitHub → Enable). Release GitHub dibuat
+  manual via `gh` dan TIDAK memicu Zenodo tanpa webhook: `v1.1.0`
+  (2026-10-13) dan `v1.40.0-alpha-final-certified-delivery`
+  (2026-10-16, Latest). Panduan aktivasi (untuk auto-arsip rilis
+  BERIKUTNYA): `docs/ZENODO_ACTIVATE.md`.
+- 10 repo publik masih tanpa DOI (menunggu audit, sesuai keputusan
   operator: deposit hanya repo yang gate-nya hijau & CI hijau):
-  AETHER-Z3-OMEGA, ASLC-OMEGA-LEDGER, T-hat-N, gnase-engine,
+  AETHER-Z3-OMEGA, ASLC-OMEGA-LEDGER, gnase-engine,
   jacobian-conjecture-audit, lagarias-criterion, navier-stokes-formalization,
   riemann-hypothesis-formalization, sovereign-enterprise-suite,
   the-asymmetric-wager-msaf-family017, zeta-23-audit.

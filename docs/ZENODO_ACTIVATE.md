@@ -2,9 +2,12 @@
 
 Operational guideline. Owner action required: the switch can only be flipped
 from a logged-in browser session at zenodo.org -- no API token bypasses it.
-Context: `reports/HANDOFF.md` section 3 (canonical deposit path currently
-CLOSED; the Zenodo GitHub integration has never been active for this account).
-Fallback depositor already exists: `msaf/zenodo_deposit.py`.
+Context: `reports/HANDOFF.md` section 3. **Update 2026-10-16:** the
+delivery was secured via the depositor API (`msaf/zenodo_deposit.py`) as
+a NEW VERSION of the T-hat-N record -- version DOI
+`10.5281/zenodo.23410894`, concept DOI `10.5281/zenodo.23338271`. The
+webhook remains OFF; this guide now matters only for enabling AUTOMATIC
+archiving of FUTURE releases (the API path stays valid regardless).
 
 ## 1. Preconditions (verify first, in this order)
 
@@ -25,10 +28,10 @@ Fallback depositor already exists: `msaf/zenodo_deposit.py`.
 3. In the repository list, flip the switch ON for `T-hat-N` ONLY. Sealed
    policy (HANDOFF section 3): deposit only repositories whose gate is green
    AND CI is green.
-4. Publish the GitHub Release for the EXISTING tag. No release object exists
-   yet for this tag (checked 2026-10-16: `gh release list` shows only
-   `v1.1.0`), while the annotated tag itself already exists -- publish with
-   the prepared notes; do NOT create a new tag:
+4. Publish the GitHub Release for the EXISTING tag. Status 2026-10-16: the
+   delivery release was ALREADY published via `gh` (no browser needed; it
+   is the current Latest release). For any FUTURE tag, publish with the
+   prepared notes; do NOT create a new tag:
    `gh release create v1.40.0-alpha-final-certified-delivery --verify-tag --notes-file reports/RELEASE_v1.40.0-alpha-final-certified-delivery.md`
 5. Zenodo archives the release automatically and mints two DOIs: a concept
    DOI (all versions) and a version DOI (this release).

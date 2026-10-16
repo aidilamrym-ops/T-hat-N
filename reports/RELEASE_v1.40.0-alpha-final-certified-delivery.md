@@ -1,18 +1,19 @@
 # GitHub Release -- v1.40.0-alpha-final-certified-delivery
 
 TEMPLATE for the GitHub Release of the EXISTING annotated tag. Do NOT
-create a new tag. Status 2026-10-16: no release object exists yet for this
-tag (`gh release list` shows only `v1.1.0`); the annotated tag itself was
-minted and pushed on 2026-10-16. Publish with:
+create a new tag. Status 2026-10-16: PUBLISHED via `gh` (release page
+live). Zenodo: this delivery is archived as a new version of the T-hat-N
+record -- version DOI `10.5281/zenodo.23410894`, concept DOI
+`10.5281/zenodo.23338271`; archive `T-hat-N-a37b50b7dbdd.tar.gz`,
+sha256 `44bdfb87788b1f1da687b2d8e852641385b5c80de99c072768f6b67120198f61`.
+Republish or edit with:
 
     gh release create v1.40.0-alpha-final-certified-delivery --verify-tag \
       --notes-file reports/RELEASE_v1.40.0-alpha-final-certified-delivery.md
 
-Zenodo order of operations: enable the webhook FIRST (see
-`docs/ZENODO_ACTIVATE.md`), then publish this release, so the tag content
-is archived and DOI-minted automatically. Publishing later without the
-webhook enabled keeps the fallback depositor (`msaf/zenodo_deposit.py`)
-as the only DOI path.
+Zenodo webhook status: never enabled; the deposit went through the
+depositor API (`msaf/zenodo_deposit.py`). Enabling the webhook later (see
+`docs/ZENODO_ACTIVATE.md`) only affects FUTURE releases.
 
 ## Machine metadata
 
