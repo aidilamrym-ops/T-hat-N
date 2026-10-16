@@ -19,6 +19,13 @@
 % If any discrepancy is ever found between this file and the sources,
 % the sources win. This file adds no new theorem, no new measurement and
 % no new interpretation; open questions stay open.
+% AMENDMENT NOTE (2026-10-16, H1): the dated amendment section inserted
+% before the process-defect register DOES add new measurements (the
+% refined 20000-surrogate grid and the five-seed C4 robustness array),
+% transcribed from the machine record reports/gw_h1_floor_refine.json via
+% reports/AMENDMENT_FLOOR_RESULTS.md. The "no new measurement" clause
+% above therefore binds the sealed 2026-10-15/16 consolidation body only,
+% never the amendment section; the sources-win rule still binds.
 % No numeric code was touched to produce it (no ctx.prec mutations).
 % Not compiled in the sealing environment (no TeX toolchain there); the
 % source is ASCII-only and uses standard packages only.
@@ -51,8 +58,14 @@ the single off-floor cell reads $p_{GUE} = 0.0180$, still below the 0.05
 threshold. The pre-registered question -- does the deviation shrink as
 resolution grows? -- is answered for the tested series: it does
 \textbf{not} shrink. The asymptotic direction remains open (three finite
-points). Not claimed: Montgomery's theorem, evidence for RH, Weil
-positivity, prime counting, factorisation.
+points). A dated amendment (2026-10-16) re-measures the whole grid at
+higher test power: at 20000 surrogates per ensemble, 17 of the 18 cells
+sit at the refined bound $p_{GUE} < 1.49775\times 10^{-4}$ and the
+single off-floor cell reads $p_{GUE} = 0.0631$ (NO DISCRIMINATION),
+with a five-seed array on that cell classified NOT STABLE
+(dispersion-dominated); exact counts in the amendment section. Not
+claimed: Montgomery's theorem, evidence for RH, Weil positivity, prime
+counting, factorisation.
 \end{abstract}
 
 \section{Scope and provenance}
@@ -355,6 +368,136 @@ rules, falsified expectations and retracted labels stay visible.
 NOT claimed: not Montgomery's theorem, not RH evidence, not Weil
 positivity, not prime counting, not factorisation. Every verdict is a
 statement about one finite deterministic matrix at a stated precision.
+
+\section{Dated amendment (2026-10-16): 20000-surrogate floor refinement
+and the five-seed robustness array for the single off-floor cell}
+
+This section is a dated amendment to the consolidation above. It was
+pre-registered BEFORE execution in \texttt{reports/AMENDMENT\_FLOOR\_SPEC.md}
+(frozen; sha256
+\texttt{3c9958bee3021385b242b84b2ecda136e15f35d5682c16ff690713830efbb917});
+the target cells, the output format, the decision tree and the
+anti-tuning rails were fixed there and are reproduced here without
+change. Unlike the consolidation body, this section DOES add new
+measurements; its sources are the machine-extracted record
+\texttt{reports/gw\_h1\_floor\_refine.json} and the dated report
+\texttt{reports/AMENDMENT\_FLOOR\_RESULTS.md} (both written by machine:
+extractor \texttt{msaf/gw\_h1\_extract.py}, report generator
+\texttt{msaf/gw\_h1\_report.py}). The instrument \texttt{gw\_montgomery.py}
+was not modified (revision \texttt{b0af0f519ae25f19178bc3eda4f288970cb49374},
+sha256 \texttt{072910f232b15768ba35e14d7cc6aaf4fe1ee174dc45b65429460f791196e1d5},
+identical in the headers of all seven runs).
+
+\subsection{Refined grid: 20000 surrogates per ensemble, seed 20260927}
+
+The full 18-cell grid was re-measured at exactly 20000 matched surrogates
+per ensemble (GUE and Poisson verdict-bearing; GOE reported-only,
+unchanged status) with the canonical seed 20260927. For the four
+pre-registered target cells C1 = 201$|$T$|$0.3, C2 = 301$|$T$|$0.3,
+C3 = 401$|$T$|$0.3 and C4 = 301$|$T$|$0.5 the refined values supersede
+the sealed ones; the sealed columns stay visible in Table~\ref{tab:grid}
+and nothing is deleted. Measured:
+
+\begin{itemize}
+\item 17 of the 18 cells sit at the refined floor ($k_{GUE} = 0/20000$),
+reported as a 95\% Clopper-Pearson upper bound
+$p_{GUE} < 1.49775 \times 10^{-4}$ (exact formula $1 - 0.05^{1/n}$,
+$n = 20000$), labelled BOUND, never as a measured zero; the printed
+string ``0.0000'' is retired for these runs. All 17 keep the verdict
+INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION.
+\item The single off-floor cell C4 (dim 301, chart T, $\sigma_u = 0.5$):
+$\chi^2_{\mathrm{obs}} = 1367.6160$, $k_{GUE} = 1262/20000 = 6.31000
+\times 10^{-2}$ (95\% CP $[5.97690 \times 10^{-2}, 6.65587 \times
+10^{-2}]$), $k_{Pois} = 4807/20000$, verdict NO DISCRIMINATION AT N=401.
+The sealed 2000-surrogate value of this cell ($36/2000 = 0.0180$,
+INCONSISTENT) is superseded; it remains visible in Table~\ref{tab:grid}.
+\end{itemize}
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{@{}l l l r r l@{}}
+\toprule
+cell & dim & chart & $\sigma_u$ & $\chi^2_{\mathrm{obs}}$ & $k_{GUE}/20000$ ($p_{GUE}$, refined) \\
+\midrule
+C1 & 201 & T & 0.3 & 14419.1614 & 0/20000 ($< 1.49775\times 10^{-4}$, BOUND) \\
+C2 & 301 & T & 0.3 & 12154.5726 & 0/20000 ($< 1.49775\times 10^{-4}$, BOUND) \\
+C3 & 401 & T & 0.3 & 11743.7710 & 0/20000 ($< 1.49775\times 10^{-4}$, BOUND) \\
+C4 & 301 & T & 0.5 & 1367.6160 & 1262/20000 ($6.31000\times 10^{-2}$) \\
+\bottomrule
+\end{tabular}
+\caption{Refined values for the four pre-registered target cells
+(20000 surrogates per ensemble, seed 20260927). The full refined
+18-cell grid is published as-is in
+\texttt{reports/h1\_floor\_refine\_section.md}.}
+\label{tab:refined}
+\end{table}
+
+The exact counts come from a read-only observation of the instrument's
+own $p_{GUE}$ computation, validated against the printed $p$ at
+$n = 10$, at $n = 2000$ (sealed reproduction check) and at $n = 20000$
+for the two positive-$k$ cells ($1262/20000 \leftrightarrow 0.0631$;
+$960/20000 \leftrightarrow 0.0480$); verdicts recomputed from the exact
+counts by the unchanged rules agree with the printed verdicts in all 18
+cells.
+
+\subsection{Five-seed robustness array on the off-floor cell}
+
+Five independent 20000-surrogate runs of the full instrument on dim 301
+only (seeds 20260927 canonical and 20261001--20261004, declared before
+any draw) measure the C4 statistic; Table~\ref{tab:array} lists them.
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{@{}r r r l@{}}
+\toprule
+seed & $k_i/20000$ & $\hat p_i$ & 95\% Clopper-Pearson \\
+\midrule
+20260927 & 1262/20000 & $6.31000\times 10^{-2}$ & $[5.97690, 6.65587]\times 10^{-2}$ \\
+20261001 & 960/20000 & $4.80000\times 10^{-2}$ & $[4.50783, 5.10540]\times 10^{-2}$ \\
+20261002 & 1289/20000 & $6.44500\times 10^{-2}$ & $[6.10854, 6.79419]\times 10^{-2}$ \\
+20261003 & 1021/20000 & $5.10500\times 10^{-2}$ & $[4.80401, 5.41913]\times 10^{-2}$ \\
+20261004 & 1345/20000 & $6.72500\times 10^{-2}$ & $[6.38170, 7.08094]\times 10^{-2}$ \\
+\midrule
+pooled & 5877/100000 & $5.87700\times 10^{-2}$ & $[5.73201, 6.02456]\times 10^{-2}$ \\
+\bottomrule
+\end{tabular}
+\caption{Five-seed robustness array on C4 (dim 301, chart T,
+$\sigma_u = 0.5$). Pearson homogeneity on the $5\times 2$ count table:
+$\chi^2 = 107.9299$ (df 4), $p = 2.01097\times 10^{-22}$.}
+\label{tab:array}
+\end{table}
+
+The frozen decision tree, applied in the declared order, lands on
+branch 1: \textbf{NOT STABLE (homogeneity rejected at alpha = 0.01;
+dispersion-dominated)}. C4 is flagged resolution-sensitive; the number
+of record remains the canonical 20000 value ($1262/20000$), and the
+verdict grid recomputation uses it under the unchanged rules.
+
+\subsection{Falsified pre-registered expectation, kept visible}
+
+The frozen specification pre-declared (its section 4): ``Under the
+pre-declared bands, every branch leaves C4 below the 0.05 verdict
+threshold.'' The measurement FALSIFIES this expectation: the pooled
+rate is $5.87700 \times 10^{-2} \geq 0.05$ and four of the five seeds
+sit at or above 0.05 (only seed 20261001, $4.80000 \times 10^{-2}$, is
+below). The sealed single-cell reading (0.0180) did not persist at
+higher surrogate count, and the five-seed array shows the crossing of
+the threshold is seed-dependent (dispersion-dominated), so no stable
+off-floor value is claimed. Recorded as-is, never patched.
+
+\subsection{Interpretation limits and reproduction}
+
+Even a STABLE OFF-FLOOR classification would not have made C4
+``physical''; the measured classification is NOT STABLE
+(dispersion-dominated). These remain statistics of a finite set of
+constructed matrices: not Montgomery's theorem, not a proof of RH, not
+Weil positivity, not a prime count, not factorisation. The asymptotic
+question stays open; what changed is the resolution of the finite
+statement at 20000 surrogates. Part (C) of the specification (a second,
+never-verdict-bearing verification engine) remains a later session.
+Reproducibility: a capped single-thread rerun at dim 201 (2000 samples)
+reproduces the sealed log exactly on every compared field, so the
+thread caps are performance-only; the seven run logs (sha256 in the
+machine record) each carry the instrument revision and threading
+environment in their headers.
 
 \section{Technical appendix: process-defect register}
 The following entries transcribe the campaign's process record

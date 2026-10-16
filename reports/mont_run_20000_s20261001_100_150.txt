@@ -1,0 +1,312 @@
+================================================================================================
+# H1 FLOOR-REFINEMENT RUN (FROZEN SPEC: reports/AMENDMENT_FLOOR_SPEC.md)
+# tag = B_seed20261001
+# spectrum = D:\Opencode AI Agent\reports\gw_spectrum_100_150.json
+# spectrum sha256 = 8fded8394f0ab4e8ed83f537609d313d0d50eef42f09214c30d1cfcd994d161d
+# instrument = D:\THE ASYMMETRIC WAGER\guinand-weil-rigorous-numerics-main\gw_montgomery.py
+# instrument sha256 = 072910f232b15768ba35e14d7cc6aaf4fe1ee174dc45b65429460f791196e1d5
+# instrument git revision = b0af0f519ae25f19178bc3eda4f288970cb49374 2026-10-06 10:16:26 +0800
+# samples = 20000   seed = 20261001 (declared; injected as module SEED)
+# exact-count spy: np.mean of boolean arrays observed during main(); values returned unchanged
+# python = 3.14.4 (tags/v3.14.4:23116f9, Apr  7 2026, 14:10:54) [MSC v.1944 64 bit (AMD64)]
+# threading env = OPENBLAS_NUM_THREADS:1 OMP_NUM_THREADS:1 (recorded for the manifest)
+# start = 2026-10-16T15:38:05
+================================================================================================
+################################################################################################
+# OMEGA OPSI (d) -- MONTGOMERY PAIR CORRELATION / GUE CONSISTENCY
+# input = D:\Opencode AI Agent\reports\gw_spectrum_100_150.json   surrogate samples per ensemble = 20000   seed = 20261001
+################################################################################################
+
+PRE-REGISTERED RULES (brain #1001630, locked BEFORE any eigenvalue):
+  S1  r_bar unfolding-free, charts T=ln(lambda) PRIMARY and L=lambda
+      -> report BOTH, never pick the flattering one afterwards
+  S2  R2(u) vs 1-(sin(pi u)/(pi u))^2, sigma_u in {0.3,0.5,1.0},
+      sigma_e=0.5, u in [0,10), 20 bins of 0.5, drop bins with E<5
+  ref GUE / GOE / Poisson, matched N, 2000 samples, seed 20261001
+  S1 verdict: in-Poisson-only -> POISSON; in-RMT-only -> RMT;
+      in both -> NO DISCRIMINATION; in neither -> INCONSISTENT
+  S2 verdict: p_GUE = P(chi2_GUE >= chi2_obs),
+      p_Pois = P(chi2_Pois <= chi2_obs)  [LOWER tail -- amendment
+      #1001631, registered before any real spectrum was read];
+      p_GUE>=0.05 & p_Pois<0.05 -> MONTGOMERY/GUE, distinguishable
+      from Poisson; both >=0.05 -> NO DISCRIMINATION; p_GUE<0.05 ->
+      INCONSISTENT. Must hold on ALL 6 grid points {T,L} x {0.3,0.5,1.0},
+      else UNSTABLE. Threshold 0.05, bins, sigma_e, grid, seed UNCHANGED.
+  EXPECTED (pre-registered): GOE-vs-GUE NOT separable at N=401;
+      spread ~295 orders -> chart L non-uniform; ~200 pairs/bin.
+SCOPE: this is NOT Montgomery's theorem about zeta zeros and NOT an
+       RH / Weil-positivity / prime-counting / factoring claim.
+
+================================================================================================
+INPUT SPECTRUM
+================================================================================================
+  provenance : c=100 N=150 dps=1806 prec=6000 algo=vdhoeven_mourrain n=301
+  eig time   : 3137.6 s
+  G-M0 gate  : G-M0 PASS
+  G-M0 parts : {"G-M0a_finite": true, "G-M0b_inertia": true, "G-M0c_strict": true, "G-M0d_trace": true, "G-M0e_frob": true}
+  inertia    : {"n_pos": 301, "n_neg": 0, "indeterminate": 0}
+  all 301 levels finite, positive, strictly increasing -- OK
+  lambda_min = 6.5771898716824545e-248
+  lambda_max = 7.8671659089293762
+  spread     = 248.077778 orders   (pre-registered expectation ~295)
+  max enclosure radius = 4.957228557e-1685   (301 of 301 levels carry a radius)
+  worst |rad|/|mid|    = 1e-1437.12
+
+================================================================================================
+LEVEL DENSITY IN CHART T = ln(lambda)  (reported)
+================================================================================================
+  bin  0  y in [  -569.16,  -540.60)  count   3
+  bin  1  y in [  -540.60,  -512.04)  count   4
+  bin  2  y in [  -512.04,  -483.47)  count   3
+  bin  3  y in [  -483.47,  -454.91)  count   5
+  bin  4  y in [  -454.91,  -426.35)  count   4
+  bin  5  y in [  -426.35,  -397.79)  count   5
+  bin  6  y in [  -397.79,  -369.23)  count   5
+  bin  7  y in [  -369.23,  -340.67)  count   5
+  bin  8  y in [  -340.67,  -312.11)  count   5
+  bin  9  y in [  -312.11,  -283.55)  count   6
+  bin 10  y in [  -283.55,  -254.99)  count   7
+  bin 11  y in [  -254.99,  -226.43)  count   6
+  bin 12  y in [  -226.43,  -197.86)  count   7
+  bin 13  y in [  -197.86,  -169.30)  count   8
+  bin 14  y in [  -169.30,  -140.74)  count   8
+  bin 15  y in [  -140.74,  -112.18)  count   8
+  bin 16  y in [  -112.18,   -83.62)  count  10
+  bin 17  y in [   -83.62,   -55.06)  count  10
+  bin 18  y in [   -55.06,   -26.50)  count  12
+  bin 19  y in [   -26.50,     2.06)  count 180
+
+================================================================================================
+S1 -- MEAN ADJACENT GAP RATIO r_bar (unfolding-free)
+================================================================================================
+  chart T (ln lambda, PRIMARY)   r_bar = 0.563504   (n_ratios = 299, min 1.392e-04, max 0.999)
+  chart L (lambda, SECONDARY)    r_bar = 0.151834   (n_ratios = 299, min 7.395e-05, max 0.995)
+  sanity labels: GUE 0.5995 | GOE 0.5307 | Poisson 0.3863
+  (defect 17: the GUE label 0.5359 printed by run #1 is RETRACTED;
+   a universality sweep of the diagonal variance over {0.5,1,2} moved
+   r_bar by <1 se in both classes, so the construction is sound and
+   the label -- not the code -- was wrong: beta=2 measures 0.5995 here)
+  real references come from the matched-N simulation below
+
+================================================================================================
+SURROGATES -- matched N = 301, 20000 samples each, seed 20261001
+================================================================================================
+    gue 500/20000 done  (33 s)
+    gue 1000/20000 done  (69 s)
+    gue 1500/20000 done  (105 s)
+    gue 2000/20000 done  (143 s)
+    gue 2500/20000 done  (173 s)
+    gue 3000/20000 done  (204 s)
+    gue 3500/20000 done  (236 s)
+    gue 4000/20000 done  (268 s)
+    gue 4500/20000 done  (299 s)
+    gue 5000/20000 done  (330 s)
+    gue 5500/20000 done  (361 s)
+    gue 6000/20000 done  (393 s)
+    gue 6500/20000 done  (427 s)
+    gue 7000/20000 done  (454 s)
+    gue 7500/20000 done  (485 s)
+    gue 8000/20000 done  (511 s)
+    gue 8500/20000 done  (536 s)
+    gue 9000/20000 done  (562 s)
+    gue 9500/20000 done  (587 s)
+    gue 10000/20000 done  (614 s)
+    gue 10500/20000 done  (641 s)
+    gue 11000/20000 done  (671 s)
+    gue 11500/20000 done  (703 s)
+    gue 12000/20000 done  (733 s)
+    gue 12500/20000 done  (767 s)
+    gue 13000/20000 done  (799 s)
+    gue 13500/20000 done  (830 s)
+    gue 14000/20000 done  (859 s)
+    gue 14500/20000 done  (888 s)
+    gue 15000/20000 done  (914 s)
+    gue 15500/20000 done  (940 s)
+    gue 16000/20000 done  (967 s)
+    gue 16500/20000 done  (995 s)
+    gue 17000/20000 done  (1025 s)
+    gue 17500/20000 done  (1054 s)
+    gue 18000/20000 done  (1083 s)
+    gue 18500/20000 done  (1111 s)
+    gue 19000/20000 done  (1139 s)
+    gue 19500/20000 done  (1169 s)
+    gue 20000/20000 done  (1198 s)
+  gue      generated in 1197.8 s
+    goe 500/20000 done  (1205 s)
+    goe 1000/20000 done  (1212 s)
+    goe 1500/20000 done  (1219 s)
+    goe 2000/20000 done  (1226 s)
+    goe 2500/20000 done  (1232 s)
+    goe 3000/20000 done  (1240 s)
+    goe 3500/20000 done  (1247 s)
+    goe 4000/20000 done  (1254 s)
+    goe 4500/20000 done  (1261 s)
+    goe 5000/20000 done  (1268 s)
+    goe 5500/20000 done  (1275 s)
+    goe 6000/20000 done  (1282 s)
+    goe 6500/20000 done  (1289 s)
+    goe 7000/20000 done  (1296 s)
+    goe 7500/20000 done  (1303 s)
+    goe 8000/20000 done  (1310 s)
+    goe 8500/20000 done  (1317 s)
+    goe 9000/20000 done  (1324 s)
+    goe 9500/20000 done  (1331 s)
+    goe 10000/20000 done  (1338 s)
+    goe 10500/20000 done  (1345 s)
+    goe 11000/20000 done  (1352 s)
+    goe 11500/20000 done  (1358 s)
+    goe 12000/20000 done  (1365 s)
+    goe 12500/20000 done  (1372 s)
+    goe 13000/20000 done  (1378 s)
+    goe 13500/20000 done  (1385 s)
+    goe 14000/20000 done  (1393 s)
+    goe 14500/20000 done  (1400 s)
+    goe 15000/20000 done  (1406 s)
+    goe 15500/20000 done  (1413 s)
+    goe 16000/20000 done  (1420 s)
+    goe 16500/20000 done  (1427 s)
+    goe 17000/20000 done  (1435 s)
+    goe 17500/20000 done  (1441 s)
+    goe 18000/20000 done  (1448 s)
+    goe 18500/20000 done  (1455 s)
+    goe 19000/20000 done  (1462 s)
+    goe 19500/20000 done  (1468 s)
+    goe 20000/20000 done  (1475 s)
+  goe      generated in 277.1 s
+    poisson 500/20000 done  (1475 s)
+    poisson 1000/20000 done  (1475 s)
+    poisson 1500/20000 done  (1475 s)
+    poisson 2000/20000 done  (1475 s)
+    poisson 2500/20000 done  (1475 s)
+    poisson 3000/20000 done  (1475 s)
+    poisson 3500/20000 done  (1475 s)
+    poisson 4000/20000 done  (1475 s)
+    poisson 4500/20000 done  (1475 s)
+    poisson 5000/20000 done  (1475 s)
+    poisson 5500/20000 done  (1475 s)
+    poisson 6000/20000 done  (1475 s)
+    poisson 6500/20000 done  (1475 s)
+    poisson 7000/20000 done  (1475 s)
+    poisson 7500/20000 done  (1475 s)
+    poisson 8000/20000 done  (1475 s)
+    poisson 8500/20000 done  (1475 s)
+    poisson 9000/20000 done  (1475 s)
+    poisson 9500/20000 done  (1475 s)
+    poisson 10000/20000 done  (1475 s)
+    poisson 10500/20000 done  (1475 s)
+    poisson 11000/20000 done  (1475 s)
+    poisson 11500/20000 done  (1475 s)
+    poisson 12000/20000 done  (1475 s)
+    poisson 12500/20000 done  (1475 s)
+    poisson 13000/20000 done  (1475 s)
+    poisson 13500/20000 done  (1475 s)
+    poisson 14000/20000 done  (1476 s)
+    poisson 14500/20000 done  (1476 s)
+    poisson 15000/20000 done  (1476 s)
+    poisson 15500/20000 done  (1476 s)
+    poisson 16000/20000 done  (1476 s)
+    poisson 16500/20000 done  (1476 s)
+    poisson 17000/20000 done  (1476 s)
+    poisson 17500/20000 done  (1476 s)
+    poisson 18000/20000 done  (1476 s)
+    poisson 18500/20000 done  (1476 s)
+    poisson 19000/20000 done  (1476 s)
+    poisson 19500/20000 done  (1476 s)
+    poisson 20000/20000 done  (1476 s)
+  poisson  generated in 0.9 s
+
+================================================================================================
+S1 REFERENCES (matched-N simulation)
+================================================================================================
+  gue      mean 0.599521  sd 0.016602  CI95 [0.566741, 0.631579]  (label 0.5995)
+  goe      mean 0.530395  sd 0.017902  CI95 [0.495652, 0.565424]  (label 0.5307)
+  poisson  mean 0.386392  sd 0.018591  CI95 [0.350375, 0.422780]  (label 0.3863)
+  pooled RMT CI95 = [0.501106, 0.626607]
+  SE of r_bar (GUE sd / sqrt(300)) = 0.000959
+  pre-registered expectation 1: GOE vs GUE not separable at N=301
+    measured gap = 0.069125 against SE = 0.000959  ->  FALSIFIED -- they ARE separable (72 SE)
+    (the expectation was built on the recalled label 0.5359, which
+     defect 17 retracted; the measurement is not adjusted to fit it)
+
+  S1 chart T (ln lambda, PRIMARY)   r_bar = 0.563504  ->  CONSISTENT WITH RMT (level repulsion PRESENT)
+  S1 chart L (lambda, SECONDARY)    r_bar = 0.151834  ->  INCONSISTENT WITH ALL THREE REFERENCES
+  SECONDARY (does NOT change the verdict above):
+    chart T (ln lambda, PRIMARY)   GOE [in] | GUE [OUT] | Poisson [OUT]
+    chart L (lambda, SECONDARY)    GOE [OUT] | GUE [OUT] | Poisson [OUT]
+
+  S1 FINAL: CHART-DEPENDENT (T and L disagree) -> INCONCLUSIVE
+    (pre-registered: report the disagreement, do NOT pick the chart)
+
+================================================================================================
+S2 -- PAIR CORRELATION vs MONTGOMERY KERNEL 1 - (sin(pi u)/(pi u))^2
+grid = {chart} x {sigma_u in [0.3, 0.5, 1.0]}, sigma_e = 0.5, bins 20 x 0.5
+target = Montgomery convolved with the estimator's own sigma_e
+         (defect 12: comparing a smoothed estimate to an unsmoothed
+          kernel is apples-to-oranges; thresholds unchanged)
+================================================================================================
+  sigma_u 0.3 unfolded+binned in 1955.7 s
+  sigma_u 0.5 unfolded+binned in 1673.5 s
+  sigma_u 1.0 unfolded+binned in 1528.3 s
+  expected pairs/bin: min 28.5  max 150.4  -> bins dropped (E<5): 0
+  NOTE no edge correction is applied; the matched surrogates carry the
+       same finite-N bias, so the Monte-Carlo p-values stay calibrated.
+
+  chart T (ln lambda, PRIMARY)   sigma_u 0.3 : chi2 = 12247.0900
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.9944  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart T (ln lambda, PRIMARY)   sigma_u 0.5 : chi2 = 1369.1483
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0480
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0006  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.2464  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart T (ln lambda, PRIMARY)   sigma_u 1.0 : chi2 = 852.1336
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.0846  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart L (lambda, SECONDARY)    sigma_u 0.3 : chi2 = 103433.6616
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 1.0000  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart L (lambda, SECONDARY)    sigma_u 0.5 : chi2 = 14784.2672
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 1.0000  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart L (lambda, SECONDARY)    sigma_u 1.0 : chi2 = 5676.0032
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 1.0000  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+
+  S2 FINAL (all 6 grid points agree): INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+
+################################################################################################
+# OPSI (d) VERDICT
+################################################################################################
+  S1 (gap ratio, unfolding-free) : CHART-DEPENDENT (T and L disagree) -> INCONCLUSIVE
+      chart T (ln lambda, PRIMARY)   r_bar = 0.563504 -> CONSISTENT WITH RMT (level repulsion PRESENT)
+      chart L (lambda, SECONDARY)    r_bar = 0.151834 -> INCONSISTENT WITH ALL THREE REFERENCES
+  S2 (pair correlation)          : INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+
+  RESOLUTION CEILING: N = 301 levels, 299 ratios, ~150 pairs/bin;
+  GOE-vs-GUE separation needs |Delta r_bar| ~ 0.0691 against SE ~ 0.0010.
+
+  SCOPE LIMIT (read literally): these are statistics of ONE finite
+  constructed matrix. They are NOT Montgomery's theorem, NOT evidence
+  for RH, NOT Weil positivity, NOT prime counting, NOT factorisation.
+  The source preprint disclaims all four.
+
+TOOL STATUS: python 3.14 + numpy 2.5.2 + scipy 1.18.0 + mpmath + python-flint.
+lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN.
+seed = 20261001 (fixed for reproducibility, declared before the run).
+================================================================================================
+# end = 2026-10-16T17:28:41   elapsed = 6636.1 s   exit = 0
+# EXACT COUNTS -- spy on np.mean of boolean arrays
+# order: per cell [T0.3, T0.5, T1.0, L0.3, L0.5, L1.0], per kind [gue, goe, poisson], [upper, lower]
+# expected captures: 36 (6 cells x 3 kinds x 2 tails)
+# exact_counts = [[20000, 0], [20000, 20000], [20000, 0], [20000, 20000], [20000, 111], [20000, 19889], [20000, 960], [20000, 19040], [20000, 11], [20000, 19989], [20000, 15072], [20000, 4928], [20000, 0], [20000, 20000], [20000, 0], [20000, 20000], [20000, 18308], [20000, 1692], [20000, 0], [20000, 20000], [20000, 0], [20000, 20000], [20000, 0], [20000, 20000], [20000, 0], [20000, 20000], [20000, 0], [20000, 20000], [20000, 0], [20000, 20000], [20000, 0], [20000, 20000], [20000, 0], [20000, 20000], [20000, 0], [20000, 20000]]
+================================================================================================

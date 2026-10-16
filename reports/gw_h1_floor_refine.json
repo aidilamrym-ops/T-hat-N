@@ -1,0 +1,568 @@
+{
+  "spec": "reports/AMENDMENT_FLOOR_SPEC.md",
+  "grid": [
+    {
+      "dim": 201,
+      "chart": "T",
+      "sigma_u": 0.3,
+      "chi2_obs": 14419.1614,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 19827,
+      "p_pois": "9.91350e-01",
+      "cp95_pois": [
+        0.9899676137523831,
+        0.9925865506663607
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 14621.8788,
+      "log": "reports/mont_run_20000_100_100.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 201,
+      "chart": "T",
+      "sigma_u": 0.5,
+      "chi2_obs": 2140.7335,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 16287,
+      "p_pois": "8.14350e-01",
+      "cp95_pois": [
+        0.8088907218337003,
+        0.8197177434276525
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 2146.3923,
+      "log": "reports/mont_run_20000_100_100.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 201,
+      "chart": "T",
+      "sigma_u": 1.0,
+      "chi2_obs": 600.0785,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 611,
+      "p_pois": "3.05500e-02",
+      "cp95_pois": [
+        0.02820837179180991,
+        0.033029370484251724
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 594.5661,
+      "log": "reports/mont_run_20000_100_100.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 201,
+      "chart": "L",
+      "sigma_u": 0.3,
+      "chi2_obs": 47376.918,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 20000,
+      "p_pois": "1.00000e+00",
+      "cp95_pois": [
+        0.9998155730360381,
+        1.0
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 47172.5984,
+      "log": "reports/mont_run_20000_100_100.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 201,
+      "chart": "L",
+      "sigma_u": 0.5,
+      "chi2_obs": 10085.3753,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 20000,
+      "p_pois": "1.00000e+00",
+      "cp95_pois": [
+        0.9998155730360381,
+        1.0
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 10004.2942,
+      "log": "reports/mont_run_20000_100_100.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 201,
+      "chart": "L",
+      "sigma_u": 1.0,
+      "chi2_obs": 4191.0836,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 20000,
+      "p_pois": "1.00000e+00",
+      "cp95_pois": [
+        0.9998155730360381,
+        1.0
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 4219.3598,
+      "log": "reports/mont_run_20000_100_100.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 301,
+      "chart": "T",
+      "sigma_u": 0.3,
+      "chi2_obs": 12154.5726,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 19878,
+      "p_pois": "9.93900e-01",
+      "cp95_pois": [
+        0.9927209058332657,
+        0.9949318208283423
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 12448.7407,
+      "log": "reports/mont_run_20000_100_150.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 301,
+      "chart": "T",
+      "sigma_u": 0.5,
+      "chi2_obs": 1367.616,
+      "k_gue": 1262,
+      "n": 20000,
+      "p_gue": "6.31000e-02",
+      "cp95_gue": [
+        0.05976897156794577,
+        0.06655871146639472
+      ],
+      "k_pois": 4807,
+      "p_pois": "2.40350e-01",
+      "cp95_pois": [
+        0.23444116200314674,
+        0.24633440333598777
+      ],
+      "verdict_printed": "NO DISCRIMINATION AT N=401",
+      "verdict_recomputed": "NO DISCRIMINATION AT N=401",
+      "sealed_k_gue": 36,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.018,
+      "sealed_chi2": 1393.1679,
+      "log": "reports/mont_run_20000_100_150.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 301,
+      "chart": "T",
+      "sigma_u": 1.0,
+      "chi2_obs": 858.7248,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 1736,
+      "p_pois": "8.68000e-02",
+      "cp95_pois": [
+        0.08293336780979052,
+        0.0907872296227217
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 869.3876,
+      "log": "reports/mont_run_20000_100_150.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 301,
+      "chart": "L",
+      "sigma_u": 0.3,
+      "chi2_obs": 102823.8252,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 20000,
+      "p_pois": "1.00000e+00",
+      "cp95_pois": [
+        0.9998155730360381,
+        1.0
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 107396.0291,
+      "log": "reports/mont_run_20000_100_150.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 301,
+      "chart": "L",
+      "sigma_u": 0.5,
+      "chi2_obs": 14957.37,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 20000,
+      "p_pois": "1.00000e+00",
+      "cp95_pois": [
+        0.9998155730360381,
+        1.0
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 15289.0448,
+      "log": "reports/mont_run_20000_100_150.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 301,
+      "chart": "L",
+      "sigma_u": 1.0,
+      "chi2_obs": 5752.5886,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 20000,
+      "p_pois": "1.00000e+00",
+      "cp95_pois": [
+        0.9998155730360381,
+        1.0
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 5786.2945,
+      "log": "reports/mont_run_20000_100_150.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 401,
+      "chart": "T",
+      "sigma_u": 0.3,
+      "chi2_obs": 11743.771,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 19933,
+      "p_pois": "9.96650e-01",
+      "cp95_pois": [
+        0.9957475431844424,
+        0.997402881409263
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 11639.5769,
+      "log": "reports/mont_run_20000_100_200.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 401,
+      "chart": "T",
+      "sigma_u": 0.5,
+      "chi2_obs": 1723.5222,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 10544,
+      "p_pois": "5.27200e-01",
+      "cp95_pois": [
+        0.5202522088107719,
+        0.5341398815657952
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 1698.5441,
+      "log": "reports/mont_run_20000_100_200.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 401,
+      "chart": "T",
+      "sigma_u": 1.0,
+      "chi2_obs": 820.1678,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 163,
+      "p_pois": "8.15000e-03",
+      "cp95_pois": [
+        0.006950867384343951,
+        0.009495224160342501
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 816.3241,
+      "log": "reports/mont_run_20000_100_200.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 401,
+      "chart": "L",
+      "sigma_u": 0.3,
+      "chi2_obs": 140300.8482,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 20000,
+      "p_pois": "1.00000e+00",
+      "cp95_pois": [
+        0.9998155730360381,
+        1.0
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 137543.9721,
+      "log": "reports/mont_run_20000_100_200.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 401,
+      "chart": "L",
+      "sigma_u": 0.5,
+      "chi2_obs": 19148.9036,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 20000,
+      "p_pois": "1.00000e+00",
+      "cp95_pois": [
+        0.9998155730360381,
+        1.0
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 18825.3487,
+      "log": "reports/mont_run_20000_100_200.txt",
+      "seed": 20260927
+    },
+    {
+      "dim": 401,
+      "chart": "L",
+      "sigma_u": 1.0,
+      "chi2_obs": 6355.3766,
+      "k_gue": 0,
+      "n": 20000,
+      "p_gue": null,
+      "cp95_gue": [
+        0.0,
+        0.000149775396222962
+      ],
+      "k_pois": 20000,
+      "p_pois": "1.00000e+00",
+      "cp95_pois": [
+        0.9998155730360381,
+        1.0
+      ],
+      "verdict_printed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "verdict_recomputed": "INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION",
+      "sealed_k_gue": 0,
+      "sealed_n": 2000,
+      "sealed_p_gue": 0.0,
+      "sealed_chi2": 6289.2525,
+      "log": "reports/mont_run_20000_100_200.txt",
+      "seed": 20260927
+    }
+  ],
+  "c4_array": {
+    "k": [
+      1262,
+      960,
+      1289,
+      1021,
+      1345
+    ],
+    "n_per_seed": 20000,
+    "pooled_k": 5877,
+    "pooled_n": 100000,
+    "p_hat": 0.05877,
+    "per_seed_p": [
+      0.0631,
+      0.048,
+      0.06445,
+      0.05105,
+      0.06725
+    ],
+    "pooled_cp95": [
+      0.05732009387219187,
+      0.06024556290723691
+    ],
+    "homogeneity_stat": 107.92990453585426,
+    "homogeneity_p": 2.01096665341861e-22,
+    "classification": "NOT STABLE (homogeneity rejected at alpha = 0.01; dispersion-dominated)",
+    "seeds": [
+      20260927,
+      20261001,
+      20261002,
+      20261003,
+      20261004
+    ],
+    "per_seed_cp95": [
+      [
+        0.05976897156794577,
+        0.06655871146639472
+      ],
+      [
+        0.04507829452110123,
+        0.05105397685301719
+      ],
+      [
+        0.06108537417021053,
+        0.0679419022503054
+      ],
+      [
+        0.0480400743492922,
+        0.05419126301249717
+      ],
+      [
+        0.06381703672762777,
+        0.0708093977775035
+      ]
+    ],
+    "canonical_chi2": 1367.616,
+    "canonical_p_gue": "6.31000e-02"
+  },
+  "manifest": {
+    "generated": "2026-10-16T19:41:06",
+    "repo_head": "32ac8dca72df60b2f5fa1807798d31b13840e6fb",
+    "extractor_sha256": "67fc149775e1b23ff4ea27150c21c727975756893e2e84fac6b98cdb1870f960",
+    "sealed_logs": {
+      "201": "811a9dcc055acc1d649ebce1d8fec45b56c4fc26b81060de2f90746e058dfe4d",
+      "301": "faecc52318b729be13c624b589e9d1ed4a332f5da8b2af316957b67f0bf7f017",
+      "401": "eb072757c3b1b18e502ab25dc1bff329d115b7d6c2c74baec89e279340b54b10"
+    },
+    "refined_logs": {
+      "A_201": "b1e4f37d747862a9ce00979f5f7de7df0cf89ace0bbe192c7598d8112ccc90b5",
+      "A_301": "a234929ea657d50d61780444576e5275d38c902d94e565da7bae5113ddcb378d",
+      "A_401": "369f0d36bdc5c98cc49ccd256701b77731f39034f71350934d658f8a269b86b7",
+      "B_20261001": "cf92df3d3516ebf468274ab1bbc9771de12de8977cf6796b2e30ab01c6b52ac1",
+      "B_20261002": "f412dadbc4d2915f323b805ff13080888867b7dddc841fbd565c418d59b71a6d",
+      "B_20261003": "54acf7b6bc82c7dbfa6c735cacd1512e05a95fc96cf965bd50c950bb4845fb68",
+      "B_20261004": "b4d82953f8fed94c61c5ec72d3fa944920da4a44c0144e9234d2edbc8f58c0d2"
+    }
+  }
+}

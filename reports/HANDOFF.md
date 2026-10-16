@@ -8,7 +8,7 @@ dashboard `reports/gw_diagnostic_v3.html`; README §6 memuat peta jalan
 kampanye + rumus instrumen lengkap). **Konsolidasi 2026-10-16:** manuskrip
 `exports/research_paper.tex` (Main Spectral Results + register cacat,
 transkripsi artefak tersegel saja) ditambahkan; dashboard v3 diuji ulang
-byte-stabil; delivery akhir ditandai tag `v1.40.0-alpha-final-certified-delivery`. **H0 lockdown (2026-10-16):** `docs/ZENODO_ACTIVATE.md` (panduan aktivasi webhook Zenodo) + template release + pra-registrasi amandemen lantai `reports/AMENDMENT_FLOOR_SPEC.md` (DIBEKUKAN, sha256 di §1) disegel; TIDAK ada komputasi baru dijalankan. **Deposit + release (2026-10-16):** delivery T-hat-N diamankan sebagai VERSI BARU record Zenodo via depositor API — DOI versi `10.5281/zenodo.23410894` (konsep `10.5281/zenodo.23338271`; arsip tarball commit `a37b50b`, sha256 `44bdfb87...`); release GitHub `v1.40.0-alpha-final-certified-delivery` diterbitkan via `gh`; skrip depositor diperluas (`--date`/`--version`, commit `3305221`).
+byte-stabil; delivery akhir ditandai tag `v1.40.0-alpha-final-certified-delivery`. **H0 lockdown (2026-10-16):** `docs/ZENODO_ACTIVATE.md` (panduan aktivasi webhook Zenodo) + template release + pra-registrasi amandemen lantai `reports/AMENDMENT_FLOOR_SPEC.md` (DIBEKUKAN, sha256 di §1) disegel; TIDAK ada komputasi baru dijalankan. **Deposit + release (2026-10-16):** delivery T-hat-N diamankan sebagai VERSI BARU record Zenodo via depositor API — DOI versi `10.5281/zenodo.23410894` (konsep `10.5281/zenodo.23338271`; arsip tarball commit `a37b50b`, sha256 `44bdfb87...`); release GitHub `v1.40.0-alpha-final-certified-delivery` diterbitkan via `gh`; skrip depositor diperluas (`--date`/`--version`, commit `3305221`). **H1 amandemen lantai (2026-10-16):** bagian (A)+(B) dari `reports/AMENDMENT_FLOOR_SPEC.md` (DIBEKUKAN) dieksekusi penuh — grid refined 20000 surrogat + array robustness C4 5-seed; hasil terukur, klasifikasi beku (NOT STABLE), dan falsifikasi ekspektasi pra-registrasi di §2.0c dan `reports/AMENDMENT_FLOOR_RESULTS.md`; manuskrip `exports/research_paper.tex` diamandemen bertanggal (section sebelum register cacat + pointer abstrak + catatan header). (C) engine B = sesi berikutnya.
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
 `reports/DAFTAR_MASALAH_KERJA.md` (antrean 20 masalah).
@@ -36,6 +36,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Konsolidasi manuskrip + tag delivery akhir | commit yang membawa baris ini; dibangun di atas `28de2b8`/`86b161f` (CI hijau run `38852216992` / `38852448159`); tag `v1.40.0-alpha-final-certified-delivery` | `exports/research_paper.tex`, `reports/gw_diagnostic_v3.html` (sha256 `89C7D5F948626BD51DE06F37534BDC4941D3793353DCB80B8557E10E2BED7322`, byte-identik pasca rerun `--write`), `reports/THREE_TASKS_2026-10-15.md` §4.4 + §5 |
 | H0 lockdown + pra-registrasi amandemen lantai (H1) | commit yang membawa baris ini; dibangun di atas `a37b50b` (CI hijau run `38854261266` / `38854493402`); spesifikasi DIBEKUKAN, sha256 `3C9958BEE3021385B242B84B2ECDA136E15F35D5682C16FF690713830EFBB917` | `docs/ZENODO_ACTIVATE.md`, `reports/RELEASE_v1.40.0-alpha-final-certified-delivery.md`, `reports/AMENDMENT_FLOOR_SPEC.md` |
 | Deposit delivery T-hat-N (versi baru Zenodo) + release GitHub delivery | commit yang membawa baris ini; DOI versi `10.5281/zenodo.23410894` (konsep `10.5281/zenodo.23338271`); arsip tarball commit `a37b50b` sha256 `44bdfb87788b1f1da687b2d8e852641385b5c80de99c072768f6b67120198f61` (546.800 byte, md5 cocok), CI hijau run `38854261266` / `38854493402`; release `v1.40.0-alpha-final-certified-delivery` terbit via `gh` | `https://doi.org/10.5281/zenodo.23410894`, `msaf/zenodo_deposit.py` (commit `3305221`), halaman release |
+| Amandemen lantai H1 — grid refined 20000 surrogat + array robustness C4 5-seed | commit yang membawa baris ini; dibangun di atas rantai tooling H1 `993b0e8` → `2f6100e` → `32ac8dc` (CI hijau run `38888730255` untuk `32ac8dc`; catatan jujur: run pertama `993b0e8` GAGAL karena runner CI belum punya scipy — diperbaiki di akar oleh `2f6100e`, pin `scipy==1.18.0`); spec DIBEKUKAN sha256 `3C9958BEE3021385B242B84B2ECDA136E15F35D5682C16FF690713830EFBB917`; angka eksak (spec §6.5): C4 kanonik `1262/20000` = 6.31000e-02 (NO DISCRIMINATION AT N=401), pooled `5877/100000` = 5.87700e-02, homogenitas p = 2.01097e-22 → klasifikasi NOT STABLE (dispersion-dominated); 17/18 sel di lantai `0/20000` (bound `1.49775e-04`); ekspektasi pra-registrasi "semua cabang di bawah 0.05" TERFALSIFIKASI (4/5 seed ≥ 0.05) | `reports/AMENDMENT_FLOOR_RESULTS.md` (generator `msaf/gw_h1_report.py`), `reports/gw_h1_floor_refine.json`, `reports/h1_floor_refine_section.md`, 7 log `reports/mont_run_20000_*.txt` |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -94,6 +95,47 @@ DAN sha256 arsip.
   yang tersisa: seri keempat (plafon ~100–200 pasangan/bin sudah terukur
   tiga kali), atau daya uji di atas lantai 2000 surrogat; (4) hanya setelah
   itu boleh bicara hukum redaman sebagai hukum.
+- **Pembaruan 2026-10-16 (H1):** daya uji di atas lantai 2000 surrogat
+  DIJALANKAN — grid refined 20000 + array C4 5-seed; hasil terukur +
+  klasifikasi beku + falsifikasi ekspektasi pra-registrasi: lihat §2.0c
+  (`reports/AMENDMENT_FLOOR_RESULTS.md`).
+
+### 2.0c [BARU, 2026-10-16] Amandemen lantai H1 SELESAI — refined 20000 surrogat + array C4 5-seed
+
+- **Pra-registrasi beku** `reports/AMENDMENT_FLOOR_SPEC.md` (sha256
+  `3C9958BEE3021385B242B84B2ECDA136E15F35D5682C16FF690713830EFBB917`):
+  bagian (A) + (B) tuntas; (C) engine B = sesi berikutnya (arsitektur
+  dibekukan; tidak pernah verdict-bearing).
+- **(A) Grid refined** (18 sel, 20000 surrogat/ensemble, seed 20260927):
+  **17/18 sel k_GUE = 0/20000** → BOUND 95% `p_GUE < 1.49775e-04`
+  (format "0.0000" pensiun), verdict INCONSISTENT tetap. Sel off-floor
+  tunggal C4 (301|T|0.5): chi2 1367.6160, **1262/20000 = 6.31000e-02**
+  (CP95 [5.97690e-02, 6.65587e-02]), k_Pois 4807/20000, verdict
+  **NO DISCRIMINATION AT N=401**; nilai tersegel 36/2000 = 0.0180
+  (INCONSISTENT) disupersede — kolom tersegel tetap terlihat.
+- **(B) Array 5-seed S5** pada C4: k = 1262 / 960 / 1289 / 1021 / 1345
+  → pooled **5877/100000 = 5.87700e-02** (CP95 [5.73201e-02,
+  6.02456e-02]); homogenitas Pearson chi2 = 107.9299 (df 4),
+  p = 2.01097e-22 → **NOT STABLE (dispersion-dominated)**; C4
+  ditandai resolution-sensitive; angka of record tetap kanonik 20000.
+- **Ekspektasi pra-registrasi TERFALSIFIKASI (dicatat, tidak dipatch):**
+  spec §4 "setiap cabang meninggalkan C4 di bawah ambang 0.05" —
+  terukur pooled 5.87700e-02 ≥ 0.05; 4/5 seed ≥ 0.05 (hanya 20261001 =
+  4.80000e-02 di bawah).
+- **Reproduktibilitas:** REPRO CHECK PASS (rerun dim 201 @2000 capped
+  mereproduksi log tersegel identik); instrumen tak berubah
+  (`b0af0f5...` / sha256 `072910f2...`); cap thread murni kinerja;
+  7 log `reports/mont_run_20000_*.txt` (elapsed 3115.4 / 7514.3 /
+  10443.3 / 6636.1 / 5947.4 / 4812.3 / 4106.2 s; semua exit 0).
+- **Artefak:** `reports/AMENDMENT_FLOOR_RESULTS.md` (generator
+  `msaf/gw_h1_report.py`; semua angka mesin, bukan retype),
+  `reports/gw_h1_floor_refine.json`, `reports/h1_floor_refine_section.md`;
+  extractor `msaf/gw_h1_extract.py`; manuskrip `exports/research_paper.tex`
+  diamandemen bertanggal (section sebelum register cacat + pointer
+  abstrak + catatan header).
+- **Batas interpretasi (beku):** NOT STABLE; bukan "physical"; bukan
+  teorema Montgomery, bukan bukti RH. Seri resolusi keempat tetap
+  tersisa.
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 
