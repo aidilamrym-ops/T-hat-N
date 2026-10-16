@@ -20,9 +20,9 @@ GATE G-M0 (same logic as the canonical gw_spectrum_arb.py):
   G-M0e  |sum(lam^2) - ||M||_F^2| / ||M||_F^2 < 1e-300
 Failure -> ABORT: no statistics are computed from this file.
 
-Honesty rules honoured: arb ball arithmetic only in the measurement; ctx.prec is
-set inside and restored in `finally`; any failure prints as-is, never rounded
-into a verdict. Output -> reports/gw_spectrum_100_100.json.
+Honesty rules honoured: arb ball arithmetic only in the measurement; ctx.prec
+and mpmath's `mp.dps` are set inside and restored in `finally`; any failure
+prints as-is, never rounded into a verdict. Output -> reports/gw_spectrum_100_100.json.
 
 usage:
     python msaf/capture_spectrum_201.py
@@ -68,6 +68,7 @@ def main() -> int:
     import source_arb_ldlt_certify as gw
 
     saved = ctx.prec
+    saved_dps = mp.mp.dps
     ok = True
     results = {}
     try:
@@ -224,6 +225,7 @@ def main() -> int:
         return 0 if ok else 1
     finally:
         ctx.prec = saved
+        mp.mp.dps = saved_dps
 
 
 if __name__ == "__main__":
