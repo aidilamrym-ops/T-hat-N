@@ -1,9 +1,10 @@
 # HANDOFF — titik sambung untuk sesi berikutnya
 
 Ditulis 2026-10-15, akhir sesi repo-audit + Zenodo.
-**Update 2026-10-16:** resolusi kedua (dim 201) diukur; sensor CI diperbaiki
-di akar; jawaban "mengecil atau membesar" di §2.0b dan
-`reports/THREE_TASKS_2026-10-15.md` §4.
+**Update 2026-10-16:** resolusi kedua (dim 201) dan ketiga (dim 301) diukur;
+sensor CI diperbaiki di akar; jawaban "mengecil atau membesar" di §2.0b dan
+`reports/THREE_TASKS_2026-10-15.md` §4 + §5 (seri tiga titik 201/301/401,
+dashboard `reports/gw_diagnostic_v3.html`).
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
 `reports/DAFTAR_MASALAH_KERJA.md` (antrean 20 masalah).
@@ -26,6 +27,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Anti-Turing / P-vs-NP | v1.39.0-alpha, entails gap didokumentasikan | `GAP-PNP.md` |
 | Hodge → HODGE-CH | v1.38.0-alpha, polinomial Weil eksak | `reports/HODGE_CLOSURE.md`, `HODGE_CH_SPEC.md` |
 | Resolusi kedua dim 201 + delta S1/S2 + perbaikan sensor CI | commits `1d591a8`, `da94306`, dan commit yang membawa baris ini; CI hijau run `38832840886` | `reports/THREE_TASKS_2026-10-15.md` §4 |
+| Seri tiga titik dim 201/301/401 + §5 + dashboard v3 | commit yang membawa baris ini | `reports/THREE_TASKS_2026-10-15.md` §5, `reports/gw_diagnostic_v3.html` |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -62,24 +64,28 @@ DAN sha256 arsip.
 - **Tangga Sturm tidak bisa mengukur λ_min** dan alasannya mekanis:
   bracket cluster identik pada 300 maupun 3000 bit, karena titik geser
   dari mesin duble float64.
-- **S1/S2 terukur pada DUA resolusi.** dim 401 (`gw_spectrum_100_200.json`,
-  run2) dan dim 201 (c=100/N=100, 6000 bit, G-M0 PASS, 2026-10-16,
-  `reports/gw_spectrum_100_100.json`): **S1 FINAL = INCONCLUSIVE di
-  keduanya** (chart-dependence bertahan; r_bar T 0,5486 → 0,6205; L 0,1909
-  → 0,1317), **S2 FINAL = INCONSISTENT di keduanya** (p_GUE 0,0000 di
-  keenam titik kisi KEDUA resolusi — terkunci di lantai uji; 2000 surrogat
-  per ensemble, seed 20260927). **"Mengecil atau membesar" TERJAWAB pada
-  versi ujinya: TIDAK mengecil** — tidak ada pendakian menuju konsistensi
-  dari N=401 ke N=201; arah asimtotik tetap terbuka (seri lebih panjang).
-  Delta lengkap + cacat proses: `THREE_TASKS_2026-10-15.md` §4
-  (generator: `msaf/gw_resolution_delta.py`; log: `reports/mont_run_100_100.txt`).
+- **S1/S2 terukur pada TIGA resolusi → seri tiga titik 201/301/401.**
+  dim 401 (`gw_spectrum_100_200.json`, run2), dim 201 (c=100/N=100,
+  `reports/gw_spectrum_100_100.json`), dan dim 301 (c=100/N=150, 6000 bit,
+  G-M0 PASS, `reports/gw_spectrum_100_150.json`): **S1 FINAL =
+  INCONCLUSIVE di ketiganya** (chart-dependence bertahan; r_bar T
+  0,6205 → 0,5635 → 0,5486 menurut dim menaik 201/301/401; L 0,1317 →
+  0,1518 → 0,1909), **S2 FINAL = INCONSISTENT di ketiganya** (p_GUE
+  0,0000 di 17 dari 18 sel; satu sel dim 301 = 0,0180 — tetap di bawah
+  ambang 0,05; 2000 surrogat per ensemble, seed 20260927). **"Mengecil
+  atau membesar" TERJAWAB pada versi ujinya: TIDAK mengecil** — tidak ada
+  pendakian menuju konsistensi dari N=401 ke N=301 ke N=201; arah
+  asimtotik tetap terbuka (seri lebih panjang). Delta lengkap + cacat
+  proses: `THREE_TASKS_2026-10-15.md` §4 + §5 (generator:
+  `msaf/gw_resolution_delta.py`; log: `reports/mont_run_100_100.txt`,
+  `reports/mont_run_100_150.txt`).
 - **Urutan berikutnya yang masuk akal:** (1) anak tangga λ_min lebih
   panjang kalau arah B mau dipastikan (dim 257/321; 321 belum tuntas);
   (2) ~~spektrum kedua + S1/S2~~ **SELESAI 2026-10-16** — lihat bullet di
-  atas; (3) kalau tren Montgomery mau dikejar sungguhan: seri resolusi
-  ketiga/keempat (plafon ~100–200 pasangan/bin sudah terukur dua kali),
-  atau daya uji di atas lantai 2000 surrogat; (4) hanya setelah itu boleh
-  bicara hukum redaman sebagai hukum.
+  atas; (3) ~~seri resolusi ketiga~~ **SELESAI 2026-10-16** (dim 301; §5) —
+  yang tersisa: seri keempat (plafon ~100–200 pasangan/bin sudah terukur
+  tiga kali), atau daya uji di atas lantai 2000 surrogat; (4) hanya setelah
+  itu boleh bicara hukum redaman sebagai hukum.
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 
@@ -230,4 +236,9 @@ ASCII dua jalur yang sudah usang. Jangan cari-cari keduanya di repo.
   spec = CI merah sampai ci.yml diedit sengaja.
 - `msaf/mont_run.txt` (log dim 401) ber-UTF-16 dengan BOM — baca eksplisit
   `decode('utf-16')` (atau `type` via cmd). Log dim 201
-  (`reports/mont_run_100_100.txt`) UTF-8 murni.
+  (`reports/mont_run_100_100.txt`) dan dim 301 (`reports/mont_run_100_150.txt`,
+  `reports/gw_capture_100_150.log`) UTF-8 murni tanpa BOM, CRLF.
+- Urutan `eig` di spectrum JSON = urutan mentah keluaran flint (tidak
+  terurut global; dim 201/301 sama polanya). Gate `G-M0c` memeriksa
+  multiset terurut dan `gw_montgomery.py` menyortir saat baca — jangan
+  "memperbaiki" urutan berkas.
