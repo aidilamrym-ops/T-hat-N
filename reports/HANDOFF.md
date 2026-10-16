@@ -8,7 +8,7 @@ dashboard `reports/gw_diagnostic_v3.html`; README §6 memuat peta jalan
 kampanye + rumus instrumen lengkap). **Konsolidasi 2026-10-16:** manuskrip
 `exports/research_paper.tex` (Main Spectral Results + register cacat,
 transkripsi artefak tersegel saja) ditambahkan; dashboard v3 diuji ulang
-byte-stabil; delivery akhir ditandai tag `v1.40.0-alpha-final-certified-delivery`.
+byte-stabil; delivery akhir ditandai tag `v1.40.0-alpha-final-certified-delivery`. **H0 lockdown (2026-10-16):** `docs/ZENODO_ACTIVATE.md` (panduan aktivasi webhook Zenodo) + template release + pra-registrasi amandemen lantai `reports/AMENDMENT_FLOOR_SPEC.md` (DIBEKUKAN, sha256 di §1) disegel; TIDAK ada komputasi baru dijalankan.
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
 `reports/DAFTAR_MASALAH_KERJA.md` (antrean 20 masalah).
@@ -34,6 +34,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Seri tiga titik dim 201/301/401 + §5 + dashboard v3 | commit `da93d19` dan commit yang membawa baris ini; CI hijau run `38850650775` | `reports/THREE_TASKS_2026-10-15.md` §5, `reports/gw_diagnostic_v3.html` |
 | README §6 (peta jalan lengkap + rumus instrumen) | commit `28de2b8` dan commit yang membawa baris ini; CI hijau run `38852216992` | `README.md` §6, aset `docs/math/gw_*.svg` |
 | Konsolidasi manuskrip + tag delivery akhir | commit yang membawa baris ini; dibangun di atas `28de2b8`/`86b161f` (CI hijau run `38852216992` / `38852448159`); tag `v1.40.0-alpha-final-certified-delivery` | `exports/research_paper.tex`, `reports/gw_diagnostic_v3.html` (sha256 `89C7D5F948626BD51DE06F37534BDC4941D3793353DCB80B8557E10E2BED7322`, byte-identik pasca rerun `--write`), `reports/THREE_TASKS_2026-10-15.md` §4.4 + §5 |
+| H0 lockdown + pra-registrasi amandemen lantai (H1) | commit yang membawa baris ini; dibangun di atas `a37b50b` (CI hijau run `38854261266` / `38854493402`); spesifikasi DIBEKUKAN, sha256 `3C9958BEE3021385B242B84B2ECDA136E15F35D5682C16FF690713830EFBB917` | `docs/ZENODO_ACTIVATE.md`, `reports/RELEASE_v1.40.0-alpha-final-certified-delivery.md`, `reports/AMENDMENT_FLOOR_SPEC.md` |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -192,6 +193,9 @@ Konsekuensi urutan yang disarankan:
 | Kernel RH | `lean/NewtonExistence.lean` |
 | Test suite (311) | `msaf/tests/` |
 | Konsolidasi manuskrip (ekspor LaTeX) | `exports/research_paper.tex` |
+| Pra-registrasi amandemen lantai H1 (DIBEKUKAN) | `reports/AMENDMENT_FLOOR_SPEC.md` |
+| Template release delivery akhir | `reports/RELEASE_v1.40.0-alpha-final-certified-delivery.md` |
+| Panduan aktivasi webhook Zenodo | `docs/ZENODO_ACTIVATE.md` |
 | Bukti JSON | `reports/*.json` |
 
 **Artefak user yang SUDAH DIHAPUS (atas perintah pemilik, 2026-10-15):**
