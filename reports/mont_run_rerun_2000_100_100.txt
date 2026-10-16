@@ -1,0 +1,204 @@
+================================================================================================
+# H1 FLOOR-REFINEMENT RUN (FROZEN SPEC: reports/AMENDMENT_FLOOR_SPEC.md)
+# tag = rerun_dim201_2000_capped
+# spectrum = D:\Opencode AI Agent\reports\gw_spectrum_100_100.json
+# spectrum sha256 = c645c590e54717cf793a31ecd941640adbbca162caf15108f56dde1da993f75d
+# instrument = D:\THE ASYMMETRIC WAGER\guinand-weil-rigorous-numerics-main\gw_montgomery.py
+# instrument sha256 = 072910f232b15768ba35e14d7cc6aaf4fe1ee174dc45b65429460f791196e1d5
+# instrument git revision = b0af0f519ae25f19178bc3eda4f288970cb49374 2026-10-06 10:16:26 +0800
+# samples = 2000   seed = 20260927 (declared; injected as module SEED)
+# exact-count spy: np.mean of boolean arrays observed during main(); values returned unchanged
+# python = 3.14.4 (tags/v3.14.4:23116f9, Apr  7 2026, 14:10:54) [MSC v.1944 64 bit (AMD64)]
+# threading env = OPENBLAS_NUM_THREADS:1 OMP_NUM_THREADS:1 (recorded for the manifest)
+# start = 2026-10-16T15:38:03
+================================================================================================
+################################################################################################
+# OMEGA OPSI (d) -- MONTGOMERY PAIR CORRELATION / GUE CONSISTENCY
+# input = D:\Opencode AI Agent\reports\gw_spectrum_100_100.json   surrogate samples per ensemble = 2000   seed = 20260927
+################################################################################################
+
+PRE-REGISTERED RULES (brain #1001630, locked BEFORE any eigenvalue):
+  S1  r_bar unfolding-free, charts T=ln(lambda) PRIMARY and L=lambda
+      -> report BOTH, never pick the flattering one afterwards
+  S2  R2(u) vs 1-(sin(pi u)/(pi u))^2, sigma_u in {0.3,0.5,1.0},
+      sigma_e=0.5, u in [0,10), 20 bins of 0.5, drop bins with E<5
+  ref GUE / GOE / Poisson, matched N, 2000 samples, seed 20260927
+  S1 verdict: in-Poisson-only -> POISSON; in-RMT-only -> RMT;
+      in both -> NO DISCRIMINATION; in neither -> INCONSISTENT
+  S2 verdict: p_GUE = P(chi2_GUE >= chi2_obs),
+      p_Pois = P(chi2_Pois <= chi2_obs)  [LOWER tail -- amendment
+      #1001631, registered before any real spectrum was read];
+      p_GUE>=0.05 & p_Pois<0.05 -> MONTGOMERY/GUE, distinguishable
+      from Poisson; both >=0.05 -> NO DISCRIMINATION; p_GUE<0.05 ->
+      INCONSISTENT. Must hold on ALL 6 grid points {T,L} x {0.3,0.5,1.0},
+      else UNSTABLE. Threshold 0.05, bins, sigma_e, grid, seed UNCHANGED.
+  EXPECTED (pre-registered): GOE-vs-GUE NOT separable at N=401;
+      spread ~295 orders -> chart L non-uniform; ~200 pairs/bin.
+SCOPE: this is NOT Montgomery's theorem about zeta zeros and NOT an
+       RH / Weil-positivity / prime-counting / factoring claim.
+
+================================================================================================
+INPUT SPECTRUM
+================================================================================================
+  provenance : c=100 N=100 dps=1806 prec=6000 algo=vdhoeven_mourrain n=201
+  eig time   : 825.7 s
+  G-M0 gate  : G-M0 PASS
+  G-M0 parts : {"G-M0a_finite": true, "G-M0b_inertia": true, "G-M0c_strict": true, "G-M0d_trace": true, "G-M0e_frob": true}
+  inertia    : {"n_pos": 201, "n_neg": 0, "indeterminate": 0}
+  all 201 levels finite, positive, strictly increasing -- OK
+  lambda_min = 2.4366351145008994e-191
+  lambda_max = 7.1571506955502118
+  spread     = 191.467950 orders   (pre-registered expectation ~295)
+  max enclosure radius = 7.424315166e-1728   (201 of 201 levels carry a radius)
+  worst |rad|/|mid|    = 1e-1536.52
+
+================================================================================================
+LEVEL DENSITY IN CHART T = ln(lambda)  (reported)
+================================================================================================
+  bin  0  y in [  -438.90,  -416.86)  count   3
+  bin  1  y in [  -416.86,  -394.82)  count   3
+  bin  2  y in [  -394.82,  -372.77)  count   3
+  bin  3  y in [  -372.77,  -350.73)  count   3
+  bin  4  y in [  -350.73,  -328.69)  count   3
+  bin  5  y in [  -328.69,  -306.64)  count   4
+  bin  6  y in [  -306.64,  -284.60)  count   4
+  bin  7  y in [  -284.60,  -262.55)  count   4
+  bin  8  y in [  -262.55,  -240.51)  count   5
+  bin  9  y in [  -240.51,  -218.47)  count   4
+  bin 10  y in [  -218.47,  -196.42)  count   5
+  bin 11  y in [  -196.42,  -174.38)  count   6
+  bin 12  y in [  -174.38,  -152.34)  count   5
+  bin 13  y in [  -152.34,  -130.29)  count   6
+  bin 14  y in [  -130.29,  -108.25)  count   6
+  bin 15  y in [  -108.25,   -86.21)  count   7
+  bin 16  y in [   -86.21,   -64.16)  count   8
+  bin 17  y in [   -64.16,   -42.12)  count   8
+  bin 18  y in [   -42.12,   -20.08)  count   9
+  bin 19  y in [   -20.08,     1.97)  count 105
+
+================================================================================================
+S1 -- MEAN ADJACENT GAP RATIO r_bar (unfolding-free)
+================================================================================================
+  chart T (ln lambda, PRIMARY)   r_bar = 0.620526   (n_ratios = 199, min 1.310e-03, max 1.000)
+  chart L (lambda, SECONDARY)    r_bar = 0.131742   (n_ratios = 199, min 1.565e-04, max 0.941)
+  sanity labels: GUE 0.5995 | GOE 0.5307 | Poisson 0.3863
+  (defect 17: the GUE label 0.5359 printed by run #1 is RETRACTED;
+   a universality sweep of the diagonal variance over {0.5,1,2} moved
+   r_bar by <1 se in both classes, so the construction is sound and
+   the label -- not the code -- was wrong: beta=2 measures 0.5995 here)
+  real references come from the matched-N simulation below
+
+================================================================================================
+SURROGATES -- matched N = 201, 2000 samples each, seed 20260927
+================================================================================================
+    gue 500/2000 done  (11 s)
+    gue 1000/2000 done  (21 s)
+    gue 1500/2000 done  (31 s)
+    gue 2000/2000 done  (43 s)
+  gue      generated in 42.6 s
+    goe 500/2000 done  (47 s)
+    goe 1000/2000 done  (51 s)
+    goe 1500/2000 done  (55 s)
+    goe 2000/2000 done  (59 s)
+  goe      generated in 16.6 s
+    poisson 500/2000 done  (59 s)
+    poisson 1000/2000 done  (59 s)
+    poisson 1500/2000 done  (59 s)
+    poisson 2000/2000 done  (59 s)
+  poisson  generated in 0.2 s
+
+================================================================================================
+S1 REFERENCES (matched-N simulation)
+================================================================================================
+  gue      mean 0.599774  sd 0.020042  CI95 [0.559925, 0.639858]  (label 0.5995)
+  goe      mean 0.529840  sd 0.021802  CI95 [0.487526, 0.573307]  (label 0.5307)
+  poisson  mean 0.385821  sd 0.022441  CI95 [0.342725, 0.431107]  (label 0.3863)
+  pooled RMT CI95 = [0.494286, 0.632349]
+  SE of r_bar (GUE sd / sqrt(200)) = 0.001417
+  pre-registered expectation 1: GOE vs GUE not separable at N=201
+    measured gap = 0.069935 against SE = 0.001417  ->  FALSIFIED -- they ARE separable (49 SE)
+    (the expectation was built on the recalled label 0.5359, which
+     defect 17 retracted; the measurement is not adjusted to fit it)
+
+  S1 chart T (ln lambda, PRIMARY)   r_bar = 0.620526  ->  CONSISTENT WITH RMT (level repulsion PRESENT)
+  S1 chart L (lambda, SECONDARY)    r_bar = 0.131742  ->  INCONSISTENT WITH ALL THREE REFERENCES
+  SECONDARY (does NOT change the verdict above):
+    chart T (ln lambda, PRIMARY)   GOE [OUT] | GUE [in] | Poisson [OUT]
+    chart L (lambda, SECONDARY)    GOE [OUT] | GUE [OUT] | Poisson [OUT]
+
+  S1 FINAL: CHART-DEPENDENT (T and L disagree) -> INCONCLUSIVE
+    (pre-registered: report the disagreement, do NOT pick the chart)
+
+================================================================================================
+S2 -- PAIR CORRELATION vs MONTGOMERY KERNEL 1 - (sin(pi u)/(pi u))^2
+grid = {chart} x {sigma_u in [0.3, 0.5, 1.0]}, sigma_e = 0.5, bins 20 x 0.5
+target = Montgomery convolved with the estimator's own sigma_e
+         (defect 12: comparing a smoothed estimate to an unsmoothed
+          kernel is apples-to-oranges; thresholds unchanged)
+================================================================================================
+  sigma_u 0.3 unfolded+binned in 94.7 s
+  sigma_u 0.5 unfolded+binned in 75.7 s
+  sigma_u 1.0 unfolded+binned in 75.3 s
+  expected pairs/bin: min 19.0  max 100.4  -> bins dropped (E<5): 0
+  NOTE no edge correction is applied; the matched surrogates carry the
+       same finite-N bias, so the Monte-Carlo p-values stay calibrated.
+
+  chart T (ln lambda, PRIMARY)   sigma_u 0.3 : chi2 = 14621.8788
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.9910  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart T (ln lambda, PRIMARY)   sigma_u 0.5 : chi2 = 2146.3923
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.8285  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart T (ln lambda, PRIMARY)   sigma_u 1.0 : chi2 = 594.5661
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.0245  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart L (lambda, SECONDARY)    sigma_u 0.3 : chi2 = 47172.5984
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 1.0000  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart L (lambda, SECONDARY)    sigma_u 0.5 : chi2 = 10004.2942
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 1.0000  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart L (lambda, SECONDARY)    sigma_u 1.0 : chi2 = 4219.3598
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 1.0000  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+
+  S2 FINAL (all 6 grid points agree): INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+
+################################################################################################
+# OPSI (d) VERDICT
+################################################################################################
+  S1 (gap ratio, unfolding-free) : CHART-DEPENDENT (T and L disagree) -> INCONCLUSIVE
+      chart T (ln lambda, PRIMARY)   r_bar = 0.620526 -> CONSISTENT WITH RMT (level repulsion PRESENT)
+      chart L (lambda, SECONDARY)    r_bar = 0.131742 -> INCONSISTENT WITH ALL THREE REFERENCES
+  S2 (pair correlation)          : INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+
+  RESOLUTION CEILING: N = 201 levels, 199 ratios, ~100 pairs/bin;
+  GOE-vs-GUE separation needs |Delta r_bar| ~ 0.0699 against SE ~ 0.0014.
+
+  SCOPE LIMIT (read literally): these are statistics of ONE finite
+  constructed matrix. They are NOT Montgomery's theorem, NOT evidence
+  for RH, NOT Weil positivity, NOT prime counting, NOT factorisation.
+  The source preprint disclaims all four.
+
+TOOL STATUS: python 3.14 + numpy 2.5.2 + scipy 1.18.0 + mpmath + python-flint.
+lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN.
+seed = 20260927 (fixed for reproducibility, declared before the run).
+================================================================================================
+# end = 2026-10-16T15:43:08   elapsed = 305.7 s   exit = 0
+# EXACT COUNTS -- spy on np.mean of boolean arrays
+# order: per cell [T0.3, T0.5, T1.0, L0.3, L0.5, L1.0], per kind [gue, goe, poisson], [upper, lower]
+# expected captures: 36 (6 cells x 3 kinds x 2 tails)
+# exact_counts = [[2000, 0], [2000, 2000], [2000, 0], [2000, 2000], [2000, 18], [2000, 1982], [2000, 0], [2000, 2000], [2000, 0], [2000, 2000], [2000, 343], [2000, 1657], [2000, 0], [2000, 2000], [2000, 0], [2000, 2000], [2000, 1951], [2000, 49], [2000, 0], [2000, 2000], [2000, 0], [2000, 2000], [2000, 0], [2000, 2000], [2000, 0], [2000, 2000], [2000, 0], [2000, 2000], [2000, 0], [2000, 2000], [2000, 0], [2000, 2000], [2000, 0], [2000, 2000], [2000, 0], [2000, 2000]]
+================================================================================================
