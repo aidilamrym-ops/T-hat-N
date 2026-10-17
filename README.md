@@ -31,9 +31,10 @@ under pre-declared rules, never excused. All sealed numbers, provenance
 hashes and the public-CI evidence are machine-extracted into
 [Section 7](#section-7-sealed-status-workflow-and-verification-chain); the
 standalone dashboards are
-[`v5`](reports/gw_diagnostic_v5.html) (H1 + engine-B extension, current),
+[`v6`](reports/gw_diagnostic_v6.html) (H1 + S10 + dim-501, current),
+[`v5`](reports/gw_diagnostic_v5.html) (H1 + engine-B extension, preserved),
 [`v4`](reports/gw_diagnostic_v4.html) (intermediate rebuild) and
-[`v3`](reports/gw_diagnostic_v3.html) (sealed); v4 and v3 are preserved
+[`v3`](reports/gw_diagnostic_v3.html) (sealed); v5, v4 and v3 are preserved
 byte-identical. Frozen
 pre-registration:
 [`reports/AMENDMENT_FLOOR_SPEC.md`](reports/AMENDMENT_FLOOR_SPEC.md);
@@ -751,6 +752,7 @@ python msaf/gw_resolution_delta.py --write
 python msaf/gw_dashboard_v3.py --write
 python msaf/gw_dashboard_v4.py --write
 python msaf/gw_dashboard_v5.py --write
+python msaf/gw_dashboard_v6.py --write
 
 # H1 floor amendment + independent re-verification (Section 7)
 python msaf/gw_h1_extract.py               # refined grid + C4 array (parses the run logs)
@@ -824,8 +826,8 @@ Reading the map:
    after the run had already completed and written its artefacts) is kept
    append-only in
    [`reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md`](reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md).
-4. **Publication and proof.** The dashboards (`v5` current, `v4`/`v3`
-   preserved),
+4. **Publication and proof.** The dashboards (`v6` current,
+   `v5`/`v4`/`v3` preserved),
    the manuscript, and the Zenodo DOI; the seal is a green public CI run on
    the content commit.
 
@@ -873,6 +875,15 @@ Dims 201/301/401 x charts T/L x sigma_u 0.3/0.5/1.0, seed 20260927.
 
 Homogeneity across the five seeds: chi2 = 107.9299 (df 4), p = 2.01097e-22 -> classification: **NOT STABLE (homogeneity rejected at alpha = 0.01; dispersion-dominated)**.
 
+**Stage B extension - C4 S10 (ten-seed robustness array).** The sealed five-seed array was extended with five fresh seeds under a pre-registration committed before the first new draw (ordering check PASS).
+
+| quantity | value |
+|---|---|
+| pooled (10 x 20000) | 11458 / 200000 = 5.72900e-02 (95% CI 5.62754e-02 to 5.83174e-02) |
+| homogeneity | chi2 = 131.2879 (df 9), p = 6.44376e-24 |
+| classification | NOT STABLE (homogeneity rejected at alpha = 0.01; dispersion-dominated) |
+| number of record | 1262 / 20000 = 6.31000e-02 (unchanged; canonical seed 20260927) |
+
 **Stage C - independent engine-B re-verification** (spec Section 5; decimal-exact parse, mpmath dps 50, seed 20260927, 20000 samples per dim; run 2026-10-17T00:51:30, 9062.4 s; artefact written).
 
 | check | verdict |
@@ -919,6 +930,8 @@ Cell census: 9 clean + 9 enumerated edge-cluster + 0 failing. Enumeration of the
 | `reports/gw_diagnostic_v3.html` | 23493 | `89c7d5f948626bd51de06f37534bdc4941d3793353dcb80b8557e10e2bed7322` |
 | `reports/gw_diagnostic_v4.html` | 50465 | `c9ec26217f516a1a73527bc098addbc11a4935f6965d905d38a7dbeb7d95a8b6` |
 | `reports/gw_diagnostic_v5.html` | 80371 | `0e99571b887f17b95180edc478af7bf887cce861edfbc9fd2ac3b1a2798d4259` |
+| `reports/gw_diagnostic_v6.html` | 105034 | `d6d300245752f83457ecfb6867e3bc768c4840d0348fda4917c70103ae1215e6` |
+| `reports/gw_h1_c4_seeds10.json` | 6542 | `b57e1c7af5eac363543a3aee74cdd09829a9babfe5812fd2addad8db0a741419` |
 | `msaf/gw_engine_b_verify.py` | 46717 | `485ab6525531aa8ef9b5e499736331b600fdb205bb2a9b93cfa438ffa261fcea` |
 
 **Engine-B run manifest.** mode `full`; 20000 samples per dim; seed 20260927; mpmath dps 50; generated 2026-10-17T00:51:30; elapsed 9062.4 s; repository head `451eec7`; interval instrument sha256 before = after = `072910f232b15768...` (first 16 hex; full hash in the run manifest); python 3.14.4, numpy 2.5.2, scipy 1.18.0, mpmath 1.3.0.
@@ -933,7 +946,8 @@ python -m pytest msaf/tests/test_readme_guard.py -q
 # 2. the artefact guards for the sealed runs
 python -m pytest msaf/tests/test_gw_engine_b_full_artifact.py \
                  msaf/tests/test_gw_dashboard_v4.py \
-                 msaf/tests/test_gw_dashboard_v5.py -q
+                 msaf/tests/test_gw_dashboard_v5.py \
+                 msaf/tests/test_gw_dashboard_v6.py -q
 
 # 3. generator dry run: ASCII summary, no files written
 python msaf/gw_readme.py
@@ -1026,7 +1040,8 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
   full-spectrum capture), `gw_route_s_ladder.py` (Route S inertia ladder),
   `lambda_min_eig_ladder.py` (Route A2 magnitudes), `gw_resolution_delta.py`
   (Section 5 generator), `gw_dashboard_v3.py` / `gw_dashboard_v4.py` /
-  `gw_dashboard_v5.py` (dashboard generators; v5 current),
+  `gw_dashboard_v5.py` / `gw_dashboard_v6.py` (dashboard generators;
+  v6 current),
   `gw_h1_extract.py` (H1 amendment
   extractor), `gw_engine_b_verify.py` (independent S2 re-verification),
   `gw_readme.py` (README Section 7 generator)
@@ -1045,7 +1060,8 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
   spec / results / artefacts, the engine-B full-run JSON + log, and the
   standalone dashboards `reports/gw_diagnostic_v3.html` (sealed) /
   `reports/gw_diagnostic_v4.html` (preserved) /
-  `reports/gw_diagnostic_v5.html` (current)
+  `reports/gw_diagnostic_v5.html` (preserved) /
+  `reports/gw_diagnostic_v6.html` (current)
 
 ## CITATION
 

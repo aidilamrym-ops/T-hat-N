@@ -77,12 +77,28 @@ verdict audit = `A-2026-0001`) + guard CI fail-closed
 audit P1 tuntas; sisa hanya owner-gated (dashboard v6, Scope Note,
 engine L1).
 
+**Dashboard v6 + Scope Note (2026-10-18, keputusan owner (a)+(b)):**
+`msaf/gw_dashboard_v6.py` → `reports/gw_diagnostic_v6.html` — basis v5
+byte-identik (sha256 `0e99571b…` di-hard-assert sebelum patch; embed di
+panel 6) + Panel 9 (ekstensi C4 S10: pooled `11458/200000` =
+5.72900e-02; χ² = 131.2879 (df 9), p = 6.44376e-24 → NOT STABLE
+bertahan; angka of record tidak berubah) + Panel 10 (outcome dim 501:
+`UNDETERMINED at pivot 446`; statistik berakhir per pra-registrasi §4) +
+koreksi panel 1/7 (rung dim-321 terukur 2026-10-17: λmin 3.123459e-59,
+lereng −0.000854) + blok Scope Note terekam (kutipan verbatim "analytic
+justification at t=0 remains external", registry A-2026-0001). README
+§7.3 diregenerasi (`msaf/gw_readme.py`: v6 current + baris S10; guard
+hijau). Rincian §2.0l; (c) instalasi engine ditunda ke sesi terpandu.
+
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
 `reports/DAFTAR_MASALAH_KERJA.md` (antrean 20 masalah).
 
-**Berikutnya dieksekusi: audit P1** — baca
-`reports/MSAF_PORTFOLIO_2026-10-17.md` §2 (P1) +
+**Status 2026-10-18:** audit P1 tuntas; owner-gated tersisa = (c)
+instalasi engine container (ditunda ke sesi terpandu atas keputusan
+pemilik). (a) dashboard v6 dan (b) Scope Note sudah dieksekusi — lihat
+§2.0l dan `reports/gw_diagnostic_v6.html`. Konteks P1:
+`reports/MSAF_PORTFOLIO_2026-10-17.md` §2 +
 `reports/AUDIT_DBN_RECON_2026-10-17.md` + pra-registrasi beku
 `reports/AUDIT_DBN_PREREG_2026-10-17.md` (target rilis, kriteria
 verdict, urutan L2, cap anggaran, coverage).
@@ -630,7 +646,56 @@ DAN sha256 arsip.
 - **P1 audit PRA-REG TUNTAS** (setiap langkah dieksekusi atau tercatat
   not-run dengan sebab). Owner-gated yang menunggu keputusan: (a)
   dashboard v6 (v3/v4/v5 tetap beku); (b) Scope Note recording;
-  (c) instalasi engine container untuk replay L1.
+  (c) instalasi engine container untuk replay L1. → keputusan
+  2026-10-18: (a)+(b) diselesaikan di §2.0l; (c) ditunda ke sesi
+  terpandu.
+
+### 2.0l [BARU, 2026-10-18] Dashboard v6 + Scope Note SELESAI (keputusan owner (a)+(b)); (c) ditunda
+
+- **Keputusan owner (satu ronde pertanyaan, 2026-10-18):** (a)
+  dashboard v6 = dieksekusi sekarang; (b) Scope Note recording = blok
+  scope DI DALAM v6 (panel 9 + panel 10 + blok panel 6), termasuk
+  kutipan verbatim `"analytic justification at t=0 remains external"`;
+  (c) instalasi engine container = ditunda ke sesi terpandu terpisah.
+- **v6 = basis v5 byte-identik + 13 patch `once-only`:**
+  `msaf/gw_dashboard_v6.py` meng-import `gw_dashboard_v5` sebagai basis
+  beku; sha256LF v5 `0e99571b…` di-hard-assert SEBELUM patch apa pun
+  dan di-embed di panel 6; setiap anchor patch wajib cocok tepat 1×
+  (tidak cocok = build berhenti, bukan diam-diam). v5/v4/v3 tidak
+  disentuh (segel byte-identik; dicek ulang oleh tes v6).
+- **Panel 9 — ekstensi C4 S10:** 10 seed (5 S5 tersegel + 5 baru di
+  bawah pra-registrasi `657352c`, ordering PASS); pooled
+  `11458/200000` = 5.72900e-02 (CP95 [5.62754e-02, 5.83174e-02]);
+  χ² = 131.2879 (df 9), p = 6.44376e-24 → NOT STABLE
+  (dispersion-dominated) bertahan; 9/10 seed ≥ 0.05 (eksepsi seed
+  20261001 = 4.80000e-02); angka of record `1262/20000` = 6.31000e-02
+  TIDAK berubah. Semua angka ditarik mesin dari
+  `reports/gw_h1_c4_seeds10.json` (hash artefak dipin di panel).
+- **Panel 10 — outcome dim 501:** verdict `UNDETERMINED at pivot 446`
+  (n_pos=446, n_neg=0, entries finite, pivots recorded=446; build
+  1612.96 s / LDL^T 177.07 s / total 1790.13 s); OUTCOME per
+  pra-registrasi §4 → statistik berakhir, tanpa rerun; artefak Stage
+  C/M memang tidak ada (itu bagian dari rekam); insiden wrapper
+  launcher dicatat apa adanya (log verbatim, tidak diedit).
+- **Koreksi histori:** caption panel 1 + open-item panel 7 v5 ("dim 321
+  not yet run" / "remains not run") diganti nilai terukur 2026-10-17
+  (λmin = 3.123459e-59; 321/321 enclosure exclude zero; ln-lereng
+  −0.000854 atas 257→321); bullet historis lain dibiarkan apa adanya.
+- **Scope Note terekam di v6:** kutipan verbatim release DBN
+  `"analytic justification at t=0 remains external"` (registry
+  A-2026-0001) + scope S10 + scope dim 501; blok bertanggal "owner
+  decision 2026-10-18".
+- **README + registry:** §7.3 diregenerasi `msaf/gw_readme.py` — baris
+  prov baru (v6 = current; v5 = preserved predecessor; + baris S10
+  json), paragraf ekstensi S10, box dashboard workflow SVG = v6;
+  `msaf/tests/test_readme_guard.py` hijau. FENCE_REGISTRY dan laporan
+  L4 TIDAK disentuh (tetap beku).
+- **Tes:** `msaf/tests/test_gw_dashboard_v6.py` — segel v3/v4/v5 +
+  needle panel 9/10 + absence caption lama + count eq=10 / svg=7 /
+  panel=11 + committed == render. Suite lokal penuh: **360 passed**
+  (88.31 s).
+- **Engine (c):** tidak dijalankan di sesi ini; tidak ada perubahan
+  sistem.
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 

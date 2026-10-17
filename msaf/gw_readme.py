@@ -21,7 +21,9 @@ SOURCES (committed, machine-produced)
   reports/AMENDMENT_FLOOR_SPEC.md   frozen pre-registration (hash pinned)
   reports/gw_diagnostic_v3.html     sealed dashboard (read-only here)
   reports/gw_diagnostic_v4.html     intermediate rebuild (preserved, pinned)
-  reports/gw_diagnostic_v5.html     current dashboard (hash pinned)
+  reports/gw_diagnostic_v5.html     preserved predecessor (pinned)
+  reports/gw_diagnostic_v6.html     current dashboard (hash pinned)
+  reports/gw_h1_c4_seeds10.json     C4 S10 robustness extension (section 7)
   msaf/gw_engine_b_verify.py        stage-C harness (hash cross-checked
                                     against its own run manifest)
 
@@ -32,7 +34,7 @@ USAGE
   python msaf/gw_readme.py --check    exit 1 on any drift (CI-equivalent)
 
 Provenance hashes are SHA-256 over newline-normalised bytes ("stable_bytes",
-same convention as msaf/gw_dashboard_v5.py): identical on Windows and Linux
+same convention as msaf/gw_dashboard_v6.py): identical on Windows and Linux
 checkouts with core.autocrlf=true.
 
 GUARD
@@ -58,6 +60,8 @@ SPEC_MD = ROOT / "reports" / "AMENDMENT_FLOOR_SPEC.md"
 DASH_V3 = ROOT / "reports" / "gw_diagnostic_v3.html"
 DASH_V4 = ROOT / "reports" / "gw_diagnostic_v4.html"
 DASH_V5 = ROOT / "reports" / "gw_diagnostic_v5.html"
+DASH_V6 = ROOT / "reports" / "gw_diagnostic_v6.html"
+S10_JSON = ROOT / "reports" / "gw_h1_c4_seeds10.json"
 ENGINE_B_SCRIPT = ROOT / "msaf" / "gw_engine_b_verify.py"
 
 README = ROOT / "README.md"
@@ -235,6 +239,23 @@ def collect() -> dict:
     if abs(c4["canonical_chi2"] - above[0]["chi2_obs"]) > 1e-9:
         raise SystemExit("C4 canonical chi2 != grid cell chi2")
     ctx["c4"] = c4
+
+    # ---- C4 S10 extension (ten-seed robustness array) --------------------
+    s10 = json.loads(S10_JSON.read_text(encoding="utf-8-sig"))
+    sx = s10["extension"]
+    if sx["seeds"][:5] != list(c4["seeds"]) or sx["k"][:5] != list(c4["k"]):
+        raise SystemExit("S10: sealed S5 base drift")
+    if len(sx["seeds"]) != 10 or sx["pooled_k"] != sum(sx["k"]):
+        raise SystemExit("S10: extension arrays inconsistent")
+    if not sx["classification"].startswith("NOT STABLE"):
+        raise SystemExit("S10: classification changed")
+    if sx["number_of_record"]["k"] != c4["k"][0]:
+        raise SystemExit("S10: number of record != sealed C4 canonical k")
+    if s10["manifest"]["prereg_order_check"]["status"] != "PASS":
+        raise SystemExit("S10: pre-registration ordering check not PASS")
+    ctx["s10"] = sx
+    ctx["s10_order"] = s10["manifest"]["prereg_order_check"]["status"]
+
     rfman = rf["manifest"]
     ctx["rf"] = dict(n_sealed=len(req(rfman, "sealed_logs",
                                       "refine manifest")),
@@ -260,7 +281,11 @@ def collect() -> dict:
         ("reports/gw_diagnostic_v4.html", DASH_V4,
          "intermediate rebuild (preserved)"),
         ("reports/gw_diagnostic_v5.html", DASH_V5,
+         "preserved predecessor (pinned)"),
+        ("reports/gw_diagnostic_v6.html", DASH_V6,
          "current dashboard"),
+        ("reports/gw_h1_c4_seeds10.json", S10_JSON,
+         "C4 S10 extension (robustness)"),
         ("msaf/gw_engine_b_verify.py", ENGINE_B_SCRIPT,
          "stage C harness (frozen)"),
     ]
@@ -284,6 +309,7 @@ def render_block(ctx: dict) -> str:
     eb = ctx["eb"]
     fl = ctx["floor"]
     c4 = ctx["c4"]
+    s10 = ctx["s10"]
     ed = ctx["edge"]
     cell = fl["cell"]
     out: list = []
@@ -330,6 +356,26 @@ def render_block(ctx: dict) -> str:
         "-> classification: **%s**."
         % (c4["homogeneity_stat"], len(c4["seeds"]) - 1,
            e5(c4["homogeneity_p"]), c4["classification"]))
+    add("")
+    add("**Stage B extension - C4 S10 (ten-seed robustness array).** The "
+        "sealed five-seed array was extended with five fresh seeds under a "
+        "pre-registration committed before the first new draw (ordering "
+        "check %s)."
+        % ctx["s10_order"])
+    add("")
+    add("| quantity | value |")
+    add("|---|---|")
+    add("| pooled (10 x %d) | %d / %d = %s (95%% CI %s to %s) |"
+        % (s10["n_per_seed"], s10["pooled_k"], s10["pooled_n"],
+           e5(s10["p_hat"]), e5(s10["pooled_cp95"][0]),
+           e5(s10["pooled_cp95"][1])))
+    add("| homogeneity | chi2 = %.4f (df %d), p = %s |"
+        % (s10["homogeneity_stat"], s10["homogeneity_df"],
+           e5(s10["homogeneity_p"])))
+    add("| classification | %s |" % s10["classification"])
+    add("| number of record | %d / %d = %s (unchanged; canonical seed %d) |"
+        % (s10["number_of_record"]["k"], s10["number_of_record"]["n"],
+           s10["number_of_record"]["p"], s10["seeds"][0]))
     add("")
     add("**Stage C - independent engine-B re-verification** (spec Section 5; "
         "decimal-exact parse, mpmath dps %d, seed %d, %d samples per dim; "
@@ -415,7 +461,7 @@ def splice_readme(text: str, segment: str) -> str:
 def render_workflow_svg(ctx: dict) -> str:
     W, H = 1100, 530
     eb, g, fl = ctx["eb"], ctx["grid"], ctx["floor"]
-    c4, v, ed = ctx["c4"], ctx["verdict"], ctx["edge"]
+    s10, v, ed = ctx["s10"], ctx["verdict"], ctx["edge"]
     cell = fl["cell"]
     n_cells = len(ctx["counts_rows"])
     L: list = []
@@ -479,11 +525,11 @@ def render_workflow_svg(ctx: dict) -> str:
          % (fl["n_zero"], n_cells)])
     harrow(344, 204, 376)
     box(380, 160, 330, 88, "Robustness array \u2014 stage B",
-        ["5 seeds on the single off-floor cell",
+        ["10 seeds (S5 + S10) on the off-floor cell",
          "pooled %d/%d \u2014 %s"
-         % (c4["pooled_k"], c4["pooled_n"],
-            c4["classification"].split(" (")[0]),
-         "homogeneity p = %s (rejected)" % e5(c4["homogeneity_p"])])
+         % (s10["pooled_k"], s10["pooled_n"],
+            s10["classification"].split(" (")[0]),
+         "homogeneity p = %s (rejected)" % e5(s10["homogeneity_p"])])
     harrow(714, 204, 746)
     box(750, 160, 330, 88, "Sealed verdicts",
         ["single off-floor cell: %d/%d"
@@ -515,8 +561,8 @@ def render_workflow_svg(ctx: dict) -> str:
     stage(410, "STAGE 4 \u00b7 PUBLICATION & PROOF \u2014 DASHBOARDS, "
                "MANUSCRIPT, DOI")
     box(20, 420, 320, 88, "Dashboards",
-        ["v5 \u2014 H1 + engine-B extension (current)",
-         "v4 \u00b7 v3 \u2014 preserved byte-identical",
+        ["v6 \u2014 H1 + S10 + dim-501 (current)",
+         "v5 \u00b7 v4 \u00b7 v3 \u2014 preserved byte-identical",
          "all standalone offline HTML"])
     harrow(344, 464, 376)
     box(380, 420, 330, 88, "Manuscript & release",
@@ -633,6 +679,13 @@ def dry_run() -> int:
           "chart %s sigma_u %s k=%d/%d"
           % (fl["n_zero"], len(ctx["counts_rows"]), cell["dim"],
              cell["chart"], cell["sigma_u"], cell["k_gue"], cell["n"]))
+    print("  S10 extension: pooled %d/%d = %s; %s (number of record %d/"
+          "%d unchanged)"
+          % (ctx["s10"]["pooled_k"], ctx["s10"]["pooled_n"],
+             e5(ctx["s10"]["p_hat"]),
+             ctx["s10"]["classification"].split(" (")[0],
+             ctx["s10"]["number_of_record"]["k"],
+             ctx["s10"]["number_of_record"]["n"]))
     print("  block: %d lines, %d bytes"
           % (seg.count("\n") + 1, len(seg.encode("utf-8"))))
     print("  workflow svg: %d bytes; trustchain svg: %d bytes"
