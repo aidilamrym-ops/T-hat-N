@@ -68,7 +68,14 @@ terdokumentasi (equal=True, string tercetak di log); containment +
 overlap + citation chain byte-identik dua sisi; artefak
 `audit_p1/l3_weld_checks.py` + log resmi + JSON + 2 transkrip smoke +
 `reports/AUDIT_DBN_L3_2026-10-17.md` — commit bersama baris ini.
-Berikutnya: **L4** report + registry P3.
+**L4 SELESAI + registry P3 aktif:** laporan
+`reports/AUDIT_DBN_L4REPORT_2026-10-17.md` (tabel per-obligasi 8
+`accepted` / 4 `unresolved` resource-bound; agregat tanpa GAP-FOUND;
+coverage 9 butir) + `reports/FENCE_REGISTRY.md` (skema + 6 entri awal;
+verdict audit = `A-2026-0001`) + guard CI fail-closed
+`msaf/tests/test_fence_registry.py` (suite lokal 355 passed). Pra-reg
+audit P1 tuntas; sisa hanya owner-gated (dashboard v6, Scope Note,
+engine L1).
 
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
@@ -577,9 +584,53 @@ DAN sha256 arsip.
   (pagination typeset tidak dibandingkan); snapshot arXiv dated
   2026-10-17; lane rilis tidak di-re-run (verdict item 1–4 dikonsumsi
   dari log ter-commit).
-- **Berikutnya: L4** — laporan audit akhir + registry P3 + daftar
-  coverage lengkap (termasuk L1 NOT-RUN-ENVIRONMENT, diskrepansi
-  lean rilis-vs-HEAD berlabel AUXILIARY, caveat-caveat item 2/3/4).
+- **Berikutnya (saat itu): L4** → lihat §2.0k (L4 + registry P3 SELESAI).
+
+### 2.0k [BARU, 2026-10-17] P1 audit — L4 (verdict final) + registry P3 SELESAI
+
+- **Laporan:** `reports/AUDIT_DBN_L4REPORT_2026-10-17.md` — struktur
+  template reviewer rilis (recon §7.12) dengan field wajib terisi dari
+  log: commit `2e9976c4…`; os Microsoft Windows 10 Pro 10.0.19045;
+  Python 3.14.4; **stored checks PASS** (gate blob in-run per item:
+  3/7/10/11 sumber + L3 14 gate; PDF referensi byte-identik
+  `60d0d2d3…`/`3362f66a…`); **container checks NOT RUN** (tanpa engine;
+  stop rule §3.4). Overall assessment (pilihan template) =
+  `plausible but incomplete` — dibaca sebagai status penilaian KITA
+  (semua lane yang dieksekusi lolos; bagian di luar scope terenumerasi).
+- **Tabel per-obligasi (ID blueprint rilis P1/P2/P3/G1/F1/F2/F3/T1/T2/
+  B1/B2/C1):** 8 `accepted` (P1, P2, G1, F1, T1, B1, B2, C1) +
+  4 `unresolved` resource-bound (P3, F2, F3, T2 — tanpa eksekusi
+  independen; masuk agregat UNVERIFIABLE-WITH-OUR-RESOURCES);
+  0 `rejected`; kolom L1 = "—" di semua baris (L1 not-run). Verdict L3
+  dikutip apa adanya: (i)/(ii)/(iii) `compatible`; weld `HELD`; 57/57.
+- **Coverage 9 butir:** L1 stop-rule; full sweep optional; item 2
+  jendela tersampel; item 3 titik desain; item 4 descriptor/subset;
+  batas L3 (incl. Bull. LMS 403, bracket π sekunder, reduksi analitik
+  tidak dibuktikan ulang); gate Lean berlabel AUXILIARY (rilis 0
+  `.lean`; `lean/` di `a74738de`; scan 25 berkas PASS; self-test
+  13/13); verifier rilis tidak di-re-run; kesegaran target (watch
+  bersih).
+- **Agregat:** GAP-FOUND = **none**; INDEPENDENTLY-CERTIFIED = item 1–4
+  (34/34, 48/48, 47/47, 124/124) + L3 (57/57) di stack kita; 
+  UNVERIFIABLE = L1 replay, F2/P3/T2/F3, sapuan penuh (baris/prisma),
+  full text referee.
+- **Registry P3 `reports/FENCE_REGISTRY.md`:** skema (ID/Jenis/
+  Pernyataan/Batas/Sertifikat/Status/Domino/Relasi; baris sertifikat
+  `sha256LF <hex> <path>` = sha256 LF-normalised, platform-stabil) +
+  6 entri awal: T-2026-0001 (ladder Route S positif-tertutup dim
+  201/301), T-2026-0002 (λmin 321), F-2026-0001 (S2 seri Montgomery
+  201/301/401), F-2026-0002 (OUTCOME dim 501), T-2026-0003 (replikasi
+  Engine B 18/18), A-2026-0001 (**verdict audit P1**; 23 berkas
+  sertifikat termasuk laporan L4). Entri tidak pernah dihapus;
+  perubahan = status/relasi/catatan.
+- **Guard CI fail-closed:** `msaf/tests/test_fence_registry.py` — tiap
+  baris `sha256LF` diverifikasi (berkas ada + hash cocok); entri
+  CERTIFIED wajib ≥1 baris sertifikat; heading wajib skema; ≥6 entri.
+  Suite lokal: **355 passed** (302.48 s).
+- **P1 audit PRA-REG TUNTAS** (setiap langkah dieksekusi atau tercatat
+  not-run dengan sebab). Owner-gated yang menunggu keputusan: (a)
+  dashboard v6 (v3/v4/v5 tetap beku); (b) Scope Note recording;
+  (c) instalasi engine container untuk replay L1.
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 
