@@ -722,6 +722,17 @@ DAN sha256 arsip.
   Log 2026-10-17 (`audit_p1_l1_launch.log`) tetap beku (FENCE_REGISTRY);
   laporan L4 dan FENCE_REGISTRY tidak disentuh; pembaruan registry =
   alur registry di akhir (diputuskan setelah laporan L1).
+- **Progres 2026-10-18 (~02:04):** engine siap — WSL diperbarui 2.4.13 → **3.0.3**
+  (boot gagal `Wsl/Service/E_UNEXPECTED` pada 2.4.13; update menyembuhkan;
+  semua terekam di log); distro **Ubuntu 26.04** (resolute), kernel
+  6.18.54.1-1-microsoft-standard-WSL2; **podman 5.7.0** + git 2.53.0 (apt);
+  cgroup2fs tersedia. Fetch input ter-pin OK: arsip OCI 172.810.240 B
+  sha256 `87a4695e…` MATCH; bundle `34f8f523…` MATCH. Skrip
+  `audit_p1/l1_fetch.sh` + `audit_p1/l1_run.sh` (sha256 repo == salinan WSL,
+  tercatat di engine log) — replay `l1_run.sh` dijalankan (clone tree dari
+  bundle → verifier arsip rilis → podman load → verify.sh → container review
+  default CMD). Catatan nama: `run_prop410_arb.sh` TIDAK ada di tree rilis —
+  deviasi prereg-vs-artifact terekam di header log replay, sebelum hasil.
 - **Status:** berjalan; semua hasil (termasuk kegagalan) dicatat apa
   adanya di log baru.
 
