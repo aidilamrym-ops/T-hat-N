@@ -538,8 +538,10 @@ The dim-401 matrix carries the same inertial certificate inside its capture
 (G-M0b: n+ = 401, n- = 0). A 9000-bit repeat over dims 21-321 kept every
 verdict.
 
-**Magnitude ladder (Route A2).** c=13 at 6000 bits, the four measured points
-([`reports/lambda_min_eig_ladder.json`](reports/lambda_min_eig_ladder.json)):
+**Magnitude ladder (Route A2).** c=13 at 6000 bits, the six measured points
+([`reports/lambda_min_eig_ladder.json`](reports/lambda_min_eig_ladder.json),
+[`reports/lambda_min_eig_ladder_big.json`](reports/lambda_min_eig_ladder_big.json),
+[`reports/lambda_min_eig_ladder_dim321.json`](reports/lambda_min_eig_ladder_dim321.json)):
 
 | dim (N) | lambda_min | lambda_max | verdict |
 |---|---|---|---|
@@ -547,6 +549,8 @@ verdict.
 | 33 (16) | `8.568627478072444e-35` | `3.338257132308795` | CERTIFIED, all eigenvalues strictly positive |
 | 65 (32) | `2.2589311905740533e-49` | `4.114073645476566` | CERTIFIED, all eigenvalues strictly positive |
 | 129 (64) | `6.321351409477261e-59` | `5.146341280489336` | CERTIFIED, all eigenvalues strictly positive |
+| 257 (128) | `3.2990200597971055e-59` | `5.870951656228312` | CERTIFIED, all eigenvalues strictly positive |
+| 321 (160) | `3.123458832662237e-59` | `6.113965017866562` | CERTIFIED, all eigenvalues strictly positive |
 
 Every enclosure excludes zero (`all_exclude_zero = true`). The float
 registry of this artifact records radius 0.0 and imaginary leak 0.0; the
@@ -562,7 +566,9 @@ realness is structural. See
 A 9000-bit
 repeat returns bit-identical midpoints at 2.6x the cost: more precision buys
 nothing at this slice. Slopes of ln lambda_min per dimension: -1.72, -1.05,
--0.34 - the decay DAMPENS, so the assumed constant-B law
+-0.34, -0.0051, -0.000854 - the decay DAMPENS at every step (the dim-321
+rung, measured 2026-10-17, drops lambda_min by a factor 0.9468 over 64
+dimensions: still decreasing, no upturn yet), so the assumed constant-B law
 lambda_min(n) ~ A exp(-B n) is REFUTED on this slice. One slice only (c=13);
 across-c is not apples-to-apples; no fitted exponent is printed anywhere
 (the scripts refuse it by design).
@@ -720,8 +726,11 @@ export GW_DIR=...       # companion checkout containing source_arb_ldlt_certify.
 python msaf/gw_route_s_ladder.py --prec 6000 --ladder 10,20,40,80,160,320
 python msaf/gw_route_s_ladder.py --c 100 --prec 6000 --ladder 100,150 --out reports/gw_route_s_ladder_c100.json
 
-# Magnitude ladder (c=13: dims 17/33/65/129 at 6000 bits)
+# Magnitude ladder (c=13 at 6000 bits: dims 17..129 in one pass; the big
+# rungs dim 257 (2026-10-15) and dim 321 (2026-10-17) as separate runs)
 python msaf/lambda_min_eig_ladder.py --prec 6000 --ladder 8,16,32,64
+python msaf/lambda_min_eig_ladder.py --prec 6000 --ladder 128 --out reports/lambda_min_eig_ladder_big.json
+python msaf/lambda_min_eig_ladder.py --prec 6000 --ladder 160 --out reports/lambda_min_eig_ladder_dim321.json
 
 # Full-spectrum capture through gate G-M0 (dim 201 default; dim 301)
 python msaf/capture_spectrum_201.py
@@ -744,15 +753,19 @@ python msaf/gw_readme.py --write           # README Section 7 block + diagrams
 
 Measured cost on the author's machine: build and eig 825.7 s (dim 201),
 3137.6 s (dim 301), 1862.2 s (dim 401); Route S LDL^T 57.1 s at dim 301; the
-full 2000-surrogate measurement is minutes per spectrum; the engine-B full
-re-verification measured 9062.4 s. Windows note:
+full 2000-surrogate measurement is minutes per spectrum; the magnitude
+ladder's big rungs cost eig 1984.84 s (dim 257) and 3110.88 s (dim 321) at
+6000 bits; the engine-B full re-verification measured 9062.4 s. Windows note:
 `msaf/mont_run.txt` is UTF-16; all newer logs are UTF-8 without BOM, CRLF.
 
 ### 6.7 Roadmap (next moves, in order)
 
-1. extend the c=13 magnitude ladder to dims 257 and 321 - dim 321 already
-   carries the sign certificate; the magnitudes are what is missing to
-   settle the damping direction;
+1. ~~extend the c=13 magnitude ladder to dims 257 and 321~~ **DONE**
+   (dim 257 measured 2026-10-15, dim 321 measured 2026-10-17; slopes
+   -0.0051 then -0.000854 - the decay keeps damping, no upturn; see
+   `reports/lambda_min_eig_ladder_big.json`,
+   `reports/lambda_min_eig_ladder_dim321.json`,
+   `reports/GW_LADDER_DIM321_2026-10-17.md`);
 2. a fourth resolution series: the statistical-power lever was executed as
    the H1 floor-amendment (2026-10-17, Section 7) - the floor moved to
    20000 surrogates and the single off-floor cell was re-measured with a

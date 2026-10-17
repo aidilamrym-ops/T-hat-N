@@ -1,0 +1,23 @@
+{
+ "c": 13,
+ "prec_bits": 6000,
+ "runs": [
+  {
+   "c": 13,
+   "N": 160,
+   "dim": 321,
+   "prec_bits": 6000,
+   "n_eigenvalues": 321,
+   "all_finite": true,
+   "imag_leak_upper": 0.0,
+   "lambda_min_lo": 3.123458832662237e-59,
+   "lambda_min_mid": 3.123458832662237e-59,
+   "lambda_min_rad": 0.0,
+   "lambda_max_hi": 6.113965017866562,
+   "all_exclude_zero": true,
+   "build_s": 199.9,
+   "eig_s": 3110.88,
+   "verdict": "CERTIFIED, all eigenvalues strictly positive"
+  }
+ ]
+}
