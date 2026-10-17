@@ -36,6 +36,19 @@ mengaktifkan engine = keputusan pemilik. Urutan eksekusi beku: §2.0f.
 **Anchor baseline:** tag git `baseline-2026-10-17` (commit `8038243`,
 CI `39025604163` hijau) — titik pulih bila ganti sesi / listrik padam.
 
+**P1 audit — eksekusi L2 (2026-10-17):** L1 = NOT-RUN-ENVIRONMENT (tanpa
+engine container; `reports/audit_p1_l1_launch.log`, commit `20a77c8`).
+Gate Lean anti-circularity PASS 25/25 (catatan mesin: rilis memuat 0
+berkas `.lean`; gate dijalankan atas `lean/` commit pasca-rilis terpin
+`a74738de` berlabel AUXILIARY; diskrepansi → coverage L4; log + attempt1,
+commit `ad4755c`). L2 item 1 SELESAI 34/34 (commit `de4d686`, CI
+`39033622304`). L2 item 2 SELESAI — Prop 4.10 budget 48/48: e_A+e_B ≤
+8.7446e-13 ≤ sealed 2.057e-12 (gap ≥ 1.18256e-12); e_C,0 ≤ sealed dengan
+gap ≥ 3.20854e-25 (kasus batas 24 dp dicatat); E_max ≤ sealed; margin ≥
+sealed → verdict REPRODUCED; artefak `audit_p1/l2_prop410_budget.py` +
+log + JSON + 3 transkrip smoke (commit bersama baris ini). Berikutnya: L2
+item 3 (tail lane) → item 4 (barrier K=8; cap 4 jam) → L3 → L4 + P3.
+
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
 `reports/DAFTAR_MASALAH_KERJA.md` (antrean 20 masalah).
@@ -298,6 +311,73 @@ DAN sha256 arsip.
   karena hasil; infra-rerun hanya setelah fix + tercatat; semua angka
   machine-extracted; coverage eksplisit; satu operator (dua pass
   berselang waktu = mitigasi, bukan dua auditor independen).
+
+### 2.0g [BARU, 2026-10-17] P1 audit — eksekusi L2 item 1 & 2 SELESAI (gate Lean + L1 tercatat)
+
+- **Gate Lean anti-circularity (pra-L2) SELESAI.** Fakta mesin: rilis
+  `review-01787854-v3` (commit `2e9976c4...`) memuat 0 berkas `.lean` —
+  prereg §7 "release's lean/ tree" karena itu dieksekusi tanpa mengedit
+  prereg: gate dijalankan atas `lean/` pada commit pasca-rilis terpin
+  `a74738de`, berlabel AUXILIARY; 57/57 blob rilis terverifikasi (git
+  blob sha1); gate `gate.py lean` (anti-circularity) PASS 25/25 berkas;
+  attempt fetch pertama yang gagal disimpan verbatim. Artefak
+  `reports/audit_p1_lean_gate.log` + `reports/audit_p1_lean_gate_attempt1.log`;
+  commit `ad4755c`. Diskrepansi release-vs-HEAD → masuk coverage L4.
+- **L1 = NOT-RUN-ENVIRONMENT** (pra-reg §3.4): mesin tanpa engine
+  container (docker/podman absen; WSL2 tanpa distro). Log
+  `reports/audit_p1_l1_launch.log`; commit `20a77c8`. Instalasi engine =
+  keputusan pemilik (bukan bagian audit ini).
+- **L2 item 1 SELESAI — window freeze & affine sign map.** Rerun tetap
+  34/34 PASS exit 0 (attempt 1 disimpan verbatim + diff mesin: hanya baris
+  label pi-width berubah — disengaja); angka kunci: lebar bracket π <
+  1e-100 eksak; k terbesar dengan width < 10^-k = 128; margin lantai
+  `5377393.987856431175` / `11989041.174663815586`; `x_* =
+  6000000185827 + sqrt(2412323/2500000)`. Commit `de4d686`, CI
+  `39033622304` hijau.
+- **L2 item 2 SELESAI — Prop 4.10 finite-lane error budget & binding.**
+  Implementasi kita sendiri (`audit_p1/l2_prop410_budget.py`, sha256
+  `cbb33b81...`): mpmath.iv 240-bit; semua angka final diekstrak sebagai
+  rasional eksak (`mpmath.libmp.to_rational` atas endpoint mentah `_mpi_`)
+  dan seluruh perbandingan vs konstanta sealed = perbandingan
+  `fractions.Fraction` eksak; enumerasi per-suku n = 1..20000 (pilihan
+  kita) + ekor via konveksitas `h(u) = (t/4)u² − σ1u + u` (check
+  f-menurun per window); 4 window: 690988 (titik evaluasi rilis), 690989,
+  1000000, 3840000 (= N_* (5.1), jendela overlap finite/tail). Hasil
+  resmi: **48/48 PASS, exit 0, 30.6 s** (`reports/audit_p1_l2_prop410.log`;
+  JSON `reports/audit_p1_l2_prop410_results.json` sha256 `3a83da89...`).
+  Angka mesin: e_A+e_B ≤ `0.000000000000874463842636` ≤ sealed
+  `0.000000000002057023688667` (gap ≥ `1.182559846031e-12`); e_C,0 ≤
+  sealed `0.000000233492848188649183` dengan gap tipis ≥ `3.20854e-25`
+  (kasus batas: nilai kita praktis sama dengan konstanta sealed di 24 dp —
+  dicatat sengaja; bandingkan window N=690989: gap ≥ `5.66918e-13`,
+  konsisten dengan sensitivitas log0); E_max ≤
+  `0.000000233493722652491819` ≤ sealed; margin ≥ `0.000000557872277347`
+  ≥ sealed. **Verdict L2 item 2 = REPRODUCED** (pra-reg §4.5: rantai
+  independen kita mensertifikasi pertidaksamaan sealed pada konstanta
+  sealed; untuk 4 window tersampel). Riwayat pra-run (semua tersimpan):
+  smoke1 GAGAL 5 dari 47 check — converter endpoint→Fraction salah
+  konvensi internal mpmath (sign/mantissa; `.a/.b` ivmpf bukan mpf) →
+  semua tampilan angka 0; diperbaiki di akar; smoke2 GAGAL 1 dari 48 —
+  typo arah bracket π di test sanity kita sendiri (komputasi audit lolos
+  47/48 dengan nilai nyata); smoke3 PASS 48/48, lalu run resmi attempt 1
+  PASS 48/48 dengan parameter tidak berubah. Transkrip:
+  `reports/audit_p1_l2_prop410_smoke{1,2,3}.log`. Klaim diidentifikasi
+  dari `verifiers/verify_finite_and_binding.py` (blob `17c33ac1...`) dan
+  `verifiers/verify_error_constant_weld.py` (blob `891f3b01...`) —
+  read-only; tidak ada kode mereka yang dipakai. Coverage item ini:
+  window antara (690989..3839999) TIDAK dihitung ulang satu per satu;
+  sertifikasi kita = first window + 3 window tersampel termasuk ujung
+  jauh; uniformity window penuh tetap bersandar pada teorema
+  window-freeze rilis (bukan objek re-derivasi penuh item 2).
+- **Berikutnya: L2 item 3** (tail lane: koridor `0.999719 < D < 0.999721`;
+  post-error margin `> 0.0001735209373337`; `M = 153814`, `M_err = 3000`,
+  `M_max < 1.608290`) → **item 4** (subset barrier K=8 + seam +
+  first/last; cap 4 jam) → **L3** (checklist weld) → **L4** report +
+  registry P3.
+- **Owner-gated yang menunggu (tidak memblok):** (a) update dashboard =
+  wajib v6 baru (v3/v4/v5 dibekukan, tidak boleh diedit; persetujuan
+  pemilik belum diberikan); (b) Scope Note recording; (c) instalasi
+  engine container untuk replay L1 di masa depan.
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 

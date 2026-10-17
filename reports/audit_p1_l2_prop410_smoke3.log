@@ -1,0 +1,150 @@
+audit_p1 L2 item 2 - Prop 4.10 finite-lane effective-error budget & binding
+release commit: 2e9976c4becbf97e31c56fe75fce07cdff5dd4ea
+prereg: reports/AUDIT_DBN_PREREG_2026-10-17.md section 4 item 2
+stack: mpmath.iv prec=240; fractions for all final numbers
+
+== statement sources (pinned release, read-only) ==
+  file: PROOF_NOTE.md  (statement source ((4.15)/(4.16), region))
+    expected git_blob_sha1: 323e2144e9d1624c81002be5997b0901147ce166
+    fetched copy: size 14965  sha256 03748fb39e239e4c7cc40ce938ae35321d678131d3400fc4339e3628e696dc49
+    fetched copy git_blob_sha1: 323e2144e9d1624c81002be5997b0901147ce166  match: True
+[PASS] source blob match: PROOF_NOTE.md
+  file: ERROR_CONSTANT_WELD.md  (welded 10.50 corollary (statement source))
+    expected git_blob_sha1: 9fd635b59831316b73c1052dd4f6ec71ce70f1e1
+    fetched copy: size 2604  sha256 4c29fdcdb3b9c04c558cab44ae8a8218928f8b91b26836648c45f3770f620cb0
+    fetched copy git_blob_sha1: 9fd635b59831316b73c1052dd4f6ec71ce70f1e1  match: True
+[PASS] source blob match: ERROR_CONSTANT_WELD.md
+  file: vendor/dbn21a/certificates/record/error_terms_audit/ERROR_TERMS_AUDIT.md  (formula transcription (20)-(24) source)
+    expected git_blob_sha1: 542c1ce0e9909bbb2556e6debf3ce25ed0ec34a3
+    fetched copy: size 7577  sha256 da91b3dada1d8f60d7da190361b6c75afb0e7889d030c8eddeb189e10e85d20d
+    fetched copy git_blob_sha1: 542c1ce0e9909bbb2556e6debf3ce25ed0ec34a3  match: True
+[PASS] source blob match: vendor/dbn21a/certificates/record/error_terms_audit/ERROR_TERMS_AUDIT.md
+  file: CANDIDATE_PARAMETERS.md  (constants source (t0, y0, margin target))
+    expected git_blob_sha1: bdad0402562f5ea077a9ab380558cb19f74ffb82
+    fetched copy: size 4695  sha256 3a748e1ba88e00276c176962dab95bce2cc4f4214b7d7b31bc301dfc2ac0fd8d
+    fetched copy git_blob_sha1: bdad0402562f5ea077a9ab380558cb19f74ffb82  match: True
+[PASS] source blob match: CANDIDATE_PARAMETERS.md
+  file: logs/finite_and_binding.log  (sealed numbers source)
+    expected git_blob_sha1: c84e2b3404b966c00477a3040c303a0a1ff809b6
+    fetched copy: size 897  sha256 25be62e7ad9cf28e593a7fe8c061a364c7df3a0ecb276704b036592b5c8f3008
+    fetched copy git_blob_sha1: c84e2b3404b966c00477a3040c303a0a1ff809b6  match: True
+[PASS] source blob match: logs/finite_and_binding.log
+  file: verifiers/verify_finite_and_binding.py  (claim identified from; no code reused)
+    expected git_blob_sha1: 17c33ac18f4e03ab75f5f6f82c745e4a430408b2
+    fetched copy: size 16502  sha256 f49bac5ae9e3233fb4fe211430c2615fe48d4ab24ab81ed60f0162f458917545
+    fetched copy git_blob_sha1: 17c33ac18f4e03ab75f5f6f82c745e4a430408b2  match: True
+[PASS] source blob match: verifiers/verify_finite_and_binding.py
+  file: verifiers/verify_error_constant_weld.py  (claim identified from; no code reused)
+    expected git_blob_sha1: 891f3b017d8699b86e11494bb28526fb9480f5d8
+    fetched copy: size 3111  sha256 d42a1d5b36e06e8e262d67cdeb6604c1b1fc089fd0428a429fc18231c88fb4d3
+    fetched copy git_blob_sha1: 891f3b017d8699b86e11494bb28526fb9480f5d8  match: True
+[PASS] source blob match: verifiers/verify_error_constant_weld.py
+
+== arithmetic helper self-tests ==
+[PASS] frac_of(3/2) exact
+[PASS] frac_of(-1/4) exact
+[PASS] frac_of(3) exact
+[PASS] iv.pi interval inside (314159/100000, 31416/10000)
+[PASS] fr_to_iv round-trip brackets 1/3
+
+== region and configuration checks (exact rational lane) ==
+  t0 = 129/800 ; t_hi = 161250001/1000000000 ; y0^2 = 87677/2500000 ; 1-2t0 = 271/400
+[PASS] t0 > 0
+[PASS] t0 < t_hi
+[PASS] t_hi <= 1/4
+[PASS] t_hi - t0 = 1/10^9 exactly
+[PASS] 0 < y0^2 < 1-2t0 <= 1
+[PASS] N0^2 = 477464416144
+[PASS] N0 > m0
+[PASS] (1872719/10^7)^2 < y0^2
+[PASS] y0^2 < (23409/125000)^2
+[PASS] (8231038/10^7)^2 < 1-2t0
+[PASS] 1-2t0 < (8231039/10^7)^2 (implies stated <=)
+[PASS] s2 = 1 - y0^2 = 2412323/2500000
+[PASS] isqrt square check for x_* lower bracket
+  x_star lower bracket (scale 10^18): 30000000929139911540491536234907191/5000000000000000000000
+[PASS] x0(690988) upper < x_* lower (evaluation below criterion start)
+  x0(690988) interval: [5999994808433.994451, 5999994808433.994452] (6 dp floor/ceil)
+  x_* - x0(690988) lower margin > 5377393.987856
+[PASS] (h)_+ <= 1 lemma: 4(1 + ymax_ub) < 3 x0^2
+[PASS] sealed arithmetic replay: T_floor - sealed E_max >= sealed margin
+
+== precompute log(n) for n = 1..20000 ==
+  done
+
+== window budgets (our bounds; per-term enumeration + convexity tail) ==
+-- N = 690988
+   x0 = [5999994808433.994451, 5999994808433.994452] (6 dp floor/ceil)
+   sigma1 interval = [1.677709889853772829047831, 1.677709896576711697279332] (24 dp)
+   direct sum n=1..20000  <= 0.000000000000738546020301
+   tail cap <= 0.571528988142954335326550 ; theta_m0 <= 0.000000000000117928491403 ; (1+gamma_tail) <= 2.016598324240631745522478
+   tail <= 0.000000000000135917822336
+   e_A+e_B <= 0.000000000000874463842636
+   e_C,0   <= 0.000000233492848188649183
+   E_max   <= 0.000000233493722652491819
+   margin  >= 0.000000557872277347 (18 dp floor)
+   cert gap floors: sealed-eAB >= 0.000000000001182559846031 ; sealed-eC0 >= 0.000000000000000000000000320854 ; margin-sealed >= 0.000000000001182560
+   sealed: e_A+e_B <= 0.000000000002057023688667 ; e_C,0 <= 0.000000233492848188649183
+   sealed: E_max <= 0.000000233494905212337849 ; margin >= 0.000000557871094787
+[PASS] N=690988 f decreasing on [m0,N] ((t_hi/2) log N < sigma1_lo)
+[PASS] N=690988 e_A+e_B <= sealed 2.057023688667e-12
+[PASS] N=690988 e_C,0 <= sealed 2.33492848188649183e-7
+[PASS] N=690988 E_max <= sealed 2.33494905212337849e-7
+[PASS] N=690988 margin >= sealed 5.57871094787e-7
+
+-- N = 690989
+   x0 = [6000012174869.156971, 6000012174869.156972] (6 dp floor/ceil)
+   sigma1 interval = [1.677710006534441175938950, 1.677710013257380767771495] (24 dp)
+   direct sum n=1..20000  <= 0.000000000000738543838761
+   tail cap <= 0.571528661088431262348862 ; theta_m0 <= 0.000000000000117928161179 ; (1+gamma_tail) <= 2.016598324240631745075597
+   tail <= 0.000000000000135917363961
+   e_A+e_B <= 0.000000000000874461202721
+   e_C,0   <= 0.000000233492281270381624
+   E_max   <= 0.000000233493155731584345
+   margin  >= 0.000000557872844268 (18 dp floor)
+   cert gap floors: sealed-eAB >= 0.000000000001182562485946 ; sealed-eC0 >= 0.000000000000566918267559002889 ; margin-sealed >= 0.000000000001749481
+[PASS] N=690989 f decreasing on [m0,N] ((t_hi/2) log N < sigma1_lo)
+[PASS] N=690989 e_A+e_B <= sealed 2.057023688667e-12
+[PASS] N=690989 e_C,0 <= sealed 2.33492848188649183e-7
+[PASS] N=690989 E_max <= sealed 2.33494905212337849e-7
+[PASS] N=690989 margin >= sealed 5.57871094787e-7
+
+-- N = 1000000
+   x0 = [12566370614359.046308, 12566370614359.046309] (6 dp floor/ceil)
+   sigma1 interval = [1.707511536087315180944371, 1.707511542995070459926514] (24 dp)
+   direct sum n=1..20000  <= 0.000000000000348127400562
+   tail cap <= 0.488606027846510806292549 ; theta_m0 <= 0.000000000000057731982254 ; (1+gamma_tail) <= 2.016598324240550115252469
+   tail <= 0.000000000000056884597817
+   e_A+e_B <= 0.000000000000405011998378
+   e_C,0   <= 0.000000124898996177330753
+   E_max   <= 0.000000124899401189329130
+   margin  >= 0.000000666466598810 (18 dp floor)
+   cert gap floors: sealed-eAB >= 0.000000000001652011690289 ; sealed-eC0 >= 0.000000108593852011318430773080 ; margin-sealed >= 0.000000108595504023
+[PASS] N=1000000 f decreasing on [m0,N] ((t_hi/2) log N < sigma1_lo)
+[PASS] N=1000000 e_A+e_B <= sealed 2.057023688667e-12
+[PASS] N=1000000 e_C,0 <= sealed 2.33492848188649183e-7
+[PASS] N=1000000 E_max <= sealed 2.33494905212337849e-7
+[PASS] N=1000000 margin >= sealed 5.57871094787e-7
+
+-- N = 3840000
+   x0 = [185298674531094.494062, 185298674531094.494063] (6 dp floor/ceil)
+   sigma1 interval = [1.815990245644411170989733, 1.815990253224902633271689] (24 dp)
+   direct sum n=1..20000  <= 0.000000000000023241926102
+   tail cap <= 0.235625068053295976201091 ; theta_m0 <= 0.000000000000004348001819 ; (1+gamma_tail) <= 2.016598324240477534118348
+   tail <= 0.000000000000002066001403
+   e_A+e_B <= 0.000000000000025307927505
+   e_C,0   <= 0.000000011671098860461392
+   E_max   <= 0.000000011671124168388896
+   margin  >= 0.000000779694875831 (18 dp floor)
+   cert gap floors: sealed-eAB >= 0.000000000002031715761162 ; sealed-eC0 >= 0.000000221821749328187791947376 ; margin-sealed >= 0.000000221823781044
+[PASS] N=3840000 f decreasing on [m0,N] ((t_hi/2) log N < sigma1_lo)
+[PASS] N=3840000 e_A+e_B <= sealed 2.057023688667e-12
+[PASS] N=3840000 e_C,0 <= sealed 2.33492848188649183e-7
+[PASS] N=3840000 E_max <= sealed 2.33494905212337849e-7
+[PASS] N=3840000 margin >= sealed 5.57871094787e-7
+
+== summary ==
+checks_total: 48  checks_failed: 0
+item2 machine verdict: PASS
+runtime_seconds: 29.1
+json written: D:\Opencode AI Agent\reports\audit_p1_l2_prop410_results.json

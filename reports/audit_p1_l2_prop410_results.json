@@ -1,0 +1,379 @@
+{
+  "item": "L2-2 Prop 4.10 finite-lane effective-error budget & binding",
+  "prereg": "reports/AUDIT_DBN_PREREG_2026-10-17.md section 4 item 2",
+  "release_commit": "2e9976c4becbf97e31c56fe75fce07cdff5dd4ea",
+  "stack": {
+    "mpmath_iv_prec_bits": 240,
+    "exact_rational_extraction": "mpmath.libmp.to_rational + fractions"
+  },
+  "sources": [
+    {
+      "path": "PROOF_NOTE.md",
+      "git_blob_sha1_expected": "323e2144e9d1624c81002be5997b0901147ce166",
+      "fetched_as": "PROOF_NOTE.md",
+      "role": "statement source ((4.15)/(4.16), region)"
+    },
+    {
+      "path": "ERROR_CONSTANT_WELD.md",
+      "git_blob_sha1_expected": "9fd635b59831316b73c1052dd4f6ec71ce70f1e1",
+      "fetched_as": "ERROR_CONSTANT_WELD.md",
+      "role": "welded 10.50 corollary (statement source)"
+    },
+    {
+      "path": "vendor/dbn21a/certificates/record/error_terms_audit/ERROR_TERMS_AUDIT.md",
+      "git_blob_sha1_expected": "542c1ce0e9909bbb2556e6debf3ce25ed0ec34a3",
+      "fetched_as": "vendor__dbn21a__certificates__record__error_terms_audit__ERROR_TERMS_AUDIT.md",
+      "role": "formula transcription (20)-(24) source"
+    },
+    {
+      "path": "CANDIDATE_PARAMETERS.md",
+      "git_blob_sha1_expected": "bdad0402562f5ea077a9ab380558cb19f74ffb82",
+      "fetched_as": "CANDIDATE_PARAMETERS.md",
+      "role": "constants source (t0, y0, margin target)"
+    },
+    {
+      "path": "logs/finite_and_binding.log",
+      "git_blob_sha1_expected": "c84e2b3404b966c00477a3040c303a0a1ff809b6",
+      "fetched_as": "logs__finite_and_binding.log",
+      "role": "sealed numbers source"
+    },
+    {
+      "path": "verifiers/verify_finite_and_binding.py",
+      "git_blob_sha1_expected": "17c33ac18f4e03ab75f5f6f82c745e4a430408b2",
+      "fetched_as": "verifiers__verify_finite_and_binding.py",
+      "role": "claim identified from; no code reused"
+    },
+    {
+      "path": "verifiers/verify_error_constant_weld.py",
+      "git_blob_sha1_expected": "891f3b017d8699b86e11494bb28526fb9480f5d8",
+      "fetched_as": "verifiers__verify_error_constant_weld.py",
+      "role": "claim identified from; no code reused"
+    }
+  ],
+  "checks_total": 48,
+  "checks_failed": 0,
+  "machine_verdict": "PASS",
+  "checks": [
+    {
+      "name": "source blob match: PROOF_NOTE.md",
+      "ok": true
+    },
+    {
+      "name": "source blob match: ERROR_CONSTANT_WELD.md",
+      "ok": true
+    },
+    {
+      "name": "source blob match: vendor/dbn21a/certificates/record/error_terms_audit/ERROR_TERMS_AUDIT.md",
+      "ok": true
+    },
+    {
+      "name": "source blob match: CANDIDATE_PARAMETERS.md",
+      "ok": true
+    },
+    {
+      "name": "source blob match: logs/finite_and_binding.log",
+      "ok": true
+    },
+    {
+      "name": "source blob match: verifiers/verify_finite_and_binding.py",
+      "ok": true
+    },
+    {
+      "name": "source blob match: verifiers/verify_error_constant_weld.py",
+      "ok": true
+    },
+    {
+      "name": "frac_of(3/2) exact",
+      "ok": true
+    },
+    {
+      "name": "frac_of(-1/4) exact",
+      "ok": true
+    },
+    {
+      "name": "frac_of(3) exact",
+      "ok": true
+    },
+    {
+      "name": "iv.pi interval inside (314159/100000, 31416/10000)",
+      "ok": true
+    },
+    {
+      "name": "fr_to_iv round-trip brackets 1/3",
+      "ok": true
+    },
+    {
+      "name": "t0 > 0",
+      "ok": true
+    },
+    {
+      "name": "t0 < t_hi",
+      "ok": true
+    },
+    {
+      "name": "t_hi <= 1/4",
+      "ok": true
+    },
+    {
+      "name": "t_hi - t0 = 1/10^9 exactly",
+      "ok": true
+    },
+    {
+      "name": "0 < y0^2 < 1-2t0 <= 1",
+      "ok": true
+    },
+    {
+      "name": "N0^2 = 477464416144",
+      "ok": true
+    },
+    {
+      "name": "N0 > m0",
+      "ok": true
+    },
+    {
+      "name": "(1872719/10^7)^2 < y0^2",
+      "ok": true
+    },
+    {
+      "name": "y0^2 < (23409/125000)^2",
+      "ok": true
+    },
+    {
+      "name": "(8231038/10^7)^2 < 1-2t0",
+      "ok": true
+    },
+    {
+      "name": "1-2t0 < (8231039/10^7)^2 (implies stated <=)",
+      "ok": true
+    },
+    {
+      "name": "s2 = 1 - y0^2 = 2412323/2500000",
+      "ok": true
+    },
+    {
+      "name": "isqrt square check for x_* lower bracket",
+      "ok": true
+    },
+    {
+      "name": "x0(690988) upper < x_* lower (evaluation below criterion start)",
+      "ok": true
+    },
+    {
+      "name": "(h)_+ <= 1 lemma: 4(1 + ymax_ub) < 3 x0^2",
+      "ok": true
+    },
+    {
+      "name": "sealed arithmetic replay: T_floor - sealed E_max >= sealed margin",
+      "ok": true
+    },
+    {
+      "name": "N=690988 f decreasing on [m0,N] ((t_hi/2) log N < sigma1_lo)",
+      "ok": true
+    },
+    {
+      "name": "N=690988 e_A+e_B <= sealed 2.057023688667e-12",
+      "ok": true
+    },
+    {
+      "name": "N=690988 e_C,0 <= sealed 2.33492848188649183e-7",
+      "ok": true
+    },
+    {
+      "name": "N=690988 E_max <= sealed 2.33494905212337849e-7",
+      "ok": true
+    },
+    {
+      "name": "N=690988 margin >= sealed 5.57871094787e-7",
+      "ok": true
+    },
+    {
+      "name": "N=690989 f decreasing on [m0,N] ((t_hi/2) log N < sigma1_lo)",
+      "ok": true
+    },
+    {
+      "name": "N=690989 e_A+e_B <= sealed 2.057023688667e-12",
+      "ok": true
+    },
+    {
+      "name": "N=690989 e_C,0 <= sealed 2.33492848188649183e-7",
+      "ok": true
+    },
+    {
+      "name": "N=690989 E_max <= sealed 2.33494905212337849e-7",
+      "ok": true
+    },
+    {
+      "name": "N=690989 margin >= sealed 5.57871094787e-7",
+      "ok": true
+    },
+    {
+      "name": "N=1000000 f decreasing on [m0,N] ((t_hi/2) log N < sigma1_lo)",
+      "ok": true
+    },
+    {
+      "name": "N=1000000 e_A+e_B <= sealed 2.057023688667e-12",
+      "ok": true
+    },
+    {
+      "name": "N=1000000 e_C,0 <= sealed 2.33492848188649183e-7",
+      "ok": true
+    },
+    {
+      "name": "N=1000000 E_max <= sealed 2.33494905212337849e-7",
+      "ok": true
+    },
+    {
+      "name": "N=1000000 margin >= sealed 5.57871094787e-7",
+      "ok": true
+    },
+    {
+      "name": "N=3840000 f decreasing on [m0,N] ((t_hi/2) log N < sigma1_lo)",
+      "ok": true
+    },
+    {
+      "name": "N=3840000 e_A+e_B <= sealed 2.057023688667e-12",
+      "ok": true
+    },
+    {
+      "name": "N=3840000 e_C,0 <= sealed 2.33492848188649183e-7",
+      "ok": true
+    },
+    {
+      "name": "N=3840000 E_max <= sealed 2.33494905212337849e-7",
+      "ok": true
+    },
+    {
+      "name": "N=3840000 margin >= sealed 5.57871094787e-7",
+      "ok": true
+    }
+  ],
+  "values": {
+    "release_commit": "2e9976c4becbf97e31c56fe75fce07cdff5dd4ea",
+    "region": {
+      "t_box": [
+        "129/800",
+        "161250001/1000000000"
+      ],
+      "y0_sq": "87677/2500000",
+      "one_minus_2t0": "271/400",
+      "x0_definition": "4*pi*(N^2 - t/16)",
+      "N_list": [
+        690988,
+        690989,
+        1000000,
+        3840000
+      ],
+      "direct_terms_m0": 20000,
+      "tail_method": "convexity cap (log N - log m0) * max(E endpoints); f decreasing checked"
+    },
+    "sealed": {
+      "eab": "0.000000000002057023688667",
+      "ec0": "0.000000233492848188649183",
+      "emax": "0.000000233494905212337849",
+      "margin": "0.000000557871094787",
+      "t_floor_input": "0.000000791366"
+    },
+    "per_N": [
+      {
+        "N": 690988,
+        "x0_floor6": "5999994808433.994451",
+        "x0_ceil6": "5999994808433.994452",
+        "sigma1_lo": "370532099304725625021904064128168406648494671232351889691547582128597539/220855883097298041197912187592864814478435487109452369765200775161577472",
+        "sigma1_hi": "370532100789526225774321454274356771704496477238388273099869486413142703/220855883097298041197912187592864814478435487109452369765200775161577472",
+        "dec_ok": true,
+        "eab_direct_ceil24": "0.000000000000738546020301",
+        "cap_ceil24": "0.571528988142954335326550",
+        "theta_m0_ceil24": "0.000000000000117928491403",
+        "tail_ceil24": "0.000000000000135917822336",
+        "eab_ceil24": "0.000000000000874463842636",
+        "ec0_ceil24": "0.000000233492848188649183",
+        "emax_ceil24": "0.000000233493722652491819",
+        "margin_floor18": "0.000000557872277347",
+        "sealed_minus_eab_floor24": "0.000000000001182559846031",
+        "sealed_minus_ec0_floor30": "0.000000000000000000000000320854",
+        "sealed_minus_ec0_ceil30": "0.000000000000000000000000320855",
+        "sealed_minus_emax_floor24": "0.000000000001182559846030",
+        "margin_minus_sealed_floor18": "0.000000000001182560",
+        "eab_le_sealed": true,
+        "ec0_le_sealed": true,
+        "emax_le_sealed": true,
+        "margin_ge_sealed": true
+      },
+      {
+        "N": 690989,
+        "x0_floor6": "6000012174869.156971",
+        "x0_ceil6": "6000012174869.156972",
+        "sigma1_lo": "1482128500297350692629971119019959557318110556701452818715633614646764971/883423532389192164791648750371459257913741948437809479060803100646309888",
+        "sigma1_hi": "1482128506236553734885831020912171360727181649826072921209419467298934757/883423532389192164791648750371459257913741948437809479060803100646309888",
+        "dec_ok": true,
+        "eab_direct_ceil24": "0.000000000000738543838761",
+        "cap_ceil24": "0.571528661088431262348862",
+        "theta_m0_ceil24": "0.000000000000117928161179",
+        "tail_ceil24": "0.000000000000135917363961",
+        "eab_ceil24": "0.000000000000874461202721",
+        "ec0_ceil24": "0.000000233492281270381624",
+        "emax_ceil24": "0.000000233493155731584345",
+        "margin_floor18": "0.000000557872844268",
+        "sealed_minus_eab_floor24": "0.000000000001182562485946",
+        "sealed_minus_ec0_floor30": "0.000000000000566918267559002889",
+        "sealed_minus_ec0_ceil30": "0.000000000000566918267559002890",
+        "sealed_minus_emax_floor24": "0.000000000001749480753504",
+        "margin_minus_sealed_floor18": "0.000000000001749481",
+        "eab_le_sealed": true,
+        "ec0_le_sealed": true,
+        "emax_le_sealed": true,
+        "margin_ge_sealed": true
+      },
+      {
+        "N": 1000000,
+        "x0_floor6": "12566370614359.046308",
+        "x0_ceil6": "12566370614359.046309",
+        "sigma1_lo": "754227936402775774341815493334074226648483517599333360793777636506438151/441711766194596082395824375185729628956870974218904739530401550323154944",
+        "sigma1_hi": "377113969727006279530531137151535824493721887721799942978105365963559619/220855883097298041197912187592864814478435487109452369765200775161577472",
+        "dec_ok": true,
+        "eab_direct_ceil24": "0.000000000000348127400562",
+        "cap_ceil24": "0.488606027846510806292549",
+        "theta_m0_ceil24": "0.000000000000057731982254",
+        "tail_ceil24": "0.000000000000056884597817",
+        "eab_ceil24": "0.000000000000405011998378",
+        "ec0_ceil24": "0.000000124898996177330753",
+        "emax_ceil24": "0.000000124899401189329130",
+        "margin_floor18": "0.000000666466598810",
+        "sealed_minus_eab_floor24": "0.000000000001652011690289",
+        "sealed_minus_ec0_floor30": "0.000000108593852011318430773080",
+        "sealed_minus_ec0_ceil30": "0.000000108593852011318430773081",
+        "sealed_minus_emax_floor24": "0.000000108595504023008719",
+        "margin_minus_sealed_floor18": "0.000000108595504023",
+        "eab_le_sealed": true,
+        "ec0_le_sealed": true,
+        "emax_le_sealed": true,
+        "margin_ge_sealed": true
+      },
+      {
+        "N": 3840000,
+        "x0_floor6": "185298674531094.494062",
+        "x0_ceil6": "185298674531094.494063",
+        "sigma1_lo": "401072129397875626919718193612375088585359412209326670434016174590417249/220855883097298041197912187592864814478435487109452369765200775161577472",
+        "sigma1_hi": "1604288524288287052534110245094545286685648305702119622331618651235962005/883423532389192164791648750371459257913741948437809479060803100646309888",
+        "dec_ok": true,
+        "eab_direct_ceil24": "0.000000000000023241926102",
+        "cap_ceil24": "0.235625068053295976201091",
+        "theta_m0_ceil24": "0.000000000000004348001819",
+        "tail_ceil24": "0.000000000000002066001403",
+        "eab_ceil24": "0.000000000000025307927505",
+        "ec0_ceil24": "0.000000011671098860461392",
+        "emax_ceil24": "0.000000011671124168388896",
+        "margin_floor18": "0.000000779694875831",
+        "sealed_minus_eab_floor24": "0.000000000002031715761162",
+        "sealed_minus_ec0_floor30": "0.000000221821749328187791947376",
+        "sealed_minus_ec0_ceil30": "0.000000221821749328187791947377",
+        "sealed_minus_emax_floor24": "0.000000221823781043948953",
+        "margin_minus_sealed_floor18": "0.000000221823781044",
+        "eab_le_sealed": true,
+        "ec0_le_sealed": true,
+        "emax_le_sealed": true,
+        "margin_ge_sealed": true
+      }
+    ]
+  }
+}
