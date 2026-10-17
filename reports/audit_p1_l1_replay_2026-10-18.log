@@ -1,0 +1,41 @@
+# audit_p1 - L1 replay log (second attempt; 2026-10-18)
+
+purpose: L1 replay per prereg section 3, on the pinned release
+`review-01787854-v3` (commit `2e9976c4becbf97e31c56fe75fce07cdff5dd4ea`).
+
+pinned inputs of record:
+- OCI archive `dbn-lambda-01787854-review-v3.oci.tar`: expected sha256
+  `87a4695e86b535eac48b0a39e1999028e8a18249eb1c95cc9715e4a91afb83c6`, 172810240 bytes.
+- image digest: `sha256:6e29bc53adc5a4337802da2b5a219720e3da9dcc1b87c546b96b6126d8b9975d`.
+- release tree carrier: `dbn-lambda-01787854-review-v3.bundle`: expected sha256
+  `34f8f5239c56b9602d47800f0cac4ef9ee995f845298362fb4a2a95740c5ba92`.
+- replay runbook input: `COLD_REPLAY.md` (fetched and hashed on the Windows side 2026-10-18;
+  sha256 `1cdb4bbd6ad11d79b97d9bf87f83bb72703f992b884d756d5a34f1ed3a2cc3fd`).
+
+engine: podman inside the WSL2 distro `Ubuntu` on the audit machine; installation and
+version evidence in `reports/audit_p1_l1_engine_install_2026-10-18.log`.
+
+naming discrepancy (recorded BEFORE execution, not adapted afterwards):
+- prereg section 2 names four bounded scripts: `verify.sh`; `run_prop410_arb.sh`;
+  `run_tail_arb.sh`; `run_barrier_replay.sh`.
+- the pinned release tree does NOT contain any path matching `410`/`prop` (checked against
+  the GitHub tree API for commit 2e9976c4, recursive, truncated=False). It ships:
+  `verify.sh` (root); `scripts/run_container_review.sh` (the image's default CMD);
+  `scripts/run_tail_arb.sh`; `scripts/run_barrier_replay.sh`; `scripts/run_direct_singletons.sh`;
+  `scripts/run_interval_verifiers.sh`; `scripts/run_full_sweep.sh`.
+- execution set used here = the release's actual artifacts: `verify.sh` standalone +
+  the image's default CMD `./scripts/run_container_review.sh` (the exact command their own
+  tag workflow ran, "Run stored and fresh critical review against this image", run 30322974859).
+- `run_prop410_arb.sh`: NOT-RUN (absent from the release); `run_full_sweep.sh`: skipped as
+  optional per prereg section 8. No parameter is changed in response to any result.
+
+capture convention: every block below is appended by the runner from the actual invocation
+(marker | CMD | output | EXIT); nothing is retyped; failures are recorded as-is.
+
+scope limit (unchanged): L1 can never yield "independently verified"; at most "release
+replayed; numbers reproduced from the release's own tooling".
+
+ordering anchor: prereg add-commit `86a32c99f9b78808f32e4e3e9ba150809264bfa2` (2026-10-17)
+predates this 2026-10-18 log.
+
+## machine log (appended as executed)

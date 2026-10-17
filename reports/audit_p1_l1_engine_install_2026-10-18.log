@@ -62,3 +62,502 @@ release-asset: name=dbn-lambda-01787854-review-v3.oci.tar | size=172810240 | dig
 release: tag=review-01787854-v3 | published=2026-07-28T04:32:43Z
 runner-sha256=821D2E1E636DAA8EFD898F0A158836FE02EDBBECA2DF073D25B2405F3EBAC770
 EXIT-INLINE: 0
+
+--- 2026-10-18T01:46:35.404+08:00 | install Ubuntu distro (web download, no launch)
+CMD: wsl --install --no-launch -d Ubuntu --web-download
+
+--- 2026-10-18T01:46:51.027+08:00 | fetch release guidance files (read-only inputs; outside repo)
+CMD: Invoke-WebRequest x3 + Get-FileHash
+[stdout]
+file=COLD_REPLAY.md size=3848 sha256=1cdb4bbd6ad11d79b97d9bf87f83bb72703f992b884d756d5a34f1ed3a2cc3fd
+[stdout]
+file=REVIEW_IMAGE.sha256 size=83 sha256=58a4d96e6d8b6ee44ae811623dcfa8656ed9896e635ded44bbd8204f92c23fbc
+[stdout]
+file=RELEASE_ASSETS.sha256 size=1193 sha256=1e6355d34652d4cf0159cae2c02ac5f30c703fa699d89fe4dd8da3f22788b40a
+REVIEW_IMAGE.sha256 content:
+4e8c2e528fb5d6998e62b31c13c112d3fe1de929bd586ffa643ab167b92f026a  REVIEW_IMAGE.txt
+EXIT-INLINE: 0
+[stdout]
+Downloading: Ubuntu
+Installing: Ubuntu
+Distribution successfully installed. It can be launched via 'wsl.exe -d Ubuntu'
+EXIT: 0
+
+--- 2026-10-18T01:48:40.892+08:00 | post-install: distro list
+CMD: wsl --list --verbose
+[stdout]
+  NAME      STATE           VERSION
+* Ubuntu    Stopped         2
+EXIT: 0
+
+--- 2026-10-18T01:48:42.043+08:00 | post-install: distro identity
+CMD: wsl -d Ubuntu -u root -- cat /etc/os-release
+[stdout]
+Catastrophic failure 
+Error code: Wsl/Service/E_UNEXPECTED
+EXIT: -1
+
+--- 2026-10-18T01:48:44.087+08:00 | post-install: machine arch
+CMD: wsl -d Ubuntu -u root -- uname -m
+[stdout]
+Catastrophic failure 
+Error code: Wsl/Service/E_UNEXPECTED
+EXIT: -1
+
+--- 2026-10-18T01:49:24.852+08:00 | debug: wsl shutdown
+CMD: wsl --shutdown
+EXIT: 0
+
+--- 2026-10-18T01:49:25.976+08:00 | debug: retry boot echo ok
+CMD: wsl -d Ubuntu -u root -- echo ok
+[stdout]
+Catastrophic failure 
+Error code: Wsl/Service/E_UNEXPECTED
+EXIT: -1
+
+--- 2026-10-18T01:49:29.056+08:00 | debug: virtualization facts
+CMD: inline capture (CIM)
+[stdout]
+HypervisorPresent=True
+Name                                    : Intel(R) Core(TM) i7-6600U CPU @ 2.60GHz
+VirtualizationFirmwareEnabled           : False
+SecondLevelAddressTranslationExtensions : False
+eventlog: There is not an event log on the localhost computer that matches "Microsoft-Windows-Subsystem-Linux".
+EXIT-INLINE: 0
+
+--- 2026-10-18T01:50:20.037+08:00 | debug: machine identity + virtualization
+CMD: inline capture (CIM + systeminfo)
+[stdout]
+Manufacturer=LENOVO | Model=20JTS0HT00 | HypervisorPresent=True
+CPU=Intel(R) Core(TM) i7-6600U CPU @ 2.60GHz
+VMMonitorModeExtensions=False | VirtualizationFirmwareEnabled=False | SLAT=False
+systeminfo (filtered):
+Virtual Memory: Max Size:  29.567 MB
+Virtual Memory: Available: 18.143 MB
+Virtual Memory: In Use:    11.424 MB
+                           [05]: Hyper-V Virtual Ethernet Adapter
+                           [06]: Hyper-V Virtual Ethernet Adapter
+Hyper-V Requirements:      A hypervisor has been detected. Features required for Hyper-V will not be displayed.
+EXIT-INLINE: 0
+
+--- 2026-10-18T01:51:31.414+08:00 | debug: wsl status full
+CMD: wsl --status
+[stdout]
+Default Distribution: Ubuntu
+Default Version: 2
+EXIT: 0
+
+--- 2026-10-18T01:51:32.547+08:00 | debug: services + features + identity
+CMD: inline capture
+[stdout]
+Name       Status StartType
+----       ------ ---------
+hns       Running    Manual
+HvHost    Running    Manual
+vmcompute Running    Manual
+CSP: Vendor=LENOVO | Name=20JTS0HT00 | ID=PC0U37UG
+BIOS: LENOVO | N1WET68W (1.47 ) | 07/21/2022 08:00:00
+BatteryCount=1
+Name                                    InstallState
+----                                    ------------
+Microsoft-Windows-Subsystem-Linux                  1
+VirtualMachinePlatform                             1
+Microsoft-Hyper-V-All                              1
+Microsoft-Hyper-V                                  1
+Microsoft-Hyper-V-Tools-All                        1
+Microsoft-Hyper-V-Management-PowerShell            1
+Microsoft-Hyper-V-Hypervisor                       1
+Microsoft-Hyper-V-Services                         1
+Microsoft-Hyper-V-Management-Clients               1
+https://logs-hyper: Microsoft-Windows-Hyper-V-VmSwitch-Operational; Microsoft-Windows-Hyper-V-VMSP-Admin; Microsoft-Windows-Hyper-V-Guest-Drivers/Operational; Microsoft-Windows-Hyper-V-Guest-Drivers/Admin
+logs-wsl: 
+EXIT-INLINE: 0
+
+--- 2026-10-18T01:52:04.139+08:00 | wsl update
+CMD: wsl --update
+[stdout]
+Checking for updates.
+Updating Windows Subsystem for Linux to version: 3.0.3.
+EXIT: 0
+
+--- 2026-10-18T01:53:42.197+08:00 | post-update: wsl version
+CMD: wsl --version
+[stdout]
+WSL version: 3.0.3.0
+Kernel version: 6.18.54.1-1
+WSLg version: 1.0.79
+MSRDC version: 1.2.7391
+Direct3D version: 1.611.1-81528511
+DXCore version: 10.0.26100.1-240331-1435.ge-release
+Windows version: 10.0.19045.6466
+EXIT: 0
+
+--- 2026-10-18T01:53:43.236+08:00 | post-update: shutdown
+CMD: wsl --shutdown
+EXIT: 0
+
+--- 2026-10-18T01:53:44.268+08:00 | post-update: boot retry
+CMD: wsl -d Ubuntu -u root -- echo ok
+[stdout]
+ok
+EXIT: 0
+
+--- 2026-10-18T01:54:58.787+08:00 | distro: os-release
+CMD: wsl -d Ubuntu -u root -- cat /etc/os-release
+[stdout]
+PRETTY_NAME="Ubuntu 26.04.1 LTS"
+NAME="Ubuntu"
+VERSION_ID="26.04"
+VERSION="26.04.1 LTS (Resolute Raccoon)"
+VERSION_CODENAME=resolute
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=resolute
+LOGO=ubuntu-logo
+EXIT: 0
+
+--- 2026-10-18T01:55:04.978+08:00 | distro: kernel
+CMD: wsl -d Ubuntu -u root -- cat /proc/version
+[stdout]
+Linux version 6.18.54.1-microsoft-standard-WSL2 (root@9b80f41eb17c) (gcc (GCC) 13.2.0, GNU ld (GNU Binutils) 2.41) #1 SMP PREEMPT_DYNAMIC Tue Oct  6 19:13:07 UTC 2026
+EXIT: 0
+
+--- 2026-10-18T01:55:06.010+08:00 | distro: arch
+CMD: wsl -d Ubuntu -u root -- uname -m
+[stdout]
+x86_64
+EXIT: 0
+
+--- 2026-10-18T01:55:07.050+08:00 | distro: cgroup fs type
+CMD: wsl -d Ubuntu -u root -- stat -fc %T /sys/fs/cgroup
+[stdout]
+cgroup2fs
+EXIT: 0
+
+--- 2026-10-18T01:55:19.441+08:00 | apt: update
+CMD: wsl -d Ubuntu -u root -- apt-get update
+[stdout]
+Hit:1 http://archive.ubuntu.com/ubuntu resolute InRelease
+Get:2 http://archive.ubuntu.com/ubuntu resolute-updates InRelease [137 kB]
+Get:3 http://security.ubuntu.com/ubuntu resolute-security InRelease [137 kB]
+Get:4 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages [602 kB]
+Get:5 http://archive.ubuntu.com/ubuntu resolute-backports InRelease [137 kB]
+Get:6 http://archive.ubuntu.com/ubuntu resolute/universe amd64 Packages [16.0 MB]
+Get:7 http://security.ubuntu.com/ubuntu resolute-security/main Translation-en [139 kB]
+Get:8 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Components [46.7 kB]
+Get:9 http://security.ubuntu.com/ubuntu resolute-security/universe amd64 Packages [202 kB]
+Get:10 http://security.ubuntu.com/ubuntu resolute-security/universe Translation-en [65.9 kB]
+Get:11 http://security.ubuntu.com/ubuntu resolute-security/universe amd64 Components [55.5 kB]
+Get:12 http://security.ubuntu.com/ubuntu resolute-security/universe amd64 c-n-f Metadata [3552 B]
+Get:13 http://security.ubuntu.com/ubuntu resolute-security/restricted amd64 Packages [495 kB]
+Get:14 http://security.ubuntu.com/ubuntu resolute-security/restricted Translation-en [99.6 kB]
+Get:15 http://security.ubuntu.com/ubuntu resolute-security/multiverse amd64 Packages [20.0 kB]
+Get:16 http://security.ubuntu.com/ubuntu resolute-security/multiverse Translation-en [3728 B]
+Get:17 http://security.ubuntu.com/ubuntu resolute-security/multiverse amd64 Components [212 B]
+Get:18 http://security.ubuntu.com/ubuntu resolute-security/multiverse amd64 c-n-f Metadata [120 B]
+Get:19 http://archive.ubuntu.com/ubuntu resolute/universe Translation-en [6329 kB]
+Get:20 http://archive.ubuntu.com/ubuntu resolute/universe amd64 Components [4556 kB]
+Get:21 http://archive.ubuntu.com/ubuntu resolute/universe amd64 c-n-f Metadata [313 kB]
+Get:22 http://archive.ubuntu.com/ubuntu resolute/multiverse amd64 Packages [290 kB]
+Get:23 http://archive.ubuntu.com/ubuntu resolute/multiverse Translation-en [127 kB]
+Get:24 http://archive.ubuntu.com/ubuntu resolute/multiverse amd64 Components [50.0 kB]
+Get:25 http://archive.ubuntu.com/ubuntu resolute/multiverse amd64 c-n-f Metadata [8276 B]
+Get:26 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages [738 kB]
+Get:27 http://archive.ubuntu.com/ubuntu resolute-updates/main Translation-en [174 kB]
+Get:28 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Components [110 kB]
+Get:29 http://archive.ubuntu.com/ubuntu resolute-updates/universe amd64 Packages [329 kB]
+Get:30 http://archive.ubuntu.com/ubuntu resolute-updates/universe Translation-en [108 kB]
+Get:31 http://archive.ubuntu.com/ubuntu resolute-updates/universe amd64 Components [201 kB]
+Get:32 http://archive.ubuntu.com/ubuntu resolute-updates/universe amd64 c-n-f Metadata [4704 B]
+Get:33 http://archive.ubuntu.com/ubuntu resolute-updates/restricted amd64 Packages [508 kB]
+Get:34 http://archive.ubuntu.com/ubuntu resolute-updates/restricted Translation-en [101 kB]
+Get:35 http://archive.ubuntu.com/ubuntu resolute-updates/multiverse amd64 Packages [21.0 kB]
+Get:36 http://archive.ubuntu.com/ubuntu resolute-updates/multiverse Translation-en [4168 B]
+Get:37 http://archive.ubuntu.com/ubuntu resolute-updates/multiverse amd64 Components [216 B]
+Get:38 http://archive.ubuntu.com/ubuntu resolute-updates/multiverse amd64 c-n-f Metadata [256 B]
+Get:39 http://archive.ubuntu.com/ubuntu resolute-backports/main amd64 Components [212 B]
+Get:40 http://archive.ubuntu.com/ubuntu resolute-backports/main amd64 c-n-f Metadata [112 B]
+Get:41 http://archive.ubuntu.com/ubuntu resolute-backports/universe amd64 Packages [3136 B]
+Get:42 http://archive.ubuntu.com/ubuntu resolute-backports/universe Translation-en [7988 B]
+Get:43 http://archive.ubuntu.com/ubuntu resolute-backports/universe amd64 Components [1056 B]
+Get:44 http://archive.ubuntu.com/ubuntu resolute-backports/universe amd64 c-n-f Metadata [116 B]
+Get:45 http://archive.ubuntu.com/ubuntu resolute-backports/restricted amd64 Components [216 B]
+Get:46 http://archive.ubuntu.com/ubuntu resolute-backports/restricted amd64 c-n-f Metadata [120 B]
+Get:47 http://archive.ubuntu.com/ubuntu resolute-backports/multiverse amd64 Components [216 B]
+Get:48 http://archive.ubuntu.com/ubuntu resolute-backports/multiverse amd64 c-n-f Metadata [120 B]
+Fetched 32.1 MB in 10s (3090 kB/s)
+Reading package lists...
+EXIT: 0
+
+--- 2026-10-18T01:55:35.739+08:00 | apt: install podman git curl ca-certificates
+CMD: wsl -d Ubuntu -u root -- env DEBIAN_FRONTEND=noninteractive apt-get install -y podman git curl ca-certificates
+[stdout]
+Reading package lists...
+Building dependency tree...
+Reading state information...
+git is already the newest version (1:2.53.0-1ubuntu1).
+git set to manually installed.
+ca-certificates is already the newest version (20260601~26.04.1).
+ca-certificates set to manually installed.
+Solving dependencies...
+The following additional packages will be installed:
+  aardvark-dns buildah catatonit conmon containers-storage cpp cpp-15
+  cpp-15-x86-64-linux-gnu cpp-x86-64-linux-gnu criu crun fuse-overlayfs
+  gcc-15-base golang-github-containers-common golang-github-containers-image
+  libcompel1 libcriu2 libcurl3t64-gnutls libcurl4t64 libgpgme45 libisl23
+  libmpc3 libnet9 libnftables1 libnftnl11 libnl-3-200 libprotobuf-c1 libslirp0
+  libsubid5 libyajl2 netavark nftables passt python3-protobuf python3-pycriu
+  slirp4netns uidmap
+Suggested packages:
+  cpp-doc gcc-15-locales cpp-15-doc iptables libwasmedge0 firewalld
+  containernetworking-plugins docker-compose
+The following NEW packages will be installed:
+  aardvark-dns buildah catatonit conmon containers-storage cpp cpp-15
+  cpp-15-x86-64-linux-gnu cpp-x86-64-linux-gnu criu crun fuse-overlayfs
+  gcc-15-base golang-github-containers-common golang-github-containers-image
+  libcompel1 libcriu2 libgpgme45 libisl23 libmpc3 libnet9 libnftables1
+  libnftnl11 libnl-3-200 libprotobuf-c1 libslirp0 libsubid5 libyajl2 netavark
+  nftables passt podman python3-protobuf python3-pycriu slirp4netns uidmap
+The following packages will be upgraded:
+  curl libcurl3t64-gnutls libcurl4t64
+3 upgraded, 36 newly installed, 0 to remove and 106 not upgraded.
+Need to get 90.1 MB of archives.
+After this operation, 293 MB of additional disk space will be used.
+Get:1 http://security.ubuntu.com/ubuntu resolute-security/main amd64 curl amd64 8.18.0-1ubuntu2.8 [273 kB]
+Get:2 http://archive.ubuntu.com/ubuntu resolute/main amd64 libnftnl11 amd64 1.3.1-1 [72.3 kB]
+Get:3 http://archive.ubuntu.com/ubuntu resolute/main amd64 libnftables1 amd64 1.1.6-1 [390 kB]
+Get:4 http://security.ubuntu.com/ubuntu resolute-security/main amd64 libcurl4t64 amd64 8.18.0-1ubuntu2.8 [430 kB]
+Get:5 http://archive.ubuntu.com/ubuntu resolute/main amd64 libnl-3-200 amd64 3.12.0-2 [58.8 kB]
+Get:6 http://archive.ubuntu.com/ubuntu resolute/main amd64 nftables amd64 1.1.6-1 [76.2 kB]
+Get:7 http://archive.ubuntu.com/ubuntu resolute/universe amd64 netavark amd64 1.16.1-3.1 [4832 kB]
+Get:8 http://security.ubuntu.com/ubuntu resolute-security/main amd64 libcurl3t64-gnutls amd64 8.18.0-1ubuntu2.8 [421 kB]
+Get:9 http://archive.ubuntu.com/ubuntu resolute/universe amd64 aardvark-dns amd64 1.16.0-3 [907 kB]
+Get:10 http://archive.ubuntu.com/ubuntu resolute/universe amd64 golang-github-containers-image all 5.38.0+ds2-2 [34.7 kB]
+Get:11 http://archive.ubuntu.com/ubuntu resolute/universe amd64 golang-github-containers-common all 0.66.0+ds2-3 [46.4 kB]
+Get:12 http://archive.ubuntu.com/ubuntu resolute/main amd64 libsubid5 amd64 1:4.17.4-2ubuntu3 [28.0 kB]
+Get:13 http://archive.ubuntu.com/ubuntu resolute/main amd64 uidmap amd64 1:4.17.4-2ubuntu3 [39.0 kB]
+Get:14 http://archive.ubuntu.com/ubuntu resolute/main amd64 libgpgme45 amd64 2.0.1-2build1 [140 kB]
+Get:15 http://archive.ubuntu.com/ubuntu resolute/universe amd64 buildah amd64 1.42.1+ds1-2build1 [38.0 MB]
+Get:16 http://archive.ubuntu.com/ubuntu resolute/universe amd64 catatonit amd64 0.2.1-2build1 [319 kB]
+Get:17 http://archive.ubuntu.com/ubuntu resolute/universe amd64 conmon amd64 2.1.13+ds1-2 [36.7 kB]
+Get:18 http://archive.ubuntu.com/ubuntu resolute/universe amd64 containers-storage amd64 1.61.0+ds1-6 [2736 kB]
+Get:19 http://archive.ubuntu.com/ubuntu resolute/main amd64 gcc-15-base amd64 15.2.0-16ubuntu1 [39.0 kB]
+Get:20 http://archive.ubuntu.com/ubuntu resolute/main amd64 libisl23 amd64 0.27-1build1 [691 kB]
+Get:21 http://archive.ubuntu.com/ubuntu resolute/main amd64 libmpc3 amd64 1.3.1-3 [54.6 kB]
+Get:22 http://archive.ubuntu.com/ubuntu resolute/main amd64 cpp-15-x86-64-linux-gnu amd64 15.2.0-16ubuntu1 [12.9 MB]
+Get:23 http://archive.ubuntu.com/ubuntu resolute/main amd64 cpp-15 amd64 15.2.0-16ubuntu1 [1030 B]
+Get:24 http://archive.ubuntu.com/ubuntu resolute/main amd64 cpp-x86-64-linux-gnu amd64 4:15.2.0-5ubuntu1 [5840 B]
+Get:25 http://archive.ubuntu.com/ubuntu resolute/main amd64 cpp amd64 4:15.2.0-5ubuntu1 [22.4 kB]
+Get:26 http://archive.ubuntu.com/ubuntu resolute/main amd64 libnet9 amd64 1.3+dfsg-3 [43.8 kB]
+Get:27 http://archive.ubuntu.com/ubuntu resolute/universe amd64 libprotobuf-c1 amd64 1.5.1-1ubuntu2 [22.0 kB]
+Get:28 http://archive.ubuntu.com/ubuntu resolute/universe amd64 libcompel1 amd64 4.2-1ubuntu2 [70.5 kB]
+Get:29 http://archive.ubuntu.com/ubuntu resolute/universe amd64 criu amd64 4.2-1ubuntu2 [589 kB]
+Get:30 http://archive.ubuntu.com/ubuntu resolute/main amd64 libyajl2 amd64 2.1.0-5.1 [20.9 kB]
+Get:31 http://archive.ubuntu.com/ubuntu resolute/universe amd64 crun amd64 1.21-1ubuntu3 [455 kB]
+Get:32 http://archive.ubuntu.com/ubuntu resolute/universe amd64 fuse-overlayfs amd64 1.14-1build2 [46.6 kB]
+Get:33 http://archive.ubuntu.com/ubuntu resolute/universe amd64 libcriu2 amd64 4.2-1ubuntu2 [25.5 kB]
+Get:34 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libslirp0 amd64 4.9.1-1ubuntu1.1 [67.0 kB]
+Get:35 http://archive.ubuntu.com/ubuntu resolute/universe amd64 passt amd64 0.0~git20260120.386b5f5-1 [260 kB]
+Get:36 http://archive.ubuntu.com/ubuntu resolute/universe amd64 podman amd64 5.7.0+ds2-3build1 [25.8 MB]
+Get:37 http://archive.ubuntu.com/ubuntu resolute/universe amd64 python3-protobuf amd64 3.21.12-15ubuntu1 [107 kB]
+Get:38 http://archive.ubuntu.com/ubuntu resolute/universe amd64 python3-pycriu all 4.2-1ubuntu2 [43.0 kB]
+Get:39 http://archive.ubuntu.com/ubuntu resolute/universe amd64 slirp4netns amd64 1.3.3-1 [35.7 kB]
+Fetched 90.1 MB in 16s (5630 kB/s)
+Selecting previously unselected package libnftnl11:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 35908 files and directories currently installed.)
+Preparing to unpack .../00-libnftnl11_1.3.1-1_amd64.deb ...
+Unpacking libnftnl11:amd64 (1.3.1-1) ...
+Selecting previously unselected package libnftables1:amd64.
+Preparing to unpack .../01-libnftables1_1.1.6-1_amd64.deb ...
+Unpacking libnftables1:amd64 (1.1.6-1) ...
+Selecting previously unselected package libnl-3-200:amd64.
+Preparing to unpack .../02-libnl-3-200_3.12.0-2_amd64.deb ...
+Unpacking libnl-3-200:amd64 (3.12.0-2) ...
+Selecting previously unselected package nftables.
+Preparing to unpack .../03-nftables_1.1.6-1_amd64.deb ...
+Unpacking nftables (1.1.6-1) ...
+Selecting previously unselected package netavark.
+Preparing to unpack .../04-netavark_1.16.1-3.1_amd64.deb ...
+Unpacking netavark (1.16.1-3.1) ...
+Selecting previously unselected package aardvark-dns.
+Preparing to unpack .../05-aardvark-dns_1.16.0-3_amd64.deb ...
+Unpacking aardvark-dns (1.16.0-3) ...
+Selecting previously unselected package golang-github-containers-image.
+Preparing to unpack .../06-golang-github-containers-image_5.38.0+ds2-2_all.deb ...
+Unpacking golang-github-containers-image (5.38.0+ds2-2) ...
+Selecting previously unselected package golang-github-containers-common.
+Preparing to unpack .../07-golang-github-containers-common_0.66.0+ds2-3_all.deb ...
+Unpacking golang-github-containers-common (0.66.0+ds2-3) ...
+Selecting previously unselected package libsubid5:amd64.
+Preparing to unpack .../08-libsubid5_1%3a4.17.4-2ubuntu3_amd64.deb ...
+Unpacking libsubid5:amd64 (1:4.17.4-2ubuntu3) ...
+Selecting previously unselected package uidmap.
+Preparing to unpack .../09-uidmap_1%3a4.17.4-2ubuntu3_amd64.deb ...
+Unpacking uidmap (1:4.17.4-2ubuntu3) ...
+Selecting previously unselected package libgpgme45:amd64.
+Preparing to unpack .../10-libgpgme45_2.0.1-2build1_amd64.deb ...
+Unpacking libgpgme45:amd64 (2.0.1-2build1) ...
+Selecting previously unselected package buildah.
+Preparing to unpack .../11-buildah_1.42.1+ds1-2build1_amd64.deb ...
+Unpacking buildah (1.42.1+ds1-2build1) ...
+Selecting previously unselected package catatonit.
+Preparing to unpack .../12-catatonit_0.2.1-2build1_amd64.deb ...
+Unpacking catatonit (0.2.1-2build1) ...
+Selecting previously unselected package conmon.
+Preparing to unpack .../13-conmon_2.1.13+ds1-2_amd64.deb ...
+Unpacking conmon (2.1.13+ds1-2) ...
+Selecting previously unselected package containers-storage.
+Preparing to unpack .../14-containers-storage_1.61.0+ds1-6_amd64.deb ...
+Unpacking containers-storage (1.61.0+ds1-6) ...
+Selecting previously unselected package gcc-15-base:amd64.
+Preparing to unpack .../15-gcc-15-base_15.2.0-16ubuntu1_amd64.deb ...
+Unpacking gcc-15-base:amd64 (15.2.0-16ubuntu1) ...
+Selecting previously unselected package libisl23:amd64.
+Preparing to unpack .../16-libisl23_0.27-1build1_amd64.deb ...
+Unpacking libisl23:amd64 (0.27-1build1) ...
+Selecting previously unselected package libmpc3:amd64.
+Preparing to unpack .../17-libmpc3_1.3.1-3_amd64.deb ...
+Unpacking libmpc3:amd64 (1.3.1-3) ...
+Selecting previously unselected package cpp-15-x86-64-linux-gnu.
+Preparing to unpack .../18-cpp-15-x86-64-linux-gnu_15.2.0-16ubuntu1_amd64.deb ...
+Unpacking cpp-15-x86-64-linux-gnu (15.2.0-16ubuntu1) ...
+Selecting previously unselected package cpp-15.
+Preparing to unpack .../19-cpp-15_15.2.0-16ubuntu1_amd64.deb ...
+Unpacking cpp-15 (15.2.0-16ubuntu1) ...
+Selecting previously unselected package cpp-x86-64-linux-gnu.
+Preparing to unpack .../20-cpp-x86-64-linux-gnu_4%3a15.2.0-5ubuntu1_amd64.deb ...
+Unpacking cpp-x86-64-linux-gnu (4:15.2.0-5ubuntu1) ...
+Selecting previously unselected package cpp.
+Preparing to unpack .../21-cpp_4%3a15.2.0-5ubuntu1_amd64.deb ...
+Unpacking cpp (4:15.2.0-5ubuntu1) ...
+Selecting previously unselected package libnet9:amd64.
+Preparing to unpack .../22-libnet9_1.3+dfsg-3_amd64.deb ...
+Unpacking libnet9:amd64 (1.3+dfsg-3) ...
+Selecting previously unselected package libprotobuf-c1:amd64.
+Preparing to unpack .../23-libprotobuf-c1_1.5.1-1ubuntu2_amd64.deb ...
+Unpacking libprotobuf-c1:amd64 (1.5.1-1ubuntu2) ...
+Selecting previously unselected package libcompel1:amd64.
+Preparing to unpack .../24-libcompel1_4.2-1ubuntu2_amd64.deb ...
+Unpacking libcompel1:amd64 (4.2-1ubuntu2) ...
+Selecting previously unselected package criu.
+Preparing to unpack .../25-criu_4.2-1ubuntu2_amd64.deb ...
+Unpacking criu (4.2-1ubuntu2) ...
+Selecting previously unselected package libyajl2:amd64.
+Preparing to unpack .../26-libyajl2_2.1.0-5.1_amd64.deb ...
+Unpacking libyajl2:amd64 (2.1.0-5.1) ...
+Selecting previously unselected package crun.
+Preparing to unpack .../27-crun_1.21-1ubuntu3_amd64.deb ...
+Unpacking crun (1.21-1ubuntu3) ...
+Preparing to unpack .../28-curl_8.18.0-1ubuntu2.8_amd64.deb ...
+Unpacking curl (8.18.0-1ubuntu2.8) over (8.18.0-1ubuntu2.4) ...
+Preparing to unpack .../29-libcurl4t64_8.18.0-1ubuntu2.8_amd64.deb ...
+Unpacking libcurl4t64:amd64 (8.18.0-1ubuntu2.8) over (8.18.0-1ubuntu2.4) ...
+Selecting previously unselected package fuse-overlayfs.
+Preparing to unpack .../30-fuse-overlayfs_1.14-1build2_amd64.deb ...
+Unpacking fuse-overlayfs (1.14-1build2) ...
+Selecting previously unselected package libcriu2:amd64.
+Preparing to unpack .../31-libcriu2_4.2-1ubuntu2_amd64.deb ...
+Unpacking libcriu2:amd64 (4.2-1ubuntu2) ...
+Preparing to unpack .../32-libcurl3t64-gnutls_8.18.0-1ubuntu2.8_amd64.deb ...
+Unpacking libcurl3t64-gnutls:amd64 (8.18.0-1ubuntu2.8) over (8.18.0-1ubuntu2.4) ...
+Selecting previously unselected package libslirp0:amd64.
+Preparing to unpack .../33-libslirp0_4.9.1-1ubuntu1.1_amd64.deb ...
+Unpacking libslirp0:amd64 (4.9.1-1ubuntu1.1) ...
+Selecting previously unselected package passt.
+Preparing to unpack .../34-passt_0.0~git20260120.386b5f5-1_amd64.deb ...
+Unpacking passt (0.0~git20260120.386b5f5-1) ...
+Selecting previously unselected package podman.
+Preparing to unpack .../35-podman_5.7.0+ds2-3build1_amd64.deb ...
+Unpacking podman (5.7.0+ds2-3build1) ...
+Selecting previously unselected package python3-protobuf.
+Preparing to unpack .../36-python3-protobuf_3.21.12-15ubuntu1_amd64.deb ...
+Unpacking python3-protobuf (3.21.12-15ubuntu1) ...
+Selecting previously unselected package python3-pycriu.
+Preparing to unpack .../37-python3-pycriu_4.2-1ubuntu2_all.deb ...
+Unpacking python3-pycriu (4.2-1ubuntu2) ...
+Selecting previously unselected package slirp4netns.
+Preparing to unpack .../38-slirp4netns_1.3.3-1_amd64.deb ...
+Unpacking slirp4netns (1.3.3-1) ...
+Setting up libcurl4t64:amd64 (8.18.0-1ubuntu2.8) ...
+Setting up libyajl2:amd64 (2.1.0-5.1) ...
+Setting up libcurl3t64-gnutls:amd64 (8.18.0-1ubuntu2.8) ...
+Setting up libnftnl11:amd64 (1.3.1-1) ...
+Setting up libprotobuf-c1:amd64 (1.5.1-1ubuntu2) ...
+Setting up libsubid5:amd64 (1:4.17.4-2ubuntu3) ...
+Setting up libcompel1:amd64 (4.2-1ubuntu2) ...
+Setting up golang-github-containers-image (5.38.0+ds2-2) ...
+Setting up conmon (2.1.13+ds1-2) ...
+Setting up catatonit (0.2.1-2build1) ...
+Setting up netavark (1.16.1-3.1) ...
+Created symlink '/etc/systemd/system/default.target.wants/netavark-dhcp-proxy.service' → '/usr/lib/systemd/system/netavark-dhcp-proxy.service'.
+Created symlink '/etc/systemd/system/sockets.target.wants/netavark-dhcp-proxy.socket' → '/usr/lib/systemd/system/netavark-dhcp-proxy.socket'.
+Created symlink '/etc/systemd/system/firewalld.service.wants/netavark-firewalld-reload.service' → '/usr/lib/systemd/system/netavark-firewalld-reload.service'.
+Unit /usr/lib/systemd/system/netavark-firewalld-reload.service is added as a dependency to a non-existent unit firewalld.service.
+Setting up libmpc3:amd64 (1.3.1-3) ...
+Setting up aardvark-dns (1.16.0-3) ...
+Setting up libslirp0:amd64 (4.9.1-1ubuntu1.1) ...
+Setting up passt (0.0~git20260120.386b5f5-1) ...
+Setting up libnl-3-200:amd64 (3.12.0-2) ...
+Setting up curl (8.18.0-1ubuntu2.8) ...
+Setting up fuse-overlayfs (1.14-1build2) ...
+Setting up golang-github-containers-common (0.66.0+ds2-3) ...
+Setting up libnet9:amd64 (1.3+dfsg-3) ...
+Setting up python3-protobuf (3.21.12-15ubuntu1) ...
+Setting up libisl23:amd64 (0.27-1build1) ...
+Setting up gcc-15-base:amd64 (15.2.0-16ubuntu1) ...
+Setting up libgpgme45:amd64 (2.0.1-2build1) ...
+Setting up libnftables1:amd64 (1.1.6-1) ...
+Setting up nftables (1.1.6-1) ...
+Setting up slirp4netns (1.3.3-1) ...
+Setting up crun (1.21-1ubuntu3) ...
+Setting up uidmap (1:4.17.4-2ubuntu3) ...
+Setting up containers-storage (1.61.0+ds1-6) ...
+Setting up podman (5.7.0+ds2-3build1) ...
+Setting up cpp-15-x86-64-linux-gnu (15.2.0-16ubuntu1) ...
+Setting up cpp-15 (15.2.0-16ubuntu1) ...
+Setting up criu (4.2-1ubuntu2) ...
+Setting up buildah (1.42.1+ds1-2build1) ...
+Setting up cpp-x86-64-linux-gnu (4:15.2.0-5ubuntu1) ...
+Setting up python3-pycriu (4.2-1ubuntu2) ...
+Setting up libcriu2:amd64 (4.2-1ubuntu2) ...
+Setting up cpp (4:15.2.0-5ubuntu1) ...
+Processing triggers for man-db (2.13.1-1build1) ...
+Processing triggers for libc-bin (2.43-2ubuntu2.3) ...
+EXIT: 0
+
+--- 2026-10-18T01:56:05.987+08:00 | versions: podman
+CMD: wsl -d Ubuntu -u root -- podman --version
+[stdout]
+podman version 5.7.0
+EXIT: 0
+
+--- 2026-10-18T01:56:07.035+08:00 | versions: git
+CMD: wsl -d Ubuntu -u root -- git --version
+[stdout]
+git version 2.53.0
+EXIT: 0
+
+--- 2026-10-18T01:57:10.489+08:00 | copy: mkdir /root/l1
+CMD: wsl -d Ubuntu -u root -- mkdir -p /root/l1
+EXIT: 0
+
+--- 2026-10-18T01:57:16.684+08:00 | copy: l1_fetch.sh to WSL
+CMD: wsl -d Ubuntu -u root -- cp "/mnt/d/Opencode AI Agent/audit_p1/l1_fetch.sh" /root/l1/l1_fetch.sh
+EXIT: 0
+
+--- 2026-10-18T01:57:17.716+08:00 | copy: l1_run.sh to WSL
+CMD: wsl -d Ubuntu -u root -- cp "/mnt/d/Opencode AI Agent/audit_p1/l1_run.sh" /root/l1/l1_run.sh
+EXIT: 0
+
+--- 2026-10-18T01:57:18.745+08:00 | copy: sha256 of WSL copies
+CMD: wsl -d Ubuntu -u root -- sha256sum /root/l1/l1_fetch.sh /root/l1/l1_run.sh
+[stdout]
+caa3009837ccc30df568564f5bacad3931514db1a4e59afcc650c270c586b0ca  /root/l1/l1_fetch.sh
+9f42336d651d7ef34d754604ebc2632f1a168beb7c564c3aa307508fbe1415d2  /root/l1/l1_run.sh
+EXIT: 0
+repo l1_fetch.sh sha256=caa3009837ccc30df568564f5bacad3931514db1a4e59afcc650c270c586b0ca
+repo l1_run.sh sha256=9f42336d651d7ef34d754604ebc2632f1a168beb7c564c3aa307508fbe1415d2
