@@ -910,7 +910,9 @@ The public CI runs that validated the H1 seal (jobs `python-tests` and
 documentation seal commit `251ada6` -> run
 [`38972862055`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/38972862055);
 dashboard v4 commit `84248da` -> run
-[`38922309908`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/38922309908).
+[`38922309908`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/38922309908);
+dashboard v5 commit `2d7b72c` -> run
+[`38992695849`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/38992695849).
 Version of record: [10.5281/zenodo.23410894](https://doi.org/10.5281/zenodo.23410894).
 
 ---
