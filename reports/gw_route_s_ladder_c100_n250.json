@@ -1,0 +1,20 @@
+{
+ "c": 100,
+ "runs": [
+  {
+   "c": 100,
+   "N": 250,
+   "dim": 501,
+   "prec_bits": 6000,
+   "n_pos": 446,
+   "n_neg": 0,
+   "undetermined_pivot": 446,
+   "pivots_recorded": 446,
+   "entries_finite": true,
+   "verdict": "UNDETERMINED at pivot 446",
+   "build_s": 1612.96,
+   "ldlt_s": 177.07,
+   "total_s": 1790.13
+  }
+ ]
+}

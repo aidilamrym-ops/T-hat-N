@@ -780,7 +780,11 @@ ladder's big rungs cost eig 1984.84 s (dim 257) and 3110.88 s (dim 321) at
    robustness array (five seeds sealed 2026-10-16, extended to ten seeds
    2026-10-17 - Section 6.5 item 5); the remaining lever is a wider N, not
    more samples at fixed N (the ceiling ~100-200 pairs per bin was measured
-   three times);
+   three times); the wider-N lever was then executed as the pre-registered
+   fourth point (dim 501, N=250, 2026-10-17 - report
+   `reports/GW_RESOLUTION4_DIM501_2026-10-17.md`): the 6000-bit Route S
+   ladder printed `UNDETERMINED at pivot 446` - a non-PD outcome, so the
+   statistics of that point end there; no S1/S2 numbers exist for dim 501;
 3. only then may the damping be discussed as a law (the single-slice
    refutation stays single-slice until more slices exist);
 4. the wider queue (four bridges, RH/Hodge status) stays in

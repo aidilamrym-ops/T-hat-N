@@ -1,0 +1,5 @@
+﻿[2026-10-17T17:24:00] orchestrator start; sequential stages L -> C -> M (one heavy stage at a time); prereg commit ea2ed77 pushed; env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONIOENCODING=utf-8; GW_DIR default C:/Users/usER/oracle-toe/GUINAND_WEIL
+[2026-10-17T17:24:00] HEAD check OK: ea2ed77fe8886c56cebd9c4c667a8df09d422ae0 (res4-dim501: pre-register the fourth resolution point (dim 501) + series runner)
+[2026-10-17T17:24:00] stage L launched: python msaf\gw_route_s_ladder.py --c 100 --ladder 250 --prec 6000 --out reports\gw_route_s_ladder_c100_n250.json; stdout->reports\gw_route_s_ladder_c100_n250.log; stderr->reports\gw_route_s_ladder_c100_n250.err.log
+[2026-10-17T17:53:51] stage L finished exit= elapsed=1791s
+[2026-10-17T17:53:51] ABORT: stage L nonzero exit -> infrastructure failure per prereg section 4; stopping for review (identical rerun allowed only after the issue is fixed and logged).

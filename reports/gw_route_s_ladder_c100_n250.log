@@ -1,0 +1,16 @@
+Route S ladder  c=100  prec=6000 bits
+dim = 2N+1; inertia is SIGN only, not magnitude
+N    dim   prec     n_pos  n_neg  finite    build_s  ldlt_s   verdict
+--------------------------------------------------------------------------------------------
+  [ldlt] pivot 50/501  elapsed=6s  eta=51s
+  [ldlt] pivot 100/501  elapsed=21s  eta=84s
+  [ldlt] pivot 150/501  elapsed=45s  eta=106s
+  [ldlt] pivot 200/501  elapsed=74s  eta=111s
+  [ldlt] pivot 250/501  elapsed=101s  eta=102s
+  [ldlt] pivot 300/501  elapsed=126s  eta=85s
+  [ldlt] pivot 350/501  elapsed=149s  eta=64s
+  [ldlt] pivot 400/501  elapsed=166s  eta=42s
+250  501   6000     446    0      True      1612.96  177.07   UNDETERMINED at pivot 446
+--------------------------------------------------------------------------------------------
+1 run(s); 0 certified, 1 not certified
+written: D:\Opencode AI Agent\reports\gw_route_s_ladder_c100_n250.json

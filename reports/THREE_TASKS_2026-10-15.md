@@ -448,3 +448,21 @@ chi^2 mentah lintas-N tetap bukan apel-samel (jumlah pasangan ~N^2/2); statistik
 Catatan provenance: `capture_spectrum_201.py` diparameterkan (--c/--n/--prec; default mereproduksi run pertama dim 201) sebelum run ketiga; log mentah: `reports/mont_run_100_150.txt`; capture: `reports/gw_capture_100_150.log`; ladder seri: `reports/gw_route_s_ladder_c100.json`.
 
 <!-- END GW-DELTA-3 -->
+
+<!-- BEGIN GW-RES4-OUTCOME (hand-written outcome notice appended 2026-10-17; NOT a generated measurement block) -->
+
+## 6. Titik keempat (dim 501) — OUTCOME non-PD: statistik titik berakhir di ladder
+
+*Pra-registrasi `reports/RESOLUTION4_DIM501_PREREG_2026-10-17.md` (commit `ea2ed77`, dipush sebelum launch). Ladder Route S 6000 bit, c=100, N=250 → dim 501. Angka mesin verbatim dari `reports/gw_route_s_ladder_c100_n250.log`:*
+
+| N | dim | prec | n_pos | n_neg | finite | build_s | ldlt_s | verdict |
+|---|---|---|---|---|---|---|---|---|
+| 250 | 501 | 6000 | 446 | 0 | True | 1612.96 | 177.07 | UNDETERMINED at pivot 446 |
+
+`1 run(s); 0 certified, 1 not certified` — bukan CERTIFIED POSITIVE DEFINITE; sesuai pra-registrasi §4 ini OUTCOME (bukan infrastruktur) dan statistik titik keempat BERAKHIR: capture penuh + pengukuran Montgomery untuk dim 501 tidak dijalankan; tidak ada angka S1/S2 baru dan **tidak ada blok GW-DELTA keempat**. Laporan bertanggal (termasuk insiden wrapper `ExitCode` kosong yang tidak memengaruhi hasil): `reports/GW_RESOLUTION4_DIM501_2026-10-17.md`.
+
+Batas: sertifikat tanda LDL^T interval pada satu matriks finit (6000 bit) — bukan pernyataan tentang spektrum sebenarnya, bukan teorema Montgomery, bukan bukti RH, bukan tren.
+
+Blok ini tidak mengubah byte apa pun dari GW-DELTA dan GW-DELTA-3 di atas.
+
+<!-- END GW-RES4-OUTCOME -->
