@@ -34,6 +34,7 @@ NEEDLES = (
     "NO DISCRIMINATION AT N=401",
     "NOT STABLE",
     "dim 321 not yet run",
+    "float64 underflow",
     V4_SHA,
     V3_SHA,
 )
@@ -62,6 +63,11 @@ def test_v5_render_deterministic_and_clean():
     # sealed key numbers must appear (machine-extracted at build time)
     for needle in NEEDLES:
         assert needle in h1, needle
+    # the pre-correction radius wording must not survive anywhere
+    # (correction measured 2026-10-17: registry 0.0 is a float64
+    # underflow, not an exact point)
+    assert "radius exactly 0" not in h1
+    assert "enclosure radius = 0.0" not in h1
     assert h1.count('class="eq"') == 9
     assert h1.count("<svg") == 5
     assert h1.count('class="panel"') == 9

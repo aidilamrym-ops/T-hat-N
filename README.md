@@ -550,7 +550,16 @@ verdict.
 
 Every enclosure excludes zero (`all_exclude_zero = true`). The float
 registry of this artifact records radius 0.0 and imaginary leak 0.0; the
-certified content is the exclusion of zero, not the float field. A 9000-bit
+certified content is the exclusion of zero, not the float field. Correction
+(measured 2026-10-17): both 0.0 entries are float64 registry artifacts —
+the true enclosure radii and the imaginary leaks are nonzero but below the
+float64 floor (re-measured at dims 17/33: radii 4.73e-1792 / 5.37e-1788,
+`is_exact() = False`; max leak 1.97e-1792 / 7.06e-1789, zero exact
+imaginary parts), and the ball matrix is exactly transpose-symmetric
+(exact-dyadic mid/rad test: 0/289 and 0/1089 differing entries), so
+realness is structural. See
+[`reports/GW_RADIUS_REGISTRY_CORRECTION_2026-10-17.md`](reports/GW_RADIUS_REGISTRY_CORRECTION_2026-10-17.md).
+A 9000-bit
 repeat returns bit-identical midpoints at 2.6x the cost: more precision buys
 nothing at this slice. Slopes of ln lambda_min per dimension: -1.72, -1.05,
 -0.34 - the decay DAMPENS, so the assumed constant-B law
@@ -883,7 +892,7 @@ Cell census: 9 clean + 9 enumerated edge-cluster + 0 failing. Enumeration of the
 | `reports/gw_engine_b_verify.log` | 12186 | `27743364ce1cabfe217b1a7a489524e5a463f8a3c1bdbbb4cb8ae71d8be0330d` |
 | `reports/gw_diagnostic_v3.html` | 23493 | `89c7d5f948626bd51de06f37534bdc4941d3793353dcb80b8557e10e2bed7322` |
 | `reports/gw_diagnostic_v4.html` | 50465 | `c9ec26217f516a1a73527bc098addbc11a4935f6965d905d38a7dbeb7d95a8b6` |
-| `reports/gw_diagnostic_v5.html` | 80082 | `188ded56a24bb455a79e6134021de090b846af75daa7e06a00d1feb1adfc060c` |
+| `reports/gw_diagnostic_v5.html` | 80371 | `0e99571b887f17b95180edc478af7bf887cce861edfbc9fd2ac3b1a2798d4259` |
 | `msaf/gw_engine_b_verify.py` | 46717 | `485ab6525531aa8ef9b5e499736331b600fdb205bb2a9b93cfa438ffa261fcea` |
 
 **Engine-B run manifest.** mode `full`; 20000 samples per dim; seed 20260927; mpmath dps 50; generated 2026-10-17T00:51:30; elapsed 9062.4 s; repository head `451eec7`; interval instrument sha256 before = after = `072910f232b15768...` (first 16 hex; full hash in the run manifest); python 3.14.4, numpy 2.5.2, scipy 1.18.0, mpmath 1.3.0.

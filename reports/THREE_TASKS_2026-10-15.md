@@ -220,6 +220,19 @@ Radius **tepat nol**: setiap eigenvalue terisolasi titik pada presisi ini,
 dan tidak satu pun enclosure-nya memuat nol. Bocoran imajiner **tepat
 nol**, jadi "semua real" diukur, bukan diasumsikan.
 
+**Koreksi terukur (2026-10-17):** dua klaim "tepat nol" di atas keliru
+sebagai pernyataan matematis. Field JSON `lambda_min_rad` dan
+`imag_leak_upper` memang mencatat 0,0, tetapi keduanya **artefak
+underflow float64** (radius/leak sejati ~1e-1790, jauh di bawah lantai
+subnormal ~4,9e-324). Terukur ulang (c=13, 6000 bit; dim 17/33): radius
+enclosure sejati 4,73e-1792 / 5,37e-1788 (`is_exact() = False`), leak
+imajiner maksimum 1,97e-1792 / 7,06e-1789 (0/17 dan 0/33 bagian imajiner
+eksak nol). Yang tetap benar: tidak satu pun enclosure memuat nol, dan
+matriks bola **simetris eksak** (mid-diff 0/289, rad-diff 0/289 pada dim
+17) — realness struktural, bukan hasil ukur "leak nol". Bukti + detail:
+`reports/gw_radius_diag_2026-10-17.log`,
+`reports/GW_RADIUS_REGISTRY_CORRECTION_2026-10-17.md`.
+
 #### Temuan: B dari model A·e^(-B·dim) TIDAK konstan
 
 Lereng `ln(lambda_min)` per satuan dimensi:
@@ -264,7 +277,7 @@ antar-c bukan apel-samel, jadi tidak ada hukum universal yang diklaim di sini.
 | 6000 | 8.568627e-35 | 2.258931e-49 | 30,06 |
 | 9000 | 8.568627e-35 | 2.258931e-49 | 79,05 |
 
-Nilai **identik bit-dengan-bit**, radius tetap 0, biaya 2,6x. Jadi pada
+Nilai **identik bit-dengan-bit**, radius registry tetap 0,0 (artefak float64 — koreksi 2026-10-17), biaya 2,6x. Jadi pada
 dimensi ini 6000 bit sudah cukup untuk isolasi eigenvalue, dan tambahan
 presisi yang lebih tinggi tidak menambah informasi apa pun. Ini adalah
 koreksi atas asumsi bahwa "resolusi lebih tinggi" otomatis berarti

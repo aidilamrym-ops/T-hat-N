@@ -548,10 +548,10 @@ def build_h1_panel(h1: dict, lad: dict) -> str:
         'not evidence for RH.</p>'
         + '<p class="note">Open item recorded with the panel-1 caption: '
         'the dim-257 rung was measured 2026-10-15 (lambda_min = '
-        + lad["lam_s"] + ', radius exactly 0; ln-slope '
-        + lad["slope_s"] + ' over 129' + ARR + '257 \u2014 plateau '
-        'candidate). dim 321 remains not run (deliberately deferred).'
-        '</p>')
+        + lad["lam_s"] + '; registry radius 0.0 = float64 underflow, '
+        'not an exact point; ln-slope ' + lad["slope_s"] + ' over 129'
+        + ARR + '257 \u2014 plateau candidate). dim 321 remains not run '
+        '(deliberately deferred).</p>')
     return body
 
 
@@ -735,9 +735,11 @@ def render(ctx4: dict, h1: dict, eb: dict, lad: dict) -> tuple:
         base, "dim 257/321 not yet measured.",
         "dim 321 not yet run (deliberately deferred; see HANDOFF); "
         "dim 257 was measured on 2026-10-15: lambda_min = "
-        + lad["lam_s"] + " with radius exactly 0 (ln-slope "
-        + lad["slope_s"] + " over 129\u2192257 \u2014 plateau candidate; "
-        "stored in reports/lambda_min_eig_ladder_big.json).",
+        + lad["lam_s"] + " with every enclosure excluding zero; the "
+        "registry radius 0.0 is a float64 underflow, not an exact point "
+        "(ln-slope " + lad["slope_s"] + " over 129\u2192257 \u2014 "
+        "plateau candidate; stored in "
+        "reports/lambda_min_eig_ladder_big.json).",
         "panel1 caption", applied)
 
     # 6. heatmap label + note
@@ -795,6 +797,19 @@ def render(ctx4: dict, h1: dict, eb: dict, lad: dict) -> tuple:
         base, '<code>python msaf/gw_dashboard_v4.py --write</code>',
         '<code>python msaf/gw_dashboard_v5.py --write</code>',
         "regenerate hint", applied)
+
+    # 7b. radius wording in the four imported chart tooltips (2026-10-17
+    #     float64 registry correction: the field records 0.0, the true
+    #     radius is nonzero but below the float64 floor)
+    tip_old = " (enclosure radius = 0.0)</title>"
+    tip_new = (" (registry radius = 0.0 \u2014 float64 underflow, "
+               "not an exact point)</title>")
+    n_tip = base.count(tip_old)
+    if n_tip != 4:
+        raise SystemExit("v5 tooltip radius anchors: expected 4, found %d"
+                         % n_tip)
+    base = base.replace(tip_old, tip_new)
+    applied.append("tooltip radius wording (4x)")
 
     # 8. new panels + footer
     footer = ('<footer>Rendered by msaf/gw_dashboard_v5.py \u2014 '
