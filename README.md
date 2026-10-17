@@ -710,6 +710,13 @@ New and sealed in this repository (each item replayable with 6.6):
    -0.34).
 4. The two-sided rails: verdicts move only by pre-registered rules; falsified
    expectations and retracted labels stay visible in the record.
+5. The C4 robustness array extended from 5 to 10 seeds (frozen instrument
+   and spectrum, 20000 surrogates per seed, pre-registered before the first
+   new draw): pooled 11458/200000 = 5.72900e-02 (CP95 [5.62754e-02,
+   5.83174e-02]); homogeneity chi^2 = 131.2879 (df 9), p = 6.44376e-24 ->
+   NOT STABLE (dispersion-dominated) persists at ten seeds; the number of
+   record stays the canonical 1262/20000 = 6.31000e-02. Dated report:
+   `reports/C4_SEEDS10_RESULTS_2026-10-17.md`.
 
 NOT claimed (the script's own scope limit, repeated here): not Montgomery's
 theorem, not RH evidence, not Weil positivity, not prime counting, not
@@ -747,6 +754,7 @@ python msaf/gw_dashboard_v5.py --write
 
 # H1 floor amendment + independent re-verification (Section 7)
 python msaf/gw_h1_extract.py               # refined grid + C4 array (parses the run logs)
+python msaf/gw_h1_c4_seeds10.py --write    # C4 robustness array extension (S5 -> S10)
 python msaf/gw_engine_b_verify.py --full   # independent engine-B run (writes JSON + log)
 python msaf/gw_readme.py --write           # README Section 7 block + diagrams
 ```
@@ -769,8 +777,9 @@ ladder's big rungs cost eig 1984.84 s (dim 257) and 3110.88 s (dim 321) at
 2. a fourth resolution series: the statistical-power lever was executed as
    the H1 floor-amendment (2026-10-17, Section 7) - the floor moved to
    20000 surrogates and the single off-floor cell was re-measured with a
-   five-seed robustness array; the remaining lever is a wider N, not more
-   samples at fixed N (the ceiling ~100-200 pairs per bin was measured
+   robustness array (five seeds sealed 2026-10-16, extended to ten seeds
+   2026-10-17 - Section 6.5 item 5); the remaining lever is a wider N, not
+   more samples at fixed N (the ceiling ~100-200 pairs per bin was measured
    three times);
 3. only then may the damping be discussed as a law (the single-slice
    refutation stays single-slice until more slices exist);

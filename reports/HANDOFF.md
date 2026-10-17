@@ -9,6 +9,8 @@ kampanye + rumus instrumen lengkap). **Konsolidasi 2026-10-16:** manuskrip
 `exports/research_paper.tex` (Main Spectral Results + register cacat,
 transkripsi artefak tersegel saja) ditambahkan; dashboard v3 diuji ulang
 byte-stabil; delivery akhir ditandai tag `v1.40.0-alpha-final-certified-delivery`. **H0 lockdown (2026-10-16):** `docs/ZENODO_ACTIVATE.md` (panduan aktivasi webhook Zenodo) + template release + pra-registrasi amandemen lantai `reports/AMENDMENT_FLOOR_SPEC.md` (DIBEKUKAN, sha256 di §1) disegel; TIDAK ada komputasi baru dijalankan. **Deposit + release (2026-10-16):** delivery T-hat-N diamankan sebagai VERSI BARU record Zenodo via depositor API — DOI versi `10.5281/zenodo.23410894` (konsep `10.5281/zenodo.23338271`; arsip tarball commit `a37b50b`, sha256 `44bdfb87...`); release GitHub `v1.40.0-alpha-final-certified-delivery` diterbitkan via `gh`; skrip depositor diperluas (`--date`/`--version`, commit `3305221`). **H1 amandemen lantai (2026-10-16):** bagian (A)+(B) dari `reports/AMENDMENT_FLOOR_SPEC.md` (DIBEKUKAN) dieksekusi penuh — grid refined 20000 surrogat + array robustness C4 5-seed; hasil terukur, klasifikasi beku (NOT STABLE), dan falsifikasi ekspektasi pra-registrasi di §2.0c dan `reports/AMENDMENT_FLOOR_RESULTS.md`; manuskrip `exports/research_paper.tex` diamandemen bertanggal (section sebelum register cacat + pointer abstrak + catatan header). (C) engine B = sesi berikutnya. **H1 (C) engine B SELESAI (2026-10-17):** verifikasi independen S2 run penuh 20000 sampel — verdict `PASS-WITH-ENUMERATED-EXCEPTIONS`, counts 18/18 eksak vs engine A (exit 0, 9062 s); log + JSON tersegel di repo, riwayat interupsi R1/R2 di `reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md`, rincian §8 `reports/AMENDMENT_FLOOR_RESULTS.md`. **README publikasi (2026-10-17):** README.md diperbarui — banner terbaru penutupan H1, Section 7 baru (peta alur kerja + rantai verifikasi + blok status mesin + "verify it yourself"); blok status dan 2 diagram SVG digenerate `msaf/gw_readme.py` HANYA dari artefak tersegel (hash + byte-count LF-normalised), dijaga `msaf/tests/test_readme_guard.py` (drift = CI merah); commit `90a6520`, perbaikan byte-count checkout-stable `c957503` (run pertama `38975016984` GAGAL — kolom bytes pakai st_size mentah, CRLF vs LF CI; diperbaiki di akar + disimulasikan di worktree LF lokal); CI hijau run `38975450198`; suite 345 passed. **Dashboard v5 (2026-10-17):** halaman v5 dibangun DI ATAS v4 byte-identik (v4 disegel sebagai preserved — sha256 penuh di panel 6 v5 + dipin `msaf/tests/test_gw_dashboard_v5.py`); 14 patch deterministik terdokumentasi + 1 patch koreksi radius/leak float64 2026-10-17 (total 15; laporan `reports/GW_RADIUS_REGISTRY_CORRECTION_2026-10-17.md`) + 2 panel baru (Panel 7: grid refined H1 + array 5-seed dengan grafik seed baru; Panel 8: census 720 bin engine B + counts 18/18 eksak + provenance); semua angka diekstrak mesin saat build; commit `2d7b72c`, CI hijau run `38992695849`; suite 349 passed. Koreksi radius/leak float64 2026-10-17: commit `6304599`, CI hijau run `38995193745`. **Tangga λ_min diperpanjang (2026-10-17):** rung dim 321 (N=160, c=13, 6000 bit) terukur CERTIFIED — λ_min = `3.123458832662237e-59` (eig 3110,88 s; build 199,9 s), λ_max = `6.113965017866562`; lereng 257→321 = −0,000854 (ratio 0,9468 per 64 dim — masih mengecil, terus melandai, belum ada upturn); artefak `reports/lambda_min_eig_ladder_dim321.json` (LF sha256 `e92e05ef8d37b10bb3e39c65e7537e23c8e3a426da548028a0a560126b60b696`) + log; laporan `reports/GW_LADDER_DIM321_2026-10-17.md`; commit `9ce44be` + baris ini; CI hijau run `38999210393`.
+**C4 S10 (2026-10-17):** array robustness C4 diperluas 5 → 10 seed di bawah pra-registrasi beku (`reports/C4_SEEDS10_PREREG_2026-10-17.md`, commit `657352c`, dipush sebelum draw pertama; ordering PASS) — pooled `11458/200000` = 5.72900e-02 (CP95 [5.62754e-02, 5.83174e-02]); homogenitas chi2 = 131.2879 (df 9), p = 6.44376e-24 → **NOT STABLE (dispersion-dominated) bertahan**; angka of record TIDAK berubah (`1262/20000` = 6.31000e-02). Insiden CI dicatat: run pertama `39019056454` GAGAL karena tes kesetaraan float bit-exact lintas platform (scipy beta.ppf ~1 ULP; semua count/label identik) — diperbaiki di akar di tes (float rel_tol = 1e-12, int/string eksak) di commit `15f767f`; CI hijau `39019664353`; rincian `reports/C4_SEEDS10_RESULTS_2026-10-17.md`.
+
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
 `reports/DAFTAR_MASALAH_KERJA.md` (antrean 20 masalah).
@@ -41,6 +43,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | README Section 7 — status tersegel mesin + diagram alur kerja / rantai verifikasi | commit `90a6520` + `c957503` (perbaikan byte-count LF-normalised; run `38975016984` GAGAL pada kolom bytes, diperbaiki di akar); CI hijau run `38975450198`; suite 345 passed | `README.md` §7, `docs/math/readme_workflow.svg`, `docs/math/readme_trustchain.svg`, `msaf/gw_readme.py`, `msaf/tests/test_readme_guard.py` |
 | Dashboard v5 — ekstensi H1 + engine B di atas v4 byte-identik | commit `2d7b72c` + `6304599` + baris ini; dibangun di atas `9af033b`; CI hijau run `38992695849` + `38995193745`; v4 preserved sha256 penuh `C9EC26217F516A1A73527BC098ADBC11A4935F6965D905D38A7DBEB7D95A8B6` (embed di panel 6 v5 + dipin test guard); v3 tetap `89C7D5F948626BD51DE06F37534BDC4941D3793353DCB80B8557E10E2BED7322`; 15 patch deterministik (14 + koreksi radius float64 2026-10-17) + Panel 7/8 (H1 refined grid, array 5-seed, census 720 bin engine B, counts 18/18 eksak); suite 349 passed | `reports/gw_diagnostic_v5.html`, `msaf/gw_dashboard_v5.py`, `msaf/tests/test_gw_dashboard_v5.py`, `msaf/gw_readme.py`, `README.md` |
 | Tangga λ_min c=13 diperpanjang — rung dim 321 (rung dim 257 pendahulu) | commit `9ce44be` + baris ini; dibangun di atas `abecb07`; CI hijau run `38999210393`; λ_min `3.2990200597971055e-59` (dim 257, 2026-10-15) → `3.123458832662237e-59` (dim 321, 2026-10-17), verdict CERTIFIED + all_exclude_zero; lereng 257→321 −0,000854 (ratio 0,9468 per 64 dim — masih mengecil, terus melandai, belum ada upturn); registry rad/leak 0,0 = underflow float64 (koreksi 2026-10-17) | `reports/lambda_min_eig_ladder_big.json`, `reports/lambda_min_eig_ladder_dim321.json` + `reports/lambda_min_eig_ladder_dim321.log`, `reports/GW_LADDER_DIM321_2026-10-17.md` |
+| C4 robustness array diperluas (S5 → S10; item H1) | commit `19fe938` + `15f767f`; dibangun di atas `657352c` (pra-registrasi, dipush sebelum draw pertama); CI hijau run `39019664353`; catatan jujur: run pertama `39019056454` GAGAL pada tes kesetaraan float bit-exact lintas platform (scipy beta.ppf ~1 ULP; semua count/label/pooled identik) — diperbaiki di akar di tes (float rel_tol = 1e-12, int/string eksak) di `15f767f`; hasil pooled `11458/200000` = 5.72900e-02 (CP95 [5.62754e-02, 5.83174e-02]), chi2 = 131.2879 (df 9), p = 6.44376e-24 → NOT STABLE; angka of record tetap `1262/20000` = 6.31000e-02 | `reports/C4_SEEDS10_RESULTS_2026-10-17.md`, `reports/gw_h1_c4_seeds10.json`, `reports/h1_c4_seeds10_section.md`, `reports/c4_seeds10_launch_2026-10-17.log`, 5 log `reports/mont_run_20000_s2026100[5-9]_100_150.txt` |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -159,6 +162,41 @@ DAN sha256 arsip.
   `msaf/tests/test_gw_engine_b_full_artifact.py`; riwayat R1/R2 di
   `reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md`; rincian §8
   `reports/AMENDMENT_FLOOR_RESULTS.md`.
+
+### 2.0d [BARU, 2026-10-17] C4 S10 SELESAI — array robustness diperluas 5 → 10 seed
+
+- Pra-registrasi `reports/C4_SEEDS10_PREREG_2026-10-17.md` (sha256_lf
+  `d8dd65cd...`; commit `657352c`, dipush sebelum draw pertama;
+  ordering check PASS di artefak: commit 13:45:32 < start run pertama
+  13:47:32 lokal).
+- Lima run baru seed 20261005..20261009 (cap-2 rolling queue; launcher
+  log `reports/c4_seeds10_launch_2026-10-17.log`); semua `exit = 0`;
+  36/36 tangkapan eksak; instrument sha `072910f2...` / spectrum sha
+  `8fded839...` cocok di semua header; elapsed 4126.0 / 4151.7 /
+  4000.5 / 3925.8 / 2852.0 s.
+- Hasil (ekstraktor `msaf/gw_h1_c4_seeds10.py`, sha `c65dcc7f...`,
+  tidak berubah; semua angka dari log):
+  k = [1262, 960, 1289, 1021, 1345, 1164, 1115, 1114, 1022, 1166];
+  pooled `11458/200000` = 5.72900e-02 (CP95 [5.62754e-02,
+  5.83174e-02]); homogenitas chi2 = 131.2879 (df 9),
+  p = 6.44376e-24 → **NOT STABLE (dispersion-dominated)** — dispersi
+  S5 bertahan pada n = 10 (pertanyaan pra-registrasi terjawab:
+  bertahan).
+- Konteks warisan: 9/10 seed `p_hat_i >= 0.05` (yang di bawah hanya
+  20261001 = 4.80000e-02); pooled >= 0.05; angka of record TIDAK
+  berubah (`1262/20000` = 6.31000e-02).
+- Insiden CI (dicatat, tidak disembunyikan): run `39019056454` GAGAL —
+  self-validation menuntut float bit-exact; scipy `beta.ppf` tidak
+  bit-identik Windows vs Linux (~1 ULP; semua count/label/pooled
+  identik). Diperbaiki di akar: komparator toleransi (int/string eksak;
+  float rel_tol = 1e-12, kebijakan `_close` yang sama) + tes pengunci;
+  commit `15f767f`; CI hijau `39019664353`. Artefak/log/angka/ekstraktor
+  tidak disentuh. Suite lokal 353 passed; CI 352 passed + 1 skipped.
+- Artefak: `reports/C4_SEEDS10_RESULTS_2026-10-17.md` (laporan
+  bertanggal, blok mesin verbatim), `reports/gw_h1_c4_seeds10.json`,
+  `reports/h1_c4_seeds10_section.md`.
+- Batas: NOT STABLE; bukan 'physical'; bukan teorema Montgomery; bukan
+  bukti RH. Seri resolusi keempat (dim 501) tetap tersisa.
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 
