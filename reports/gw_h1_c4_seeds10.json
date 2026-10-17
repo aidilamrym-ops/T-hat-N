@@ -1,0 +1,255 @@
+{
+  "preregistration": {
+    "doc": "reports/C4_SEEDS10_PREREG_2026-10-17.md",
+    "sha256_lf": "d8dd65cd614f5457a5fe12f7aa24556dc97a4dcda57fed0d01b69f8fb34a0b95",
+    "commit": "657352cc2b47ee8480686c4281664b70a5714c64"
+  },
+  "base": {
+    "artifact": "reports/gw_h1_floor_refine.json",
+    "sha256_lf": "4777d94f9ec533712b14cc097b9240e5c961790b3d9025f452b7c21aade6148f",
+    "sealed_c4_array": {
+      "seeds": [
+        20260927,
+        20261001,
+        20261002,
+        20261003,
+        20261004
+      ],
+      "k": [
+        1262,
+        960,
+        1289,
+        1021,
+        1345
+      ],
+      "n_per_seed": 20000,
+      "pooled_k": 5877,
+      "pooled_n": 100000,
+      "p_hat": 0.05877,
+      "pooled_cp95": [
+        0.05732009387219187,
+        0.06024556290723691
+      ],
+      "per_seed_cp95": [
+        [
+          0.05976897156794577,
+          0.06655871146639472
+        ],
+        [
+          0.04507829452110123,
+          0.05105397685301719
+        ],
+        [
+          0.06108537417021053,
+          0.0679419022503054
+        ],
+        [
+          0.0480400743492922,
+          0.05419126301249717
+        ],
+        [
+          0.06381703672762777,
+          0.0708093977775035
+        ]
+      ],
+      "homogeneity_stat": 107.92990453585426,
+      "homogeneity_p": 2.01096665341861e-22,
+      "classification": "NOT STABLE (homogeneity rejected at alpha = 0.01; dispersion-dominated)"
+    },
+    "reparse_crosscheck": {
+      "all_match": true,
+      "checks": {
+        "k_match": true,
+        "pooled_k_match": true,
+        "pooled_n_match": true,
+        "p_hat_match": true,
+        "homogeneity_stat_match": true,
+        "homogeneity_p_match": true,
+        "classification_match": true,
+        "pooled_cp95_match": true,
+        "per_seed_cp95_match": true
+      },
+      "k_reparsed": [
+        1262,
+        960,
+        1289,
+        1021,
+        1345
+      ],
+      "seeds": [
+        20260927,
+        20261001,
+        20261002,
+        20261003,
+        20261004
+      ]
+    }
+  },
+  "extension": {
+    "seeds": [
+      20260927,
+      20261001,
+      20261002,
+      20261003,
+      20261004,
+      20261005,
+      20261006,
+      20261007,
+      20261008,
+      20261009
+    ],
+    "new_seeds": [
+      20261005,
+      20261006,
+      20261007,
+      20261008,
+      20261009
+    ],
+    "k": [
+      1262,
+      960,
+      1289,
+      1021,
+      1345,
+      1164,
+      1115,
+      1114,
+      1022,
+      1166
+    ],
+    "n_per_seed": 20000,
+    "per_seed_p": [
+      0.0631,
+      0.048,
+      0.06445,
+      0.05105,
+      0.06725,
+      0.0582,
+      0.05575,
+      0.0557,
+      0.0511,
+      0.0583
+    ],
+    "per_seed_cp95": [
+      [
+        0.05976897156794577,
+        0.06655871146639472
+      ],
+      [
+        0.04507829452110123,
+        0.05105397685301719
+      ],
+      [
+        0.06108537417021053,
+        0.0679419022503054
+      ],
+      [
+        0.0480400743492922,
+        0.05419126301249717
+      ],
+      [
+        0.06381703672762777,
+        0.0708093977775035
+      ],
+      [
+        0.054994711294938596,
+        0.06153445184657766
+      ],
+      [
+        0.05260996796926355,
+        0.059019938041232324
+      ],
+      [
+        0.05256131731588769,
+        0.05896860387686531
+      ],
+      [
+        0.048088654031881756,
+        0.05424266805457801
+      ],
+      [
+        0.05509208285527101,
+        0.06163705000763026
+      ]
+    ],
+    "pooled_k": 11458,
+    "pooled_n": 200000,
+    "p_hat": 0.05729,
+    "pooled_cp95": [
+      0.05627542045588519,
+      0.05831743452135584
+    ],
+    "homogeneity_stat": 131.28793731654142,
+    "homogeneity_df": 9,
+    "homogeneity_p": 6.443761011065574e-24,
+    "classification": "NOT STABLE (homogeneity rejected at alpha = 0.01; dispersion-dominated)",
+    "number_of_record": {
+      "k": 1262,
+      "n": 20000,
+      "p": "6.31000e-02",
+      "note": "UNCHANGED: canonical seed 20260927; the S10 pooled result is the enlarged robustness statement only"
+    }
+  },
+  "manifest": {
+    "generated": "2026-10-17T16:52:38",
+    "repo_head": "657352cc2b47ee8480686c4281664b70a5714c64",
+    "tool": "msaf/gw_h1_c4_seeds10.py",
+    "tool_sha256_lf": "c65dcc7f2e9e2338a30b5dffaf22284e2c92384b71e77cf1ad6156cedb60124a",
+    "instrument_sha256": "072910f232b15768ba35e14d7cc6aaf4fe1ee174dc45b65429460f791196e1d5",
+    "spectrum_sha256": "8fded8394f0ab4e8ed83f537609d313d0d50eef42f09214c30d1cfcd994d161d",
+    "n_per_seed": 20000,
+    "new_logs": {
+      "20261005": {
+        "log": "reports/mont_run_20000_s20261005_100_150.txt",
+        "sha256_lf": "8f37dfbfb96d8f4e3f82ebbac5898416abb622a6010e6a000afc4afee10300cb",
+        "tag": "B_seed20261005",
+        "start": "2026-10-17T13:47:32",
+        "end": "2026-10-17T14:56:18",
+        "elapsed_s": 4126.0,
+        "exact_capture_count": 36
+      },
+      "20261006": {
+        "log": "reports/mont_run_20000_s20261006_100_150.txt",
+        "sha256_lf": "358223f0e72bbe2ab88e19eefc37552d2fede56bdc4290fba6c80887716cff90",
+        "tag": "B_seed20261006",
+        "start": "2026-10-17T13:47:32",
+        "end": "2026-10-17T14:56:44",
+        "elapsed_s": 4151.7,
+        "exact_capture_count": 36
+      },
+      "20261007": {
+        "log": "reports/mont_run_20000_s20261007_100_150.txt",
+        "sha256_lf": "981311dc0c42d34183b8e51093076fec591e8d77bd6838a64fd77a5e9f0b4d86",
+        "tag": "B_seed20261007",
+        "start": "2026-10-17T14:56:32",
+        "end": "2026-10-17T16:03:13",
+        "elapsed_s": 4000.5,
+        "exact_capture_count": 36
+      },
+      "20261008": {
+        "log": "reports/mont_run_20000_s20261008_100_150.txt",
+        "sha256_lf": "e750fe7ca3180f29a7386af4582eca2a586757f7d36b53bfba2ba3a9faa3cd27",
+        "tag": "B_seed20261008",
+        "start": "2026-10-17T14:56:52",
+        "end": "2026-10-17T16:02:18",
+        "elapsed_s": 3925.8,
+        "exact_capture_count": 36
+      },
+      "20261009": {
+        "log": "reports/mont_run_20000_s20261009_100_150.txt",
+        "sha256_lf": "64ec51ee2a0a9d871547c2f16bed020501af81f2426d744029e03ce9c27afbea",
+        "tag": "B_seed20261009",
+        "start": "2026-10-17T16:02:34",
+        "end": "2026-10-17T16:50:06",
+        "elapsed_s": 2852.0,
+        "exact_capture_count": 36
+      }
+    },
+    "prereg_order_check": {
+      "status": "PASS",
+      "prereg_commit_time_local": "2026-10-17T13:45:32",
+      "first_new_run_start": "2026-10-17T13:47:32",
+      "note": "all new runs must start AFTER the pre-registration commit (anti-cocoklogi ordering)"
+    }
+  }
+}
