@@ -33,6 +33,8 @@ L1–L4 + kriteria verdict + coverage + cap anggaran. Temuan lingkungan
 (docker/podman absen; WSL2 tanpa distro) → L1 conditional (jika tak ada
 engine saat attempt → NOT-RUN-ENVIRONMENT; L2/L3 tetap jalan) —
 mengaktifkan engine = keputusan pemilik. Urutan eksekusi beku: §2.0f.
+**Anchor baseline:** tag git `baseline-2026-10-17` (commit `8038243`,
+CI `39025604163` hijau) — titik pulih bila ganti sesi / listrik padam.
 
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
