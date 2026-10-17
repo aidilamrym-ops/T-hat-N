@@ -1,0 +1,3 @@
+lambda_min ladder via arb_mat.eig   c=13 prec=6000 bits
+N    dim   eig_s  lambda_min_lo   rad        Im_leak  n_excl0 verdict
+----------------------------------------------------------------------------------------------------------------
