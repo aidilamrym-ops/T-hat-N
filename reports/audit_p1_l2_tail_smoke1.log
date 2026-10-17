@@ -1,0 +1,25 @@
+audit_p1 L2 item 3 - tail lane: TAIL_LEMMA partition budget (finite lane)
+release commit: 2e9976c4becbf97e31c56fe75fce07cdff5dd4ea
+prereg: reports/AUDIT_DBN_PREREG_2026-10-17.md section 4 item 3
+stack: mpmath.iv prec=240; fractions for all final numbers
+DEV partial run: upto=anchors (no JSON, no verdict)
+
+== selftests (helpers) ==
+[FAIL] selftest lo_f/hi_f on [1,2]
+python.exe : Traceback (most recent call last):
+At line:1 char:151
++ ...  = "utf-8"; & $py "$repo\audit_p1\l2_tail_budget.py" --upto anchors 2 ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "D:\Opencode AI Agent\audit_p1\l2_tail_budget.py", line 805, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "D:\Opencode AI Agent\audit_p1\l2_tail_budget.py", line 637, in main
+    part_selftests()
+    ~~~~~~~~~~~~~~^^
+  File "D:\Opencode AI Agent\audit_p1\l2_tail_budget.py", line 235, in part_selftests
+    check("selftest ivpt(1/3) contains 1/3", lo_f(y) <= F(1, 3) <= hi_f(y))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<=' not supported between instances of 'tuple' and 'Fraction'

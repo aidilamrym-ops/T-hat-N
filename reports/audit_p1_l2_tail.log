@@ -1,0 +1,146 @@
+audit_p1 L2 item 3 - tail lane: TAIL_LEMMA partition budget (finite lane)
+release commit: 2e9976c4becbf97e31c56fe75fce07cdff5dd4ea
+prereg: reports/AUDIT_DBN_PREREG_2026-10-17.md section 4 item 3
+stack: mpmath.iv prec=240; fractions for all final numbers
+
+== selftests (helpers) ==
+[PASS] selftest lo_f/hi_f on [1,2]
+[PASS] selftest ivpt(1/3) contains 1/3
+[PASS] selftest abs_hi/abs_lo on [-2,1]
+[PASS] selftest floor_dec/ceil_dec
+[PASS] selftest interval add contains 5/6
+
+== statement sources (git blob sha1 re-verified in-run) ==
+[PASS] source TAIL_LEMMA.md blob sha1+size verified (formula statements (2.1),(3.1),(4.2)-(4.7),(5.2)-(5.4),(8.1)-(8.3); boxes, S, lambda)
+[PASS] source TAIL_PROVENANCE.md blob sha1+size verified (scope/provenance statement)
+[PASS] source CANDIDATE_PARAMETERS.md blob sha1+size verified (sealed constants source (item 3 lines))
+[PASS] source MAXIMUM_CHECKS.md blob sha1+size verified (sealed-claim source (section 6))
+[PASS] source logs/assembly_1787854.log blob sha1+size verified (assembly context (target lines))
+[PASS] source logs/tail_1787854_256.log blob sha1+size verified (supplementary Python-lane regression witnesses)
+[PASS] source logs/tail_arb_256.log blob sha1+size verified (Arb 256 directed reference values)
+[PASS] source logs/tail_arb_512.log blob sha1+size verified (Arb 512 directed reference values (this run's witnesses))
+[PASS] source verifiers/verify_tail_1787854_256.py blob sha1+size verified (claim identified from; no code reused)
+[PASS] source verifiers/verify_tail_arb.c blob sha1+size verified (claim identified from; no code reused)
+
+== exact anchors and hull checks (integer arithmetic) ==
+[PASS] anchor t0 + y0^2/2 = 893927/5000000 (exact)
+[PASS] anchor (1872719/10^7)^2 < y0^2 < (23409/125000)^2 (exact)
+[PASS] anchor (8231039/10^7)^2 >= 1-2t0 (exact)
+[PASS] anchor I_box top below sqrt(1-2t) on I_t (exact)
+[PASS] anchor lambda_1 = 1 and sum|lambda| = 9918746/10^6 (exact)
+[PASS] anchor floors: d*(M//d) <= M < d*(M//d+1) for all d in S
+[PASS] anchor N* > M > M_err > 1
+[PASS] anchor (5.1) cutoffs: M = 153814, M_err = 3000 (spec constants)
+
+== fixed scalars and cap-validity gates ==
+  delta in [0.000000000000000027552247047426, 0.000000000000000027552247389160] (30 dp)
+  kappa in [0.000000000000000435108347126752, 0.000000000000000435108349825099] (30 dp)
+  s1_box in [1.815990198292965183414646880750, 1.815990255873456645696602019178] (30 dp)
+  s1_ext in [1.815990198292965183414646880750, 2.133906205873456645696602019178] (30 dp)
+  s2_box in [1.628718248292964748306297055651, 1.628718305873456210588254892426] (30 dp)
+  s2_ext in [1.310802298292964748306297055651, 1.628718305873456210588254892426] (30 dp)
+[PASS] SC1: sigma1 > (t/2) log N on box and extended hull
+[PASS] SC2: sigma2 > (t/2) log N on box and extended hull
+[PASS] SC3: sigma1, sigma2 > 1 on both hulls
+[PASS] YM: D decreases above the lower y-box (both algebraic forms, upper < 0)
+[PASS] Delta N-monotonicity gate: (t^2/16)L(L-2)+0.626 > 0
+[PASS] eC0 quotient N-monotonicity gate: 3 < 10.50 and X_N > 12
+[PASS] domain: log(N^2-t/16) > 2 and X_N > 200
+[PASS] domain: 0 < t/(16N^2) < 1 and window log gate N(1-t/(16N^2)) > 1
+
+== fills: log table, b_t table, sigma-power tables ==
+  log table 1..153814 done (3.6 s)
+  b_t table 1..153814 done (7.6 s)
+  k^{-sigma1} tables done (9.5 s)
+  k^{-sigma2} tables done (9.5 s)
+  GN-TR gates (cap decrease for all N >= N*), endpoints M//d:
+[PASS] GN-TR: every fixed-left routed cap decreases for all N >= N* (gates)
+[PASS] GN-AB: fixed-left MHEAD A-cap decreases for all N >= N* (gates)
+[PASS] GN-error: both MERR=3000 caps decrease for all N >= N* (gates)
+[PASS] OVW: floor(N/d) >= N/(d+1) for all d in S (exact)
+
+== exact convolution head c_m(t) over the t-box (m = 2..153814) ==
+  coefficient table built (2.6 s)
+[PASS] identity: c_1 = 1 (lambda_1 = b_t(1) = 1)
+== P (floor-partition head) ==
+  P sum done (10.5 s)
+  P upper >= 0.170228023677302130480890029962 (30 dp floor)
+  P lower <= 0.170227967112144610160736040422 (30 dp ceil)
+== TR, OV, M_max, G, A-branch, AB, D ==
+  TR upper >= 0.262901330124670485819592904698 (30 dp floor)
+  OV upper >= 0.039242681210158884904199811146 (30 dp floor)
+  Mmax upper >= 1.608289144954140760690152332386 (30 dp floor)
+  G in [0.058690221153900882481051967094, 0.058690310251493029540074006806] (30 dp)
+  TR interval width (ub-lb) <= 0.000000252846851870305142473003 (30 dp ceil)
+  OV interval width (ub-lb) <= 0.000000039450480688143933752326 (30 dp ceil)
+  A-head sum done (7.8 s)
+  A-head upper >= 3.120704407281173363590840862159 ; capB upper >= 2.466151717027119785339373696702 (30 dp floor / 30 dp floor)
+  AB upper >= 0.327894319266107632788399407172 ; AB lower <= 0.327893654877447828540367160155 (30 dp)
+  D upper >= 0.999720909379939789364347569707 (30 dp floor)
+  D lower <= 0.999719478933499205324062210852 (30 dp ceil)
+  D interval width (ub-lb) <= 0.000001430446440584040285358856 (30 dp ceil)
+  flow lower (1-D_ub)/Mmax_ub <= 0.0001735326144156551584167916171588536480 (40 dp ceil)
+== error side (8.1)-(8.3) on the extended hull ==
+  Delta in [0.000000000000011441797485519300222524, 0.000000000000011441797585531305114079] (36 dp)
+  eAB factor (e^Delta-1) <= 0.000000000000011441797585531371 (30 dp ceil)
+  eAB upper >= 0.000000000000493807881690150741 (30 dp floor)
+  eC0 upper >= 0.000000011671108781306324155721 (30 dp floor)
+  err upper >= 0.000000011671602589188014306462 (30 dp floor)
+== point-coverage regression probe (plain mpf lane, non-interval) ==
+  D-side point (t_hi, y_lo) (11.4 s): P=0.170228014968350744 TR=0.262901298826165725 OV=0.0392426763133634632
+    Mmax=1.60828913971256445 AB=0.327894161289468055 D=0.999720608684891364
+  D-side point (t0, y_box_hi) (11.4 s): P=0.170227975821092874 TR=0.26290110857629695 OV=0.0392426466564693013
+    Mmax=1.60828911038134177 AB=0.327893812853840117 D=0.999719779628107815
+  error point (t0, y_ext_hi): eAB=1.8497180835463958e-14 eC0=9.41559596322076634e-11 err=9.41744568130431273e-11
+  error point (t_hi, y_ext_hi): eAB=1.84971809161912921e-14 eC0=9.41559542216438017e-11 err=9.4174451402559993e-11
+  error point (t0, y_lo): eAB=3.27804420138164261e-14 eC0=1.16711041015923332e-8 err=1.16711368820343471e-8
+  smallest headroom: 4.65707e-13 at (t0, y_lo)/err (probe 23.2 s)
+[PASS] probe: certified uppers dominate D-side point values (t_hi, y_lo)
+[PASS] probe: certified uppers dominate D-side point values (t0, y_box_hi)
+[PASS] probe: err_ub dominates error point values (3 hull points)
+
+
+== sealed targets (pre-registered, exact rational comparisons) ==
+  corridor:            0.999719 < D < 0.999721
+  D_lb - 0.999719 >=  0.000000478933499205324062210851 (30 dp floor)
+  0.999721 - D_ub >=  0.000000090620060210635652430292 (30 dp floor)
+  flow: (1-D_ub)/Mmax_ub > 0.0001735326089372
+  flow_lo - sealed >= 0.000000000005478455158416791617158853 (36 dp floor)
+  error < 0.000000011671604
+  sealed - err_ub >= 0.000000000000001410811985693537360806 (36 dp floor)
+  margin > 0.0001735209373337
+  margin_lo - sealed >= 0.000000000005479365970402485154519659 (36 dp floor)
+  Mmax_ub - 1.608290 <= -0.000000855045859239309847667613 (30 dp ceil)
+
+[PASS] corridor lower: D_lb > 0.999719
+[PASS] corridor upper: D_ub < 0.999721
+[PASS] flow: (1-D_ub)/Mmax_ub > 0.0001735326089372
+[PASS] error: eAB_ub + eC0_ub < 0.000000011671604
+[PASS] margin: flow_lo - err_ub > 0.0001735209373337
+[PASS] anchor M_max_ub < 1.608290
+[PASS] decisive contraction D_ub < 1 (strict)
+[PASS] error positivity: 0 < err_lb (strict)
+
+== comparison vs release Arb 512 directed points (non-verdict) ==
+  (reference: logs/tail_arb_512.log, blob c091e5ee3f4ff912778b10c8e6d9fe72dc54b2db)
+  P      our-Arb = -8.202118054e-13
+  TR     our-Arb = -1.204087764e-13
+  OV     our-Arb = -1.79792597e-14
+  Mmax   our-Arb = -1.425300548e-16
+  AB     our-Arb = -4.88237058e-12
+  D      our-Arb = -8.810910181e-12
+  flow   our-Arb = 5.478436657e-12
+  eAB    our-Arb = -3.939603651e-20
+  eC0    our-Arb = -8.460473022e-16
+  err    our-Arb = -8.460866982e-16
+  margin our-Arb = 5.479282743e-12
+  note: our eC0 equals the release's 256-bit Python lane value
+        (1.167110878131e-8) to ~4e-19 relative; the 512-bit C/Arb lane
+        is looser by 7.25e-8 relative on the exponent (both are valid
+        enclosures; the sealed err target clears all three lanes).
+
+== summary ==
+checks_total: 47  checks_failed: 0
+item3 machine verdict: PASS
+runtime_seconds: 75.4
+json written: D:\Opencode AI Agent\reports\audit_p1_l2_tail_results.json

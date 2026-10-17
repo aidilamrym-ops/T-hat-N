@@ -46,8 +46,14 @@ commit `ad4755c`). L2 item 1 SELESAI 34/34 (commit `de4d686`, CI
 8.7446e-13 ≤ sealed 2.057e-12 (gap ≥ 1.18256e-12); e_C,0 ≤ sealed dengan
 gap ≥ 3.20854e-25 (kasus batas 24 dp dicatat); E_max ≤ sealed; margin ≥
 sealed → verdict REPRODUCED; artefak `audit_p1/l2_prop410_budget.py` +
-log + JSON + 3 transkrip smoke (commit bersama baris ini). Berikutnya: L2
-item 3 (tail lane) → item 4 (barrier K=8; cap 4 jam) → L3 → L4 + P3.
+log + JSON + 3 transkrip smoke (commit bersama baris ini). **L2 item 3
+SELESAI — tail lane 47/47 PASS (REPRODUCED):** koridor dua sisi
+(`D_lb − 0.999719 ≥ 4.7893e-7`, `0.999721 − D_ub ≥ 9.0620e-8`),
+`flow_lo − sealed ≥ 5.47846e-12`, `sealed − err_ub ≥ 1.41081e-15`,
+`margin_lo − sealed ≥ 5.47937e-12`, `Mmax_ub < 1.608290`; artefak
+`audit_p1/l2_tail_budget.py` + log resmi + JSON + 4 transkrip smoke
+(2 gagal, dicatat) — commit bersama baris ini. Berikutnya: L2 item 4
+(barrier K=8; cap 4 jam) → L3 → L4 + P3.
 
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
@@ -378,6 +384,61 @@ DAN sha256 arsip.
   wajib v6 baru (v3/v4/v5 dibekukan, tidak boleh diedit; persetujuan
   pemilik belum diberikan); (b) Scope Note recording; (c) instalasi
   engine container untuk replay L1 di masa depan.
+
+### 2.0h [BARU, 2026-10-17] P1 audit — L2 item 3 (tail lane) SELESAI — REPRODUCED
+
+- **Klaim beku (pra-reg §4 item 3):** koridor `0.999719 < D < 0.999721`;
+  `(1−D)/M_max > 0.0001735326089372`; error ekor
+  `< 0.000000011671604`; margin pasca-error `> 0.0001735209373337`;
+  anchor `M = 153814`, `M_err = 3000`, `M_max < 1.608290`.
+- **Implementasi kita:** `audit_p1/l2_tail_budget.py` (sha256
+  `E2D75209…`, dikunci di JSON), mpmath.iv 240-bit + `fractions.Fraction`
+  untuk semua angka final (perbandingan rasional eksak); 10 berkas sumber
+  diverifikasi in-run via git blob sha1+size (TAIL_LEMMA,
+  CANDIDATE_PARAMETERS, MAXIMUM_CHECKS, 4 log, 2 verifier); tanpa
+  penggunaan kode rilis (read-only untuk identifikasi klaim + saksi
+  regresi non-verdict). Device: D-side pada `I_box` tertutup; error-side
+  pada `I_ext` tertutup; semua gate premis (SC1/SC2/SC3, YM, Δ-gate,
+  eC0-quotient, GN-TR/GN-AB/GN-error, OVW) di-re-check sebagai premis
+  perlu.
+- **Run resmi:** exit 0, 75.4 s, verdict `PASS`, 47/47 check; log
+  `reports/audit_p1_l2_tail.log` (sha256 `FE595389…`), JSON
+  `reports/audit_p1_l2_tail_results.json` (sha256 `643F2AE8…`).
+- **Angka mesin / slack vs konstanta sealed (eksak):**
+  `D_lb − 0.999719 ≥ 4.78933499205324062210851e-7`;
+  `0.999721 − D_ub ≥ 9.0620060210635652430292e-8`;
+  `flow_lo − 0.0001735326089372 ≥ 5.478455158416791617158853e-12`;
+  `0.000000011671604 − err_ub ≥ 1.410811985693537360806e-15`;
+  `margin_lo − 0.0001735209373337 ≥ 5.479365970402485154519659e-12`;
+  `M_max_ub − 1.608290 ≤ −8.55045859239309847667613e-7`. Nilai kunci:
+  `D_ub = 0.999720909379939789…` (lebar interval `D ≤ 1.4304e-6` <
+  slack koridor 1.9094e-6), `err_ub = 1.167160258918801…e-8`.
+- **Probe titik (jalur mpf non-interval; 2 titik D-side + 3 titik
+  hull error):** semua upper tersertifikasi mendominasi nilai titik
+  tersampel; headroom terkecil `4.65707e-13` di `(t0, y_lo)/err`.
+- **Perbandingan non-verdict vs titik terarah Arb 512 rilis**
+  (`logs/tail_arb_512.log`, blob `c091e5ee…`): semua komponen D-side
+  setuju pada 1e-16..5e-12 (rantai kita sedikit lebih ketat); `eC0`
+  kita = nilai lane Python 256-bit rilis (`1.167110878131e-8`) sampai
+  ~4e-19 relatif, sedangkan lane C/Arb 512 mereka lebih longgar
+  `7.25e-8` relatif di eksponen (keduanya enclosure valid; target
+  sealed membersihkan ketiganya).
+- **Riwayat pra-run (semua transkrip tersimpan, tidak ada yang
+  dipatch):** `_smoke1` GAGAL (`to_rational` mpmath mengembalikan tuple
+  `(p, q)`, bukan Fraction); `_smoke2` PASS (anchors+sigma); `_smoke3`
+  GAGAL di blok cetak referensi (NameError lokal `part_err`; komputasi
+  dan semua verdict internal sudah lolos); `_smoke4` GAGAL di format
+  `nstr10` (`mpf(Fraction)` tak didukung versi mpmath ini) — semua
+  diperbaiki di akar; run resmi adalah run segar dengan parameter tidak
+  berubah. Transkrip `reports/audit_p1_l2_tail_smoke{1,2,3,4}.log`.
+- **Coverage item 3 (beku):** sertifikasi hanya di titik desain
+  `N = N_* = 3840000`; langkah "semua N ≥ N_*" dan cakupan y di atas
+  `I_box` tetap bersandar reduksi rilis §6/7 (gate di-re-check sebagai
+  premis perlu); lane Arb/C dan Python 256 rilis TIDAK dijalankan ulang
+  (dicatat di JSON `scope.not_done`).
+- **Berikutnya: L2 item 4** (subset barrier K=8 narrowest + seam +
+  first/last; cap 4 jam) → **L3** weld checklist → **L4** report +
+  registry P3.
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 
