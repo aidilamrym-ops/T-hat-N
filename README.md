@@ -936,7 +936,9 @@ dashboard v4 commit `84248da` -> run
 dashboard v5 commit `2d7b72c` -> run
 [`38992695849`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/38992695849);
 radius-correction commit `6304599` -> run
-[`38995193745`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/38995193745).
+[`38995193745`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/38995193745);
+magnitude-ladder dim-321 commit `9ce44be` -> run
+[`38999210393`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/38999210393).
 Version of record: [10.5281/zenodo.23410894](https://doi.org/10.5281/zenodo.23410894).
 
 ---
