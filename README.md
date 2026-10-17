@@ -9,7 +9,7 @@ ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
 - Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338271.svg)](https://doi.org/10.5281/zenodo.23338271) (concept DOI, all versions; latest version v1.40.0-alpha: https://doi.org/10.5281/zenodo.23410894)
-- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha) (current: 345 passed)
+- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha) (current: 349 passed)
 - Final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
 - License: MIT - see [LICENSE](LICENSE)
 
@@ -31,8 +31,10 @@ under pre-declared rules, never excused. All sealed numbers, provenance
 hashes and the public-CI evidence are machine-extracted into
 [Section 7](#section-7-sealed-status-workflow-and-verification-chain); the
 standalone dashboards are
-[`v4`](reports/gw_diagnostic_v4.html) (English rebuild, current) and
-[`v3`](reports/gw_diagnostic_v3.html) (sealed, byte-identical). Frozen
+[`v5`](reports/gw_diagnostic_v5.html) (H1 + engine-B extension, current),
+[`v4`](reports/gw_diagnostic_v4.html) (intermediate rebuild) and
+[`v3`](reports/gw_diagnostic_v3.html) (sealed); v4 and v3 are preserved
+byte-identical. Frozen
 pre-registration:
 [`reports/AMENDMENT_FLOOR_SPEC.md`](reports/AMENDMENT_FLOOR_SPEC.md);
 results: [`reports/AMENDMENT_FLOOR_RESULTS.md`](reports/AMENDMENT_FLOOR_RESULTS.md)
@@ -246,7 +248,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (345 tests, every landmine pinned)
+### 3.2 Regression Suite (349 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -723,6 +725,7 @@ python gw_montgomery.py reports/gw_spectrum_100_150.json --samples 2000
 python msaf/gw_resolution_delta.py --write
 python msaf/gw_dashboard_v3.py --write
 python msaf/gw_dashboard_v4.py --write
+python msaf/gw_dashboard_v5.py --write
 
 # H1 floor amendment + independent re-verification (Section 7)
 python msaf/gw_h1_extract.py               # refined grid + C4 array (parses the run logs)
@@ -786,7 +789,8 @@ Reading the map:
    after the run had already completed and written its artefacts) is kept
    append-only in
    [`reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md`](reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md).
-4. **Publication and proof.** The dashboards (`v4` current, `v3` sealed),
+4. **Publication and proof.** The dashboards (`v5` current, `v4`/`v3`
+   preserved),
    the manuscript, and the Zenodo DOI; the seal is a green public CI run on
    the content commit.
 
@@ -879,6 +883,7 @@ Cell census: 9 clean + 9 enumerated edge-cluster + 0 failing. Enumeration of the
 | `reports/gw_engine_b_verify.log` | 12186 | `27743364ce1cabfe217b1a7a489524e5a463f8a3c1bdbbb4cb8ae71d8be0330d` |
 | `reports/gw_diagnostic_v3.html` | 23493 | `89c7d5f948626bd51de06f37534bdc4941d3793353dcb80b8557e10e2bed7322` |
 | `reports/gw_diagnostic_v4.html` | 50465 | `c9ec26217f516a1a73527bc098addbc11a4935f6965d905d38a7dbeb7d95a8b6` |
+| `reports/gw_diagnostic_v5.html` | 80082 | `188ded56a24bb455a79e6134021de090b846af75daa7e06a00d1feb1adfc060c` |
 | `msaf/gw_engine_b_verify.py` | 46717 | `485ab6525531aa8ef9b5e499736331b600fdb205bb2a9b93cfa438ffa261fcea` |
 
 **Engine-B run manifest.** mode `full`; 20000 samples per dim; seed 20260927; mpmath dps 50; generated 2026-10-17T00:51:30; elapsed 9062.4 s; repository head `451eec7`; interval instrument sha256 before = after = `072910f232b15768...` (first 16 hex; full hash in the run manifest); python 3.14.4, numpy 2.5.2, scipy 1.18.0, mpmath 1.3.0.
@@ -892,7 +897,8 @@ python -m pytest msaf/tests/test_readme_guard.py -q
 
 # 2. the artefact guards for the sealed runs
 python -m pytest msaf/tests/test_gw_engine_b_full_artifact.py \
-                 msaf/tests/test_gw_dashboard_v4.py -q
+                 msaf/tests/test_gw_dashboard_v4.py \
+                 msaf/tests/test_gw_dashboard_v5.py -q
 
 # 3. generator dry run: ASCII summary, no files written
 python msaf/gw_readme.py
@@ -978,15 +984,16 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
 - `msaf/` campaign tools - `capture_spectrum_201.py` (G-M0-gated
   full-spectrum capture), `gw_route_s_ladder.py` (Route S inertia ladder),
   `lambda_min_eig_ladder.py` (Route A2 magnitudes), `gw_resolution_delta.py`
-  (Section 5 generator), `gw_dashboard_v3.py` / `gw_dashboard_v4.py`
-  (dashboard generators; v4 current), `gw_h1_extract.py` (H1 amendment
+  (Section 5 generator), `gw_dashboard_v3.py` / `gw_dashboard_v4.py` /
+  `gw_dashboard_v5.py` (dashboard generators; v5 current),
+  `gw_h1_extract.py` (H1 amendment
   extractor), `gw_engine_b_verify.py` (independent S2 re-verification),
   `gw_readme.py` (README Section 7 generator)
 - `msaf/navier_stokes/` - finite hydrodynamic lattice: Godunov loop,
   restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
-- `msaf/tests/` - regression suite (345 tests)
+- `msaf/tests/` - regression suite (349 tests)
 - `lean/` - Lean 4 machine-checked kernels 1D/2D/3D + central variant + Moore box (`lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py); includes the generated workflow / verification-chain diagrams (Section 7)
@@ -996,7 +1003,8 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
   the Guinand-Weil spectra JSONs and Montgomery logs, the H1 amendment
   spec / results / artefacts, the engine-B full-run JSON + log, and the
   standalone dashboards `reports/gw_diagnostic_v3.html` (sealed) /
-  `reports/gw_diagnostic_v4.html` (current)
+  `reports/gw_diagnostic_v4.html` (preserved) /
+  `reports/gw_diagnostic_v5.html` (current)
 
 ## CITATION
 

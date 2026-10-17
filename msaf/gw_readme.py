@@ -20,7 +20,8 @@ SOURCES (committed, machine-produced)
   reports/gw_h1_floor_refine.json   refined 20000-surrogate grid + C4 array
   reports/AMENDMENT_FLOOR_SPEC.md   frozen pre-registration (hash pinned)
   reports/gw_diagnostic_v3.html     sealed dashboard (read-only here)
-  reports/gw_diagnostic_v4.html     current dashboard (hash pinned)
+  reports/gw_diagnostic_v4.html     intermediate rebuild (preserved, pinned)
+  reports/gw_diagnostic_v5.html     current dashboard (hash pinned)
   msaf/gw_engine_b_verify.py        stage-C harness (hash cross-checked
                                     against its own run manifest)
 
@@ -31,7 +32,7 @@ USAGE
   python msaf/gw_readme.py --check    exit 1 on any drift (CI-equivalent)
 
 Provenance hashes are SHA-256 over newline-normalised bytes ("stable_bytes",
-same convention as msaf/gw_dashboard_v4.py): identical on Windows and Linux
+same convention as msaf/gw_dashboard_v5.py): identical on Windows and Linux
 checkouts with core.autocrlf=true.
 
 GUARD
@@ -56,6 +57,7 @@ REFINE_JSON = ROOT / "reports" / "gw_h1_floor_refine.json"
 SPEC_MD = ROOT / "reports" / "AMENDMENT_FLOOR_SPEC.md"
 DASH_V3 = ROOT / "reports" / "gw_diagnostic_v3.html"
 DASH_V4 = ROOT / "reports" / "gw_diagnostic_v4.html"
+DASH_V5 = ROOT / "reports" / "gw_diagnostic_v5.html"
 ENGINE_B_SCRIPT = ROOT / "msaf" / "gw_engine_b_verify.py"
 
 README = ROOT / "README.md"
@@ -256,6 +258,8 @@ def collect() -> dict:
         ("reports/gw_diagnostic_v3.html", DASH_V3,
          "sealed dashboard (read-only)"),
         ("reports/gw_diagnostic_v4.html", DASH_V4,
+         "intermediate rebuild (preserved)"),
+        ("reports/gw_diagnostic_v5.html", DASH_V5,
          "current dashboard"),
         ("msaf/gw_engine_b_verify.py", ENGINE_B_SCRIPT,
          "stage C harness (frozen)"),
@@ -511,9 +515,9 @@ def render_workflow_svg(ctx: dict) -> str:
     stage(410, "STAGE 4 \u00b7 PUBLICATION & PROOF \u2014 DASHBOARDS, "
                "MANUSCRIPT, DOI")
     box(20, 420, 320, 88, "Dashboards",
-        ["v4 \u2014 English rebuild (current)",
-         "v3 \u2014 sealed, byte-identical",
-         "both standalone offline HTML"])
+        ["v5 \u2014 H1 + engine-B extension (current)",
+         "v4 \u00b7 v3 \u2014 preserved byte-identical",
+         "all standalone offline HTML"])
     harrow(344, 464, 376)
     box(380, 420, 330, 88, "Manuscript & release",
         ["research_paper.tex \u00b7 results appendix",

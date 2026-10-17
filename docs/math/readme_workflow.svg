@@ -57,9 +57,9 @@
 <text x="16" y="410.0" font-size="11" fill="#8a94a8" letter-spacing="1.4" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">STAGE 4 · PUBLICATION &amp; PROOF — DASHBOARDS, MANUSCRIPT, DOI</text>
 <rect x="20.0" y="420.0" width="320.0" height="88.0" rx="9" fill="#f8fafd" stroke="#c9d4e4"/>
 <text x="34.0" y="444.0" font-size="13" font-weight="600" fill="#101828" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Dashboards</text>
-<text x="34.0" y="463.0" font-size="11.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">v4 — English rebuild (current)</text>
-<text x="34.0" y="479.0" font-size="11.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">v3 — sealed, byte-identical</text>
-<text x="34.0" y="495.0" font-size="11.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">both standalone offline HTML</text>
+<text x="34.0" y="463.0" font-size="11.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">v5 — H1 + engine-B extension (current)</text>
+<text x="34.0" y="479.0" font-size="11.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">v4 · v3 — preserved byte-identical</text>
+<text x="34.0" y="495.0" font-size="11.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">all standalone offline HTML</text>
 <line x1="344.0" y1="464.0" x2="376.0" y2="464.0" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arw)"/>
 <rect x="380.0" y="420.0" width="330.0" height="88.0" rx="9" fill="#f8fafd" stroke="#c9d4e4"/>
 <text x="394.0" y="444.0" font-size="13" font-weight="600" fill="#101828" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Manuscript &amp; release</text>
