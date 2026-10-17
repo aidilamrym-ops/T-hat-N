@@ -1,0 +1,64 @@
+# audit_p1 - L1 engine install log (second attempt; owner-approved; 2026-10-18)
+
+purpose: second L1 attempt. Attempt 1 (2026-10-17) recorded no container engine
+and L1 = NOT-RUN-ENVIRONMENT (prereg section 3.4; evidence file
+reports/audit_p1_l1_launch.log - sealed; NOT modified by this attempt).
+On 2026-10-18 the owner approved, in a guided session, enabling one OCI engine
+(WSL2 distro + podman inside the distro) and executing the L1 replay per
+prereg section 3.
+
+ordering anchors:
+- prereg add-commit (must predate this log): 86a32c99f9b78808f32e4e3e9ba150809264bfa2
+  (2026-10-17T18:12:13+08:00; value as recorded in reports/audit_p1_l1_launch.log).
+- HEAD at log creation (git rev-parse, 2026-10-18): 587c1dc9c58f027f61d9b071dc51c299ce0a152b.
+
+## owner decision (declared before execution)
+- date_local: 2026-10-18
+- decision: owner selected "start now" (guided session) for item (c): install one
+  OCI engine and run the L1 replay. Optional full sweep deferred (prereg section 8
+  marks it optional).
+- unchanged scope limit: L1 can never yield "independently verified"; at most
+  "release replayed; numbers reproduced from the release's own tooling".
+
+## capture convention
+- every block below is appended by an external runner from the actual invocation:
+  marker (timestamp | description), CMD line, [stdout], [stderr], EXIT code.
+- nothing is retyped; failures (if any) stay in the log as recorded.
+- runner script (outside the repo): C:\Users\usER\AppData\Local\Temp\opencode\audit_p1_l1_runlog.ps1
+- replay transcripts go to reports/audit_p1_l1_replay_2026-10-18.log (created later).
+
+## machine log (appended as executed)
+
+--- 2026-10-18T01:44:52.360+08:00 | precondition: WSL version
+CMD: wsl --version
+[stdout]
+WSL version: 2.4.13.0
+Kernel version: 5.15.167.4-1
+WSLg version: 1.0.65
+MSRDC version: 1.2.5716
+Direct3D version: 1.611.1-81528511
+DXCore version: 10.0.26100.1-240331-1435.ge-release
+Windows version: 10.0.19045.6466
+EXIT: 0
+
+--- 2026-10-18T01:44:53.535+08:00 | precondition: WSL status
+CMD: wsl --status
+[stdout]
+Default Version: 2
+EXIT: 0
+
+--- 2026-10-18T01:44:54.587+08:00 | preconditions: admin/disk/winget/github-asset/runner-hash
+CMD: inline capture (PowerShell)
+[stdout]
+admin=False
+C-freeGB=20.3
+D-freeGB=18.7
+winget-RedHat.Podman:
+Name           Id                    Version
+--------------------------------------------
+Podman         RedHat.Podman         5.8.3
+Podman Desktop RedHat.Podman-Desktop 1.30.5
+release-asset: name=dbn-lambda-01787854-review-v3.oci.tar | size=172810240 | digest=sha256:87a4695e86b535eac48b0a39e1999028e8a18249eb1c95cc9715e4a91afb83c6
+release: tag=review-01787854-v3 | published=2026-07-28T04:32:43Z
+runner-sha256=821D2E1E636DAA8EFD898F0A158836FE02EDBBECA2DF073D25B2405F3EBAC770
+EXIT-INLINE: 0

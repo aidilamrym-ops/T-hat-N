@@ -94,10 +94,12 @@ hijau). Rincian §2.0l; (c) instalasi engine ditunda ke sesi terpandu.
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
 `reports/DAFTAR_MASALAH_KERJA.md` (antrean 20 masalah).
 
-**Status 2026-10-18:** audit P1 tuntas; owner-gated tersisa = (c)
-instalasi engine container (ditunda ke sesi terpandu atas keputusan
-pemilik). (a) dashboard v6 dan (b) Scope Note sudah dieksekusi — lihat
-§2.0l dan `reports/gw_diagnostic_v6.html`. Konteks P1:
+**Status 2026-10-18 (lanjutan):** audit P1 tuntas; (a) dashboard v6 dan
+(b) Scope Note selesai (§2.0l). (c) instalasi engine container = **mulai
+dieksekusi** (keputusan owner 2026-10-18, sesi terpandu): distro WSL +
+podman, lalu replay L1 per pra-registrasi §3 — log
+`reports/audit_p1_l1_engine_install_2026-10-18.log` + ringkas §2.0m.
+Konteks P1:
 `reports/MSAF_PORTFOLIO_2026-10-17.md` §2 +
 `reports/AUDIT_DBN_RECON_2026-10-17.md` + pra-registrasi beku
 `reports/AUDIT_DBN_PREREG_2026-10-17.md` (target rilis, kriteria
@@ -700,6 +702,28 @@ DAN sha256 arsip.
   commit (menambahkan run row README §7.4 + baris tabel §1 + id CI ini).
 - **Engine (c):** tidak dijalankan di sesi ini; tidak ada perubahan
   sistem.
+
+### 2.0m [BARU, 2026-10-18] (c) L1 replay: keputusan owner = EKSEKUSI — engine install dimulai
+
+- **Keputusan owner (2026-10-18, lanjutan; satu ronde):** (c) dieksekusi
+  SEKARANG (mode terpandu) — install satu engine OCI (distro WSL +
+  podman di dalam distro) lalu replay L1; sweep penuh tetap opsional
+  (prereg §8; default dilewati).
+- **Prekondisi read-only (terekam di log baru, sebelum install):** rilis
+  `review-01787854-v3` hidup; asset `dbn-lambda-01787854-review-v3.oci.tar`
+  172.810.240 B, digest API `87a4695e…` = pin prereg; WSL 2.4.13 store
+  aktif (kernel 5.15.167.4-1, default v2, belum ada distro) → tidak
+  butuh reboot Windows; shell non-admin; C 20,3 GB / D 18,7 GB bebas;
+  RedHat.Podman 5.8.3 tersedia via winget (cadangan).
+- **Artefak baru (berkas tersegel TIDAK disentuh):**
+  `reports/audit_p1_l1_engine_install_2026-10-18.log` (keputusan +
+  prekondisi + capture perintah) dan nanti
+  `reports/audit_p1_l1_replay_2026-10-18.log` + laporan L1 bertanggal.
+  Log 2026-10-17 (`audit_p1_l1_launch.log`) tetap beku (FENCE_REGISTRY);
+  laporan L4 dan FENCE_REGISTRY tidak disentuh; pembaruan registry =
+  alur registry di akhir (diputuskan setelah laporan L1).
+- **Status:** berjalan; semua hasil (termasuk kegagalan) dicatat apa
+  adanya di log baru.
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 
