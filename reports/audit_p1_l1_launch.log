@@ -1,0 +1,61 @@
+﻿# audit_p1 - L1 launch attempt log (engine availability; recorded as-is)
+generator: C:\Users\usER\AppData\Local\Temp\opencode\audit_p1_l1_check.ps1
+timestamp_start_local: 2026-10-17T20:21:02.2604115+08:00
+
+## attempt history of this check (written after the fact; incident log)
+- attempt A (parse error): generator .ps1 was first written UTF-8 w/o BOM; PS 5.1 read it as ANSI; an em-dash broke parsing; exit 1; no log written; file rewritten ASCII-only.
+- attempt B (timeout): the OCI archive search was not actually bounded (Downloads/oracle-toe recursion); harness killed it at 180 s; no log written; roots now capped at depth<=1 (top-level for Downloads/oracle-toe).
+- attempt C (this run): completed; log written at the timestamp_end below.
+
+## ordering anchor (pre-registration must predate this log)
+prereg_add_commit: 86a32c99f9b78808f32e4e3e9ba150809264bfa2 2026-10-17T18:12:13+08:00
+HEAD: 2a0ad07865fa9c214f220a28ae7986741f5b537b 2026-10-17T18:41:41+08:00
+
+## machine baseline
+os: Microsoft Windows 10 Pro
+logical_processors: 4
+powershell: 5.1.19041.6456
+python: Python 3.14.4
+mpmath: 1.3.0
+
+## engine checks (prereg 3.1 step 1)
+--- docker --version ---
+EXCEPTION: The term 'docker' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+--- docker info ---
+EXCEPTION: The term 'docker' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+--- podman --version ---
+EXCEPTION: The term 'podman' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+--- nerdctl --version ---
+EXCEPTION: The term 'nerdctl' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+--- wsl --status ---
+Default Version: 2
+
+--- wsl --list --verbose ---
+Windows Subsystem for Linux has no installed distributions.
+You can resolve this by installing a distribution with the instructions below:
+
+Use 'wsl.exe --list --online' to list available distributions
+and 'wsl.exe --install <Distro>' to install.
+
+## OCI archive local search (bounded; prereg 3.2 fetch not attempted if no engine)
+--- root: D:\Opencode AI Agent (depth 1, name match *01787854*) ---
+no match
+
+--- root: C:\Users\usER\AppData\Local\Temp\opencode (depth 1, name match *01787854*) ---
+no match
+
+--- root: C:\Users\usER\Downloads (depth 0, name match *01787854*) ---
+no match
+
+--- root: C:\Users\usER\oracle-toe (depth 0, name match *01787854*) ---
+no match
+
+## result (machine-derived)
+engines_found: none
+stop_rule (prereg 3.4): L1 = NOT-RUN-ENVIRONMENT; L2/L3 proceed regardless; enabling an engine is owner-gated.
+timestamp_end_local: 2026-10-17T20:21:03.6385708+08:00
+(end)
