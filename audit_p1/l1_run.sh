@@ -38,6 +38,13 @@ git -C "$TREE" rev-parse 'HEAD^{tree}' >>"$LOG" 2>&1; foot "$?"
 mark 'tree: status porcelain (expect empty)' "git -C $TREE status --porcelain"
 git -C "$TREE" status --porcelain >>"$LOG" 2>&1; foot "$?"
 
+# --- step 1b: archive verifier (release tooling) binding manifest + config digests
+mark 'verify: verify_release_image_archive.py (release tooling; manifest + config digests)' "python3 $TREE/scripts/verify_release_image_archive.py $WORK/dbn-lambda-01787854-review-v3.oci.tar --manifest-digest sha256:6e29bc53adc5a4337802da2b5a219720e3da9dcc1b87c546b96b6126d8b9975d --config-digest sha256:5ccd9e3f7f8fdde6ee6a35c2542efc17b6a7247d615ad03c1db5bd47e3c8f42d"
+python3 "$TREE/scripts/verify_release_image_archive.py" "$WORK/dbn-lambda-01787854-review-v3.oci.tar" \
+  --manifest-digest sha256:6e29bc53adc5a4337802da2b5a219720e3da9dcc1b87c546b96b6126d8b9975d \
+  --config-digest sha256:5ccd9e3f7f8fdde6ee6a35c2542efc17b6a7247d615ad03c1db5bd47e3c8f42d >/tmp/l1_run.out 2>&1; rc=$?
+cat /tmp/l1_run.out >>"$LOG"; foot "$rc"; [ "$rc" -eq 0 ] || fail=1
+
 # --- step 2: load the image offline (no registry)
 mark 'podman: load release archive (no registry)' "podman load --input $WORK/dbn-lambda-01787854-review-v3.oci.tar"
 podman load --input "$WORK/dbn-lambda-01787854-review-v3.oci.tar" >/tmp/l1_run.out 2>&1; rc=$?

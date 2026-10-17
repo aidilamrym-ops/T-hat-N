@@ -561,3 +561,14 @@ caa3009837ccc30df568564f5bacad3931514db1a4e59afcc650c270c586b0ca  /root/l1/l1_fe
 EXIT: 0
 repo l1_fetch.sh sha256=caa3009837ccc30df568564f5bacad3931514db1a4e59afcc650c270c586b0ca
 repo l1_run.sh sha256=9f42336d651d7ef34d754604ebc2632f1a168beb7c564c3aa307508fbe1415d2
+
+--- 2026-10-18T02:02:58.476+08:00 | copy: l1_run.sh v+b to WSL (adds archive verifier step)
+CMD: wsl -d Ubuntu -u root -- cp "/mnt/d/Opencode AI Agent/audit_p1/l1_run.sh" /root/l1/l1_run.sh
+EXIT: 0
+
+--- 2026-10-18T02:03:06.675+08:00 | copy: sha256 of WSL l1_run.sh
+CMD: wsl -d Ubuntu -u root -- sha256sum /root/l1/l1_run.sh
+[stdout]
+dab87b5c5951979ade480da12fc5212552b5277b12905c725caad3d51587618b  /root/l1/l1_run.sh
+EXIT: 0
+repo l1_run.sh sha256=dab87b5c5951979ade480da12fc5212552b5277b12905c725caad3d51587618b

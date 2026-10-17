@@ -39,3 +39,36 @@ ordering anchor: prereg add-commit `86a32c99f9b78808f32e4e3e9ba150809264bfa2` (2
 predates this 2026-10-18 log.
 
 ## machine log (appended as executed)
+
+--- 2026-10-18T01:58:59.776+08:00 | run: l1_fetch.sh (fetch + verify pinned inputs; inside WSL)
+CMD: wsl -d Ubuntu -u root -- bash /root/l1/l1_fetch.sh
+
+script: /root/l1/l1_fetch.sh sha256 caa3009837ccc30df568564f5bacad3931514db1a4e59afcc650c270c586b0ca
+
+--- 2026-10-18T01:59:07+0800 | fetch: OCI archive
+CMD: curl -fsSL --retry 3 -o /root/l1/dbn-lambda-01787854-review-v3.oci.tar https://github.com/judegomila/dbn-lambda-01787854-candidate-audit/releases/download/review-01787854-v3/dbn-lambda-01787854-review-v3.oci.tar
+EXIT: 0
+
+--- 2026-10-18T01:59:33+0800 | verify: OCI archive size
+CMD: stat -c %s /root/l1/dbn-lambda-01787854-review-v3.oci.tar
+172810240
+EXIT: 0
+
+--- 2026-10-18T01:59:33+0800 | verify: OCI archive sha256 (expected 87a4695e86b535eac48b0a39e1999028e8a18249eb1c95cc9715e4a91afb83c6)
+CMD: sha256sum /root/l1/dbn-lambda-01787854-review-v3.oci.tar
+87a4695e86b535eac48b0a39e1999028e8a18249eb1c95cc9715e4a91afb83c6
+VERDICT: sha256 MATCH
+EXIT: 0
+
+--- 2026-10-18T01:59:35+0800 | fetch: git bundle (release tree carrier)
+CMD: curl -fsSL --retry 3 -o /root/l1/dbn-lambda-01787854-review-v3.bundle https://github.com/judegomila/dbn-lambda-01787854-candidate-audit/releases/download/review-01787854-v3/dbn-lambda-01787854-review-v3.bundle
+EXIT: 0
+
+--- 2026-10-18T01:59:43+0800 | verify: bundle sha256 (expected 34f8f5239c56b9602d47800f0cac4ef9ee995f845298362fb4a2a95740c5ba92)
+CMD: sha256sum /root/l1/dbn-lambda-01787854-review-v3.bundle
+34f8f5239c56b9602d47800f0cac4ef9ee995f845298362fb4a2a95740c5ba92
+VERDICT: sha256 MATCH
+EXIT: 0
+
+RESULT: FETCH-AND-VERIFY OK
+EXIT: 0
