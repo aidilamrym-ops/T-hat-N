@@ -24,9 +24,25 @@ TIDAK terpengaruh (runner selalu exit 0, artefak lengkap, segel seri lama
 utuh). Laporan: `reports/GW_RESOLUTION4_DIM501_2026-10-17.md`; detail §2.0e.
 Gate pra-registrasi audit P1 kini TERBUKA (C4 + 501 keduanya tertutup).
 
+**P1 audit — pra-registrasi DIBEKUKAN (2026-10-17):**
+`reports/AUDIT_DBN_PREREG_2026-10-17.md` (commit `86a32c9`, CI hijau
+`39024004135`) — target beku rilis `review-01787854-v3` (commit
+`2e9976c4...`, OCI digest `6e29bc53...`; BUKAN HEAD bergerak), level
+L1–L4 + kriteria verdict + coverage + cap anggaran. Temuan lingkungan
+(tercatat sebelum eksekusi): mesin ini TIDAK punya engine container
+(docker/podman absen; WSL2 tanpa distro) → L1 conditional (jika tak ada
+engine saat attempt → NOT-RUN-ENVIRONMENT; L2/L3 tetap jalan) —
+mengaktifkan engine = keputusan pemilik. Urutan eksekusi beku: §2.0f.
+
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
 `reports/DAFTAR_MASALAH_KERJA.md` (antrean 20 masalah).
+
+**Berikutnya dieksekusi: audit P1** — baca
+`reports/MSAF_PORTFOLIO_2026-10-17.md` §2 (P1) +
+`reports/AUDIT_DBN_RECON_2026-10-17.md` + pra-registrasi beku
+`reports/AUDIT_DBN_PREREG_2026-10-17.md` (target rilis, kriteria
+verdict, urutan L2, cap anggaran, coverage).
 
 Tidak ada konteks yang hidup hanya di dalam percakapan. Yang menentukan
 ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
@@ -58,6 +74,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Tangga λ_min c=13 diperpanjang — rung dim 321 (rung dim 257 pendahulu) | commit `9ce44be` + baris ini; dibangun di atas `abecb07`; CI hijau run `38999210393`; λ_min `3.2990200597971055e-59` (dim 257, 2026-10-15) → `3.123458832662237e-59` (dim 321, 2026-10-17), verdict CERTIFIED + all_exclude_zero; lereng 257→321 −0,000854 (ratio 0,9468 per 64 dim — masih mengecil, terus melandai, belum ada upturn); registry rad/leak 0,0 = underflow float64 (koreksi 2026-10-17) | `reports/lambda_min_eig_ladder_big.json`, `reports/lambda_min_eig_ladder_dim321.json` + `reports/lambda_min_eig_ladder_dim321.log`, `reports/GW_LADDER_DIM321_2026-10-17.md` |
 | C4 robustness array diperluas (S5 → S10; item H1) | commit `19fe938` + `15f767f`; dibangun di atas `657352c` (pra-registrasi, dipush sebelum draw pertama); CI hijau run `39019664353`; catatan jujur: run pertama `39019056454` GAGAL pada tes kesetaraan float bit-exact lintas platform (scipy beta.ppf ~1 ULP; semua count/label/pooled identik) — diperbaiki di akar di tes (float rel_tol = 1e-12, int/string eksak) di `15f767f`; hasil pooled `11458/200000` = 5.72900e-02 (CP95 [5.62754e-02, 5.83174e-02]), chi2 = 131.2879 (df 9), p = 6.44376e-24 → NOT STABLE; angka of record tetap `1262/20000` = 6.31000e-02 | `reports/C4_SEEDS10_RESULTS_2026-10-17.md`, `reports/gw_h1_c4_seeds10.json`, `reports/h1_c4_seeds10_section.md`, `reports/c4_seeds10_launch_2026-10-17.log`, 5 log `reports/mont_run_20000_s2026100[5-9]_100_150.txt` |
 | Resolusi ke-4 (dim 501) — OUTCOME non-PD di ladder (statistik berakhir) | commit yang membawa baris ini; dibangun di atas `ea2ed77` (pra-registrasi, dipush sebelum launch; CI hijau `39020789629`); ladder `UNDETERMINED at pivot 446` (n_pos=446, n_neg=0; 0 certified) → OUTCOME per pra-registrasi §4 (statistik berakhir; tanpa rerun); insiden wrapper `ExitCode` kosong di launcher (PS 5.1 `Start-Process -PassThru` + `.WaitForExit()`) di-root-cause tanpa dampak pada hasil; Stage C/M tidak dijalankan (artefak C/M tidak ada) | `reports/GW_RESOLUTION4_DIM501_2026-10-17.md`, `reports/gw_route_s_ladder_c100_n250.json` (raw `319e50d7...`), `reports/gw_route_s_ladder_c100_n250.log` (raw `c6e48510...`), `reports/gw_route_s_ladder_c100_n250.err.log` (0 byte), `reports/res4_dim501_launch_2026-10-17.log` (raw `d4225ac0...`), `reports/RESOLUTION4_DIM501_PREREG_2026-10-17.md` |
+| P1 audit Λ (DBN/Gomila) — pra-registrasi L1–L4 dibekukan sebelum eksekusi | commit `86a32c9` + baris ini; dibangun di atas `b7e0e8f` (penutupan 501); CI hijau `39024004135`; target beku rilis `review-01787854-v3` (commit `2e9976c4...`, seal `89a20156...`, OCI digest `6e29bc53...`; BUKAN HEAD bergerak); L1 conditional — mesin audit tanpa engine container (docker/podman absen; WSL2 tanpa distro; 2026-10-17; keputusan pemilik); stack L2 kita = mpmath.iv + fractions (bukan jalur C/FLINT mereka) | `reports/AUDIT_DBN_PREREG_2026-10-17.md`, `reports/AUDIT_DBN_RECON_2026-10-17.md`, `reports/MSAF_PORTFOLIO_2026-10-17.md` |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -249,8 +266,36 @@ DAN sha256 arsip.
   (6000 bit) — bukan teorema Montgomery, bukan bukti RH, bukan
   Weil-positivity, bukan tren. Gate pra-registrasi audit P1
   (`reports/AUDIT_DBN_RECON_2026-10-17.md`) kini TERBUKA: C4 (S10) +
-  501 (outcome) keduanya tertutup; pra-registrasi audit = tahap
-  berikutnya.
+  501 (outcome) keduanya tertutup; pra-registrasi audit SELESAI
+  2026-10-17 (`reports/AUDIT_DBN_PREREG_2026-10-17.md`, commit
+  `86a32c9`); eksekusi audit = tahap berikutnya → §2.0f.
+
+### 2.0f [BARU, 2026-10-17] P1 audit — pra-registrasi DIBEKUKAN; eksekusi menyusul
+
+- **Berkas beku:** `reports/AUDIT_DBN_PREREG_2026-10-17.md` (commit
+  `86a32c9`, CI `39024004135`) + recon
+  `reports/AUDIT_DBN_RECON_2026-10-17.md` (§1–§7 lengkap: pin,
+  parameter, margin, transkripsi Thm 1.2/1.3 + Lemma 8.4, template
+  reviewer). **Target:** rilis `review-01787854-v3` (commit
+  `2e9976c4...`; seal `89a20156...`; OCI digest `6e29bc53...`), BUKAN
+  HEAD bergerak; klaim pihak ketiga yang diuji: Λ ≤ 0.1787854
+  (unrefereed).
+- **Urutan eksekusi (beku di pra-registrasi):** gate Lean statis
+  (anti-circularity atas `lean/` rilis) → L2 window-freeze & sign-map →
+  L2 Prop 4.10 (margin target 5.57871094787e-7) → L2 tail (koridor
+  0.999719 < D < 0.999721; margin pasca-error > 0.0001735209373337) →
+  L2 subset barrier (K=8 + seam; cap 4 jam) → L3 weld (checklist beku;
+  transkripsi di recon §7.11) → L4
+  `reports/AUDIT_DBN_L4REPORT_<date>.md` + entri registry P3.
+- **L1 (replay container): CONDITIONAL** — 2026-10-17: docker/podman
+  absen; WSL2 tanpa distro; arsip OCI belum lokal. Jika tak ada engine
+  saat attempt → NOT-RUN-ENVIRONMENT (masuk coverage); L2/L3 tetap
+  jalan. Keputusan pemilik: aktifkan Docker Desktop / distro WSL bila
+  L1 diinginkan.
+- **Aturan mengikat (dari pra-registrasi):** tanpa perubahan parameter
+  karena hasil; infra-rerun hanya setelah fix + tercatat; semua angka
+  machine-extracted; coverage eksplisit; satu operator (dua pass
+  berselang waktu = mitigasi, bukan dua auditor independen).
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 

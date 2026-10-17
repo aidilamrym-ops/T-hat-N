@@ -170,6 +170,19 @@ Format: Tujuan | Jenis klaim | Sertifikat | Status | Langkah pertama.
 
 ## 3. Eksekusi & antrean (satu kampanye komputasi berat pada satu waktu)
 
+**Status 2026-10-17 (bertanggal; sumber hidup = `reports/HANDOFF.md`):**
+butir 1–3 SELESAI — C4 S10 tuntas
+(`reports/C4_SEEDS10_RESULTS_2026-10-17.md`, commit `19fe938` +
+`15f767f`); titik ke-4 seri resolusi (dim 501) DIJALANKAN dan DITUTUP
+sebagai OUTCOME non-PD di ladder (statistik berakhir, tanpa C/M, tanpa
+rerun; `reports/GW_RESOLUTION4_DIM501_2026-10-17.md`, commit `b7e0e8f`);
+pass-3 recon P1 selesai. Butir 4 DIMULAI: pra-registrasi audit P1
+SELESAI (`reports/AUDIT_DBN_PREREG_2026-10-17.md`, commit `86a32c9`) —
+eksekusi menyusul; L1 conditional (mesin tanpa engine container;
+keputusan pemilik). Butir 5 (skema registry P3 + entri awal) BELUM
+mulai. Urutan eksekusi audit yang beku: `reports/AUDIT_DBN_PREREG_2026-10-17.md`
++ `reports/HANDOFF.md` §2.0f.
+
 1. [SEKARANG] C4 (+5 seed) berjalan → verifikasi → ekstraksi `--write` →
    commit hasil → push → CI hijau.
 2. Commit pra-registrasi 501 + runner seri → push → CI hijau → launch 501
