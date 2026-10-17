@@ -1,0 +1,314 @@
+audit_p1 / L2 item 4 -- barrier subset (descriptor recheck)
+release commit: 2e9976c4becbf97e31c56fe75fce07cdff5dd4ea
+source dir: C:\Users\usER\AppData\Local\Temp\opencode\dbn_barrier_src
+
+frozen claims (prereg section 4 item 4):
+  e_A+e_B        < 3.639278679550541e-10
+  e_C,0          < 0.000356522647672172
+  total uniform  < 0.000356523011600040 < 1/800
+  gate           : M_i > D_z,i/(2(num-1)) + D_t,i*dt_i + 1/800
+  winding agg    : +/- 8.95e-13
+  min margin     : 0.519849894613872543374989997
+
+== provenance: pinned release sources (git blob sha1 + size) ==
+[PASS] prov BARRIER_CERTIFICATE.md (blob e5278fbd45b4, 9914 B)  -- sha256=45a685d9393f26c2 role=claim text (assertions compared here)
+[PASS] prov barrier/certificates/barrier_target_closed.log (blob 7bed566a9de3, 387381 B)  -- sha256=2d010f70902dca16 role=PRIMARY INPUT: 883 sealed prism descriptors rechecked here
+[PASS] prov barrier/certificates/uniform_error_256.log (blob 3e3e2cb40524, 988 B)  -- sha256=7f43bc240b8852fd role=sealed uniform-error Arb log compared here
+[PASS] prov barrier/certificates/storedsum_taylor_tail.log (blob 597af26e3439, 679 B)  -- sha256=31102fa5feba5b07 role=context only (not consumed by item 4)
+[PASS] prov barrier/certificates/storedsum_provenance.log (blob 31d596fa9d46, 424 B)  -- sha256=9f0b732e81dcde08 role=context only (not consumed by item 4)
+[PASS] prov verifiers/verify_barrier_binding.py (blob 403c51345153, 22345 B)  -- sha256=3d32f5be09028d73 role=claim/format identification only; no code reused
+[PASS] prov barrier/src/TloopSinglemat_closed_cert.c (blob 6c4f0cbf1356, 53944 B)  -- sha256=76e4d4f856baad77 role=generator source read for field semantics; no code reused
+[PASS] prov barrier/src/verify_uniform_error_01787854.c (blob 3b838984a28a, 8261 B)  -- sha256=dd61648fa05e76ba role=uniform-error source (total = eAB + eC0 semantics)
+[PASS] prov barrier/compare_storedsum_intervals.py (blob d063327a0dbf, 3386 B)  -- sha256=12f2c7f596c3db05 role=context only (not consumed by item 4)
+[PASS] prov scripts/run_barrier_replay.sh (blob d31b55365449, 2984 B)  -- sha256=386fec3590b28480 role=official replay driver (invocation recorded; not re-run)
+
+== structural parse of the sealed prism log ==
+[PASS] all prism lines parse in the sealed format (883)  -- parsed=883 parse_fail=0
+[PASS] prism identifiers are consecutive 1..883
+[PASS] log line structure: 891 nonblank, unique headers, result/cpu ordered  -- nonblank=891 recognized=True
+[PASS] no failure/abort marker in the log
+
+== header: slab, target coverage, allowance ==
+[PASS] header: N-corners=690988,690988  -- N-corners=690988,690988
+[PASS] header: target enclosure encloses 129/800, width <= 1e-25  -- ball=[0.161249999999999999999999999999999, 0.161250000000000000000000000000000]
+[PASS] header: allowance ball encloses 1/800, width < 1e-25  -- ball=[0.001249999999999999999999997000000, 0.001250000000000000000000003000000]
+[PASS] header: X/N/y0/t slab tokens present
+[PASS] header: stored-sum matrix context line present
+
+== all 883 prisms: descriptor recomputation (exact rationals) ==
+[PASS] all prism tokens parse into exact rational intervals  -- parsed=883 parse_fail=0
+[PASS] all prisms: Dz,Dt exact positive ints, mesh == 4*Dz-4  -- violations=0
+[PASS] all prisms: positive duration start_hi < end_lo  -- violations=0
+[PASS] all prisms: spatial ball encloses Dz/(2(Dz-1))  -- violations=0
+[PASS] all prisms: time ball encloses Dt*[dt_lo,dt_hi]  -- violations=0
+[PASS] all prisms: eps ball uniform, encloses 1/800, radius < 1e-25  -- violations=0 uniform=True
+[PASS] GATE rec_E8_lo > 0 for every prism  -- min=0.519849894613872543374989997000000 at prism 882 of 883
+[PASS] GATE rec_x_lo > 0 for every prism (refined variant)  -- min=0.519849894613872543386998324392146 at prism 882
+[PASS] margin ball intersects recomputed hulls for every prism  -- violations=0
+[PASS] winding ball strictly inside (-1/4, 1/4) for every prism  -- max |endpoint|=2.27000000165436122510605500000000e-15 at prism 1
+[PASS] all 882 adjacent seam tokens byte-identical  -- mismatches=0
+[PASS] first prism starts at exact token '0'  -- token='0'
+[PASS] last prism end ball encloses t0=129/800  -- token='[0.161250000000000000000000000000 +/- 2e-35]'
+[PASS] coverage endpoint token equals last prism end token  -- coverage='[0.161250000000000000000000000000 +/- 2e-35]'
+
+== selection: K=8 smallest sealed margins + seam faces + endpoints ==
+  sel prism 882: margin_lo=0.519849894613872543386000000000000  rec_E8_lo=0.519849894613872543374989997000000  rec_x_lo=0.519849894613872543386998324392146
+  sel prism 881: margin_lo=0.532722754567164480098000000000000  rec_E8_lo=0.532722754567164480103349997000000  rec_x_lo=0.532722754567164480107184370292010
+  sel prism 880: margin_lo=0.544429020576158022305000000000000  rec_E8_lo=0.544429020576158022298779697000000  rec_x_lo=0.544429020576158022298789944177624
+  sel prism 879: margin_lo=0.555506562754568527294000000000000  rec_E8_lo=0.555506562754568527283399997000000  rec_x_lo=0.555506562754568527296590817297587
+  sel prism 878: margin_lo=0.565432723479460240838000000000000  rec_E8_lo=0.565432723479460240835609997000000  rec_x_lo=0.565432723479460240838383107748206
+  sel prism 877: margin_lo=0.574901015467058469968000000000000  rec_E8_lo=0.574901015467058469925749997000000  rec_x_lo=0.574901015467058469927982241345054
+  sel prism 876: margin_lo=0.583765081239648257394000000000000  rec_E8_lo=0.583765081239648257394009697000000  rec_x_lo=0.583765081239648257394013747226694
+  sel prism 875: margin_lo=0.591971607007705382733000000000000  rec_E8_lo=0.591971607007705382703759997000000  rec_x_lo=0.591971607007705382710746366777688
+  same K=8 set under rec_E8_lo ranking: True
+  subset S (11 prisms): 1,874,875,876,877,878,879,880,881,882,883
+[PASS] criterion: K=8 selection computed from sealed margin balls
+[PASS] global min rec_E8_lo equals sealed minimum margin exactly  -- min=0.519849894613872543374989997000000 at prism 882
+[PASS] min-margin prism is #882
+[PASS] min-margin prism is inside subset S
+
+== subset deep checks ==
+  -- prism 1 --
+     t      = [0, [3.58178128594897487241369766568e-5 +/- 4.40e-36]]
+     duration (end_lo - start_hi) = 0.000035817812859489748724136976656
+     winding  = [1.654361225106055e-24 +/- 2.27e-15]
+     min_mesh = [4.2783620904181587383 +/- 1.08e-18]
+     Dz=9600 Dt=52726 mesh=38396 (4*Dz-4=38396)
+     spatial  = [0.50005208875924575477 +/- 3.88e-21] ; exact Dz/(2(Dz-1)) = 4800/9599 = 0.500052088759245754766121470986561
+     time     = [1.8885300008294564912 +/- 2.89e-20] ; Dt*dt hull = [1.888530000829456491228846231206204, 1.888530000829456491228846231206668]
+     eps      = [0.0012500000000000000000 +/- 3e-27]
+     margin   = [1.8885300008294564923 +/- 1.08e-18]
+     rec_E8   = [1.888530000829456491217219997000000, 1.888530000829456493442780003000000]
+     rec_x    = [1.888530000829456491225032294806770, 1.888530000829456493385032300807234]
+     seam L/R = - / byte-identical
+[PASS] S1 gate rec_E8_lo>0  -- rec_E8_lo=1.888530000829456491217219997000000
+[PASS] S1 gate rec_x_lo>0  -- rec_x_lo=1.888530000829456491225032294806770
+[PASS] S1 margin ball intersects recomputed hulls
+[PASS] S1 winding ball inside (-1/4,1/4)  -- [1.654361225106055e-24 +/- 2.27e-15]
+[PASS] S1 descriptors (struct/duration/spatial/time/eps)
+[PASS] S1 seam faces byte-identical
+  -- prism 874 --
+     t      = [[0.126252851998516579718782797613 +/- 1.91e-31], [0.128525194624315465118920001473 +/- 2.76e-31]]
+     duration (end_lo - start_hi) = 0.002272342625798885400137203859533
+     winding  = [1.292469707114105e-26 +/- 1.50e-17]
+     min_mesh = [1.7116852042941519176 +/- 8.02e-19]
+     Dz=48 Dt=264 mesh=188 (4*Dz-4=188)
+     spatial  = [0.51063829787234042553 +/- 1.92e-21] ; exact Dz/(2(Dz-1)) = 24/47 = 0.510638297872340425531914893617021
+     time     = [0.59989845321090574564 +/- 3.78e-21] ; Dt*dt hull = [0.599898453210905745636221818916712, 0.599898453210905745636221819163288]
+     eps      = [0.0012500000000000000000 +/- 3e-27]
+     margin   = [0.59989845321090574643 +/- 8.03e-19]
+     rec_E8   = [0.599898453210905745622299997000000, 0.599898453210905747237700003000000]
+     rec_x    = [0.599898453210905745629863284219690, 0.599898453210905747233863290466266]
+     seam L/R = byte-identical / byte-identical
+[PASS] S874 gate rec_E8_lo>0  -- rec_E8_lo=0.599898453210905745622299997000000
+[PASS] S874 gate rec_x_lo>0  -- rec_x_lo=0.599898453210905745629863284219690
+[PASS] S874 margin ball intersects recomputed hulls
+[PASS] S874 winding ball inside (-1/4,1/4)  -- [1.292469707114105e-26 +/- 1.50e-17]
+[PASS] S874 descriptors (struct/duration/spatial/time/eps)
+[PASS] S874 seam faces byte-identical
+  -- prism 875 --
+     t      = [[0.128525194624315465118920001473 +/- 2.76e-31], [0.130971358289636561741790836193 +/- 3.53e-32]]
+     duration (end_lo - start_hi) = 0.002446163665321096622870834719688
+     winding  = [1.292469707114105e-26 +/- 1.38e-17]
+     min_mesh = [1.6968211209921549523 +/- 8.08e-19]
+     Dz=44 Dt=242 mesh=172 (4*Dz-4=172)
+     spatial  = [0.51162790697674418605 +/- 3.49e-21] ; exact Dz/(2(Dz-1)) = 22/43 = 0.511627906976744186046511627906976
+     time     = [0.59197160700770538273 +/- 4.75e-21] ; Dt*dt hull = [0.591971607007705382734742002164665, 0.591971607007705382734742002315334]
+     eps      = [0.0012500000000000000000 +/- 3e-27]
+     margin   = [0.59197160700770538353 +/- 7.97e-19]
+     rec_E8   = [0.591971607007705382703759997000000, 0.591971607007705384336240003000000]
+     rec_x    = [0.591971607007705382710746366777688, 0.591971607007705384326746372928357]
+     seam L/R = byte-identical / byte-identical
+[PASS] S875 gate rec_E8_lo>0  -- rec_E8_lo=0.591971607007705382703759997000000
+[PASS] S875 gate rec_x_lo>0  -- rec_x_lo=0.591971607007705382710746366777688
+[PASS] S875 margin ball intersects recomputed hulls
+[PASS] S875 winding ball inside (-1/4,1/4)  -- [1.292469707114105e-26 +/- 1.38e-17]
+[PASS] S875 descriptors (struct/duration/spatial/time/eps)
+[PASS] S875 seam faces byte-identical
+  -- prism 876 --
+     t      = [[0.130971358289636561741790836193 +/- 3.53e-32], [0.133624835931634962911768046419 +/- 2.07e-31]]
+     duration (end_lo - start_hi) = 0.002653477641998401169977210225757
+     winding  = [1.292469707114105e-26 +/- 1.28e-17]
+     min_mesh = [1.6812801624792965156 +/- 8.11e-19]
+     Dz=41 Dt=220 mesh=160 (4*Dz-4=160)
+     spatial  = [0.51250000000000000000 +/- 3e-25] ; exact Dz/(2(Dz-1)) = 41/80 = 0.512500000000000000000000000000000
+     time     = [0.58376508123964825739 +/- 4.99e-21] ; Dt*dt hull = [0.583765081239648257394986249666694, 0.583765081239648257394986249773306]
+     eps      = [0.0012500000000000000000 +/- 3e-27]
+     margin   = [0.58376508123964825819 +/- 7.96e-19]
+     rec_E8   = [0.583765081239648257394009697000000, 0.583765081239648259025990303000000]
+     rec_x    = [0.583765081239648257394013747226694, 0.583765081239648259016013753333306]
+     seam L/R = byte-identical / byte-identical
+[PASS] S876 gate rec_E8_lo>0  -- rec_E8_lo=0.583765081239648257394009697000000
+[PASS] S876 gate rec_x_lo>0  -- rec_x_lo=0.583765081239648257394013747226694
+[PASS] S876 margin ball intersects recomputed hulls
+[PASS] S876 winding ball inside (-1/4,1/4)  -- [1.292469707114105e-26 +/- 1.28e-17]
+[PASS] S876 descriptors (struct/duration/spatial/time/eps)
+[PASS] S876 seam faces byte-identical
+  -- prism 877 --
+     t      = [[0.133624835931634962911768046419 +/- 2.07e-31], [0.136513785758102593414135528161 +/- 3.36e-31]]
+     duration (end_lo - start_hi) = 0.002888949826467630502367481741457
+     winding  = [1.938704560671158e-26 +/- 1.15e-17]
+     min_mesh = [1.6649409198230058296 +/- 8.12e-19]
+     Dz=37 Dt=199 mesh=144 (4*Dz-4=144)
+     spatial  = [0.51388888888888888889 +/- 1.12e-21] ; exact Dz/(2(Dz-1)) = 37/72 = 0.513888888888888888888888888888888
+     time     = [0.57490101546705846997 +/- 1.13e-21] ; Dt*dt hull = [0.574901015467058469971128866549943, 0.574901015467058469971128866766057]
+     eps      = [0.0012500000000000000000 +/- 3e-27]
+     margin   = [0.57490101546705847076 +/- 7.92e-19]
+     rec_E8   = [0.574901015467058469925749997000000, 0.574901015467058471554250003000000]
+     rec_x    = [0.574901015467058469927982241345054, 0.574901015467058471551982247561168]
+     seam L/R = byte-identical / byte-identical
+[PASS] S877 gate rec_E8_lo>0  -- rec_E8_lo=0.574901015467058469925749997000000
+[PASS] S877 gate rec_x_lo>0  -- rec_x_lo=0.574901015467058469927982241345054
+[PASS] S877 margin ball intersects recomputed hulls
+[PASS] S877 winding ball inside (-1/4,1/4)  -- [1.938704560671158e-26 +/- 1.15e-17]
+[PASS] S877 descriptors (struct/duration/spatial/time/eps)
+[PASS] S877 seam faces byte-identical
+  -- prism 878 --
+     t      = [[0.136513785758102593414135528161 +/- 3.36e-31], [0.139690374092256864430082814055 +/- 3.37e-31]]
+     duration (end_lo - start_hi) = 0.003176588334154271015947285893327
+     winding  = [+/- 1.03e-17]
+     min_mesh = [1.6477404469589204825 +/- 8.23e-19]
+     Dz=33 Dt=178 mesh=128 (4*Dz-4=128)
+     spatial  = 0.51562500000000000000 ; exact Dz/(2(Dz-1)) = 33/64 = 0.515625000000000000000000000000000
+     time     = [0.56543272347946024084 +/- 1.39e-21] ; Dt*dt hull = [0.565432723479460240838616889012206, 0.565432723479460240838616889251794]
+     eps      = [0.0012500000000000000000 +/- 3e-27]
+     margin   = [0.56543272347946024163 +/- 7.92e-19]
+     rec_E8   = [0.565432723479460240835609997000000, 0.565432723479460242484390003000000]
+     rec_x    = [0.565432723479460240838383107748206, 0.565432723479460242484383113987794]
+     seam L/R = byte-identical / byte-identical
+[PASS] S878 gate rec_E8_lo>0  -- rec_E8_lo=0.565432723479460240835609997000000
+[PASS] S878 gate rec_x_lo>0  -- rec_x_lo=0.565432723479460240838383107748206
+[PASS] S878 margin ball intersects recomputed hulls
+[PASS] S878 winding ball inside (-1/4,1/4)  -- [+/- 1.03e-17]
+[PASS] S878 descriptors (struct/duration/spatial/time/eps)
+[PASS] S878 seam faces byte-identical
+  -- prism 879 --
+     t      = [[0.139690374092256864430082814055 +/- 3.37e-31], [0.143206238413488310805381562682 +/- 1.99e-31]]
+     duration (end_lo - start_hi) = 0.003515864321231446375298748626464
+     winding  = [+/- 9.26e-18]
+     min_mesh = [1.6295045048194818830 +/- 8.20e-19]
+     Dz=30 Dt=158 mesh=116 (4*Dz-4=116)
+     spatial  = [0.51724137931034482759 +/- 3.80e-21] ; exact Dz/(2(Dz-1)) = 15/29 = 0.517241379310344827586206896551724
+     time     = [0.55550656275456852730 +/- 2.80e-21] ; Dt*dt hull = [0.555506562754568527297202282981312, 0.555506562754568527297202283150688]
+     eps      = [0.0012500000000000000000 +/- 3e-27]
+     margin   = [0.55550656275456852808 +/- 7.86e-19]
+     rec_E8   = [0.555506562754568527283399997000000, 0.555506562754568528936600003000000]
+     rec_x    = [0.555506562754568527296590817297587, 0.555506562754568528936590823466963]
+     seam L/R = byte-identical / byte-identical
+[PASS] S879 gate rec_E8_lo>0  -- rec_E8_lo=0.555506562754568527283399997000000
+[PASS] S879 gate rec_x_lo>0  -- rec_x_lo=0.555506562754568527296590817297587
+[PASS] S879 margin ball intersects recomputed hulls
+[PASS] S879 winding ball inside (-1/4,1/4)  -- [+/- 9.26e-18]
+[PASS] S879 descriptors (struct/duration/spatial/time/eps)
+[PASS] S879 seam faces byte-identical
+  -- prism 880 --
+     t      = [[0.143206238413488310805381562682 +/- 1.99e-31], [0.147122993957201677872383073853 +/- 1.85e-31]]
+     duration (end_lo - start_hi) = 0.003916755543713367067001511170616
+     winding  = [6.46234853557052e-27 +/- 7.99e-18]
+     min_mesh = [1.6101080411523160454 +/- 7.88e-19]
+     Dz=26 Dt=139 mesh=100 (4*Dz-4=100)
+     spatial  = [0.52000000000000000000 +/- 3e-25] ; exact Dz/(2(Dz-1)) = 13/25 = 0.520000000000000000000000000000000
+     time     = [0.54442902057615802231 +/- 3.22e-21] ; Dt*dt hull = [0.544429020576158022313210052715624, 0.544429020576158022313210052822376]
+     eps      = [0.0012500000000000000000 +/- 3e-27]
+     margin   = [0.54442902057615802309 +/- 7.85e-19]
+     rec_E8   = [0.544429020576158022298779697000000, 0.544429020576158023881220303000000]
+     rec_x    = [0.544429020576158022298789944177624, 0.544429020576158023874789950284376]
+     seam L/R = byte-identical / byte-identical
+[PASS] S880 gate rec_E8_lo>0  -- rec_E8_lo=0.544429020576158022298779697000000
+[PASS] S880 gate rec_x_lo>0  -- rec_x_lo=0.544429020576158022298789944177624
+[PASS] S880 margin ball intersects recomputed hulls
+[PASS] S880 winding ball inside (-1/4,1/4)  -- [6.46234853557052e-27 +/- 7.99e-18]
+[PASS] S880 descriptors (struct/duration/spatial/time/eps)
+[PASS] S880 seam faces byte-identical
+  -- prism 881 --
+     t      = [[0.147122993957201677872383073853 +/- 1.85e-31], [0.151525661350318739691458184216 +/- 2.92e-31]]
+     duration (end_lo - start_hi) = 0.004402667393117061819075110362523
+     winding  = [6.46234853557052e-27 +/- 7.04e-18]
+     min_mesh = [1.5894227818616016883 +/- 8.12e-19]
+     Dz=23 Dt=121 mesh=88 (4*Dz-4=88)
+     spatial  = [0.52272727272727272727 +/- 2.73e-21] ; exact Dz/(2(Dz-1)) = 23/44 = 0.522727272727272727272727272727272
+     time     = [0.53272275456716448011 +/- 1.92e-21] ; Dt*dt hull = [0.532722754567164480108088353865283, 0.532722754567164480108088353980717]
+     eps      = [0.0012500000000000000000 +/- 3e-27]
+     margin   = [0.53272275456716448088 +/- 7.82e-19]
+     rec_E8   = [0.532722754567164480103349997000000, 0.532722754567164481736650003000000]
+     rec_x    = [0.532722754567164480107184370292010, 0.532722754567164481731184376407444]
+     seam L/R = byte-identical / byte-identical
+[PASS] S881 gate rec_E8_lo>0  -- rec_E8_lo=0.532722754567164480103349997000000
+[PASS] S881 gate rec_x_lo>0  -- rec_x_lo=0.532722754567164480107184370292010
+[PASS] S881 margin ball intersects recomputed hulls
+[PASS] S881 winding ball inside (-1/4,1/4)  -- [6.46234853557052e-27 +/- 7.04e-18]
+[PASS] S881 descriptors (struct/duration/spatial/time/eps)
+[PASS] S881 seam faces byte-identical
+  -- prism 882 --
+     t      = [[0.151525661350318739691458184216 +/- 2.92e-31], [0.156572747705793230403959988906 +/- 3.31e-31]]
+     duration (end_lo - start_hi) = 0.005047086355474490712501804689377
+     winding  = [9.693522803355793e-27 +/- 6.08e-18]
+     min_mesh = [1.5672655787014292981 +/- 7.99e-19]
+     Dz=20 Dt=103 mesh=76 (4*Dz-4=76)
+     spatial  = [0.52631578947368421053 +/- 3.69e-21] ; exact Dz/(2(Dz-1)) = 10/19 = 0.526315789473684210526315789473684
+     time     = [0.51984989461387254339 +/- 2.32e-21] ; Dt*dt hull = [0.519849894613872543387685883005831, 0.519849894613872543387685883134169]
+     eps      = [0.0012500000000000000000 +/- 3e-27]
+     margin   = [0.51984989461387254416 +/- 7.74e-19]
+     rec_E8   = [0.519849894613872543374989997000000, 0.519849894613872544985010003000000]
+     rec_x    = [0.519849894613872543386998324392146, 0.519849894613872544984998330520484]
+     seam L/R = byte-identical / byte-identical
+[PASS] S882 gate rec_E8_lo>0  -- rec_E8_lo=0.519849894613872543374989997000000
+[PASS] S882 gate rec_x_lo>0  -- rec_x_lo=0.519849894613872543386998324392146
+[PASS] S882 margin ball intersects recomputed hulls
+[PASS] S882 winding ball inside (-1/4,1/4)  -- [9.693522803355793e-27 +/- 6.08e-18]
+[PASS] S882 descriptors (struct/duration/spatial/time/eps)
+[PASS] S882 seam faces byte-identical
+  -- prism 883 --
+     t      = [[0.156572747705793230403959988906 +/- 3.31e-31], [0.161250000000000000000000000000 +/- 2e-35]]
+     duration (end_lo - start_hi) = 0.004677252294206769596040011093668
+     winding  = [+/- 5.13e-18]
+     min_mesh = [1.5431990755993189515 +/- 7.99e-19]
+     Dz=17 Dt=87 mesh=64 (4*Dz-4=64)
+     spatial  = 0.53125000000000000000 ; exact Dz/(2(Dz-1)) = 17/32 = 0.531250000000000000000000000000000
+     time     = [0.40692094959598895486 +/- 4.52e-21] ; Dt*dt hull = [0.406920949595988954855480965149201, 0.406920949595988954855480965206798]
+     eps      = [0.0012500000000000000000 +/- 3e-27]
+     margin   = [0.60377812600332999667 +/- 7.73e-19]
+     rec_E8   = [0.603778126003329995836479997000000, 0.603778126003329997443520003000000]
+     rec_x    = [0.603778126003329995845519031793201, 0.603778126003329997443519037850798]
+     seam L/R = byte-identical / -
+[PASS] S883 gate rec_E8_lo>0  -- rec_E8_lo=0.603778126003329995836479997000000
+[PASS] S883 gate rec_x_lo>0  -- rec_x_lo=0.603778126003329995845519031793201
+[PASS] S883 margin ball intersects recomputed hulls
+[PASS] S883 winding ball inside (-1/4,1/4)  -- [+/- 5.13e-18]
+[PASS] S883 descriptors (struct/duration/spatial/time/eps)
+[PASS] S883 seam faces byte-identical
+
+== aggregate winding vs exact sum of per-prism enclosures ==
+[PASS] aggregate token equals +/- 8.95e-13 exactly  -- token='[+/- 8.95e-13]'
+[PASS] aggregate encloses 0 and |endpoints| < 1/4
+[PASS] per-prism winding sum interval intersects aggregate interval  -- sum=[-8.96873899183957245148028286137000e-13, 8.96873900816042754851971713863000e-13] agg=[-8.95000000000000000000000000000000e-13, 8.95000000000000000000000000000000e-13]
+  sum of per-prism winding intervals: [-8.96873899183957245148028286137000e-13, 8.96873900816042754851971713863000e-13]
+  aggregate interval: [-8.95000000000000000000000000000000e-13, 8.95000000000000000000000000000000e-13]
+  containment sum inside agg: False
+[PASS] Overall winding number line reads exactly 0.000000
+
+== uniform error claims (uniform_error_256.log) ==
+[PASS] uniform log: e_A+e_B upper < 3.639278679550541e-10  -- eab_hi=3.63927867955054020359174821041699e-10
+[PASS] uniform log: e_C0 upper < 0.000356522647672172  -- ec0_hi=0.000356522647672171713326278151093
+[PASS] uniform log: total upper < 0.000356523011600040  -- total_hi=0.000356523011600039668380298510268
+[PASS] uniform log: total upper < 1/800
+[PASS] claim arithmetic: eAB + eC0 <= claimed total (exact)  -- exact sum=0.000356523011600039955054100000000
+[PASS] uniform log: total ball intersects eAB+eC0 ball sum
+[PASS] uniform log: PASS and RESULT lines present
+  uniform log scope note present: True
+
+== certificate + prereg text spot checks ==
+[PASS] certificate contains '3.639278679550541'
+[PASS] certificate contains '0.000356522647672172'
+[PASS] certificate contains '0.000356523011600040'
+[PASS] certificate contains '0.519849894613872543374989997'
+[PASS] certificate contains '-8.95,8.95'
+[PASS] certificate gate inequality text present
+[PASS] prereg contains frozen claim constant '3.639278679550541e-10'
+[PASS] prereg contains frozen claim constant '0.000356522647672172'
+[PASS] prereg contains frozen claim constant '0.000356523011600040'
+[PASS] prereg contains frozen claim constant '0.519849894613872543374989997'
+
+checks_total: 124  checks_failed: 0
+item4 machine verdict: PASS
+json written: D:\Opencode AI Agent\reports\audit_p1_l2_barrier_results.json

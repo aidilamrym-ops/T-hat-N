@@ -52,8 +52,15 @@ SELESAI — tail lane 47/47 PASS (REPRODUCED):** koridor dua sisi
 `flow_lo − sealed ≥ 5.47846e-12`, `sealed − err_ub ≥ 1.41081e-15`,
 `margin_lo − sealed ≥ 5.47937e-12`, `Mmax_ub < 1.608290`; artefak
 `audit_p1/l2_tail_budget.py` + log resmi + JSON + 4 transkrip smoke
-(2 gagal, dicatat) — commit bersama baris ini. Berikutnya: L2 item 4
-(barrier K=8; cap 4 jam) → L3 → L4 + P3.
+(2 gagal, dicatat). **L2 item 4 SELESAI — barrier subset 124/124 PASS
+(REPRODUCED level-descriptor):** gate `M_i > D_z,i/(2(num−1)) +
+D_t,i·dt_i + 1/800` eksak untuk 883/883 prisma; subset K=8 margin
+terkecil (#875–#882) + seam + first/last; minimum margin re-komputasi
+eksak = klaim sealed `0.519849894613872543374989997` (digit penuh);
+agregat winding `±8.95e-13` ∋ 0 ⊂ (−1/4,1/4); uniform error (3 nilai)
+< klaim beku; artefak `audit_p1/l2_barrier_subset.py` + log resmi +
+JSON + 1 transkrip smoke — commit bersama baris ini. Berikutnya:
+**L3** weld checklist → **L4** report + registry P3.
 
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
@@ -439,6 +446,73 @@ DAN sha256 arsip.
 - **Berikutnya: L2 item 4** (subset barrier K=8 narrowest + seam +
   first/last; cap 4 jam) → **L3** weld checklist → **L4** report +
   registry P3.
+
+### 2.0i [BARU, 2026-10-17] P1 audit — L2 item 4 (barrier subset) SELESAI — REPRODUCED (level descriptor)
+
+- **Klaim beku (pra-reg §4 item 4):** K=8 prisma margin tersegel
+  terkecil + seam faces + prisma first/last; recheck winding dengan
+  metode enclosure kita sendiri (BUKAN sampling interior); klaim:
+  uniform error total `< 0.000356523011600040 < 0.00125`
+  (`e_A+e_B < 3.639278679550541e-10`,
+  `e_C,0 < 0.000356522647672172`); gate `M_i > D_z,i/(2(num−1)) +
+  D_t,i·Δt_i + 0.00125`; agregat winding `[−8.95, 8.95]×10⁻¹³`; margin
+  minimum tersegel `0.519849894613872543374989997`.
+- **Implementasi kita:** `audit_p1/l2_barrier_subset.py` (sha256
+  `8E81881E…`). Device: setiap token desimal log ditranskripsi ke
+  `fractions.Fraction` eksak (tanpa float di semua check); setiap
+  pertidaksamaan = perbandingan rasional eksak dengan endpoint luar
+  konservatif; tanpa evaluasi titik interior slab; tanpa menjalankan
+  ulang lane C/Arb (input reuse sesuai protokol). 10 berkas rilis pinned
+  (`2e9976c4…`) diverifikasi in-run via git blob sha1 + size.
+- **Gate ganda:** `rec_E8_lo = M_lo − spatial_hi − time_hi − eps_hi > 0`
+  (komposisi ala verifier binding rilis, direproduksi independen) dan
+  varian kita lebih kuat `rec_x_lo = M_lo − Dz/(2(Dz−1)) − Dt·Δt_hi −
+  eps_hi > 0` (spatial eksak + hull ball-t); keduanya > 0 untuk 883/883.
+- **Angka kunci (log resmi, machine-extracted):** min
+  `rec_E8_lo = 0.519849894613872543374989997000000` di prisma 882 —
+  **sama persis dengan klaim sealed sampai 27 digit**; min `rec_x_lo =
+  0.519849894613872543386998324392146`; seleksi K=8 = prisma 875–882
+  (set identik di ranking rec_E8_lo); subset S = {1, 874…883} (11
+  prisma); winding maks |endpoint| = 2.27e-15 (prisma 1); seam 882/882
+  token byte-identik; coverage `[0, 129/800]` via rantai token + endpoint
+  `[0.16125 ± 2e-35]`; 883/883 margin-ball ∩ hull rekonsiliasi; eps ball
+  uniform ∋ 1/800 lebar < 1e-25; header N-corners=690988,690988.
+- **Agregat winding:** token `[+/- 8.95e-13]` eksak; Σ interval
+  per-prisma (eksak) = `[−8.96873899183957245148028286137e-13,
+  +8.96873900816042754851971713863e-13]`; irisan dengan agregat = ya
+  (keduanya enclosure dari jumlah riil yang sama); containment
+  Σ ⊆ agregat = **tidak** (selisih ~1.87e-15/sisi dari pembulatan print
+  radius per-prisma ke 3 digit keluar — dicatat sebagai info, bukan
+  verdict; |8.95e-13| ≪ 1/4 sehingga integer-winding = 0 tetap terbukti).
+- **Uniform error (`uniform_error_256.log`, dibandingkan eksak):**
+  `e_A+e_B upper = 3.63927867955054020359…e-10 < 3.639278679550541e-10`;
+  `e_C0 upper = 0.00035652264767217171332… < 0.000356522647672172`;
+  total `= 0.00035652301160003966838… < 0.000356523011600040 < 1/800`;
+  aritmetika klaim eksak `eAB + eC0 = 0.00035652301160003995505… ≤
+  0.000356523011600040`; ball total konsisten dengan ball-sum eAB+eC0
+  (irisan; total = eAB + eC0 di sumber C rilis). Scope note rilis
+  "analytic justification at t=0 remains external" dicatat.
+- **Run resmi:** exit 0, verdict `PASS`, 124/124 check; log
+  `reports/audit_p1_l2_barrier.log` (sha256 `DB67FDA7…`), JSON
+  `reports/audit_p1_l2_barrier_results.json` (sha256 `5D7AED37…`).
+  Reproducibility: log resmi **byte-identik** dengan smoke-1 (sha256
+  sama) — skrip deterministik, input sama; guard LOG-EXISTS memastikan
+  log resmi dibuat oleh run resmi (run segar; JSON ditulis ulang oleh
+  run resmi).
+- **Riwayat pra-run:** smoke-1 = run penuh pertama, PASS 124/124 tanpa
+  perbaikan; tidak ada transkrip gagal (1 transkrip disimpan:
+  `reports/audit_p1_l2_barrier_smoke1.log`).
+- **Coverage item 4 (beku, di JSON `boundary`):** lane C/Arb TIDAK
+  dijalankan ulang; enclosure descriptor per-prisma (nilai mesh,
+  min_mesh, winding, Dz, Dt) dipercaya sebagai INPUT tersegel sesuai
+  protokol; regenerasi koefisien stored-sum & artefak Taylor-tail tidak
+  di-recheck; byte-identity seam ter-serialisasi di dalam assembly rilis
+  tidak di-recheck (hanya token seam sisi-log); sweep independen penuh
+  883-prisma tidak di-ulang (rekomputasi deskriptor untuk 883 + deep
+  check subset); lane prop43/prop62 di luar scope.
+- **Berikutnya: L3** (weld checklist: domain/endpoint/quantifier/
+  substitusi, kompatibilitas parameter X/2 vs T_PT, containment,
+  citation chain) → **L4** report + registry P3.
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 

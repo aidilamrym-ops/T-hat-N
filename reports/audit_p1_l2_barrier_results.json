@@ -1,0 +1,1155 @@
+{
+ "aggregate": {
+  "hi": "179/200000000000000",
+  "lo": "-179/200000000000000",
+  "sum_hi": "896873900816042754851971713863/1000000000000000000000000000000000000000000",
+  "sum_inside_agg": false,
+  "sum_lo": "-896873899183957245148028286137/1000000000000000000000000000000000000000000",
+  "token": "[+/- 8.95e-13]"
+ },
+ "audit": "P1 L2 item 4 -- barrier subset descriptor recheck",
+ "boundary": [
+  "did not re-run the C/Arb lanes (barrier_closed, uniform_error)",
+  "per-prism descriptor enclosures (mesh values, min_mesh, winding, Dz, Dt) trusted as sealed inputs",
+  "stored-sum coefficient regeneration and Taylor-tail artefact not rechecked",
+  "serialized seam byte-identity inside the release assembly not rechecked (log-side token identity only)",
+  "full independent 883-prism sweep not re-performed (descriptor recomputation for all 883 + deep checks on the subset)",
+  "prop43/prop62 lanes not in scope"
+ ],
+ "checks": [
+  {
+   "detail": "sha256=45a685d9393f26c2 role=claim text (assertions compared here)",
+   "name": "prov BARRIER_CERTIFICATE.md (blob e5278fbd45b4, 9914 B)",
+   "ok": true
+  },
+  {
+   "detail": "sha256=2d010f70902dca16 role=PRIMARY INPUT: 883 sealed prism descriptors rechecked here",
+   "name": "prov barrier/certificates/barrier_target_closed.log (blob 7bed566a9de3, 387381 B)",
+   "ok": true
+  },
+  {
+   "detail": "sha256=7f43bc240b8852fd role=sealed uniform-error Arb log compared here",
+   "name": "prov barrier/certificates/uniform_error_256.log (blob 3e3e2cb40524, 988 B)",
+   "ok": true
+  },
+  {
+   "detail": "sha256=31102fa5feba5b07 role=context only (not consumed by item 4)",
+   "name": "prov barrier/certificates/storedsum_taylor_tail.log (blob 597af26e3439, 679 B)",
+   "ok": true
+  },
+  {
+   "detail": "sha256=9f0b732e81dcde08 role=context only (not consumed by item 4)",
+   "name": "prov barrier/certificates/storedsum_provenance.log (blob 31d596fa9d46, 424 B)",
+   "ok": true
+  },
+  {
+   "detail": "sha256=3d32f5be09028d73 role=claim/format identification only; no code reused",
+   "name": "prov verifiers/verify_barrier_binding.py (blob 403c51345153, 22345 B)",
+   "ok": true
+  },
+  {
+   "detail": "sha256=76e4d4f856baad77 role=generator source read for field semantics; no code reused",
+   "name": "prov barrier/src/TloopSinglemat_closed_cert.c (blob 6c4f0cbf1356, 53944 B)",
+   "ok": true
+  },
+  {
+   "detail": "sha256=dd61648fa05e76ba role=uniform-error source (total = eAB + eC0 semantics)",
+   "name": "prov barrier/src/verify_uniform_error_01787854.c (blob 3b838984a28a, 8261 B)",
+   "ok": true
+  },
+  {
+   "detail": "sha256=12f2c7f596c3db05 role=context only (not consumed by item 4)",
+   "name": "prov barrier/compare_storedsum_intervals.py (blob d063327a0dbf, 3386 B)",
+   "ok": true
+  },
+  {
+   "detail": "sha256=386fec3590b28480 role=official replay driver (invocation recorded; not re-run)",
+   "name": "prov scripts/run_barrier_replay.sh (blob d31b55365449, 2984 B)",
+   "ok": true
+  },
+  {
+   "detail": "parsed=883 parse_fail=0",
+   "name": "all prism lines parse in the sealed format (883)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "prism identifiers are consecutive 1..883",
+   "ok": true
+  },
+  {
+   "detail": "nonblank=891 recognized=True",
+   "name": "log line structure: 891 nonblank, unique headers, result/cpu ordered",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "no failure/abort marker in the log",
+   "ok": true
+  },
+  {
+   "detail": "N-corners=690988,690988",
+   "name": "header: N-corners=690988,690988",
+   "ok": true
+  },
+  {
+   "detail": "ball=[0.161249999999999999999999999999999, 0.161250000000000000000000000000000]",
+   "name": "header: target enclosure encloses 129/800, width <= 1e-25",
+   "ok": true
+  },
+  {
+   "detail": "ball=[0.001249999999999999999999997000000, 0.001250000000000000000000003000000]",
+   "name": "header: allowance ball encloses 1/800, width < 1e-25",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "header: X/N/y0/t slab tokens present",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "header: stored-sum matrix context line present",
+   "ok": true
+  },
+  {
+   "detail": "parsed=883 parse_fail=0",
+   "name": "all prism tokens parse into exact rational intervals",
+   "ok": true
+  },
+  {
+   "detail": "violations=0",
+   "name": "all prisms: Dz,Dt exact positive ints, mesh == 4*Dz-4",
+   "ok": true
+  },
+  {
+   "detail": "violations=0",
+   "name": "all prisms: positive duration start_hi < end_lo",
+   "ok": true
+  },
+  {
+   "detail": "violations=0",
+   "name": "all prisms: spatial ball encloses Dz/(2(Dz-1))",
+   "ok": true
+  },
+  {
+   "detail": "violations=0",
+   "name": "all prisms: time ball encloses Dt*[dt_lo,dt_hi]",
+   "ok": true
+  },
+  {
+   "detail": "violations=0 uniform=True",
+   "name": "all prisms: eps ball uniform, encloses 1/800, radius < 1e-25",
+   "ok": true
+  },
+  {
+   "detail": "min=0.519849894613872543374989997000000 at prism 882 of 883",
+   "name": "GATE rec_E8_lo > 0 for every prism",
+   "ok": true
+  },
+  {
+   "detail": "min=0.519849894613872543386998324392146 at prism 882",
+   "name": "GATE rec_x_lo > 0 for every prism (refined variant)",
+   "ok": true
+  },
+  {
+   "detail": "violations=0",
+   "name": "margin ball intersects recomputed hulls for every prism",
+   "ok": true
+  },
+  {
+   "detail": "max |endpoint|=2.27000000165436122510605500000000e-15 at prism 1",
+   "name": "winding ball strictly inside (-1/4, 1/4) for every prism",
+   "ok": true
+  },
+  {
+   "detail": "mismatches=0",
+   "name": "all 882 adjacent seam tokens byte-identical",
+   "ok": true
+  },
+  {
+   "detail": "token='0'",
+   "name": "first prism starts at exact token '0'",
+   "ok": true
+  },
+  {
+   "detail": "token='[0.161250000000000000000000000000 +/- 2e-35]'",
+   "name": "last prism end ball encloses t0=129/800",
+   "ok": true
+  },
+  {
+   "detail": "coverage='[0.161250000000000000000000000000 +/- 2e-35]'",
+   "name": "coverage endpoint token equals last prism end token",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "criterion: K=8 selection computed from sealed margin balls",
+   "ok": true
+  },
+  {
+   "detail": "min=0.519849894613872543374989997000000 at prism 882",
+   "name": "global min rec_E8_lo equals sealed minimum margin exactly",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "min-margin prism is #882",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "min-margin prism is inside subset S",
+   "ok": true
+  },
+  {
+   "detail": "rec_E8_lo=1.888530000829456491217219997000000",
+   "name": "S1 gate rec_E8_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "rec_x_lo=1.888530000829456491225032294806770",
+   "name": "S1 gate rec_x_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S1 margin ball intersects recomputed hulls",
+   "ok": true
+  },
+  {
+   "detail": "[1.654361225106055e-24 +/- 2.27e-15]",
+   "name": "S1 winding ball inside (-1/4,1/4)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S1 descriptors (struct/duration/spatial/time/eps)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S1 seam faces byte-identical",
+   "ok": true
+  },
+  {
+   "detail": "rec_E8_lo=0.599898453210905745622299997000000",
+   "name": "S874 gate rec_E8_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "rec_x_lo=0.599898453210905745629863284219690",
+   "name": "S874 gate rec_x_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S874 margin ball intersects recomputed hulls",
+   "ok": true
+  },
+  {
+   "detail": "[1.292469707114105e-26 +/- 1.50e-17]",
+   "name": "S874 winding ball inside (-1/4,1/4)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S874 descriptors (struct/duration/spatial/time/eps)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S874 seam faces byte-identical",
+   "ok": true
+  },
+  {
+   "detail": "rec_E8_lo=0.591971607007705382703759997000000",
+   "name": "S875 gate rec_E8_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "rec_x_lo=0.591971607007705382710746366777688",
+   "name": "S875 gate rec_x_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S875 margin ball intersects recomputed hulls",
+   "ok": true
+  },
+  {
+   "detail": "[1.292469707114105e-26 +/- 1.38e-17]",
+   "name": "S875 winding ball inside (-1/4,1/4)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S875 descriptors (struct/duration/spatial/time/eps)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S875 seam faces byte-identical",
+   "ok": true
+  },
+  {
+   "detail": "rec_E8_lo=0.583765081239648257394009697000000",
+   "name": "S876 gate rec_E8_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "rec_x_lo=0.583765081239648257394013747226694",
+   "name": "S876 gate rec_x_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S876 margin ball intersects recomputed hulls",
+   "ok": true
+  },
+  {
+   "detail": "[1.292469707114105e-26 +/- 1.28e-17]",
+   "name": "S876 winding ball inside (-1/4,1/4)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S876 descriptors (struct/duration/spatial/time/eps)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S876 seam faces byte-identical",
+   "ok": true
+  },
+  {
+   "detail": "rec_E8_lo=0.574901015467058469925749997000000",
+   "name": "S877 gate rec_E8_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "rec_x_lo=0.574901015467058469927982241345054",
+   "name": "S877 gate rec_x_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S877 margin ball intersects recomputed hulls",
+   "ok": true
+  },
+  {
+   "detail": "[1.938704560671158e-26 +/- 1.15e-17]",
+   "name": "S877 winding ball inside (-1/4,1/4)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S877 descriptors (struct/duration/spatial/time/eps)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S877 seam faces byte-identical",
+   "ok": true
+  },
+  {
+   "detail": "rec_E8_lo=0.565432723479460240835609997000000",
+   "name": "S878 gate rec_E8_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "rec_x_lo=0.565432723479460240838383107748206",
+   "name": "S878 gate rec_x_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S878 margin ball intersects recomputed hulls",
+   "ok": true
+  },
+  {
+   "detail": "[+/- 1.03e-17]",
+   "name": "S878 winding ball inside (-1/4,1/4)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S878 descriptors (struct/duration/spatial/time/eps)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S878 seam faces byte-identical",
+   "ok": true
+  },
+  {
+   "detail": "rec_E8_lo=0.555506562754568527283399997000000",
+   "name": "S879 gate rec_E8_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "rec_x_lo=0.555506562754568527296590817297587",
+   "name": "S879 gate rec_x_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S879 margin ball intersects recomputed hulls",
+   "ok": true
+  },
+  {
+   "detail": "[+/- 9.26e-18]",
+   "name": "S879 winding ball inside (-1/4,1/4)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S879 descriptors (struct/duration/spatial/time/eps)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S879 seam faces byte-identical",
+   "ok": true
+  },
+  {
+   "detail": "rec_E8_lo=0.544429020576158022298779697000000",
+   "name": "S880 gate rec_E8_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "rec_x_lo=0.544429020576158022298789944177624",
+   "name": "S880 gate rec_x_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S880 margin ball intersects recomputed hulls",
+   "ok": true
+  },
+  {
+   "detail": "[6.46234853557052e-27 +/- 7.99e-18]",
+   "name": "S880 winding ball inside (-1/4,1/4)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S880 descriptors (struct/duration/spatial/time/eps)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S880 seam faces byte-identical",
+   "ok": true
+  },
+  {
+   "detail": "rec_E8_lo=0.532722754567164480103349997000000",
+   "name": "S881 gate rec_E8_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "rec_x_lo=0.532722754567164480107184370292010",
+   "name": "S881 gate rec_x_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S881 margin ball intersects recomputed hulls",
+   "ok": true
+  },
+  {
+   "detail": "[6.46234853557052e-27 +/- 7.04e-18]",
+   "name": "S881 winding ball inside (-1/4,1/4)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S881 descriptors (struct/duration/spatial/time/eps)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S881 seam faces byte-identical",
+   "ok": true
+  },
+  {
+   "detail": "rec_E8_lo=0.519849894613872543374989997000000",
+   "name": "S882 gate rec_E8_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "rec_x_lo=0.519849894613872543386998324392146",
+   "name": "S882 gate rec_x_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S882 margin ball intersects recomputed hulls",
+   "ok": true
+  },
+  {
+   "detail": "[9.693522803355793e-27 +/- 6.08e-18]",
+   "name": "S882 winding ball inside (-1/4,1/4)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S882 descriptors (struct/duration/spatial/time/eps)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S882 seam faces byte-identical",
+   "ok": true
+  },
+  {
+   "detail": "rec_E8_lo=0.603778126003329995836479997000000",
+   "name": "S883 gate rec_E8_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "rec_x_lo=0.603778126003329995845519031793201",
+   "name": "S883 gate rec_x_lo>0",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S883 margin ball intersects recomputed hulls",
+   "ok": true
+  },
+  {
+   "detail": "[+/- 5.13e-18]",
+   "name": "S883 winding ball inside (-1/4,1/4)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S883 descriptors (struct/duration/spatial/time/eps)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "S883 seam faces byte-identical",
+   "ok": true
+  },
+  {
+   "detail": "token='[+/- 8.95e-13]'",
+   "name": "aggregate token equals +/- 8.95e-13 exactly",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "aggregate encloses 0 and |endpoints| < 1/4",
+   "ok": true
+  },
+  {
+   "detail": "sum=[-8.96873899183957245148028286137000e-13, 8.96873900816042754851971713863000e-13] agg=[-8.95000000000000000000000000000000e-13, 8.95000000000000000000000000000000e-13]",
+   "name": "per-prism winding sum interval intersects aggregate interval",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "Overall winding number line reads exactly 0.000000",
+   "ok": true
+  },
+  {
+   "detail": "eab_hi=3.63927867955054020359174821041699e-10",
+   "name": "uniform log: e_A+e_B upper < 3.639278679550541e-10",
+   "ok": true
+  },
+  {
+   "detail": "ec0_hi=0.000356522647672171713326278151093",
+   "name": "uniform log: e_C0 upper < 0.000356522647672172",
+   "ok": true
+  },
+  {
+   "detail": "total_hi=0.000356523011600039668380298510268",
+   "name": "uniform log: total upper < 0.000356523011600040",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "uniform log: total upper < 1/800",
+   "ok": true
+  },
+  {
+   "detail": "exact sum=0.000356523011600039955054100000000",
+   "name": "claim arithmetic: eAB + eC0 <= claimed total (exact)",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "uniform log: total ball intersects eAB+eC0 ball sum",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "uniform log: PASS and RESULT lines present",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "certificate contains '3.639278679550541'",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "certificate contains '0.000356522647672172'",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "certificate contains '0.000356523011600040'",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "certificate contains '0.519849894613872543374989997'",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "certificate contains '-8.95,8.95'",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "certificate gate inequality text present",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "prereg contains frozen claim constant '3.639278679550541e-10'",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "prereg contains frozen claim constant '0.000356522647672172'",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "prereg contains frozen claim constant '0.000356523011600040'",
+   "ok": true
+  },
+  {
+   "detail": "",
+   "name": "prereg contains frozen claim constant '0.519849894613872543374989997'",
+   "ok": true
+  }
+ ],
+ "checks_failed": 0,
+ "checks_total": 124,
+ "device": "exact rational arithmetic on sealed decimal tokens; no float; no interior sampling; no C/Arb re-run",
+ "global_min_rec_e8_lo": {
+  "dec": "0.519849894613872543374989997000000",
+  "prism": 882,
+  "value": "519849894613872543374989997/1000000000000000000000000000"
+ },
+ "global_min_rec_x_lo": {
+  "dec": "0.519849894613872543386998324392146",
+  "prism": 882,
+  "value": "9877147997663578324352968163450789/19000000000000000000000000000000000"
+ },
+ "max_abs_winding_endpoint": {
+  "dec": "2.27000000165436122510605500000000e-15",
+  "prism": 1,
+  "value": "454000000330872245021211/200000000000000000000000000000000000000"
+ },
+ "min_duration": {
+  "dec": "0.000035817812859489748724136976656",
+  "prism": 1,
+  "value": "89544532148724371810342441641989/2500000000000000000000000000000000000"
+ },
+ "prereg": "reports/AUDIT_DBN_PREREG_2026-10-17.md section 4 item 4",
+ "release_commit": "2e9976c4becbf97e31c56fe75fce07cdff5dd4ea",
+ "runtime_seconds": 0.2,
+ "selection": [
+  {
+   "idx": 882,
+   "margin_lo": "259924947306936271693/500000000000000000000",
+   "margin_lo_dec": "0.519849894613872543386000000000000",
+   "rec_e8_lo": "519849894613872543374989997/1000000000000000000000000000",
+   "rec_x_lo": "9877147997663578324352968163450789/19000000000000000000000000000000000"
+  },
+  {
+   "idx": 881,
+   "margin_lo": "266361377283582240049/500000000000000000000",
+   "margin_lo_dec": "0.532722754567164480098000000000000",
+   "rec_e8_lo": "532722754567164480103349997/1000000000000000000000000000",
+   "rec_x_lo": "5859950300238809281179028073212113/11000000000000000000000000000000000"
+  },
+  {
+   "idx": 880,
+   "margin_lo": "108885804115231604461/200000000000000000000",
+   "margin_lo_dec": "0.544429020576158022305000000000000",
+   "rec_e8_lo": "544429020576158022298779697/1000000000000000000000000000",
+   "rec_x_lo": "68053627572019752787348743022203/125000000000000000000000000000000"
+  },
+  {
+   "idx": 879,
+   "margin_lo": "277753281377284263647/500000000000000000000",
+   "margin_lo_dec": "0.555506562754568527294000000000000",
+   "rec_e8_lo": "555506562754568527283399997/1000000000000000000000000000",
+   "rec_x_lo": "503427822496327727862535428175939/906250000000000000000000000000000"
+  },
+  {
+   "idx": 878,
+   "margin_lo": "282716361739730120419/500000000000000000000",
+   "margin_lo_dec": "0.565432723479460240838000000000000",
+   "rec_e8_lo": "565432723479460240835609997/1000000000000000000000000000",
+   "rec_x_lo": "282716361739730120419191553874103/500000000000000000000000000000000"
+  },
+  {
+   "idx": 877,
+   "margin_lo": "35931313466691154373/62500000000000000000",
+   "margin_lo_dec": "0.574901015467058469968000000000000",
+   "rec_e8_lo": "574901015467058469925749997/1000000000000000000000000000",
+   "rec_x_lo": "5174109139203526229351840172105487/9000000000000000000000000000000000"
+  },
+  {
+   "idx": 876,
+   "margin_lo": "291882540619824128697/500000000000000000000",
+   "margin_lo_dec": "0.583765081239648257394000000000000",
+   "rec_e8_lo": "583765081239648257394009697/1000000000000000000000000000",
+   "rec_x_lo": "291882540619824128697006873613347/500000000000000000000000000000000"
+  },
+  {
+   "idx": 875,
+   "margin_lo": "591971607007705382733/1000000000000000000000",
+   "margin_lo_dec": "0.591971607007705382733000000000000",
+   "rec_e8_lo": "591971607007705382703759997/1000000000000000000000000000",
+   "rec_x_lo": "127273895506656657282810468857203061/215000000000000000000000000000000000"
+  }
+ ],
+ "selection_rule": "K=8 smallest lower endpoint of the sealed margin ball; plus both seam-face neighbours of each; plus first and last prism",
+ "selection_same_under_rec_e8_ranking": true,
+ "sources": [
+  {
+   "blob_sha1": "e5278fbd45b448618d404cbbd20610be124253d4",
+   "rel": "BARRIER_CERTIFICATE.md",
+   "role": "claim text (assertions compared here)",
+   "sha256": "45a685d9393f26c25540debdcfe41fb670ae42223a53f77cdb67cf2af3596541",
+   "size": 9914
+  },
+  {
+   "blob_sha1": "7bed566a9de30ccf35598419480164cae2632820",
+   "rel": "barrier/certificates/barrier_target_closed.log",
+   "role": "PRIMARY INPUT: 883 sealed prism descriptors rechecked here",
+   "sha256": "2d010f70902dca1627f40ddcd68f3954b37fd9596f7840787415eeafb20805f4",
+   "size": 387381
+  },
+  {
+   "blob_sha1": "3e3e2cb40524c3dadf55e604668bed14377fdebc",
+   "rel": "barrier/certificates/uniform_error_256.log",
+   "role": "sealed uniform-error Arb log compared here",
+   "sha256": "7f43bc240b8852fde73fe4f95ff050481af601acead90a5232e58e604c55a163",
+   "size": 988
+  },
+  {
+   "blob_sha1": "597af26e3439389bb9f8f56838994fc1ac365b51",
+   "rel": "barrier/certificates/storedsum_taylor_tail.log",
+   "role": "context only (not consumed by item 4)",
+   "sha256": "31102fa5feba5b07d3ccb155e7e3f2741bf359e95ac2e5282fa9961f04df19eb",
+   "size": 679
+  },
+  {
+   "blob_sha1": "31d596fa9d46182ef5849e1e6a3e7a2e45556db7",
+   "rel": "barrier/certificates/storedsum_provenance.log",
+   "role": "context only (not consumed by item 4)",
+   "sha256": "9f0b732e81dcde089ed78224efa7d6f613601dd240f0da6feee98ec265776cc4",
+   "size": 424
+  },
+  {
+   "blob_sha1": "403c51345153f1acc74a1ca4a29a56c2f1dda5ba",
+   "rel": "verifiers/verify_barrier_binding.py",
+   "role": "claim/format identification only; no code reused",
+   "sha256": "3d32f5be09028d735ccd50e4a8a5fd264c6a48868a098f7fe7d9ae5ea08db7cd",
+   "size": 22345
+  },
+  {
+   "blob_sha1": "6c4f0cbf1356759e385579d4c612d401c15eafaf",
+   "rel": "barrier/src/TloopSinglemat_closed_cert.c",
+   "role": "generator source read for field semantics; no code reused",
+   "sha256": "76e4d4f856baad77190ec12b1e23aa1d27e5c053e43df02375715dc006147cb0",
+   "size": 53944
+  },
+  {
+   "blob_sha1": "3b838984a28aa80f6b0b4255c8656fb62a848521",
+   "rel": "barrier/src/verify_uniform_error_01787854.c",
+   "role": "uniform-error source (total = eAB + eC0 semantics)",
+   "sha256": "dd61648fa05e76bacedc5b7554c643d01500f3d16c91b47d3156a6e00545d858",
+   "size": 8261
+  },
+  {
+   "blob_sha1": "d063327a0dbf9ffca74ed64c6a937d017629cf0b",
+   "rel": "barrier/compare_storedsum_intervals.py",
+   "role": "context only (not consumed by item 4)",
+   "sha256": "12f2c7f596c3db05941fcc31106deda0841a9a11b196fe765511287bfddccfaf",
+   "size": 3386
+  },
+  {
+   "blob_sha1": "d31b55365449da12c2a37343e73b416555e5b4e4",
+   "rel": "scripts/run_barrier_replay.sh",
+   "role": "official replay driver (invocation recorded; not re-run)",
+   "sha256": "386fec3590b28480838ae801ef10ba219c799575b6ee2ff47d2b8e876faeb685",
+   "size": 2984
+  }
+ ],
+ "subset": [
+  1,
+  874,
+  875,
+  876,
+  877,
+  878,
+  879,
+  880,
+  881,
+  882,
+  883
+ ],
+ "subset_detail": [
+  {
+   "dt": 52726,
+   "dz": 9600,
+   "eps": "[0.0012500000000000000000 +/- 3e-27]",
+   "gate_e8": true,
+   "gate_x": true,
+   "idx": 1,
+   "margin": "[1.8885300008294564923 +/- 1.08e-18]",
+   "mesh": 38396,
+   "min_mesh": "[4.2783620904181587383 +/- 1.08e-18]",
+   "rec_e8": [
+    "1888530000829456491217219997/1000000000000000000000000000",
+    "1888530000829456493442780003/1000000000000000000000000000"
+   ],
+   "rec_x": [
+    "22659999347452441074086356247312732803193/11998750000000000000000000000000000000000",
+    "22659999347452441100003656319310800088807/11998750000000000000000000000000000000000"
+   ],
+   "s_exact": "4800/9599",
+   "spatial": "[0.50005208875924575477 +/- 3.88e-21]",
+   "t_end": "[3.58178128594897487241369766568e-5 +/- 4.40e-36]",
+   "t_start": "0",
+   "time": "[1.8885300008294564912 +/- 2.89e-20]",
+   "time_hull": [
+    "2360662501036820614036057789007756007/1250000000000000000000000000000000000",
+    "2360662501036820614036057789008335993/1250000000000000000000000000000000000"
+   ],
+   "winding": "[1.654361225106055e-24 +/- 2.27e-15]"
+  },
+  {
+   "dt": 264,
+   "dz": 48,
+   "eps": "[0.0012500000000000000000 +/- 3e-27]",
+   "gate_e8": true,
+   "gate_x": true,
+   "idx": 874,
+   "margin": "[0.59989845321090574643 +/- 8.03e-19]",
+   "mesh": 188,
+   "min_mesh": "[1.7116852042941519176 +/- 8.02e-19]",
+   "rec_e8": [
+    "599898453210905745622299997/1000000000000000000000000000",
+    "599898453210905747237700003/1000000000000000000000000000"
+   ],
+   "rec_x": [
+    "3524403412614071255575446794790683/5875000000000000000000000000000000",
+    "3524403412614071264998946831489317/5875000000000000000000000000000000"
+   ],
+   "s_exact": "24/47",
+   "spatial": "[0.51063829787234042553 +/- 1.92e-21]",
+   "t_end": "[0.128525194624315465118920001473 +/- 2.76e-31]",
+   "t_start": "[0.126252851998516579718782797613 +/- 1.91e-31]",
+   "time": "[0.59989845321090574564 +/- 3.78e-21]",
+   "time_hull": [
+    "74987306651363218204527727364589/125000000000000000000000000000000",
+    "74987306651363218204527727395411/125000000000000000000000000000000"
+   ],
+   "winding": "[1.292469707114105e-26 +/- 1.50e-17]"
+  },
+  {
+   "dt": 242,
+   "dz": 44,
+   "eps": "[0.0012500000000000000000 +/- 3e-27]",
+   "gate_e8": true,
+   "gate_x": true,
+   "idx": 875,
+   "margin": "[0.59197160700770538353 +/- 7.97e-19]",
+   "mesh": 172,
+   "min_mesh": "[1.6968211209921549523 +/- 8.08e-19]",
+   "rec_e8": [
+    "591971607007705382703759997/1000000000000000000000000000",
+    "591971607007705384336240003/1000000000000000000000000000"
+   ],
+   "rec_x": [
+    "127273895506656657282810468857203061/215000000000000000000000000000000000",
+    "127273895506656657630250470179596939/215000000000000000000000000000000000"
+   ],
+   "s_exact": "22/43",
+   "spatial": "[0.51162790697674418605 +/- 3.49e-21]",
+   "t_end": "[0.130971358289636561741790836193 +/- 3.53e-32]",
+   "t_start": "[0.128525194624315465118920001473 +/- 2.76e-31]",
+   "time": "[0.59197160700770538273 +/- 4.75e-21]",
+   "time_hull": [
+    "2959858035038526913673710010823327/5000000000000000000000000000000000",
+    "2959858035038526913673710011576673/5000000000000000000000000000000000"
+   ],
+   "winding": "[1.292469707114105e-26 +/- 1.38e-17]"
+  },
+  {
+   "dt": 220,
+   "dz": 41,
+   "eps": "[0.0012500000000000000000 +/- 3e-27]",
+   "gate_e8": true,
+   "gate_x": true,
+   "idx": 876,
+   "margin": "[0.58376508123964825819 +/- 7.96e-19]",
+   "mesh": 160,
+   "min_mesh": "[1.6812801624792965156 +/- 8.11e-19]",
+   "rec_e8": [
+    "583765081239648257394009697/1000000000000000000000000000",
+    "583765081239648259025990303/1000000000000000000000000000"
+   ],
+   "rec_x": [
+    "291882540619824128697006873613347/500000000000000000000000000000000",
+    "291882540619824129508006876666653/500000000000000000000000000000000"
+   ],
+   "s_exact": "41/80",
+   "spatial": "[0.51250000000000000000 +/- 3e-25]",
+   "t_end": "[0.133624835931634962911768046419 +/- 2.07e-31]",
+   "t_start": "[0.130971358289636561741790836193 +/- 3.53e-32]",
+   "time": "[0.58376508123964825739 +/- 4.99e-21]",
+   "time_hull": [
+    "291882540619824128697493124833347/500000000000000000000000000000000",
+    "291882540619824128697493124886653/500000000000000000000000000000000"
+   ],
+   "winding": "[1.292469707114105e-26 +/- 1.28e-17]"
+  },
+  {
+   "dt": 199,
+   "dz": 37,
+   "eps": "[0.0012500000000000000000 +/- 3e-27]",
+   "gate_e8": true,
+   "gate_x": true,
+   "idx": 877,
+   "margin": "[0.57490101546705847076 +/- 7.92e-19]",
+   "mesh": 144,
+   "min_mesh": "[1.6649409198230058296 +/- 8.12e-19]",
+   "rec_e8": [
+    "574901015467058469925749997/1000000000000000000000000000",
+    "574901015467058471554250003/1000000000000000000000000000"
+   ],
+   "rec_x": [
+    "5174109139203526229351840172105487/9000000000000000000000000000000000",
+    "5174109139203526243967840228050513/9000000000000000000000000000000000"
+   ],
+   "s_exact": "37/72",
+   "spatial": "[0.51388888888888888889 +/- 1.12e-21]",
+   "t_end": "[0.136513785758102593414135528161 +/- 3.36e-31]",
+   "t_start": "[0.133624835931634962911768046419 +/- 2.07e-31]",
+   "time": "[0.57490101546705846997 +/- 1.13e-21]",
+   "time_hull": [
+    "574901015467058469971128866549943/1000000000000000000000000000000000",
+    "574901015467058469971128866766057/1000000000000000000000000000000000"
+   ],
+   "winding": "[1.938704560671158e-26 +/- 1.15e-17]"
+  },
+  {
+   "dt": 178,
+   "dz": 33,
+   "eps": "[0.0012500000000000000000 +/- 3e-27]",
+   "gate_e8": true,
+   "gate_x": true,
+   "idx": 878,
+   "margin": "[0.56543272347946024163 +/- 7.92e-19]",
+   "mesh": 128,
+   "min_mesh": "[1.6477404469589204825 +/- 8.23e-19]",
+   "rec_e8": [
+    "565432723479460240835609997/1000000000000000000000000000",
+    "565432723479460242484390003/1000000000000000000000000000"
+   ],
+   "rec_x": [
+    "282716361739730120419191553874103/500000000000000000000000000000000",
+    "282716361739730121242191556993897/500000000000000000000000000000000"
+   ],
+   "s_exact": "33/64",
+   "spatial": "0.51562500000000000000",
+   "t_end": "[0.139690374092256864430082814055 +/- 3.37e-31]",
+   "t_start": "[0.136513785758102593414135528161 +/- 3.36e-31]",
+   "time": "[0.56543272347946024084 +/- 1.39e-21]",
+   "time_hull": [
+    "282716361739730120419308444506103/500000000000000000000000000000000",
+    "282716361739730120419308444625897/500000000000000000000000000000000"
+   ],
+   "winding": "[+/- 1.03e-17]"
+  },
+  {
+   "dt": 158,
+   "dz": 30,
+   "eps": "[0.0012500000000000000000 +/- 3e-27]",
+   "gate_e8": true,
+   "gate_x": true,
+   "idx": 879,
+   "margin": "[0.55550656275456852808 +/- 7.86e-19]",
+   "mesh": 116,
+   "min_mesh": "[1.6295045048194818830 +/- 8.20e-19]",
+   "rec_e8": [
+    "555506562754568527283399997/1000000000000000000000000000",
+    "555506562754568528936600003/1000000000000000000000000000"
+   ],
+   "rec_x": [
+    "503427822496327727862535428175939/906250000000000000000000000000000",
+    "62928477812040966168598179220867/113281250000000000000000000000000"
+   ],
+   "s_exact": "15/29",
+   "spatial": "[0.51724137931034482759 +/- 3.80e-21]",
+   "t_end": "[0.143206238413488310805381562682 +/- 1.99e-31]",
+   "t_start": "[0.139690374092256864430082814055 +/- 3.37e-31]",
+   "time": "[0.55550656275456852730 +/- 2.80e-21]",
+   "time_hull": [
+    "8679790043040133239018785671583/15625000000000000000000000000000",
+    "17359580086080266478037571348459/31250000000000000000000000000000"
+   ],
+   "winding": "[+/- 9.26e-18]"
+  },
+  {
+   "dt": 139,
+   "dz": 26,
+   "eps": "[0.0012500000000000000000 +/- 3e-27]",
+   "gate_e8": true,
+   "gate_x": true,
+   "idx": 880,
+   "margin": "[0.54442902057615802309 +/- 7.85e-19]",
+   "mesh": 100,
+   "min_mesh": "[1.6101080411523160454 +/- 7.88e-19]",
+   "rec_e8": [
+    "544429020576158022298779697/1000000000000000000000000000",
+    "544429020576158023881220303/1000000000000000000000000000"
+   ],
+   "rec_x": [
+    "68053627572019752787348743022203/125000000000000000000000000000000",
+    "68053627572019752984348743785547/125000000000000000000000000000000"
+   ],
+   "s_exact": "13/25",
+   "spatial": "[0.52000000000000000000 +/- 3e-25]",
+   "t_end": "[0.147122993957201677872383073853 +/- 1.85e-31]",
+   "t_start": "[0.143206238413488310805381562682 +/- 1.99e-31]",
+   "time": "[0.54442902057615802231 +/- 3.22e-21]",
+   "time_hull": [
+    "68053627572019752789151256589453/125000000000000000000000000000000",
+    "68053627572019752789151256602797/125000000000000000000000000000000"
+   ],
+   "winding": "[6.46234853557052e-27 +/- 7.99e-18]"
+  },
+  {
+   "dt": 121,
+   "dz": 23,
+   "eps": "[0.0012500000000000000000 +/- 3e-27]",
+   "gate_e8": true,
+   "gate_x": true,
+   "idx": 881,
+   "margin": "[0.53272275456716448088 +/- 7.82e-19]",
+   "mesh": 88,
+   "min_mesh": "[1.5894227818616016883 +/- 8.12e-19]",
+   "rec_e8": [
+    "532722754567164480103349997/1000000000000000000000000000",
+    "532722754567164481736650003/1000000000000000000000000000"
+   ],
+   "rec_x": [
+    "5859950300238809281179028073212113/11000000000000000000000000000000000",
+    "5859950300238809299043028140481887/11000000000000000000000000000000000"
+   ],
+   "s_exact": "23/44",
+   "spatial": "[0.52272727272727272727 +/- 2.73e-21]",
+   "t_end": "[0.151525661350318739691458184216 +/- 2.92e-31]",
+   "t_start": "[0.147122993957201677872383073853 +/- 1.85e-31]",
+   "time": "[0.53272275456716448011 +/- 1.92e-21]",
+   "time_hull": [
+    "532722754567164480108088353865283/1000000000000000000000000000000000",
+    "532722754567164480108088353980717/1000000000000000000000000000000000"
+   ],
+   "winding": "[6.46234853557052e-27 +/- 7.04e-18]"
+  },
+  {
+   "dt": 103,
+   "dz": 20,
+   "eps": "[0.0012500000000000000000 +/- 3e-27]",
+   "gate_e8": true,
+   "gate_x": true,
+   "idx": 882,
+   "margin": "[0.51984989461387254416 +/- 7.74e-19]",
+   "mesh": 76,
+   "min_mesh": "[1.5672655787014292981 +/- 7.99e-19]",
+   "rec_e8": [
+    "519849894613872543374989997/1000000000000000000000000000",
+    "519849894613872544985010003/1000000000000000000000000000"
+   ],
+   "rec_x": [
+    "9877147997663578324352968163450789/19000000000000000000000000000000000",
+    "9877147997663578354714968279889211/19000000000000000000000000000000000"
+   ],
+   "s_exact": "10/19",
+   "spatial": "[0.52631578947368421053 +/- 3.69e-21]",
+   "t_end": "[0.156572747705793230403959988906 +/- 3.31e-31]",
+   "t_start": "[0.151525661350318739691458184216 +/- 2.92e-31]",
+   "time": "[0.51984989461387254339 +/- 2.32e-21]",
+   "time_hull": [
+    "519849894613872543387685883005831/1000000000000000000000000000000000",
+    "519849894613872543387685883134169/1000000000000000000000000000000000"
+   ],
+   "winding": "[9.693522803355793e-27 +/- 6.08e-18]"
+  },
+  {
+   "dt": 87,
+   "dz": 17,
+   "eps": "[0.0012500000000000000000 +/- 3e-27]",
+   "gate_e8": true,
+   "gate_x": true,
+   "idx": 883,
+   "margin": "[0.60377812600332999667 +/- 7.73e-19]",
+   "mesh": 64,
+   "min_mesh": "[1.5431990755993189515 +/- 7.99e-19]",
+   "rec_e8": [
+    "603778126003329995836479997/1000000000000000000000000000",
+    "603778126003329997443520003/1000000000000000000000000000"
+   ],
+   "rec_x": [
+    "30188906300166499792275951589660063/50000000000000000000000000000000000",
+    "30188906300166499872175951892539937/50000000000000000000000000000000000"
+   ],
+   "s_exact": "17/32",
+   "spatial": "0.53125000000000000000",
+   "t_end": "[0.161250000000000000000000000000 +/- 2e-35]",
+   "t_start": "[0.156572747705793230403959988906 +/- 3.31e-31]",
+   "time": "[0.40692094959598895486 +/- 4.52e-21]",
+   "time_hull": [
+    "20346047479799447742774048257460063/50000000000000000000000000000000000",
+    "20346047479799447742774048260339937/50000000000000000000000000000000000"
+   ],
+   "winding": "[+/- 5.13e-18]"
+  }
+ ],
+ "uniform_error": {
+  "claims": {
+   "agg": "8.95e-13",
+   "eab": "3.639278679550541e-10",
+   "ec0": "0.000356522647672172",
+   "min_margin": "0.519849894613872543374989997",
+   "total": "0.000356523011600040"
+  },
+  "eab": [
+   "3639278679550540203591748210416995862339591/10000000000000000000000000000000000000000000000000000",
+   "3639278679550540203591748210416995862340409/10000000000000000000000000000000000000000000000000000"
+  ],
+  "ec0": [
+   "891306619180429283315695377734970030869961/2500000000000000000000000000000000000000000000",
+   "891306619180429283315695377734970030870039/2500000000000000000000000000000000000000000000"
+  ],
+  "total": [
+   "1782615058000198341901492551344045270237853/5000000000000000000000000000000000000000000000",
+   "1782615058000198341901492551344045270238147/5000000000000000000000000000000000000000000000"
+  ]
+ },
+ "verdict": "PASS"
+}
