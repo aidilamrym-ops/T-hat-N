@@ -1,10 +1,12 @@
-# AUDIT DBN — Recon pass-3, potongan 1+2 (2026-10-17)
+# AUDIT DBN — Recon pass-3, potongan 1+2+3 (2026-10-17)
 
-Status: **DRAF (potongan 1+2), dikomit 2026-10-17 (batch strategi).** Non-binding; bahan mentah untuk
+Status: **DRAF (potongan 1+2+3), dikomit 2026-10-17 (batch strategi; potongan 3 dilengkapi
+selama run dim 501).** Non-binding; bahan mentah untuk
 pra-registrasi audit P1 pada `reports/MSAF_PORTFOLIO_2026-10-17.md` §2.
-Ditulis selama C4 (+5 seed) berjalan; **mesin tidak disentuh** — murni
+Ditulis selama C4 (+5 seed) berjalan, dilengkapi selama run dim 501;
+**mesin tidak disentuh** — murni
 pekerjaan dokumen. Semua kutipan verbatim dari dokumen sumber yang
-di-fetch 2026-10-17 (daftar di §6). Catatan anti-cocoklogi: seluruh angka
+di-fetch 2026-10-17 (daftar di §6; hasil potongan 3 di §7.11–§7.12). Catatan anti-cocoklogi: seluruh angka
 di bawah adalah **deskripsi klaim pihak ketiga**, bukan klaim MSAF; tidak
 satu pun menjadi hasil kita sampai audit dieksekusi dan dilaporkan.
 
@@ -210,20 +212,24 @@ Selesai hari ini (dipercepat atas persetujuan; detail di §7):
 - [x] `independent/README.md`: celah prop43 + kandidat promosi Romik —
       §7.5.
 
-Potongan 3 (mulai 2026-10-17; sisa kecil menyusul selama run 501):
+Potongan 3 (mulai 2026-10-17; **selesai 2026-10-17 selama run dim 501**):
 
 - [x] `BARRIER_CERTIFICATE.md` + `DERIVATIVE_BOX_LEMMA.md` dibaca penuh
       (bahan butir barrier L2) — ringkasan §7.9–§7.10.
-- [ ] Transkripsi penuh Thm 1.2/1.3 + Lemma 8.4 dari arXiv:1904.12438v2
-      (bahan L3; PDF versi terkunci kini ter-pin — §7.9).
+- [x] Transkripsi penuh Thm 1.2/1.3 + Lemma 8.4 dari arXiv:1904.12438v2
+      (bahan L3; PDF versi terkunci kini ter-pin — §7.9; **selesai**:
+      PDF byte-identik (`references/README.md`), sumber e-print v2
+      ter-pin, digest per-region — §7.11).
 - [x] `references/README.md`: SHA-256 empat PDF upstream ter-pin — §7.9.
-- [~] `dan-reworking/`: listing per 2026-10-17 (unsealed; `CLAUDE.md`,
-      `code/`, `latex/`); `REVIEWER_REPORT_TEMPLATE.md` belum dibaca.
+- [x] `dan-reworking/`: listing per 2026-10-17 (unsealed; `CLAUDE.md`,
+      `code/`, `latex/`); `REVIEWER_REPORT_TEMPLATE.md` ternyata di **root
+      repo** — dibaca 2026-10-17 (SHA + ringkasan §7.12).
 - [x] Repo GPC: struktur terkonfirmasi (`src/`, `tests/`, `scripts/`,
       `paper/`, `data/`) — verifier kecil di `tests/`+`src/` (pin detail
       saat P2 dipra-registrasi).
-- [x] Watch 2026-10-17: HEAD tetap `a74738de` (PGP-signed); revisi OpenAI
-      `paper2.pdf` (5 Okt) masih TO-PIN.
+- [x] Watch 2026-10-17 (dua cek; cek-2 saat potongan 3): HEAD tetap
+      `a74738de` (PGP-signed); rilis tetap hanya `review-01787854-v3`;
+      revisi OpenAI `paper2.pdf` (5 Okt) masih TO-PIN.
 
 ## 5. Peta klaim (bahan awal registry P3)
 
@@ -461,7 +467,8 @@ Dari `CANDIDATE_PARAMETERS.md` + `MAXIMUM_CHECKS.md` (penguatan §1):
   Platt–Trudgian `2004.09765v1` (8 hal.) `3362f66a…`; Romik `1902.06330`
   (background) `e81eecf4…`; `dbn21a-main.pdf` (Zenodo 21175533, CC BY 4.0)
   `10648df3…`. L3 kita: unduh dari URL arXiv persis + verifikasi SHA —
-  byte-identik dengan versi yang mereka review.
+  byte-identik dengan versi yang mereka review. **Selesai 2026-10-17
+  untuk Polymath15: cocok penuh (68 hal.); transkripsi + digest §7.11.**
 - **Barrier certificate (`BARRIER_CERTIFICATE.md`, ringkas)** — klaim:
   `H_t(z) ≠ 0` untuk `z ∈ R = [X, X+1] + i[1809/10000, 1]`, `0 ≤ t ≤ t0`;
   superset persegi dari barrier lengkung Thm 1.2. Lebar:
@@ -514,8 +521,11 @@ Dari `CANDIDATE_PARAMETERS.md` + `MAXIMUM_CHECKS.md` (penguatan §1):
     `order=1` per integral. → kelas defect yang sama dengan temuan audit
     internal mereka (proyeksi real) kini punya gate eksplisit.
 - **`dan-reworking/`** (per 2026-10-17): berisi `CLAUDE.md` (13,5 KB —
-  instruksi workspace Romik), `code/`, `latex/`; unsealed. Template
-  `REVIEWER_REPORT_TEMPLATE.md` belum dibaca (sisa potongan 3).
+  instruksi workspace Romik), `code/` (prop43, prop49, prop510, prop612,
+  prop62, prop65 + `runs/`), `latex/` (eksposisi + manuskrip
+  `research-paper/debruijn-newman.tex`); unsealed. Template
+  `REVIEWER_REPORT_TEMPLATE.md` ternyata di **root repo** (bukan di
+  dan-reworking) — dibaca 2026-10-17; ringkasan + kutipan §7.12.
 - **Repo GPC** (`agupta/gold-partition-conjecture`): struktur `src/`,
   `tests/`, `scripts/`, `paper/`, `data/`, `Makefile`, `CITATION.cff` —
   kandidat re-verifikasi kecil di `tests/`+`src/` (pin detail saat P2
@@ -524,8 +534,192 @@ Dari `CANDIDATE_PARAMETERS.md` + `MAXIMUM_CHECKS.md` (penguatan §1):
   tree `babfa77e…`, parent `6d3b2230…`); tidak ada commit baru sejak
   21 Agu 2026.
 
+### 7.11 Transkripsi theorem-source L3 — Thm 1.2/1.3 + Lemma 8.4 (selesai)
+
+Provenance (fetch + hash di mesin ini, 2026-10-17; run dim 501 yang
+sedang berjalan **tidak disentuh**; PDF/e-print **tidak dikomit** —
+kebijakan redistribusi sama seperti paket):
+
+- PDF terbit: `https://arxiv.org/pdf/1904.12438v2`, 68 hal.; SHA-256
+  `60d0d2d381227d32f98535a5c43dedb86e333a9006d6819f0bdebdd734085603`
+  = **byte-identik** dengan hash acuan `references/README.md` paket
+  (unduh-verifikasi persis jalur L3 §7.9). Verifikasi silang render:
+  pernyataan Thm 1.2 di hal. 2, Thm 1.3 di hal. 6, Lemma 8.4 di hal. 46.
+- Sumber transkripsi: `https://arxiv.org/e-print/1904.12438v2` (tar
+  2.229.636 byte, sha256
+  `1be3bc38d203ad0142f1c97c267c7deaa06b84c97716c9a1ec1f56456d826863`;
+  isi: `debruijn.tex` + 23 PNG). `debruijn.tex` = 170.017 byte, sha256
+  `560a28fe31bec92dd793820222e9e73a1fc6958a08344033a946b2ccaba225e5`
+  (sumber submisi v2; basis file PDF yang direview).
+- Semua blok di bawah = teks **verbatim** dari `debruijn.tex`; angka
+  baris mengacu ke file itu. Digest per-region (sha256 atas teks UTF-8,
+  LF, termasuk newline akhir, **tanpa** nomor baris; raw vs norm =
+  rstrip per baris — identik kecuali thm13):
+
+  | region | baris tex | byte | sha256 |
+  |---|---|---|---|
+  | (5) domain | 168–170 | 111 | `4353e6c842cf7ff5c811228a53212ea2260a619824e581d4843474a827fbb12e` |
+  | Thm 1.2 | 145–152 | 765 | `06290d46cbbbe1670c4e9d4ee9957f0f8dc06367a9907644a654d048b7e331ec` |
+  | Thm 1.3 | 223–244 | 2019 | raw `2bdd6d87d0a0c1d90a114b934eb905a46a4c40e99cb0fcc27993414ea0e1e08d` / norm `cebe9801b3c2b57414fa65d55506df0987dd01f94851bada291e51d6a85d68b2` (beda hanya spasi akhir baris 234) |
+  | Lemma 8.4 | 1442–1453 | 1021 | `b2fbc004252e3f47d2f821febba43b684a49d4fd47125a429c1ed8012d0bc57f` |
+
+  Re-ekstraksi: unduh e-print v2 → cek sha256 tar/tex di atas → potong
+  baris sesuai tabel (verifikasi digest). Pemetaan nomor render PDF
+  hal. 6: eq. (13) `ratio-form-eff` · (14) `ft-def` · (15) `bn-def` ·
+  (16) `lambda-def` · (17) `sn-def` · (18) `kappa-def` · (19)
+  `N-def-main` · (20) `gamma-bound` · (21) `res-bound` · (22)
+  `kappa-bound` · (23) `eab-bound` · (24) `ec-bound`.
+
+**Region domain (5)** — `\label{region}`, tex 168–170 (dirujuk pernyataan Thm 1.3):
+
+```latex
+\begin{equation}\label{region}
+0 < t \leq \frac{1}{2}; \quad 0 \leq y \leq 1; \quad x \geq 200,
+\end{equation}
+```
+
+**Theorem 1.2 (Upper bound criterion)** — `\label{ubc-0}`, tex 145–152, PDF hal. 2:
+
+```latex
+\begin{theorem}[Upper bound criterion]\label{ubc-0}  Suppose that $t_0, X > 0$ and $0 < y_0 \leq 1$ obey the following hypotheses:
+\begin{itemize}
+\item[(i)]  (Numerical verification of RH at initial time $0$) There are no zeroes $\zeta(\sigma+iT) = 0$ with $\frac{1+y_0}{2} \leq \sigma \leq 1$ and $0 \leq T \leq \frac{X}{2}$.
+\item[(ii)]  (Asymptotic zero-free region at final time $t_0$) There are no zeroes $H_{t_0}(x+iy)=0$ with $x \geq X+\sqrt{1-y_0^2}$ and $y_0 \leq y \leq \sqrt{1-2t_0}$.
+\item[(iii)]  (Barrier at intermediate times) There are no zeroes $H_{t}(x+iy)=0$ with $X \leq x \leq X+\sqrt{1-y_0^2}$, $\sqrt{y_0^2+2(t_0-t)} \leq y \leq \sqrt{1-2t}$, and $0 \leq t \leq t_0$.
+\end{itemize}
+Then $\Lambda \leq t_0 + \frac{1}{2} y_0^2$.
+\end{theorem}
+```
+
+**Theorem 1.3 (Effective Riemann-Siegel approximation to $H_t(x+iy)$)** — `\label{eff}`, tex 223–244, PDF hal. 6:
+
+```latex
+\begin{theorem}[Effective Riemann-Siegel approximation to $H_t(x+iy)$]\label{eff}  Let $t,x,y$ lie in the region \eqref{region}.  Then we have
+\begin{equation}\label{ratio-form-eff}
+\frac{H_t(x+iy)}{B_t(x+iy)} = f_t(x+iy) + O_{\leq}\left( e_A + e_B + e_{C,0} \right)
+\end{equation}
+where
+\begin{align}
+f_t(x+iy) &\coloneqq \sum_{n=1}^N \frac{b_n^t}{n^{s_*}} + \gamma \sum_{n=1}^N n^y \frac{b_n^t}{n^{\overline{s_*} + \kappa}}\label{ft-def} \\
+b_n^t &\coloneqq \exp( \frac{t}{4} \log^2 n ) \label{bn-def}\\
+\gamma = \gamma(x+iy) &\coloneqq \frac{M_t\left(\frac{1-y+ix}{2}\right)}{M_t\left(\frac{1+y-ix}{2}\right)} \label{lambda-def} \\
+s_* = s_*(x+iy) &\coloneqq \frac{1+y-ix}{2} +\frac{t}{2} \alpha\left(\frac{1+y-ix}{2}\right) \label{sn-def}\\
+\kappa = \kappa(x+iy) &\coloneqq \frac{t}{2} \left(\alpha\left(\frac{1-y+ix}{2}\right) - \alpha\left(\frac{1+y+ix}{2}\right)\right) \label{kappa-def}\\
+N &\coloneqq \left\lfloor \sqrt{\frac{x}{4\pi} + \frac{t}{16}} \right\rfloor \label{N-def-main} 
+\end{align}
+and $e_A, e_B, e_{C,0}$ are certain explicitly computable positive quantities\footnote{See \eqref{ea-def}-\eqref{ec-def} for the precise definition of these quantities.} depending on $t$ and $x+iy$.  Furthermore, we have the following bounds:
+\begin{align}
+|\gamma| &\leq e^{0.02 y} \left( \frac{x}{4\pi} \right)^{-y/2}  \label{gamma-bound} \\
+\Re s_* &\geq \frac{1+y}{2} +\frac{t}{4} \log \frac{x}{4\pi} - \frac{t}{2x^2} \left(1-3y+\frac{4y(1+y)}{x^2}\right)_+  \label{res-bound} \\
+|\kappa| &\leq  \frac{ty}{2(x-6)} \label{kappa-bound} \\
+e_A + e_B &\leq \sum_{n=1}^N (1 + |\gamma| N^{|\kappa|} n^y) \frac{b_n^t}{n^{\Re s_*}} \left( \exp\left( \frac{\frac{t^2}{16} \log^2 \frac{x}{4\pi n^2} + 0.626}{x-6.66} \right)-1 \right) \label{eab-bound} \\
+e_{C,0} &\leq \left(\frac{x}{4\pi}\right)^{-\frac{1+y}{4}} \exp\left( - \frac{t}{16} \log^2 \frac{x}{4\pi} + \frac{1.24 \times (3^y+3^{-y})}{N-0.125} + \frac{3 |\log \frac{x}{4\pi} + i \frac{\pi}{2}|+10.44}{x-12} \right) \label{ec-bound}
+\end{align}
+\end{theorem}
+```
+
+**Lemma 8.4** — tex 1442–1453, PDF hal. 46 (konteks sumber: "To run this algorithm, we need bounds on $D_t$ and $D_z$. This is achieved by the following lemma [...]"):
+
+```latex
+\begin{lemma} In the region \eqref{region}, and away from the jump discontinuities of $N$, we have
+\begin{align*}
+ \left|\frac{\partial f_t}{\partial z}\right| &\leq  \sum_{n=1}^N \frac{b_n^t}{n^{\Re s_*}} \left(\frac{\log n}{2} + \frac{t \log n}{4(x-6)}\right) \\
+&\quad + |\gamma| N^{|\kappa|} \sum_{n=1}^N \frac{b_n^t n^{y} }{n^{\Re s_{*}}}
+\left( \frac{t \log n}{4(x-6)} + \left(\log \frac{|1+y+ix|}{4\pi} + \pi + \frac{3}{x}\right) \left(\frac{1}{2} + \frac{t}{4(x-6)}\right)\right)
+\end{align*}
+and
+\begin{align*} \left|\frac{\partial f_t}{\partial t}\right| &\leq \sum_{n=1}^N \frac{b_n^t}{n^{\Re s_*}} \left(\frac{1}{4} \log n \log \frac{x}{4\pi n} + \frac{\pi}{8} \log n + \frac{2 \log n}{x-6}\right) \\
+&\quad + |\gamma| N^{|\kappa|} \sum_{n=1}^N \frac{b_n^t n^y}{n^{\Re s_{*}}}
+\left(\frac{1}{4} \log n \log \frac{x}{4\pi n} + \frac{\pi}{8} \log n + \frac{2 \log n}{x-6} + \frac{1}{4} \left(\frac{\pi}{2} + \frac{8}{x-6}\right) \left(\log \frac{x}{4\pi} + \frac{8}{x-6}\right)\right).
+\end{align*}
+\end{lemma}
+```
+
+Catatan keterkaitan (bahan L3; **belum ada verdict** — verifikasi simbolik menyusul saat audit):
+
+- Hipotesis (i)/(ii)/(iii) Thm 1.2 = slot yang di paket diisi oleh klaim P1/T1/B1–B2; pemetaan formal dilakukan di L3/L4, bukan di recon ini.
+- Thm 1.3 eq. (23) memuat `0.626`, `x-6.66`; eq. (24) memuat `1.24`, `N-0.125`, `10.44`, `x-12`. Obligasi P3 paket membahas bound `x-12, 10.50` **tanpa** eq. (24) — perbandingan teks/verifikasi nanti.
+- Lemma 8.4 bersifat **pointwise** ("In the region (5), and away from the jump discontinuities of $N$"); paket memakainya lewat `DERIVATIVE_BOX_LEMMA.md` (§7.10). Lemma tak berjudul di sumber; nomor 8.4 dari render PDF.
+
+### 7.12 `REVIEWER_REPORT_TEMPLATE.md` (root repo; selesai) + watch cek-2
+
+- Lokasi: **root repo** pada commit ter-pin `a74738de` (bukan di
+  `dan-reworking/`); fetch 2026-10-17:
+  `raw.githubusercontent.com/judegomila/dbn-lambda-01787854-candidate-audit/a74738deb6d5e0f76887cb36901da08b68dca705/REVIEWER_REPORT_TEMPLATE.md`
+  — 1.518 byte, sha256
+  `4ef9d6decd23be0894f1b66e3bfb3e212f58e8fd819f2b18e31c32eaf94bb524`.
+  Lisensi dokumen paket: CC BY; kutipan penuh di bawah (atribusi ke paket).
+- Isi (verbatim, teks penuh):
+
+```text
+# Suggested referee response
+
+## Overall assessment
+
+Choose one:
+
+- validated as stated;
+- plausible but incomplete;
+- repairable with specified changes;
+- invalid for the stated conclusion;
+- unable to assess.
+
+## Claim reviewed
+
+\[
+\Lambda\le\frac{893927}{5000000}=0.1787854.
+\]
+
+State the commit SHA, operating system, Python version, and whether the stored
+and container checks passed.
+
+## Layer findings
+
+For each layer, record `valid`, `needs repair`, `invalid`, or `not reviewed`,
+with exact file/line references:
+
+1. exact Polymath Theorem 1.2 statement and Platt--Trudgian height input;
+2. finite producer, all 3,149,013 stored rows, and direct singleton checks;
+3. direct all-height Triangle theorem and continuous window freeze;
+4. native normalization and effective-error binding;
+5. standalone infinite-tail theorem;
+6. repaired 883-prism closed barrier, including the full spatial derivative
+   envelope and \(t=0\) endpoint;
+7. the three-hypothesis criterion weld and final exact substitution.
+
+## Decisive objections or repairs
+
+For every objection, please include:
+
+- the precise false or unproved statement;
+- a counterexample or missing hypothesis where possible;
+- whether the issue affects only reproducibility or the mathematical
+  conclusion;
+- the smallest proposed repair and whether new computation is required.
+
+## Disclosure recommendation
+
+Choose one:
+
+- keep private;
+- circulate to additional specialists;
+- prepare a corrected preprint;
+- suitable for public release after named edits.
+```
+
+- Relevansi kita: struktur 7-lapis + pilihan assessment = kerangka laporan
+  L4; lapis 1 ("exact Polymath Theorem 1.2 statement and Platt--Trudgian
+  height input") persis fokus §7.11; template mensyaratkan commit SHA, OS,
+  versi Python, dan status cek stored/container per review — akan diisi
+  saat audit dieksekusi (bukan sekarang; pra-registrasi tetap ditahan).
+- Watch cek-2 (2026-10-17, saat potongan 3): HEAD tetap
+  `a74738deb6d5e0f76887cb36901da08b68dca705` (21 Agu 2026, PGP-signed);
+  rilis tetap hanya `review-01787854-v3` (28 Jul 2026). Tidak ada commit
+  atau rilis baru; watch berkala lanjut selama run 501.
+
 Ditulis oleh sesi analisis, 2026-10-17. Potongan 2 dan sebagian besar
 potongan 3 dikerjakan lebih awal pada hari yang sama (atas persetujuan
-pemilik proyek); sisa: transkripsi penuh Thm 1.2/1.3 + Lemma 8.4 (L3),
-template reviewer, dan watch berkala selama run 501. Pra-registrasi
-audit tidak dibuat sebelum C4/501 ditutup.
+pemilik proyek); **potongan 3 dilengkapi 2026-10-17 selama run dim 501**
+(transkripsi penuh Thm 1.2/1.3 + Lemma 8.4 → §7.11; template reviewer →
+§7.12; watch ulang bersih). Sisa: watch berkala selama run 501.
+Pra-registrasi audit tidak dibuat sebelum C4/501 ditutup.
