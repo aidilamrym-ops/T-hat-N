@@ -1,0 +1,107 @@
+﻿# audit_p1 - Lean static anti-circularity gate (prereg section 7)
+generated_by: C:\Users\usER\AppData\Local\Temp\opencode\audit_p1_lean_gate_run.ps1
+timestamp_start_local: 2026-10-17T20:26:26.2026554+08:00
+
+## generators in use (sha256, machine-computed)
+sha256 bc647579f6ef4512a22b2df7793ff1dbd29d29419021d2a821ac3766a761504c  C:\Users\usER\AppData\Local\Temp\opencode\audit_p1_lean_gate_run.ps1
+sha256 d9fbde194f0404ddc91c9291f25d6d7b97736d032c3764098c652e679cf0dfc8  C:\Users\usER\AppData\Local\Temp\opencode\dbn_lean_fetch_verify.py
+sha256 77f610e8aebbed126dbcd4fdb8a1d808b4e2dc215d46afb2c26056334d7d22ea  C:\Users\usER\AppData\Local\Temp\opencode\dbn_lean_extra_scan.py
+
+## ordering anchor
+prereg_add_commit: 86a32c99f9b78808f32e4e3e9ba150809264bfa2 2026-10-17T18:12:13+08:00
+l1_log_add_commit: 20a77c867114a3ef26011e0b6d04fd1353352397 2026-10-17T20:21:19+08:00
+HEAD: 20a77c867114a3ef26011e0b6d04fd1353352397 2026-10-17T20:21:19+08:00
+
+## scope note (post-registration clarification of prereg section 7; no prereg change)
+- prereg section 7 scopes the static gate to the release's `lean/` tree.
+- machine fact: the pinned release commit 2e9976c4becbf97e31c56fe75fce07cdff5dd4ea tree (recursive, truncated=false) contains NO path under lean/ (0 .lean files).
+- machine fact: the Lean layer exists only at the pinned post-release commit a74738deb6d5e0f76887cb36901da08b68dca705 (2026-08-21, "Add the Aristotle-formalized complete lemma layer under lean/aristotle (#29)"), as recorded in recon section 0 (committed 2026-10-17, before the prereg).
+- execution (this log): the gate is run over lean/ at the pinned commit a74738de..., labeled AUXILIARY evidence (not the release depot); HEAD is not merged into any release-scope verdict; the discrepancy is recorded in the L4 coverage list.
+
+## toolchain checks
+python: Python 3.14.4
+z3_version: 5.0.0
+
+## release tree check (lean/ absence in the pinned release)
+release_commit: 2e9976c4becbf97e31c56fe75fce07cdff5dd4ea; recursive_entries: 397; truncated: False; paths_under_lean: 0
+
+## head tree check (lean/ at pinned HEAD)
+head_commit: a74738deb6d5e0f76887cb36901da08b68dca705 (2026-08-21); recursive_entries: 640; truncated: False; entries_under_lean: 72; dot_lean_files: 25
+
+## 1. download & integrity (lean/ at pinned HEAD; checked against git tree blob shas)
+pinned_commit: a74738deb6d5e0f76887cb36901da08b68dca705
+fetched_at_utc: 2026-10-17T12:26:27.229023+00:00
+lean_entries: 72  lean_dot_lean_files: 25
+OK  lean/ARISTOTLE_BASECASE_NOTES.md  1279B  git_blob_sha1=6ffc192e62f0459a9a3dd3ea40d57a7bef7d9ef0  sha256=77ab4b70d87fc1940f94e9bb2569d96e4e9fee044ed993a4e4559d49d194b604
+OK  lean/BarrierAnalyticSkeleton.lean  10935B  git_blob_sha1=fdd99cff0c2692c2b2558b482714dcf106d54497  sha256=edde993c8c5291ee477ce114024c1b2a30d6b8cb6fe7bdb416b9d0e0d0bf3ee2
+OK  lean/DeBruijnNewman_BaseCase.aristotle.lean  15205B  git_blob_sha1=ed55830287c465b1278f2c27f5995c9f3798d7f2  sha256=f3574a4a7e678c70f713dfa1c1e78d171f8078c21ceb59ff72387c81119eee82
+OK  lean/HYPOTHESIS_DISCHARGE_NOTES.md  9084B  git_blob_sha1=d3cd2ce45751340a3ce505bae29bdfde57561b43  sha256=091630e76fdd0f4a212f812d1b813d23f95d9a1279d5c2bde4db2f187e0515ad
+OK  lean/HypothesisDischarge.lean  13577B  git_blob_sha1=c36371d235407123e21f9926c498d044a63395a2  sha256=2b9518d9e4a64d306e99790dece88fb91dde710c8796f1233d1ec88c987a1e49
+OK  lean/README.md  3297B  git_blob_sha1=f3cf95f28b04a29a21a46bd10e0b8d5f027f3bd7  sha256=125c6d2c0cf26a18d51a2b708343e4e852fe7bd0aa62f2e14f637a16956975d2
+OK  lean/StrongerWindowArithmetic.lean  8791B  git_blob_sha1=373bd84dcefbec7eb64eef33cb88547411afb324  sha256=69beca9012a99fb67c9a86934f338584e0c96c7ba8fb68c02edb83d240caa2d9
+python.exe : Traceback (most recent call last):
+At C:\Users\usER\AppData\Local\Temp\opencode\audit_p1_lean_gate_run.ps1:50 char:9
++ $out = (& $py "$tmp\dbn_lean_fetch_verify.py" 2>&1 | Out-String); $co ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Users\usER\AppData\Local\Temp\opencode\dbn_lean_fetch_verify.py", line 48, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\usER\AppData\Local\Temp\opencode\dbn_lean_fetch_verify.py", line 22, in main
+    p, sha, size = e["path"], e["sha"], e["size"]
+                                        ~^^^^^^^^
+KeyError: 'size'
+fetch_verify_exit: 1
+
+## 2. skill self-test (validates the gate is not vacuous)
+  PASS  exit=0  positive fixture is clean
+  PASS  exit=0  comment-only mentions of sorry/admit/Abort are ignored
+  PASS  exit=0  #print axioms is not an axiom declaration
+  PASS  exit=1  a real sorry placeholder fails, with its line number
+  PASS  exit=1  an axiom behind a stripped doc comment reports its own line, not the start of the whitespace run
+  PASS  exit=0  dependency directories are pruned and the pruning is reported
+  PASS  exit=1  a verdict with no (check-sat) fails
+  PASS  exit=1  a verdict with no run log fails
+  PASS  exit=0  a document that claims nothing passes
+  PASS  exit=0  a GENUINE script passes the audit gate
+  PASS  exit=1  a fixture corpus of non-results fails the audit gate
+  PASS  exit=2  a missing input reports TOOL NOT RUN
+  PASS  exit=2  a missing auditor reports TOOL NOT RUN
+------------------------------------------------------------------------------
+gate self-test: 13 cases, 0 failed
+self_test_exit: 0
+
+## 3. placeholder scan: gate.py lean over all .lean files (authoritative for placeholders)
+file_count: 4
+------------------------------------------------------------------------------
+ANTI-CIRCULARITY GATE [lean]
+  result: FAIL=0  NOT_RUN=0  SKIP=0
+  verdict: PASS
+gate_exit: 0   (map per skill: 0=PASS, 1=FAIL, 2=TOOL NOT RUN/UNKNOWN)
+
+## 4. auxiliary textual scans (comment-stripped naive; labeled auxiliary, not verdict-bearing)
+lean_files_scanned: 4
+token_totals: {'sorry': 0, 'admit': 0, 'unsafe': 0, 'axiom': 0, 'native_decide': 0, 'Abort': 0}
+naive_declaration_counts: theorem=44 lemma=0
+PRINT lean/BarrierAnalyticSkeleton.lean:60: `[propext, Classical.choice, Quot.sound]` (verified via `#print axioms`).
+PRINT lean/HypothesisDischarge.lean:51: (see the `#print axioms` block at the end).
+PRINT lean/HypothesisDischarge.lean:255: #print axioms M0_ne_zero
+PRINT lean/HypothesisDischarge.lean:256: #print axioms Bt_ne_zero
+PRINT lean/HypothesisDischarge.lean:257: #print axioms M0_ne_zero_on
+PRINT lean/HypothesisDischarge.lean:258: #print axioms norm_cos_le_exp_abs_im
+PRINT lean/HypothesisDischarge.lean:259: #print axioms continuousOn_Ht_integral
+PRINT lean/HypothesisDischarge.lean:260: #print axioms continuousOn_Ht_in_t
+PRINT lean/HypothesisDischarge.lean:261: #print axioms continuousOn_norm_Ht_in_t
+PRINT lean/StrongerWindowArithmetic.lean:53: [propext, Classical.choice, Quot.sound] (verify via #print axioms).
+PRINT lean/StrongerWindowArithmetic.lean:181: #print axioms lambda_row_identity
+PRINT lean/StrongerWindowArithmetic.lean:182: #print axioms window_index_691008
+PRINT lean/StrongerWindowArithmetic.lean:183: #print axioms sqrt_lt_691009
+PRINT lean/StrongerWindowArithmetic.lean:184: #print axioms reserve_value
+PRINT lean/StrongerWindowArithmetic.lean:185: #print axioms reserve_exceeds_14x_current
+PRINT lean/StrongerWindowArithmetic.lean:186: #print axioms reserve_conversion
+scan_exit: 0
+
+timestamp_end_local: 2026-10-17T20:26:35.6556029+08:00
+(end)

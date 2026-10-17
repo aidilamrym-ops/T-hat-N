@@ -1,0 +1,147 @@
+﻿# audit_p1 - Lean static anti-circularity gate (prereg section 7)
+generated_by: C:\Users\usER\AppData\Local\Temp\opencode\audit_p1_lean_gate_run.ps1
+timestamp_start_local: 2026-10-17T20:28:43.1840817+08:00
+
+## generators in use (sha256, machine-computed)
+sha256 16f2a781990e801589497ec4d497d92749c0c7192c2dc9350c857eabd13ebc71  C:\Users\usER\AppData\Local\Temp\opencode\audit_p1_lean_gate_run.ps1
+sha256 98399801f1dc2b6b5896ec4a0c9e2c30cc90148b6f63413d76ffc0ae667d9483  C:\Users\usER\AppData\Local\Temp\opencode\dbn_lean_fetch_verify.py
+sha256 77f610e8aebbed126dbcd4fdb8a1d808b4e2dc215d46afb2c26056334d7d22ea  C:\Users\usER\AppData\Local\Temp\opencode\dbn_lean_extra_scan.py
+
+## attempt history (written after the fact; incident log)
+- attempt 1: fetch script crashed with KeyError: 'size' on tree entries lacking a size field (directory entries not filtered); 7/72 files fetched; the gate ran over 4/25 .lean files and printed PASS on that subset (superseded; kept as reports/audit_p1_lean_gate_attempt1.log). Fix: fetch filters tree entries to type blob; attempt 2 = this log.
+
+## ordering anchor
+prereg_add_commit: 86a32c99f9b78808f32e4e3e9ba150809264bfa2 2026-10-17T18:12:13+08:00
+l1_log_add_commit: 20a77c867114a3ef26011e0b6d04fd1353352397 2026-10-17T20:21:19+08:00
+HEAD: 20a77c867114a3ef26011e0b6d04fd1353352397 2026-10-17T20:21:19+08:00
+
+## scope note (post-registration clarification of prereg section 7; no prereg change)
+- prereg section 7 scopes the static gate to the release's `lean/` tree.
+- machine fact: the pinned release commit 2e9976c4becbf97e31c56fe75fce07cdff5dd4ea tree (recursive, truncated=false) contains NO path under lean/ (0 .lean files).
+- machine fact: the Lean layer exists only at the pinned post-release commit a74738deb6d5e0f76887cb36901da08b68dca705 (2026-08-21, "Add the Aristotle-formalized complete lemma layer under lean/aristotle (#29)"), as recorded in recon section 0 (committed 2026-10-17, before the prereg).
+- execution (this log): the gate is run over lean/ at the pinned commit a74738de..., labeled AUXILIARY evidence (not the release depot); HEAD is not merged into any release-scope verdict; the discrepancy is recorded in the L4 coverage list.
+
+## toolchain checks
+python: Python 3.14.4
+z3_version: 5.0.0
+
+## release tree check (lean/ absence in the pinned release)
+release_commit: 2e9976c4becbf97e31c56fe75fce07cdff5dd4ea; recursive_entries: 397; truncated: False; paths_under_lean: 0
+
+## head tree check (lean/ at pinned HEAD)
+head_commit: a74738deb6d5e0f76887cb36901da08b68dca705 (2026-08-21); recursive_entries: 640; truncated: False; entries_under_lean: 72; dot_lean_files: 25
+
+## 1. download & integrity (lean/ at pinned HEAD; checked against git tree blob shas)
+pinned_commit: a74738deb6d5e0f76887cb36901da08b68dca705
+fetched_at_utc: 2026-10-17T12:28:44.196947+00:00
+lean_entries: 57  lean_dot_lean_files: 25
+OK  lean/ARISTOTLE_BASECASE_NOTES.md  1279B  git_blob_sha1=6ffc192e62f0459a9a3dd3ea40d57a7bef7d9ef0  sha256=77ab4b70d87fc1940f94e9bb2569d96e4e9fee044ed993a4e4559d49d194b604
+OK  lean/BarrierAnalyticSkeleton.lean  10935B  git_blob_sha1=fdd99cff0c2692c2b2558b482714dcf106d54497  sha256=edde993c8c5291ee477ce114024c1b2a30d6b8cb6fe7bdb416b9d0e0d0bf3ee2
+OK  lean/DeBruijnNewman_BaseCase.aristotle.lean  15205B  git_blob_sha1=ed55830287c465b1278f2c27f5995c9f3798d7f2  sha256=f3574a4a7e678c70f713dfa1c1e78d171f8078c21ceb59ff72387c81119eee82
+OK  lean/HYPOTHESIS_DISCHARGE_NOTES.md  9084B  git_blob_sha1=d3cd2ce45751340a3ce505bae29bdfde57561b43  sha256=091630e76fdd0f4a212f812d1b813d23f95d9a1279d5c2bde4db2f187e0515ad
+OK  lean/HypothesisDischarge.lean  13577B  git_blob_sha1=c36371d235407123e21f9926c498d044a63395a2  sha256=2b9518d9e4a64d306e99790dece88fb91dde710c8796f1233d1ec88c987a1e49
+OK  lean/README.md  3297B  git_blob_sha1=f3cf95f28b04a29a21a46bd10e0b8d5f027f3bd7  sha256=125c6d2c0cf26a18d51a2b708343e4e852fe7bd0aa62f2e14f637a16956975d2
+OK  lean/StrongerWindowArithmetic.lean  8791B  git_blob_sha1=373bd84dcefbec7eb64eef33cb88547411afb324  sha256=69beca9012a99fb67c9a86934f338584e0c96c7ba8fb68c02edb83d240caa2d9
+OK  lean/aristotle/README.md  5710B  git_blob_sha1=e7ab3cffb1a39e52071afb0e379a5b0a8eab27ae  sha256=f9d3cdae22ad13777c297210750ecea6f47e7a06658ea96ea23f339c4b2f7d30
+OK  lean/aristotle/derivative_box/ARISTOTLE_SUMMARY.md  3331B  git_blob_sha1=29fda1e301c591dd30275539ecd03fdf44c99fff  sha256=3411aea850e93427569bd0cad7cb5202d30f1d10c5dcbc739361b7b54460a95b
+OK  lean/aristotle/derivative_box/RequestProject/DerivativeBox.lean  34065B  git_blob_sha1=59f630983d495e748cbe0dac020ab5502f954d0c  sha256=add825c3f2f3930718f64d46ecc375abdaee5829078b9f215b34c8e585273063
+OK  lean/aristotle/derivative_box/RequestProject/Main.lean  563B  git_blob_sha1=308f9cfb58cc562160bcd62ba1e20174f161311d  sha256=929b0bddef0b781f3fb42c7a99f252dc0bda7331f698104f7075e12ff637c52d
+OK  lean/aristotle/derivative_box/lake-manifest.json  3109B  git_blob_sha1=57bef473f4e93ba8f5d0387c29642e4327c08cda  sha256=116c6ef00aa899fb38c08c5e4c92c0e434d0e7f9d574fcb5d4d42cc90ffb07cb
+OK  lean/aristotle/derivative_box/lakefile.toml  234B  git_blob_sha1=d1331e3725185586634d12846a2ef43f829fc639  sha256=b1481968ce2912f2b85288fc18aa05fb22750e4083f9e03f49f59a8814ba268a
+OK  lean/aristotle/derivative_box/lean-toolchain  25B  git_blob_sha1=4c685fa085fa1c66103533e992fc82c014a12142  sha256=db7bb24b756d745bbde83fe92718b51bd3625dae3701ba0f598d0eedcd3f3028
+OK  lean/aristotle/error_weld/ARISTOTLE_SUMMARY.md  1452B  git_blob_sha1=1d0c9fcbd0d665677065268b13d6be39934edcae  sha256=bda457c1fa08c176bfd37230a6b81a70ec8b992e7d24bb7dbca86b0bb258a159
+OK  lean/aristotle/error_weld/RequestProject/ErrorWeld.lean  5028B  git_blob_sha1=b0e9b294a2f339cf02e00480874a7ccbf1b4cf97  sha256=94212e1c8a7b86980e3a02a3dd97d049c2cee432bc8a0f06a7e30e5d84589e9b
+OK  lean/aristotle/error_weld/RequestProject/Main.lean  563B  git_blob_sha1=308f9cfb58cc562160bcd62ba1e20174f161311d  sha256=929b0bddef0b781f3fb42c7a99f252dc0bda7331f698104f7075e12ff637c52d
+OK  lean/aristotle/error_weld/lake-manifest.json  3109B  git_blob_sha1=57bef473f4e93ba8f5d0387c29642e4327c08cda  sha256=116c6ef00aa899fb38c08c5e4c92c0e434d0e7f9d574fcb5d4d42cc90ffb07cb
+OK  lean/aristotle/error_weld/lakefile.toml  234B  git_blob_sha1=d1331e3725185586634d12846a2ef43f829fc639  sha256=b1481968ce2912f2b85288fc18aa05fb22750e4083f9e03f49f59a8814ba268a
+OK  lean/aristotle/error_weld/lean-toolchain  25B  git_blob_sha1=4c685fa085fa1c66103533e992fc82c014a12142  sha256=db7bb24b756d745bbde83fe92718b51bd3625dae3701ba0f598d0eedcd3f3028
+OK  lean/aristotle/ht_continuity/ARISTOTLE_SUMMARY.md  2135B  git_blob_sha1=0a82fc3403eab18206e4dfc5ce10a14c914cdf9d  sha256=71ca178918a24fc83341ea9accf1e33ebfdc758afd7da57ff95bb1a2b4dbc86c
+OK  lean/aristotle/ht_continuity/RequestProject/HTContinuity.lean  15091B  git_blob_sha1=c9b32dcbc50e84174f04c6287f76397a3a2382dd  sha256=b20beebd28c84f56c8f0d6f8a65471c7a92633213943b5c7d4535d6d0c044edd
+OK  lean/aristotle/ht_continuity/RequestProject/Main.lean  563B  git_blob_sha1=308f9cfb58cc562160bcd62ba1e20174f161311d  sha256=929b0bddef0b781f3fb42c7a99f252dc0bda7331f698104f7075e12ff637c52d
+OK  lean/aristotle/ht_continuity/lake-manifest.json  3109B  git_blob_sha1=57bef473f4e93ba8f5d0387c29642e4327c08cda  sha256=116c6ef00aa899fb38c08c5e4c92c0e434d0e7f9d574fcb5d4d42cc90ffb07cb
+OK  lean/aristotle/ht_continuity/lakefile.toml  234B  git_blob_sha1=d1331e3725185586634d12846a2ef43f829fc639  sha256=b1481968ce2912f2b85288fc18aa05fb22750e4083f9e03f49f59a8814ba268a
+OK  lean/aristotle/ht_continuity/lean-toolchain  25B  git_blob_sha1=4c685fa085fa1c66103533e992fc82c014a12142  sha256=db7bb24b756d745bbde83fe92718b51bd3625dae3701ba0f598d0eedcd3f3028
+OK  lean/aristotle/native_binding/ARISTOTLE_SUMMARY.md  2674B  git_blob_sha1=04e1d723636f3becb252fe40391f06b1d35a4da6  sha256=43abfba2492b54be987b109a10e4b7c7064768454d3fd8c8f8d4823085fccf21
+OK  lean/aristotle/native_binding/RequestProject/Main.lean  563B  git_blob_sha1=308f9cfb58cc562160bcd62ba1e20174f161311d  sha256=929b0bddef0b781f3fb42c7a99f252dc0bda7331f698104f7075e12ff637c52d
+OK  lean/aristotle/native_binding/RequestProject/NativeBinding.lean  27386B  git_blob_sha1=57b51ed186c2b68e35192805715cdb87cebc1474  sha256=d97040235244e7fa9de5ac1ab33adf588e285ff106e4ca7152417b939654d82f
+OK  lean/aristotle/native_binding/lake-manifest.json  3109B  git_blob_sha1=57bef473f4e93ba8f5d0387c29642e4327c08cda  sha256=116c6ef00aa899fb38c08c5e4c92c0e434d0e7f9d574fcb5d4d42cc90ffb07cb
+OK  lean/aristotle/native_binding/lakefile.toml  234B  git_blob_sha1=d1331e3725185586634d12846a2ef43f829fc639  sha256=b1481968ce2912f2b85288fc18aa05fb22750e4083f9e03f49f59a8814ba268a
+OK  lean/aristotle/native_binding/lean-toolchain  25B  git_blob_sha1=4c685fa085fa1c66103533e992fc82c014a12142  sha256=db7bb24b756d745bbde83fe92718b51bd3625dae3701ba0f598d0eedcd3f3028
+OK  lean/aristotle/tail_lemma/ARISTOTLE_SUMMARY.md  2786B  git_blob_sha1=7d62edffbab79699996923119bd803c7a987d525  sha256=23b2feda5f71728251d477cf8e57a1442d1635ccf57ef194b0ad1a3e94c678b9
+OK  lean/aristotle/tail_lemma/RequestProject/Basic.lean  5476B  git_blob_sha1=a7d33537f455d8cbff1172b152353b0afa863d18  sha256=886824309d6bfc209773647fe63d7ad29c42eccdc99ad3145823b6aed6e83fe0
+OK  lean/aristotle/tail_lemma/RequestProject/Cap.lean  7406B  git_blob_sha1=0076f051cd6c6b58a7dbf8ad03d6e0e382743106  sha256=d7429c687d504ce439735971414411a6f248489f20724552ea9a359a9d9d7368
+OK  lean/aristotle/tail_lemma/RequestProject/Contraction.lean  9170B  git_blob_sha1=ad125cc1895a201c67b6b96f67f75030af06d574  sha256=e4425e3d343cb8c5a478a5a3f26363018c0fd3c3c492daa15ac9faf7771b83af
+OK  lean/aristotle/tail_lemma/RequestProject/Convolution.lean  6640B  git_blob_sha1=b2e866eaf7c2f8b94b5b347a5fd60d99b721b413  sha256=45081fb282036483d2efa1b9097c85cb3fd57f8c8de140bb54469fcf7a11a4d5
+OK  lean/aristotle/tail_lemma/RequestProject/Errors.lean  7080B  git_blob_sha1=258e3ddc4b6d0d9df647a9d368a4a16d2d5bdb24  sha256=d42f7df10248b610993227398a53ede81589ec1ca40aeed934466f59cfbb7c0a
+OK  lean/aristotle/tail_lemma/RequestProject/Main.lean  772B  git_blob_sha1=1b58ccf7a1aad4a38158cc2e5a9b2dc841ca1b3e  sha256=dacb04a40a5de2b570fc64e52ad993cf6413d3e288c738e878d42bcd9894eadf
+OK  lean/aristotle/tail_lemma/RequestProject/Monotone.lean  18758B  git_blob_sha1=cc7dc6abb1e62c01cee2dad8fed587d7f7a7190f  sha256=1e10977491d3a26df4f0007869156c83ea2fb7284ee84e8a380d1504ed6bdb07
+OK  lean/aristotle/tail_lemma/RequestProject/Tail.lean  11752B  git_blob_sha1=2f167492838c14a307c0d8191ec3a4b89f4253a8  sha256=f189de73bee87a9e25b46cb25563604152e5bcddb41e5e9a1b184fb6bb80e21a
+OK  lean/aristotle/tail_lemma/lake-manifest.json  3109B  git_blob_sha1=57bef473f4e93ba8f5d0387c29642e4327c08cda  sha256=116c6ef00aa899fb38c08c5e4c92c0e434d0e7f9d574fcb5d4d42cc90ffb07cb
+OK  lean/aristotle/tail_lemma/lakefile.toml  234B  git_blob_sha1=d1331e3725185586634d12846a2ef43f829fc639  sha256=b1481968ce2912f2b85288fc18aa05fb22750e4083f9e03f49f59a8814ba268a
+OK  lean/aristotle/tail_lemma/lean-toolchain  25B  git_blob_sha1=4c685fa085fa1c66103533e992fc82c014a12142  sha256=db7bb24b756d745bbde83fe92718b51bd3625dae3701ba0f598d0eedcd3f3028
+OK  lean/aristotle/theorem12_weld/ARISTOTLE_SUMMARY.md  2680B  git_blob_sha1=9de328b1df3941d787f48b121adcb5e43d9dfe2f  sha256=2cd215e1911c9eefd4bf986552deebc69bc50b63abe931df758991c90e615106
+OK  lean/aristotle/theorem12_weld/RequestProject/Main.lean  563B  git_blob_sha1=308f9cfb58cc562160bcd62ba1e20174f161311d  sha256=929b0bddef0b781f3fb42c7a99f252dc0bda7331f698104f7075e12ff637c52d
+OK  lean/aristotle/theorem12_weld/RequestProject/Weld.lean  14136B  git_blob_sha1=d1b17935d994f730d57ded4d491e8a4e131e933c  sha256=2591032ec1ac0126cc3cafed68c0cdee85f5a587a5d784f7350149e919c2c543
+OK  lean/aristotle/theorem12_weld/lake-manifest.json  3109B  git_blob_sha1=57bef473f4e93ba8f5d0387c29642e4327c08cda  sha256=116c6ef00aa899fb38c08c5e4c92c0e434d0e7f9d574fcb5d4d42cc90ffb07cb
+OK  lean/aristotle/theorem12_weld/lakefile.toml  234B  git_blob_sha1=d1331e3725185586634d12846a2ef43f829fc639  sha256=b1481968ce2912f2b85288fc18aa05fb22750e4083f9e03f49f59a8814ba268a
+OK  lean/aristotle/theorem12_weld/lean-toolchain  25B  git_blob_sha1=4c685fa085fa1c66103533e992fc82c014a12142  sha256=db7bb24b756d745bbde83fe92718b51bd3625dae3701ba0f598d0eedcd3f3028
+OK  lean/aristotle/window_freeze/ARISTOTLE_SUMMARY.md  2697B  git_blob_sha1=de8f079633c470922201c09d1b5b6e6810edf402  sha256=090be978311b68cbfec3981541347d195fd01711d8325fcf3e88cc7563135865
+OK  lean/aristotle/window_freeze/RequestProject/Main.lean  632B  git_blob_sha1=9b9b6157e80f2ada27ed9453278579fe08d329de  sha256=034454019bac1a6334b01d16367b166b18dc8a3718e6cd164938d4ebee9984e4
+OK  lean/aristotle/window_freeze/RequestProject/SiteBracket.lean  5591B  git_blob_sha1=2d27e3c8ac7084002e4bd933463e1ed05ace45b4  sha256=87767f9a920e185be79e4ecd42200b32038d32d4470f2b3ce3522795d776b2d8
+OK  lean/aristotle/window_freeze/RequestProject/WindowFreeze.lean  10471B  git_blob_sha1=bdc68801925b8bf3008b444280d82523eb5786b6  sha256=2a902e46e44a06015eb50cccf8b052efece4cb185f1d543ff26976914e00df6f
+OK  lean/aristotle/window_freeze/lake-manifest.json  3109B  git_blob_sha1=57bef473f4e93ba8f5d0387c29642e4327c08cda  sha256=116c6ef00aa899fb38c08c5e4c92c0e434d0e7f9d574fcb5d4d42cc90ffb07cb
+OK  lean/aristotle/window_freeze/lakefile.toml  234B  git_blob_sha1=d1331e3725185586634d12846a2ef43f829fc639  sha256=b1481968ce2912f2b85288fc18aa05fb22750e4083f9e03f49f59a8814ba268a
+OK  lean/aristotle/window_freeze/lean-toolchain  25B  git_blob_sha1=4c685fa085fa1c66103533e992fc82c014a12142  sha256=db7bb24b756d745bbde83fe92718b51bd3625dae3701ba0f598d0eedcd3f3028
+verified: 57/57  mismatches: 0
+fetch_verify_exit: 0
+
+## 2. skill self-test (validates the gate is not vacuous)
+  PASS  exit=0  positive fixture is clean
+  PASS  exit=0  comment-only mentions of sorry/admit/Abort are ignored
+  PASS  exit=0  #print axioms is not an axiom declaration
+  PASS  exit=1  a real sorry placeholder fails, with its line number
+  PASS  exit=1  an axiom behind a stripped doc comment reports its own line, not the start of the whitespace run
+  PASS  exit=0  dependency directories are pruned and the pruning is reported
+  PASS  exit=1  a verdict with no (check-sat) fails
+  PASS  exit=1  a verdict with no run log fails
+  PASS  exit=0  a document that claims nothing passes
+  PASS  exit=0  a GENUINE script passes the audit gate
+  PASS  exit=1  a fixture corpus of non-results fails the audit gate
+  PASS  exit=2  a missing input reports TOOL NOT RUN
+  PASS  exit=2  a missing auditor reports TOOL NOT RUN
+------------------------------------------------------------------------------
+gate self-test: 13 cases, 0 failed
+self_test_exit: 0
+
+## 3. placeholder scan: gate.py lean over all .lean files (authoritative for placeholders)
+file_count: 25
+------------------------------------------------------------------------------
+ANTI-CIRCULARITY GATE [lean]
+  result: FAIL=0  NOT_RUN=0  SKIP=0
+  verdict: PASS
+gate_exit: 0   (map per skill: 0=PASS, 1=FAIL, 2=TOOL NOT RUN/UNKNOWN)
+
+## 4. auxiliary textual scans (comment-stripped naive; labeled auxiliary, not verdict-bearing)
+lean_files_scanned: 25
+token_totals: {'sorry': 0, 'admit': 0, 'unsafe': 0, 'axiom': 0, 'native_decide': 0, 'Abort': 0}
+naive_declaration_counts: theorem=159 lemma=114
+PRINT lean/BarrierAnalyticSkeleton.lean:60: `[propext, Classical.choice, Quot.sound]` (verified via `#print axioms`).
+PRINT lean/HypothesisDischarge.lean:51: (see the `#print axioms` block at the end).
+PRINT lean/HypothesisDischarge.lean:255: #print axioms M0_ne_zero
+PRINT lean/HypothesisDischarge.lean:256: #print axioms Bt_ne_zero
+PRINT lean/HypothesisDischarge.lean:257: #print axioms M0_ne_zero_on
+PRINT lean/HypothesisDischarge.lean:258: #print axioms norm_cos_le_exp_abs_im
+PRINT lean/HypothesisDischarge.lean:259: #print axioms continuousOn_Ht_integral
+PRINT lean/HypothesisDischarge.lean:260: #print axioms continuousOn_Ht_in_t
+PRINT lean/HypothesisDischarge.lean:261: #print axioms continuousOn_norm_Ht_in_t
+PRINT lean/StrongerWindowArithmetic.lean:53: [propext, Classical.choice, Quot.sound] (verify via #print axioms).
+PRINT lean/StrongerWindowArithmetic.lean:181: #print axioms lambda_row_identity
+PRINT lean/StrongerWindowArithmetic.lean:182: #print axioms window_index_691008
+PRINT lean/StrongerWindowArithmetic.lean:183: #print axioms sqrt_lt_691009
+PRINT lean/StrongerWindowArithmetic.lean:184: #print axioms reserve_value
+PRINT lean/StrongerWindowArithmetic.lean:185: #print axioms reserve_exceeds_14x_current
+PRINT lean/StrongerWindowArithmetic.lean:186: #print axioms reserve_conversion
+scan_exit: 0
+
+timestamp_end_local: 2026-10-17T20:29:19.4228825+08:00
+(end)
