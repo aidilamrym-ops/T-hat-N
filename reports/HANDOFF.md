@@ -59,8 +59,16 @@ terkecil (#875–#882) + seam + first/last; minimum margin re-komputasi
 eksak = klaim sealed `0.519849894613872543374989997` (digit penuh);
 agregat winding `±8.95e-13` ∋ 0 ⊂ (−1/4,1/4); uniform error (3 nilai)
 < klaim beku; artefak `audit_p1/l2_barrier_subset.py` + log resmi +
-JSON + 1 transkrip smoke — commit bersama baris ini. Berikutnya:
-**L3** weld checklist → **L4** report + registry P3.
+JSON + 1 transkrip smoke — commit bersama baris ini. **L3 SELESAI —
+weld theorem-source HELD (57/57 PASS):** PT Thm 1 = height eksak
+`3000175332800` (bukan hanya pembulatan 3·10^12 abstrak); identitas
+margin `X/2 + 350479773/2 = T_PT` eksak; statement weld (i)/(ii)/(iii)
++ konklusi ≡ PROOF_NOTE (2.1)–(2.4) setelah kanonikalisasi
+terdokumentasi (equal=True, string tercetak di log); containment +
+overlap + citation chain byte-identik dua sisi; artefak
+`audit_p1/l3_weld_checks.py` + log resmi + JSON + 2 transkrip smoke +
+`reports/AUDIT_DBN_L3_2026-10-17.md` — commit bersama baris ini.
+Berikutnya: **L4** report + registry P3.
 
 **Sesi berikutnya: baca berkas ini dulu**, lalu `reports/REPO_AUDIT.md`
 (§1–4 verdict, §6–10 perbaikan tersegel) dan
@@ -510,9 +518,68 @@ DAN sha256 arsip.
   tidak di-recheck (hanya token seam sisi-log); sweep independen penuh
   883-prisma tidak di-ulang (rekomputasi deskriptor untuk 883 + deep
   check subset); lane prop43/prop62 di luar scope.
-- **Berikutnya: L3** (weld checklist: domain/endpoint/quantifier/
-  substitusi, kompatibilitas parameter X/2 vs T_PT, containment,
-  citation chain) → **L4** report + registry P3.
+- **Berikutnya (saat itu): L3** (weld checklist: domain/endpoint/
+  quantifier/substitusi, kompatibilitas parameter X/2 vs T_PT,
+  containment, citation chain) → lihat §2.0j (L3 SELESAI); berikutnya
+  L4 report + registry P3.
+
+### 2.0j [BARU, 2026-10-17] P1 audit — L3 (weld theorem-source, clean-room) SELESAI — WELD HELD
+
+- **Protokol beku (pra-reg §5):** checklist 1–5 — pemetaan hipotesis
+  (i)/(ii)/(iii) Thm 1.2 ↔ slot paket (P1/T1/B1–B2 + F1–F3, glue C1;
+  id slot dari `ADVERSARIAL_REVIEW_PROTOCOL.md`); kompatibilitas
+  parameter; containment; citation chain; verdict per hipotesis +
+  verdict weld.
+- **Implementasi:** `audit_p1/l3_weld_checks.py` (sha256 `9AF03B5D…`).
+  57 cek; seluruh aritmetika verdict = `fractions.Fraction` eksak
+  (tanpa float); 14 dokumen rilis di-gate in-run via git blob sha1 +
+  size terhadap tree pinned `2e9976c4…` (PROOF_NOTE,
+  CANDIDATE_PARAMETERS, WINDOW_FREEZE_THEOREM, TAIL_LEMMA,
+  TAIL_PROVENANCE, NATIVE_BINDING, DERIVATIVE_BOX_LEMMA,
+  ERROR_CONSTANT_WELD, MAXIMUM_CHECKS, README, BIBLIOGRAPHY,
+  ADVERSARIAL_REVIEW_PROTOCOL, references/README, BARRIER_CERTIFICATE);
+  e-print Polymath v2 (`1be3bc38…`) di-re-ekstraksi ulang dari tar
+  (member `debruijn.tex` sha256 `560a28fe…`) dan digest 4 segmen
+  di-reproduksi (Thm 1.2 `06290d46…`; Thm 1.3 raw/norm
+  `2bdd6d87…`/`cebe9801…`; region `4353e6c8…`; Lemma 8.4
+  `b2fbc004…`); PT v1 (`c4f13cdf…`) di-re-decompress (payload sha256
+  `c6c29099…`).
+- **Temuan kunci (machine):** PT Thm 1 (pt_v1.tex baris 61–63) berbunyi
+  height persis `3 000 175 332 800` = `T_PT` paket (abstrak hanya
+  membulatkan ke 3·10^12 — ini menutup titik kritis hypothesis (i));
+  identitas `X/2 + 350479773/2 = 3000000092913.5 + 175239886.5 =
+  3000175332800 = T_PT` eksak; statement weld hipotesis (i)/(ii)/(iii)
+  + konklusi Thm 1.2: teks e-print v2 ≡ PROOF_NOTE (2.1)–(2.4)
+  setelah kanonikalisasi terdokumentasi (equal=True; string
+  ternormalisasi tercetak di log); containment eksak
+  (`y0²−(1809/10000)² = 234599/10^8 > 0`; canopy `893927/2500000 < 1`;
+  `sqrt(1−y0²) < 1`); overlap `3149013 = 3840000−690988+1` kontigu;
+  bracket sekunder `x_*` (mpmath-60d π, label non-primer) > margin
+  beku rilis; citation chain byte-identik dua sisi (Polymath
+  `60d0d2d3…`, PT `3362f66a…`) + record v2 = "final version" (RIMS)
+  + DOI refereed PT `10.1112/blms.12460` (Bull. LMS 53(3):792–797).
+- **Verdict:** hypothesis (i)/(ii)/(iii) = `compatible`; `weld verdict:
+  HELD`; `checks_total: 57  checks_failed: 0`; `L3 machine verdict:
+  PASS`; exit 0.
+- **Run resmi:** log `reports/audit_p1_l3.log` (sha256 `700315F4…`),
+  JSON `reports/audit_p1_l3_results.json` (sha256 `85056681…`);
+  log resmi **byte-identik** dengan smoke-2 (skrip deterministik;
+  guard LOG-EXISTS). Transkrip pra-run disimpan: smoke1 (6 cek gagal —
+  3 bug implementasi check/needles, dicatat apa adanya, sha256
+  `95F55BFE…`) + smoke2 (bersih). Laporan:
+  `reports/AUDIT_DBN_L3_2026-10-17.md`.
+- **Coverage L3 (beku, di JSON `boundary`):** kebenaran teorema
+  terbitan tidak direview (statement + pemetaan yang di-weld); reduksi
+  analitik paket (Dini all-y, limit t=0, native binding,
+  derivative-box/tail) tidak dibuktikan ulang; full text Bull. LMS
+  (refereed) tidak dapat diakses fetch scripted (403) — hanya record
+  bibliografi; v2 Polymath = "final version" per record arXiv
+  (pagination typeset tidak dibandingkan); snapshot arXiv dated
+  2026-10-17; lane rilis tidak di-re-run (verdict item 1–4 dikonsumsi
+  dari log ter-commit).
+- **Berikutnya: L4** — laporan audit akhir + registry P3 + daftar
+  coverage lengkap (termasuk L1 NOT-RUN-ENVIRONMENT, diskrepansi
+  lean rilis-vs-HEAD berlabel AUXILIARY, caveat-caveat item 2/3/4).
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 

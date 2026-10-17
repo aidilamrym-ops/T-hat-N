@@ -1,0 +1,85 @@
+P1 audit -- L3 clean-room theorem-source weld (prereg section 5)
+release commit 2e9976c4becbf97e31c56fe75fce07cdff5dd4ea ; date 2026-10-17
+
+== A. provenance gates (pinned tree / recorded sha256) ==
+[PASS] A.proof_note blob gate proof_note -- PROOF_NOTE.md blob 323e2144e9d1 size 14965  [weld: criterion sections 2-7]
+[PASS] A.candidate_parameters blob gate candidate_parameters -- CANDIDATE_PARAMETERS.md blob bdad0402562f size 4695  [weld: exact parameter row]
+[PASS] A.window_freeze blob gate window_freeze -- WINDOW_FREEZE_THEOREM.md blob 0f4ebe356741 size 3856  [slot F1/F3: x-freeze + endpoint coverage]
+[PASS] A.tail_lemma blob gate tail_lemma -- TAIL_LEMMA.md blob cdc612e9117b size 14476  [slot T1: all-N tail theorem]
+[PASS] A.tail_provenance blob gate tail_provenance -- TAIL_PROVENANCE.md blob cb3bc2947e2e size 1793  [slot T1: provenance]
+[PASS] A.native_binding blob gate native_binding -- NATIVE_BINDING.md blob aac13ed946ce size 4194  [slot F1: native binding]
+[PASS] A.derivative_box blob gate derivative_box -- DERIVATIVE_BOX_LEMMA.md blob 39616582de04 size 9206  [slot B1: uniform derivative bounds]
+[PASS] A.error_constant_weld blob gate error_constant_weld -- ERROR_CONSTANT_WELD.md blob 9fd635b59831 size 2604  [slot P3/error: conservative x-12, 10.50 corollary]
+[PASS] A.maximum_checks blob gate maximum_checks -- MAXIMUM_CHECKS.md blob acbf9813044b size 13572  [release: check inventory]
+[PASS] A.release_readme blob gate release_readme -- README.md blob 4af5cdb46e7d size 10492  [release: front matter]
+[PASS] A.bibliography blob gate bibliography -- BIBLIOGRAPHY.md blob 9e0961a138ff size 1095  [citation chain: primary references]
+[PASS] A.adversarial_protocol blob gate adversarial_protocol -- ADVERSARIAL_REVIEW_PROTOCOL.md blob d26d6db3f860 size 7487  [slot ids P1/T1/B1-B2/C1]
+[PASS] A.references_readme blob gate references_readme -- references/README.md blob 294ddc5f3759 size 687  [citation chain: version-locked reference hashes]
+[PASS] A.barrier_certificate blob gate barrier_certificate -- BARRIER_CERTIFICATE.md blob e5278fbd45b4 size 9914  [slot B1/B2: closed-slab certificate]
+[PASS] A.poly_pdf sha256 gate poly_pdf -- sha256 60d0d2d38122  [Polymath15 v2 PDF (also package references hash)]
+[PASS] A.poly_eprint sha256 gate poly_eprint -- sha256 1be3bc38d203  [Polymath15 v2 e-print tar]
+[PASS] A.pt_pdf sha256 gate pt_pdf -- sha256 3362f66af9fa  [Platt-Trudgian v1 PDF (also package references hash)]
+[PASS] A.pt_eprint sha256 gate pt_eprint -- sha256 c4f13cdfca71  [Platt-Trudgian v1 e-print payload]
+[PASS] A.abs_polymath sha256 gate abs_polymath -- sha256 354ed00c24c6  [arXiv abs snapshot 1904.12438 (citation-chain record)]
+[PASS] A.abs_pt sha256 gate abs_pt -- sha256 c137519d02a5  [arXiv abs snapshot 2004.09765 (citation-chain record)]
+[PASS] A.poly_tex_via_tar re-extract debruijn.tex from pinned e-print tar -- tar member sha256 560a28fe31be ; match extracted file: True
+[PASS] A.pt_tex_via_gzip re-decompress PT v1 e-print payload -- gzip payload sha256 c6c29099c943 (24571 B)
+
+== B. e-print v2 segment digests (recon transcription records) ==
+[PASS] B.seg_168_170 segment digest region (5) domain -- lines 168-170 raw 4353e6c842cf norm 4353e6c842cf (111 B)
+[PASS] B.seg_145_152 segment digest Theorem 1.2 (upper bound criterion) -- lines 145-152 raw 06290d46cbbb norm 06290d46cbbb (765 B)
+[PASS] B.seg_223_244 segment digest Theorem 1.3 (effective Riemann-Siegel) -- lines 223-244 raw 2bdd6d87d0a0 norm cebe9801b3c2 (2019 B)
+[PASS] B.seg_1442_1453 segment digest Lemma 8.4 -- lines 1442-1453 raw b2fbc004252e norm b2fbc004252e (1021 B)
+
+== C. parameter compatibility (checklist item 2) ==
+[PASS] C.t0_range t0 = 129/800 in (0, 1/2) -- t0 = 129/800 = 0.161250000000
+[PASS] C.y0sq_range 0 < y0^2 < 1 -- y0^2 = 87677/2500000 = 0.035070800000
+[PASS] C.y0_bracket y0 bracket from sealed window -- 1872719/10^7 < y0 < 23409/125000 (exact squares; y0 <= 1)
+[PASS] C.ymax_bracket sqrt(1-2t0) bracket -- 8231038/10^7 < sqrt(1-2t0) < 8231039/10^7 (exact squares)
+[PASS] C.pt_margin_identity X/2 + margin = T_PT exactly -- X/2 + 350479773/2 = 3000000092913.5 + 175239886.5 = 3000175332800 = T_PT (exact)
+[PASS] C.candidate_identities candidate / canopy / ceiling identities -- t0+y0^2/2 = 893927/5000000 = 0.178785400000 ; canopy = 893927/2500000 < 1 ; ceiling = 271/400
+[PASS] C.pt_theorem_statement PT v1 Theorem 1 states the exact height -- PT Thm 1 (lines 61-63): \begin{thm}\label{bank} The Riemann hypothesis is true up to height $3000175332800$. That is, the lowest $1236
+[FAIL] C.doc_strings frozen constants present in pinned docs + prereg -- missing: PROOF_NOTE:87677/2500000
+
+== D. containment of the curved barrier (checklist item 3) ==
+[PASS] D.sqrt_lt_1 sqrt(1-y0^2) < 1  <=>  y0^2 > 0 -- y0^2 = 87677/2500000 > 0 (exact)
+[PASS] D.lower_edge_margin lower-edge margin of the barrier rectangle -- y0^2 - (1809/10000)^2 = 234599/100000000 > 0 (exact)
+[PASS] D.canopy_uniform upper >= lower uniformly in t; upper <= 1 -- y0^2 + 2(t0-t) <= y0^2 + 2t0 = 893927/2500000 < 1 for all t in [0,t0] (t cancels; exact)
+[PASS] D.t_endpoints closed t-range endpoints recorded -- certified t-range [0, t0] closed; t0 = 129/800 in note + barrier docs
+
+== E. finite/tail overlap N = 3840000 (checklist item 2) ==
+[PASS] E.legs finite ladder partition arithmetic -- leg lengths [38012, 90000, 209000, 2812001] total 3149013 ; contiguous junctions True
+[PASS] E.nstar closed cutoff shared by both lanes -- N* = 3840000 is the last finite row (shared complete window W_3840000)
+[PASS] E.freeze_doc WINDOW_FREEZE_THEOREM records -- window-freeze margins and complete-overlap statement present
+[PASS] E.secondary_bracket x_* inside first finite window (secondary mpmath-60d pi bracket) -- secondary: x_*-x_690988 > 5377393.9878 ; x_690989-x_* > 11989041.1746 (recorded: >5377393.9878 / >11989041.1746)
+
+== F. statement weld (checklist item 1) ==
+[FAIL] F.hyp_i hypothesis (i) eprint vs note (2.1) -- eprint \frac{1+y_0}{2}\le\sigma\le1,0\leT\le\frac{X}{2}. | note \boxed{\Lambda\le\frac{893927}{5000000}=0.1787854}.\tag{0.1}\]Itisnota | equal=False
+[FAIL] F.hyp_ii hypothesis (ii) eprint vs note (2.2) -- eprint x\geX+\sqrt{1-y_0^2},y_0\ley\le\sqrt{1-2t_0}. | note \boxed{\Lambda\le\frac{893927}{5000000}=0.1787854}.\tag{0.1}\]Itisnota | equal=False
+[FAIL] F.hyp_iii hypothesis (iii) eprint vs note (2.3) -- eprint X\lex\leX+\sqrt{1-y_0^2},\sqrt{y_0^2+2(t_0-t)}\ley\le\sqrt{1-2t},0\let | note \boxed{\Lambda\le\frac{893927}{5000000}=0.1787854}.\tag{0.1}\]Itisnota | equal=False
+[FAIL] F.conclusion conclusion eprint vs note (2.4) -- eprint \Lambda\let_0+\frac{y_0^2}{2}. | note \boxed{\Lambda\le\frac{893927}{5000000}=0.1787854}.\tag{0.1}\]Itisnota | equal=False
+[FAIL] F.prose absence quantifier prose (zeroes/zeros) -- eprint x6 note x3 ; canon 'there are no zeros' == 'there are no zeros'
+[PASS] F.labels hypothesis labels/headings present -- eprint labels 3/3 ; note headings 4/4
+[PASS] F.preconditions Theorem 1.2 standing hypotheses instantiated -- preconditions t0>0, X>0, 0<y0<=1 (y0<23409/125000<1 exact)
+[PASS] F.convenient_region superset direction vs paper's own replacement region -- paper's convenient region [X,X+1]x[y0,1]; package rectangle extends to 0.1809 < y0 (no weakening)
+
+== G. citation chain versions (checklist item 4) ==
+[PASS] G.ref_hashes version-locked reference PDFs -- package reference hashes match our fetches byte-for-byte (poly 60d0d2d38122, pt 3362f66af9fa)
+[PASS] G.poly_final_version Polymath v2 = final version -- arXiv record: v2 is the final refereed version (RIMS)
+[PASS] G.pt_related_doi PT refereed DOI recorded -- arXiv record: abstract height statement + related Bull. LMS DOI
+
+== H. cross-references to committed L2 evidence (consumed, not re-run) ==
+[PASS] H.item1 committed verdict of item1 -- item1: checks_failed 0 + verdict PASS recorded
+[PASS] H.item2 committed verdict of item2 -- item2: checks_failed 0 + verdict PASS recorded
+[PASS] H.item3 committed verdict of item3 -- item3: checks_failed 0 + verdict PASS recorded
+[PASS] H.item4 committed verdict of item4 -- item4: checks_failed 0 + verdict PASS recorded
+
+
+== verdict ==
+hypothesis (i)   (P1)      : unresolved-or-mismatch
+hypothesis (ii)  (T1+F1-3) : unresolved-or-mismatch
+hypothesis (iii) (B1-B2)   : unresolved-or-mismatch
+weld verdict               : GAP-FOUND
+checks_total: 57  checks_failed: 6
+L3 machine verdict: FAIL
+json written: D:\Opencode AI Agent\reports\audit_p1_l3_results.json
