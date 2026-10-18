@@ -1,0 +1,72 @@
+# audit_p1 - L1 full sweep log (2026-10-18)
+
+purpose: L1 full finite-triangle sweep of the pinned release
+`review-01787854-v3` (commit `2e9976c4becbf97e31c56fe75fce07cdff5dd4ea`),
+executed with the release's own `scripts/run_full_sweep.sh` - reserved as
+optional by prereg section 8 ("run_full_sweep.sh optional (budget, section
+8)"; "L1 full sweep optional only within these caps") and skipped in the
+2026-10-18 L1 replay log (`reports/audit_p1_l1_replay_2026-10-18.log`).
+
+decision (recorded BEFORE execution): the owner selected the optional
+full sweep on 2026-10-18. No parameter, tolerance, selection, or cap is
+changed in response to any result; the decision order is anchored by this
+file's commit timestamp, and the machine log below records `repo_commit`
+and the runner sha256 at run start.
+
+budget cap (pre-registered): wall cap 6 h from `started_utc` recorded in
+`REPLAY_METADATA.txt`. If exceeded the run is stopped and the item is
+recorded UNRESOLVED-BUDGET (section-8 style); a cap change would be a new
+dated decision, never a silent one. The cap is mechanically enforced by
+`audit_p1/l1_sweep_watchdog.sh` (committed with this file), which stops
+the run and appends the stop record to this log if the wall is reached.
+(Measured anchors carried from prereg section 8: "barrier + tail lanes
+add hours"; "full sweep = 3,149,013 lines". Review lanes on this machine
+measured up to ~15 min per range.)
+
+pinned inputs of record (unchanged from L1; fetched and verified
+2026-10-18 01:59):
+- OCI archive sha256
+  `87a4695e86b535eac48b0a39e1999028e8a18249eb1c95cc9715e4a91afb83c6`
+  (172810240 B); loaded image (podman digest)
+  `sha256:6e29bc53adc5a4337802da2b5a219720e3da9dcc1b87c546b96b6126d8b9975d`;
+  config digest `sha256:5ccd9e3f7f8fdde6ee6a35c2542efc17b6a7247d615ad03c1db5bd47e3c8f42d`.
+- release tree carrier bundle sha256
+  `34f8f5239c56b9602d47800f0cac4ef9ee995f845298362fb4a2a95740c5ba92`;
+  checkout commit `2e9976c4...`; tree hash `7f15ecf8...`.
+
+execution set: `scripts/run_full_sweep.sh` (release tree) with
+`IMAGE=localhost/sha256:6e29bc53...` and `EXPECTED_IMAGE_ID` pinned to the
+image `.Id` measured on this engine (bare hex, no `sha256:` prefix):
+`5ccd9e3f7f8fdde6ee6a35c2542efc17b6a7247d615ad03c1db5bd47e3c8f42d`
+(= the archive's config digest, itself verified in the L1 replay log step
+1b). The script's own checks run as shipped: reviewed build-manifest sha
+`1dbed4db...`, `sha256sum --check` of `REVIEW_CONTAINER_INPUTS.sha256`,
+`replay_guard.py require/prepare`, clean-repository refusal, image
+identity + reviewed-build label check, host-visible bind-mount probe. No
+env override (`ALLOW_DIRTY_REPO`, `ALLOW_UNPINNED_IMAGE`) is set.
+
+environment delta (recorded BEFORE execution, not adapted afterwards):
+- the docker CLI is absent from the audit WSL2 distro; a shim
+  `/usr/local/bin/docker` (`exec podman "$@"`; sha256 recorded at run
+  start) provides the docker CLI surface used by the release script.
+  podman 5.7.0; the same container surface (--rm --network none
+  --read-only --cap-drop ALL --security-opt no-new-privileges --tmpfs
+  exec --volume) was exercised in the L1 replay (verify.sh + container
+  review), which passed on this engine.
+- expected output: 15 producer logs covering N=690988..3840000
+  (3,149,013 rows; names as in `scripts/compare_full_sweep.py`) +
+  `REPLAY_METADATA.txt` + `REPLAY_SHA256SUMS`; the final comparator must
+  print `RESULT PASS: fresh sweep matches every canonical line and all
+  3149013 sealed rows N=690988..3840000`.
+
+capture convention: as in the replay log - every block is appended by the
+runner from the actual invocation (marker | CMD | output | EXIT); nothing
+is retyped; failures are recorded as-is.
+
+scope limit (unchanged): L1 can never yield "independently verified"; the
+label maximum stays "release replayed; numbers reproduced from the
+release's own tooling" (prereg section 3.5).
+
+ordering anchor: this header is committed before the first sweep command;
+the runner records `repo_commit` + script sha256 at run start below, so
+the header commit predates the machine log.
