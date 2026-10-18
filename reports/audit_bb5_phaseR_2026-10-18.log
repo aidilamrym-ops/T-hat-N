@@ -1379,3 +1379,56 @@ Akuntansi cap: setup ~14m42s dari cap 3j; build terpakai 30m25s (attempt 2) + 63
 --- 2026-10-18T10:59Z | UPDATE PRA-LAUNCH attempt 4 (sebelum blok start pertama attempt 4; tidak ada langkah audit berjalan) ---
 Uji tick manual pertama: bug self-match -- pgrep di dalam wrapper flock mengenai cmdline wrapper sendiri (memuat path runner), sehingga runner tidak diluncurkan; hanya heartbeat tertulis. Diperbaiki di commit ini: pgrep dipindah ke luar wrapper + jeda 2 dtk di dalam flock menutup balapan peluncuran ganda. Tidak ada langkah audit yang berjalan selama uji (log build tidak berubah; BB5_Theorem.vo tetap tidak ada).
 Register-ScheduledTask dan schtasks /create ditolak non-admin (Access Denied; whoami: zafran-pradifta\user, Administrator=False; elevasi non-interaktif tidak tersedia). Supervisor dijalankan via jalur non-admin: (a) loop PowerShell pada shell background agent; (b) proses detached Start-Process; (c) item Startup %APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\T-hat-N-BB5-keepalive.cmd untuk kelanjutan pasca-logon/reboot. Ketiganya menjalankan tick yang sama (idempoten; flock mencegah peluncuran ganda). Opsi kuat ber-elevasi disediakan untuk owner: audit_bb5/bb5_phaseR_keepalive_task.ps1 (jalankan dari PowerShell elevated).
+
+=== phase R attempt 4 (resume) start 2026-10-18T11:00:17Z ===
+runner: /mnt/d/Opencode AI Agent/audit_bb5/bb5_phaseR_resume3.sh (repo path; single source of truth) sha256 c3b5132e3c4918f90d7d3447641031fa38621a31d3be6aff07ccdcc821fa18f5
+attempt 3 status: HALTED by WSL instance idle-termination ca. 09:27:36Z (mid TNF_Root_4_10.v; VM hidup/instance dimatikan); no audit results; resume from 40/50 .vo.
+supervision: Windows Scheduled Task keepalive -> tick ~10 dtk (self-healing relaunch); deadline epoch 1792364575.
+
+--- 2026-10-18T11:00:17Z | opam env (eval in runner; WARNING difilter)
+CMD: opam env --shell=bash
+OPAM_LAST_ENV='/root/.opam/.last-env/env-7e1c9e96aee4d3d9f98a0c81be18d8d2-0'; export OPAM_LAST_ENV;
+OPAM_SWITCH_PREFIX='/root/.opam/4.14.2'; export OPAM_SWITCH_PREFIX;
+OCAMLTOP_INCLUDE_PATH='/root/.opam/4.14.2/lib/toplevel'; export OCAMLTOP_INCLUDE_PATH;
+CAML_LD_LIBRARY_PATH='/root/.opam/4.14.2/lib/stublibs:/root/.opam/4.14.2/lib/ocaml/stublibs:/root/.opam/4.14.2/lib/ocaml'; export CAML_LD_LIBRARY_PATH;
+OCAML_TOPLEVEL_PATH='/root/.opam/4.14.2/lib/toplevel'; export OCAML_TOPLEVEL_PATH;
+MANPATH=':/root/.opam/4.14.2/man'; export MANPATH;
+PATH='/root/.opam/4.14.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/usr/lib/linux-tools/6.18.54.1-microsoft-standard-WSL2/bin:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Python314/Scripts/:/mnt/c/Python314/:/mnt/c/Program Files (x86)/Common Files/Intel/Shared Files/cpp/bin/Intel64:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/nodejs/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/usER/AppData/Roaming/Python/Python314/Scripts:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/GitHub CLI/:/mnt/c/Users/usER/.pi/agent/bin:/mnt/c/Users/usER/.elan/bin:/mnt/c/Users/usER/.cargo/bin:/mnt/c/Users/usER/.mimocode/bin:/mnt/c/Users/usER/AppData/Local/hermes/bin:/mnt/c/Users/usER/AppData/Local/Microsoft/WindowsApps:/mnt/d/Taget 2026/Antigravity/bin:/mnt/c/Users/usER/AppData/Roaming/npm:/mnt/c/Users/usER/AppData/Local/Programs/Ollama:/mnt/c/Users/usER/AppData/Local/Microsoft/WinGet/Links:/mnt/c/Users/usER/.lmstudio/bin:/mnt/c/Users/usER/AppData/Local/Programs/Cua/cua-driver/bin:/mnt/c/Users/usER/AppData/Local/Programs/Obsidian:/mnt/c/Users/usER/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin'; export PATH;
+EXIT: 0
+
+--- 2026-10-18T11:00:17Z | coqc --version (expect 8.20.1)
+CMD: coqc --version
+The Coq Proof Assistant, version 8.20.1
+compiled with OCaml 4.14.2
+EXIT: 0
+
+--- 2026-10-18T11:00:17Z | build BusyCoq (make -j4; no-op bila lengkap)
+CMD: cd /root/bb5r/Coq-BB5-git/BusyCoq && time make -j4
+make[1]: Entering directory '/root/bb5r/Coq-BB5-git/BusyCoq'
+make[2]: Nothing to be done for 'real-all'.
+make[1]: Leaving directory '/root/bb5r/Coq-BB5-git/BusyCoq'
+
+real	0m0.321s
+user	0m0.151s
+sys	0m0.156s
+EXIT: 0
+
+--- 2026-10-18T11:00:17Z | build CoqBB5/BB5 (make -j4; melanjutkan dari parsial)
+CMD: cd /root/bb5r/Coq-BB5-git/CoqBB5/BB5 && time make -j4
+make[1]: Entering directory '/root/bb5r/Coq-BB5-git/CoqBB5/BB5'
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_3.v
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_2.v
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_9.v
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_10.v
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_10.v", line 24, characters 0-67:
+Warning: native_compute disabled at configure time; falling back to
+vm_compute. [native-compiler-disabled,native-compiler,default]
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_9.v", line 24, characters 0-67:
+Warning: native_compute disabled at configure time; falling back to
+vm_compute. [native-compiler-disabled,native-compiler,default]
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_3.v", line 17, characters 0-67:
+Warning: native_compute disabled at configure time; falling back to
+vm_compute. [native-compiler-disabled,native-compiler,default]
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_2.v", line 24, characters 0-67:
+Warning: native_compute disabled at configure time; falling back to
+vm_compute. [native-compiler-disabled,native-compiler,default]
