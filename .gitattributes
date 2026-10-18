@@ -1,0 +1,5 @@
+# Line-ending policy.
+# Shell scripts are executed by WSL from /mnt/d; a CRLF checkout would break bash.
+*.sh text eol=lf
+# Transcripts are append-only and certified via sha256LF; keep them LF.
+*.log text eol=lf
