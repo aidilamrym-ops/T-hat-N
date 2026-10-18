@@ -1001,6 +1001,8 @@ AI-disclosure push commits `fc7a965` + `d0fe74d` -> run
 [`39089204940`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/39089204940);
 new-version tooling push commit `cf32fca` -> run
 [`39090625982`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/39090625982);
+tag `v1.41.0-alpha` (ref) -> run
+[`39090834877`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/39090834877);
 resume-fix push commit `b1e23ab` -> run
 [`39091124813`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/39091124813).
 Version of record: [10.5281/zenodo.23445149](https://doi.org/10.5281/zenodo.23445149); earlier version v1.40.0-alpha archived unchanged at [10.5281/zenodo.23410894](https://doi.org/10.5281/zenodo.23410894).

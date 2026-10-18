@@ -141,7 +141,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Refresh presentasi — judul baru README + top-matter + mode `--edit-record` + `.zenodo.json` + metadata repo GitHub | commit `aa4f4e8` + `493adb6` + commit yang membawa baris ini; dibangun di atas `7641a17`; CI hijau run `39087074988` | `README.md` (H1 "Rigorous Ball Arithmetic for Zeta, L-Function, and Weil Spectra"), `.zenodo.json`, `msaf/zenodo_deposit.py`, `msaf/tests/test_zenodo_deposit.py` (8 tes kontrak) |
 | Zenodo record `23410894` — edit metadata DI TEMPAT (judul/deskripsi/keywords); DOI + arsip TIDAK berubah | aksi API 2026-10-18 01:35:31Z (unlock → PUT → publish); commit yang membawa baris ini | `reports/ZENODO_METADATA_UPDATE_2026-10-18.md`; deskripsi sha256 `d7e30f5b…` (2722 byte); keywords 14; md5 arsip tetap `f90bc238bcda0170c5cb8b717afedddd` |
 | Disclosure AI (provenance) — README + deskripsi Zenodo (pass 2) + `.zenodo.json` + pengunci validator | commit `fc7a965` + `d0fe74d` + commit yang membawa baris ini; CI hijau run `39089204940` | `README.md` (paragraf "Provenance and AI-tooling disclosure"), `msaf/zenodo_deposit.py` (invariant baru), `msaf/tests/test_zenodo_deposit.py` (9 tes); deskripsi `c25ae517…` (3529 byte); `reports/ZENODO_METADATA_UPDATE_2026-10-18.md` §8 |
-| Versi baru Zenodo `v1.41.0-alpha` (suksesor) — mint + publish via `--new-version-of` | commit `cf32fca` (tooling new-version + arsip yang diarsipkan; CI hijau `39090625982`) + `b1e23ab` (perbaikan resume; CI hijau `39091124813`) + commit yang membawa baris ini; DOI versi `10.5281/zenodo.23445149` (konsep `10.5281/zenodo.23338271`); arsip tarball commit `cf32fca` sha256 `722258413f6dc416daf6702234d11699f1add25411fdd405807480952c2e946f` (1.068.890 byte, md5 `07fd2e2a598d8f6fc0778c6fd4b68923` cocok); deskripsi 3764 byte sha256 `218f902570d3a14759bc8d4c8ee7b92606c442b0830596e8406935e984b77988`; tag annotated `v1.41.0-alpha` → `cf32fca`; record `23410894` TIDAK tersentuh | https://doi.org/10.5281/zenodo.23445149, `reports/ZENODO_NEW_VERSION_2026-10-18.md` |
+| Versi baru Zenodo `v1.41.0-alpha` (suksesor) — mint + publish via `--new-version-of` | commit `cf32fca` (tooling new-version + arsip yang diarsipkan; CI hijau `39090625982` + ref tag `39090834877`) + `b1e23ab` (perbaikan resume; CI hijau `39091124813`) + commit yang membawa baris ini; DOI versi `10.5281/zenodo.23445149` (konsep `10.5281/zenodo.23338271`); arsip tarball commit `cf32fca` sha256 `722258413f6dc416daf6702234d11699f1add25411fdd405807480952c2e946f` (1.068.890 byte, md5 `07fd2e2a598d8f6fc0778c6fd4b68923` cocok); deskripsi 3764 byte sha256 `218f902570d3a14759bc8d4c8ee7b92606c442b0830596e8406935e984b77988`; tag annotated `v1.41.0-alpha` → `cf32fca`; record `23410894` TIDAK tersentuh | https://doi.org/10.5281/zenodo.23445149, `reports/ZENODO_NEW_VERSION_2026-10-18.md` |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -851,7 +851,8 @@ DAN sha256 arsip.
   (14 keywords, `publication_date` 2026-10-18, related identifier sama).
 - **Commit yang diarsipkan = tooling-first** (pilihan pemilik): `cf32fca`
   membawa mode `--new-version-of` + 6 tes + sinkron hitungan README 375
-  (CI hijau `39090625982`); perbaikan resume `b1e23ab` + 2 tes (README
+  (CI hijau `39090625982`, plus `39090834877` untuk ref tag
+  `v1.41.0-alpha`); perbaikan resume `b1e23ab` + 2 tes (README
   377; CI hijau `39091124813`) menyusul SETELAH kuirk API ditemukan.
 - **Kuirk API baru (fakta terukur; dikunci di tooling + laporan):**
   panggilan `actions/newversion` KEDUA — saat draft barunya sudah

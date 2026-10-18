@@ -50,8 +50,9 @@ checkpoint draft.
 ## 3. Urutan yang dijalankan (aktual)
 
 1. Commit tooling `cf32fca` dipush; CI hijau `39090625982`.
-2. Tag annotated `v1.41.0-alpha` dibuat di `cf32fca` dan dipush;
-   `git ls-remote` memastikan tag menunjuk commit arsip.
+2. Tag annotated `v1.41.0-alpha` dibuat di `cf32fca` dan dipush; push
+   ref tag memicu run `39090834877` (hijau, 2m5s); `git ls-remote`
+   memastikan tag menunjuk commit arsip.
 3. Pratinjau deskripsi di luar repo (`preview_v141.py`): unduh tarball
    commit dari GitHub, hitung sha256, komposisi via fungsi yang sama,
    cek kontrak (`[]`), simpan 3764 byte.
@@ -118,8 +119,8 @@ membuktikan draft tetap seperti ditinggalkan.
 - Rantai konsep `allversions`: 4 versi utuh (§1).
 - Record `23410894` — tidak berubah (§1).
 - Tag: `git ls-remote --tags origin v1.41.0-alpha` → `6c6f7198…`
-  (tag object) → commit `cf32fca…`; setiap push diverifikasi
-  `origin/main` == HEAD.
+  (tag object) → commit `cf32fca…`; run ref tag `39090834877` hijau;
+  setiap push diverifikasi `origin/main` == HEAD.
 
 ## 6. Bukti di luar repo (Temp\opencode; tidak di-commit)
 
