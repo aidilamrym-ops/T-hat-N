@@ -1432,3 +1432,6 @@ vm_compute. [native-compiler-disabled,native-compiler,default]
 File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_2.v", line 24, characters 0-67:
 Warning: native_compute disabled at configure time; falling back to
 vm_compute. [native-compiler-disabled,native-compiler,default]
+
+--- 2026-10-18T11:08Z | UPDATE supervisor attempt 4 (setelah start ~11:00Z; tidak mengubah langkah audit) ---
+Uji daya hidup: proses detached Start-Process (PID 9764) mati saat shell tool-call pembuatnya berakhir (harness membunuh process tree tool-call; tick-nya sempat menulis heartbeat 11:00:58Z). Pengganti terverifikasi: 2 supervisor via WMI (Invoke-CimMethod Win32_Process Create; PID 14708 & 14996; induk 16748) TETAP HIDUP melewati berakhirnya tool-call pembuatnya (dikonfirmasi 11:08:04Z) + shell background agent (PID 7548/15768) + item Startup (pasca-logon). Total 3 loop tick (~10 dtk masing-masing; sesi efektif ~3-4 dtk) menjalankan tick yang sama (idempoten; flock mencegah peluncuran ganda). Skrip spawn dicatat: audit_bb5/bb5_phaseR_keepalive_spawn_wmi.ps1. Build attempt 4: daemon PID 456; 4 coqc paralel berjalan (antara lain TNF_Root_3, TNF_Root_4_2, TNF_Root_4_9). Tidak ada langkah audit yang berubah.
