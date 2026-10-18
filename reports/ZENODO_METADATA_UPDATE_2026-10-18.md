@@ -5,6 +5,9 @@ versi-of-record `10.5281/zenodo.23410894` diganti DI TEMPAT. DOI versi,
 DOI konsep, dan berkas arsip tidak berubah. Persetujuan pemilik (satu
 ronde): judul opsi A; repo tetap `T-hat-N`; mode edit di tempat (bukan
 versi baru); registry audit P1 disertakan ringkas di README.
+Dua pass pada 2026-10-18: (1) refresh judul/deskripsi/keywords (§1–§7);
+(2) paragraf provenance/AI-tooling disclosure + perluasan Metadata note
+(§8).
 
 ## 1. Sebelum → sesudah (owner view; cadangan JSON di luar repo)
 
@@ -32,6 +35,9 @@ Tidak berubah: DOI versi `10.5281/zenodo.23410894`; DOI konsep
 ORCID 0009-0002-9718-9710); berkas arsip `T-hat-N-a37b50b7dbdd.tar.gz`
 546.800 byte — md5 `f90bc238bcda0170c5cb8b717afedddd`. `modified`
 pasca-edit: `2026-10-18T01:35:31.065740+00:00`; state `done`.
+Pass kedua (§8) mengubah deskripsi lagi: 2722 → 3529 byte — sha256
+`c25ae517bf35d6177be1af93a5ac12cfeeabc391618ab51be85a1b449306ae4a`;
+`modified` → `2026-10-18T02:13:01.174772+00:00`.
 
 ## 2. Kontrak edit (ditegakkan sebelum tulis; diuji tanpa jaringan)
 
@@ -39,10 +45,12 @@ Mode baru `--edit-record` di `msaf/zenodo_deposit.py` (commit `aa4f4e8`)
 menolak mengubah klaim objek arsip. Deskripsi pengganti wajib: (1) diawali
 judul baru; (2) memuat klaim commit arsip yang sama (`a37b50b…`); (3)
 memuat sha256 tarball yang sama (`44bdfb87…`); (4) memuat paragraf SCOPE
-tetap (verbatim dari modul); (5) memuat baris `LICENSE:`. PUT gagal →
+tetap (verbatim dari modul); (5) memuat baris `LICENSE:`; (6) memuat frasa
+`AI-tooling disclosure` (sejak commit `fc7a965`). PUT gagal →
 `actions/discard` (record kembali persis seperti terbit); echo PUT
 (judul + sha256 deskripsi) tidak cocok → publish diblokir. Tes kontrak:
-`msaf/tests/test_zenodo_deposit.py` (8 tes, tanpa jaringan). Dry-run
+`msaf/tests/test_zenodo_deposit.py` (9 tes, tanpa jaringan; suite total
+369). Dry-run
 mencetak sha256 deskripsi baru — nilai itu identik dengan yang terpasang
 pasca-publish (kecocokan byte).
 
@@ -76,6 +84,11 @@ pasca-publish (kecocokan byte).
 - `zenodo_public_after_2026-10-18.json` — record publik pasca-edit.
 - `zenodo_desc_23410894_2026-10-18.txt` — teks deskripsi yang dipasang.
 - `zenodo_edit_run_2026-10-18.log` + `zenodo_verify_after_2026-10-18.log`.
+- Pass kedua: `zenodo_desc_23410894_2026-10-18_b.txt`,
+  `zenodo_dryrun_b_2026-10-18.log`, `zenodo_edit_run_b_2026-10-18.log`,
+  `zenodo_backup_23410894_2026-10-18_after2.json`,
+  `zenodo_public_after2_2026-10-18.json`,
+  `zenodo_verify_after_edit_b_2026-10-18.log`.
 
 ## 6. Selaras di sumber yang sama (satu push dengan skrip)
 
@@ -89,7 +102,8 @@ pasca-publish (kecocokan byte).
   python-flint, spectral-analysis, guinand-weil, reproducible-research,
   lean4, random-matrix-theory).
 - README: H1 = judul baru (identik judul record), banner status
-  2026-10-18, paragraf registry audit `A-2026-0001`.
+  2026-10-18, paragraf registry audit `A-2026-0001`, paragraf
+  provenance/AI-tooling disclosure (pass 2).
 
 ## 7. Catatan
 
@@ -98,3 +112,31 @@ pasca-publish (kecocokan byte).
   (commit, sha256, SCOPE, LICENSE) lewat verbatim.
 - Baris "Metadata note (2026-10-18)" ditambahkan ke deskripsi untuk
   menyatakan bahwa ini refresh metadata, bukan arsip baru.
+
+## 8. Pass kedua (2026-10-18 02:13:01Z) — paragraf provenance/disclosure AI
+
+Latar: FAQ kebijakan generatif-AI Zenodo (2026-04-27) mengharapkan
+depositor mengungkap pemakaian AI substantif DI DESKRIPSI record
+(tool apa, untuk apa, bagian mana); panduan SSI menyarankan hal sama di
+README. Keputusan owner: tiga permukaan (README, deskripsi Zenodo,
+`.zenodo.json`) + aturan HANDOFF §5 + pengunci validator; nama tool
+"OpenCode" disebut; versi model tidak disebut (berganti antar sesi).
+
+| medan | pass 1 | pass 2 |
+|---|---|---|
+| deskripsi | 2722 byte — sha256 `d7e30f5b…` | 3529 byte — sha256 `c25ae517bf35d6177be1af93a5ac12cfeeabc391618ab51be85a1b449306ae4a` |
+
+- Paragraf "Provenance and AI-tooling disclosure." disisipkan antara
+  paragraf versi dan Metadata note; Metadata note diperluas satu kalimat
+  yang mencatat pass kedua (per kebijakan Zenodo).
+- `modified`: `2026-10-18T02:13:01.174772+00:00`; state `done`;
+  REPUBLISHED; DOI versi/konsep, keywords (14), `version`,
+  `publication_date`, dan berkas arsip TIDAK berubah (md5
+  `f90bc238bcda0170c5cb8b717afedddd`, 546.800 byte).
+- Kontrak edit diperluas (commit `fc7a965`): validator MENOLAK deskripsi
+  yang kehilangan frasa `AI-tooling disclosure`; tes baru
+  `test_ai_tooling_disclosure_is_pinned`; suite 368 → 369.
+- Verifikasi: owner view + record publik + halaman publik memuat
+  paragraf. Bukti baru: lihat §5 (baris "Pass kedua").
+- Permukaan lain: README top-matter (commit `d0fe74d`) + `.zenodo.json`
+  selaras; aturan §5 HANDOFF ditambahkan oleh docs commit.

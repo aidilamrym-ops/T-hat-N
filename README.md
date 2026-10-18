@@ -996,7 +996,9 @@ magnitude-ladder dim-321 commit `9ce44be` -> run
 dashboard v6 commit `6b56f4a` -> run
 [`39053097132`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/39053097132);
 readme + Zenodo-edit tooling push commit `493adb6` -> run
-[`39087074988`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/39087074988).
+[`39087074988`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/39087074988);
+AI-disclosure push commits `fc7a965` + `d0fe74d` -> run
+[`39089204940`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/39089204940).
 Version of record: [10.5281/zenodo.23410894](https://doi.org/10.5281/zenodo.23410894).
 
 ---

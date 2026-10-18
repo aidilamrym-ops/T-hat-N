@@ -140,6 +140,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | P1 audit Λ — eksekusi L1 (replay container, semua langkah exit 0, 2026-10-18) + L2–L4 + registry A-2026-0001 | commit `018a416` (log replay) + `58cf4a3` (laporan L1 + registry) + `7641a17` + commit yang membawa baris ini; CI hijau run `39063534769` / `39082654115` | `reports/AUDIT_DBN_L1_2026-10-18.md`, `reports/audit_p1_l1_replay_2026-10-18.log`, `reports/audit_p1_l1_engine_install_2026-10-18.log`, `reports/FENCE_REGISTRY.md` (A-2026-0001), `reports/AUDIT_DBN_L4REPORT_2026-10-17.md` |
 | Refresh presentasi — judul baru README + top-matter + mode `--edit-record` + `.zenodo.json` + metadata repo GitHub | commit `aa4f4e8` + `493adb6` + commit yang membawa baris ini; dibangun di atas `7641a17`; CI hijau run `39087074988` | `README.md` (H1 "Rigorous Ball Arithmetic for Zeta, L-Function, and Weil Spectra"), `.zenodo.json`, `msaf/zenodo_deposit.py`, `msaf/tests/test_zenodo_deposit.py` (8 tes kontrak) |
 | Zenodo record `23410894` — edit metadata DI TEMPAT (judul/deskripsi/keywords); DOI + arsip TIDAK berubah | aksi API 2026-10-18 01:35:31Z (unlock → PUT → publish); commit yang membawa baris ini | `reports/ZENODO_METADATA_UPDATE_2026-10-18.md`; deskripsi sha256 `d7e30f5b…` (2722 byte); keywords 14; md5 arsip tetap `f90bc238bcda0170c5cb8b717afedddd` |
+| Disclosure AI (provenance) — README + deskripsi Zenodo (pass 2) + `.zenodo.json` + pengunci validator | commit `fc7a965` + `d0fe74d` + commit yang membawa baris ini; CI hijau run `39089204940` | `README.md` (paragraf "Provenance and AI-tooling disclosure"), `msaf/zenodo_deposit.py` (invariant baru), `msaf/tests/test_zenodo_deposit.py` (9 tes); deskripsi `c25ae517…` (3529 byte); `reports/ZENODO_METADATA_UPDATE_2026-10-18.md` §8 |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -809,6 +810,33 @@ DAN sha256 arsip.
 - **Tanpa perubahan:** tidak ada komputasi baru; artefak tersegel tidak
   disentuh; suite penuh 368 lulus lokal sebelum push.
 
+### 2.0o [BARU, 2026-10-18] Disclosure AI (provenance) — 3 permukaan + pengunci kontrak — SELESAI
+
+- **Latar:** FAQ kebijakan generatif-AI Zenodo (2026-04-27) mengharapkan
+  pengungkapan pemakaian AI substantif di deskripsi record; SSI
+  menyarankan di README. Repo sudah transparan di dalam (`brain.md` §1
+  menyebut agen OpenCode; semua commit author = pemilik; satu-satunya
+  baris co-author di sejarah berbunyi "Co-Authored-By: none") — yang
+  ditutup = paragraf di permukaan (menutup asimetri halaman depan).
+- **Keputusan owner:** tiga permukaan + pengunci; nama tool "OpenCode"
+  disebut eksplisit; versi model tidak disebut (berganti antar sesi).
+- **Commit `fc7a965`:** validator `--edit-record` menolak deskripsi yang
+  kehilangan frasa `AI-tooling disclosure`; tes baru
+  `test_ai_tooling_disclosure_is_pinned`; suite 368 → 369.
+- **Commit `d0fe74d`:** paragraf "Provenance and AI-tooling disclosure"
+  di README (top-matter, setelah paragraf registry audit) + kalimat
+  selaras di `.zenodo.json`; hitungan suite README 368 → 369.
+- **Record Zenodo 23410894 (pass kedua, 2026-10-18 02:13:01Z):**
+  deskripsi 2722 → 3529 byte (sha256 `d7e30f5b…` → `c25ae517…`);
+  paragraf disisipkan sebelum Metadata note; note diperluas mencatat
+  pass kedua; DOI/berkas/keywords/version TIDAK berubah; REPUBLISHED;
+  verifikasi owner + publik. Bukti:
+  `reports/ZENODO_METADATA_UPDATE_2026-10-18.md` §8.
+- **CI:** run `39089204940` (push `fc7a965` + `d0fe74d`) = HIJAU; baris
+  ini = docs commit.
+- **Aturan baru (dicatat di §5):** paragraf disclosure = invariant
+  permukaan publik; tidak boleh hilang oleh edit metadata mana pun.
+
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 
 `msaf/certify.py` mengesahkan `nan` sebagai nol (Arb menjawab True untuk
@@ -959,6 +987,12 @@ ASCII dua jalur yang sudah usang. Jangan cari-cari keduanya di repo.
    penulisan laporan mode-teks Windows yang menggandakan CR (`\r\r\n`,
    terdeteksi lewat diff seluruh baris; `msaf/gw_resolution_delta.py`
    kini menormalisasi line-ending dan menulis byte eksak).
+6. Disclosure AI = bagian permanen permukaan publik: paragraf
+   "Provenance and AI-tooling disclosure" wajib ada di README, deskripsi
+   record Zenodo dan `.zenodo.json`; validator `--edit-record` MENOLAK
+   edit yang menghapusnya (`test_ai_tooling_disclosure_is_pinned`). AI
+   tidak pernah dicantumkan sebagai author/co-author; pemilik =
+   penanggung jawab seluruh konten.
 
 ## 6. Jebakan lingkungan (hemat waktu sesi depan)
 
