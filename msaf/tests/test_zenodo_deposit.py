@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-"""Contract guards for the in-place metadata edit path of the Zenodo
-depositor (`msaf/zenodo_deposit.py --edit-record`).
+"""Contract guards for the Zenodo depositor (`msaf/zenodo_deposit.py`).
 
 An edit may re-title a published record and rewrite its opening
 paragraphs, but it must never silently retarget what the archive holds
-(same commit, same tarball sha256), and the fixed SCOPE paragraph plus a
-LICENSE line must survive verbatim. These tests pin that contract with no
-network access."""
+(same commit, same tarball sha256), and the fixed SCOPE paragraph, the
+AI-tooling disclosure paragraph and a LICENSE line must survive verbatim.
+The same frozen text is composed into every deposit and new version, and
+the newversion action's `latest_draft` resolution refuses to guess. These
+tests pin all of that with no network access."""
 
 from __future__ import annotations
 
@@ -87,3 +88,56 @@ def test_claims_extraction_reads_commit_and_sha() -> None:
 def test_claims_extraction_refuses_unparsable_text() -> None:
     with pytest.raises(SystemExit):
         zd.extract_archive_claims("no claim pair in this text")
+
+
+def test_compose_description_satisfies_the_frozen_contract() -> None:
+    desc = zd.compose_description(TITLE, "OWNER/REPO", COMMIT, SHA,
+                                  extra_note="Note.",
+                                  license_id="mit-license")
+    assert zd.DISCLOSURE_MARKER in desc
+    assert zd.SCOPE_NOTE in desc
+    assert zd.validate_edit_description(desc, TITLE, COMMIT, SHA) == []
+
+
+def test_compose_description_without_license_states_none() -> None:
+    desc = zd.compose_description(TITLE, "OWNER/REPO", COMMIT, SHA)
+    assert "LICENSE: none." in desc
+
+
+def test_compose_metadata_core_fields() -> None:
+    md = zd.compose_metadata(TITLE, "OWNER/REPO", "the description",
+                             date="2026-10-18", keywords=["a", "b"])
+    assert md["upload_type"] == "software"
+    assert md["title"] == TITLE
+    assert md["description"] == "the description"
+    assert md["publication_date"] == "2026-10-18"
+    assert md["access_right"] == "open"
+    assert md["related_identifiers"] == [{
+        "identifier": "https://github.com/OWNER/REPO",
+        "relation": "isSupplementTo",
+        "scheme": "url",
+    }]
+    assert md["keywords"] == ["a", "b"]
+    assert md["creators"][0]["orcid"] == "0009-0002-9718-9710"
+    assert "version" not in md
+    assert "license" not in md
+
+
+def test_compose_metadata_version_and_license_only_when_passed() -> None:
+    md = zd.compose_metadata(TITLE, "OWNER/REPO", "d",
+                             version="v1.41.0-alpha",
+                             license_id="mit-license")
+    assert md["version"] == "v1.41.0-alpha"
+    assert md["license"] == "mit-license"
+
+
+def test_latest_draft_resolution_reads_the_link() -> None:
+    payload = {"links": {"latest_draft":
+                         "https://zenodo.org/api/deposit/depositions/"
+                         "23410999/"}}
+    assert zd.resolve_latest_draft_id(payload) == "23410999"
+
+
+def test_latest_draft_resolution_refuses_without_link() -> None:
+    with pytest.raises(SystemExit):
+        zd.resolve_latest_draft_id({"links": {}})

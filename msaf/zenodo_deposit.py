@@ -21,12 +21,22 @@ What it refuses to do, on purpose
   sha256, the fixed SCOPE paragraph, the AI-tooling disclosure paragraph
   and a LICENSE line, or nothing is written. Re-titling and rewriting the
   opening paragraph are allowed; changing the archived object is not.
+* In new-version mode (`--new-version-of`) it mints a new version of a
+  published record: the snapshot is replaced BY DESIGN and the new
+  version gets its own DOI, but the description written there must
+  satisfy the same contract -- SCOPE, disclosure and the claim pair are
+  composed in, never parameters, and are checked before any write.
 
 Usage:
     C:\\Python314\\python.exe zenodo_deposit.py --repo OWNER/NAME --sha <full sha>
         [--license mit-license] [--draft-only] [--title "..."]
         [--date YYYY-MM-DD] [--version "..."] [--deposition-id ID]
         [--publish]
+
+    python zenodo_deposit.py --new-version-of ID --repo OWNER/NAME
+        --sha <full sha> [--license mit-license] [--title "..."]
+        [--date YYYY-MM-DD] [--version "..."] [--keywords "a, b"]
+        [--extra-note-file PATH] [--publish]
 
     python zenodo_deposit.py --edit-record ID --title "..."
         --description-file PATH [--keywords "a, b"] [--dry-run] [--publish]
@@ -70,6 +80,21 @@ SCOPE_NOTE = (
     "above -- nothing beyond that."
 )
 
+DISCLOSURE_MARKER = "AI-tooling disclosure"
+
+DISCLOSURE_NOTE = (
+    "Provenance and AI-tooling disclosure. This repository is developed "
+    "with substantive AI assistance: the OpenCode agentic coding "
+    "environment drafts and edits code, tests and documentation under the "
+    "author's direct instruction, review and sign-off. The research "
+    "programme, the mathematical content, the sealed artefacts and every "
+    "claim are the author's; the AI is a tool, not a source, and never an "
+    "author. Nothing in the verification chain depends on who or what "
+    "typed a line: every claim is bound to deterministic code, "
+    "machine-checked gates and replayable runs; the author takes "
+    "responsibility for all content."
+)
+
 
 def post(url, token, payload=None, raw=None, content_type=None):
     data = None
@@ -105,6 +130,19 @@ def put(url, token, payload):
     try:
         with urllib.request.urlopen(req) as resp:
             return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        raise SystemExit("HTTP %s on %s\n%s"
+                         % (exc.code, url,
+                            exc.read().decode("utf-8", "replace")[:2000]))
+
+
+def delete(url, token):
+    req = urllib.request.Request(url, method="DELETE")
+    req.add_header("Authorization", "Bearer " + token)
+    try:
+        with urllib.request.urlopen(req) as resp:
+            body = resp.read().decode("utf-8")
+            return json.loads(body) if body else {}
     except urllib.error.HTTPError as exc:
         raise SystemExit("HTTP %s on %s\n%s"
                          % (exc.code, url,
@@ -174,14 +212,15 @@ def extract_archive_claims(description):
 
 
 def validate_edit_description(text, title, commit_sha, archive_sha256):
-    """Return the list of contract violations for an edited description.
+    """Return the list of contract violations for a description about to
+    be frozen for writing (an in-place edit or a new version).
 
     An edit may re-title the record and rewrite its opening paragraphs; it
     may not change what the archive holds, and it may not drop the
     disclosure of how the work was made. The commit, the tarball sha256,
     the fixed SCOPE paragraph, the AI-tooling disclosure paragraph and a
-    LICENSE line must survive verbatim, or the edit is refused before any
-    write."""
+    LICENSE line must survive verbatim, or the write is refused before it
+    happens."""
     problems = []
     if not text.startswith(title):
         problems.append("description must start with the new title line")
@@ -191,11 +230,75 @@ def validate_edit_description(text, title, commit_sha, archive_sha256):
         problems.append("archived tarball sha256 claim dropped or altered")
     if SCOPE_NOTE not in text:
         problems.append("the fixed SCOPE paragraph is missing")
-    if "AI-tooling disclosure" not in text:
+    if DISCLOSURE_MARKER not in text:
         problems.append("the AI-tooling disclosure paragraph is missing")
     if "LICENSE:" not in text:
         problems.append("the LICENSE line is missing")
     return problems
+
+
+def compose_description(title, owner_repo, sha, digest, extra_note="",
+                        license_id=None):
+    """Compose the description a deposit or a new version will carry.
+
+    The fixed blocks are not parameters: the SCOPE paragraph and the
+    AI-tooling disclosure paragraph are part of the frozen text, exactly
+    like the claim pair, so no caller can drop them by omission. Order:
+    title, source claims, SCOPE, the caller's note, disclosure, LICENSE."""
+    desc = (
+        "%s\n\n"
+        "Source: https://github.com/%s at commit %s "
+        "(archived tarball sha256 %s).\n"
+        "Continuous integration for that exact commit: GREEN "
+        "(GitHub Actions).\n\n%s"
+        % (title, owner_repo, sha, digest, SCOPE_NOTE)
+    )
+    if extra_note:
+        desc += "\n\n" + extra_note.strip()
+    desc += "\n\n" + DISCLOSURE_NOTE
+    if license_id:
+        desc += ("\n\nLICENSE: %s, as stated by the LICENSE file in the "
+                 "archived repository." % license_id)
+    else:
+        desc += ("\n\nLICENSE: none. The repository contains no LICENSE "
+                 "file and this deposit grants no rights; all rights are "
+                 "reserved by the author.")
+    return desc
+
+
+def compose_metadata(title, owner_repo, description, date=None, version=None,
+                     license_id=None, keywords=()):
+    """Build the deposition metadata shared by the deposit and new-version
+    modes; only the description and the version string change per call."""
+    metadata = {
+        "upload_type": "software",
+        "title": title,
+        "description": description,
+        "creators": CREATORS,
+        "publication_date": date or time.strftime("%Y-%m-%d"),
+        "access_right": "open",
+        "related_identifiers": [{
+            "identifier": "https://github.com/%s" % owner_repo,
+            "relation": "isSupplementTo",
+            "scheme": "url",
+        }],
+        "keywords": list(keywords),
+    }
+    if license_id:
+        metadata["license"] = license_id
+    if version:
+        metadata["version"] = version
+    return metadata
+
+
+def resolve_latest_draft_id(payload):
+    """The newversion action answers with the ORIGINAL resource; the new
+    draft id lives in links.latest_draft. Refuse to guess when absent."""
+    latest = (payload.get("links") or {}).get("latest_draft")
+    if not latest or "/" not in latest:
+        raise SystemExit("newversion response carries no usable "
+                         "latest_draft link; inspect the record")
+    return latest.rstrip("/").rsplit("/", 1)[-1]
 
 
 def public_get(url, tries=6, wait=5):
@@ -310,6 +413,90 @@ def edit_record_metadata(args):
     return 0
 
 
+def new_version_deposit(args, blob, digest, fname, desc, metadata, tmp):
+    """Mint a new version of a published record and fill the draft.
+
+    Legacy flow: POST actions/newversion (idempotent while a draft is
+    open), resolve links.latest_draft, drop the inherited file copy of
+    the previous version, upload the new tarball, PUT the composed
+    metadata, and publish only when --publish is passed. The original
+    version, its DOI and its files never change; the new version gets its
+    own DOI under the same concept DOI. The description already passed
+    the frozen-claims contract in main() before this was called."""
+    src_url = "%s/depositions/%s" % (API, args.new_version_of)
+    cur = get(src_url, args.token)
+    if not cur.get("submitted"):
+        raise SystemExit("record %s is not published; refusing to mint a "
+                         "new version" % args.new_version_of)
+    out = post("%s/actions/newversion" % src_url, args.token)
+    draft_id = resolve_latest_draft_id(out)
+    draft = get("%s/depositions/%s" % (API, draft_id), args.token)
+    if draft.get("submitted"):
+        raise SystemExit("draft %s is already published; nothing to fill"
+                         % draft_id)
+    if str(draft.get("conceptrecid")) != str(cur.get("conceptrecid")):
+        raise SystemExit("draft %s does not belong to the same concept as "
+                         "record %s; refusing" % (draft_id,
+                                                  args.new_version_of))
+    print("record:      %s (concept %s)"
+          % (args.new_version_of, cur.get("conceptrecid")))
+    print("new draft:   %s (state %s)" % (draft_id, draft.get("state")))
+    print("title:       %s" % args.title)
+    print("desc bytes:  %d" % len(desc.encode("utf-8")))
+    print("desc sha256: %s" % hashlib.sha256(desc.encode("utf-8")).hexdigest())
+    have = {f.get("filename") for f in draft.get("files", [])}
+    for f in draft.get("files", []):
+        if f.get("filename") != fname:
+            delete("%s/depositions/%s/files/%s"
+                   % (API, draft_id, f.get("id")), args.token)
+            print("inherited file dropped from draft: %s"
+                  % f.get("filename"))
+    if fname in have:
+        print("file already present in draft, upload skipped: %s" % fname)
+    else:
+        with open(tmp, "rb") as fh:
+            payload = fh.read()
+        post_multipart("%s/depositions/%s/files" % (API, draft_id),
+                       args.token, "file", fname, payload)
+        print("file uploaded: %s (%d bytes, sha256=%s)"
+              % (fname, len(payload), digest))
+    got = put("%s/depositions/%s" % (API, draft_id), args.token,
+              payload={"metadata": metadata})
+    gm = got.get("metadata", {})
+    gd = gm.get("description", "")
+    if (gm.get("title") != args.title
+            or hashlib.sha256(gd.encode("utf-8")).hexdigest()
+            != hashlib.sha256(desc.encode("utf-8")).hexdigest()):
+        raise SystemExit("PUT echo does not match what was sent; the draft "
+                         "is left unpublished -- inspect before retrying")
+    print("draft metadata set; PUT echo matches verbatim")
+    if not args.publish:
+        print("NOT PUBLISHED (safe checkpoint). The draft is private and "
+              "modifiable; re-run the same command with --publish to "
+              "publish it. id=%s" % draft_id)
+        return 0
+    done = post("%s/depositions/%s/actions/publish" % (API, draft_id),
+                args.token)
+    print("PUBLISHED")
+    print("doi:        %s" % done.get("doi"))
+    print("conceptdoi: %s" % done.get("conceptdoi"))
+    print("url:        https://doi.org/%s" % done.get("doi"))
+    print("archive:    %d bytes  sha256=%s" % (len(blob), digest))
+    try:
+        os.remove(tmp)
+    except OSError:
+        pass
+    try:
+        pub = public_get("https://zenodo.org/api/records/%s" % draft_id)
+        pm = pub.get("metadata", {})
+        print("public title:   %s" % pm.get("title"))
+        print("public version: %s" % pm.get("version"))
+    except urllib.error.HTTPError as exc:
+        print("note: public re-check got HTTP %s; re-check manually"
+              % exc.code)
+    return 0
+
+
 def main(argv):
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", default=None, help="OWNER/NAME on GitHub")
@@ -331,9 +518,18 @@ def main(argv):
                     help="version string recorded in the metadata")
     ap.add_argument("--deposition-id", default=None,
                     help="resume an existing draft instead of creating one")
+    ap.add_argument("--new-version-of", default=None,
+                    help="mint a NEW VERSION of this published record id; "
+                         "the new draft replaces the archived snapshot with "
+                         "--sha under the same concept DOI and must satisfy "
+                         "the same frozen-claims contract as the edit mode")
+    ap.add_argument("--extra-note-file", default=None,
+                    help="read the extra-note text from this UTF-8 file "
+                         "(for notes too long to quote on a command line)")
     ap.add_argument("--publish", action="store_true",
                     help="publish: the draft named by --deposition-id in "
                          "deposit mode, the edited record in --edit-record "
+                         "mode, the filled new version in --new-version-of "
                          "mode")
     ap.add_argument("--edit-record", default=None,
                     help="in-place metadata edit of this published record "
@@ -359,6 +555,10 @@ def main(argv):
     if args.dry_run:
         raise SystemExit("--dry-run only applies to --edit-record")
 
+    if args.new_version_of and args.deposition_id:
+        raise SystemExit("--new-version-of and --deposition-id are "
+                         "mutually exclusive")
+
     if not args.repo or not args.sha:
         raise SystemExit("deposit mode needs --repo and --sha")
 
@@ -376,42 +576,29 @@ def main(argv):
     with open(tmp, "wb") as fh:
         fh.write(blob)
 
-    desc = (
-        "%s\n\n"
-        "Source: https://github.com/%s at commit %s "
-        "(archived tarball sha256 %s).\n"
-        "Continuous integration for that exact commit: GREEN "
-        "(GitHub Actions).\n\n%s"
-        % (args.title, owner_repo, args.sha, digest, SCOPE_NOTE)
-    )
-    if args.extra_note:
-        desc += "\n\n" + args.extra_note.strip()
-    if args.license:
-        desc += ("\n\nLICENSE: %s, as stated by the LICENSE file in the "
-                 "archived repository." % args.license)
-    else:
-        desc += ("\n\nLICENSE: none. The repository contains no LICENSE "
-                 "file and this deposit grants no rights; all rights are "
-                 "reserved by the author.")
+    extra_note = args.extra_note
+    if args.extra_note_file:
+        with open(args.extra_note_file, "r", encoding="utf-8") as fh:
+            extra_note = fh.read().replace("\r\n", "\n").strip()
 
-    metadata = {
-        "upload_type": "software",
-        "title": args.title,
-        "description": desc,
-        "creators": CREATORS,
-        "publication_date": args.date or time.strftime("%Y-%m-%d"),
-        "access_right": "open",
-        "related_identifiers": [{
-            "identifier": "https://github.com/%s" % owner_repo,
-            "relation": "isSupplementTo",
-            "scheme": "url",
-        }],
-        "keywords": [k.strip() for k in args.keywords.split(",") if k.strip()],
-    }
-    if args.license:
-        metadata["license"] = args.license
-    if args.version:
-        metadata["version"] = args.version
+    desc = compose_description(args.title, owner_repo, args.sha, digest,
+                               extra_note=extra_note,
+                               license_id=args.license)
+    problems = validate_edit_description(desc, args.title, args.sha, digest)
+    if problems:
+        for p in problems:
+            print("REFUSED: %s" % p)
+        raise SystemExit("composed description failed the frozen-claims "
+                         "contract; nothing written")
+
+    metadata = compose_metadata(
+        args.title, owner_repo, desc, date=args.date, version=args.version,
+        license_id=args.license,
+        keywords=[k.strip() for k in args.keywords.split(",") if k.strip()])
+
+    if args.new_version_of:
+        return new_version_deposit(args, blob, digest, fname, desc, metadata,
+                                   tmp)
 
     if args.publish:
         done = post("%s/depositions/%s/actions/publish"
