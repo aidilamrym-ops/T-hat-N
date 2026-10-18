@@ -141,6 +141,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Refresh presentasi — judul baru README + top-matter + mode `--edit-record` + `.zenodo.json` + metadata repo GitHub | commit `aa4f4e8` + `493adb6` + commit yang membawa baris ini; dibangun di atas `7641a17`; CI hijau run `39087074988` | `README.md` (H1 "Rigorous Ball Arithmetic for Zeta, L-Function, and Weil Spectra"), `.zenodo.json`, `msaf/zenodo_deposit.py`, `msaf/tests/test_zenodo_deposit.py` (8 tes kontrak) |
 | Zenodo record `23410894` — edit metadata DI TEMPAT (judul/deskripsi/keywords); DOI + arsip TIDAK berubah | aksi API 2026-10-18 01:35:31Z (unlock → PUT → publish); commit yang membawa baris ini | `reports/ZENODO_METADATA_UPDATE_2026-10-18.md`; deskripsi sha256 `d7e30f5b…` (2722 byte); keywords 14; md5 arsip tetap `f90bc238bcda0170c5cb8b717afedddd` |
 | Disclosure AI (provenance) — README + deskripsi Zenodo (pass 2) + `.zenodo.json` + pengunci validator | commit `fc7a965` + `d0fe74d` + commit yang membawa baris ini; CI hijau run `39089204940` | `README.md` (paragraf "Provenance and AI-tooling disclosure"), `msaf/zenodo_deposit.py` (invariant baru), `msaf/tests/test_zenodo_deposit.py` (9 tes); deskripsi `c25ae517…` (3529 byte); `reports/ZENODO_METADATA_UPDATE_2026-10-18.md` §8 |
+| Versi baru Zenodo `v1.41.0-alpha` (suksesor) — mint + publish via `--new-version-of` | commit `cf32fca` (tooling new-version + arsip yang diarsipkan; CI hijau `39090625982`) + `b1e23ab` (perbaikan resume; CI hijau `39091124813`) + commit yang membawa baris ini; DOI versi `10.5281/zenodo.23445149` (konsep `10.5281/zenodo.23338271`); arsip tarball commit `cf32fca` sha256 `722258413f6dc416daf6702234d11699f1add25411fdd405807480952c2e946f` (1.068.890 byte, md5 `07fd2e2a598d8f6fc0778c6fd4b68923` cocok); deskripsi 3764 byte sha256 `218f902570d3a14759bc8d4c8ee7b92606c442b0830596e8406935e984b77988`; tag annotated `v1.41.0-alpha` → `cf32fca`; record `23410894` TIDAK tersentuh | https://doi.org/10.5281/zenodo.23445149, `reports/ZENODO_NEW_VERSION_2026-10-18.md` |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -837,6 +838,37 @@ DAN sha256 arsip.
 - **Aturan baru (dicatat di §5):** paragraf disclosure = invariant
   permukaan publik; tidak boleh hilang oleh edit metadata mana pun.
 
+### 2.0p [BARU, 2026-10-18] Versi baru Zenodo v1.41.0-alpha (suksesor) — tooling `--new-version-of` + arsip `cf32fca` — SELESAI
+
+- **DOI versi baru `10.5281/zenodo.23445149`** (konsep tetap
+  `10.5281/zenodo.23338271`); versi `v1.41.0-alpha`; tag annotated
+  `v1.41.0-alpha` → commit `cf32fca7c45a87ee523e466982a6ad5eacdc5853`;
+  arsip `T-hat-N-cf32fca7c45a.tar.gz` 1.068.890 byte sha256
+  `722258413f6dc416daf6702234d11699f1add25411fdd405807480952c2e946f`
+  (md5 `07fd2e2a598d8f6fc0778c6fd4b68923`, byte-identik lokal ↔ unggah);
+  deskripsi 3764 byte sha256
+  `218f902570d3a14759bc8d4c8ee7b92606c442b0830596e8406935e984b77988`
+  (14 keywords, `publication_date` 2026-10-18, related identifier sama).
+- **Commit yang diarsipkan = tooling-first** (pilihan pemilik): `cf32fca`
+  membawa mode `--new-version-of` + 6 tes + sinkron hitungan README 375
+  (CI hijau `39090625982`); perbaikan resume `b1e23ab` + 2 tes (README
+  377; CI hijau `39091124813`) menyusul SETELAH kuirk API ditemukan.
+- **Kuirk API baru (fakta terukur; dikunci di tooling + laporan):**
+  panggilan `actions/newversion` KEDUA — saat draft barunya sudah
+  berisi berkas — dijawab `HTTP 400` dengan
+  `"field": "files.enabled", "messages": ["Please remove all files
+  first."]`; jadi klaim dokumentasi "no effect" hanya berlaku selama
+  draft kosong dari berkas. Pola isi → publish WAJIB resume lewat id
+  draft (`--new-version-of ID --deposition-id DRAFT`, tanpa memanggil
+  newversion lagi); ditambah guard baru: checksum berkas draft harus
+  cocok md5 byte lokal sebelum publish (fail-closed).
+- **Verifikasi:** owner-view (isi, pra-publish, pasca-publish) + publik
+  anonim cocok (deskripsi sha256, berkas md5, konsep, versi); rantai
+  konsep 4 versi utuh `v1.1.0 → v1.2.0 → v1.40.0-alpha → v1.41.0-alpha`;
+  record `23410894` TIDAK tersentuh (deskripsi `c25ae517…`, berkas
+  `f90bc238…`).
+- Laporan penuh + urutan perintah: `reports/ZENODO_NEW_VERSION_2026-10-18.md`.
+
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 
 `msaf/certify.py` mengesahkan `nan` sebagai nol (Arb menjawab True untuk
@@ -940,6 +972,19 @@ Konsekuensi urutan yang disarankan:
   keywords 10 → 14; state `done`, modified `2026-10-18T01:35:31Z`;
   verifikasi publik OK. Bukti:
   `reports/ZENODO_METADATA_UPDATE_2026-10-18.md`.
+- **VERSI BARU suksesor (2026-10-18):** keadaan suksesor diarsipkan
+  sebagai VERSI BARU record yang sama lewat mode baru `--new-version-of`
+  (`msaf/zenodo_deposit.py`; commit `cf32fca` + perbaikan resume
+  `b1e23ab`): DOI versi `10.5281/zenodo.23445149`, versi
+  `v1.41.0-alpha`, tag annotated `v1.41.0-alpha` → commit `cf32fca`;
+  arsip tarball `T-hat-N-cf32fca7c45a.tar.gz` sha256
+  `722258413f6dc416daf6702234d11699f1add25411fdd405807480952c2e946f`
+  (1.068.890 byte). Rantai konsep kini 4 versi: `v1.1.0` (23338272) →
+  `v1.2.0` (23340971) → `v1.40.0-alpha` (23410894) → `v1.41.0-alpha`
+  (23445149); record `23410894` tidak berubah (deskripsi `c25ae517…`,
+  berkas `f90bc238…`). Kuirk API `actions/newversion` kedua (HTTP 400
+  saat draft sudah berisi berkas) + jalur resume didokumentasikan;
+  bukti: `reports/ZENODO_NEW_VERSION_2026-10-18.md`.
 
 ---
 
@@ -956,7 +1001,7 @@ Konsekuensi urutan yang disarankan:
 | Berek Hodge | `msaf/hodge/` (`weil_search.py`, `fermat_k3.py`, `gauss_exact.py`) |
 | Berek NS | `msaf/navier_stokes/`, kernel `lean/NavierStokesCore.lean` |
 | Kernel RH | `lean/NewtonExistence.lean` |
-| Test suite (311) | `msaf/tests/` |
+| Test suite (377) | `msaf/tests/` |
 | Konsolidasi manuskrip (ekspor LaTeX) | `exports/research_paper.tex` |
 | Pra-registrasi amandemen lantai H1 (DIBEKUKAN) | `reports/AMENDMENT_FLOOR_SPEC.md` |
 | Template release delivery akhir | `reports/RELEASE_v1.40.0-alpha-final-certified-delivery.md` |
@@ -1028,3 +1073,11 @@ ASCII dua jalur yang sudah usang. Jangan cari-cari keduanya di repo.
   terurut global; dim 201/301 sama polanya). Gate `G-M0c` memeriksa
   multiset terurut dan `gw_montgomery.py` menyortir saat baca — jangan
   "memperbaiki" urutan berkas.
+- Zenodo `actions/newversion` KEDUA pada record yang draft barunya
+  sudah berisi berkas = `HTTP 400`
+  (`files.enabled: Please remove all files first`); dokumentasi
+  "no effect" hanya berlaku selama draft KOSONG dari berkas. Publish
+  lanjutan WAJIB lewat resume by id:
+  `--new-version-of ID --deposition-id DRAFT` (`msaf/zenodo_deposit.py`,
+  commit `b1e23ab`); guard checksum berkas draft aktif
+  (`file_matches_local`, fail-closed).

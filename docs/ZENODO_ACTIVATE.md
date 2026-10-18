@@ -5,7 +5,11 @@ from a logged-in browser session at zenodo.org -- no API token bypasses it.
 Context: `reports/HANDOFF.md` section 3. **Update 2026-10-16:** the
 delivery was secured via the depositor API (`msaf/zenodo_deposit.py`) as
 a NEW VERSION of the T-hat-N record -- version DOI
-`10.5281/zenodo.23410894`, concept DOI `10.5281/zenodo.23338271`. The
+`10.5281/zenodo.23410894`, concept DOI `10.5281/zenodo.23338271`.
+**Update 2026-10-18:** the successor state was archived the same way
+(mode `--new-version-of`, same script) -- version DOI
+`10.5281/zenodo.23445149`, tag `v1.41.0-alpha`, commit `cf32fca`;
+report `reports/ZENODO_NEW_VERSION_2026-10-18.md`. The
 webhook remains OFF; this guide now matters only for enabling AUTOMATIC
 archiving of FUTURE releases (the API path stays valid regardless).
 

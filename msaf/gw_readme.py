@@ -571,7 +571,7 @@ def render_workflow_svg(ctx: dict) -> str:
          "green public CI on every commit"])
     harrow(714, 464, 746)
     box(750, 420, 330, 88, "Permanent archive",
-        ["Zenodo DOI 10.5281/zenodo.23410894",
+        ["Zenodo DOI 10.5281/zenodo.23445149",
          "concept DOI 10.5281/zenodo.23338271",
          "all versions pinned forever"])
     add("</svg>")

@@ -140,3 +140,10 @@ README. Keputusan owner: tiga permukaan (README, deskripsi Zenodo,
   paragraf. Bukti baru: lihat §5 (baris "Pass kedua").
 - Permukaan lain: README top-matter (commit `d0fe74d`) + `.zenodo.json`
   selaras; aturan §5 HANDOFF ditambahkan oleh docs commit.
+
+## 9. Lanjutan hari yang sama — VERSI BARU suksesor (bukan edit)
+
+Record `23410894` tidak diubah lagi setelah pass 2. Keadaan suksesor
+diarsipkan sebagai VERSI BARU dari record yang sama: DOI versi
+`10.5281/zenodo.23445149` (`v1.41.0-alpha`, commit `cf32fca`). Laporan
+penuh: `reports/ZENODO_NEW_VERSION_2026-10-18.md`.

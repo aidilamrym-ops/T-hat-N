@@ -13,7 +13,7 @@ ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
 - **CI:** [![CI](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml) - `python -m pytest msaf -q` (377 tests) plus the Lean kernel build; every push must stay green
-- **Permanent archive:** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338271.svg)](https://doi.org/10.5281/zenodo.23338271) (concept DOI, all versions; latest version v1.40.0-alpha: https://doi.org/10.5281/zenodo.23410894)
+- **Permanent archive:** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338271.svg)](https://doi.org/10.5281/zenodo.23338271) (concept DOI, all versions; latest version v1.41.0-alpha: https://doi.org/10.5281/zenodo.23445149)
 - **Sealed releases:** [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha); final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
 - **License:** MIT - see [LICENSE](LICENSE)
 
@@ -998,8 +998,12 @@ dashboard v6 commit `6b56f4a` -> run
 readme + Zenodo-edit tooling push commit `493adb6` -> run
 [`39087074988`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/39087074988);
 AI-disclosure push commits `fc7a965` + `d0fe74d` -> run
-[`39089204940`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/39089204940).
-Version of record: [10.5281/zenodo.23410894](https://doi.org/10.5281/zenodo.23410894).
+[`39089204940`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/39089204940);
+new-version tooling push commit `cf32fca` -> run
+[`39090625982`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/39090625982);
+resume-fix push commit `b1e23ab` -> run
+[`39091124813`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/39091124813).
+Version of record: [10.5281/zenodo.23445149](https://doi.org/10.5281/zenodo.23445149); earlier version v1.40.0-alpha archived unchanged at [10.5281/zenodo.23410894](https://doi.org/10.5281/zenodo.23410894).
 
 ---
 
@@ -1100,10 +1104,10 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
 
 ```text
 Amry, Muhammad Aidil. Rigorous Ball Arithmetic for Zeta, L-Function, and
-Weil Spectra (T-hat-N / MSAF). v1.40.0-alpha. Zenodo.
-https://doi.org/10.5281/zenodo.23410894
+Weil Spectra (T-hat-N / MSAF). v1.41.0-alpha. Zenodo.
+https://doi.org/10.5281/zenodo.23445149
 Concept DOI (all versions): https://doi.org/10.5281/zenodo.23338271
-Current development line: v1.40.0-alpha (GitHub tags).
+Current development line: v1.41.0-alpha (GitHub tags).
 Final certified delivery: v1.40.0-alpha-final-certified-delivery (GitHub tag).
 ```
 

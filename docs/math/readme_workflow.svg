@@ -69,7 +69,7 @@
 <line x1="714.0" y1="464.0" x2="746.0" y2="464.0" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arw)"/>
 <rect x="750.0" y="420.0" width="330.0" height="88.0" rx="9" fill="#f8fafd" stroke="#c9d4e4"/>
 <text x="764.0" y="444.0" font-size="13" font-weight="600" fill="#101828" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Permanent archive</text>
-<text x="764.0" y="463.0" font-size="11.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Zenodo DOI 10.5281/zenodo.23410894</text>
+<text x="764.0" y="463.0" font-size="11.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">Zenodo DOI 10.5281/zenodo.23445149</text>
 <text x="764.0" y="479.0" font-size="11.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">concept DOI 10.5281/zenodo.23338271</text>
 <text x="764.0" y="495.0" font-size="11.5" fill="#475569" style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">all versions pinned forever</text>
 </svg>
