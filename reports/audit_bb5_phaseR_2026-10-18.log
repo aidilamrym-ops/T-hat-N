@@ -1,0 +1,60 @@
+# audit_bb5 — phase R log (2026-10-18): rebuild Coq-BB5 v1.0.0 dengan Coq 8.20.1
+
+purpose: item R dari pra-registrasi beku `reports/AUDIT_BB5_PREREG_2026-10-18.md`
+(commit `fe90659`), §2 item R dan §9. Label maksimum beku:
+
+  "the proof was rebuilt with Coq 8.20.1 on this host; compilation exited
+  [0/other]; the end-of-build assumption print reads [verbatim]."
+
+decision + consent (tercatat SEBELUM eksekusi): pemilik memberi izin
+eksplisit (2026-10-18, ronde ini) untuk instalasi toolchain (opam + Coq)
+di distro WSL2 Ubuntu audit — syarat owner-gated pra-reg §9. Prasyarat
+lain §9 terpenuhi: sweep L1 SELESAI (commit `4f5e537`; CI hijau run
+`39101382854`).
+
+urutan: file ini + runner `audit_bb5/bb5_phaseR.sh` + watchdog
+`audit_bb5/bb5_phaseR_watchdog.sh` dipush SEBELUM perintah eksekusi
+pertama (apt/opam/make). Recon read-only (clone ulang repo ter-pin + baca
+README build upstream) dijalankan pra-header; TIDAK ada instalasi atau
+kompilasi pra-header.
+
+pinned inputs: repo `ccz181078/Coq-BB5`, commit
+`9142e219229baf2245d3f70851947230ea28a318`, tree
+`616f07b54639263638a09dabde7312ca1b534b50` (clone fresh di `/root/bb5r`,
+diverifikasi ulang oleh runner saat run start). Target: Coq **8.20.1**
+vanilla — pembacaan ketat: TANPA `opam install coq-native`; konsekuensi
+dicatat pra-hasil: estimasi upstream tanpa native lebih lama (±3 jam di
+13 core; host ini 4 core) dan cap build 14 jam tetap berlaku.
+
+rencana perintah eksak (README upstream §Compiling the proof, disalin
+dengan penyesuaian host yang direkam):
+
+1. `apt-get update -qq && apt-get install -y -qq opam build-essential m4 unzip pkg-config`
+2. `opam init --disable-sandboxing --bare -y`
+3. `opam switch create 4.14.2 -y`   (verbatim README)
+4. `eval $(opam env)`
+5. `opam pin add coq 8.20.1 -y`     (tanpa coq-native — lihat atas)
+6. `coqc --version` → harus 8.20.1
+7. `cd /root/bb5r/Coq-BB5-git/BusyCoq && make -j4`
+8. `cd /root/bb5r/Coq-BB5-git/CoqBB5/BB5 && make -j4`
+9. Print Assumptions: output kompilasi `BB5_Theorem.v` (baris terakhir
+   file: `Print Assumptions BB5_value.`) ter-capture di transkrip; blok
+   ekstraksi marker ditambahkan pasca-build.
+
+`-j4` = nproc host (4 core) sesuai petunjuk README ("Replace `-j 13` by
+the number of cores"). Langkah ekstraksi CSV 10 GB (`BB5_Extraction.sh`)
+DIKECUALIKAN by design (pra-reg §9).
+
+caps (pra-reg §9): setup ≤ 3 j; build ≤ 14 j; backstop mekanis: watchdog
+memutus pada 17 j dinding dari run start lalu menulis stop-record;
+overrun/failure direkam apa adanya — NOT-RUN-ENVIRONMENT / BUILD-FAILED /
+UNRESOLVED-BUDGET.
+
+capture convention: setiap blok ditulis runner dari eksekusi sebenarnya
+(marker | CMD | output | EXIT); tidak ada yang diretyping; kegagalan
+direkam apa adanya. Tidak ada rahasia yang ditampilkan.
+
+scope limit: hasil maksimum = label di atas; tidak menyatakan/menyangkal
+RH / P≠NP; berkas tersegel tidak disentuh; staging per berkas bernama.
+
+## machine log (ditulis oleh `audit_bb5/bb5_phaseR.sh`)
