@@ -18,9 +18,9 @@ What it refuses to do, on purpose
   came from, so the DOI resolves to a byte-verifiable object.
 * In edit mode (`--edit-record`) it refuses to retarget what the archive
   holds: the new description must keep the same commit, the same tarball
-  sha256, the fixed SCOPE paragraph and a LICENSE line, or nothing is
-  written. Re-titling and rewriting the opening paragraph are allowed;
-  changing the archived object is not.
+  sha256, the fixed SCOPE paragraph, the AI-tooling disclosure paragraph
+  and a LICENSE line, or nothing is written. Re-titling and rewriting the
+  opening paragraph are allowed; changing the archived object is not.
 
 Usage:
     C:\\Python314\\python.exe zenodo_deposit.py --repo OWNER/NAME --sha <full sha>
@@ -177,9 +177,11 @@ def validate_edit_description(text, title, commit_sha, archive_sha256):
     """Return the list of contract violations for an edited description.
 
     An edit may re-title the record and rewrite its opening paragraphs; it
-    may not change what the archive holds. The commit, the tarball
-    sha256, the fixed SCOPE paragraph and a LICENSE line must survive
-    verbatim, or the edit is refused before any write."""
+    may not change what the archive holds, and it may not drop the
+    disclosure of how the work was made. The commit, the tarball sha256,
+    the fixed SCOPE paragraph, the AI-tooling disclosure paragraph and a
+    LICENSE line must survive verbatim, or the edit is refused before any
+    write."""
     problems = []
     if not text.startswith(title):
         problems.append("description must start with the new title line")
@@ -189,6 +191,8 @@ def validate_edit_description(text, title, commit_sha, archive_sha256):
         problems.append("archived tarball sha256 claim dropped or altered")
     if SCOPE_NOTE not in text:
         problems.append("the fixed SCOPE paragraph is missing")
+    if "AI-tooling disclosure" not in text:
+        problems.append("the AI-tooling disclosure paragraph is missing")
     if "LICENSE:" not in text:
         problems.append("the LICENSE line is missing")
     return problems

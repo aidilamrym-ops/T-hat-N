@@ -21,14 +21,18 @@ LICENSE_LINE = ("LICENSE: mit-license, as stated by the LICENSE file in "
                 "the archived repository.")
 
 
+DISCLOSURE = ("Provenance and AI-tooling disclosure. The OpenCode agentic "
+              "coding environment drafts under human direction.")
+
+
 def _description(title=TITLE, commit=COMMIT, sha=SHA, scope=zd.SCOPE_NOTE,
-                 license_line=LICENSE_LINE):
+                 disclosure=DISCLOSURE, license_line=LICENSE_LINE):
     return ("%s\n\nA new opening paragraph.\n\n"
             "Source: https://github.com/OWNER/REPO at commit %s "
             "(archived tarball sha256 %s).\n"
             "Continuous integration for that exact commit: GREEN "
-            "(GitHub Actions).\n\n%s\n\n%s"
-            % (title, commit, sha, scope, license_line))
+            "(GitHub Actions).\n\n%s\n\n%s\n\n%s"
+            % (title, commit, sha, scope, disclosure, license_line))
 
 
 def test_valid_edit_description_passes() -> None:
@@ -66,6 +70,12 @@ def test_license_line_is_required() -> None:
         _description(license_line="All rights reserved."), TITLE, COMMIT,
         SHA)
     assert any("LICENSE" in p for p in problems)
+
+
+def test_ai_tooling_disclosure_is_pinned() -> None:
+    problems = zd.validate_edit_description(_description(disclosure=""),
+                                            TITLE, COMMIT, SHA)
+    assert any("AI-tooling disclosure" in p for p in problems)
 
 
 def test_claims_extraction_reads_commit_and_sha() -> None:
