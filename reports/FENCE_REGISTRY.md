@@ -214,6 +214,22 @@ mengikuti laporan L4).
   own tooling"), bukan verifikasi independen; sweep penuh tetap tidak
   dijalankan (opsional pra-reg §8); `run_prop410_arb.sh` tidak ada di
   tree rilis (tercatat pra-hasil).
+- **Catatan (2026-10-18, sweep penuh — memperbarui kalimat "sweep penuh
+  tetap tidak dijalankan" di atas; kalimat itu = snapshot pra-sweep):**
+  opsi pra-reg §8 "sweep penuh" DIPILIH pemilik dan dieksekusi pada
+  engine WSL2+podman yang sama. Runner + watchdog + header log dipush di
+  commit `295e716` SEBELUM perintah pertama (urutan terekam mesin).
+  Hasil: `RESULT: FULL SWEEP REPLAY AND METADATA PASS` — fresh path,
+  15/15 lane `[PASS]`, komparator rilis mencocokkan semua baris kanonik +
+  3.149.013 baris tersegel N=690988..3840000; semua langkah exit 0; image
+  `.Id` = pin `5ccd9e3f…` ✓; tree `2e9976c4…` bersih ✓; sha256 16 berkas
+  keluaran tercatat in-run. Waktu 03:10:00Z → 05:31:18Z (≈2 j 21 m; cap
+  6 j tidak tersentuh; watchdog tidak memutus). Backup luar repo:
+  `…\Temp\opencode\l1_sweep_2026-10-18.tar.gz` (24.581.749 B, sha256
+  `11bad912…`; isi terverifikasi ulang vs `REPLAY_SHA256SUMS` = 16/16 OK).
+  Laporan `reports/AUDIT_P1_L1_SWEEP_2026-10-18.md`. Label maksimum tetap
+  replay-level ("release replayed; numbers reproduced from the release's
+  own tooling") — bukan verifikasi independen.
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py
   -q` (guard memeriksa semua sha di bawah, termasuk laporan L4);
   re-run lane: lihat log per-item + laporan L3 §9 (input = berkas rilis
@@ -249,6 +265,10 @@ mengikuti laporan L4).
   sha256LF 24f01abe20153ed62d61fca43c64c52c5c4431a92eac98fda28d5a87a2040c59 reports/AUDIT_DBN_L1_2026-10-18.md
   sha256LF caa3009837ccc30df568564f5bacad3931514db1a4e59afcc650c270c586b0ca audit_p1/l1_fetch.sh
   sha256LF dab87b5c5951979ade480da12fc5212552b5277b12905c725caad3d51587618b audit_p1/l1_run.sh
+  sha256LF 094728296caa5071ee02e3bd5f1908af2c8640d236d295e99582959a49187d60 reports/audit_p1_l1_sweep_2026-10-18.log
+  sha256LF 16eaef71e97d3a7b3922916fcb7eba20d796a2261a2d825658d61cad4471c6ca reports/AUDIT_P1_L1_SWEEP_2026-10-18.md
+  sha256LF 911f63b8be290581f773c3114cb3ebca7597f167556dfe08ff86bf32fe1cdfff audit_p1/l1_sweep.sh
+  sha256LF b85f1cde2d5aaef00da483ab07e4ee128a44859125d13c0206c7a40f66e1d106 audit_p1/l1_sweep_watchdog.sh
   ```
 
 ### A-2026-0002 — Audit probe BB(5): replay saksi rilis Coq-BB5 v1.0.0

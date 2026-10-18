@@ -143,6 +143,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Disclosure AI (provenance) — README + deskripsi Zenodo (pass 2) + `.zenodo.json` + pengunci validator | commit `fc7a965` + `d0fe74d` + commit yang membawa baris ini; CI hijau run `39089204940` | `README.md` (paragraf "Provenance and AI-tooling disclosure"), `msaf/zenodo_deposit.py` (invariant baru), `msaf/tests/test_zenodo_deposit.py` (9 tes); deskripsi `c25ae517…` (3529 byte); `reports/ZENODO_METADATA_UPDATE_2026-10-18.md` §8 |
 | Versi baru Zenodo `v1.41.0-alpha` (suksesor) — mint + publish via `--new-version-of` | commit `cf32fca` (tooling new-version + arsip yang diarsipkan; CI hijau `39090625982` + ref tag `39090834877`) + `b1e23ab` (perbaikan resume; CI hijau `39091124813`) + commit yang membawa baris ini; DOI versi `10.5281/zenodo.23445149` (konsep `10.5281/zenodo.23338271`); arsip tarball commit `cf32fca` sha256 `722258413f6dc416daf6702234d11699f1add25411fdd405807480952c2e946f` (1.068.890 byte, md5 `07fd2e2a598d8f6fc0778c6fd4b68923` cocok); deskripsi 3764 byte sha256 `218f902570d3a14759bc8d4c8ee7b92606c442b0830596e8406935e984b77988`; tag annotated `v1.41.0-alpha` → `cf32fca`; record `23410894` TIDAK tersentuh | https://doi.org/10.5281/zenodo.23445149, `reports/ZENODO_NEW_VERSION_2026-10-18.md` |
 | Probe audit eksternal pertama — BB(5) = 47.176.870 (Coq-BB5 v1.0.0): pra-registrasi + Phase A W/S/H/E/P + registry `A-2026-0002` | commit `fe90659` (pra-registrasi, dipush sebelum perintah audit pertama; CI hijau run `39096422610`) + commit yang membawa baris ini; eksekusi 85 s; replay saksi 47.176.870/4.098 eksak oleh 2 engine ×2 run (baterai 15/15); statement sha256LF `cac368d2…` (dua jalur unduh); weld Zenodo↔repo 217/218 (hanya `README.md`); E BB(3) X=20/Y=6 konsisten tabel beku; H: 0 `Admitted`, flag `BusyCoq/LibTactics.v`; R NOT-RUN (izin pemilik; prasyarat sweep L1 selesai) | `reports/AUDIT_BB5_REPORT_2026-10-18.md`, `reports/AUDIT_BB5_PREREG_2026-10-18.md`, `reports/AUDIT_BB5_RECON_2026-10-18.md`, `audit_bb5/`, `reports/FENCE_REGISTRY.md` (A-2026-0002) |
+| Sweep penuh L1 (opsi pra-reg §8) — keputusan owner = JALANKAN; LULUS PENUH | commit `295e716` (pra-registrasi runner+watchdog+header, dipush sebelum perintah pertama) + commit yang membawa baris ini; dibangun di atas `3d2a1bc` (CI hijau run `39097034038`); eksekusi 03:10:00Z → 05:31:18Z (±2 j 21 m; cap 6 j tidak tersentuh); `RESULT: FULL SWEEP REPLAY AND METADATA PASS`; 15/15 lane `[PASS]`; 3.149.013 baris N=690988..3840000 cocok; image `.Id` = pin `5ccd9e3f…`; tree `2e9976c4…` bersih; backup Temp sha256 `11bad912…` (16/16 OK) | `reports/AUDIT_P1_L1_SWEEP_2026-10-18.md`, `reports/audit_p1_l1_sweep_2026-10-18.log`, `audit_p1/l1_sweep.sh`, `audit_p1/l1_sweep_watchdog.sh`, `reports/FENCE_REGISTRY.md` (A-2026-0001) |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -757,10 +758,11 @@ DAN sha256 arsip.
   dibiarkan utuh; guard fail-closed lulus lokal (2 passed) + suite
   penuh 360 passed. Commit: log replay `018a416`; laporan+registry
   `58cf4a3`; baris ini = docs commit.
-- **Sisa opsional:** full sweep (pra-reg §8) tetap tidak dijalankan;
-  engine WSL2+podman dibiarkan terpasang (instalasi yang diizinkan
-  pemilik; dapat dibersihkan kapan pun atas permintaan). Audit P1
-  tuntas: (a)+(b)+(c).
+- **Sisa opsional:** full sweep (pra-reg §8) tidak dijalankan pada ronde
+  ini; **PEMBARUAN §2.0r (2026-10-18): opsi dipilih pemilik dan SELESAI
+  PASS**; engine WSL2+podman dibiarkan terpasang (instalasi yang
+  diizinkan pemilik; dapat dibersihkan kapan pun atas permintaan). Audit
+  P1 tuntas: (a)+(b)+(c).
 - **Status:** SELESAI; semua hasil (termasuk anomali lingkungan)
   dicatat apa adanya di log terkait.
 
@@ -962,8 +964,46 @@ Konsekuensi urutan yang disarankan:
 - **Gate anti-sirkularitas:** TOOL NOT RUN (NO_LEAN_FILES) — verbatim di
   laporan §8; tidak ada kosakata "verified" untuk artefak Coq.
 - **Tindak lanjut:** keputusan R (pemilik); Collatz = kandidat probe kedua;
-  catatan vault "Peta Prospek" (pasangan SM ↔ Yang–Mills) menyusul setelah
-  probe pertama tuntas.
+  catatan vault "Peta Prospek" (pasangan SM ↔ Yang–Mills) sudah ditulis
+  2026-10-18 di root vault (catatan hidup, non-binding; `Home.md` zona
+  sync tidak disentuh).
+
+### 2.0r [BARU, 2026-10-18] Sweep penuh L1 (opsi pra-reg §8) — keputusan owner = JALANKAN; SELESAI PENUH (semua langkah exit 0)
+
+- **Konteks/urutan:** opsi "full sweep" pra-reg §8 (sebelumnya dilewati;
+  §2.0m). Pemilik memilih menjalankan; runner + watchdog + header log
+  dipush di commit `295e716` SEBELUM perintah sweep pertama — urutan
+  terkunci (header commit < blok mesin; log merekam `repo_commit` +
+  sha256 runner saat run start). Tidak ada parameter/cap yang diubah
+  setelah hasil.
+- **Eksekusi:** engine WSL2+podman yang sama (docker shim → podman 5.7.0,
+  delta lingkungan direkam pra-eksekusi; permukaan container sama dengan
+  replay L1 yang sudah lulus). Skrip rilis apa adanya
+  `scripts/run_full_sweep.sh`; `IMAGE` + `EXPECTED_IMAGE_ID` ter-pin;
+  fresh path `/root/l1/replay-out/sweep`; tanpa env override; guard rilis
+  jalan (replay_guard require/prepare, repo bersih, identitas image,
+  label reviewed-build, probe bind-mount). Cap 6 j dikawal watchdog —
+  tidak tersentuh.
+- **Hasil (03:10:00Z → 05:31:18Z; ≈2 j 21 m):** `RESULT PASS: fresh sweep
+  matches every canonical line and all 3149013 sealed rows
+  N=690988..3840000`; `RESULT: FULL SWEEP REPLAY AND METADATA PASS`;
+  penanda akhir `RESULT: L1-SWEEP COMPLETE (all steps exit 0)`. 15/15
+  lane `[PASS]`; image `.Id` = pin `5ccd9e3f…` ✓; tree `2e9976c4…`
+  bersih ✓; sha256 16 berkas keluaran tercatat in-run.
+- **Backup + bukti:** tarball luar repo
+  `…\Temp\opencode\l1_sweep_2026-10-18.tar.gz` (24.581.749 B; sha256
+  `11bad9123b8f0db2b4ed4ac2a3e4f42aeda7197ee91c78f30ec39f12a3c75509`);
+  isi diverifikasi ulang vs `REPLAY_SHA256SUMS` → 16/16 OK. Laporan:
+  `reports/AUDIT_P1_L1_SWEEP_2026-10-18.md`; log:
+  `reports/audit_p1_l1_sweep_2026-10-18.log`.
+- **Registry:** `A-2026-0001` — catatan sweep baru + 4 baris sertifikat
+  (log sweep, laporan sweep, `audit_p1/l1_sweep.sh`,
+  `audit_p1/l1_sweep_watchdog.sh`). Kalimat "sweep penuh tetap tidak
+  dijalankan" di §2.0m/catatan lama = snapshot pra-sweep.
+- **Batas:** label maksimum tetap replay-level — "release replayed;
+  numbers reproduced from the release's own tooling"; bukan verifikasi
+  independen; tidak menyatakan/menyangkal RH atau pernyataan universal.
+- **Status:** SELESAI; audit P1 kini tuntas penuh: (a)+(b)+(c)+opsi §8.
 
 ---
 
