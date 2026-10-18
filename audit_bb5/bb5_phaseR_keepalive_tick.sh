@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# BB(5) phase R keepalive tick -- invoked by the Windows-side loop (~10 s) started by
-# Scheduled Task 'T-hat-N-BB5-keepalive'. Each tick = one NEW short WSL session (the tick
-# itself must stay well under the observed instance-idle window of ~21-23 s).
+# BB(5) phase R keepalive tick -- invoked by Windows-side loops (~10 s) from the supervisor
+# hosts (harness shell / detached process / Startup item). Each tick = one NEW short WSL
+# session (well under the observed instance-idle window of ~21-23 s).
 # Exit codes: 0 = continue; 42 = loop should stop (phase complete or stop requested).
 set -u
 LOG="/mnt/d/Opencode AI Agent/reports/audit_bb5_phaseR_2026-10-18.log"
@@ -27,9 +27,14 @@ fi
 # abort latch: if the runner recorded a failure, do not relaunch (needs attention)
 [ -f "$R/DAEMON_FAIL" ] && exit 0
 
-# self-healing: relaunch the detached runner if it is not running (flock; bracket pattern avoids self-match)
-flock -n "$R/daemon.flock" bash -c '
-  pgrep -f "[b]b5_phaseR_resume3\.sh" >/dev/null 2>&1 && exit 0
-  setsid nohup bash "/mnt/d/Opencode AI Agent/audit_bb5/bb5_phaseR_resume3.sh" </dev/null >>/root/bb5r/daemon_stdout.log 2>&1 &
-' || true
+# self-healing relaunch. NOTE: the pgrep is OUTSIDE the flock wrapper on purpose -- the
+# wrapper's own cmdline contains the runner path (an inside pgrep would self-match and
+# always exit early). The 2 s hold inside the wrapper closes the double-launch race
+# between concurrent ticks.
+if ! pgrep -f "bb5_phaseR_resume3\.sh" >/dev/null 2>&1; then
+  flock -n "$R/daemon.flock" bash -c '
+    setsid nohup bash "/mnt/d/Opencode AI Agent/audit_bb5/bb5_phaseR_resume3.sh" </dev/null >>/root/bb5r/daemon_stdout.log 2>&1 &
+    sleep 2
+  ' || true
+fi
 exit 0

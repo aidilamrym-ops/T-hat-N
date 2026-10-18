@@ -1,4 +1,10 @@
-# BB(5) phase R -- register + start the keepalive Scheduled Task (attempt 4).
+# BB(5) phase R -- OPTIONAL elevated path: register + start the keepalive Scheduled Task.
+# STATUS 2026-10-18 ~10:55Z: non-admin registration DENIED on this host
+#   (Register-ScheduledTask: Access is denied 0x80070005; schtasks /create: same class,
+#    and no elevation available non-interactively). Non-admin supervisors are used instead
+#   (see the log note "UPDATE PRA-LAUNCH attempt 4" in reports/audit_bb5_phaseR_2026-10-18.log).
+# If the OWNER runs this from an ELEVATED PowerShell, the Scheduled Task becomes the
+# strongest persistence path (AtLogOn trigger + restart-on-failure every 1 min).
 # Task 'T-hat-N-BB5-keepalive' runs: powershell -File <repo>\audit_bb5\bb5_phaseR_keepalive.ps1
 # Recorded for audit. Cleanup after phase R:
 #   Unregister-ScheduledTask -TaskName 'T-hat-N-BB5-keepalive' -Confirm:$false
