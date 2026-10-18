@@ -703,7 +703,7 @@ DAN sha256 arsip.
 - **Engine (c):** tidak dijalankan di sesi ini; tidak ada perubahan
   sistem.
 
-### 2.0m [BARU, 2026-10-18] (c) L1 replay: keputusan owner = EKSEKUSI — engine install dimulai
+### 2.0m [BARU, 2026-10-18] (c) L1 replay: keputusan owner = EKSEKUSI — SELESAI (semua langkah exit 0)
 
 - **Keputusan owner (2026-10-18, lanjutan; satu ronde):** (c) dieksekusi
   SEKARANG (mode terpandu) — install satu engine OCI (distro WSL +
@@ -733,8 +733,30 @@ DAN sha256 arsip.
   bundle → verifier arsip rilis → podman load → verify.sh → container review
   default CMD). Catatan nama: `run_prop410_arb.sh` TIDAK ada di tree rilis —
   deviasi prereg-vs-artifact terekam di header log replay, sebelum hasil.
-- **Status:** berjalan; semua hasil (termasuk kegagalan) dicatat apa
-  adanya di log baru.
+- **Hasil (selesai; blok run 02:03:39 → penanda inventaris 03:39:10
+  +08:00 ≈ 95 menit):** L1 replay SELESAI — semua langkah exit 0.
+  verify.sh `RESULT: STORED UNCONDITIONAL-CANDIDATE REVIEW PASS` (38
+  cek); container review default CMD (command yang sama dengan workflow
+  tag rilis) `RESULT: CONTAINER REVIEW PASS` (seal 362 berkas + lane
+  fresh; barrier 883/883, `TOTAL CHECKS RUN: 54`; 33 berkas evidence
+  ter-sha256); penanda akhir `RESULT: L1-RUN COMPLETE (all steps exit 0
+  as recorded above)`. Semua keluaran terekam di log replay; tidak ada
+  langkah yang diulang/diadaptasi.
+- **Laporan + registry:** laporan L1 bertanggal
+  `reports/AUDIT_DBN_L1_2026-10-18.md` (addendum; laporan L4 tetap beku
+  — baris L1 "NOT-RUN-ENVIRONMENT" di sana = snapshot 2026-10-17).
+  Entri registry `A-2026-0001` diperbarui lewat alur skema: **Catatan**
+  baru + 5 baris sertifikat (log engine, log replay, laporan L1,
+  `audit_p1/l1_fetch.sh`, `audit_p1/l1_run.sh`); frasa Batas historis
+  dibiarkan utuh; guard fail-closed lulus lokal (2 passed) + suite
+  penuh 360 passed. Commit: log replay `018a416`; laporan+registry
+  `58cf4a3`; baris ini = docs commit.
+- **Sisa opsional:** full sweep (pra-reg §8) tetap tidak dijalankan;
+  engine WSL2+podman dibiarkan terpasang (instalasi yang diizinkan
+  pemilik; dapat dibersihkan kapan pun atas permintaan). Audit P1
+  tuntas: (a)+(b)+(c).
+- **Status:** SELESAI; semua hasil (termasuk anomali lingkungan)
+  dicatat apa adanya di log terkait.
 
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 
