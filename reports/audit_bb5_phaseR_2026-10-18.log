@@ -1435,3 +1435,41 @@ vm_compute. [native-compiler-disabled,native-compiler,default]
 
 --- 2026-10-18T11:08Z | UPDATE supervisor attempt 4 (setelah start ~11:00Z; tidak mengubah langkah audit) ---
 Uji daya hidup: proses detached Start-Process (PID 9764) mati saat shell tool-call pembuatnya berakhir (harness membunuh process tree tool-call; tick-nya sempat menulis heartbeat 11:00:58Z). Pengganti terverifikasi: 2 supervisor via WMI (Invoke-CimMethod Win32_Process Create; PID 14708 & 14996; induk 16748) TETAP HIDUP melewati berakhirnya tool-call pembuatnya (dikonfirmasi 11:08:04Z) + shell background agent (PID 7548/15768) + item Startup (pasca-logon). Total 3 loop tick (~10 dtk masing-masing; sesi efektif ~3-4 dtk) menjalankan tick yang sama (idempoten; flock mencegah peluncuran ganda). Skrip spawn dicatat: audit_bb5/bb5_phaseR_keepalive_spawn_wmi.ps1. Build attempt 4: daemon PID 456; 4 coqc paralel berjalan (antara lain TNF_Root_3, TNF_Root_4_2, TNF_Root_4_9). Tidak ada langkah audit yang berubah.
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_2.v", line 30, characters 0-4:
+Warning: Native compiler is disabled, falling back to VM conversion test.
+[native-compiler-disabled,native-compiler,default]
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_11.v
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_11.v", line 24, characters 0-67:
+Warning: native_compute disabled at configure time; falling back to
+vm_compute. [native-compiler-disabled,native-compiler,default]
+Killed
+make[2]: *** [Makefile.coq:818: BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_11.vo] Error 137
+make[2]: *** [BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_11.vo] Deleting file 'BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_11.glob'
+make[2]: *** Waiting for unfinished jobs....
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_9.v", line 30, characters 0-4:
+Warning: Native compiler is disabled, falling back to VM conversion test.
+[native-compiler-disabled,native-compiler,default]
+
+--- 2026-10-18T17:05Z | INTERRUPTION 3 attempt 4 (OOM-kill; dicatat SEBELUM attempt 5 dimulai; tidak ada hasil audit yang terlihat) ---
+Fakta (dmesg + transkrip): 2026-10-18T15:08:59Z kernel OOM-killer membunuh coqc yang
+mengompilasi BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_11.v; dmesg: "Out of memory:
+Killed process 29049 (coqc) total-vm:4209724kB, anon-rss:2648504kB, file-rss:0kB,
+shmem-rss:0kB, UID:0 pgtables:7016kB oom_score_adj:0"; make: "make[2]: *** [Makefile.coq:818:
+BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_11.vo] Error 137" + delete 4_11.glob.
+Sebab: 4 coqc paralel (-j4) pada RAM 9,7 GiB + swap 3 GiB -> global OOM.
+Progres attempt 4: TNF_Root_4_2.vo 12:50:02Z; TNF_Root_4_9.vo 15:16:42Z (42/50 .vo).
+Saat catatan ini dibuat make masih menunggu 2 job berjalan (TNF_Root_3, TNF_Root_4_10;
+mulai 11:00:17Z); begitu selesai make exit non-zero lalu runner menulis ABORT attempt 4 +
+DAEMON_FAIL (sesuai desain).
+Keputusan (SEBELUM retry; tanpa melihat hasil audit apa pun -- tidak ada blok Print
+Assumptions di transkrip):
+1) Attempt 5 = bb5_phaseR_resume4.sh dengan make -j2 (turun dari -j4) sebagai mitigasi OOM;
+   cap prereg "no -j >4" dipatuhi; -j hanya memengaruhi penjadwalan paralelisme, bukan
+   artefak/hasil kompilasi.
+2) Tick v4: relaunch menunjuk resume4 + token sekali-pakai /root/bb5r/APPROVE_ATTEMPT5 --
+   setelah abort attempt 4 (DAEMON_FAIL) terlihat, tick menghapus latch+token lalu relaunch
+   otomatis; kegagalan BARU setelahnya memasang kembali latch dan kembali butuh intervensi.
+3) Deadline epoch 1792364575 (2026-10-18T23:02:55Z) TIDAK diubah; cap setup/build TIDAK diubah.
+Skrip + catatan ini di-commit SEBELUM retry; token APPROVE_ATTEMPT5 dibuat setelah commit
+(aturan: environment fix dicatat + di-commit sebelum retry). Bukti mentah tetap di
+transkrip ini (dmesg verbatim di atas).
