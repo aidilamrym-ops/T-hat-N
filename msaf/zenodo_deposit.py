@@ -26,6 +26,11 @@ What it refuses to do, on purpose
   version gets its own DOI, but the description written there must
   satisfy the same contract -- SCOPE, disclosure and the claim pair are
   composed in, never parameters, and are checked before any write.
+  Passing --deposition-id together with --new-version-of RESUMES the
+  named new-version draft instead of calling actions/newversion again:
+  Zenodo answers that call with HTTP 400 ("files.enabled: Please remove
+  all files first") once the open draft holds files, so a fill-then-
+  publish flow must resume by draft id.
 
 Usage:
     C:\\Python314\\python.exe zenodo_deposit.py --repo OWNER/NAME --sha <full sha>
@@ -37,6 +42,10 @@ Usage:
         --sha <full sha> [--license mit-license] [--title "..."]
         [--date YYYY-MM-DD] [--version "..."] [--keywords "a, b"]
         [--extra-note-file PATH] [--publish]
+
+    python zenodo_deposit.py --new-version-of ID --deposition-id DRAFT
+        --repo OWNER/NAME --sha <full sha> [...] [--publish]
+        # resume a filled new-version draft (skip actions/newversion)
 
     python zenodo_deposit.py --edit-record ID --title "..."
         --description-file PATH [--keywords "a, b"] [--dry-run] [--publish]
@@ -301,6 +310,20 @@ def resolve_latest_draft_id(payload):
     return latest.rstrip("/").rsplit("/", 1)[-1]
 
 
+def same_concept(draft, source):
+    """A new-version draft must share the source record's concept id;
+    compare as strings so the API's int/str forms both pass."""
+    return str(draft.get("conceptrecid")) == str(source.get("conceptrecid"))
+
+
+def file_matches_local(stored_checksum, blob):
+    """True when a draft file's stored checksum (md5, possibly prefixed
+    like "md5:...") equals the md5 of the local bytes to be claimed. An
+    absent checksum fails closed: publish only what can be verified."""
+    stored = (stored_checksum or "").split(":")[-1].strip().lower()
+    return bool(stored) and stored == hashlib.md5(blob).hexdigest()
+
+
 def public_get(url, tries=6, wait=5):
     """Retry-wrapped anonymous GET (the public record may lag an edit)."""
     for attempt in range(1, tries + 1):
@@ -416,25 +439,32 @@ def edit_record_metadata(args):
 def new_version_deposit(args, blob, digest, fname, desc, metadata, tmp):
     """Mint a new version of a published record and fill the draft.
 
-    Legacy flow: POST actions/newversion (idempotent while a draft is
-    open), resolve links.latest_draft, drop the inherited file copy of
-    the previous version, upload the new tarball, PUT the composed
-    metadata, and publish only when --publish is passed. The original
-    version, its DOI and its files never change; the new version gets its
-    own DOI under the same concept DOI. The description already passed
-    the frozen-claims contract in main() before this was called."""
+    Legacy flow: POST actions/newversion, resolve links.latest_draft,
+    drop the inherited file copy of the previous version, upload the new
+    tarball, PUT the composed metadata, and publish only when --publish
+    is passed. A fill-then-publish sequence cannot call newversion twice
+    (Zenodo refuses with "files.enabled: Please remove all files first"
+    once the open draft holds files), so --deposition-id resumes the
+    named draft directly. The original version, its DOI and its files
+    never change; the new version gets its own DOI under the same concept
+    DOI. The description already passed the frozen-claims contract in
+    main() before this was called."""
     src_url = "%s/depositions/%s" % (API, args.new_version_of)
     cur = get(src_url, args.token)
     if not cur.get("submitted"):
         raise SystemExit("record %s is not published; refusing to mint a "
                          "new version" % args.new_version_of)
-    out = post("%s/actions/newversion" % src_url, args.token)
-    draft_id = resolve_latest_draft_id(out)
+    if args.deposition_id:
+        draft_id = args.deposition_id
+        print("resuming the named new-version draft (no newversion call)")
+    else:
+        out = post("%s/actions/newversion" % src_url, args.token)
+        draft_id = resolve_latest_draft_id(out)
     draft = get("%s/depositions/%s" % (API, draft_id), args.token)
     if draft.get("submitted"):
         raise SystemExit("draft %s is already published; nothing to fill"
                          % draft_id)
-    if str(draft.get("conceptrecid")) != str(cur.get("conceptrecid")):
+    if not same_concept(draft, cur):
         raise SystemExit("draft %s does not belong to the same concept as "
                          "record %s; refusing" % (draft_id,
                                                   args.new_version_of))
@@ -452,7 +482,16 @@ def new_version_deposit(args, blob, digest, fname, desc, metadata, tmp):
             print("inherited file dropped from draft: %s"
                   % f.get("filename"))
     if fname in have:
-        print("file already present in draft, upload skipped: %s" % fname)
+        stored = ""
+        for f in draft.get("files", []):
+            if f.get("filename") == fname:
+                stored = f.get("checksum", "")
+        if not file_matches_local(stored, blob):
+            raise SystemExit("draft file %s is not the local bytes "
+                             "(stored checksum %r); refusing to continue"
+                             % (fname, stored))
+        print("file already present in draft, checksum matches local "
+              "bytes, upload skipped: %s" % fname)
     else:
         with open(tmp, "rb") as fh:
             payload = fh.read()
@@ -517,7 +556,9 @@ def main(argv):
     ap.add_argument("--version", default=None,
                     help="version string recorded in the metadata")
     ap.add_argument("--deposition-id", default=None,
-                    help="resume an existing draft instead of creating one")
+                    help="resume an existing draft instead of creating one; "
+                         "with --new-version-of it names the new-version "
+                         "draft to resume")
     ap.add_argument("--new-version-of", default=None,
                     help="mint a NEW VERSION of this published record id; "
                          "the new draft replaces the archived snapshot with "
@@ -554,10 +595,6 @@ def main(argv):
 
     if args.dry_run:
         raise SystemExit("--dry-run only applies to --edit-record")
-
-    if args.new_version_of and args.deposition_id:
-        raise SystemExit("--new-version-of and --deposition-id are "
-                         "mutually exclusive")
 
     if not args.repo or not args.sha:
         raise SystemExit("deposit mode needs --repo and --sha")

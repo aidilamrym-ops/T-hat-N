@@ -11,6 +11,8 @@ tests pin all of that with no network access."""
 
 from __future__ import annotations
 
+import hashlib
+
 import pytest
 
 from msaf import zenodo_deposit as zd
@@ -141,3 +143,18 @@ def test_latest_draft_resolution_reads_the_link() -> None:
 def test_latest_draft_resolution_refuses_without_link() -> None:
     with pytest.raises(SystemExit):
         zd.resolve_latest_draft_id({"links": {}})
+
+
+def test_new_version_draft_must_share_the_concept() -> None:
+    cur = {"conceptrecid": "23338271"}
+    assert zd.same_concept({"conceptrecid": 23338271}, cur)
+    assert not zd.same_concept({"conceptrecid": "23399999"}, cur)
+
+
+def test_draft_file_checksum_guard() -> None:
+    blob = b"payload"
+    md5 = hashlib.md5(blob).hexdigest()
+    assert zd.file_matches_local(md5, blob)
+    assert zd.file_matches_local("md5:" + md5, blob)
+    assert not zd.file_matches_local("00" * 16, blob)
+    assert not zd.file_matches_local("", blob)

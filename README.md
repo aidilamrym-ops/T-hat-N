@@ -12,7 +12,7 @@ arithmetic (`arb` / `acb` / `arb_mat`, version 0.9.0). No floating-point value
 ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
-- **CI:** [![CI](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml) - `python -m pytest msaf -q` (375 tests) plus the Lean kernel build; every push must stay green
+- **CI:** [![CI](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml) - `python -m pytest msaf -q` (377 tests) plus the Lean kernel build; every push must stay green
 - **Permanent archive:** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338271.svg)](https://doi.org/10.5281/zenodo.23338271) (concept DOI, all versions; latest version v1.40.0-alpha: https://doi.org/10.5281/zenodo.23410894)
 - **Sealed releases:** [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha); final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
 - **License:** MIT - see [LICENSE](LICENSE)
@@ -276,7 +276,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (375 tests, every landmine pinned)
+### 3.2 Regression Suite (377 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -1082,7 +1082,7 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
   restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
-- `msaf/tests/` - regression suite (375 tests)
+- `msaf/tests/` - regression suite (377 tests)
 - `lean/` - Lean 4 machine-checked kernels 1D/2D/3D + central variant + Moore box (`lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py); includes the generated workflow / verification-chain diagrams (Section 7)
