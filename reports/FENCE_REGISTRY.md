@@ -202,6 +202,18 @@ mengikuti laporan L4).
 - **Domino:** RH (bound Lambda ≤ 0.1787854)
 - **Relasi:** verdict audit pihak ketiga (entri audit pertama);
   laporan L3 `reports/AUDIT_DBN_L3_2026-10-17.md`.
+- **Catatan (2026-10-18):** L1 replay dijalankan setelah izin pemilik
+  (engine WSL2 + podman; instalasi owner-gated direkam di log engine).
+  Semua langkah exit 0: verify.sh `RESULT: STORED UNCONDITIONAL-CANDIDATE
+  REVIEW PASS` (38 cek) + container review default CMD `RESULT: CONTAINER
+  REVIEW PASS` (lane fresh; 33 berkas evidence ter-sha256); laporan:
+  `reports/AUDIT_DBN_L1_2026-10-18.md`. Frasa "L1 not-run (tanpa engine
+  container)" pada Batas di atas = snapshot laporan L4 2026-10-17
+  (dibiarkan utuh); status terkini = catatan ini. Label maksimum tetap
+  replay-level ("release replayed; numbers reproduced from the release's
+  own tooling"), bukan verifikasi independen; sweep penuh tetap tidak
+  dijalankan (opsional pra-reg §8); `run_prop410_arb.sh` tidak ada di
+  tree rilis (tercatat pra-hasil).
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py
   -q` (guard memeriksa semua sha di bawah, termasuk laporan L4);
   re-run lane: lihat log per-item + laporan L3 §9 (input = berkas rilis
@@ -232,6 +244,11 @@ mengikuti laporan L4).
   sha256LF 8e81881e30efefe539743ab4aa3eaf86ad4de13af5eac1fec13752c71efcf69d audit_p1/l2_barrier_subset.py
   sha256LF 9af03b5d22a02b31050ca48c9860370edf40d944b8a91a8f888d7d2ff7cb4378 audit_p1/l3_weld_checks.py
   sha256LF 7a5a143ef607b1684372d3339bb3181440cbd6499dcf3dbd3de51112fd867987 reports/AUDIT_DBN_L4REPORT_2026-10-17.md
+  sha256LF 2d99e70becd677741a9ce2cab3c8cebf5a411c7c36506f2c2f60e419a6152f1f reports/audit_p1_l1_engine_install_2026-10-18.log
+  sha256LF 98ac0dece29aff8b46f12cd178ff3579c09218d8c6b71f1cbce3d8a88fb9c146 reports/audit_p1_l1_replay_2026-10-18.log
+  sha256LF 24f01abe20153ed62d61fca43c64c52c5c4431a92eac98fda28d5a87a2040c59 reports/AUDIT_DBN_L1_2026-10-18.md
+  sha256LF caa3009837ccc30df568564f5bacad3931514db1a4e59afcc650c270c586b0ca audit_p1/l1_fetch.sh
+  sha256LF dab87b5c5951979ade480da12fc5212552b5277b12905c725caad3d51587618b audit_p1/l1_run.sh
   ```
 
 Selesai — 6 entri awal. Entri berikutnya menyusul dengan skema yang
