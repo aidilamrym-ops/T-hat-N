@@ -1,24 +1,28 @@
-# T-hat-N: Matrix-constraint Spectral Analysis Framework (MSAF)
+# Rigorous Ball Arithmetic for Zeta, L-Function, and Weil Spectra
 
-A rigid computational kernel for finite-lattice spectral analysis, built by
-**Muhammad Aidil Amry** (ORCID 0009-0002-9718-9710).
+*T-hat-N - Matrix-constraint Spectral Analysis Framework (MSAF): one rigid
+computational kernel, every reported number an interval enclosure.*
+
+A rigid computational kernel for finite-lattice spectral analysis over the
+Riemann zeta function, Dirichlet L-functions and truncated Guinand-Weil
+spectra, built by **Muhammad Aidil Amry** (ORCID 0009-0002-9718-9710).
 Every number reported in this repository is an interval enclosure computed
 with [python-flint](https://github.com/fredrik-johansson/python-flint) ball
 arithmetic (`arb` / `acb` / `arb_mat`, version 0.9.0). No floating-point value
 ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
-- Permanent archive: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338271.svg)](https://doi.org/10.5281/zenodo.23338271) (concept DOI, all versions; latest version v1.40.0-alpha: https://doi.org/10.5281/zenodo.23410894)
-- Sealed release: [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha) (current: 349 passed)
-- Final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
-- License: MIT - see [LICENSE](LICENSE)
+- **CI:** [![CI](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml) - `python -m pytest msaf -q` (368 tests) plus the Lean kernel build; every push must stay green
+- **Permanent archive:** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338271.svg)](https://doi.org/10.5281/zenodo.23338271) (concept DOI, all versions; latest version v1.40.0-alpha: https://doi.org/10.5281/zenodo.23410894)
+- **Sealed releases:** [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha); final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
+- **License:** MIT - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
 [`docs/math/`](docs/math/), rendered offline by
 [`harness/render_math.py`](harness/render_math.py) with no network and no TeX
 installation, so the archive stays self-contained forever.
 
-**New (2026-10-17) - H1 floor-amendment closed (stages A + B + C).** The
+**Status (2026-10-18) - H1 floor-amendment closed (stages A + B + C).** The
 statistical floor of the Section 6 campaign was lifted from 2000 to 20000
 surrogates on the pre-registered 18-cell grid (A), the single cell that
 clears the floor was re-measured with a five-seed robustness array (B), and
@@ -47,6 +51,17 @@ RMT-GUE does **not** shrink with resolution (S1 chart-dependent at all three
 points; asymptotic direction open). The consolidated LaTeX export
 ([`exports/research_paper.tex`](exports/research_paper.tex)) transcribes the
 sealed results and the process-defect register; it adds no new claims.
+
+**Audit registry (2026-10-18).** The repository also carries a completed
+pre-registered four-layer audit (L1-L4) of a pinned external candidate
+release, recorded in [`reports/FENCE_REGISTRY.md`](reports/FENCE_REGISTRY.md)
+(entry `A-2026-0001`, guarded by `msaf/tests/test_fence_registry.py`): layer
+L1 re-executed the pinned repository end-to-end in a fresh container on
+2026-10-18 (all steps exit 0), layers L2-L3 reproduced the numerical checks
+and the theorem-source weld, and the L4 verdict with its scope limits and
+certificate hashes points to the dated reports under `reports/`. The verdict
+is a bounded assessment under the scope limits recorded there, not a defect
+claim on any third party's work.
 
 ## Contents
 
@@ -249,7 +264,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (349 tests, every landmine pinned)
+### 3.2 Regression Suite (368 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -1051,7 +1066,7 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
   restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
-- `msaf/tests/` - regression suite (349 tests)
+- `msaf/tests/` - regression suite (368 tests)
 - `lean/` - Lean 4 machine-checked kernels 1D/2D/3D + central variant + Moore box (`lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py); includes the generated workflow / verification-chain diagrams (Section 7)
@@ -1068,8 +1083,9 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
 ## CITATION
 
 ```text
-Amry, Muhammad Aidil. T-hat-N: Matrix-constraint Spectral Analysis Framework.
-v1.40.0-alpha. Zenodo. https://doi.org/10.5281/zenodo.23410894
+Amry, Muhammad Aidil. Rigorous Ball Arithmetic for Zeta, L-Function, and
+Weil Spectra (T-hat-N / MSAF). v1.40.0-alpha. Zenodo.
+https://doi.org/10.5281/zenodo.23410894
 Concept DOI (all versions): https://doi.org/10.5281/zenodo.23338271
 Current development line: v1.40.0-alpha (GitHub tags).
 Final certified delivery: v1.40.0-alpha-final-certified-delivery (GitHub tag).
