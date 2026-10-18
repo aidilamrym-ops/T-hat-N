@@ -491,3 +491,807 @@ Runner resume (attempt 2): `audit_bb5/bb5_phaseR_resume.sh`; watchdog
 diperluas polanya untuk nama runner resume
 (`audit_bb5/bb5_phaseR_watchdog.sh` v2) — keduanya di commit yang sama
 dengan blok ini, dipush SEBELUM retry.
+
+=== phase R attempt 2 (resume) start 2026-10-18T06:15:01Z ===
+runner: /root/bb5r/bb5_phaseR_resume.sh sha256 0261cae899a03423efc9d76960fe82d5dc06b00382c51a66448fee5f539c5c17
+resume copy == repo copy (byte-identical)
+attempt 1 status: ABORT EXIT 10 at opam pin add coq (depext libgmp-dev non-interaktif); switch 4.14.2 selesai EXIT 0 (dipakai ulang, tidak diulang).
+watchdog deadline (tidak berubah dari run start asli): 1792364575
+
+--- 2026-10-18T06:15:01Z | apt install libgmp-dev (depext zarith/coq-core)
+CMD: apt-get install -y -qq libgmp-dev
+Selecting previously unselected package libgmpxx4ldbl:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 46993 files and directories currently installed.)
+Preparing to unpack .../libgmpxx4ldbl_2%3a6.3.0+dfsg-5ubuntu2_amd64.deb ...
+Unpacking libgmpxx4ldbl:amd64 (2:6.3.0+dfsg-5ubuntu2) ...
+Selecting previously unselected package libgmp-dev:amd64.
+Preparing to unpack .../libgmp-dev_2%3a6.3.0+dfsg-5ubuntu2_amd64.deb ...
+Unpacking libgmp-dev:amd64 (2:6.3.0+dfsg-5ubuntu2) ...
+Setting up libgmpxx4ldbl:amd64 (2:6.3.0+dfsg-5ubuntu2) ...
+Setting up libgmp-dev:amd64 (2:6.3.0+dfsg-5ubuntu2) ...
+Processing triggers for libc-bin (2.43-2ubuntu2.4) ...
+EXIT: 0
+
+--- 2026-10-18T06:15:06Z | opam env (eval in runner; WARNING difilter)
+CMD: opam env --shell=bash
+OPAM_LAST_ENV='/root/.opam/.last-env/env-7e1c9e96aee4d3d9f98a0c81be18d8d2-0'; export OPAM_LAST_ENV;
+OPAM_SWITCH_PREFIX='/root/.opam/4.14.2'; export OPAM_SWITCH_PREFIX;
+OCAMLTOP_INCLUDE_PATH='/root/.opam/4.14.2/lib/toplevel'; export OCAMLTOP_INCLUDE_PATH;
+CAML_LD_LIBRARY_PATH='/root/.opam/4.14.2/lib/stublibs:/root/.opam/4.14.2/lib/ocaml/stublibs:/root/.opam/4.14.2/lib/ocaml'; export CAML_LD_LIBRARY_PATH;
+OCAML_TOPLEVEL_PATH='/root/.opam/4.14.2/lib/toplevel'; export OCAML_TOPLEVEL_PATH;
+MANPATH=':/root/.opam/4.14.2/man'; export MANPATH;
+PATH='/root/.opam/4.14.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/usr/lib/linux-tools/6.18.54.1-microsoft-standard-WSL2/bin:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Python314/Scripts/:/mnt/c/Python314/:/mnt/c/Program Files (x86)/Common Files/Intel/Shared Files/cpp/bin/Intel64:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/nodejs/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/usER/AppData/Roaming/Python/Python314/Scripts:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/GitHub CLI/:/mnt/c/Users/usER/.pi/agent/bin:/mnt/c/Users/usER/.elan/bin:/mnt/c/Users/usER/.cargo/bin:/mnt/c/Users/usER/.mimocode/bin:/mnt/c/Users/usER/AppData/Local/hermes/bin:/mnt/c/Users/usER/AppData/Local/Microsoft/WindowsApps:/mnt/d/Taget 2026/Antigravity/bin:/mnt/c/Users/usER/AppData/Roaming/npm:/mnt/c/Users/usER/AppData/Local/Programs/Ollama:/mnt/c/Users/usER/AppData/Local/Microsoft/WinGet/Links:/mnt/c/Users/usER/.lmstudio/bin:/mnt/c/Users/usER/AppData/Local/Programs/Cua/cua-driver/bin:/mnt/c/Users/usER/AppData/Local/Programs/Obsidian:/mnt/c/Users/usER/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin'; export PATH;
+EXIT: 0
+
+--- 2026-10-18T06:15:06Z | opam pin add coq 8.20.1 (retry; --confirm-level=unsafe-yes)
+CMD: opam pin add coq 8.20.1 -y --confirm-level=unsafe-yes
+[WARNING] Running as root is not recommended
+[NOTE] Pinning unchanged
+coq is now pinned to version 8.20.1
+
+The following actions will be performed:
+=== install 10 packages
+  ∗ conf-gmp            5               [required by zarith]
+  ∗ conf-linux-libc-dev 0               [required by coq-core]
+  ∗ conf-pkg-config     5               [required by zarith]
+  ∗ coq                 8.20.1 (pinned)
+  ∗ coq-core            8.20.1          [required by coq]
+  ∗ coq-stdlib          8.20.1          [required by coq]
+  ∗ coqide-server       8.20.1          [required by coq]
+  ∗ dune                3.23.1          [required by coq]
+  ∗ ocamlfind           1.9.8           [required by coq-core]
+  ∗ zarith              1.14            [required by coq-core]
+
+<><> Processing actions <><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+⬇ retrieved conf-gmp.5  (https://opam.ocaml.org/cache)
+∗ installed conf-gmp.5
+∗ installed conf-linux-libc-dev.0
+⬇ retrieved conf-pkg-config.5  (2 extra sources)
+⬇ retrieved conf-pkg-config.5  (2 extra sources)
+∗ installed conf-pkg-config.5
+⬇ retrieved coq.8.20.1, coq-core.8.20.1, coq-stdlib.8.20.1, coqide-server.8.20.1  (https://opam.ocaml.org/cache)
+⬇ retrieved ocamlfind.1.9.8  (https://opam.ocaml.org/cache)
+⬇ retrieved dune.3.23.1  (https://opam.ocaml.org/cache)
+⬇ retrieved zarith.1.14  (https://opam.ocaml.org/cache)
+∗ installed ocamlfind.1.9.8
+∗ installed zarith.1.14
+∗ installed dune.3.23.1
+∗ installed coq-core.8.20.1
+∗ installed coqide-server.8.20.1
+∗ installed coq-stdlib.8.20.1
+∗ installed coq.8.20.1
+Done.
+EXIT: 0
+
+--- 2026-10-18T06:23:11Z | opam installed coq packages
+CMD: opam list --installed --short | grep -E '^coq' || echo none
+[WARNING] Running as root is not recommended
+coq
+coq-core
+coq-stdlib
+coqide-server
+EXIT: 0
+
+--- 2026-10-18T06:23:11Z | coqc --version (expect 8.20.1)
+CMD: coqc --version
+The Coq Proof Assistant, version 8.20.1
+compiled with OCaml 4.14.2
+EXIT: 0
+
+--- 2026-10-18T06:23:11Z | build BusyCoq (make -j4)
+CMD: cd /root/bb5r/Coq-BB5-git/BusyCoq && time make -j4
+coq_makefile -f _CoqProject -o Makefile.coq
+make[1]: Entering directory '/root/bb5r/Coq-BB5-git/BusyCoq'
+COQDEP VFILES
+COQC LibTactics.v
+File "./LibTactics.v", line 131, characters 0-56:
+Warning: Automatically putting ltac_Mark in Prop even though it was declared
+with Type.
+Unset Automatic Proposition Inductives to prevent this (it will become the
+default in a future version).
+If you instead put ltac_Mark explicitly in Prop, set Dependent Proposition
+Eliminators around the declaration for full backwards compatibility.
+[automatic-prop-lowering,deprecated-since-8.20,deprecated,default]
+COQC Helper.v
+COQC TM.v
+COQC FixedBin.v
+COQC ShiftOverflow.v
+COQC Compute.v
+COQC Flip.v
+COQC BB52.v
+COQC Permute.v
+COQC Individual.v
+COQC Individual52.v
+COQC Finned.v
+COQC ShiftOverflowBins.v
+COQC Skelet1.v
+COQC Skelet10.v
+COQC Skelet26.v
+COQC Skelet33.v
+COQC Skelet34.v
+COQC Skelet35.v
+COQC Finned1.v
+COQC Finned2.v
+COQC Finned3.v
+COQC Finned4.v
+COQC Finned5.v
+COQC Skelet15.v
+Finished transaction in 0.149 secs (0.149u,0.s) (successful)
+Finished transaction in 7.689 secs (7.66u,0.027s) (successful)
+Finished transaction in 11.912 secs (11.867u,0.039s) (successful)
+Finished transaction in 1018.374 secs (1017.345u,0.772s) (successful)
+make[1]: Leaving directory '/root/bb5r/Coq-BB5-git/BusyCoq'
+
+real	18m58.333s
+user	21m7.394s
+sys	0m10.587s
+EXIT: 0
+
+--- 2026-10-18T06:42:10Z | build CoqBB5/BB5 (make -j4)
+CMD: cd /root/bb5r/Coq-BB5-git/CoqBB5/BB5 && time make -j4
+coq_makefile -f _CoqProject -o Makefile.coq
+Warning: ../../BusyCoq (used in -R or -Q) is not a subdirectory of the current directory
+
+Warning: No common logical root.
+Warning: In this case the -docroot option should be given.
+Warning: Otherwise the install-doc target is going to install files
+Warning: in orphan_BusyCoq_CoqBB5
+make[1]: Entering directory '/root/bb5r/Coq-BB5-git/CoqBB5/BB5'
+COQDEP VFILES
+COQC BB5_Statement.v
+COQC BB5_Deciders_Generic.v
+COQC BB5_Skelet17.v
+COQC Tactics.v
+COQC Prelims.v
+COQC BB5_Encodings.v
+COQC List_Routines.v
+COQC TM.v
+File "./BB5_Skelet17.v", line 1130, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1130, characters 43-53:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1130, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1130, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1130, characters 43-53:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1130, characters 43-53:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1182, characters 41-51:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1182, characters 52-62:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1182, characters 41-51:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1182, characters 41-51:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1182, characters 52-62:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1182, characters 52-62:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1182, characters 41-51:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1182, characters 41-51:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1182, characters 52-62:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1182, characters 52-62:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1208, characters 39-49:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1208, characters 50-60:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1208, characters 39-49:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1208, characters 39-49:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1208, characters 50-60:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1208, characters 50-60:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1208, characters 39-49:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1208, characters 39-49:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1208, characters 50-60:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1208, characters 50-60:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1222, characters 39-49:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1222, characters 50-60:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1222, characters 39-49:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1222, characters 39-49:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1222, characters 50-60:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1222, characters 50-60:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1222, characters 39-49:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1222, characters 39-49:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1222, characters 50-60:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1222, characters 50-60:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1443, characters 14-24:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1443, characters 14-24:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1443, characters 14-24:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1463, characters 65-75:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1463, characters 65-75:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1463, characters 65-75:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1464, characters 63-73:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1464, characters 63-73:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1464, characters 63-73:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1502, characters 14-24:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1502, characters 14-24:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1502, characters 14-24:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1522, characters 65-75:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1522, characters 65-75:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1522, characters 65-75:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1523, characters 63-73:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1523, characters 63-73:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1523, characters 63-73:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+COQC Deciders/Deciders_Common.v
+COQC BB5_Make_TM.v
+File "./BB5_Skelet17.v", line 1799, characters 34-44:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1799, characters 45-55:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1799, characters 34-44:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1799, characters 34-44:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1799, characters 45-55:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1799, characters 45-55:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1829, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1829, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1829, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1841, characters 10-20:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1841, characters 10-20:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1841, characters 10-20:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1884, characters 40-50:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1884, characters 51-61:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1884, characters 40-50:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1884, characters 40-50:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1884, characters 51-61:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1884, characters 51-61:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1977, characters 38-48:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1977, characters 49-59:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1977, characters 38-48:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1977, characters 38-48:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1977, characters 49-59:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 1977, characters 49-59:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+COQC TNF.v
+File "./BB5_Skelet17.v", line 2279, characters 34-44:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 2279, characters 34-44:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 2279, characters 34-44:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 2718, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 2718, characters 43-53:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 2718, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 2718, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 2718, characters 43-53:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 2718, characters 43-53:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 2749, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 2749, characters 43-53:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 2749, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 2749, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 2749, characters 43-53:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 2749, characters 43-53:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+COQC Deciders/Decider_NGramCPS.v
+File "./Deciders/Decider_NGramCPS.v", line 475, characters 12-22:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./Deciders/Decider_NGramCPS.v", line 475, characters 12-22:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./Deciders/Decider_NGramCPS.v", line 475, characters 12-22:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./Deciders/Decider_NGramCPS.v", line 477, characters 12-22:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./Deciders/Decider_NGramCPS.v", line 477, characters 12-22:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./Deciders/Decider_NGramCPS.v", line 477, characters 12-22:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+COQC List_Tape.v
+File "./List_Tape.v", line 619, characters 40-50:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./List_Tape.v", line 619, characters 40-50:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./List_Tape.v", line 619, characters 40-50:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./List_Tape.v", line 655, characters 18-28:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./List_Tape.v", line 655, characters 18-28:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./List_Tape.v", line 655, characters 18-28:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./List_Tape.v", line 742, characters 40-50:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./List_Tape.v", line 742, characters 40-50:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./List_Tape.v", line 742, characters 40-50:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+COQC BusyCoq_Translation.v
+COQC Deciders/Decider_Halt.v
+COQC Deciders/Decider_Loop.v
+COQC Deciders/Decider_RepWL.v
+COQC Deciders/Verifier_Halt.v
+COQC Deciders/Decider_Halt_BB5.v
+COQC Deciders/Verifier_FAR.v
+COQC Deciders/Verifier_WFAR.v
+File "./BB5_Skelet17.v", line 4324, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 4324, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 4324, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 4328, characters 10-20:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 4328, characters 10-20:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 4328, characters 10-20:
+Warning: Notation app_length is deprecated since 8.20.
+Use length_app instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 5584, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 5584, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 5584, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 6822, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 6822, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+File "./BB5_Skelet17.v", line 6822, characters 32-42:
+Warning: Notation map_length is deprecated since 8.20.
+Use length_map instead.
+[deprecated-syntactic-definition-since-8.20,deprecated-since-8.20,deprecated-syntactic-definition,deprecated,default]
+COQC BB5_Sporadic_Machines.v
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ --> _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->* _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->+ _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ --> _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->* _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->+ _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ --> _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->* _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->+ _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ --> _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->* _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->+ _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ --> _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->* _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->+ _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ --> _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->* _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->+ _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ --> _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->* _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->+ _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ --> _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->* _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->+ _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ --> _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->* _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->+ _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ --> _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->* _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 10, characters 0-133:
+Warning: Notation "_ -->+ _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 13, characters 0-40:
+Warning: Notation "_ --> _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 13, characters 0-40:
+Warning: Notation "_ -->* _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 13, characters 0-40:
+Warning: Notation "_ -->+ _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 13, characters 0-40:
+Warning: Notation "_ <| _" was already used.
+[notation-overridden,parsing,default]
+File "./BB5_Sporadic_Machines.v", line 13, characters 0-40:
+Warning: Notation "_ |> _" was already used.
+[notation-overridden,parsing,default]
+COQC BB5_Deciders_Hardcoded.v
+COQC BB5_Deciders_Hardcoded_Parameters/Decider_Loop_Hardcoded_Parameters.v
+COQC BB5_Deciders_Hardcoded_Parameters/Decider_NGramCPS_Hardcoded_Parameters.v
+COQC BB5_Deciders_Hardcoded_Parameters/Verifier_WFAR_Hardcoded_Certificates.v
+COQC BB5_Deciders_Hardcoded_Parameters/Verifier_FAR_Hardcoded_Certificates.v
+COQC BB5_Deciders_Hardcoded_Parameters/Decider_RepWL_Hardcoded_Parameters.v
+COQC BB5_Deciders_Hardcoded_Parameters/Decider_Halt_Hardcoded_Parameters.v
+COQC BB5_Deciders_Pipeline.v
+COQC BB5_TNF_Enumeration_Roots/TNF_Roots_Common.v
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_1.v
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_2.v
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_3.v
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_1.v
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_3.v", line 17, characters 0-67:
+Warning: native_compute disabled at configure time; falling back to
+vm_compute. [native-compiler-disabled,native-compiler,default]
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_2.v", line 19, characters 0-49:
+Warning: native_compute disabled at configure time; falling back to
+vm_compute. [native-compiler-disabled,native-compiler,default]
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_1.v", line 24, characters 0-67:
+Warning: native_compute disabled at configure time; falling back to
+vm_compute. [native-compiler-disabled,native-compiler,default]
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_1.v", line 19, characters 0-49:
+Warning: native_compute disabled at configure time; falling back to
+vm_compute. [native-compiler-disabled,native-compiler,default]
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_2.v
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_3_leaf.v
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_2.v", line 24, characters 0-67:
+Warning: native_compute disabled at configure time; falling back to
+vm_compute. [native-compiler-disabled,native-compiler,default]
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_4_leaf.v
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_5.v
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_5.v", line 24, characters 0-67:
+Warning: native_compute disabled at configure time; falling back to
+vm_compute. [native-compiler-disabled,native-compiler,default]
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_5.v", line 30, characters 0-4:
+Warning: Native compiler is disabled, falling back to VM conversion test.
+[native-compiler-disabled,native-compiler,default]
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_6.v
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_6.v", line 24, characters 0-67:
+Warning: native_compute disabled at configure time; falling back to
+vm_compute. [native-compiler-disabled,native-compiler,default]
+
+--- 2026-10-18T08:22Z | INTERRUPTION attempt 2 (dicatat SEBELUM attempt 3 dimulai; tidak ada hasil audit yang terlihat) ---
+Attempt 2 berjalan sejak 06:15:06Z; berhenti mendadak saat kompilasi TNF_Root_4_6.v (log berakhir tanpa penanda akhir). Titik henti eksak: .vo terakhir = TNF_Root_4_5.vo (mtime 07:12:35Z). Sisa 14 .v tanpa .vo: BB5_Extraction.v, BB5_TNF_Enumeration.v, TNF_Root_3.v, TNF_Root_4.v, TNF_Root_4_1.v, TNF_Root_4_2.v, TNF_Root_4_6.v, TNF_Root_4_7_leaf.v, TNF_Root_4_8_leaf.v, TNF_Root_4_9.v, TNF_Root_4_10.v, TNF_Root_4_11.v, TNF_Root_4_12.v, BB5_Theorem.v. BusyCoq 25/25 .vo. BB5_Theorem.vo TIDAK ada; tidak ada output Print Assumptions / hasil audit apa pun.
+Konfirmasi versi terpasang: line 577 "The Coq Proof Assistant, version 8.20.1".
+Penyebab: VM WSL berhenti (auto-stop idle) dan membunuh build. Fakta: (a) journal VM menunjukkan siklus boot-henti cepat pada tiap probe setelah kejadian (boot 16:06:03 / 16:09:09 / 16:10:56 / 16:15:39 WITA; tiap VM hidup hanya puluhan detik setelah klien keluar); (b) tidak ada event sleep/resume host (terakhir 10/11) dan tidak ada reboot Windows (boot 17 Okt 05:33); (c) probe pertama 08:06:07Z menemukan VM fresh boot tanpa proses runner. Kesimpulan: klien wsl.exe dari dua shell background (runner + watchdog) terputus sekitar 07:1xZ; VM auto-stop tak lama kemudian; build terbunuh di situ. Penyebab terputusnya klien TIDAK terbukti dari bukti yang ada; dicatat sebagai gangguan lingkungan, akar tidak pasti.
+Hardening lingkungan (bukan perubahan parameter audit): dibuat %USERPROFILE%\.wslconfig berisi "[wsl2]" + "vmIdleTimeout=86400000" (24 jam) + komentar alasan. Uji setelah wsl --shutdown: boot baru 08:18:30Z (boot_id 68fc0587-0ae1-4a46-b062-415ba05bfcfa); dibiarkan TANPA klien ~106 dtk; probe kedua = boot_id sama, uptime kontinu ("up 1 min") -> VM bertahan; hardening AKTIF terverifikasi (sebelumnya VM selalu mati puluhan detik setelah klien keluar).
+Recovery: attempt 3 (resume) -- runner bb5_phaseR_resume2.sh (state parsial dipertahankan; make -j4 melanjutkan dari 36/50); watchdog v3 (pola runner diperluas ke _resume[0-9]?); deadline TETAP epoch 1792364575 (23:02:55Z).
+Akuntansi cap: setup ~14m42s (6m37s + 8m05s) dari cap 3j; build terpakai 30m25s (06:42:10Z -> 07:12:35Z) dari cap 14j. Tidak ada parameter run yang berubah; label tetap sesuai praspesifikasi.
