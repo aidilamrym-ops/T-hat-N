@@ -1,0 +1,14 @@
+{
+  "changed": [
+    "README.md"
+  ],
+  "clone": "/tmp/bb5/Coq-BB5-git",
+  "file_counts": {
+    "clone": 218,
+    "tarball": 218
+  },
+  "identical": 217,
+  "only_in_clone": [],
+  "only_in_tarball": [],
+  "tarball": "/tmp/bb5/Coq-BB5-1.0.0.tar.gz"
+}

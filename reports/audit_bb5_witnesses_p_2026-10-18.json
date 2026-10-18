@@ -1,0 +1,172 @@
+{
+  "all_match": true,
+  "engine": "P",
+  "format": "bbch standard; Z counted; --- uncounted halt",
+  "results": [
+    {
+      "expected_ones": 4,
+      "expected_steps": 6,
+      "halt_kind": "z",
+      "label": "classic-2state",
+      "machine": "1RB1LB_1LA1RZ",
+      "match": true,
+      "ones": 4,
+      "source": "wiki BB(2) oldid 5358",
+      "steps": 6
+    },
+    {
+      "expected_ones": 13,
+      "expected_steps": 79,
+      "halt_kind": "z",
+      "label": "green-1964",
+      "machine": "1LD1LB_1LZ1LA_0LB1LD_0LE0LD_1RE1RC",
+      "match": true,
+      "ones": 13,
+      "source": "wiki BB(5) oldid 9024 timeline",
+      "steps": 79
+    },
+    {
+      "expected_ones": 11,
+      "expected_steps": 84,
+      "halt_kind": "z",
+      "label": "brady-1964",
+      "machine": "1RB1LD_0LC0RC_1LC1LA_1RZ0LA",
+      "match": true,
+      "ones": 11,
+      "source": "wiki BB(5) oldid 9024 timeline",
+      "steps": 84
+    },
+    {
+      "expected_ones": 13,
+      "expected_steps": 96,
+      "halt_kind": "z",
+      "label": "lee-1965",
+      "machine": "1RB0RC_1LA1RA_1RZ1RD_1LD0LB",
+      "match": true,
+      "ones": 13,
+      "source": "wiki BB(5) oldid 9024 timeline",
+      "steps": 96
+    },
+    {
+      "expected_ones": 13,
+      "expected_steps": 107,
+      "halt_kind": "z",
+      "label": "brady-1966",
+      "machine": "1RB1LB_1LA0LC_1RZ1LD_1RD0RA",
+      "match": true,
+      "ones": 13,
+      "source": "wiki BB(5) oldid 9024 timeline",
+      "steps": 107
+    },
+    {
+      "expected_ones": 15,
+      "expected_steps": 435,
+      "halt_kind": "z",
+      "label": "lynn-1972",
+      "machine": "1RB1RA_1LC0LD_0RA1LB_1RZ0LE_1RC1RB",
+      "match": true,
+      "ones": 15,
+      "source": "wiki BB(5) oldid 9024 timeline",
+      "steps": 435
+    },
+    {
+      "expected_ones": 23,
+      "expected_steps": 992,
+      "halt_kind": "z",
+      "label": "weimann-1973",
+      "machine": "1RB0LD_1RC0RB_1LA0RA_0LC0LE_1LC1RZ",
+      "match": true,
+      "ones": 23,
+      "source": "wiki BB(5) oldid 9024 timeline",
+      "steps": 992
+    },
+    {
+      "expected_ones": 88,
+      "expected_steps": 7707,
+      "halt_kind": "z",
+      "label": "lynn-1974",
+      "machine": "0RB1RZ_1RC0LD_1RD0RE_1LB0LD_1RE1RA",
+      "match": true,
+      "ones": 88,
+      "source": "wiki BB(5) oldid 9024 timeline",
+      "steps": 7707
+    },
+    {
+      "expected_ones": 501,
+      "expected_steps": 134467,
+      "halt_kind": "z",
+      "label": "schult-1982",
+      "machine": "1RB0LC_1RC1RD_1LA0RB_0RE1RZ_1LC1RA",
+      "match": true,
+      "ones": 501,
+      "source": "wiki BB(5) oldid 9024 timeline",
+      "steps": 134467
+    },
+    {
+      "expected_ones": 1915,
+      "expected_steps": 2133492,
+      "halt_kind": "z",
+      "label": "uhing-1984",
+      "machine": "1RB1LC_0LA0LD_1LA1RZ_1LB1RE_0RD0RB",
+      "match": true,
+      "ones": 1915,
+      "source": "wiki BB(5) oldid 9024 timeline",
+      "steps": 2133492
+    },
+    {
+      "expected_ones": 1471,
+      "expected_steps": 2358064,
+      "halt_kind": "z",
+      "label": "feb-1986",
+      "machine": "1RB1RZ_1LC1RC_0RE0LD_1LC0LB_1RD1RA",
+      "match": true,
+      "ones": 1471,
+      "source": "wiki BB(5) oldid 9024 timeline/top-halters",
+      "steps": 2358064
+    },
+    {
+      "expected_ones": 4098,
+      "expected_steps": 11798826,
+      "halt_kind": "z",
+      "label": "mb89-sigma",
+      "machine": "1RB1RA_1LC1LB_1RA1LD_1RA1LE_1RZ0LC",
+      "match": true,
+      "ones": 4098,
+      "source": "PRIMARY; wiki BB(5) oldid 9024 champions/top-halters; winner page oldid 4369",
+      "steps": 11798826
+    },
+    {
+      "expected_ones": 4097,
+      "expected_steps": 23554764,
+      "halt_kind": "z",
+      "label": "mb89-runner",
+      "machine": "1RB0LD_1LC1RD_1LA1LC_1RZ1RE_1RA0RB",
+      "match": true,
+      "ones": 4097,
+      "source": "wiki BB(5) oldid 9024 top-halters; michel/beh",
+      "steps": 23554764
+    },
+    {
+      "expected_ones": 4098,
+      "expected_steps": 47176870,
+      "halt_kind": "z",
+      "label": "mb89-shift",
+      "machine": "1RB1LC_1RC1RB_1RD0LE_1LA1LD_1RZ0LA",
+      "match": true,
+      "ones": 4098,
+      "source": "PRIMARY; wiki BB(5) oldid 9024 champions; winner page oldid 4369; michel/beh",
+      "steps": 47176870
+    },
+    {
+      "expected_ones": 5,
+      "expected_steps": 21,
+      "halt_kind": "z",
+      "label": "bb3-champion",
+      "machine": "1RB1RZ_1LB0RC_1LC1LA",
+      "match": true,
+      "ones": 5,
+      "source": "wiki BB(3) oldid 8372",
+      "steps": 21
+    }
+  ]
+}

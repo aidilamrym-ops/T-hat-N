@@ -1,0 +1,37 @@
+{
+  "anomalies": [],
+  "candidate_presence": {
+    "1RB---_0RC1RB_1LC1LA": true,
+    "1RB---_1LB0RC_1LC1LA": true,
+    "1RB1RZ_0RC1RB_1LC1LA": false,
+    "1RB1RZ_1LB0RC_1LC1LA": false
+  },
+  "csv": "/tmp/bb5/BB3_verified_enumeration.csv",
+  "data_rows": 5417,
+  "duplicate_rows": [],
+  "engine": "Q",
+  "halt_rows_replayed": 1772,
+  "header": [
+    "machine",
+    "status",
+    "decider"
+  ],
+  "max_ones": 6,
+  "max_ones_machines": [
+    "1RB---_0RC1RB_1LC1LA",
+    "1RB1LC_1LA1RB_1LB---",
+    "1RB1LC_1RC---_1LA0LB",
+    "1RB1RA_1LC---_1RA1LB",
+    "1RB1RC_1LC---_1RA0LB"
+  ],
+  "max_steps": 20,
+  "max_steps_machines": [
+    "1RB---_1LB0RC_1LC1LA"
+  ],
+  "parse_issues": [],
+  "status_counts": {
+    "halt": 1772,
+    "nonhalt": 3645
+  },
+  "unique_machines": 5417
+}

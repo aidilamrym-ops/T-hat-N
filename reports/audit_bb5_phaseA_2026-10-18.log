@@ -1,0 +1,1091 @@
+=== bb5 phaseA start 2026-10-18T04:15:36Z ===
+HEAD: fe906593cb2e6884a2fad1ad5badc7d573bdee2b
+--- runner script (verbatim):
+#!/usr/bin/env bash
+# BB(5) audit Phase A runner (transient tool; NOT committed).
+# Pre-registered in reports/AUDIT_BB5_PREREG_2026-10-18.md (commit fe90659).
+set -u
+REPO="/mnt/d/Opencode AI Agent"
+WORK="/tmp/bb5"
+LOG="$REPO/reports/audit_bb5_phaseA_2026-10-18.log"
+mkdir -p "$WORK"
+cd "$REPO" || exit 1
+
+exec > >(tee -a "$LOG") 2>&1
+
+echo "=== bb5 phaseA start $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
+echo "HEAD: $(git rev-parse HEAD)"
+echo "--- runner script (verbatim):"
+cat "$0"
+echo "--- tool hashes:"
+sha256sum audit_bb5/bb5_engine_p.py audit_bb5/bb5_engine_q.py audit_bb5/artifact_checks.py
+
+echo "--- W: engine P run1 (canonical)"
+nice -n 10 python3 audit_bb5/bb5_engine_p.py --out reports/audit_bb5_witnesses_p_2026-10-18.json
+echo "W-P-run1-exit:$?"
+echo "--- W: engine P run2 (determinism)"
+nice -n 10 python3 audit_bb5/bb5_engine_p.py --out "$WORK/w_p2.json"
+echo "W-P-run2-exit:$?"
+cmp -s reports/audit_bb5_witnesses_p_2026-10-18.json "$WORK/w_p2.json" && echo "DETERMINISM_P_OK" || echo "DETERMINISM_P_FAIL"
+echo "--- W: engine Q run1 (canonical)"
+nice -n 10 python3 audit_bb5/bb5_engine_q.py --out reports/audit_bb5_witnesses_q_2026-10-18.json
+echo "W-Q-run1-exit:$?"
+echo "--- W: engine Q run2 (determinism)"
+nice -n 10 python3 audit_bb5/bb5_engine_q.py --out "$WORK/w_q2.json"
+echo "W-Q-run2-exit:$?"
+cmp -s reports/audit_bb5_witnesses_q_2026-10-18.json "$WORK/w_q2.json" && echo "DETERMINISM_Q_OK" || echo "DETERMINISM_Q_FAIL"
+
+python3 - <<'PYEOF'
+import json
+p = json.load(open('reports/audit_bb5_witnesses_p_2026-10-18.json'))
+q = json.load(open('reports/audit_bb5_witnesses_q_2026-10-18.json'))
+pm = {r['label']: (r['steps'], r['ones']) for r in p['results']}
+qm = {r['label']: (r['steps'], r['ones']) for r in q['results']}
+ok = (pm == qm) and p['all_match'] and q['all_match']
+print('CROSS_ENGINE_AGREE=%s' % ok)
+if not ok:
+    for k in sorted(set(pm) | set(qm)):
+        if pm.get(k) != qm.get(k):
+            print('DISAGREE', k, pm.get(k), qm.get(k))
+PYEOF
+
+echo "--- S: statement file"
+curl -sSfL "https://raw.githubusercontent.com/ccz181078/Coq-BB5/9142e219229baf2245d3f70851947230ea28a318/CoqBB5/BB5/BB5_Statement.v" -o "$WORK/BB5_Statement.v"
+echo "S-curl-exit:$?"
+wc -l -c "$WORK/BB5_Statement.v"
+python3 audit_bb5/artifact_checks.py sha256lf "$WORK/BB5_Statement.v"
+grep -n "Definition BB5 := 47176870%N." "$WORK/BB5_Statement.v"
+grep -n "BB5_value_statement" "$WORK/BB5_Statement.v"
+grep -n "HaltsAtPlusOne" "$WORK/BB5_Statement.v" | head -20
+
+echo "--- H: clone + hygiene scan"
+if [ ! -d "$WORK/Coq-BB5-git/.git" ]; then
+  git clone -q https://github.com/ccz181078/Coq-BB5.git "$WORK/Coq-BB5-git"
+  echo "clone-exit:$?"
+fi
+git -C "$WORK/Coq-BB5-git" checkout -q 9142e219229baf2245d3f70851947230ea28a318
+echo "H-checkout-exit:$?"
+git -C "$WORK/Coq-BB5-git" rev-parse HEAD
+git -C "$WORK/Coq-BB5-git" status --porcelain
+cd "$WORK/Coq-BB5-git"
+for pat in Admitted admit Axiom Axioms Parameter Parameters Conjecture Hypothesis Abort; do
+  n=$(grep -rE "\b${pat}\b" --include='*.v' . | wc -l)
+  echo "H-COUNT ${pat}: ${n}"
+done
+echo "H-HITS (head -400):"
+grep -rnE '\b(Admitted|admit|Axiom|Axioms|Parameter|Parameters|Conjecture|Hypothesis|Abort)\b' --include='*.v' . | head -400
+cd "$REPO"
+
+echo "--- P: zenodo tarball + weld"
+curl -sSfL "https://zenodo.org/api/records/17061968/files/Coq-BB5-1.0.0.tar.gz/content" -o "$WORK/Coq-BB5-1.0.0.tar.gz"
+echo "P-curl-exit:$?"
+md5sum "$WORK/Coq-BB5-1.0.0.tar.gz"
+sha256sum "$WORK/Coq-BB5-1.0.0.tar.gz"
+python3 audit_bb5/artifact_checks.py weld-tar "$WORK/Coq-BB5-1.0.0.tar.gz" "$WORK/Coq-BB5-git" --out reports/audit_bb5_weld_2026-10-18.json
+
+echo "--- E: bb3 enumeration"
+curl -sSfL "https://zenodo.org/api/records/17061968/files/BB3_verified_enumeration.csv/content" -o "$WORK/BB3_verified_enumeration.csv"
+echo "E-curl-exit:$?"
+md5sum "$WORK/BB3_verified_enumeration.csv"
+sha256sum "$WORK/BB3_verified_enumeration.csv"
+python3 audit_bb5/artifact_checks.py bb3-max "$WORK/BB3_verified_enumeration.csv" --engine p --out reports/audit_bb5_bb3_p_2026-10-18.json
+echo "E-P-exit:$?"
+python3 audit_bb5/artifact_checks.py bb3-max "$WORK/BB3_verified_enumeration.csv" --engine q --out reports/audit_bb5_bb3_q_2026-10-18.json
+echo "E-Q-exit:$?"
+
+python3 - <<'PYEOF'
+import json
+p = json.load(open('reports/audit_bb5_bb3_p_2026-10-18.json'))
+q = json.load(open('reports/audit_bb5_bb3_q_2026-10-18.json'))
+keys = ['max_steps', 'max_ones', 'max_steps_machines', 'max_ones_machines', 'anomalies']
+ok = all(p[k] == q[k] for k in keys)
+print('E-PQ-AGREE=%s' % ok)
+for k in keys:
+    v = p[k]
+    print(k, '=', ('%d entries' % len(v)) if isinstance(v, list) else v)
+PYEOF
+
+echo "=== bb5 phaseA end $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
+--- tool hashes:
+a94220774443486bad7ad2c38141a20ecfce43103204989867f49950ab4af1b4  audit_bb5/bb5_engine_p.py
+37b96a2b4a02530b31c0fe2e9b984a1d2c0a22bc7aea3648b3b5f98072f2a4b1  audit_bb5/bb5_engine_q.py
+03d69223587e4fcae9ecab30e96931de99ccb531db5e20ff988ba7cfd4762ff4  audit_bb5/artifact_checks.py
+--- W: engine P run1 (canonical)
+[P] classic-2state steps=6         ones=4      halt=z expected=(6,4) MATCH 0.00s
+[P] green-1964     steps=79        ones=13     halt=z expected=(79,13) MATCH 0.00s
+[P] brady-1964     steps=84        ones=11     halt=z expected=(84,11) MATCH 0.00s
+[P] lee-1965       steps=96        ones=13     halt=z expected=(96,13) MATCH 0.00s
+[P] brady-1966     steps=107       ones=13     halt=z expected=(107,13) MATCH 0.00s
+[P] lynn-1972      steps=435       ones=15     halt=z expected=(435,15) MATCH 0.00s
+[P] weimann-1973   steps=992       ones=23     halt=z expected=(992,23) MATCH 0.00s
+[P] lynn-1974      steps=7707      ones=88     halt=z expected=(7707,88) MATCH 0.00s
+[P] schult-1982    steps=134467    ones=501    halt=z expected=(134467,501) MATCH 0.04s
+[P] uhing-1984     steps=2133492   ones=1915   halt=z expected=(2133492,1915) MATCH 0.49s
+[P] feb-1986       steps=2358064   ones=1471   halt=z expected=(2358064,1471) MATCH 0.54s
+[P] mb89-sigma     steps=11798826  ones=4098   halt=z expected=(11798826,4098) MATCH 3.38s
+[P] mb89-runner    steps=23554764  ones=4097   halt=z expected=(23554764,4097) MATCH 6.22s
+[P] mb89-shift     steps=47176870  ones=4098   halt=z expected=(47176870,4098) MATCH 9.44s
+[P] bb3-champion   steps=21        ones=5      halt=z expected=(21,5) MATCH 0.00s
+[P] all_match=True
+W-P-run1-exit:0
+--- W: engine P run2 (determinism)
+[P] classic-2state steps=6         ones=4      halt=z expected=(6,4) MATCH 0.00s
+[P] green-1964     steps=79        ones=13     halt=z expected=(79,13) MATCH 0.00s
+[P] brady-1964     steps=84        ones=11     halt=z expected=(84,11) MATCH 0.00s
+[P] lee-1965       steps=96        ones=13     halt=z expected=(96,13) MATCH 0.00s
+[P] brady-1966     steps=107       ones=13     halt=z expected=(107,13) MATCH 0.00s
+[P] lynn-1972      steps=435       ones=15     halt=z expected=(435,15) MATCH 0.00s
+[P] weimann-1973   steps=992       ones=23     halt=z expected=(992,23) MATCH 0.00s
+[P] lynn-1974      steps=7707      ones=88     halt=z expected=(7707,88) MATCH 0.00s
+[P] schult-1982    steps=134467    ones=501    halt=z expected=(134467,501) MATCH 0.02s
+[P] uhing-1984     steps=2133492   ones=1915   halt=z expected=(2133492,1915) MATCH 0.43s
+[P] feb-1986       steps=2358064   ones=1471   halt=z expected=(2358064,1471) MATCH 0.54s
+[P] mb89-sigma     steps=11798826  ones=4098   halt=z expected=(11798826,4098) MATCH 2.59s
+[P] mb89-runner    steps=23554764  ones=4097   halt=z expected=(23554764,4097) MATCH 4.76s
+[P] mb89-shift     steps=47176870  ones=4098   halt=z expected=(47176870,4098) MATCH 9.26s
+[P] bb3-champion   steps=21        ones=5      halt=z expected=(21,5) MATCH 0.00s
+[P] all_match=True
+W-P-run2-exit:0
+DETERMINISM_P_OK
+--- W: engine Q run1 (canonical)
+[Q] classic-2state steps=6         ones=4      halt=z expected=(6,4) MATCH 0.00s
+[Q] green-1964     steps=79        ones=13     halt=z expected=(79,13) MATCH 0.00s
+[Q] brady-1964     steps=84        ones=11     halt=z expected=(84,11) MATCH 0.00s
+[Q] lee-1965       steps=96        ones=13     halt=z expected=(96,13) MATCH 0.00s
+[Q] brady-1966     steps=107       ones=13     halt=z expected=(107,13) MATCH 0.00s
+[Q] lynn-1972      steps=435       ones=15     halt=z expected=(435,15) MATCH 0.00s
+[Q] weimann-1973   steps=992       ones=23     halt=z expected=(992,23) MATCH 0.00s
+[Q] lynn-1974      steps=7707      ones=88     halt=z expected=(7707,88) MATCH 0.00s
+[Q] schult-1982    steps=134467    ones=501    halt=z expected=(134467,501) MATCH 0.03s
+[Q] uhing-1984     steps=2133492   ones=1915   halt=z expected=(2133492,1915) MATCH 0.42s
+[Q] feb-1986       steps=2358064   ones=1471   halt=z expected=(2358064,1471) MATCH 0.49s
+[Q] mb89-sigma     steps=11798826  ones=4098   halt=z expected=(11798826,4098) MATCH 2.33s
+[Q] mb89-runner    steps=23554764  ones=4097   halt=z expected=(23554764,4097) MATCH 4.65s
+[Q] mb89-shift     steps=47176870  ones=4098   halt=z expected=(47176870,4098) MATCH 9.24s
+[Q] bb3-champion   steps=21        ones=5      halt=z expected=(21,5) MATCH 0.00s
+[Q] all_match=True
+W-Q-run1-exit:0
+--- W: engine Q run2 (determinism)
+[Q] classic-2state steps=6         ones=4      halt=z expected=(6,4) MATCH 0.00s
+[Q] green-1964     steps=79        ones=13     halt=z expected=(79,13) MATCH 0.00s
+[Q] brady-1964     steps=84        ones=11     halt=z expected=(84,11) MATCH 0.00s
+[Q] lee-1965       steps=96        ones=13     halt=z expected=(96,13) MATCH 0.00s
+[Q] brady-1966     steps=107       ones=13     halt=z expected=(107,13) MATCH 0.00s
+[Q] lynn-1972      steps=435       ones=15     halt=z expected=(435,15) MATCH 0.00s
+[Q] weimann-1973   steps=992       ones=23     halt=z expected=(992,23) MATCH 0.00s
+[Q] lynn-1974      steps=7707      ones=88     halt=z expected=(7707,88) MATCH 0.00s
+[Q] schult-1982    steps=134467    ones=501    halt=z expected=(134467,501) MATCH 0.02s
+[Q] uhing-1984     steps=2133492   ones=1915   halt=z expected=(2133492,1915) MATCH 0.41s
+[Q] feb-1986       steps=2358064   ones=1471   halt=z expected=(2358064,1471) MATCH 0.44s
+[Q] mb89-sigma     steps=11798826  ones=4098   halt=z expected=(11798826,4098) MATCH 2.18s
+[Q] mb89-runner    steps=23554764  ones=4097   halt=z expected=(23554764,4097) MATCH 4.54s
+[Q] mb89-shift     steps=47176870  ones=4098   halt=z expected=(47176870,4098) MATCH 8.97s
+[Q] bb3-champion   steps=21        ones=5      halt=z expected=(21,5) MATCH 0.00s
+[Q] all_match=True
+W-Q-run2-exit:0
+DETERMINISM_Q_OK
+CROSS_ENGINE_AGREE=True
+--- S: statement file
+S-curl-exit:0
+ 120 3768 /tmp/bb5/BB5_Statement.v
+sha256LF cac368d2d0d018c580b7fd88233f1da3111ee5f63776921b79b97bd78a75927d /tmp/bb5/BB5_Statement.v
+112:Definition BB5 := 47176870%N.
+3:  The statement (see `BB5_value_statement`) and the definitions are quite transparent, the only prerequisite is to know what Turing machine are.
+119:Definition BB5_value_statement :=
+100:(** `HaltsAtPlusOne tm n st` holds if Turing machine `tm` halts at configuration `st` after `n` steps.
+102:  Note: Coq-BB5 'HaltsAt' definition (see TM.v) is off by one compared to Radò's definition which is why we have to use 'HaltsAtPlusOne'
+105:Inductive HaltsAtPlusOne(tm:TM): nat->ExecState->Prop :=
+106:| HaltsAtPlusOne_intro n st:
+108:  HaltsAtPlusOne tm (S n) st.
+120:  (forall tm n0, HaltsAtPlusOne Σ tm n0 (InitES Σ Σ0) -> n0 <= N.to_nat BB5) /\
+121:  (exists tm, HaltsAtPlusOne Σ tm (N.to_nat BB5) (InitES Σ Σ0)).
+--- H: clone + hygiene scan
+clone-exit:0
+H-checkout-exit:0
+9142e219229baf2245d3f70851947230ea28a318
+H-COUNT Admitted: 0
+H-COUNT admit: 3
+H-COUNT Axiom: 1
+H-COUNT Axioms: 0
+H-COUNT Parameter: 14
+H-COUNT Parameters: 0
+H-COUNT Conjecture: 0
+H-COUNT Hypothesis: 344
+H-COUNT Abort: 0
+H-HITS (head -400):
+./CoqBB5/BB5/TNF.v:109:Hypothesis BB:nat.
+./CoqBB5/BB5/TM.v:25:Hypothesis Σ:Set.
+./CoqBB5/BB5/TM.v:26:Hypothesis Σ0:Σ.
+./CoqBB5/BB5/TM.v:173:Hypothesis BB:nat.
+./CoqBB5/BB5/TM.v:188:Hypothesis Σ_eqb:Σ->Σ->bool.
+./CoqBB5/BB5/TM.v:189:Hypothesis Σ_eqb_spec: forall i1 i2, if Σ_eqb i1 i2 then i1=i2 else i1<>i2.
+./CoqBB5/BB5/TM.v:252:Hypothesis s1 s2:St.
+./CoqBB5/BB5/TM.v:253:Hypothesis Hneq12: s1<>s2.
+./CoqBB5/BB5/TM.v:254:Hypothesis Hneq01: s1 <> St0.
+./CoqBB5/BB5/TM.v:255:Hypothesis Hneq02: s2 <> St0.
+./CoqBB5/BB5/TM.v:1116:Hypothesis Σ:Set.
+./CoqBB5/BB5/TM.v:1117:Hypothesis Σ':Set.
+./CoqBB5/BB5/TM.v:1118:Hypothesis Σ0':Σ'.
+./CoqBB5/BB5/TM.v:1119:Hypothesis F:Σ'->Σ.
+./CoqBB5/BB5/TM.v:1121:Hypothesis tm:TM Σ.
+./CoqBB5/BB5/TM.v:1122:Hypothesis tm':TM Σ'.
+./CoqBB5/BB5/TM.v:1123:Hypothesis HF:
+./CoqBB5/BB5/Deciders/Verifier_WFAR.v:19:Hypothesis n_l:nat.
+./CoqBB5/BB5/Deciders/Verifier_WFAR.v:20:Hypothesis n_r:nat.
+./CoqBB5/BB5/Deciders/Verifier_WFAR.v:35:Hypothesis wdfa_l:U_l->Σ->(U_l*Z).
+./CoqBB5/BB5/Deciders/Verifier_WFAR.v:36:Hypothesis wdfa_r:U_r->Σ->(U_r*Z).
+./CoqBB5/BB5/Deciders/Verifier_WFAR.v:38:Hypothesis wdfa_l_0: wdfa_0 U_l U0_l wdfa_l.
+./CoqBB5/BB5/Deciders/Verifier_WFAR.v:39:Hypothesis wdfa_r_0: wdfa_0 U_r U0_r wdfa_r.
+./CoqBB5/BB5/Deciders/Verifier_WFAR.v:41:Hypothesis wdfa_sgn_l:Dir->U_l->bool.
+./CoqBB5/BB5/Deciders/Verifier_WFAR.v:42:Hypothesis wdfa_sgn_r:Dir->U_r->bool.
+./CoqBB5/BB5/Deciders/Verifier_WFAR.v:44:Hypothesis wdfa_sgn_l_closed: wdfa_sgn_closed U_l wdfa_l wdfa_sgn_l.
+./CoqBB5/BB5/Deciders/Verifier_WFAR.v:45:Hypothesis wdfa_sgn_r_closed: wdfa_sgn_closed U_r wdfa_r wdfa_sgn_r.
+./CoqBB5/BB5/Deciders/Verifier_WFAR.v:231:Hypothesis max_d:Z.
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:23:Hypothesis U: Set.
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:24:Hypothesis U0: U.
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:25:Hypothesis U_enc: U->positive.
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:26:Hypothesis U_enc_inj: is_inj U_enc.
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:27:Hypothesis U_list:list U.
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:28:Hypothesis U_list_spec:
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:30:Hypothesis maxT:nat.
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:31:Hypothesis dfa: U->Σ->U.
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:48:Hypothesis tm:TM Σ.
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:53:Hypothesis nfa: (option (St*U))->Σ->(option (St*U))->bool.
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:54:Hypothesis nfa_acc: option (St*U) -> bool.
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:60:Hypothesis nfa_h0:
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:64:Hypothesis nfa_h:
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:69:Hypothesis nfa_r:
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:74:Hypothesis nfa_l:
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:81:Hypothesis dfa_0:
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:194:Hypothesis nfa_acc_0: nfa_acc (Some (St0,U0)) = true.
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:195:Hypothesis nfa_acc_h: nfa_acc None = false.
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:196:Hypothesis nfa_acc_closed:
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:737:Hypothesis wdfa:U->Σ->(U*Z).
+./CoqBB5/BB5/Deciders/Verifier_FAR.v:809:Hypothesis wdfa_sgn: Dir->U->bool.
+./CoqBB5/BB5/Deciders/Deciders_Common.v:11:Hypothesis BB: nat.
+./CoqBB5/BB5/Deciders/Decider_RepWL.v:125:Hypothesis len:nat.
+./CoqBB5/BB5/Deciders/Decider_RepWL.v:141:Hypothesis min_nonconst_len:nat.
+./CoqBB5/BB5/Deciders/Decider_RepWL.v:190:Hypothesis WordUpdate_MAXT:nat.
+./CoqBB5/BB5/Deciders/Decider_RepWL.v:969:Hypothesis T:Type.
+./CoqBB5/BB5/Deciders/Decider_RepWL.v:970:Hypothesis T_enc:T->positive.
+./CoqBB5/BB5/Deciders/Decider_RepWL.v:971:Hypothesis T_enc_inj: is_inj T_enc.
+./CoqBB5/BB5/Deciders/Decider_RepWL.v:972:Hypothesis In_T: (ExecState Σ)->T->Prop.
+./CoqBB5/BB5/Deciders/Decider_RepWL.v:973:Hypothesis T_InitES:T.
+./CoqBB5/BB5/Deciders/Decider_RepWL.v:974:Hypothesis In_T_InitES: In_T (InitES Σ Σ0) T_InitES.
+./CoqBB5/BB5/Deciders/Decider_RepWL.v:975:Hypothesis T_step: (TM Σ)->T->option (list T).
+./CoqBB5/BB5/Deciders/Decider_RepWL.v:976:Hypothesis T_step_spec:
+./CoqBB5/BB5/Deciders/Decider_NGramCPS.v:39:Hypothesis Σ:Set.
+./CoqBB5/BB5/Deciders/Decider_NGramCPS.v:41:Hypothesis T:Type.
+./CoqBB5/BB5/Deciders/Decider_NGramCPS.v:42:Hypothesis InT:(ExecState Σ)->T->Prop.
+./CoqBB5/BB5/Deciders/Decider_NGramCPS.v:101:Hypothesis Σ:Set.
+./CoqBB5/BB5/Deciders/Decider_NGramCPS.v:102:Hypothesis len_l:nat.
+./CoqBB5/BB5/Deciders/Decider_NGramCPS.v:103:Hypothesis len_r:nat.
+./CoqBB5/BB5/Deciders/Decider_NGramCPS.v:105:Hypothesis Σ_enc: Σ->positive.
+./CoqBB5/BB5/Deciders/Decider_NGramCPS.v:106:Hypothesis Σ_enc_inj: is_inj Σ_enc.
+./CoqBB5/BB5/Deciders/Decider_NGramCPS.v:107:Hypothesis listΣ_enc: (list Σ)->positive.
+./CoqBB5/BB5/Deciders/Decider_NGramCPS.v:108:Hypothesis listΣ_enc_inj: is_inj listΣ_enc.
+./CoqBB5/BB5/Deciders/Decider_NGramCPS.v:110:Hypothesis Σ0:Σ.
+./CoqBB5/BB5/BB5_Statement.v:50:Hypothesis Σ:Set.
+./CoqBB5/BB5/BB5_Statement.v:51:Hypothesis Σ0:Σ.
+./CoqBB5/BB5/BB5_Skelet17.v:4278:Hypothesis k:nat.
+./CoqBB5/BB5/BB5_Skelet17.v:4279:Hypothesis Base_k: k<>0.
+./CoqBB5/BB5/BB5_Skelet17.v:5268:Hypothesis Sk:nat*(list nat).
+./CoqBB5/BB5/BB5_Skelet17.v:5269:Hypothesis Base_Sk: Base Sk.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:516:Hypothesis Σ:Set.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:517:Hypothesis Σ0:Σ.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:702:Hypothesis BB:nat.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:718:Hypothesis Σ_eqb:Σ->Σ->bool.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:719:Hypothesis Σ_eqb_spec: forall i1 i2, if Σ_eqb i1 i2 then i1=i2 else i1<>i2.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:789:Hypothesis s1 s2:St.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:790:Hypothesis Hneq12: s1<>s2.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:791:Hypothesis Hneq01: s1 <> St0.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:792:Hypothesis Hneq02: s2 <> St0.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:1943:Hypothesis BB:nat.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:2299:Hypothesis Σ:Set.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:2301:Hypothesis T:Type.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:2302:Hypothesis InT:(ExecState Σ)->T->Prop.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:2367:Hypothesis Σ:Set.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:2368:Hypothesis len_l:nat.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:2369:Hypothesis len_r:nat.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:2820:Hypothesis Σ_enc: Σ->positive.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:2821:Hypothesis Σ_enc_inj: is_inj Σ_enc.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:2822:Hypothesis listΣ_enc: (list Σ)->positive.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:2823:Hypothesis listΣ_enc_inj: is_inj listΣ_enc.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:3324:Hypothesis Σ0:Σ.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:3499:Hypothesis Σ:Set.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:3500:Hypothesis Σ':Set.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:3501:Hypothesis Σ0':Σ'.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:3502:Hypothesis F:Σ'->Σ.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:3504:Hypothesis tm:TM Σ.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:3505:Hypothesis tm':TM Σ'.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:3506:Hypothesis HF:
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:6255:Hypothesis len:nat.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:6348:Hypothesis min_nonconst_len:nat.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:6580:Hypothesis WordUpdate_MAXT:nat.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:7108:Hypothesis T:Type.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:7109:Hypothesis T_enc:T->positive.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:7110:Hypothesis T_enc_inj: is_inj T_enc.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:7111:Hypothesis In_T: (ExecState Σ)->T->Prop.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:7112:Hypothesis T_InitES:T.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:7113:Hypothesis In_T_InitES: In_T (InitES Σ Σ0) T_InitES.
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:7114:Hypothesis T_step: (TM Σ)->T->option (list T).
+./CoqBB5/BB4/_BB4_Legacy_Monolith.v:7115:Hypothesis T_step_spec:
+./CoqBB5/BB4/TNF.v:109:Hypothesis BB:nat.
+./CoqBB5/BB4/TM.v:25:Hypothesis Σ:Set.
+./CoqBB5/BB4/TM.v:26:Hypothesis Σ0:Σ.
+./CoqBB5/BB4/TM.v:173:Hypothesis BB:nat.
+./CoqBB5/BB4/TM.v:188:Hypothesis Σ_eqb:Σ->Σ->bool.
+./CoqBB5/BB4/TM.v:189:Hypothesis Σ_eqb_spec: forall i1 i2, if Σ_eqb i1 i2 then i1=i2 else i1<>i2.
+./CoqBB5/BB4/TM.v:252:Hypothesis s1 s2:St.
+./CoqBB5/BB4/TM.v:253:Hypothesis Hneq12: s1<>s2.
+./CoqBB5/BB4/TM.v:254:Hypothesis Hneq01: s1 <> St0.
+./CoqBB5/BB4/TM.v:255:Hypothesis Hneq02: s2 <> St0.
+./CoqBB5/BB4/TM.v:1116:Hypothesis Σ:Set.
+./CoqBB5/BB4/TM.v:1117:Hypothesis Σ':Set.
+./CoqBB5/BB4/TM.v:1118:Hypothesis Σ0':Σ'.
+./CoqBB5/BB4/TM.v:1119:Hypothesis F:Σ'->Σ.
+./CoqBB5/BB4/TM.v:1121:Hypothesis tm:TM Σ.
+./CoqBB5/BB4/TM.v:1122:Hypothesis tm':TM Σ'.
+./CoqBB5/BB4/TM.v:1123:Hypothesis HF:
+./CoqBB5/BB4/Deciders/Deciders_Common.v:11:Hypothesis BB: nat.
+./CoqBB5/BB4/Deciders/Decider_RepWL.v:125:Hypothesis len:nat.
+./CoqBB5/BB4/Deciders/Decider_RepWL.v:141:Hypothesis min_nonconst_len:nat.
+./CoqBB5/BB4/Deciders/Decider_RepWL.v:190:Hypothesis WordUpdate_MAXT:nat.
+./CoqBB5/BB4/Deciders/Decider_RepWL.v:969:Hypothesis T:Type.
+./CoqBB5/BB4/Deciders/Decider_RepWL.v:970:Hypothesis T_enc:T->positive.
+./CoqBB5/BB4/Deciders/Decider_RepWL.v:971:Hypothesis T_enc_inj: is_inj T_enc.
+./CoqBB5/BB4/Deciders/Decider_RepWL.v:972:Hypothesis In_T: (ExecState Σ)->T->Prop.
+./CoqBB5/BB4/Deciders/Decider_RepWL.v:973:Hypothesis T_InitES:T.
+./CoqBB5/BB4/Deciders/Decider_RepWL.v:974:Hypothesis In_T_InitES: In_T (InitES Σ Σ0) T_InitES.
+./CoqBB5/BB4/Deciders/Decider_RepWL.v:975:Hypothesis T_step: (TM Σ)->T->option (list T).
+./CoqBB5/BB4/Deciders/Decider_RepWL.v:976:Hypothesis T_step_spec:
+./CoqBB5/BB4/Deciders/Decider_NGramCPS.v:39:Hypothesis Σ:Set.
+./CoqBB5/BB4/Deciders/Decider_NGramCPS.v:41:Hypothesis T:Type.
+./CoqBB5/BB4/Deciders/Decider_NGramCPS.v:42:Hypothesis InT:(ExecState Σ)->T->Prop.
+./CoqBB5/BB4/Deciders/Decider_NGramCPS.v:101:Hypothesis Σ:Set.
+./CoqBB5/BB4/Deciders/Decider_NGramCPS.v:102:Hypothesis len_l:nat.
+./CoqBB5/BB4/Deciders/Decider_NGramCPS.v:103:Hypothesis len_r:nat.
+./CoqBB5/BB4/Deciders/Decider_NGramCPS.v:105:Hypothesis Σ_enc: Σ->positive.
+./CoqBB5/BB4/Deciders/Decider_NGramCPS.v:106:Hypothesis Σ_enc_inj: is_inj Σ_enc.
+./CoqBB5/BB4/Deciders/Decider_NGramCPS.v:107:Hypothesis listΣ_enc: (list Σ)->positive.
+./CoqBB5/BB4/Deciders/Decider_NGramCPS.v:108:Hypothesis listΣ_enc_inj: is_inj listΣ_enc.
+./CoqBB5/BB4/Deciders/Decider_NGramCPS.v:110:Hypothesis Σ0:Σ.
+./CoqBB5/BB4/BB4_Statement.v:49:Hypothesis Σ:Set.
+./CoqBB5/BB4/BB4_Statement.v:50:Hypothesis Σ0:Σ.
+./CoqBB5/BB3/TNF.v:109:Hypothesis BB:nat.
+./CoqBB5/BB3/TM.v:25:Hypothesis Σ:Set.
+./CoqBB5/BB3/TM.v:26:Hypothesis Σ0:Σ.
+./CoqBB5/BB3/TM.v:173:Hypothesis BB:nat.
+./CoqBB5/BB3/TM.v:188:Hypothesis Σ_eqb:Σ->Σ->bool.
+./CoqBB5/BB3/TM.v:189:Hypothesis Σ_eqb_spec: forall i1 i2, if Σ_eqb i1 i2 then i1=i2 else i1<>i2.
+./CoqBB5/BB3/TM.v:252:Hypothesis s1 s2:St.
+./CoqBB5/BB3/TM.v:253:Hypothesis Hneq12: s1<>s2.
+./CoqBB5/BB3/TM.v:254:Hypothesis Hneq01: s1 <> St0.
+./CoqBB5/BB3/TM.v:255:Hypothesis Hneq02: s2 <> St0.
+./CoqBB5/BB3/TM.v:1116:Hypothesis Σ:Set.
+./CoqBB5/BB3/TM.v:1117:Hypothesis Σ':Set.
+./CoqBB5/BB3/TM.v:1118:Hypothesis Σ0':Σ'.
+./CoqBB5/BB3/TM.v:1119:Hypothesis F:Σ'->Σ.
+./CoqBB5/BB3/TM.v:1121:Hypothesis tm:TM Σ.
+./CoqBB5/BB3/TM.v:1122:Hypothesis tm':TM Σ'.
+./CoqBB5/BB3/TM.v:1123:Hypothesis HF:
+./CoqBB5/BB3/Deciders/Deciders_Common.v:11:Hypothesis BB: nat.
+./CoqBB5/BB3/Deciders/Decider_NGramCPS.v:39:Hypothesis Σ:Set.
+./CoqBB5/BB3/Deciders/Decider_NGramCPS.v:41:Hypothesis T:Type.
+./CoqBB5/BB3/Deciders/Decider_NGramCPS.v:42:Hypothesis InT:(ExecState Σ)->T->Prop.
+./CoqBB5/BB3/Deciders/Decider_NGramCPS.v:101:Hypothesis Σ:Set.
+./CoqBB5/BB3/Deciders/Decider_NGramCPS.v:102:Hypothesis len_l:nat.
+./CoqBB5/BB3/Deciders/Decider_NGramCPS.v:103:Hypothesis len_r:nat.
+./CoqBB5/BB3/Deciders/Decider_NGramCPS.v:105:Hypothesis Σ_enc: Σ->positive.
+./CoqBB5/BB3/Deciders/Decider_NGramCPS.v:106:Hypothesis Σ_enc_inj: is_inj Σ_enc.
+./CoqBB5/BB3/Deciders/Decider_NGramCPS.v:107:Hypothesis listΣ_enc: (list Σ)->positive.
+./CoqBB5/BB3/Deciders/Decider_NGramCPS.v:108:Hypothesis listΣ_enc_inj: is_inj listΣ_enc.
+./CoqBB5/BB3/Deciders/Decider_NGramCPS.v:110:Hypothesis Σ0:Σ.
+./CoqBB5/BB3/BB3_Statement.v:48:Hypothesis Σ:Set.
+./CoqBB5/BB3/BB3_Statement.v:49:Hypothesis Σ0:Σ.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:518:Hypothesis Σ:Set.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:519:Hypothesis Σ0:Σ.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:704:Hypothesis BB:nat.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:720:Hypothesis Σ_eqb:Σ->Σ->bool.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:721:Hypothesis Σ_eqb_spec: forall i1 i2, if Σ_eqb i1 i2 then i1=i2 else i1<>i2.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:791:Hypothesis s1 s2:St.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:792:Hypothesis Hneq12: s1<>s2.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:793:Hypothesis Hneq01: s1 <> St0.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:794:Hypothesis Hneq02: s2 <> St0.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:1934:Hypothesis BB:nat.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:2290:Hypothesis Σ:Set.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:2292:Hypothesis T:Type.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:2293:Hypothesis InT:(ExecState Σ)->T->Prop.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:2358:Hypothesis Σ:Set.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:2359:Hypothesis len_l:nat.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:2360:Hypothesis len_r:nat.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:2811:Hypothesis Σ_enc: Σ->positive.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:2812:Hypothesis Σ_enc_inj: is_inj Σ_enc.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:2813:Hypothesis listΣ_enc: (list Σ)->positive.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:2814:Hypothesis listΣ_enc_inj: is_inj listΣ_enc.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:3315:Hypothesis Σ0:Σ.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:3490:Hypothesis Σ:Set.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:3491:Hypothesis Σ':Set.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:3492:Hypothesis Σ0':Σ'.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:3493:Hypothesis F:Σ'->Σ.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:3495:Hypothesis tm:TM Σ.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:3496:Hypothesis tm':TM Σ'.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:3497:Hypothesis HF:
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:6250:Hypothesis len:nat.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:6343:Hypothesis min_nonconst_len:nat.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:6575:Hypothesis WordUpdate_MAXT:nat.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:7103:Hypothesis T:Type.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:7104:Hypothesis T_enc:T->positive.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:7105:Hypothesis T_enc_inj: is_inj T_enc.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:7106:Hypothesis In_T: (ExecState Σ)->T->Prop.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:7107:Hypothesis T_InitES:T.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:7108:Hypothesis In_T_InitES: In_T (InitES Σ Σ0) T_InitES.
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:7109:Hypothesis T_step: (TM Σ)->T->option (list T).
+./CoqBB5/BB2x4/_BB2x4_Legacy_Monolith.v:7110:Hypothesis T_step_spec:
+./CoqBB5/BB2x4/TNF.v:109:Hypothesis BB:nat.
+./CoqBB5/BB2x4/TM.v:25:Hypothesis Σ:Set.
+./CoqBB5/BB2x4/TM.v:26:Hypothesis Σ0:Σ.
+./CoqBB5/BB2x4/TM.v:173:Hypothesis BB:nat.
+./CoqBB5/BB2x4/TM.v:188:Hypothesis Σ_eqb:Σ->Σ->bool.
+./CoqBB5/BB2x4/TM.v:189:Hypothesis Σ_eqb_spec: forall i1 i2, if Σ_eqb i1 i2 then i1=i2 else i1<>i2.
+./CoqBB5/BB2x4/TM.v:252:Hypothesis s1 s2:St.
+./CoqBB5/BB2x4/TM.v:253:Hypothesis Hneq12: s1<>s2.
+./CoqBB5/BB2x4/TM.v:254:Hypothesis Hneq01: s1 <> St0.
+./CoqBB5/BB2x4/TM.v:255:Hypothesis Hneq02: s2 <> St0.
+./CoqBB5/BB2x4/TM.v:1116:Hypothesis Σ:Set.
+./CoqBB5/BB2x4/TM.v:1117:Hypothesis Σ':Set.
+./CoqBB5/BB2x4/TM.v:1118:Hypothesis Σ0':Σ'.
+./CoqBB5/BB2x4/TM.v:1119:Hypothesis F:Σ'->Σ.
+./CoqBB5/BB2x4/TM.v:1121:Hypothesis tm:TM Σ.
+./CoqBB5/BB2x4/TM.v:1122:Hypothesis tm':TM Σ'.
+./CoqBB5/BB2x4/TM.v:1123:Hypothesis HF:
+./CoqBB5/BB2x4/Deciders/Deciders_Common.v:11:Hypothesis BB: nat.
+./CoqBB5/BB2x4/Deciders/Decider_RepWL.v:125:Hypothesis len:nat.
+./CoqBB5/BB2x4/Deciders/Decider_RepWL.v:141:Hypothesis min_nonconst_len:nat.
+./CoqBB5/BB2x4/Deciders/Decider_RepWL.v:190:Hypothesis WordUpdate_MAXT:nat.
+./CoqBB5/BB2x4/Deciders/Decider_RepWL.v:969:Hypothesis T:Type.
+./CoqBB5/BB2x4/Deciders/Decider_RepWL.v:970:Hypothesis T_enc:T->positive.
+./CoqBB5/BB2x4/Deciders/Decider_RepWL.v:971:Hypothesis T_enc_inj: is_inj T_enc.
+./CoqBB5/BB2x4/Deciders/Decider_RepWL.v:972:Hypothesis In_T: (ExecState Σ)->T->Prop.
+./CoqBB5/BB2x4/Deciders/Decider_RepWL.v:973:Hypothesis T_InitES:T.
+./CoqBB5/BB2x4/Deciders/Decider_RepWL.v:974:Hypothesis In_T_InitES: In_T (InitES Σ Σ0) T_InitES.
+./CoqBB5/BB2x4/Deciders/Decider_RepWL.v:975:Hypothesis T_step: (TM Σ)->T->option (list T).
+./CoqBB5/BB2x4/Deciders/Decider_RepWL.v:976:Hypothesis T_step_spec:
+./CoqBB5/BB2x4/Deciders/Decider_NGramCPS.v:39:Hypothesis Σ:Set.
+./CoqBB5/BB2x4/Deciders/Decider_NGramCPS.v:41:Hypothesis T:Type.
+./CoqBB5/BB2x4/Deciders/Decider_NGramCPS.v:42:Hypothesis InT:(ExecState Σ)->T->Prop.
+./CoqBB5/BB2x4/Deciders/Decider_NGramCPS.v:101:Hypothesis Σ:Set.
+./CoqBB5/BB2x4/Deciders/Decider_NGramCPS.v:102:Hypothesis len_l:nat.
+./CoqBB5/BB2x4/Deciders/Decider_NGramCPS.v:103:Hypothesis len_r:nat.
+./CoqBB5/BB2x4/Deciders/Decider_NGramCPS.v:105:Hypothesis Σ_enc: Σ->positive.
+./CoqBB5/BB2x4/Deciders/Decider_NGramCPS.v:106:Hypothesis Σ_enc_inj: is_inj Σ_enc.
+./CoqBB5/BB2x4/Deciders/Decider_NGramCPS.v:107:Hypothesis listΣ_enc: (list Σ)->positive.
+./CoqBB5/BB2x4/Deciders/Decider_NGramCPS.v:108:Hypothesis listΣ_enc_inj: is_inj listΣ_enc.
+./CoqBB5/BB2x4/Deciders/Decider_NGramCPS.v:110:Hypothesis Σ0:Σ.
+./CoqBB5/BB2x4/BB2x4_Statement.v:49:Hypothesis Σ:Set.
+./CoqBB5/BB2x4/BB2x4_Statement.v:50:Hypothesis Σ0:Σ.
+./CoqBB5/BB2x3/TNF.v:109:Hypothesis BB:nat.
+./CoqBB5/BB2x3/TM.v:25:Hypothesis Σ:Set.
+./CoqBB5/BB2x3/TM.v:26:Hypothesis Σ0:Σ.
+./CoqBB5/BB2x3/TM.v:173:Hypothesis BB:nat.
+./CoqBB5/BB2x3/TM.v:188:Hypothesis Σ_eqb:Σ->Σ->bool.
+./CoqBB5/BB2x3/TM.v:189:Hypothesis Σ_eqb_spec: forall i1 i2, if Σ_eqb i1 i2 then i1=i2 else i1<>i2.
+./CoqBB5/BB2x3/TM.v:252:Hypothesis s1 s2:St.
+./CoqBB5/BB2x3/TM.v:253:Hypothesis Hneq12: s1<>s2.
+./CoqBB5/BB2x3/TM.v:254:Hypothesis Hneq01: s1 <> St0.
+./CoqBB5/BB2x3/TM.v:255:Hypothesis Hneq02: s2 <> St0.
+./CoqBB5/BB2x3/TM.v:1116:Hypothesis Σ:Set.
+./CoqBB5/BB2x3/TM.v:1117:Hypothesis Σ':Set.
+./CoqBB5/BB2x3/TM.v:1118:Hypothesis Σ0':Σ'.
+./CoqBB5/BB2x3/TM.v:1119:Hypothesis F:Σ'->Σ.
+./CoqBB5/BB2x3/TM.v:1121:Hypothesis tm:TM Σ.
+./CoqBB5/BB2x3/TM.v:1122:Hypothesis tm':TM Σ'.
+./CoqBB5/BB2x3/TM.v:1123:Hypothesis HF:
+./CoqBB5/BB2x3/Deciders/Deciders_Common.v:11:Hypothesis BB: nat.
+./CoqBB5/BB2x3/Deciders/Decider_RepWL.v:125:Hypothesis len:nat.
+./CoqBB5/BB2x3/Deciders/Decider_RepWL.v:141:Hypothesis min_nonconst_len:nat.
+./CoqBB5/BB2x3/Deciders/Decider_RepWL.v:190:Hypothesis WordUpdate_MAXT:nat.
+./CoqBB5/BB2x3/Deciders/Decider_RepWL.v:969:Hypothesis T:Type.
+./CoqBB5/BB2x3/Deciders/Decider_RepWL.v:970:Hypothesis T_enc:T->positive.
+./CoqBB5/BB2x3/Deciders/Decider_RepWL.v:971:Hypothesis T_enc_inj: is_inj T_enc.
+./CoqBB5/BB2x3/Deciders/Decider_RepWL.v:972:Hypothesis In_T: (ExecState Σ)->T->Prop.
+./CoqBB5/BB2x3/Deciders/Decider_RepWL.v:973:Hypothesis T_InitES:T.
+./CoqBB5/BB2x3/Deciders/Decider_RepWL.v:974:Hypothesis In_T_InitES: In_T (InitES Σ Σ0) T_InitES.
+./CoqBB5/BB2x3/Deciders/Decider_RepWL.v:975:Hypothesis T_step: (TM Σ)->T->option (list T).
+./CoqBB5/BB2x3/Deciders/Decider_RepWL.v:976:Hypothesis T_step_spec:
+./CoqBB5/BB2x3/Deciders/Decider_NGramCPS.v:39:Hypothesis Σ:Set.
+./CoqBB5/BB2x3/Deciders/Decider_NGramCPS.v:41:Hypothesis T:Type.
+./CoqBB5/BB2x3/Deciders/Decider_NGramCPS.v:42:Hypothesis InT:(ExecState Σ)->T->Prop.
+./CoqBB5/BB2x3/Deciders/Decider_NGramCPS.v:101:Hypothesis Σ:Set.
+./CoqBB5/BB2x3/Deciders/Decider_NGramCPS.v:102:Hypothesis len_l:nat.
+./CoqBB5/BB2x3/Deciders/Decider_NGramCPS.v:103:Hypothesis len_r:nat.
+./CoqBB5/BB2x3/Deciders/Decider_NGramCPS.v:105:Hypothesis Σ_enc: Σ->positive.
+./CoqBB5/BB2x3/Deciders/Decider_NGramCPS.v:106:Hypothesis Σ_enc_inj: is_inj Σ_enc.
+./CoqBB5/BB2x3/Deciders/Decider_NGramCPS.v:107:Hypothesis listΣ_enc: (list Σ)->positive.
+./CoqBB5/BB2x3/Deciders/Decider_NGramCPS.v:108:Hypothesis listΣ_enc_inj: is_inj listΣ_enc.
+./CoqBB5/BB2x3/Deciders/Decider_NGramCPS.v:110:Hypothesis Σ0:Σ.
+./CoqBB5/BB2x3/BB2x3_Statement.v:48:Hypothesis Σ:Set.
+./CoqBB5/BB2x3/BB2x3_Statement.v:49:Hypothesis Σ0:Σ.
+./CoqBB5/BB2/TNF.v:109:Hypothesis BB:nat.
+./CoqBB5/BB2/TM.v:25:Hypothesis Σ:Set.
+./CoqBB5/BB2/TM.v:26:Hypothesis Σ0:Σ.
+./CoqBB5/BB2/TM.v:173:Hypothesis BB:nat.
+./CoqBB5/BB2/TM.v:188:Hypothesis Σ_eqb:Σ->Σ->bool.
+./CoqBB5/BB2/TM.v:189:Hypothesis Σ_eqb_spec: forall i1 i2, if Σ_eqb i1 i2 then i1=i2 else i1<>i2.
+./CoqBB5/BB2/TM.v:252:Hypothesis s1 s2:St.
+./CoqBB5/BB2/TM.v:253:Hypothesis Hneq12: s1<>s2.
+./CoqBB5/BB2/TM.v:254:Hypothesis Hneq01: s1 <> St0.
+./CoqBB5/BB2/TM.v:255:Hypothesis Hneq02: s2 <> St0.
+./CoqBB5/BB2/TM.v:1116:Hypothesis Σ:Set.
+./CoqBB5/BB2/TM.v:1117:Hypothesis Σ':Set.
+./CoqBB5/BB2/TM.v:1118:Hypothesis Σ0':Σ'.
+./CoqBB5/BB2/TM.v:1119:Hypothesis F:Σ'->Σ.
+./CoqBB5/BB2/TM.v:1121:Hypothesis tm:TM Σ.
+./CoqBB5/BB2/TM.v:1122:Hypothesis tm':TM Σ'.
+./CoqBB5/BB2/TM.v:1123:Hypothesis HF:
+./CoqBB5/BB2/Deciders/Deciders_Common.v:11:Hypothesis BB: nat.
+./CoqBB5/BB2/Deciders/Decider_NGramCPS.v:39:Hypothesis Σ:Set.
+./CoqBB5/BB2/Deciders/Decider_NGramCPS.v:41:Hypothesis T:Type.
+./CoqBB5/BB2/Deciders/Decider_NGramCPS.v:42:Hypothesis InT:(ExecState Σ)->T->Prop.
+./CoqBB5/BB2/Deciders/Decider_NGramCPS.v:101:Hypothesis Σ:Set.
+./CoqBB5/BB2/Deciders/Decider_NGramCPS.v:102:Hypothesis len_l:nat.
+./CoqBB5/BB2/Deciders/Decider_NGramCPS.v:103:Hypothesis len_r:nat.
+./CoqBB5/BB2/Deciders/Decider_NGramCPS.v:105:Hypothesis Σ_enc: Σ->positive.
+./CoqBB5/BB2/Deciders/Decider_NGramCPS.v:106:Hypothesis Σ_enc_inj: is_inj Σ_enc.
+./CoqBB5/BB2/Deciders/Decider_NGramCPS.v:107:Hypothesis listΣ_enc: (list Σ)->positive.
+./CoqBB5/BB2/Deciders/Decider_NGramCPS.v:108:Hypothesis listΣ_enc_inj: is_inj listΣ_enc.
+./CoqBB5/BB2/Deciders/Decider_NGramCPS.v:110:Hypothesis Σ0:Σ.
+./CoqBB5/BB2/BB2_Statement.v:47:Hypothesis Σ:Set.
+./CoqBB5/BB2/BB2_Statement.v:48:Hypothesis Σ0:Σ.
+./BusyCoq/TM.v:17:  Parameter Q : Type.
+./BusyCoq/TM.v:19:  Parameter Sym : Type.
+./BusyCoq/TM.v:21:  Parameter q0 : Q.
+./BusyCoq/TM.v:23:  Parameter s0 : Sym.
+./BusyCoq/TM.v:27:  Parameter q1 : Q.
+./BusyCoq/TM.v:28:  Parameter q0_neq_q1 : q0 <> q1.
+./BusyCoq/TM.v:31:  Parameter s1 : Sym.
+./BusyCoq/TM.v:32:  Parameter s0_neq_s1 : s0 <> s1.
+./BusyCoq/TM.v:35:  Parameter eqb_q : forall (a b : Q), {a = b} + {a <> b}.
+./BusyCoq/TM.v:36:  Parameter eqb_sym : forall (a b : Sym), {a = b} + {a <> b}.
+./BusyCoq/TM.v:40:  Parameter all_qs : list Q.
+./BusyCoq/TM.v:41:  Parameter all_qs_spec : forall a, In a all_qs.
+./BusyCoq/TM.v:42:  Parameter all_syms : list Sym.
+./BusyCoq/TM.v:43:  Parameter all_syms_spec : forall a, In a all_syms.
+./BusyCoq/LibTactics.v:2725:Axiom inj_pair2 :  (* is in fact derivable from the axioms in LibAxiom.v *)
+./BusyCoq/LibTactics.v:4853:  admit.
+./BusyCoq/LibTactics.v:4855:(** [demo] is like [admit] but it documents the fact that admit is intended *)
+./BusyCoq/LibTactics.v:4862:    [admit: T] is another possible syntax.
+--- P: zenodo tarball + weld
+P-curl-exit:0
+3389c379d35186549eb600b547a81a3c  /tmp/bb5/Coq-BB5-1.0.0.tar.gz
+3a9f42761c8d35be7b3c0f7aeb69cbc434d27d337b702a4251e3242f8f28045e  /tmp/bb5/Coq-BB5-1.0.0.tar.gz
+{
+  "changed": [
+    "README.md"
+  ],
+  "clone": "/tmp/bb5/Coq-BB5-git",
+  "file_counts": {
+    "clone": 218,
+    "tarball": 218
+  },
+  "identical": 217,
+  "only_in_clone": [],
+  "only_in_tarball": [],
+  "tarball": "/tmp/bb5/Coq-BB5-1.0.0.tar.gz"
+}
+--- E: bb3 enumeration
+E-curl-exit:0
+c8379d1ff7fe5e7e0cc5674ade695cd6  /tmp/bb5/BB3_verified_enumeration.csv
+d1b5df70df506eab6607edeaa181274d5f5a7c58e8aad24bba4a991c351e9c38  /tmp/bb5/BB3_verified_enumeration.csv
+{
+  "anomalies": [],
+  "candidate_presence": {
+    "1RB---_0RC1RB_1LC1LA": true,
+    "1RB---_1LB0RC_1LC1LA": true,
+    "1RB1RZ_0RC1RB_1LC1LA": false,
+    "1RB1RZ_1LB0RC_1LC1LA": false
+  },
+  "csv": "/tmp/bb5/BB3_verified_enumeration.csv",
+  "data_rows": 5417,
+  "duplicate_rows": [],
+  "engine": "P",
+  "halt_rows_replayed": 1772,
+  "header": [
+    "machine",
+    "status",
+    "decider"
+  ],
+  "max_ones": 6,
+  "max_ones_machines": [
+    "1RB---_0RC1RB_1LC1LA",
+    "1RB1LC_1LA1RB_1LB---",
+    "1RB1LC_1RC---_1LA0LB",
+    "1RB1RA_1LC---_1RA1LB",
+    "1RB1RC_1LC---_1RA0LB"
+  ],
+  "max_steps": 20,
+  "max_steps_machines": [
+    "1RB---_1LB0RC_1LC1LA"
+  ],
+  "parse_issues": [],
+  "status_counts": {
+    "halt": 1772,
+    "nonhalt": 3645
+  },
+  "unique_machines": 5417
+}
+E-P-exit:0
+{
+  "anomalies": [],
+  "candidate_presence": {
+    "1RB---_0RC1RB_1LC1LA": true,
+    "1RB---_1LB0RC_1LC1LA": true,
+    "1RB1RZ_0RC1RB_1LC1LA": false,
+    "1RB1RZ_1LB0RC_1LC1LA": false
+  },
+  "csv": "/tmp/bb5/BB3_verified_enumeration.csv",
+  "data_rows": 5417,
+  "duplicate_rows": [],
+  "engine": "Q",
+  "halt_rows_replayed": 1772,
+  "header": [
+    "machine",
+    "status",
+    "decider"
+  ],
+  "max_ones": 6,
+  "max_ones_machines": [
+    "1RB---_0RC1RB_1LC1LA",
+    "1RB1LC_1LA1RB_1LB---",
+    "1RB1LC_1RC---_1LA0LB",
+    "1RB1RA_1LC---_1RA1LB",
+    "1RB1RC_1LC---_1RA0LB"
+  ],
+  "max_steps": 20,
+  "max_steps_machines": [
+    "1RB---_1LB0RC_1LC1LA"
+  ],
+  "parse_issues": [],
+  "status_counts": {
+    "halt": 1772,
+    "nonhalt": 3645
+  },
+  "unique_machines": 5417
+}
+E-Q-exit:0
+E-PQ-AGREE=True
+max_steps = 20
+max_ones = 6
+max_steps_machines = 1 entries
+max_ones_machines = 5 entries
+anomalies = 0 entries
+=== bb5 phaseA end 2026-10-18T04:17:01Z ===
+--- H-context 2026-10-18T04:17:49Z ---
+== ls CoqBB5/BB5 (top .v files)
+CoqBB5/BB5/BB5_Deciders_Generic.v
+CoqBB5/BB5/BB5_Deciders_Hardcoded.v
+CoqBB5/BB5/BB5_Deciders_Pipeline.v
+CoqBB5/BB5/BB5_Encodings.v
+CoqBB5/BB5/BB5_Extraction.v
+CoqBB5/BB5/BB5_Make_TM.v
+CoqBB5/BB5/BB5_Skelet17.v
+CoqBB5/BB5/BB5_Sporadic_Machines.v
+CoqBB5/BB5/BB5_Statement.v
+CoqBB5/BB5/BB5_TNF_Enumeration.v
+CoqBB5/BB5/BB5_Theorem.v
+CoqBB5/BB5/BusyCoq_Translation.v
+CoqBB5/BB5/List_Routines.v
+CoqBB5/BB5/List_Tape.v
+CoqBB5/BB5/Prelims.v
+CoqBB5/BB5/TM.v
+CoqBB5/BB5/TNF.v
+CoqBB5/BB5/Tactics.v
+== CoqBB5/BB5/BB5_Theorem.v head 30
+
+Require Import ZArith.
+Require Import Lia.
+
+From CoqBB5 Require Import Prelims.
+From CoqBB5 Require Import BB5_Encodings.
+From CoqBB5 Require Import BB5_Statement.
+From CoqBB5 Require Import BB5_TNF_Enumeration.
+From CoqBB5 Require Import TM.
+From CoqBB5 Require Import BB5_Make_TM.
+From CoqBB5 Require Import Tactics.
+From CoqBB5 Require Import Deciders.Verifier_Halt.
+
+Definition BB5_champion := (makeTM BR1 CL1 CR1 BR1 DR1 EL0 AL1 DL1 HR1 AL0).
+
+Lemma BB5_lower_bound:
+  exists tm,
+  HaltsAt _ tm (N.to_nat BB5_minus_one) (InitES Σ Σ0).
+Proof.
+  exists BB5_champion.
+  apply halt_time_verifier_spec.
+  vm_compute.
+  reflexivity.
+Time Qed.
+
+Lemma BB5_upperbound:
+  forall tm n0, HaltsAt Σ tm n0 (InitES Σ Σ0) -> n0 <= N.to_nat BB5_minus_one.
+Proof.
+  intros tm n0.
+  apply allTM_HTUB.
+== CoqBB5/BB5/BB5_Theorem.v Theorem/Lemma lines
+14:Definition BB5_champion := (makeTM BR1 CL1 CR1 BR1 DR1 EL0 AL1 DL1 HR1 AL0).
+16:Lemma BB5_lower_bound:
+26:Lemma BB5_upperbound:
+34:Lemma BB5_value:
+== CoqBB5/BB5/BB5_Theorem.v Require lines
+2:Require Import ZArith.
+3:Require Import Lia.
+5:From CoqBB5 Require Import Prelims.
+6:From CoqBB5 Require Import BB5_Encodings.
+7:From CoqBB5 Require Import BB5_Statement.
+8:From CoqBB5 Require Import BB5_TNF_Enumeration.
+9:From CoqBB5 Require Import TM.
+10:From CoqBB5 Require Import BB5_Make_TM.
+11:From CoqBB5 Require Import Tactics.
+12:From CoqBB5 Require Import Deciders.Verifier_Halt.
+== BB5/TM.v 20-30
+  isHaltTrans tr = 0 <-> tr <> None.
+Proof.
+  destruct tr; cbn; split; intro; cg.
+Qed.
+
+Hypothesis Σ:Set.
+Hypothesis Σ0:Σ.
+
+Definition HaltsAt(tm:TM Σ)(n:nat)(st:ExecState Σ): Prop :=
+  exists st', Steps Σ tm n st st' /\ step Σ tm st' = None.
+
+== BB5/TM.v Section/End structure (head 12)
+11:Section TM.
+250:Section swap.
+468:End swap.
+470:Section rev.
+712:End rev.
+714:End TM.
+1114:Section TMwithExtraInfo.
+1227:End TMwithExtraInfo.
+== BusyCoq/TM.v 1-46
+(** * TM: Definition of Turing Machines *)
+
+From Coq Require Import Bool.Sumbool.
+From Coq Require Import Lists.List. Export ListNotations.
+From Coq Require Import Lists.Streams.
+From Coq Require Import PeanoNat.
+From Coq Require Import Lia.
+From BusyCoq Require Export Helper.
+Set Default Goal Selector "!".
+
+(** The direction a Turing machine can step in. *)
+Inductive dir : Type := L | R.
+
+(** We parametrize over... *)
+Module Type Ctx.
+  (** the type of states [Q]; *)
+  Parameter Q : Type.
+  (** the type of tape symbols [Sym]; *)
+  Parameter Sym : Type.
+  (** the starting state [q0]; *)
+  Parameter q0 : Q.
+  (** and the blank symbol [s0]. *)
+  Parameter s0 : Sym.
+
+  (** during enumeration, we also want: *)
+  (** distinguished non-starting state *)
+  Parameter q1 : Q.
+  Parameter q0_neq_q1 : q0 <> q1.
+
+  (** distinguished non-blank symbol *)
+  Parameter s1 : Sym.
+  Parameter s0_neq_s1 : s0 <> s1.
+
+  (** Moreover we want decidable equality for [Q] and [Sym]. *)
+  Parameter eqb_q : forall (a b : Q), {a = b} + {a <> b}.
+  Parameter eqb_sym : forall (a b : Sym), {a = b} + {a <> b}.
+
+  (** It is also useful, in some situations, to be able to enumerate
+      all the symbols and states. *)
+  Parameter all_qs : list Q.
+  Parameter all_qs_spec : forall a, In a all_qs.
+  Parameter all_syms : list Sym.
+  Parameter all_syms_spec : forall a, In a all_syms.
+End Ctx.
+
+Module TM (Ctx : Ctx).
+== BusyCoq/TM.v Section/End structure (head 12)
+44:End Ctx.
+610:End TM.
+== BusyCoq/LibTactics.v 2718-2730
+
+(** Our inversion tactics is able to get rid of dependent equalities
+    generated by [inversion], using proof irrelevance. *)
+
+(* --we do not import Eqdep because it imports nasty hints automatically
+    From TLC Require Import Eqdep. *)
+
+Axiom inj_pair2 :  (* is in fact derivable from the axioms in LibAxiom.v *)
+  forall (U : Type) (P : U -> Type) (p : U) (x y : P p),
+  existT P p x = existT P p y -> x = y.
+(* Proof using. apply Eqdep.EqdepTheory.inj_pair2. Qed. *)
+
+Ltac inverts_tactic H i1 i2 i3 i4 i5 i6 :=
+== BusyCoq/LibTactics.v 4840-4866
+  | S ?p => clears_last; clears_last_base p
+  end.
+
+Tactic Notation "clears_last" constr(N) :=
+  clears_last_base N.
+
+(* ################################################################# *)
+(** * Tactics for Development Purposes *)
+
+(* ================================================================= *)
+(** ** Skipping Subgoals *)
+
+Tactic Notation "skip" :=
+  admit.
+
+(** [demo] is like [admit] but it documents the fact that admit is intended *)
+
+Tactic Notation "demo" :=
+  skip.
+
+(** [admits H: T] adds an assumption named [H] of type [T] to the
+    current context, blindly assuming that it is true.
+    [admit: T] is another possible syntax.
+    Note that H may be an intro pattern. *)
+
+Tactic Notation "admits" simple_intropattern(I) ":" constr(T) :=
+  asserts I: T; [ skip | ].
+== who requires LibTactics (head 20)
+./BusyCoq/Helper.v:11:From BusyCoq Require Export LibTactics.
+== who requires BusyCoq modules from CoqBB5/BB5 (head 20)
+CoqBB5/BB5/BB5_Skelet17.v:3:From BusyCoq Require Import Individual52.
+CoqBB5/BB5/BB5_Skelet17.v:4:From Coq Require Import Lia.
+CoqBB5/BB5/BB5_Skelet17.v:5:From Coq Require Import List. Import ListNotations.
+CoqBB5/BB5/BB5_Skelet17.v:6:From Coq Require Import PeanoNat. Import Nat.
+CoqBB5/BB5/BB5_Skelet17.v:3350:Require Import ZArith.
+== BusyCoq/BB52.v full (1042 B)
+(** * Instantiating the development to machines with 5 states and 2 symbols *)
+
+From Coq Require Import Lists.List. Import ListNotations.
+From BusyCoq Require Export Flip.
+Set Default Goal Selector "!".
+
+Inductive state := A | B | C | D | E.
+Inductive sym := S0 | S1.
+
+Module BB52 <: Ctx.
+  Definition Q := state.
+  Definition Sym := sym.
+  Definition q0 := A.
+  Definition q1 := B.
+  Definition s0 := S0.
+  Definition s1 := S1.
+
+  Lemma q0_neq_q1 : q0 <> q1.
+  Proof. discriminate. Qed.
+
+  Lemma s0_neq_s1 : s0 <> s1.
+  Proof. discriminate. Qed.
+
+  Definition eqb_q (a b : Q): {a = b} + {a <> b}.
+    decide equality.
+  Defined.
+
+  Definition eqb_sym (a b : Sym): {a = b} + {a <> b}.
+    decide equality.
+  Defined.
+
+  Definition all_qs := [A; B; C; D; E].
+
+  Lemma all_qs_spec : forall a, In a all_qs.
+  Proof.
+    destruct a; repeat ((left; reflexivity) || right).
+  Qed.
+
+  Definition all_syms := [S0; S1].
+
+  Lemma all_syms_spec : forall a, In a all_syms.
+  Proof.
+    destruct a; repeat ((left; reflexivity) || right).
+  Qed.
+End BB52.
+--- H-context end ---
+--- S-context 2026-10-18T04:20:15Z ---
+== BB5_Statement.v lines 90-121
+
+(** `Steps tm n st1 st2` holds if configuration `st2` is reached from `st1` after `n` Turing machine steps. *)
+Inductive Steps: TM->nat->ExecState->ExecState->Prop :=
+| steps_O tm st:
+  Steps tm O st st
+| steps_S tm n st st0 st1:
+  Steps tm n st st0 ->
+  step tm st0 = Some st1 ->
+  Steps tm (S n) st st1.
+
+(** `HaltsAtPlusOne tm n st` holds if Turing machine `tm` halts at configuration `st` after `n` steps.
+
+  Note: Coq-BB5 'HaltsAt' definition (see TM.v) is off by one compared to Radò's definition which is why we have to use 'HaltsAtPlusOne'
+        here in order to prove BB(5) = 47176870 and not BB(5) = 47176869.
+*)
+Inductive HaltsAtPlusOne(tm:TM): nat->ExecState->Prop :=
+| HaltsAtPlusOne_intro n st:
+  (exists st', Steps tm n st st' /\ step tm st' = None) ->
+  HaltsAtPlusOne tm (S n) st.
+
+End TM.
+
+Definition BB5 := 47176870%N.
+
+(** Main theorem statement: BB(5) = 47,176,870. The statement is split into two parts:
+  
+  - Upper bound (hard): For all 5-state 2-symbol Turing machine `tm` and natural number `n0`, if `tm` halts at `n0` steps, then `n0` is less than or equal to 47,176,870.
+  - Lower bound (easy): There exists a Turing machine `tm` that halts at 47,176,870 steps.
+*)
+Definition BB5_value_statement :=
+  (forall tm n0, HaltsAtPlusOne Σ tm n0 (InitES Σ Σ0) -> n0 <= N.to_nat BB5) /\
+  (exists tm, HaltsAtPlusOne Σ tm (N.to_nat BB5) (InitES Σ Σ0)).== BB5_minus_one occurrences
+== BB5_Theorem.v lines 20-60
+  exists BB5_champion.
+  apply halt_time_verifier_spec.
+  vm_compute.
+  reflexivity.
+Time Qed.
+
+Lemma BB5_upperbound:
+  forall tm n0, HaltsAt Σ tm n0 (InitES Σ Σ0) -> n0 <= N.to_nat BB5_minus_one.
+Proof.
+  intros tm n0.
+  apply allTM_HTUB.
+  trivial.
+Qed.
+
+Lemma BB5_value:
+  BB5_value_statement.
+Proof.
+  unfold BB5_value_statement.
+  split.
+  - intros tm n0 H.
+    invst H.
+    epose proof (allTM_HTUB _ _ _ H0) as H1.
+    Unshelve. 2: cbn; trivial.
+    unfold BB5.
+    unfold BB5_minus_one in H1.
+    lia.
+  - destruct BB5_lower_bound as [tm H].
+    exists tm.
+    replace (N.to_nat BB5) with (S (N.to_nat BB5_minus_one)).
+    1: ctor; apply H.
+    unfold BB5_minus_one,BB5. lia.
+Qed.
+
+Print Assumptions BB5_value.--- S-context end ---
+--- S-structure 2026-10-18T04:22:36Z ---
+== BB5_Statement.v Section/End lines
+47:Section TM.
+110:End TM.
+== BB5_Statement.v lines 1-60
+(** 
+  This files contains the theorem statement of "BB(5) = 47,176,870" as well as the definitions needed for the statement.
+  The statement (see `BB5_value_statement`) and the definitions are quite transparent, the only prerequisite is to know what Turing machine are.
+*)
+
+Require Import ZArith.
+
+(** 5-state Turing machines *)
+Inductive St:Set :=
+| St0
+| St1
+| St2
+| St3
+| St4.
+
+(** 2-symbol Turing machines *)
+Inductive Σ:Set :=
+| Σ0
+| Σ1.
+
+(** Equality on states *)
+Definition St_eqb(s1 s2:St) :=
+match s1,s2 with
+| St0,St0 | St1,St1 | St2,St2 | St3,St3 | St4,St4 => true
+| _,_ => false
+end.
+
+(** Equality on alphabet symbols *)
+Definition Σ_eqb(i1 i2:Σ) :=
+match i1,i2 with
+| Σ0,Σ0 | Σ1,Σ1 => true
+| _,_ => false
+end.
+
+(** Left/Right move direction *)
+Inductive Dir:Set :=
+| Dneg
+| Dpos.
+
+(** Mapping Left to -1 and Right to 1 *)
+Definition Dir_to_Z(x:Dir) :=
+match x with
+| Dneg => Zneg 1
+| Dpos => Zpos 1
+end.
+
+Section TM.
+
+(** Σ is the Turing machine's alphabet and Σ0 the zero symbol *)
+Hypothesis Σ:Set.
+Hypothesis Σ0:Σ.
+
+(** Turing machine transition: `nxt` next state, `dir` head move direction, `out` written symbol *)
+Record Trans:Set := {
+  nxt: St;
+  dir: Dir;
+  out: Σ;
+}.
+
+(** Turing machine partial transition function: the function returns the transition for a given state and read symbol.
+== BB5_Statement.v lines 60-90
+(** Turing machine partial transition function: the function returns the transition for a given state and read symbol.
+Undefined transitions are encoded with None. *)
+Definition TM:Set := St->Σ->option Trans.
+
+(** Turing machine Execution State (ES), also known as "configuration" encodes the current state and tape content.
+The tape content is represented as a function from integers to symbols, where 0 corresponds to the current head position.
+*)
+Definition ExecState:Set := St*(Z->Σ).
+
+(** Initial configuration: state 0 and all-0 tape *)
+Definition InitES:ExecState := (St0,fun _=>Σ0).
+
+(** Tape content update *)
+Definition upd(t:(Z->Σ))(o:Σ) :=
+  fun x:Z => if Z.eqb x Z0 then o else t x.
+
+(** Head position update, implemented by translating the tape content function *)
+Definition mov(t:(Z->Σ))(d:Dir) :=
+  fun x:Z => t ((x+(Dir_to_Z d))%Z).
+
+(** Turing machine step: returns the next configuration or None if the machine has halted *)
+Definition step(tm:TM)(st:ExecState): option ExecState :=
+  let (s,t):=st in
+  let read_symbol := t Z0 in
+  match tm s read_symbol with
+  | None => None
+  | Some tr =>
+    let (s',d,o):=tr in
+    Some (s',mov (upd t o) d)
+  end.
+
+== BB5_minus_one definitions in CoqBB5/BB5
+/tmp/bb5/Coq-BB5-git/CoqBB5/BB5/BB5_Encodings.v:13:Definition BB5_minus_one:N := 47176869.
+== two-path file hash (curl raw vs git clone)
+cac368d2d0d018c580b7fd88233f1da3111ee5f63776921b79b97bd78a75927d  /tmp/bb5/BB5_Statement.v
+cac368d2d0d018c580b7fd88233f1da3111ee5f63776921b79b97bd78a75927d  /tmp/bb5/Coq-BB5-git/CoqBB5/BB5/BB5_Statement.v
+== BB5_Statement.v wc
+ 120 3768 /tmp/bb5/Coq-BB5-git/CoqBB5/BB5/BB5_Statement.v
+--- S-structure end ---

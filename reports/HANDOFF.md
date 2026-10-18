@@ -142,6 +142,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Zenodo record `23410894` — edit metadata DI TEMPAT (judul/deskripsi/keywords); DOI + arsip TIDAK berubah | aksi API 2026-10-18 01:35:31Z (unlock → PUT → publish); commit yang membawa baris ini | `reports/ZENODO_METADATA_UPDATE_2026-10-18.md`; deskripsi sha256 `d7e30f5b…` (2722 byte); keywords 14; md5 arsip tetap `f90bc238bcda0170c5cb8b717afedddd` |
 | Disclosure AI (provenance) — README + deskripsi Zenodo (pass 2) + `.zenodo.json` + pengunci validator | commit `fc7a965` + `d0fe74d` + commit yang membawa baris ini; CI hijau run `39089204940` | `README.md` (paragraf "Provenance and AI-tooling disclosure"), `msaf/zenodo_deposit.py` (invariant baru), `msaf/tests/test_zenodo_deposit.py` (9 tes); deskripsi `c25ae517…` (3529 byte); `reports/ZENODO_METADATA_UPDATE_2026-10-18.md` §8 |
 | Versi baru Zenodo `v1.41.0-alpha` (suksesor) — mint + publish via `--new-version-of` | commit `cf32fca` (tooling new-version + arsip yang diarsipkan; CI hijau `39090625982` + ref tag `39090834877`) + `b1e23ab` (perbaikan resume; CI hijau `39091124813`) + commit yang membawa baris ini; DOI versi `10.5281/zenodo.23445149` (konsep `10.5281/zenodo.23338271`); arsip tarball commit `cf32fca` sha256 `722258413f6dc416daf6702234d11699f1add25411fdd405807480952c2e946f` (1.068.890 byte, md5 `07fd2e2a598d8f6fc0778c6fd4b68923` cocok); deskripsi 3764 byte sha256 `218f902570d3a14759bc8d4c8ee7b92606c442b0830596e8406935e984b77988`; tag annotated `v1.41.0-alpha` → `cf32fca`; record `23410894` TIDAK tersentuh | https://doi.org/10.5281/zenodo.23445149, `reports/ZENODO_NEW_VERSION_2026-10-18.md` |
+| Probe audit eksternal pertama — BB(5) = 47.176.870 (Coq-BB5 v1.0.0): pra-registrasi + Phase A W/S/H/E/P + registry `A-2026-0002` | commit `fe90659` (pra-registrasi, dipush sebelum perintah audit pertama; CI hijau run `39096422610`) + commit yang membawa baris ini; eksekusi 85 s; replay saksi 47.176.870/4.098 eksak oleh 2 engine ×2 run (baterai 15/15); statement sha256LF `cac368d2…` (dua jalur unduh); weld Zenodo↔repo 217/218 (hanya `README.md`); E BB(3) X=20/Y=6 konsisten tabel beku; H: 0 `Admitted`, flag `BusyCoq/LibTactics.v`; R NOT-RUN (izin pemilik; prasyarat sweep L1 selesai) | `reports/AUDIT_BB5_REPORT_2026-10-18.md`, `reports/AUDIT_BB5_PREREG_2026-10-18.md`, `reports/AUDIT_BB5_RECON_2026-10-18.md`, `audit_bb5/`, `reports/FENCE_REGISTRY.md` (A-2026-0002) |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -933,6 +934,36 @@ Konsekuensi urutan yang disarankan:
 3. Baru Q1 BSD, dan pilot terukur lebih dulu. Bukti bahwa jalur ini
    terpisah: `msaf/hodge/weil_search.py` tidak memanggil
    `evaluate_xi`, jadi pekerjaan F₃ dan kernel ξ tidak berinteraksi.
+
+### 2.0q [BARU, 2026-10-18] Probe audit eksternal pertama — BB(5) = 47.176.870 (Coq-BB5 v1.0.0): Phase A SELESAI; item R menunggu izin pemilik
+
+- **Konteks:** probe audit eksternal pertama (dari menu prospek; Collatz =
+  kandidat probe kedua, belum dipra-registrasi). Target: klaim pihak ketiga
+  S(5) = 47.176.870 / Σ(5) = 4.098 — repo `ccz181078/Coq-BB5` @ commit
+  `9142e219…` + rilis Zenodo `10.5281/zenodo.17061968`. Pra-registrasi beku
+  `fe90659` (dipush 04:14Z; CI hijau `39096422610`) sebelum perintah audit
+  pertama; eksekusi Phase A 04:15:36Z–04:17:01Z (85 s; cap 90 menit).
+- **Hasil (label beku; detail + batas: `reports/AUDIT_BB5_REPORT_2026-10-18.md`):**
+  W replay saksi eksak oleh dua engine independen (15/15 baterai di kedua
+  engine; 47.176.870 langkah / 4.098 ones; rerun byte-identik; lintas-engine
+  sepakat); S transkripsi ter-hash (sha256LF `cac368d2…`, 120 baris, dua
+  jalur unduh sha sama); H scan tekstual (0 `Admitted`/`Abort`/`Conjecture`;
+  flag: `BusyCoq/LibTactics.v` = 1 `Axiom inj_pair2` + 1 `admit.` di definisi
+  taktik; 14 `Parameter` = antarmuka `Module Type Ctx`; 344 `Hypothesis` =
+  section-local); E replay BB(3) 1.772 baris `halt`, X=20/Y=6 konsisten
+  tabel keputusan beku; P weld arsip↔clone 217/218 identik (hanya
+  `README.md`).
+- **Yang TIDAK dijalankan:** item R (rebuild Coq 8.20.1 + `Print
+  Assumptions BB5_value.` untuk meresolusi flag H) = **NOT-RUN-OWNER-GATE**;
+  prasyarat: (1) sweep L1 DBN selesai, (2) izin eksplisit pemilik
+  (instalasi toolchain = perubahan sistem; cap setup ≤ 3 h, build ≤ 14 h).
+  Tanpa R, klaim README "hanya functional_extensionality_dep" tetap belum
+  diuji dan flag H tetap terbuka by design.
+- **Gate anti-sirkularitas:** TOOL NOT RUN (NO_LEAN_FILES) — verbatim di
+  laporan §8; tidak ada kosakata "verified" untuk artefak Coq.
+- **Tindak lanjut:** keputusan R (pemilik); Collatz = kandidat probe kedua;
+  catatan vault "Peta Prospek" (pasangan SM ↔ Yang–Mills) menyusul setelah
+  probe pertama tuntas.
 
 ---
 

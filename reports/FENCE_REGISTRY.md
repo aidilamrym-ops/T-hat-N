@@ -251,5 +251,61 @@ mengikuti laporan L4).
   sha256LF dab87b5c5951979ade480da12fc5212552b5277b12905c725caad3d51587618b audit_p1/l1_run.sh
   ```
 
-Selesai — 6 entri awal. Entri berikutnya menyusul dengan skema yang
-sama; entri tidak pernah dihapus (perubahan = status/relasi/catatan).
+### A-2026-0002 — Audit probe BB(5): replay saksi rilis Coq-BB5 v1.0.0
+
+- **Jenis:** A
+- **Pernyataan:** Audit terpra-registrasi (commit beku `fe90659`, dipush
+  sebelum perintah audit pertama; eksekusi 2026-10-18 04:15:36Z–04:17:01Z,
+  85 s) atas klaim pihak ketiga S(5) = 47.176.870 / Σ(5) = 4.098
+  (Coq-BB5 `9142e219229baf2245d3f70851947230ea28a318`; rilis Zenodo
+  `10.5281/zenodo.17061968`): kedua saksi halt publik direplay eksak oleh
+  dua engine independen dalam-repo (baterai 15 mesin 15/15 di kedua engine,
+  rerun byte-identik, lintas-engine sepakat; juara 47.176.870 langkah /
+  4.098 ones); berkas pernyataan ter-pin diunduh lewat dua jalur independen
+  (sha256 sama) dan ditranskripsi; weld arsip Zenodo ↔ clone = 217/218
+  berkas identik (hanya `README.md` berbeda); replay berkas enumerasi BB(3)
+  (5.417 baris; 1.772 baris `halt`) konsisten dengan tabel keputusan beku
+  (X = 20, Y = 6, argmax = bentuk `---` juara BB(3)); scan higiene tekstual:
+  0 `Admitted`/`Abort`/`Conjecture`, flag terekam di `BusyCoq/LibTactics.v`
+  (1 `Axiom inj_pair2`, 1 `admit.` di definisi taktik), 14 `Parameter` =
+  antarmuka `Module Type Ctx`, 344 `Hypothesis` = section-local.
+- **Batas:** replay saksi finit ≠ peer review dan ≠ bukti BB(5); arah
+  universal ("tidak ada mesin 5-state yang mengalahkan") tidak diuji; scan
+  higiene = tekstual, bukan cek kernel, tidak membersihkan/menghukum berkas
+  mana pun; E bukan enumerasi independen dan tanpa klaim baris non-halt;
+  P = daftar perbedaan tanpa verdict; item R (rebuild Coq 8.20.1 +
+  `Print Assumptions BB5_value.`) **NOT-RUN** (owner-gated; prasyarat:
+  sweep L1 selesai + izin eksplisit pemilik); gate anti-sirkularitas =
+  TOOL NOT RUN (NO_LEAN_FILES); tidak menyatakan atau menyangkal RH /
+  P≠NP; label maksimum = daftar §1 laporan.
+- **Status:** CERTIFIED
+- **Domino:** tidak ada (probe eksternal; bukan domino RH)
+- **Relasi:** probe audit eksternal pertama; audit pihak ketiga kedua
+  setelah `A-2026-0001`; laporan `reports/AUDIT_BB5_REPORT_2026-10-18.md`;
+  pra-registrasi `fe90659`; recon `reports/AUDIT_BB5_RECON_2026-10-18.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py
+  -q` (guard memeriksa semua sha di bawah); replay: `python3
+  audit_bb5/bb5_engine_p.py --out <f>` + `python3 audit_bb5/bb5_engine_q.py
+  --out <f>` (baterai W), `python3 audit_bb5/artifact_checks.py bb3-max
+  <csv> --engine p|q` (E), `python3 audit_bb5/artifact_checks.py weld-tar
+  <tgz> <clone>` (P).
+- **Sertifikat:**
+
+  ```text
+  sha256LF cc474fe2f8f61d2827fc14762ac8f641c7df0fb68db2c7a3318cbcd8328ee876 reports/AUDIT_BB5_RECON_2026-10-18.md
+  sha256LF a2cb34c11d9a77c5a5a375d611290b488a9230f87a620fa45eb68b8be2337acc reports/AUDIT_BB5_PREREG_2026-10-18.md
+  sha256LF 955402e8815b1b4403350a922a6879401f6308c79298e6a2da10da1425812193 reports/AUDIT_BB5_REPORT_2026-10-18.md
+  sha256LF 4915f42818b4295c7c2c55ade2b874d444d46ab129adc518cb11d61ec3e4005d reports/audit_bb5_phaseA_2026-10-18.log
+  sha256LF d2dd6f6068490eb4b177a8b837c0b479b3e076d420fc340b70b4f3dadcc66a18 reports/audit_bb5_witnesses_p_2026-10-18.json
+  sha256LF dd8f2d6d16e9fa6e28f033887ce9e791a8d116be0405edc97a396cf03c6d1f42 reports/audit_bb5_witnesses_q_2026-10-18.json
+  sha256LF 2cbfa88dc9541f3768da7e2b155a6390f16f29dd628e17d35e0c519de071a069 reports/audit_bb5_weld_2026-10-18.json
+  sha256LF 768a69c24e3aec237c6e0a028985c3275a1677d84fea2f5d651f18cebbf27099 reports/audit_bb5_bb3_p_2026-10-18.json
+  sha256LF 503c254e47b9efd5aaaf2a9e734ad1b4a4b49e4bca459d384b0362242632b580 reports/audit_bb5_bb3_q_2026-10-18.json
+  sha256LF a94220774443486bad7ad2c38141a20ecfce43103204989867f49950ab4af1b4 audit_bb5/bb5_engine_p.py
+  sha256LF 37b96a2b4a02530b31c0fe2e9b984a1d2c0a22bc7aea3648b3b5f98072f2a4b1 audit_bb5/bb5_engine_q.py
+  sha256LF 03d69223587e4fcae9ecab30e96931de99ccb531db5e20ff988ba7cfd4762ff4 audit_bb5/artifact_checks.py
+  ```
+
+Selesai — 7 entri per 2026-10-18 (6 entri awal + `A-2026-0002`). Entri
+berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
+(perubahan = status/relasi/catatan).
