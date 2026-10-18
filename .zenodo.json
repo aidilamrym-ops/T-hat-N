@@ -1,5 +1,5 @@
 {
-  "title": "T-hat-N: Matrix-constraint Spectral Analysis Framework - Rigid Ball-Arithmetic Kernel, Interval Newton Zeta Inversion, and Certified Dirichlet Bracketing",
+  "title": "Rigorous Ball Arithmetic for Zeta, L-Function, and Weil Spectra",
   "creators": [
     {
       "name": "Amry, Muhammad Aidil",
@@ -7,7 +7,7 @@
       "orcid": "0009-0002-9718-9710"
     }
   ],
-  "description": "Executable research software for the Matrix-constraint Spectral Analysis Framework (MSAF). A rigid computational kernel built on python-flint ball arithmetic (Arb/Acb, 256-bit working precision) with zero floating-point hand-offs: a finite information lattice (N_steps = D_obs / l_P), unitary cyclic-shift operator certificates, Guinand-Weil spectral analysis, rigorous interval Newton inversion of the Riemann xi function, SHA-256 hash-chained evolution ledgers with independent replay, rigid cosmological pixel projection, and certified Hardy sign-change bracketing for real primitive Dirichlet characters. Every zero claim is certified by interval containment, never by equality. Includes an 85-test regression suite pinning 38 documented precision landmines, machine-readable evidence ledgers, and a formal 16-row measurement table in the README.",
+  "description": "Rigorous ball-arithmetic certification of the Riemann zeta function, Dirichlet L-functions and truncated Guinand-Weil spectra, from the Matrix-constraint Spectral Analysis Framework (MSAF) / T-hat-N kernel. A rigid computational kernel built on python-flint ball arithmetic (Arb/Acb) with zero floating-point hand-offs: interval Newton inversion of the Riemann xi function, certified Hardy sign-change bracketing for real primitive Dirichlet characters, Guinand-Weil operator spectra, SHA-256 hash-chained evolution ledgers with independent replay, and a fail-closed CI harness (regression suite pinning the documented precision landmines, plus a Lean kernel build). Every zero claim is certified by interval containment, never by equality; no claim beyond the machine-checked conditions is made.",
   "keywords": [
     "Riemann zeta function",
     "Dirichlet L-functions",
@@ -15,11 +15,15 @@
     "rigorous numerics",
     "ball arithmetic",
     "interval arithmetic",
+    "certified computation",
+    "interval Newton method",
     "python-flint",
     "spectral analysis",
-    "reproducible research"
+    "Guinand-Weil spectral analysis",
+    "reproducible research",
+    "computational number theory",
+    "Lean 4"
   ],
   "license": "MIT",
-  "version": "v1.1.0",
   "language": "eng"
 }
