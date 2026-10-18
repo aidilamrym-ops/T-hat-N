@@ -12,7 +12,7 @@
 # Deadline backstop and self-healing relaunch live in bb5_phaseR_keepalive_tick.sh.
 set -u
 LOG="/mnt/d/Opencode AI Agent/reports/audit_bb5_phaseR_2026-10-18.log"
-R=/root/bb5
+R=/root/bb5r
 SELF="/mnt/d/Opencode AI Agent/audit_bb5/bb5_phaseR_resume4.sh"
 
 run_step() { # run_step <name> <shell-command-string>

@@ -1473,3 +1473,29 @@ Assumptions di transkrip):
 Skrip + catatan ini di-commit SEBELUM retry; token APPROVE_ATTEMPT5 dibuat setelah commit
 (aturan: environment fix dicatat + di-commit sebelum retry). Bukti mentah tetap di
 transkrip ini (dmesg verbatim di atas).
+
+--- 2026-10-18T18:34:16Z | SUPERVISOR FIX (dicatat SEBELUM attempt 5 dimulai; tidak ada hasil audit yang terlihat) ---
+Temuan saat pemantauan attempt 4 (make masih menunggu TNF_Root_3 + TNF_Root_4_10 sejak
+11:00:17Z; saat catatan ini ditulis masih menunggu): bb5_phaseR_resume4.sh (runner attempt 5,
+dikomit pada e8490bf) memakai R=/root/bb5 -- direktori kerja yang benar adalah /root/bb5r
+(tempat deadline_epoch, DAEMON_FAIL, PHASER_COMPLETE, keepalive.heartbeat). Dampak bila
+tidak diperbaiki: langkah pertama build gagal ("cd $R/Coq-BB5-git/BusyCoq" tidak ada) ->
+abort menulis DAEMON_FAIL ke direktori salah -> tick v4 tidak melihat latch dan
+relaunch-loop ~tiap 10-20 dtk (flooding log); PHASER_COMPLETE tidak akan pernah terbaca
+tick (keepalive terus jalan); backstop deadline berpotensi mencatat UNRESOLVED-BUDGET
+palsu pada 23:02:55Z. Tidak ada hasil audit yang terlihat (belum ada blok Print
+Assumptions di transkrip).
+Perbaikan (satu baris; runner BELUM pernah dijalankan): R=/root/bb5 -> R=/root/bb5r.
+sha256 resume4.sh sebelum: 85659b1fa9f062e8146c8b9f4a5629ef953d750abe693aeef6de142503fddef3
+sha256 resume4.sh sesudah: 4b55010dd5365a25706c9c00b87d3eb9aad18ff155904c4f9065d9ddb46b9db7
+bash -n resume4 + tick: OK. /root/bb5: tidak pernah ada. grep '/root/bb5[^r]' pada
+audit_bb5/*.sh dan Temp/*.md|*.sh: tidak ada instance lain. Deadline epoch TIDAK diubah;
+parameter lain TIDAK diubah. Fix + catatan ini di-commit dan dipush segera (dicatat
+SEBELUM retry, aturan sama dengan INTERRUPTION 3).
+Status attempt 4: make -j4 masih berjalan; 42/50 .vo; dua job panjang TNF_Root_3 dan
+TNF_Root_4_10 (masing-masing ~7,5 jam; RSS coqc 3,1 GB + 2,8 GB; memori available 3,6 GB).
+Ketika make exit non-zero (Error 137 dari 4_11 yang OOM-killed), runner attempt 4
+menulis ABORT + DAEMON_FAIL seperti desain; tick v4 lalu mengonsumsi APPROVE_ATTEMPT5 dan
+relaunch attempt 5 (make -j2) memakai skrip yang SUDAH diperbaiki ini.
+Status attempt 5 saat catatan ditulis: BELUM dimulai (3 blok "resume) start"; APPROVE_ATTEMPT5
+ada; DAEMON_FAIL belum ada).
