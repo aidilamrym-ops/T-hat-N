@@ -137,6 +137,9 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Resolusi ke-4 (dim 501) — OUTCOME non-PD di ladder (statistik berakhir) | commit yang membawa baris ini; dibangun di atas `ea2ed77` (pra-registrasi, dipush sebelum launch; CI hijau `39020789629`); ladder `UNDETERMINED at pivot 446` (n_pos=446, n_neg=0; 0 certified) → OUTCOME per pra-registrasi §4 (statistik berakhir; tanpa rerun); insiden wrapper `ExitCode` kosong di launcher (PS 5.1 `Start-Process -PassThru` + `.WaitForExit()`) di-root-cause tanpa dampak pada hasil; Stage C/M tidak dijalankan (artefak C/M tidak ada) | `reports/GW_RESOLUTION4_DIM501_2026-10-17.md`, `reports/gw_route_s_ladder_c100_n250.json` (raw `319e50d7...`), `reports/gw_route_s_ladder_c100_n250.log` (raw `c6e48510...`), `reports/gw_route_s_ladder_c100_n250.err.log` (0 byte), `reports/res4_dim501_launch_2026-10-17.log` (raw `d4225ac0...`), `reports/RESOLUTION4_DIM501_PREREG_2026-10-17.md` |
 | P1 audit Λ (DBN/Gomila) — pra-registrasi L1–L4 dibekukan sebelum eksekusi | commit `86a32c9` + baris ini; dibangun di atas `b7e0e8f` (penutupan 501); CI hijau `39024004135`; target beku rilis `review-01787854-v3` (commit `2e9976c4...`, seal `89a20156...`, OCI digest `6e29bc53...`; BUKAN HEAD bergerak); L1 conditional — mesin audit tanpa engine container (docker/podman absen; WSL2 tanpa distro; 2026-10-17; keputusan pemilik); stack L2 kita = mpmath.iv + fractions (bukan jalur C/FLINT mereka) | `reports/AUDIT_DBN_PREREG_2026-10-17.md`, `reports/AUDIT_DBN_RECON_2026-10-17.md`, `reports/MSAF_PORTFOLIO_2026-10-17.md` |
 | Dashboard v6 — ekstensi C4 S10 + outcome dim 501 + Scope Note terekam | commit `6b56f4a` + baris ini; dibangun di atas `3b72160`; CI hijau run `39053097132` (python-tests + lean-kernel); basis v5 byte-identik sha256 penuh `0E99571B887F17B95180EDC478AF7BF887CCE861EDFBC9FD2AC3B1A2798D4259` (hard-assert sebelum patch + embed panel 6); 13 patch once-only; Panel 9 (S10: pooled `11458/200000` = 5.72900e-02; χ² = 131.2879 (df 9), p = 6.44376e-24 → NOT STABLE bertahan; angka of record `1262/20000` tetap) + Panel 10 (dim 501 `UNDETERMINED at pivot 446`; statistik berakhir per pra-registrasi §4) + koreksi panel 1/7 + scope notes; suite 360 passed | `reports/gw_diagnostic_v6.html`, `msaf/gw_dashboard_v6.py`, `msaf/tests/test_gw_dashboard_v6.py`, `README.md` §7.3, `reports/HANDOFF.md` §2.0l |
+| P1 audit Λ — eksekusi L1 (replay container, semua langkah exit 0, 2026-10-18) + L2–L4 + registry A-2026-0001 | commit `018a416` (log replay) + `58cf4a3` (laporan L1 + registry) + `7641a17` + commit yang membawa baris ini; CI hijau run `39063534769` / `39082654115` | `reports/AUDIT_DBN_L1_2026-10-18.md`, `reports/audit_p1_l1_replay_2026-10-18.log`, `reports/audit_p1_l1_engine_install_2026-10-18.log`, `reports/FENCE_REGISTRY.md` (A-2026-0001), `reports/AUDIT_DBN_L4REPORT_2026-10-17.md` |
+| Refresh presentasi — judul baru README + top-matter + mode `--edit-record` + `.zenodo.json` + metadata repo GitHub | commit `aa4f4e8` + `493adb6` + commit yang membawa baris ini; dibangun di atas `7641a17`; CI hijau run `39087074988` | `README.md` (H1 "Rigorous Ball Arithmetic for Zeta, L-Function, and Weil Spectra"), `.zenodo.json`, `msaf/zenodo_deposit.py`, `msaf/tests/test_zenodo_deposit.py` (8 tes kontrak) |
+| Zenodo record `23410894` — edit metadata DI TEMPAT (judul/deskripsi/keywords); DOI + arsip TIDAK berubah | aksi API 2026-10-18 01:35:31Z (unlock → PUT → publish); commit yang membawa baris ini | `reports/ZENODO_METADATA_UPDATE_2026-10-18.md`; deskripsi sha256 `d7e30f5b…` (2722 byte); keywords 14; md5 arsip tetap `f90bc238bcda0170c5cb8b717afedddd` |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -758,6 +761,54 @@ DAN sha256 arsip.
 - **Status:** SELESAI; semua hasil (termasuk anomali lingkungan)
   dicatat apa adanya di log terkait.
 
+### 2.0n [BARU, 2026-10-18] Refresh presentasi: judul baru (README + record Zenodo, edit DI TEMPAT) + metadata repo GitHub — SELESAI
+
+- **Keputusan owner (satu ronde; rekomendasi diambil):** judul baru =
+  "Rigorous Ball Arithmetic for Zeta, L-Function, and Weil Spectra"
+  (sama persis di H1 README dan judul record Zenodo); repo tetap
+  `T-hat-N` (URL/DOI/sitasi stabil); Zenodo = edit metadata DI TEMPAT
+  (bukan versi baru); audit P1 disertakan ringkas di README (tanpa
+  menyebut nama pihak ketiga).
+- **README (commit `493adb6`):** H1 diganti + subjudul memuat
+  T-hat-N/MSAF; paragraf pembuka kini menyebut objek pencarian (Riemann
+  zeta, Dirichlet L-functions, Guinand-Weil spectra); blok tautan
+  dirapikan (badge CI dulu; "current: 349 passed" usang dihapus); banner
+  status 2026-10-17 → 2026-10-18; paragraf registry audit `A-2026-0001`
+  ditambahkan; hitungan suite disinkronkan mesin 349 → 368
+  (`python -m pytest msaf --collect-only -q`); blok CITATION diperbarui.
+  Blok mesin §7.3 TIDAK disentuh — guard lulus (3 tes) + guard aset
+  (1 tes).
+- **Tooling Zenodo (commit `aa4f4e8`):** `msaf/zenodo_deposit.py`
+  menambah mode `--edit-record` (unlock → PUT metadata gabungan →
+  republish dengan `--publish`; `--dry-run` pratinjau;
+  `--description-file`). Kontrak edit ditegakkan sebelum tulis:
+  deskripsi wajib mempertahankan commit arsip, sha256 tarball, paragraf
+  SCOPE (verbatim modul), baris LICENSE; PUT gagal → discard; echo PUT
+  tidak cocok → publish diblokir. Tes kontrak baru
+  `msaf/tests/test_zenodo_deposit.py` (8 tes, tanpa jaringan) → suite
+  368 (dari 360). `.zenodo.json` diselaraskan (judul/deskripsi/keywords;
+  field `version` usang dihapus — jalur webhook tetap nonaktif).
+- **Record Zenodo 23410894 (edit DI TEMPAT; aksi API 2026-10-18
+  01:35:31Z):** judul panjang → judul baru; deskripsi 2076 → 2722 byte
+  (sha256 `bd0d6f8f…` → `d7e30f5b…`); keywords 10 → 14; DOI versi
+  `10.5281/zenodo.23410894` + DOI konsep `10.5281/zenodo.23338271`
+  TIDAK berubah; arsip `T-hat-N-a37b50b7dbdd.tar.gz` 546.800 B md5
+  `f90bc238…` TIDAK berubah; VERIFIKASI publik: judul baru + 14
+  keywords. Bukti: `reports/ZENODO_METADATA_UPDATE_2026-10-18.md` +
+  2 JSON cadangan + 2 log (di luar repo, Temp\opencode).
+- **Metadata repo GitHub (eksternal, tanpa commit):** deskripsi baru
+  sejalan judul + homepage = DOI konsep + 14 topics
+  (riemann-zeta-function, dirichlet-l-functions, interval-arithmetic,
+  ball-arithmetic, rigorous-numerics, certified-computation,
+  computational-number-theory, interval-newton, python-flint,
+  spectral-analysis, guinand-weil, reproducible-research, lean4,
+  random-matrix-theory).
+- **CI:** run `39087074988` (push konten `aa4f4e8` + `493adb6`;
+  python-tests + lean-kernel) = HIJAU; baris ini = docs commit (run row
+  README §7.4 + 3 baris tabel §1 + laporan Zenodo).
+- **Tanpa perubahan:** tidak ada komputasi baru; artefak tersegel tidak
+  disentuh; suite penuh 368 lulus lokal sebelum push.
+
 ### 2.0 [BARU, 2026-10-15] Dua silent-pass di kernel penghitung nol — sudah diperbaiki
 
 `msaf/certify.py` mengesahkan `nan` sebagai nol (Arb menjawab True untuk
@@ -852,6 +903,15 @@ Konsekuensi urutan yang disarankan:
   jacobian-conjecture-audit, lagarias-criterion, navier-stokes-formalization,
   riemann-hypothesis-formalization, sovereign-enterprise-suite,
   the-asymmetric-wager-msaf-family017, zeta-23-audit.
+- **Update metadata DI TEMPAT (2026-10-18):** judul/deskripsi/keywords
+  record `23410894` diganti pada record yang sama (DOI versi + konsep +
+  arsip tetap) lewat mode baru `--edit-record`
+  (`msaf/zenodo_deposit.py`, commit `aa4f4e8`): judul →
+  `Rigorous Ball Arithmetic for Zeta, L-Function, and Weil Spectra`;
+  deskripsi 2076 → 2722 byte (sha256 `bd0d6f8f…` → `d7e30f5b…`);
+  keywords 10 → 14; state `done`, modified `2026-10-18T01:35:31Z`;
+  verifikasi publik OK. Bukti:
+  `reports/ZENODO_METADATA_UPDATE_2026-10-18.md`.
 
 ---
 
