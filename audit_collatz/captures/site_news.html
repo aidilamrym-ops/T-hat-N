@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="msvalidate.01" content="CB69F128DC9C254B5AD833DD8C22A181">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-106745917-2"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-106745917-2');
+	</script>
+	<meta name="description" content="Collatz problem: The convergence of all numbers below 2^68 is verified.">
+	<meta name="keywords" content="Collatz problem, Collatz conjecture, distributed computing">
+	<meta name="robots" content="index,follow">
+	<meta name="author" content="David Barina">
+	<link rel="icon" type="image/png" href="https://pcbarina.fit.vutbr.cz/favicon.ico">
+	<title>Collatz conjecture news</title>
+	<meta property="og:url" content="https://pcbarina.fit.vutbr.cz/news.htm">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Collatz conjecture news">
+	<meta property="og:image" content="https://pcbarina.fit.vutbr.cz/ogimage.png">
+	<meta property="og:description" content="Collatz problem: The convergence of all numbers below 2^68 is verified.">
+	<style>
+		body {
+			max-width: 720px;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: justify;
+		}
+		h1 {
+			white-space: nowrap;
+		}
+	</style>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+		});
+	</script>
+	<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="links.css">
+</head>
+<body>
+<h1>Collatz conjecture news</h1>
+<p>
+The Collatz conjecture asserts that a sequence defined by repeatedly applying the function
+$$
+	T(n) = \begin{cases}
+		(3n+1)/2 &\text{ if $n$ is odd, or}\\
+		n/2      &\text{ if $n$ is even}
+	\end{cases}
+$$
+will always converge to the cycle passing through the number 1 for arbitrary initial positive integer $n$.
+On May 7, 2020, I managed to verify this conjecture for all numbers below $2^{68}$.
+<a href="path-records.htm">The results</a> confirm that the highest number occurring in the Collatz sequence starting at $n$ grows to approximately $n^2$.
+All source codes are available on <a href="https://github.com/xbarin02/collatz/">this GitHub repository</a>.
+</p>
+<p>
+Back to the <a href="/">main page</a>.
+</p>
+</body>
+</html>

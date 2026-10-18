@@ -1,0 +1,25 @@
+site_path_records.html	The Collatz conjecture asserts that a sequence defined by repeatedly applying
+site_path_records.html	will always converge to the cycle passing through the number 1 for arbitrary initial positive integer $n$.
+site_path_records.html	T(n) = \begin{cases}
+site_path_records.html	(3n+1)/2 &\text{ if $n$ is odd, or}
+site_path_records.html	Define $t(n)$ the highest number occurring in the sequence starting at $n$.
+site_path_records.html	The $n$ is called the path record if for all $m &lt; n$ the inequality $t(m) &lt; t(n)$ holds.
+site_path_records.html	The following table lists the known path records for all $n$ below $2^{71}$.
+site_path_records.html	Lagarias and Weiss (1992) predicted using the theory for random walks
+site_path_records.html	grows like $n^2$.
+site_path_records.html	the sizes of their arguments measured in the number of bits.
+site_main.html	The convergence of all numbers below 2075 &times; 2<sup>60</sup> (&asymp; 2<sup>71.02</sup>) has been verified.
+site_main.html	The work unit is 2<sup>40</sup> numbers.
+site_main.html	On modern GPUs, verification of one work unit takes 5 seconds on average.
+site_main.html	Progress towards verifying all numbers below 2076 &times; 2<sup>60</sup>
+site_main.html	Lowest incomplete: <code> 17.8734 % </code> (work unit <code> 2175982616 &times; 2<sup>40</sup></code>, all work units below are verified)
+site_main.html	Lowest unassigned: <code> 17.8734 % </code> (work unit <code> 2175982616 &times; 2<sup>40</sup></code>, all work units below are assigned or even verified)
+site_main.html	2020-05-07 the convergence of <a href="news.htm">all numbers below 2<sup>68</sup> is verified</a>
+site_main.html	2021-12-10 the convergence of all numbers below 2<sup>69</sup> is verified
+site_main.html	2023-07-09 the convergence of all numbers below 2<sup>70</sup> is verified
+site_main.html	2023-11-03 the convergence of all numbers below 1.5 &times; 2<sup>70</sup> is verified
+site_main.html	2025-01-15 the convergence of all numbers below 2<sup>71</sup> is verified
+site_main.html	https://doi.org/10.1007/s11227-020-03368-x
+site_main.html	https://doi.org/10.1007/s11227-025-07337-0
+site_news.html	On May 7, 2020, I managed to verify this conjecture for all numbers below $2^{68}$.
+site_news.html	confirm that the highest number occurring in the Collatz sequence starting at $n$ grows to approximately $n^2$.

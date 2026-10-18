@@ -1,0 +1,14 @@
+README.md	The trick is that, when calculating the function iterates, the programs switch between two domains
+README.md	they can always use the count trailing zeros (ctz) operation and a small lookup table with pre-computed powers of three.
+README.md	The programs can check 128-bit numbers.
+README.md	This project is licensed under the terms of the [MIT license](LICENSE.md).
+doc/ALGORITHM.md	*2<sup>40</sup>* numbers form a single work unit.
+doc/ALGORITHM.md	The sieves *2<sup>34</sup>* and *3<sup>2</sup>* are used in the CPU
+doc/ALGORITHM.md	implementation, and the sieves *2<sup>24</sup>* and *3<sup>1</sup>* on the
+doc/ALGORITHM.md	together to give raise the checksum (proof of work).
+doc/ALGORITHM.md	is the number of trailing zero bits in binary
+doc/ALGORITHM.md	The maximum value of *n* occurred during the convergence test for a given
+doc/PROTOCOL.md	[uint64_t:overflow128]
+doc/PROTOCOL.md	[uint64_t:mxoffset]
+doc/PROTOCOL.md	[uint64_t:cycleoff]
+doc/PROTOCOL.md	RET\0

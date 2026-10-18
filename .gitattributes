@@ -4,3 +4,6 @@
 *.sh text eol=lf
 # Transcripts are append-only and certified via sha256LF; keep them LF.
 *.log text eol=lf
+# Audit P2 freeze package: keep byte-stable LF checkouts (captures are cmp'd
+# byte-for-byte against fresh fetches at execution; batteries/engines hashed).
+audit_collatz/** text eol=lf

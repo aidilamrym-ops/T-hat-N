@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="msvalidate.01" content="CB69F128DC9C254B5AD833DD8C22A181">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-106745917-2"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-106745917-2');
+	</script>
+	<meta name="description" content="List of known path records for the Collatz problem.">
+	<meta name="keywords" content="Collatz problem, Collatz conjecture, distributed computing, path records">
+	<meta name="robots" content="index,follow">
+	<meta name="author" content="David Barina">
+	<link rel="icon" type="image/png" href="https://pcbarina.fit.vutbr.cz/favicon.ico">
+	<title>Path records</title>
+	<meta property="og:url" content="https://pcbarina.fit.vutbr.cz/path-records.htm">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Path records">
+	<meta property="og:image" content="https://pcbarina.fit.vutbr.cz/ogimage.png">
+	<meta property="og:description" content="List of known path records for the Collatz problem.">
+	<style>
+		table {
+			border-collapse: collapse;
+			margin-left:auto;
+			margin-right:auto;
+
+		}
+		td {
+			border: 1px solid black;
+			text-align: right;
+			padding: 2px;
+		}
+		tr:nth-child(odd) {
+			background-color: lightyellow;
+		}
+		th {
+			border: 1px solid black;
+			background-color: silver;
+			padding: 2px;
+			text-align: right;
+		}
+		body {
+			width: min-content;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: justify;
+		}
+	</style>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+		});
+	</script>
+	<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="links.css">
+</head>
+<body>
+<h1>Path records</h1>
+<p>
+The Collatz conjecture asserts that a sequence defined by repeatedly applying the function
+$$
+	T(n) = \begin{cases}
+		(3n+1)/2 &\text{ if $n$ is odd, or}\\
+		n/2      &\text{ if $n$ is even}
+	\end{cases}
+$$
+will always converge to the cycle passing through the number 1 for arbitrary initial positive integer $n$.
+Define $t(n)$ the highest number occurring in the sequence starting at $n$.
+The $n$ is called the path record if for all $m &lt; n$ the inequality $t(m) &lt; t(n)$ holds.
+The following table lists the known path records for all $n$ below $2^{71}$.
+$B(n)$ and $B(t(n))$ are the sizes of their arguments measured in the number of bits.
+Lagarias and Weiss (1992) predicted using the theory for random walks that
+$$ \limsup\limits_{n\rightarrow\infty} \frac{\log t(n)}{\log n} = 2 \text{.}$$
+In other words, the highest number occurring in the sequence for a path record $n$ grows like $n^2$.
+This agrees with the empirical evidence given in the table below.
+</p>
+<table>
+<tr><th>#</th><th>$n$</th><th>$t(n)$</th><th>$B(n)$</th><th>$B(t(n))$</th><th>$\log t(n) / \log n$</th></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1.000000</td></tr>
+<tr><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1.000000</td></tr>
+<!-- assignment 0 -->
+<tr><td>2</td><td>3</td><td>8</td><td>2</td><td>4</td><td>1.892789</td></tr>
+<tr><td>3</td><td>7</td><td>26</td><td>3</td><td>5</td><td>1.674330</td></tr>
+<tr><td>4</td><td>15</td><td>80</td><td>4</td><td>7</td><td>1.618148</td></tr>
+<tr><td>5</td><td>27</td><td>4616</td><td>5</td><td>13</td><td>2.559982</td></tr>
+<tr><td>6</td><td>255</td><td>6560</td><td>8</td><td>13</td><td>1.586054</td></tr>
+<tr><td>7</td><td>447</td><td>19682</td><td>9</td><td>15</td><td>1.620215</td></tr>
+<tr><td>8</td><td>639</td><td>20762</td><td>10</td><td>15</td><td>1.538859</td></tr>
+<tr><td>9</td><td>703</td><td>125252</td><td>10</td><td>17</td><td>1.790609</td></tr>
+<tr><td>10</td><td>1819</td><td>638468</td><td>11</td><td>20</td><td>1.780809</td></tr>
+<tr><td>11</td><td>4255</td><td>3405068</td><td>13</td><td>22</td><td>1.800029</td></tr>
+<tr><td>12</td><td>4591</td><td>4076810</td><td>13</td><td>22</td><td>1.805158</td></tr>
+<tr><td>13</td><td>9663</td><td>13557212</td><td>14</td><td>24</td><td>1.789704</td></tr>
+<tr><td>14</td><td>20895</td><td>25071632</td><td>15</td><td>25</td><td>1.712757</td></tr>
+<tr><td>15</td><td>26623</td><td>53179010</td><td>15</td><td>26</td><td>1.745829</td></tr>
+<tr><td>16</td><td>31911</td><td>60506432</td><td>15</td><td>26</td><td>1.727776</td></tr>
+<tr><td>17</td><td>60975</td><td>296639576</td><td>16</td><td>29</td><td>1.770525</td></tr>
+<tr><td>18</td><td>77671</td><td>785412368</td><td>17</td><td>30</td><td>1.818942</td></tr>
+<tr><td>19</td><td>113383</td><td>1241055674</td><td>17</td><td>31</td><td>1.799130</td></tr>
+<tr><td>20</td><td>138367</td><td>1399161680</td><td>18</td><td>31</td><td>1.778994</td></tr>
+<tr><td>21</td><td>159487</td><td>8601188876</td><td>18</td><td>34</td><td>1.909491</td></tr>
+<tr><td>22</td><td>270271</td><td>12324038948</td><td>19</td><td>34</td><td>1.857718</td></tr>
+<tr><td>23</td><td>665215</td><td>26241642656</td><td>20</td><td>35</td><td>1.789294</td></tr>
+<tr><td>24</td><td>704511</td><td>28495741760</td><td>20</td><td>35</td><td>1.787787</td></tr>
+<tr><td>25</td><td>1042431</td><td>45119577824</td><td>20</td><td>36</td><td>1.770402</td></tr>
+<tr><td>26</td><td>1212415</td><td>69823368404</td><td>21</td><td>37</td><td>1.782482</td></tr>
+<tr><td>27</td><td>1441407</td><td>75814787186</td><td>21</td><td>37</td><td>1.766542</td></tr>
+<tr><td>28</td><td>1875711</td><td>77952174848</td><td>21</td><td>37</td><td>1.736257</td></tr>
+<tr><td>29</td><td>1988859</td><td>78457189112</td><td>21</td><td>37</td><td>1.729690</td></tr>
+<tr><td>30</td><td>2643183</td><td>95229909242</td><td>22</td><td>37</td><td>1.709523</td></tr>
+<tr><td>31</td><td>2684647</td><td>176308906472</td><td>22</td><td>38</td><td>1.749335</td></tr>
+<tr><td>32</td><td>3041127</td><td>311358950810</td><td>22</td><td>39</td><td>1.772821</td></tr>
+<tr><td>33</td><td>3873535</td><td>429277584788</td><td>22</td><td>39</td><td>1.765718</td></tr>
+<tr><td>34</td><td>4637979</td><td>659401147466</td><td>23</td><td>40</td><td>1.772962</td></tr>
+<tr><td>35</td><td>5656191</td><td>1206246808304</td><td>23</td><td>41</td><td>1.789173</td></tr>
+<tr><td>36</td><td>6416623</td><td>2399998472684</td><td>23</td><td>42</td><td>1.818665</td></tr>
+<tr><td>37</td><td>6631675</td><td>30171305459816</td><td>23</td><td>45</td><td>1.976010</td></tr>
+<tr><td>38</td><td>19638399</td><td>153148462601876</td><td>25</td><td>48</td><td>1.945003</td></tr>
+<tr><td>39</td><td>38595583</td><td>237318849425546</td><td>26</td><td>48</td><td>1.894848</td></tr>
+<tr><td>40</td><td>80049391</td><td>1092571914585050</td><td>27</td><td>50</td><td>1.902792</td></tr>
+<tr><td>41</td><td>120080895</td><td>1638950788059290</td><td>27</td><td>51</td><td>1.883113</td></tr>
+<tr><td>42</td><td>210964383</td><td>3202398580560632</td><td>28</td><td>52</td><td>1.862697</td></tr>
+<tr><td>43</td><td>319804831</td><td>707118223359971240</td><td>29</td><td>60</td><td>2.098734</td></tr>
+<tr><td>44</td><td>1410123943</td><td>3562942561397226080</td><td>31</td><td>62</td><td>2.027685</td></tr>
+<tr><td>45</td><td>8528817511</td><td>9072297468678299012</td><td>33</td><td>63</td><td>1.908965</td></tr>
+<tr><td>46</td><td>12327829503</td><td>10361199457202525864</td><td>34</td><td>64</td><td>1.884414</td></tr>
+<tr><td>47</td><td>23035537407</td><td>34419078320774113520</td><td>35</td><td>65</td><td>1.885355</td></tr>
+<tr><td>48</td><td>45871962271</td><td>41170824451011417002</td><td>36</td><td>66</td><td>1.839751</td></tr>
+<tr><td>49</td><td>51739336447</td><td>57319808570806999220</td><td>36</td><td>66</td><td>1.844188</td></tr>
+<tr><td>50</td><td>59152641055</td><td>75749682531195100772</td><td>36</td><td>67</td><td>1.845472</td></tr>
+<tr><td>51</td><td>59436135663</td><td>102868194685920926084</td><td>36</td><td>67</td><td>1.857452</td></tr>
+<tr><td>52</td><td>70141259775</td><td>210483556894194914852</td><td>37</td><td>68</td><td>1.873803</td></tr>
+<tr><td>53</td><td>77566362559</td><td>458306514538433899928</td><td>37</td><td>69</td><td>1.897316</td></tr>
+<tr><td>54</td><td>110243094271</td><td>686226824783134190180</td><td>37</td><td>70</td><td>1.886959</td></tr>
+<tr><td>55</td><td>204430613247</td><td>707630396504827495544</td><td>38</td><td>70</td><td>1.843395</td></tr>
+<tr><td>56</td><td>231913730799</td><td>1095171911941437256778</td><td>38</td><td>70</td><td>1.851199</td></tr>
+<tr><td>57</td><td>272025660543</td><td>10974241817835208981874</td><td>38</td><td>74</td><td>1.927514</td></tr>
+<tr><td>58</td><td>446559217279</td><td>19766638455389030190536</td><td>39</td><td>75</td><td>1.913834</td></tr>
+<tr><td>59</td><td>567839862631</td><td>50270086612792993117994</td><td>40</td><td>76</td><td>1.931332</td></tr>
+<tr><td>60</td><td>871673828443</td><td>200279370410625061016864</td><td>40</td><td>78</td><td>1.951503</td></tr>
+<!-- assignment 2 -->
+<tr><td>61</td><td>2674309547647</td><td>385209974924871186526136</td><td>42</td><td>79</td><td>1.897907</td></tr>
+<!-- assignment 3 -->
+<tr><td>62</td><td>3716509988199</td><td>103968231672274974522437732</td><td>42</td><td>87</td><td>2.069739</td></tr>
+<!-- assignment 8 -->
+<tr><td>63</td><td>9016346070511</td><td>126114763591721667597212096</td><td>44</td><td>87</td><td>2.014721</td></tr>
+<!-- assignment 58 -->
+<tr><td>64</td><td>64848224337147</td><td>637053460104079232893133864</td><td>46</td><td>90</td><td>1.940658</td></tr>
+<!-- assignment 105 -->
+<tr><td>65</td><td>116050121715711</td><td>1265292033916892480613118196</td><td>47</td><td>91</td><td>1.926973</td></tr>
+<!-- assignment 183 -->
+<tr><td>66</td><td>201321227677935</td><td>2636975512088803001946985208</td><td>48</td><td>92</td><td>1.917038</td></tr>
+<!-- assignment 241 -->
+<tr><td>67</td><td>265078413377535</td><td>2857204078078966555847716826</td><td>48</td><td>92</td><td>1.903573</td></tr>
+<!-- assignment 265 -->
+<tr><td>68</td><td>291732129855135</td><td>3537558936133726760243328464</td><td>49</td><td>92</td><td>1.904510</td></tr>
+<!-- assignment 358 -->
+<tr><td>69</td><td>394491988532895</td><td>6054282113227445504606919650</td><td>49</td><td>93</td><td>1.903398</td></tr>
+<!-- assignment 369 -->
+<tr><td>70</td><td>406738920960667</td><td>12800696705021228411442619682</td><td>49</td><td>94</td><td>1.923925</td></tr>
+<!-- assignment 557 -->
+<tr><td>71</td><td>613450176662511</td><td>22881441742972862145992619776</td><td>50</td><td>95</td><td>1.917765</td></tr>
+<!-- assignment 670 -->
+<tr><td>72</td><td>737482236053119</td><td>37684665798782446690107505928</td><td>50</td><td>95</td><td>1.922023</td></tr>
+<!-- assignment 1140 -->
+<tr><td>73</td><td>1254251874774375</td><td>1823036311464280263720932141024</td><td>51</td><td>101</td><td>2.004241</td></tr>
+<!-- assignment 4841 -->
+<tr><td>74</td><td>5323048232813247</td><td>1964730439297455725829478995944</td><td>53</td><td>101</td><td>1.926300</td></tr>
+<!-- assignment 7787 -->
+<tr><td>75</td><td>8562235014026655</td><td>13471057008351679202003944688336</td><td>53</td><td>104</td><td>1.953820</td></tr>
+<!-- assignment 9740 -->
+<tr><td>76</td><td>10709980568908647</td><td>175294593968539094415936960141122</td><td>54</td><td>108</td><td>2.011491</td></tr>
+<!-- assignment 44713 -->
+<tr><td>77</td><td>49163256101584231</td><td>301753104069007668258074264675786</td><td>56</td><td>108</td><td>1.945863</td></tr>
+<!-- assignment 74988 -->
+<tr><td>78</td><td>82450591202377887</td><td>875612750096198197075499421245450</td><td>57</td><td>110</td><td>1.947383</td></tr>
+<!-- assignment 84823 -->
+<tr><td>79</td><td>93264792503458119</td><td>2115362774686865777485863406680032</td><td>57</td><td>111</td><td>1.963815</td></tr>
+<!-- assignment 156929 -->
+<tr><td>80</td><td>172545331199510631</td><td>2118089541282012618909185268056780</td><td>58</td><td>111</td><td>1.933407</td></tr>
+<!-- assignment 193341 -->
+<tr><td>81</td><td>212581558780141311</td><td>2176718166004315761101410771585688</td><td>58</td><td>111</td><td>1.923979</td></tr>
+<!-- assignment 232717 -->
+<tr><td>82</td><td>255875336134000063</td><td>2415428612584587115646993931986234</td><td>58</td><td>111</td><td>1.917678</td></tr>
+<!-- assignment 440695 -->
+<tr><td>83</td><td>484549993128097215</td><td>4332751846533208436890106993276834</td><td>59</td><td>112</td><td>1.901958</td></tr>
+<!-- assignment 511482 -->
+<tr><td>84</td><td>562380758422254271</td><td>6718947974962862349115040884231904</td><td>59</td><td>113</td><td>1.905760</td></tr>
+<!-- assignment 571368 -->
+<tr><td>85</td><td>628226286374752923</td><td>31268160888027375005205169043314754</td><td>60</td><td>115</td><td>1.938132</td></tr>
+<!-- assignment 810871 -->
+<tr><td>86</td><td>891563131061253151</td><td>140246903347442029303138585287425762</td><td>60</td><td>117</td><td>1.958028</td></tr>
+<!-- assignment 944732 -->
+<tr><td>87</td><td>1038743969413717663</td><td>159695671984678120932209599662553676</td><td>60</td><td>117</td><td>1.953946</td></tr>
+<!-- assignment 1801687 -->
+<tr><td>88</td><td>1980976057694848447</td><td>32012333661096566765082938647132369010</td><td>61</td><td>125</td><td>2.049820</td></tr>
+<!-- assignment 31956206 -->
+<tr><td>89</td><td>35136221158664800255</td><td>92102545196486820634779928066830214436</td><td>65</td><td>127</td><td>1.942328</td></tr>
+<!-- assignment 44113561 -->
+<tr><td>90</td><td>48503373501652785087</td><td>296696710908147364747230298439288489642</td><td>66</td><td>128</td><td>1.954321</td></tr>
+<!-- assignment 50247623 -->
+<tr><td>91</td><td>55247846101001863167</td><td>482192631091346876742345874501396316228</td><td>66</td><td>129</td><td>1.959406</td></tr>
+<!-- assignment 64709932 -->
+<tr><td>92</td><td>71149323674102624415</td><td>4527691962113372170289733115168874698466</td><td>66</td><td>132</td><td>1.997559</td></tr>
+<!-- assignment 249322560 -->
+<tr><td>93</td><td>274133054632352106267</td><td>56649062372194325899121269007146717645316</td><td>68</td><td>136</td><td>1.993995</td></tr>
+<!-- assignment 1253556274 -->
+<tr><td>94</td><td>1378299700343633691495</td><td>73161949456862481446077319071744298810624</td><td>71</td><td>136</td><td>1.933091</td></tr>
+<!-- assignment 1578445488 -->
+<tr><td>95</td><td>1735519168865914451271</td><td>88638514583197544506368462565103733234728</td><td>71</td><td>137</td><td>1.927906</td></tr>
+<!-- assignment 1606036830 -->
+<tr><td>96</td><td>1765856170146672440559</td><td>394170168671074358667552016954030019514164</td><td>71</td><td>139</td><td>1.957724</td></tr>
+<!-- assignment 2145415783 -->
+<tr><td>97</td><td>2358909599867980429759</td><td>494114680693632162318569565806744468898092</td><td>71</td><td>139</td><td>1.950797</td></tr>
+</table>
+<h2>References</h2>
+<ul>
+<li>Lagarias, J. C.; Weiss, A. The $3x+1$ Problem: Two Stochastic Models. Ann. Appl. Probab. 2 (1992), no. 1, 229&ndash;261. doi:<a href="http://doi.org/10.1214/aoap/1177005779">10.1214/aoap/1177005779</a>.</li>
+<li>Sequence <a href="https://oeis.org/A006884">A006884</a> in The On-Line Encyclopedia of Integer Sequences.</li>
+<li>Eric Roosendaal, <a href="http://www.ericr.nl/wondrous/pathrecs.html">3x + 1 Path Records</a>.</li>
+</ul>
+<p>
+Back to the <a href="/">main page</a>.
+</p>
+</body>
+</html>
