@@ -84,7 +84,12 @@ ledger head `e7bda4e1…`; and
 [`reports/BRIDGE_PROTOCOL_2026-10-19.md`](reports/BRIDGE_PROTOCOL_2026-10-19.md)
 — bounded certificates promoted across an explicit named tail bridge
 ([B]/[J]/[U]), with certified demos for zeta(2) and two integral tails (a
-tooling entry, no external claim). Every
+tooling entry, no external claim); and
+`A-2026-0007`, the periodic-box bridge study
+([`reports/PERIODIC_BRIDGE_STUDY_2026-10-19.md`](reports/PERIODIC_BRIDGE_STUDY_2026-10-19.md))
+— the bounded side certified at N=16..64 by an independent exact mode sum
+cross-checked against the sealed solver, with the free-space bridge left
+explicitly OPEN (the tested statistic is shown not to be a bridge). Every
 verdict is a bounded assessment under the scope limits recorded there, not a
 defect claim on any third party's work.
 

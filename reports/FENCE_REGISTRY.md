@@ -615,6 +615,50 @@ mengikuti laporan L4).
   sha256LF 16bc62d625f78ff8d468c5044557e7769a5b1fe3f7eeee70d055bd76df0f3cce reports/BRIDGE_DEMO_OUTPUT_2026-10-19.txt
   ```
 
-Selesai — 11 entri per 2026-10-19 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006`). Entri
+### A-2026-0007 — Studi jembatan kotak periodik ↔ ruang bebas: sisi terbatas tersertifikasi, jembatan [J] tetap OPEN (statistik q bukan bukti konvergensi)
+
+- **Jenis:** A
+- **Pernyataan:** Studi kuantitatif internal (bukan audit pihak ketiga) atas
+  model tersegel `msaf/navier_stokes/fluid_lattice.py`: solusi eksak
+  Laplacian periodik 7-titik pada T^3_N (`dx = 1/N`, sumber titik zero-mean)
+  dihitung pada sumbu dengan **mode sum langsung** O(N^3)
+  (`msaf/periodic_bridge.py`; setiap suku bola Arb dari `cos_pi` rasional
+  eksak) untuk N = 16, 20, 24, 32, 40, 48, 64; kesesuaian dengan solver DFT
+  tersegel (O(N^4)) diuji lewat aturan containment: selisih kedua enclosure
+  memuat nol eksak (N=8, r=0..4, radius < 1e-60); statistik
+  q(N) = (v1-v2)/(v2-v4) rigor menurun tegas pada band (1.95190443 →
+  1.91092671), increment mengecil tegas, dan gap 2 - q(64) =
+  0.0890732860327 ± 3.89e-14 **tidak menuju nol**: pada N ≤ 64 q bergerak
+  menjauh dari nilai kontinuum 2 → q **bukan** statistik jembatan; record
+  tersegel direproduksi independen (q(16)=1.9519; rasio mentah
+  2.48682 / 4.19692 vs catatan 2.49 / 4.20); **blok [B] CERTIFIED, blok
+  [J] OPEN** (identitas citra periodik dicatat; bound ekor citra tidak
+  dibuktikan); tidak ada nilai limit, tidak ada laju konvergensi, tidak ada
+  klaim kontinuum.
+- **Batas:** hanya sisi terbatas yang disertifikasi; [J] OPEN sehingga
+  pernyataan ruang-bebas [U] tidak diklaim; F4 adalah temuan negatif tentang
+  statistik q, bukan tentang model tersegel (guard lama tetap benar);
+  tidak menyentuh zeta/Weil/RH/P≠NP; tidak ada klaim fisik; bukan peer
+  review.
+- **Status:** CERTIFIED
+- **Domino:** tidak ada (studi internal; bukan domino)
+- **Relasi:** menerapkan protokol `[B]/[J]/[U]` dari `A-2026-0006`
+  (`reports/BRIDGE_PROTOCOL_2026-10-19.md`); memperluas bukti
+  `msaf/tests/test_tail_decay.py` (satu titik N=16 → kurva N=16..64);
+  entri registry ke-12; memori kerja §2.0y `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_periodic_bridge.py -q`
+  (6 uji; termasuk kesesuaian dua engine); guard
+  `python -m pytest msaf/tests/test_fence_registry.py -q` (memverifikasi
+  semua sha di bawah).
+- **Sertifikat:**
+
+  ```text
+  sha256LF 3ae260f319f3041f91edcb8fc6e873ed9538e6929ecb21f96dc860ab9632888d msaf/periodic_bridge.py
+  sha256LF 4f1d540a702412f1c06997ebdca4ac16b64cc5c26267ec2724ae7f03e96e4f70 msaf/tests/test_periodic_bridge.py
+  sha256LF 19fcd548e0af8e8ebec97079db2d1e2f4253b3d47c3fae1a9ae72898539e9720 reports/PERIODIC_BRIDGE_STUDY_2026-10-19.md
+  sha256LF 0e0c4d873c071bc7278ed0fe3355a235551e113061f32ad21f672c30ae0de026 reports/PERIODIC_BRIDGE_STUDY_OUTPUT_2026-10-19.txt
+  ```
+
+Selesai — 12 entri per 2026-10-19 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

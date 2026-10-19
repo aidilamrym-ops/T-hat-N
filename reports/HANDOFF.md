@@ -1245,6 +1245,29 @@ Konsekuensi urutan yang disarankan:
   ini), termasuk verifikasi 5 sha256LF `A-2026-0006` + 19 uji bridge;
   lean-kernel sukses; tidak ada berkas beku disentuh.
 
+### 2.0y [BARU, 2026-10-19] Studi jembatan kotak periodik ↔ ruang bebas — sisi [B] tersertifikasi (N=16..64), [J] tetap OPEN; q(N) terbukti bukan statistik jembatan; registry `A-2026-0007`
+
+- **Konteks:** menerapkan protokol `[B]/[J]/[U]` (`A-2026-0006`) pada model
+  tersegel `fluid_lattice.py`; pertanyaan: apakah q(N) = (v1-v2)/(v2-v4)
+  menuju nilai kontinuum 2 saat N tumbuh?
+- **Metode:** mode sum langsung O(N^3) (`msaf/periodic_bridge.py`) untuk N =
+  16…64; diverifikasi silang terhadap solver DFT tersegel O(N^4) lewat
+  aturan containment (`certify.py`): selisih enclosure memuat nol eksak,
+  radius < 1e-60.
+- **Hasil:** q(N) rigor menurun (1.95190443 → 1.91092671), increment
+  mengecil, tetapi gap `2 - q(64) = 0.0890732860327 ± 3.89e-14` tidak
+  menuju nol → pada band ini q **menjauh** dari 2; **q bukan statistik
+  jembatan** dan tidak boleh dipakai sebagai bukti konvergensi ruang-bebas.
+  Record tersegel direproduksi independen (q(16)=1.9519; 2.48682/4.19692 vs
+  2.49/4.20); guard lama tetap benar (band satu titik, far-field < 2%).
+- **Status blok:** [B] CERTIFIED; [J] OPEN (identitas citra dicatat; bound
+  ekor citra tidak dibuktikan); [U] tidak diklaim (tanpa nilai limit, tanpa
+  laju, tanpa klaim kontinuum).
+- **Guard:** `msaf/tests/test_periodic_bridge.py` (6 uji); output verbatim
+  `reports/PERIODIC_BRIDGE_STUDY_OUTPUT_2026-10-19.txt` (capture ganda);
+  registry `A-2026-0007` (4 sertifikat sha256LF). CI: id run dicatat di
+  update menyusul.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional
