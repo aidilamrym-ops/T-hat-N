@@ -1372,6 +1372,41 @@ Konsekuensi urutan yang disarankan:
   `formal_bridge/check_pseries.sh`. CI: run 39246971116 hijau
   (python-tests + lean-kernel).
 
+### 2.0ac [BARU, 2026-10-20] L2 bersyarat dua aksioma di Coq — batas deret-p dengan `Un_cv` sebagai hipotesis; `sig_not_dec` terisolasi ke eksistensi; registry `A-2026-0011`
+
+- **Konteks:** Paket 6b, pra-registrasi baru
+  `reports/PREREG_PAKET6B_2026-10-20.md` (scope dikunci sebelum
+  implementasi). Berkas baru `formal_bridge/PseriesL2Bounds.v` mengimpor
+  modul beku `PseriesL2.v` (`A-2026-0010`) apa adanya; artefak Paket 1–6
+  **tidak diubah**.
+- **Hasil:** `pseries_L2_integer_bounds`: untuk `k ≥ 1`, `N ≥ 1`, dan
+  `L` dengan `Un_cv (fun M => psum k N M) L`, berlaku
+  `1/(k(N+1)^k) ≤ L ≤ 1/(k N^k)`. Satu teorema; memakai ulang lemma
+  modul beku + `sum_incr`; **tanpa** `Un_cv_crit` dan **tanpa**
+  `pseries_L2_integer` (dijaga statis oleh guard).
+- **Bukti:** `coqc` exit 0 (kedua berkas); `coqchk` exit 0 "Modules were
+  successfully checked"; 1/1 hasil di keluaran kernel; receipt
+  deterministik (dua capture byte-identik, 23 baris). Tanpa
+  `Axiom`/`Parameter`/`Admitted`/`admit`.
+- **Trusted base:** `Print Assumptions` = **tepat dua** aksioma stdlib
+  (`sig_forall_dec`, `functional_extensionality_dep`), **tanpa**
+  `sig_not_dec`. Peta: eksistensi (`A-2026-0010`) = 3 aksioma; batas
+  bersyarat (Paket 6b) = 2 aksioma. Tidak ada aksioma proyek. Status:
+  **CERTIFIED** (kriteria pra-registrasi §4 terpenuhi literal).
+- **Batas:** hanya kondisional (`Un_cv` hipotesis; eksistensi tetap milik
+  `A-2026-0010`); hanya `p = k+1 ≥ 2`; eksponen real `p > 1` (`Rpower`),
+  L3–L5 tidak diformalkan; **bukan** penutupan `[J]` periodic-box
+  `A-2026-0007` (tetap OPEN); `Coq.Reals` aksiomatik, bukan konsistensi;
+  gate anti-circularity `TOOL NOT RUN` (NO_LEAN_FILES; exit 2 menurut
+  kontrak gate) **tidak dihitung sebagai sukses**; CI tidak punya Coq
+  (hanya guard statis); tanpa klaim zeta/Weil/RH/P≠NP/fisika; bukan peer
+  review.
+- **Guard:** `python -m pytest msaf/tests/test_coq_bridge_bounds.py -q`
+  (6 uji: placeholder, kelengkapan audit, impor + isolasi, statement
+  lock, receipt/trusted base, 11 mutasi negatif); registry `A-2026-0011`
+  (6 sertifikat sha256LF). Reproduksi lokal:
+  `formal_bridge/check_bounds.sh`. CI: run menyusul setelah push.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional

@@ -104,7 +104,13 @@ only, with the periodic-box `[J]` still explicitly OPEN; and
 — two-sided tail bounds and the epsilon-N limit proved in Coq for
 `p = k+1 ≥ 2` only, with the real-exponent case and the periodic-box `[J]`
 still explicitly OPEN, and one additional stdlib axiom (`sig_not_dec`,
-completeness of R) recorded as an audit deviation. Every
+completeness of R) recorded as an audit deviation; and
+`A-2026-0011`, the conditional two-axiom companion
+([`reports/COQ_BRIDGE_L2_BOUNDS_2026-10-20.md`](reports/COQ_BRIDGE_L2_BOUNDS_2026-10-20.md))
+— with the tail limit's existence taken as a hypothesis, the same
+two-sided bounds are proved in Coq from exactly the two shared stdlib
+axioms, isolating `sig_not_dec` to the existence step (still integer
+`p = k+1 ≥ 2` only, periodic-box `[J]` still explicitly OPEN). Every
 verdict is a bounded assessment under the scope limits recorded there, not a
 defect claim on any third party's work.
 

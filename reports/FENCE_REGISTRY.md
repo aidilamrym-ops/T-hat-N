@@ -821,6 +821,59 @@ mengikuti laporan L4).
   sha256LF e0661f2d3e2c33996839849145a5c918d6f6f68b26c4493f0adade40fbc38f75 reports/PREREG_PAKET6_2026-10-19.md
   ```
 
-Selesai — 15 entri per 2026-10-19 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010`). Entri
+### A-2026-0011 — L2 bersyarat dua aksioma di Coq: batas deret-p dengan `Un_cv` sebagai hipotesis; `sig_not_dec` terisolasi ke langkah eksistensi
+
+- **Jenis:** A
+- **Pernyataan:** Lanjutan Paket 6b (pra-registrasi baru
+  `reports/PREREG_PAKET6B_2026-10-20.md`; berkas Paket 1–6 **tidak
+  diubah**). `formal_bridge/PseriesL2Bounds.v` mengimpor modul beku
+  `PseriesL2.v` (`A-2026-0010`) dan membuktikan **satu** teorema
+  **`pseries_L2_integer_bounds`**: untuk setiap `k ≥ 1`, `N ≥ 1`, dan `L`
+  dengan `Un_cv (fun M => psum k N M) L` (limit ekor deret-p sudah ada),
+  berlaku `1/(k(N+1)^k) ≤ L ≤ 1/(k N^k)`. Ini bagian "batas" L2 kit
+  untuk eksponen bulat **secara kondisional**; bagian "eksistensi" tetap
+  milik `A-2026-0010`. Bukti memakai ulang lemma modul beku
+  (`psum_lower_sharp`, `psum_upper`, `Un_cv_le_const`, `tail_term_small`,
+  `lt_sub_pos`, `sub_le_swap`) + `sum_incr` stdlib; **tanpa**
+  `Un_cv_crit` dan **tanpa** `pseries_L2_integer` (dijaga statis oleh
+  guard). `coqc` exit 0 (kedua berkas); `coqchk` exit 0 "Modules were
+  successfully checked"; 1/1 hasil di keluaran kernel; receipt
+  deterministik (dua capture byte-identik, 23 baris). `Print Assumptions`:
+  **tepat dua** aksioma stdlib (`sig_forall_dec`,
+  `functional_extensionality_dep`), **tanpa** `sig_not_dec` — aksioma
+  ketiga `A-2026-0010` terisolasi ke langkah eksistensi. Tidak ada
+  aksioma proyek, `Axiom`, `Parameter`, `Admitted`, atau `admit`.
+- **Batas:** **hanya kondisional** (`Un_cv` hipotesis; eksistensi tidak
+  dibuktikan di sini — itu `A-2026-0010`, tiga aksioma); hanya eksponen
+  bulat `p = k+1 ≥ 2`; eksponen real `p > 1` (`Rpower`), L3, L4, L5
+  tidak diformalkan; **bukan** penutupan `[J]` periodic-box `A-2026-0007`
+  (tetap OPEN); `Coq.Reals` aksiomatik, bukan konsistensi;
+  anti-circularity gate = `TOOL NOT RUN` (NO_LEAN_FILES, exit 2 menurut
+  kontrak gate) dan **tidak dihitung sebagai sukses**; CI tidak punya
+  toolchain Coq sehingga hanya menjalankan guard statis; tidak menyentuh
+  zeta/Weil/RH/P≠NP; tidak ada klaim fisik; bukan peer review.
+- **Status:** CERTIFIED
+- **Domino:** tidak ada (formal; bukan domino)
+- **Relasi:** melanjutkan `A-2026-0010` (berkas dan sertifikatnya tidak
+  berubah; modul beku diimpor apa adanya); melengkapi peta trusted base —
+  eksistensi = 3 aksioma, batas bersyarat = 2 aksioma; entri registry
+  ke-16; memori kerja §2.0ac `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_coq_bridge_bounds.py -q`
+  (6 uji statis: placeholder, kelengkapan audit, impor + isolasi,
+  statement lock, receipt/trusted base, 11 mutasi negatif);
+  `python -m pytest msaf/tests/test_fence_registry.py -q`; reproduksi
+  kernel lokal `formal_bridge/check_bounds.sh`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF 363bdd64fa0eb66128676bf238e2a7e340b177bef2111746c26c8e3ac9d9d5f5 formal_bridge/PseriesL2Bounds.v
+  sha256LF 33f66c7339a53d22f29193e8fe2be5b8de3dd39d9b6eeb881e5b8f234075331e formal_bridge/check_bounds.sh
+  sha256LF 9113a745793e8b77a98cac68eec88712d927d7a4a5c27b969a4206b9865c39cd formal_bridge/PseriesL2Bounds.receipt.txt
+  sha256LF 6989b3b4dc04fdea51c8b2685d7468341ed9b4f809e2c75a70729a66d87027ec msaf/tests/test_coq_bridge_bounds.py
+  sha256LF b01ef855f902effe68e01b6defc10a6bea2f1ae02379a1ca08c946291257f5ea reports/COQ_BRIDGE_L2_BOUNDS_2026-10-20.md
+  sha256LF 1b547049d9e9d9a4a52377f4d7e09248f6c0c55d92fb872e925f96912da06232 reports/PREREG_PAKET6B_2026-10-20.md
+  ```
+
+Selesai — 16 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

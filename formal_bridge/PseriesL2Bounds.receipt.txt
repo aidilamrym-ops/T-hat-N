@@ -1,0 +1,23 @@
+coqc:   /root/.opam/4.14.2/bin/coqc
+coqchk: /root/.opam/4.14.2/bin/coqchk
+coqc PseriesL2 exit: 0
+coqc PseriesL2Bounds exit: 0
+coqchk exit: 0
+coqchk final line: Modules were successfully checked
+coqchk full log lines: 48144
+results in PseriesL2Bounds.v: 1
+results checked by coqchk: 1
+Print Assumptions blocks: 1
+audit axiom names: ClassicalDedekindReals.sig_forall_dec FunctionalExtensionality.functional_extensionality_dep 
+--- results checked ---
+  pseries_L2_integer_bounds
+--- coqc audit log (Print Assumptions) ---
+Axioms:
+ClassicalDedekindReals.sig_forall_dec :
+  forall P : nat -> Prop,
+  (forall n : nat, {P n} + {~ P n}) ->
+  {n : nat | ~ P n} + {forall n : nat, P n}
+FunctionalExtensionality.functional_extensionality_dep :
+  forall (A : Type) (B : A -> Type) (f g : forall x : A, B x),
+  (forall x : A, f x = g x) -> f = g
+OK: conditional bounds module kernel-checked; exactly two stdlib axioms; no sig_not_dec
