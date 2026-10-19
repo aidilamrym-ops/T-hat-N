@@ -1369,7 +1369,8 @@ Konsekuensi urutan yang disarankan:
   (5 uji: placeholder, kelengkapan audit, standalone + statement lock,
   receipt/trusted base, 8 mutasi negatif); registry `A-2026-0010`
   (6 sertifikat sha256LF). Reproduksi lokal:
-  `formal_bridge/check_pseries.sh`.
+  `formal_bridge/check_pseries.sh`. CI: run 39246971116 hijau
+  (python-tests + lean-kernel).
 
 ---
 
