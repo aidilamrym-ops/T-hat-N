@@ -52,16 +52,27 @@ points; asymptotic direction open). The consolidated LaTeX export
 ([`exports/research_paper.tex`](exports/research_paper.tex)) transcribes the
 sealed results and the process-defect register; it adds no new claims.
 
-**Audit registry (2026-10-18).** The repository also carries a completed
-pre-registered four-layer audit (L1-L4) of a pinned external candidate
-release, recorded in [`reports/FENCE_REGISTRY.md`](reports/FENCE_REGISTRY.md)
-(entry `A-2026-0001`, guarded by `msaf/tests/test_fence_registry.py`): layer
-L1 re-executed the pinned repository end-to-end in a fresh container on
+**Audit registry (2026-10-18 → 2026-10-19).** The repository also carries
+pre-registered audits of pinned external releases, recorded in
+[`reports/FENCE_REGISTRY.md`](reports/FENCE_REGISTRY.md) and guarded by
+`msaf/tests/test_fence_registry.py` (every `sha256LF` certificate line
+re-verified in CI). Entry `A-2026-0001` is the four-layer audit (L1-L4):
+layer L1 re-executed the pinned repository end-to-end in a fresh container on
 2026-10-18 (all steps exit 0), layers L2-L3 reproduced the numerical checks
 and the theorem-source weld, and the L4 verdict with its scope limits and
-certificate hashes points to the dated reports under `reports/`. The verdict
-is a bounded assessment under the scope limits recorded there, not a defect
-claim on any third party's work.
+certificate hashes points to the dated reports under `reports/`. The registry
+has since grown under the same discipline: `A-2026-0002`, the replay of the
+pinned Coq-BB5 v1.0.0 witness release (BB(5) = 47,176,870); `A-2026-0003`,
+the replay of a third-party Collatz verification record (project Barina; the
+S4/P weld discrepancy documented as-is); and `A-2026-0004`, the Replay Record
+series entry `RR-2026-01` (spec
+[`reports/REPLAY_RECORD_SPEC.md`](reports/REPLAY_RECORD_SPEC.md), record
+[`reports/AUDIT_ECDSA_REPORT_2026-10-19.md`](reports/AUDIT_ECDSA_REPORT_2026-10-19.md))
+— a reproduction of the published (t, n) -> ECDSA seed mapping (Anthropic
+page, 2026-10-16: 14/14 published rows matched; B-163 remains an open
+residue; the anti-circularity gate is attached as TOOL NOT RUN). Every
+verdict is a bounded assessment under the scope limits recorded there, not a
+defect claim on any third party's work.
 
 **Provenance and AI-tooling disclosure.** This repository is developed with
 substantive AI assistance: the OpenCode agentic coding environment drafts
