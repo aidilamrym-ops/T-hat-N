@@ -1238,7 +1238,12 @@ Konsekuensi urutan yang disarankan:
   RH/P≠NP; bukan klaim fisik; alat metodologi, bukan hasil riset baru).
 - **Guard:** `msaf/tests/test_bridge.py` (19 uji, termasuk end-to-end ζ(2)
   dan penolakan non-finit); registry `A-2026-0006` (5 sertifikat sha256LF);
-  guard registry berjalan di CI. CI: id run dicatat di update menyusul.
+  guard registry berjalan di CI.
+- **[UPDATE 2026-10-19] CI hijau:** run `39226244961` (commit `cef985e`):
+  python-tests `396 passed, 1 skipped` (28.26 s; skip = `skipif` lama
+  "Lean toolchain absent" di `test_lean_axiom_audit.py`, bukan artefak kit
+  ini), termasuk verifikasi 5 sha256LF `A-2026-0006` + 19 uji bridge;
+  lean-kernel sukses; tidak ada berkas beku disentuh.
 
 ---
 
