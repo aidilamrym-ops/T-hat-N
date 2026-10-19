@@ -25,6 +25,9 @@ reports/AUDIT_ECDSA_PREREG_2026-10-19.md text eol=lf
 msaf/quantum_entropy/** text eol=lf
 msaf/tests/test_quantum_entropy.py text eol=lf
 audit_quantum/** text eol=lf
+# The execution statistics payloads are raw float64: never eol-convert them.
+audit_quantum/exec_*/stats_d*.bin binary
 ledger/quantum_evolution.jsonl text eol=lf
 reports/REPLAY_CERT_SPEC_V0.2_QUANTUM.md text eol=lf
 reports/AUDIT_QUANTUM_PREREG_2026-10-19.md text eol=lf
+reports/gw_quantum_diagnostic_v1.html text eol=lf
