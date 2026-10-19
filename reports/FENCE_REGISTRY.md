@@ -482,6 +482,61 @@ mengikuti laporan L4).
   sha256LF b4ae5295bd6880acefc7d5b80cd187d7d882b12592be30b66aa89b36fac5de57 audit_collatz/p2_runners/p2_w_criteria.sh
   ```
 
-Selesai — 8 entri per 2026-10-19 (6 entri awal + `A-2026-0002` + `A-2026-0003`). Entri
+### A-2026-0004 — Rekaman replay RR-2026-01: reproduksi pemetaan terbit (t, n) → seed kurva ECDSA (klaim halaman Anthropic 2026-10-16)
+
+- **Jenis:** A
+- **Pernyataan:** Replay terpra-registrasi (pra-reg `reports/AUDIT_ECDSA_PREREG_2026-10-19.md` + spec seri `reports/REPLAY_RECORD_SPEC.md` v0.1, dibekukan di commit `3026d12`, dipush sebelum perintah audit pertama; CI hijau `39187596038`; eksekusi 2026-10-19T02:00:15Z–02:00:23Z ≈ 8 s di commit yang sama; tanpa perubahan parameter) atas klaim pihak ketiga halaman Anthropic "Claude reveals ECDSA curve origins" (diakses 2026-10-19 01:24:11Z; capture html/txt sha256LF `266554ce…`/`35dfbdd8…`): model `srand48(t)`/`lrand48()` POSIX direkonstruksi oleh dua engine independen + weld glibc (E1w) — (I1) selftest A–D OK (D = 36 subcek, 18 kasus sintetis, target no-match brute-force); (I2) 10/10 baris prima (5 NIST + 5 v-kurva) MATCH: seed kandidat ke-n (20 byte dari `state >> 40` = `lrand48() >> 23`) == seed standar (X9.62 draft / FIPS 186-4 / Sec2 v2 / BouncyCastle / neuromancer; 2–4 sumber sepakat per baris), e1 == e2 == standar == string klaim, indeks kemunculan-pertama = n (scan, e1 = e2); (I3) 4/4 baris biner MATCH dengan argumen = epoch dibelah-dua (`floor(t/2)`): B-233 n=155 / B-283 n=32 / B-409 n=60 / B-571 n=73; (I4) statistik kata C3: count = 4 (B-233/B-283/B-409/B-571, semua kata atas nol), `1/P` = `281474976710656/48446969237` = 5809,960481401744 vs klaim 1/5.810 (toleransi ±1% → MATCH); (I5) aritmetika waktu C4: tanggal halved = Feb 1984 (4/4, 1984-02-23), doubled = 1998-04-17 (4/4), interval B-233 − P-224 = 1.218.731 s = 14 hari (floor), rentang t prima 1997-05-15..1998-04-03 → MATCH; (I6) ≥2 sumber per baris + semua sepakat + rebuild manifest dari capture byte-identik → MATCH. B-163 tetap residu (t/n tidak terbit; tidak direproduksi; hanya struktur kata 160-bit-nya dipakai I4). Gate anti-sirkularitas `TOOL NOT RUN (NO_LEAN_FILES)` exit 2 (verbatim di laporan §6; hanya bisa menurunkan klaim; tidak ada artefak Lean/SMT dalam lingkup).
+- **Batas:** replay finit ≠ peer review; halaman klaim sendiri menyatakan ini bukan break/attack/weakness ECDSA; bukan bukti bahwa NSA benar-benar menjalankan lrand48 (tanpa program arsip); base point, kandidat yang dilewati (mis. P-256 kandidat 876), dan derivasi B-163 di luar lingkup; t klaim dibaca sebagai UTC (halaman mencetak tanpa zona waktu); tidak menyatakan/menyangkal RH atau P≠NP.
+- **Status:** CERTIFIED
+- **Domino:** tidak ada (probe eksternal; bukan domino RH)
+- **Relasi:** rekaman pertama seri Replay Record (`reports/REPLAY_RECORD_SPEC.md` v0.1); audit pihak ketiga keempat (setelah `A-2026-0001`, `A-2026-0002`, `A-2026-0003`); laporan `reports/AUDIT_ECDSA_REPORT_2026-10-19.md` (§1–§11); pra-reg + spec + log + paket beku `audit_ecdsa/` (PINS berisi 29 pin, diverifikasi `sha256sum -c`) + 9 artefak eksekusi; sertifikat 41 baris (spec + pra-reg + log + laporan + 11 berkas paket beku + 17 capture + 9 artefak eksekusi).
+- **Perintah verifikasi:** `sha256sum -c audit_ecdsa/PINS.sha256`; `gcc -O2 -std=gnu11 -o e1 audit_ecdsa/engine_e1.c` (+ `e1w`), lalu `python3 audit_ecdsa/selftest_v1.py --e1 <e1> --e1w <e1w> --e2 audit_ecdsa/engine_e2.py --json <f>`; item: `python3 audit_ecdsa/run_v1.py {i2|i3|i4|i5|i6} --manifest audit_ecdsa/seeds_manifest.json …`; runner eksekusi `audit_ecdsa/exec_2026-10-19/v1_exec_steps.sh`; guard `python -m pytest msaf/tests/test_fence_registry.py -q` (memverifikasi semua sha di bawah).
+- **Sertifikat:**
+
+  ```text
+  sha256LF 669db7ab045c770fa2d04792da710a9a3f7ed3a9d685fefcc92e073321038805 reports/REPLAY_RECORD_SPEC.md
+  sha256LF 660e3cc62a1362b8137b78c97954fe7637a5e13bd7258a7934b6692dce003d89 reports/AUDIT_ECDSA_PREREG_2026-10-19.md
+  sha256LF 07e7a6dcc05a7c90a25847deea696aaf2ba1cde9ef0ad2acc24e690e0c1ff8b5 reports/AUDIT_ECDSA_LOG_2026-10-19.log
+  sha256LF bd91bc83d2eef8dfe46366007db94b715126da51b6938610780fd19e732a10bd reports/AUDIT_ECDSA_REPORT_2026-10-19.md
+  sha256LF b939b8fdf6482dcb07cf3f8f24197600cf63c53e3c109a440a0947b04d8a89cd audit_ecdsa/engine_e1.c
+  sha256LF 3ecd223ea7d73f8ac370b08d3c2dd8f7370d0188762b4cb6b7e3825ea83f96f7 audit_ecdsa/engine_e1w.c
+  sha256LF b5ae8c2b6c9e17b435ce6b17cb0425884565699bc13cd8371b867d551a4e3c98 audit_ecdsa/engine_e2.py
+  sha256LF 788556901d7d3d7c2b61222c696c0b29d978d19e266fda27a275b02f215325b1 audit_ecdsa/selftest_v1.py
+  sha256LF 9654766ca8d53481cd07623dae776cfbdd645d98a2063bb5ba4abda279f0b91b audit_ecdsa/run_v1.py
+  sha256LF a0fcd9e1c37aa95d91809773ccf98187e000fd0af60c6d63f0258fb2a8b76fcc audit_ecdsa/build_manifest.py
+  sha256LF 2ec7baec006783b1fdeb80c9f7f25cae04aefff57ad8440dada67d261049f3d7 audit_ecdsa/tool_claim_text.py
+  sha256LF e27c3202aab424a68759da435d95da3bc5a70042f282c4b5f0b9ae1249f236fe audit_ecdsa/v1_rows.tsv
+  sha256LF 3b39e4e5ad41ff00f8e1f5b97f7f6d1357424c5e908c85b7a7605eec259ba6d4 audit_ecdsa/seeds_manifest.json
+  sha256LF 8ac938dc75c31fc498d2096cba70e7b88b5711433b3203c26604badae86335dd audit_ecdsa/SOURCES.md
+  sha256LF f64d66f5b7e11aa582f7c54b60f7e853413e538c114f1b3ad163c5d53a0c56f7 audit_ecdsa/PINS.sha256
+  sha256LF 486aa8e242427ea36492f4775a626fafbfe1b90071800fbef8d243707dd0fa55 audit_ecdsa/captures/bc_SECNamedCurves.java
+  sha256LF 266554ce62f84b3c597193b76f7046655004601e39539e2f7619b6231898781d audit_ecdsa/captures/claim_anthropic_ecdsa_curve_origins.html
+  sha256LF 35dfbdd84db918e2b678aa0371191f621c7fcac1f1ef28252cf8c43844ad77be audit_ecdsa/captures/claim_anthropic_ecdsa_curve_origins.txt
+  sha256LF 0c411bcd9c806f2dccd86ea4f663e86cc864148ce5de342ed3c13a4e46bbb38b audit_ecdsa/captures/fips186-2-change1.pdf
+  sha256LF e85f5165cc8381bf61963c95af4ca7cebe37789486d92c8693200284116ed798 audit_ecdsa/captures/fips186-2-change1.txt
+  sha256LF 34222f3b6a9442a3491b6ace810c64da0a4e43b779737ad53a287656e7fc5f6b audit_ecdsa/captures/fips186-4.pdf
+  sha256LF 5da836de5eb14ae8bb4df2fdddaa7cf25df3ba1ad404fb8cf5050a9af1898ab9 audit_ecdsa/captures/fips186-4.txt
+  sha256LF ef018c91553ccde243cb6c47405c14c68cf595bf07cfe1fdbaef27beef7baa2c audit_ecdsa/captures/neuromancer_prime192v2.html
+  sha256LF bfc658dc5687d3b149108f7ea708de943bd918efea4d6fc54dd53e1d52df75cb audit_ecdsa/captures/neuromancer_prime192v3.html
+  sha256LF d40e415d883418b9263608bb922e6c12b9a60b4356e723499447d07b3b83300b audit_ecdsa/captures/neuromancer_prime239v1.html
+  sha256LF 89848baf1e2451b523a247f77f975e345754380d8c72b6504c99bbc32ce0d3ff audit_ecdsa/captures/neuromancer_prime239v2.html
+  sha256LF 8a8f2bb06df9e72e58c93c0fd8f03df0364db5ecba94d18dc6b04602e822d7a0 audit_ecdsa/captures/neuromancer_prime239v3.html
+  sha256LF 8218c3c2f16435884691767b6d0259bf41e25819bca91a92d688cd41d8fb4ede audit_ecdsa/captures/saweis_nist_curve_seed_origins.html
+  sha256LF b52e0a56a18bef949c4342a891b78174c0977a516e2e494247bfb9159c9ea8e2 audit_ecdsa/captures/sec2-v2.pdf
+  sha256LF 93d6a91157c802de1226c08fcf36ecd78d292ac814d12bb4deb54e77362f3300 audit_ecdsa/captures/sec2-v2.txt
+  sha256LF 03230cade876901515088c170048660ce1955dd090c1c7ef875f46bcbcc45852 audit_ecdsa/captures/x962-1998-draft.pdf
+  sha256LF da957ea6ccd36df852f3ceb81f301cae3d57c19c25fbc014c1a6bdfa1ee7a299 audit_ecdsa/captures/x962-1998-draft.txt
+  sha256LF 5188ed4eb1740400252ce1db63f1d14a64e718cbbe8910fa549ae72a437bd457 audit_ecdsa/exec_2026-10-19/e1
+  sha256LF 0fcb720ed9bc67ccf8207b49981c0668f7833f63e72f2c45c28ce51ce0f3b77a audit_ecdsa/exec_2026-10-19/e1w
+  sha256LF 80cc0d2c9d0c0c1ed5581563acfbc96932bb1854409d566017ebf160ea974327 audit_ecdsa/exec_2026-10-19/i1_selftest.json
+  sha256LF 22ed4fa09a30ae2f787d966915766a3e8b1a21d84fbe4d933c39b7563fd67aac audit_ecdsa/exec_2026-10-19/i2_prime.json
+  sha256LF 247f9e511d0efdbe7a76b8f41f9b678b54d9006e8e7cc5d7a41ddab6e7201823 audit_ecdsa/exec_2026-10-19/i3_binary.json
+  sha256LF 1139975b4a0cc3f058291048ac0b8de5692af4a1ca4676167975d31a4adfef2d audit_ecdsa/exec_2026-10-19/i4_wordstats.json
+  sha256LF e1756ee8b5d1d12ef8f24b040c2ff1cbb1a6883fe440f754492ce4c504da6698 audit_ecdsa/exec_2026-10-19/i5_timestamps.json
+  sha256LF da0eccfd38f319d2dde559de7559e49d8578d3ca61bfe7c8a5de275b1368e9b3 audit_ecdsa/exec_2026-10-19/i6_sources.json
+  sha256LF a7b20f214dec09531b0d23f6d728a6f324a0c384a212a12544c3065c9919227f audit_ecdsa/exec_2026-10-19/v1_exec_steps.sh
+  ```
+
+Selesai — 9 entri per 2026-10-19 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

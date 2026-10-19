@@ -146,6 +146,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Sweep penuh L1 (opsi pra-reg §8) — keputusan owner = JALANKAN; LULUS PENUH | commit `295e716` (pra-registrasi runner+watchdog+header, dipush sebelum perintah pertama) + commit yang membawa baris ini; dibangun di atas `3d2a1bc` (CI hijau run `39097034038`); eksekusi 03:10:00Z → 05:31:18Z (±2 j 21 m; cap 6 j tidak tersentuh); `RESULT: FULL SWEEP REPLAY AND METADATA PASS`; 15/15 lane `[PASS]`; 3.149.013 baris N=690988..3840000 cocok; image `.Id` = pin `5ccd9e3f…`; tree `2e9976c4…` bersih; backup Temp sha256 `11bad912…` (16/16 OK) | `reports/AUDIT_P1_L1_SWEEP_2026-10-18.md`, `reports/audit_p1_l1_sweep_2026-10-18.log`, `audit_p1/l1_sweep.sh`, `audit_p1/l1_sweep_watchdog.sh`, `reports/FENCE_REGISTRY.md` (A-2026-0001) |
 | BB5 audit — Phase R: rebuild Coq 8.20.1 SELESAI (attempt 5, 2026-10-19T00:31:14Z) — blok akhir `Axioms:` = hanya `functional_extensionality_dep` (klaim README upstream cocok); wall/backstop 23:02:55Z tercatat as-is (D-R5, tanpa kill); gate anti-sirkularitas TOOL NOT RUN dilampirkan | commit yang membawa baris ini; dibangun di atas `0a97f2b` (tick v4.1; CI hijau run `39162111073`); attempt 5 `make -j2` `real 267m59.105s`; BusyCoq 25/25 + BB5 50/50 `.vo`; semua langkah exit 0; cert transkrip sha256LF `294d1dd4…` | `reports/AUDIT_BB5_R_ADDENDUM_2026-10-18.md`, `reports/audit_bb5_phaseR_2026-10-18.log`, `reports/FENCE_REGISTRY.md` (A-2026-0002), `audit_bb5/bb5_phaseR_resume4.sh` |
 | P2 audit Collatz (Barina) — SELESAI: replay terpra-registrasi semua item S/W/E/H/P dalam cap; S4/P DISCREPANCY terdokumentasi (15 symlink vs ekspektasi beku); registry `A-2026-0003` | commit log+laporan + commit registry yang membawa baris ini; pra-reg `bbbe9ae` (dipush sebelum perintah audit pertama; CI hijau `39154348599`); HEAD eksekusi `9d9c358` (CI hijau `39181863147`); eksekusi 2026-10-19T00:46:40Z–00:59:52Z (≈13 mnt; cap 6 j); E1 `odd_checked=8589934591` (ganjil 3 ≤ n < 2^34), `max_steps_to_drop=547` @ `12235060455`, 4 m36,8s dari wall 3,5 j; W 98/97/148 semua MATCH ×2 engine; H 25/25 + 14/14 verbatim; gate TOOL NOT RUN dilampirkan | `reports/AUDIT_COLLATZ_REPORT_2026-10-19.md`, `reports/AUDIT_COLLATZ_LOG_2026-10-19.log`, `reports/AUDIT_COLLATZ_PREREG_2026-10-19.md`, `audit_collatz/`, `reports/FENCE_REGISTRY.md` (A-2026-0003) |
+| Replay Record pertama `RR-2026-01` (halaman Anthropic 2026-10-16) — SELESAI: reproduksi terpra-registrasi pemetaan (t, n) → seed ECDSA; I2 10/10 + I3 4/4 + I4–I6 MATCH, I1 OK; B-163 residu; gate TOOL NOT RUN dilampirkan | pra-reg + spec seri dibekukan di commit `3026d12` (dipush sebelum perintah audit pertama; CI hijau run `39187596038`) + commit yang membawa baris ini; eksekusi 8 s | `reports/AUDIT_ECDSA_REPORT_2026-10-19.md`, `reports/AUDIT_ECDSA_LOG_2026-10-19.log`, `reports/AUDIT_ECDSA_PREREG_2026-10-19.md`, `reports/REPLAY_RECORD_SPEC.md`, `audit_ecdsa/`, `reports/FENCE_REGISTRY.md` (A-2026-0004) |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -1102,6 +1103,30 @@ Konsekuensi urutan yang disarankan:
   §8 dan registry.
 - **Status:** SELESAI. Berikutnya: V1 ECDSA (seri Replay Record) — mesin +
   pra-reg dulu, freeze, lalu run. Blok T P2 tetap NOT-RUN (keputusan owner).
+
+### 2.0u [BARU, 2026-10-19] Rekaman pertama Replay Record (RR-2026-01) — asal-usul seed kurva ECDSA direproduksi; registry `A-2026-0004`
+
+- **Konteks/urutan:** spec seri `reports/REPLAY_RECORD_SPEC.md` v0.1 + pra-reg
+  dibekukan di commit `3026d12`, dipush sebelum perintah audit pertama (CI
+  hijau `39187596038`); satu sesi berlog (`tee -a`); eksekusi
+  2026-10-19T02:00:15Z–02:00:23Z (8 s dari cap 60 mnt) di commit yang sama;
+  tanpa perubahan parameter.
+- **Hasil (label per item):** I1 selftest A–D `ALL OK`; I2 `10/10 MATCH`
+  (5 NIST + 5 v-kurva; `e1 = e2 = standar = klaim`; indeks kemunculan-pertama
+  = n); I3 `4/4 MATCH` (B-233/B-283/B-409/B-571; argumen = epoch
+  dibelah-dua); I4 `MATCH` (count 4; `1/P` = 5809,960481401744 vs 5.810);
+  I5 `MATCH` (halved Feb 1984 / doubled 1998-04-17 / interval 14 hari /
+  rentang Mei 1997–April 1998); I6 `MATCH` (≥2 sumber, semua sepakat, rebuild
+  byte-identik). B-163 residu (t/n tidak terbit). Gate anti-sirkularitas
+  `TOOL NOT RUN (NO_LEAN_FILES)` exit 2 dilampirkan verbatim; tidak ada klaim
+  "machine-verified".
+- **Artefak:** `reports/AUDIT_ECDSA_REPORT_2026-10-19.md` (§1–§11),
+  `reports/AUDIT_ECDSA_LOG_2026-10-19.log` (`07e7a6dc…`), pra-reg + spec,
+  paket beku `audit_ecdsa/` (PINS `f64d66f5…`, 29/29 `-c` OK) +
+  `audit_ecdsa/exec_2026-10-19/` (9 artefak); registry `A-2026-0004` (41 baris
+  sertifikat; guard pasangannya di CI).
+- **Batas:** replay finit ≠ peer review; bukan klaim keamanan ECDSA; bukan
+  bukti NSA menjalankan lrand48; tidak menyatakan/menyangkal RH atau P≠NP.
 
 ---
 
