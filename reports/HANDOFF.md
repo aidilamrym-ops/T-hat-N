@@ -144,6 +144,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Versi baru Zenodo `v1.41.0-alpha` (suksesor) — mint + publish via `--new-version-of` | commit `cf32fca` (tooling new-version + arsip yang diarsipkan; CI hijau `39090625982` + ref tag `39090834877`) + `b1e23ab` (perbaikan resume; CI hijau `39091124813`) + commit yang membawa baris ini; DOI versi `10.5281/zenodo.23445149` (konsep `10.5281/zenodo.23338271`); arsip tarball commit `cf32fca` sha256 `722258413f6dc416daf6702234d11699f1add25411fdd405807480952c2e946f` (1.068.890 byte, md5 `07fd2e2a598d8f6fc0778c6fd4b68923` cocok); deskripsi 3764 byte sha256 `218f902570d3a14759bc8d4c8ee7b92606c442b0830596e8406935e984b77988`; tag annotated `v1.41.0-alpha` → `cf32fca`; record `23410894` TIDAK tersentuh | https://doi.org/10.5281/zenodo.23445149, `reports/ZENODO_NEW_VERSION_2026-10-18.md` |
 | Probe audit eksternal pertama — BB(5) = 47.176.870 (Coq-BB5 v1.0.0): pra-registrasi + Phase A W/S/H/E/P + registry `A-2026-0002` | commit `fe90659` (pra-registrasi, dipush sebelum perintah audit pertama; CI hijau run `39096422610`) + commit yang membawa baris ini; eksekusi 85 s; replay saksi 47.176.870/4.098 eksak oleh 2 engine ×2 run (baterai 15/15); statement sha256LF `cac368d2…` (dua jalur unduh); weld Zenodo↔repo 217/218 (hanya `README.md`); E BB(3) X=20/Y=6 konsisten tabel beku; H: 0 `Admitted`, flag `BusyCoq/LibTactics.v`; R NOT-RUN (izin pemilik; prasyarat sweep L1 selesai) | `reports/AUDIT_BB5_REPORT_2026-10-18.md`, `reports/AUDIT_BB5_PREREG_2026-10-18.md`, `reports/AUDIT_BB5_RECON_2026-10-18.md`, `audit_bb5/`, `reports/FENCE_REGISTRY.md` (A-2026-0002) |
 | Sweep penuh L1 (opsi pra-reg §8) — keputusan owner = JALANKAN; LULUS PENUH | commit `295e716` (pra-registrasi runner+watchdog+header, dipush sebelum perintah pertama) + commit yang membawa baris ini; dibangun di atas `3d2a1bc` (CI hijau run `39097034038`); eksekusi 03:10:00Z → 05:31:18Z (±2 j 21 m; cap 6 j tidak tersentuh); `RESULT: FULL SWEEP REPLAY AND METADATA PASS`; 15/15 lane `[PASS]`; 3.149.013 baris N=690988..3840000 cocok; image `.Id` = pin `5ccd9e3f…`; tree `2e9976c4…` bersih; backup Temp sha256 `11bad912…` (16/16 OK) | `reports/AUDIT_P1_L1_SWEEP_2026-10-18.md`, `reports/audit_p1_l1_sweep_2026-10-18.log`, `audit_p1/l1_sweep.sh`, `audit_p1/l1_sweep_watchdog.sh`, `reports/FENCE_REGISTRY.md` (A-2026-0001) |
+| BB5 audit — Phase R: rebuild Coq 8.20.1 SELESAI (attempt 5, 2026-10-19T00:31:14Z) — blok akhir `Axioms:` = hanya `functional_extensionality_dep` (klaim README upstream cocok); wall/backstop 23:02:55Z tercatat as-is (D-R5, tanpa kill); gate anti-sirkularitas TOOL NOT RUN dilampirkan | commit yang membawa baris ini; dibangun di atas `0a97f2b` (tick v4.1; CI hijau run `39162111073`); attempt 5 `make -j2` `real 267m59.105s`; BusyCoq 25/25 + BB5 50/50 `.vo`; semua langkah exit 0; cert transkrip sha256LF `294d1dd4…` | `reports/AUDIT_BB5_R_ADDENDUM_2026-10-18.md`, `reports/audit_bb5_phaseR_2026-10-18.log`, `reports/FENCE_REGISTRY.md` (A-2026-0002), `audit_bb5/bb5_phaseR_resume4.sh` |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -1004,6 +1005,56 @@ Konsekuensi urutan yang disarankan:
   numbers reproduced from the release's own tooling"; bukan verifikasi
   independen; tidak menyatakan/menyangkal RH atau pernyataan universal.
 - **Status:** SELESAI; audit P1 kini tuntas penuh: (a)+(b)+(c)+opsi §8.
+
+---
+
+### 2.0s [BARU, 2026-10-19] BB(5) audit — Phase R SELESAI: rebuild Coq 8.20.1 (attempt 5) — `Print Assumptions` = hanya `functional_extensionality_dep`
+
+- **Konteks/urutan:** prasyarat pra-reg §9 terpenuhi (sweep L1 selesai
+  2026-10-18T05:31:18Z, §2.0r; izin pemilik untuk instalasi toolchain —
+  owner-gated). Seluruh rantai attempt (1–5) terekam di transkrip
+  `reports/audit_bb5_phaseR_2026-10-18.log`; tiap attempt lanjutan hanya
+  dimulai setelah catatan interupsi/ABORT tertulis (tanpa retry senyap);
+  tidak ada parameter/cap yang diubah setelah hasil; deadline epoch
+  `1792364575` tidak pernah di-reset.
+- **Eksekusi (attempt 5):** runner `audit_bb5/bb5_phaseR_resume4.sh` (sha256
+  `4b55010d…`; dijalankan dari path repo — single source of truth);
+  `make -j2` (mitigasi OOM; cap "no `-j` > 4" dipatuhi); vanilla Coq 8.20.1
+  (`coq-native` disabled, sesuai prereg); window 20:03:14Z → 00:31:14Z
+  (4 j 28 m; `make` self-report `real 267m59.105s`).
+- **Hasil:** BusyCoq 25/25 `.vo`; BB5 50/50 `.vo`; `BB5_Theorem.vo`
+  (6.859 B) ada; semua langkah `EXIT: 0`; `PHASER_COMPLETE` set; blok akhir
+  `Axioms:` memuat TEPAT satu aksioma —
+  `FunctionalExtensionality.functional_extensionality_dep` — **klaim README
+  upstream (`9142e219…`, "### Used Axiom") COCOK** dengan keluaran teramati.
+  Label maksimum (formula beku): "the proof was rebuilt with Coq 8.20.1 on
+  this host; compilation exited 0; the end-of-build assumption print reads:
+  `Axioms: FunctionalExtensionality.functional_extensionality_dep : forall
+  (A : Type) (B : A -> Type) (f g : forall x : A, B x), (forall x : A,
+  f x = g x) -> f = g`" — rebuild dari sumber ter-pin, **bukan** verifikasi
+  independen.
+- **Wall/backstop:** epoch `1792364575` (23:02:55Z) tercapai di tengah
+  attempt 5 → tercatat `UNRESOLVED-BUDGET` as-is + kill SUPPRESSED (D-R5
+  pra-wall; tick v4.1 commit `0a97f2b`, sha256LF `6eda81a5…`); build
+  berlanjut tanpa gangguan dan selesai 1 j 28 m 19 s setelah wall (overrun
+  dicatat as-is; tanpa blok start kedua). Bukti D-R5 bekerja:
+  `TNF_Root_4_11.vo` selesai 23:19:39Z (17 m SESUDAH wall, selamat).
+- **Attempt 1–4 (tanpa hasil audit; semua catatan ditulis sebelum attempt
+  berikutnya):** setup abort (`libgmp-dev` depext; keputusan L474);
+  interupsi lingkungan ×2 (VM WSL auto-stop → hardening `.wslconfig
+  vmIdleTimeout`; instance-terminate WSL 3.x → supervisor tick Windows-side
+  berlapis); OOM-kill `-j4` (15:08:59Z; Error 137 → mitigasi `-j2`).
+- **Gate + registry:** gate anti-sirkularitas `TOOL NOT RUN
+  (NO_LEAN_FILES)` exit 2 (verbatim di addendum §7; self-test 13/13 PASS;
+  hanya bisa menurunkan klaim). Registry `A-2026-0002`: catatan bertanggal +
+  12 baris sertifikat baru (transkrip R + skrip rantai + addendum).
+- **Artefak:** `reports/AUDIT_BB5_R_ADDENDUM_2026-10-18.md` (§1–§10);
+  transkrip beku `reports/audit_bb5_phaseR_2026-10-18.log` (sha256LF
+  `294d1dd4…`); markas `/root/bb5r` (marker `PHASER_COMPLETE`; cleanup =
+  §9 runbook, bukan bagian hasil).
+- **Status:** SELESAI. Berikutnya: P2 Collatz (prereg beku `bbbe9ae` +
+  sinyal "go" 2026-10-18T19:29Z "berlaku setelah R" → prasyarat kini
+  terpenuhi) menunggu eksekusi; setelah itu V1 ECDSA (seri Replay Record).
 
 ---
 

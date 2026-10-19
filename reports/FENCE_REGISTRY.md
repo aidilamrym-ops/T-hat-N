@@ -303,6 +303,30 @@ mengikuti laporan L4).
 - **Relasi:** probe audit eksternal pertama; audit pihak ketiga kedua
   setelah `A-2026-0001`; laporan `reports/AUDIT_BB5_REPORT_2026-10-18.md`;
   pra-registrasi `fe90659`; recon `reports/AUDIT_BB5_RECON_2026-10-18.md`.
+- **Catatan (2026-10-19): item R DIEKSEKUSI dan SELESAI** — memperbarui
+  kalimat "item R (rebuild Coq 8.20.1 + `Print Assumptions BB5_value.`)
+  **NOT-RUN** (owner-gated; ...)" di atas; kalimat itu = snapshot
+  pra-eksekusi (entri tidak dihapus, hanya dicatat). Attempt 5 SELESAI
+  2026-10-19T00:31:14Z: BusyCoq 25/25 `.vo`, BB5 50/50 `.vo`,
+  `BB5_Theorem.vo` ada (6.859 B), semua langkah `EXIT: 0`, `PHASER_COMPLETE`
+  set; `make` self-report `real 267m59.105s` (vanilla Coq 8.20.1 tanpa
+  `coq-native`, `make -j2`). Blok akhir `Axioms:` = TEPAT satu aksioma:
+  `FunctionalExtensionality.functional_extensionality_dep` — klaim README
+  upstream (`9142e219…`) COCOK dengan keluaran teramati. Wall/backstop epoch
+  `1792364575` (23:02:55Z) tercapai di tengah attempt 5 → tercatat
+  `UNRESOLVED-BUDGET` as-is + kill SUPPRESSED (D-R5 pra-wall; tick v4.1
+  commit `0a97f2b`); build berlanjut, selesai 1 j 28 m 19 s setelah wall
+  (overrun dicatat as-is; tanpa retry senyap; blok start presisi tetap 4).
+  Attempt 1–4 tanpa hasil audit (setup abort; 2 interupsi lingkungan; 1
+  OOM-kill — masing-masing dicatat sebelum attempt berikutnya). Gate
+  anti-sirkularitas: `TOOL NOT RUN (NO_LEAN_FILES)` exit 2 (verbatim di
+  addendum §7; hanya bisa menurunkan klaim). Addendum:
+  `reports/AUDIT_BB5_R_ADDENDUM_2026-10-18.md` (label beku: "the proof was
+  rebuilt with Coq 8.20.1 on this host; compilation exited 0; the
+  end-of-build assumption print reads: Axioms:
+  FunctionalExtensionality.functional_extensionality_dep : forall (A : Type)
+  (B : A -> Type) (f g : forall x : A, B x), (forall x : A, f x = g x)
+  -> f = g" — rebuild dari sumber ter-pin, bukan verifikasi independen).
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py
   -q` (guard memeriksa semua sha di bawah); replay: `python3
   audit_bb5/bb5_engine_p.py --out <f>` + `python3 audit_bb5/bb5_engine_q.py
@@ -324,6 +348,18 @@ mengikuti laporan L4).
   sha256LF a94220774443486bad7ad2c38141a20ecfce43103204989867f49950ab4af1b4 audit_bb5/bb5_engine_p.py
   sha256LF 37b96a2b4a02530b31c0fe2e9b984a1d2c0a22bc7aea3648b3b5f98072f2a4b1 audit_bb5/bb5_engine_q.py
   sha256LF 03d69223587e4fcae9ecab30e96931de99ccb531db5e20ff988ba7cfd4762ff4 audit_bb5/artifact_checks.py
+  sha256LF 294d1dd423f9b4f596435fab813f082bfb781c58d7f810d53060d51c2c7b2cef reports/audit_bb5_phaseR_2026-10-18.log
+  sha256LF 11c891930050600297f35d5338e8746e84b2ee19b6dd3a9562a53e8301df297f reports/AUDIT_BB5_R_ADDENDUM_2026-10-18.md
+  sha256LF 3f0415e57f6bef052d0e675524376995208c9611b123703d88ecad3c73a52d8c audit_bb5/bb5_phaseR.sh
+  sha256LF 0261cae899a03423efc9d76960fe82d5dc06b00382c51a66448fee5f539c5c17 audit_bb5/bb5_phaseR_resume.sh
+  sha256LF 86af54de441603b62195cc856d399de1ab19cf8c13dc00f00d75a73ec0c2cf73 audit_bb5/bb5_phaseR_resume2.sh
+  sha256LF c3b5132e3c4918f90d7d3447641031fa38621a31d3be6aff07ccdcc821fa18f5 audit_bb5/bb5_phaseR_resume3.sh
+  sha256LF 4b55010dd5365a25706c9c00b87d3eb9aad18ff155904c4f9065d9ddb46b9db7 audit_bb5/bb5_phaseR_resume4.sh
+  sha256LF ff95fe17855a38bfdddfb6289f84b551d04c09ddb013ab5575c56bf54532b3ea audit_bb5/bb5_phaseR_watchdog.sh
+  sha256LF 6eda81a5fb7e2d2653edb3342faf1631fa4fe9816c9d3ef0a195d9b906643bb4 audit_bb5/bb5_phaseR_keepalive_tick.sh
+  sha256LF 151a8b467635586ac6f318bfb0ae211df4d129adcf695bf8baa5cc1e89db6f62 audit_bb5/bb5_phaseR_keepalive.ps1
+  sha256LF 40c2405d24e6d4188b055e39144cccddf0fc6edb7845bcad7591a1b55359c097 audit_bb5/bb5_phaseR_keepalive_spawn_wmi.ps1
+  sha256LF d1a312a1322a0515a1bb31059b86a256257fbba3f4905a5e863d698034a614ed audit_bb5/bb5_phaseR_keepalive_task.ps1
   ```
 
 Selesai — 7 entri per 2026-10-18 (6 entri awal + `A-2026-0002`). Entri

@@ -1499,3 +1499,147 @@ menulis ABORT + DAEMON_FAIL seperti desain; tick v4 lalu mengonsumsi APPROVE_ATT
 relaunch attempt 5 (make -j2) memakai skrip yang SUDAH diperbaiki ini.
 Status attempt 5 saat catatan ditulis: BELUM dimulai (3 blok "resume) start"; APPROVE_ATTEMPT5
 ada; DAEMON_FAIL belum ada).
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_10.v", line 30, characters 0-4:
+Warning: Native compiler is disabled, falling back to VM conversion test.
+[native-compiler-disabled,native-compiler,default]
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_3.v", line 23, characters 0-4:
+Warning: Native compiler is disabled, falling back to VM conversion test.
+[native-compiler-disabled,native-compiler,default]
+make[1]: *** [Makefile.coq:417: all] Error 2
+make[1]: Leaving directory '/root/bb5r/Coq-BB5-git/CoqBB5/BB5'
+make: *** [Makefile:4: all] Error 2
+
+real	542m53.639s
+user	1478m13.478s
+sys	13m25.533s
+EXIT: 2
+=== phase R (attempt 4) ABORT: BB5 build 2026-10-18T20:03:11Z ===
+
+--- 2026-10-18T20:03:14Z | APPROVE_ATTEMPT5: abort attempt 4 terdeteksi (DAEMON_FAIL); latch dihapus sekali-pakai; relaunch attempt 5 (make -j2). ---
+
+=== phase R attempt 5 (resume) start 2026-10-18T20:03:14Z ===
+runner: /mnt/d/Opencode AI Agent/audit_bb5/bb5_phaseR_resume4.sh (repo path; single source of truth) sha256 4b55010dd5365a25706c9c00b87d3eb9aad18ff155904c4f9065d9ddb46b9db7
+attempt 4 status: OOM-kill (kernel) pada coqc TNF_Root_4_11.v 15:08:59Z (make: Error 137); runner menulis ABORT attempt 4 + DAEMON_FAIL setelah job tersisa (TNF_Root_3, TNF_Root_4_10) selesai. Tidak ada hasil audit.
+resume .vo count: 44/50
+mitigasi OOM: build dengan make -j2 (turun dari -j4); cap prereg 'no -j >4' dipatuhi; artefak kompilasi tidak berubah.
+supervision: tick v4 (self-healing relaunch + token APPROVE_ATTEMPT5 sekali-pakai); deadline epoch 1792364575 (tidak berubah).
+
+--- 2026-10-18T20:03:14Z | opam env (eval in runner; WARNING difilter)
+CMD: opam env --shell=bash
+OPAM_LAST_ENV='/root/.opam/.last-env/env-7e1c9e96aee4d3d9f98a0c81be18d8d2-0'; export OPAM_LAST_ENV;
+OPAM_SWITCH_PREFIX='/root/.opam/4.14.2'; export OPAM_SWITCH_PREFIX;
+OCAMLTOP_INCLUDE_PATH='/root/.opam/4.14.2/lib/toplevel'; export OCAMLTOP_INCLUDE_PATH;
+CAML_LD_LIBRARY_PATH='/root/.opam/4.14.2/lib/stublibs:/root/.opam/4.14.2/lib/ocaml/stublibs:/root/.opam/4.14.2/lib/ocaml'; export CAML_LD_LIBRARY_PATH;
+OCAML_TOPLEVEL_PATH='/root/.opam/4.14.2/lib/toplevel'; export OCAML_TOPLEVEL_PATH;
+MANPATH=':/root/.opam/4.14.2/man'; export MANPATH;
+PATH='/root/.opam/4.14.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/usr/lib/linux-tools/6.18.54.1-microsoft-standard-WSL2/bin:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Python314/Scripts/:/mnt/c/Python314/:/mnt/c/Program Files (x86)/Common Files/Intel/Shared Files/cpp/bin/Intel64:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/nodejs/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/usER/AppData/Roaming/Python/Python314/Scripts:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/GitHub CLI/:/mnt/c/Program Files/WSL/:/mnt/c/Users/usER/.pi/agent/bin:/mnt/c/Users/usER/.elan/bin:/mnt/c/Users/usER/.cargo/bin:/mnt/c/Users/usER/.mimocode/bin:/mnt/c/Users/usER/AppData/Local/hermes/bin:/mnt/c/Users/usER/AppData/Local/Microsoft/WindowsApps:/mnt/d/Taget 2026/Antigravity/bin:/mnt/c/Users/usER/AppData/Roaming/npm:/mnt/c/Users/usER/AppData/Local/Programs/Ollama:/mnt/c/Users/usER/AppData/Local/Microsoft/WinGet/Links:/mnt/c/Users/usER/.lmstudio/bin:/mnt/c/Users/usER/AppData/Local/Programs/Cua/cua-driver/bin:/mnt/c/Users/usER/AppData/Local/Programs/Obsidian:/mnt/c/Users/usER/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin'; export PATH;
+EXIT: 0
+
+--- 2026-10-18T20:03:14Z | coqc --version (expect 8.20.1)
+CMD: coqc --version
+The Coq Proof Assistant, version 8.20.1
+compiled with OCaml 4.14.2
+EXIT: 0
+
+--- 2026-10-18T20:03:14Z | build BusyCoq (make -j2; no-op bila lengkap)
+CMD: cd /root/bb5r/Coq-BB5-git/BusyCoq && time make -j2
+make[1]: Entering directory '/root/bb5r/Coq-BB5-git/BusyCoq'
+make[2]: Nothing to be done for 'real-all'.
+make[1]: Leaving directory '/root/bb5r/Coq-BB5-git/BusyCoq'
+
+real	0m0.504s
+user	0m0.161s
+sys	0m0.334s
+EXIT: 0
+
+--- 2026-10-18T20:03:15Z | build CoqBB5/BB5 (make -j2; melanjutkan dari parsial)
+CMD: cd /root/bb5r/Coq-BB5-git/CoqBB5/BB5 && time make -j2
+make[1]: Entering directory '/root/bb5r/Coq-BB5-git/CoqBB5/BB5'
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_11.v
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_12.v
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_12.v", line 24, characters 0-67:
+Warning: native_compute disabled at configure time; falling back to
+vm_compute. [native-compiler-disabled,native-compiler,default]
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_11.v", line 24, characters 0-67:
+Warning: native_compute disabled at configure time; falling back to
+vm_compute. [native-compiler-disabled,native-compiler,default]
+
+--- 2026-10-18T20:12Z | SUPERVISOR NOTE pra-wall (pre-registrasi; tick v4.1) ---
+TEMUAN (2026-10-18 ~20:08Z, attempt 5 berjalan): mekanisme wall pada tick v4 cacat. pkill -f "$R/Coq-BB5-git" hanya mengenai wrapper "bash -c cd ..." (bukti pgrep -af: make/coqc berjalan dengan path RELATIF), sehingga kill wall akan meninggalkan make/coqc sebagai orphan (build JALAN TERUS) sementara relaunch self-healing ~10 dtk kemudian menjalankan ulang target yang sama -> DOUBLE COMPILE 4_11/4_12 di host 9,7 GiB (risiko OOM; preseden 15:08:59Z Error 137).
+PERBAIKAN (berlaku 20:10Z; SEBELUM wall 23:02:55Z; commit 0a97f2b / 0a97f2bb0cb859d4942192963b076d3dc3f46904; sha256 tick v4.1 6eda81a5fb7e2d2653edb3342faf1631fa4fe9816c9d3ef0a195d9b906643bb4): blok wall menjadi RECORD-ONLY. Tidak ada parameter build yang berubah: runner resume4 sha256 4b55010dd5365a25706c9c00b87d3eb9aad18ff155904c4f9065d9ddb46b9db7; make -j2; cap "-j <= 4" dipatuhi; deadline epoch 1792364575 tidak disentuh dan tidak direset.
+KEPUTUSAN D-R5 (bertanggal, pra-wall; memenuhi runbook bagian 11 "dated decision before any retry"): (1) bila wall tercapai dan build belum selesai, tick mencatat baris wall + UNRESOLVED-BUDGET as-is, TANPA kill; attempt 5 BERLANJUT tanpa gangguan; tidak akan ada blok "attempt 5 (resume) start" kedua (tanpa relaunch). (2) Kegagalan BARU (DAEMON_FAIL latch) tetap menghentikan relaunch -> butuh atensi + keputusan baru. (3) Bila build selesai sebelum wall, catatan ini moot. Teks lengkap D-R5: runbook bagian 11 (Temp) + pesan commit 0a97f2b.
+
+--- 2026-10-18T23:02:55Z | KEEPALIVE STOP: wall backstop reached (deadline epoch 1792364575); kill SUPPRESSED (pre-registered D-R5: attempt 5 continues undisturbed, no parameter changes); item recorded UNRESOLVED-BUDGET.
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_11.v", line 30, characters 0-4:
+Warning: Native compiler is disabled, falling back to VM conversion test.
+[native-compiler-disabled,native-compiler,default]
+
+--- 2026-10-19T00:15Z | POST-WALL CHECK (supervisor) ---
+Wall tercapai 23:02:55Z (baris 1572): "KEEPALIVE STOP: wall backstop reached (deadline epoch 1792364575); kill SUPPRESSED (pre-registered D-R5: attempt 5 continues undisturbed, no parameter changes); item recorded UNRESOLVED-BUDGET." TIDAK ada kill; TIDAK ada relaunch; hitung presisi blok "attempt N (resume) start" tetap 4 (tanpa blok kedua). Build berlanjut: TNF_Root_4_11.vo selesai 23:19:39Z (17 mnt sesudah wall); TNF_Root_4_12 masih dikompilasi; .vo 45/50. STOP_RECORDED ada (klaim sekali-pakai); baris wall tunggal (grep=1); heartbeat segar (tick v4.1); tanpa DAEMON_FAIL. Kesimpulan: D-R5 bekerja sesuai pre-registrasi; item tercatat UNRESOLVED-BUDGET as-is. Tidak ada aksi.
+File "./BB5_TNF_Enumeration_Roots/TNF_Root_4/TNF_Root_4_12.v", line 30, characters 0-4:
+Warning: Native compiler is disabled, falling back to VM conversion test.
+[native-compiler-disabled,native-compiler,default]
+COQC BB5_TNF_Enumeration_Roots/TNF_Root_4.v
+COQC BB5_TNF_Enumeration.v
+COQC BB5_Extraction.v
+COQC BB5_Theorem.v
+File "./BB5_Extraction.v", line 95, characters 0-86:
+Warning: Output directory is unset, using
+"/root/bb5r/Coq-BB5-git/CoqBB5/BB5". Use command line option
+"-output-directory to set a default directory.
+[default-output-directory,filesystem,default]
+File "./BB5_Extraction.v", line 95, characters 0-86:
+Warning: Output directory is unset, using
+"/root/bb5r/Coq-BB5-git/CoqBB5/BB5". Use command line option
+"-output-directory to set a default directory.
+[default-output-directory,filesystem,default]
+File "./BB5_Extraction.v", line 118, characters 0-78:
+Warning: Output directory is unset, using
+"/root/bb5r/Coq-BB5-git/CoqBB5/BB5". Use command line option
+"-output-directory to set a default directory.
+[default-output-directory,filesystem,default]
+File "./BB5_Extraction.v", line 118, characters 0-78:
+Warning: Output directory is unset, using
+"/root/bb5r/Coq-BB5-git/CoqBB5/BB5". Use command line option
+"-output-directory to set a default directory.
+[default-output-directory,filesystem,default]
+Finished transaction in 12.262 secs (11.972u,0.281s) (successful)
+Axioms:
+FunctionalExtensionality.functional_extensionality_dep :
+  forall (A : Type) (B : A -> Type) (f g : forall x : A, B x),
+  (forall x : A, f x = g x) -> f = g
+make[1]: Leaving directory '/root/bb5r/Coq-BB5-git/CoqBB5/BB5'
+
+real	267m59.105s
+user	462m57.192s
+sys	1m8.668s
+EXIT: 0
+
+--- 2026-10-19T00:31:14Z | assumptions marker extract (self-grep)
+CMD: grep -n -E 'Print Assumptions|functional_extensionality|Axioms:|Assumptions:' "/mnt/d/Opencode AI Agent/reports/audit_bb5_phaseR_2026-10-18.log" | tail -40
+40:9. Print Assumptions: output kompilasi `BB5_Theorem.v` (baris terakhir
+41:   file: `Print Assumptions BB5_value.`) ter-capture di transkrip; blok
+486:(make BusyCoq, make BB5, Print Assumptions). Caps tidak berubah:
+1292:Attempt 2 berjalan sejak 06:15:06Z; berhenti mendadak saat kompilasi TNF_Root_4_6.v (log berakhir tanpa penanda akhir). Titik henti eksak: .vo terakhir = TNF_Root_4_5.vo (mtime 07:12:35Z). Sisa 14 .v tanpa .vo: BB5_Extraction.v, BB5_TNF_Enumeration.v, TNF_Root_3.v, TNF_Root_4.v, TNF_Root_4_1.v, TNF_Root_4_2.v, TNF_Root_4_6.v, TNF_Root_4_7_leaf.v, TNF_Root_4_8_leaf.v, TNF_Root_4_9.v, TNF_Root_4_10.v, TNF_Root_4_11.v, TNF_Root_4_12.v, BB5_Theorem.v. BusyCoq 25/25 .vo. BB5_Theorem.vo TIDAK ada; tidak ada output Print Assumptions / hasil audit apa pun.
+1372:Attempt 3 berjalan 08:23:45Z-09:27:36Z; mati saat kompilasi TNF_Root_4_10.v. Bukti: .vo terakhir TNF_Root_4_6.vo (mtime 09:21:01Z); log berakhir di warning 4_10; 40/50 .vo; BB5_Theorem.vo tetap TIDAK ada; tidak ada output Print Assumptions / hasil audit apa pun.
+1607:Axioms:
+1608:FunctionalExtensionality.functional_extensionality_dep :
+1619:CMD: grep -n -E 'Print Assumptions|functional_extensionality|Axioms:|Assumptions:' "/mnt/d/Opencode AI Agent/reports/audit_bb5_phaseR_2026-10-18.log" | tail -40
+EXIT: 0
+
+--- 2026-10-19T00:31:14Z | count .vo (BusyCoq)
+CMD: find /root/bb5r/Coq-BB5-git/BusyCoq -name '*.vo' | wc -l
+25
+EXIT: 0
+
+--- 2026-10-19T00:31:14Z | count .vo (BB5)
+CMD: find /root/bb5r/Coq-BB5-git/CoqBB5/BB5 -name '*.vo' | wc -l
+50
+EXIT: 0
+
+--- 2026-10-19T00:31:14Z | BB5_Theorem.vo present
+CMD: ls -l /root/bb5r/Coq-BB5-git/CoqBB5/BB5/BB5_Theorem.vo
+-rw-r--r-- 1 root root 6859 Oct 19 08:31 /root/bb5r/Coq-BB5-git/CoqBB5/BB5/BB5_Theorem.vo
+EXIT: 0
+
+=== phase R attempt 5 (resume) end 2026-10-19T00:31:14Z (all steps exit 0 as recorded above; PHASER_COMPLETE set) ===
