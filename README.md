@@ -122,7 +122,13 @@ an audit deviation; and
 ([`reports/COQ_BRIDGE_L5_LIMIT_2026-10-20.md`](reports/COQ_BRIDGE_L5_LIMIT_2026-10-20.md))
 — the same integral–series comparison taken to the limit with the three
 `Un_cv` limits as hypotheses, the four-axiom stdlib trusted base unchanged,
-and existence of the limits still explicitly OPEN (Paket 9 next). Every
+and existence of the limits left to Paket 9; and
+`A-2026-0014`, the unconditional L5 pilot for `f_k`
+([`reports/COQ_BRIDGE_L5_INFINITE_2026-10-20.md`](reports/COQ_BRIDGE_L5_INFINITE_2026-10-20.md))
+— all three limits proved to exist and the two-sided comparison closed for
+`f_k(x)=x^{-(k+1)}` (`k ≥ 1`, `N ≥ 1`) only, with the four-axiom stdlib
+trusted base unchanged, while general `f`, real exponents, L3/L4 and the
+periodic-box `[J]` remain explicitly OPEN. Every
 verdict is a bounded assessment under the scope limits recorded there, not a
 defect claim on any third party's work.
 

@@ -1501,6 +1501,50 @@ Konsekuensi urutan yang disarankan:
   (`python-tests` 1m19s + `lean-kernel` 1m51s; kedua job diverifikasi
   lewat `/actions/runs/39297967397/jobs`).
 
+### 2.0af [BARU, 2026-10-20] L5 infinite (unconditional) di Coq — eksistensi tiga limit dan perbandingan integral–deret dua sisi untuk `f_k(x)=x^{-(k+1)}`; 17 hasil; registry `A-2026-0014`
+
+- **Konteks:** Paket 9, pra-registrasi baru
+  `reports/PREREG_PAKET9_2026-10-20.md` (scope dikunci sebelum
+  implementasi). Berkas baru
+  `formal_bridge/IntegralComparisonInfinite.v` **mengimpor** modul beku
+  `IntegralComparison.v` (`A-2026-0012`),
+  `IntegralComparisonLimit.v` (`A-2026-0013`), dan `PseriesL2.v`
+  (`A-2026-0010`) apa adanya; artefak Paket 1–8 **tidak diubah**.
+- **Hasil:** `integral_comparison_power_infinite`: untuk `k ≥ 1`,
+  `N ≥ 1`, terbukti `exists L_N L_N1 L_S : R` dengan `Un_cv` untuk
+  integral dari `N`, integral dari `N+1`, dan tail sum dari `N+1`,
+  serta `L_{N+1} ≤ L_S ≤ L_N`. Ini L5 pilot **unconditional** untuk
+  `f_k`; 17 hasil, termasuk bridging `psum`/`sum_upto`/`pterm`/`fk`,
+  lemma shift `Un_cv`, `tail_sum_cv` dari `pseries_L2_integer`,
+  monotonisitas/batas integral lewat `sum_incr`, `whole_val_cv` lewat
+  `Un_cv_crit`, dan penggabungan dengan Paket 8.
+- **Bukti:** `coqc` exit 0 untuk keempat modul; `coqchk` exit 0
+  \"Modules were successfully checked\"; 17/17 hasil di keluaran kernel;
+  receipt deterministik (dua capture byte-identik, 178 baris; sha256
+  `39ad870db3b2fec94745ef95a26161e108e8642d2323666bc856da5954fd056d`).
+  Tanpa `Axiom`/`Parameter`/`Admitted`/`admit`.
+- **Trusted base:** `Print Assumptions` teorema utama = **tepat empat**
+  aksioma stdlib (`sig_forall_dec`, `sig_not_dec`,
+  `functional_extensionality_dep`, `Classical_Prop.classic`); peta per
+  hasil: 1 hasil dengan 1 aksioma, 10 hasil dengan 2, 1 hasil dengan 3,
+  dan 5 hasil dengan 4 (rincian di laporan §5). Tidak ada aksioma
+  proyek. Deviasi 4-aksioma Paket 7 tetap tercatat; jika owner
+  mensyaratkan literal tiga aksioma, paket ini juga tidak memenuhi.
+  Status: **CERTIFIED dengan deviasi trusted base tercatat**.
+- **Batas:** **unconditional hanya untuk `f_k`** (`k ≥ 1`, `N ≥ 1`);
+  bukan `f` umum, bukan eksponen real `p > 1` (`Rpower`), bukan L3/L4;
+  **bukan** penutupan `[J]` periodic-box `A-2026-0007` (tetap OPEN);
+  `Coq.Reals` aksiomatik, bukan konsistensi; gate anti-circularity
+  `TOOL NOT RUN` (NO_LEAN_FILES; exit 2 menurut kontrak gate) **tidak
+  dihitung sebagai sukses**; CI tidak punya Coq (hanya guard statis);
+  tanpa klaim zeta/Weil/RH/P≠NP/fisika; bukan peer review.
+- **Guard:** `python -m pytest msaf/tests/test_coq_bridge_integral_infinite.py -q`
+  (5 uji: placeholder, kelengkapan audit, impor + statement lock,
+  receipt/trusted base, 18 mutasi negatif); registry `A-2026-0014`
+  (6 sertifikat sha256LF). Reproduksi lokal:
+  `formal_bridge/check_integral_infinite.sh`. CI: dijalankan setelah
+  push (run id diperbarui di commit dokumentasi berikutnya).
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional

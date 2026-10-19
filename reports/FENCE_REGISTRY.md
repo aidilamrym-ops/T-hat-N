@@ -994,6 +994,67 @@ mengikuti laporan L4).
   sha256LF 4df4bc574199a04f9138c14174818bd4bab7a2b2c06a82cef41d0641d43b02c7 reports/PREREG_PAKET8_2026-10-20.md
   ```
 
-Selesai — 18 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013`). Entri
+### A-2026-0014 — L5 infinite (unconditional) di Coq: eksistensi tiga limit dan perbandingan integral–deret dua sisi untuk `f_k(x)=x^{-(k+1)}`; 17 hasil; trusted base 4 aksioma stdlib
+
+- **Jenis:** A
+- **Pernyataan:** Lanjutan Paket 9 (pra-registrasi baru
+  `reports/PREREG_PAKET9_2026-10-20.md`; berkas Paket 1–8 **tidak
+  diubah**). Berkas baru `formal_bridge/IntegralComparisonInfinite.v`
+  mengimpor modul beku `IntegralComparison.v` (`A-2026-0012`),
+  `IntegralComparisonLimit.v` (`A-2026-0013`), dan `PseriesL2.v`
+  (`A-2026-0010`) apa adanya. Untuk `k ≥ 1`, `N ≥ 1`, teorema utama
+  **`integral_comparison_power_infinite`** membuktikan
+  `exists L_N L_N1 L_S : R` dengan `Un_cv` untuk integral dari `N`,
+  integral dari `N+1`, dan tail sum dari `N+1`, serta
+  `L_{N+1} <= L_S <= L_N` — L5 pilot **unconditional** untuk `f_k`
+  (`∫_{N+1}^∞ f_k ≤ Σ_{n>N} f_k(n) ≤ ∫_N^∞ f_k`, limit diwakili oleh
+  `Un_cv`). 17 hasil: bridging `psum`/`sum_upto`/`pterm`/`fk`, lemma
+  shift `Un_cv`, `tail_sum_cv` dari `pseries_L2_integer`, monotonisitas
+  dan batas integral lewat `sum_incr`, `whole_val_cv` lewat
+  `Un_cv_crit`, dan teorema utama lewat Paket 8. `coqc` exit 0 untuk
+  keempat modul; `coqchk` exit 0 "Modules were successfully checked";
+  17/17 hasil di keluaran kernel; receipt deterministik (dua capture
+  byte-identik, 178 baris; sha256
+  `39ad870db3b2fec94745ef95a26161e108e8642d2323666bc856da5954fd056d`).
+  `Print Assumptions` teorema utama: **tepat empat** aksioma stdlib
+  (`sig_forall_dec`, `sig_not_dec`, `functional_extensionality_dep`,
+  `Classical_Prop.classic`); peta per hasil: 1 hasil dengan 1 aksioma,
+  10 hasil dengan 2, 1 hasil dengan 3, 5 hasil dengan 4 (rincian di
+  laporan §5). Tidak ada aksioma proyek, `Axiom`, `Parameter`,
+  `Admitted`, atau `admit` (dijaga guard).
+- **Batas:** **unconditional hanya untuk `f_k`** (`k ≥ 1`, `N ≥ 1`);
+  bukan `f` umum, bukan eksponen real `p > 1` (`Rpower`), bukan L3/L4;
+  **bukan** penutupan `[J]` periodic-box `A-2026-0007` (tetap OPEN);
+  `Coq.Reals` aksiomatik, bukan konsistensi; deviasi trusted base
+  4-aksioma diwarisi dari `RiemannInt`; jika owner mensyaratkan literal
+  tiga aksioma, paket ini **tidak** memenuhi syarat itu; anti-circularity
+  gate = `TOOL NOT RUN` (NO_LEAN_FILES; exit 2 menurut kontrak gate) dan
+  **tidak dihitung sebagai sukses**; CI tidak punya toolchain Coq
+  sehingga hanya menjalankan guard statis; tidak menyentuh
+  zeta/Weil/RH/P≠NP; tidak ada klaim fisik; bukan peer review.
+- **Status:** CERTIFIED dengan deviasi trusted base tercatat
+- **Domino:** tidak ada (formal; bukan domino)
+- **Relasi:** melanjutkan `A-2026-0013` (berkas dan sertifikatnya tidak
+  berubah); bergantung pada `A-2026-0012`, `A-2026-0013`, dan
+  `A-2026-0010` sebagai modul beku; menutup L5 pilot untuk `f_k`;
+  `A-2026-0007` `[J]` tetap OPEN; entri registry ke-19; memori kerja
+  §2.0af `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_coq_bridge_integral_infinite.py -q`
+  (5 uji statis: placeholder, kelengkapan audit, impor + statement lock,
+  receipt/trusted base, 18 mutasi negatif);
+  `python -m pytest msaf/tests/test_fence_registry.py -q`; reproduksi
+  kernel lokal `formal_bridge/check_integral_infinite.sh`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF b0aa2cae7013f4d95cbb3565fa4d88556efe9b24ea085a64b440c101ce083aec formal_bridge/IntegralComparisonInfinite.v
+  sha256LF d11d82a691f134a657e0699aaa7b671f98ce37e0d7d99cd672e9d86de46c0712 formal_bridge/check_integral_infinite.sh
+  sha256LF 39ad870db3b2fec94745ef95a26161e108e8642d2323666bc856da5954fd056d formal_bridge/IntegralComparisonInfinite.receipt.txt
+  sha256LF 5932c2a0d35bf252da6cac768717916daecefa468abdcadf939bdb8550cc16d4 msaf/tests/test_coq_bridge_integral_infinite.py
+  sha256LF 9e3ebd3fdd9fe1a7302574a063dad579db409f74e31efa7b8dc6d2aab5d4d726 reports/COQ_BRIDGE_L5_INFINITE_2026-10-20.md
+  sha256LF b94cb6e7b889149bdb9f733ef0bf0ac3f690ee277384f4ed2f4d973672630454 reports/PREREG_PAKET9_2026-10-20.md
+  ```
+
+Selesai — 19 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).
