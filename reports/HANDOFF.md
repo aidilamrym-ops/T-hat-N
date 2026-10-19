@@ -1497,8 +1497,9 @@ Konsekuensi urutan yang disarankan:
   (5 uji: placeholder, kelengkapan audit, impor + statement lock,
   receipt/trusted base, 16 mutasi negatif); registry `A-2026-0013`
   (6 sertifikat sha256LF). Reproduksi lokal:
-  `formal_bridge/check_integral_limit.sh`. CI: dijalankan setelah push
-  (run id diperbarui di commit dokumentasi berikutnya).
+  `formal_bridge/check_integral_limit.sh`. CI: run 39297967397 hijau
+  (`python-tests` 1m19s + `lean-kernel` 1m51s; kedua job diverifikasi
+  lewat `/actions/runs/39297967397/jobs`).
 
 ---
 
