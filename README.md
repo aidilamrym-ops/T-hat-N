@@ -79,7 +79,12 @@ dashboard [`reports/gw_quantum_diagnostic_v1.html`](reports/gw_quantum_diagnosti
 201/301/401 (simulated entropy stream from the OS CSPRNG; no physical
 claim): 12/12 coordinates certified by two independent exact engines,
 all three statistical dimension verdicts RESOLVED, campaign exit 0;
-ledger head `e7bda4e1…`. Every
+ledger head `e7bda4e1…`; and
+`A-2026-0006`, the two-space bridge kit: `msaf/bridge.py` plus the protocol
+[`reports/BRIDGE_PROTOCOL_2026-10-19.md`](reports/BRIDGE_PROTOCOL_2026-10-19.md)
+— bounded certificates promoted across an explicit named tail bridge
+([B]/[J]/[U]), with certified demos for zeta(2) and two integral tails (a
+tooling entry, no external claim). Every
 verdict is a bounded assessment under the scope limits recorded there, not a
 defect claim on any third party's work.
 

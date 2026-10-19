@@ -1,0 +1,32 @@
+BRIDGE KIT DEMO -- bounded [B] + bridge [J] + unbounded [U]
+arb precision: 128
+
+D1  zeta(2) = sum_{n>=1} 1/n^2   (L2, two-sided)
+    cutoff N = 14142 (partial-sum terms: 14142)
+    [B] bounded part : [1.644863357991971647375416036165980 +/- 5.24e-34]
+    [J] tail in      : [[7.0706356501449480308279714346319734144e-5 +/- 5.02e-43], [7.0711356243812756328666383821241691415e-5 +/- 6.77e-43]]
+    [U] total in     : [[1.644934064348473096855724315880326 +/- 2.05e-34], [1.6449340693482154601317447025498008 +/- 8.38e-35]]
+        budget eps   : [1.0000000000000000000000000000000000000e-8 +/- 2.11e-47]   (width <= eps: True)
+        verdict      : CERTIFIED: bounded + bridge within budget
+        label        : zeta(2) via partial sum + p-series tail
+    contains pi^2/6  : True
+
+D2  int_1^inf exp(-x) dx   (L3, envelope C=1 lam=1)
+    cutoff M = [42.139678854464590000000000000000000000 +/- 2.07e-38]
+    [B] bounded part : [0.36787944117144232109552377016737205657 +/- 6.88e-39]
+    [J] tail in      : [0, [4.9999999999408881087057409504529027083e-19 +/- 7.80e-57]]
+    [U] total in     : [[0.36787944117144232109552377016737205657 +/- 6.88e-39], [0.36787944117144232159552377016146086744 +/- 7.72e-39]]
+        budget eps   : [1.0000000000000000000000000000000000000e-18 +/- 2.03e-57]   (width <= eps: True)
+        verdict      : CERTIFIED: bounded + bridge within budget
+        label        : int_1^inf exp(-x) dx (closed form + envelope)
+    bracket [0.36, 0.38] : True
+
+D3  int_2^inf exp(-x^2) dx   (L4, Gaussian tail)
+    [B] bounded part : 0
+    [J] tail in      : [0, [0.0045789097221835450734295053183103105530 +/- 4.79e-41]]
+    [U] total in     : [0, [0.0045789097221835450734295053183103105530 +/- 4.79e-41]]
+        budget eps   : [0.0050000000000000000000000000000000000000 +/- 7.38e-42]   (width <= eps: True)
+        verdict      : CERTIFIED: bounded + bridge within budget
+        label        : gaussian tail bound at M=2 (L4)
+
+ALL DEMOS CERTIFIED: True

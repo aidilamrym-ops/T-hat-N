@@ -1217,6 +1217,29 @@ Konsekuensi urutan yang disarankan:
   (sesuai catatan laporan L1 bertanggal). Tidak ada berkas beku yang
   disentuh; tidak ada klaim baru.
 
+### 2.0x [BARU, 2026-10-19] Kit Jembatan dua-ruang (bounded↔tak-hingga) — `msaf/bridge.py` + protokol [B]/[J]/[U] + demo tersertifikasi; registry `A-2026-0006`
+
+- **Konteks:** melanjutkan disiplin `certify.py` (containment) dan contoh
+  jembatan yang sudah berjalan (`test_tail_decay.py`: kotak periodik vs
+  free-space); tujuan: klaim lintas-ruang tidak pernah dipromosikan tanpa
+  jembatan bernama + sertifikat ekor rigor.
+- **Isi:** `msaf/bridge.py` — lemma L1 (geometrik eksak), L2 (deret-p dua
+  sisi), L3 (envelope eksponensial), L4 (ekor Gaussian), L5 (perbandingan
+  integral, mekanisme L2); `split_budget`; `choose_cutoff` /
+  `choose_cutoff_real` (pencarian heuristik, keputusan final selalu
+  perbandingan Arb rigor); `assemble`/`BridgeCertificate` emitter
+  [B]/[J]/[U]; non-finit ditolak di setiap pintu masuk.
+- **Demo tersertifikasi (3):** ζ(2) dua-sisi (lebar ≈ 5.0e-9 <= 1e-8,
+  memuat pi^2/6); integral e^(-x) pada [1, inf) (lebar <= 1e-18, bracket
+  [0.36, 0.38]); ekor Gaussian M=2 <= 5e-3 (L4 murni). Output verbatim:
+  `reports/BRIDGE_DEMO_OUTPUT_2026-10-19.txt` (capture ganda, deterministik).
+- **Protokol + Batas:** `reports/BRIDGE_PROTOCOL_2026-10-19.md` (checklist
+  [B]/[J]/[U]; lemma klasik dirujuk bukan diformalkan; bukan klaim
+  RH/P≠NP; bukan klaim fisik; alat metodologi, bukan hasil riset baru).
+- **Guard:** `msaf/tests/test_bridge.py` (19 uji, termasuk end-to-end ζ(2)
+  dan penolakan non-finit); registry `A-2026-0006` (5 sertifikat sha256LF);
+  guard registry berjalan di CI. CI: id run dicatat di update menyusul.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional

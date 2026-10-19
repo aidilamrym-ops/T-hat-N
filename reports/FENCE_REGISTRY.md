@@ -572,6 +572,49 @@ mengikuti laporan L4).
   sha256LF 9747b13515ed4f1670bc690e3c4917d44c1d1e22fb99c625052c42cab33357cf reports/gw_quantum_diagnostic_v1.html
   ```
 
-Selesai — 10 entri per 2026-10-19 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005`). Entri
+### A-2026-0006 — Kit jembatan dua-ruang: `msaf/bridge.py` + protokol [B]/[J]/[U] + demo tersertifikasi (ζ(2), dua ekor integral)
+
+- **Jenis:** A
+- **Pernyataan:** Artefak perangkat internal (bukan audit pihak ketiga):
+  kit dua-ruang yang mengubah klaim di ruang tak hingga menjadi tiga blok
+  yang dapat diperiksa — [B] enclosure rigor bagian terbatas, [J] lemma
+  ekor bernama (L1 geometrik eksak; L2 deret-p dua-sisi; L3 envelope
+  eksponensial; L4 ekor Gaussian; L5 perbandingan integral), [U] pernyataan
+  final = [B]+[J] dengan verdict; keputusan `tail <= eps` hanya lewat
+  perbandingan Arb rigor (semua-anggota), pencarian cutoff heuristik tidak
+  pernah menggantikan sertifikat final (fail-closed: `RuntimeError` bila
+  anggaran tak tercapai; `certified=False` bila tak terbukti); non-finit
+  ditolak di setiap pintu masuk (aturan `certify.py`); protokol + checklist
+  di `reports/BRIDGE_PROTOCOL_2026-10-19.md`; demo tersertifikasi (output
+  verbatim `reports/BRIDGE_DEMO_OUTPUT_2026-10-19.txt`; capture ganda
+  deterministik): ζ(2) dua-sisi lebar ≈ 5.0e-9 <= 1e-8 memuat pi^2/6;
+  integral e^(-x) pada [1, inf) lebar <= 1e-18 dengan bracket [0.36, 0.38];
+  ekor Gaussian M=2 <= 5e-3 (L4); guard CI `msaf/tests/test_bridge.py`
+  (19 uji).
+- **Batas:** alat metodologi/estimasi — bukan klaim matematis baru; L1–L5
+  klasik (bukti kalkulus elementer, dirujuk bukan diformalkan ulang); demo =
+  demonstrasi mekanika [B]+[J]->[U] pada objek klasik; tidak menyentuh
+  zeta/Weil/RH/P≠NP; tidak ada klaim fisik; bukan peer review.
+- **Status:** CERTIFIED
+- **Domino:** tidak ada (artefak internal; bukan domino)
+- **Relasi:** melengkapi `msaf/certify.py` (mandat containment),
+  `msaf/budget.py` (anggaran presisi), `msaf/tests/test_tail_decay.py`
+  (contoh jembatan kotak-periodik); entri registry ke-11; memori kerja §2.0x
+  `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `python -m msaf.bridge_demo` (3 demo,
+  `ALL DEMOS CERTIFIED: True`, exit 0); `python -m pytest
+  msaf/tests/test_bridge.py -q` (19 uji); guard `python -m pytest
+  msaf/tests/test_fence_registry.py -q` (memverifikasi semua sha di bawah).
+- **Sertifikat:**
+
+  ```text
+  sha256LF 6f3865d7c327ff802fa518d48530ea4d3fb4d3f6983a491bcdc468d752a31a1e msaf/bridge.py
+  sha256LF 677b8e34e6bd7aa7da06e6f719723c1c9c0d0299fcecd060b4c33f36c1aeb2c0 msaf/tests/test_bridge.py
+  sha256LF ec25c049582ddb5b3fe6bfe5cc7e59484838406a719245292a4ba1c60e20a335 msaf/bridge_demo.py
+  sha256LF 94ec7a591e301e624e78a924ce974846cdfc08d341ea4570ef47c7b8187a6b8b reports/BRIDGE_PROTOCOL_2026-10-19.md
+  sha256LF 16bc62d625f78ff8d468c5044557e7769a5b1fe3f7eeee70d055bd76df0f3cce reports/BRIDGE_DEMO_OUTPUT_2026-10-19.txt
+  ```
+
+Selesai — 11 entri per 2026-10-19 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).
