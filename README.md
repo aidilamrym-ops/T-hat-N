@@ -98,7 +98,13 @@ analytic limit step remains explicitly OPEN; and
 `A-2026-0009`, the analytic closure for the geometric bridge
 ([`reports/COQ_BRIDGE_LIMIT_2026-10-19.md`](reports/COQ_BRIDGE_LIMIT_2026-10-19.md))
 — the epsilon-N limit (`Un_cv`) proved in Coq for the geometric case
-only, with the periodic-box `[J]` still explicitly OPEN. Every
+only, with the periodic-box `[J]` still explicitly OPEN; and
+`A-2026-0010`, the p-series L2 package for integer exponent
+([`reports/COQ_BRIDGE_L2_2026-10-19.md`](reports/COQ_BRIDGE_L2_2026-10-19.md))
+— two-sided tail bounds and the epsilon-N limit proved in Coq for
+`p = k+1 ≥ 2` only, with the real-exponent case and the periodic-box `[J]`
+still explicitly OPEN, and one additional stdlib axiom (`sig_not_dec`,
+completeness of R) recorded as an audit deviation. Every
 verdict is a bounded assessment under the scope limits recorded there, not a
 defect claim on any third party's work.
 

@@ -1334,6 +1334,43 @@ Konsekuensi urutan yang disarankan:
   Coq: yang dijalankan CI hanya guard statis, bukan kernel. CI: run
   39237627885 hijau (python-tests + lean-kernel).
 
+### 2.0ab [BARU, 2026-10-19] L2 deret-p eksponen bulat di Coq — batas dua sisi + eksistensi limit (coqc + coqchk exit 0, 20/20 hasil teraudit); deviasi audit tiga aksioma stdlib tercatat; registry `A-2026-0010`
+
+- **Konteks:** Paket 6, pra-registrasi baru
+  `reports/PREREG_PAKET6_2026-10-19.md` (scope dikunci sebelum
+  implementasi). Berkas baru `formal_bridge/PseriesL2.v`; artefak Paket
+  1–5 (`A-2026-0006` … `A-2026-0009`) **tidak diubah**.
+- **Hasil:** `pseries_L2_integer`: untuk `k ≥ 1`, `N ≥ 1`, terdapat `L`
+  dengan `Un_cv (fun M => psum k N M) L` dan
+  `1/(k(N+1)^k) ≤ L ≤ 1/(k N^k)`, dengan
+  `psum k N M = Σ_{i=0}^{M} 1/(INR(N+1+i))^(k+1)`. Ini L2 kit untuk
+  **eksponen bulat** `p = k+1 ≥ 2` saja. 20 hasil: Bernoulli integer,
+  ketaksamaan langkah atas/bawah, teleskopik finite, batas finite,
+  eksistensi limit via `Un_cv_crit`, lemma urutan limit, sisa ε, teorema
+  utama.
+- **Bukti:** `coqc` exit 0; `coqchk` exit 0 "Modules were successfully
+  checked"; 20/20 hasil di keluaran kernel; receipt deterministik (dua
+  capture byte-identik, 193 baris). Tanpa
+  `Axiom`/`Parameter`/`Admitted`/`admit`.
+- **Trusted base / deviasi:** 19/20 hasil hanya dua aksioma stdlib
+  (`sig_forall_dec`, `functional_extensionality_dep`); teorema utama
+  memakai **tiga**, ditambah `ClassicalDedekindReals.sig_not_dec` melalui
+  `Un_cv_crit` (kelengkapan R). Kriteria pra-registrasi §4 literal
+  “hanya dua aksioma” **tidak terpenuhi**; deviasi dicatat di addendum
+  §6 pra-registrasi, laporan, dan registry. Tidak ada aksioma proyek.
+  Status: **CERTIFIED dengan deviasi audit tercatat**.
+- **Batas:** hanya `p = k+1 ≥ 2`; eksponen real `p > 1` (`Rpower`),
+  L3–L5 tidak diformalkan; **bukan** penutupan `[J]` periodic-box
+  `A-2026-0007` (tetap OPEN); `Coq.Reals` aksiomatik, bukan konsistensi;
+  gate anti-circularity `TOOL NOT RUN` (NO_LEAN_FILES/NO_CLAIM_FILES,
+  exit 2) **tidak dihitung sebagai sukses**; CI tidak punya Coq (hanya
+  guard statis); tanpa klaim zeta/Weil/RH/P≠NP/fisika; bukan peer review.
+- **Guard:** `python -m pytest msaf/tests/test_coq_bridge_l2.py -q`
+  (5 uji: placeholder, kelengkapan audit, standalone + statement lock,
+  receipt/trusted base, 8 mutasi negatif); registry `A-2026-0010`
+  (6 sertifikat sha256LF). Reproduksi lokal:
+  `formal_bridge/check_pseries.sh`.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional
