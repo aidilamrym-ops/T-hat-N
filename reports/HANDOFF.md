@@ -1405,7 +1405,9 @@ Konsekuensi urutan yang disarankan:
   (6 uji: placeholder, kelengkapan audit, impor + isolasi, statement
   lock, receipt/trusted base, 11 mutasi negatif); registry `A-2026-0011`
   (6 sertifikat sha256LF). Reproduksi lokal:
-  `formal_bridge/check_bounds.sh`. CI: run menyusul setelah push.
+  `formal_bridge/check_bounds.sh`. CI: run 39284733858 hijau
+  (python-tests + lean-kernel; attempt 2 — attempt 1 macet di antrean
+  dan di-rerun).
 
 ---
 
