@@ -128,8 +128,13 @@ and existence of the limits left to Paket 9; and
 — all three limits proved to exist and the two-sided comparison closed for
 `f_k(x)=x^{-(k+1)}` (`k ≥ 1`, `N ≥ 1`) only, with the four-axiom stdlib
 trusted base unchanged, while general `f`, real exponents, L3/L4 and the
-periodic-box `[J]` remain explicitly OPEN. Every
-verdict is a bounded assessment under the scope limits recorded there, not a
+periodic-box `[J]` remain explicitly OPEN; and
+`A-2026-0015`, the scoped anti-circularity gate run
+([`reports/ANTI_CIRCULARITY_GATE_RUN_2026-10-20.md`](reports/ANTI_CIRCULARITY_GATE_RUN_2026-10-20.md))
+— the external gate now receives the four Lean kernel sources and returns
+PASS (0 placeholders), with `lean/spec/` explicitly OUT OF SCOPE (9 declared
+axioms) and no SMT input; the Coq packages' Coq-kernel status is unchanged.
+Every verdict is a bounded assessment under the scope limits recorded there, not a
 defect claim on any third party's work.
 
 **Provenance and AI-tooling disclosure.** This repository is developed with

@@ -1055,6 +1055,58 @@ mengikuti laporan L4).
   sha256LF b94cb6e7b889149bdb9f733ef0bf0ac3f690ee277384f4ed2f4d973672630454 reports/PREREG_PAKET9_2026-10-20.md
   ```
 
-Selesai — 19 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014`). Entri
+### A-2026-0015 — Gate anti-circularity dijalankan pada sumber Lean kernel: PASS 4/4; `lean/spec/` OUT OF SCOPE (9 aksioma); tidak ada input SMT
+
+- **Jenis:** A
+- **Pernyataan:** Setelah Paket 9, gate anti-circularity eksternal
+  dijalankan pada domainnya: empat berkas **Lean kernel**
+  (`lean/ComplexMoore.lean`, `lean/NavierStokesCore.lean`,
+  `lean/NewtonExistence.lean`, `lean/XiNoRealZero.lean`).
+  `gate.py lean` dan `gate.py check` keduanya exit 0 dengan
+  `result: FAIL=0  NOT_RUN=0  SKIP=0`, `verdict: PASS`; tidak ada
+  `sorry`/`admit`/`axiom`/`Abort` di kode setelah komentar dibuang, dan
+  tidak ada klaim `MACHINE RESULT` tanpa log samping. Log deterministik
+  51 baris (dua run byte-identik), sha256
+  `6e5c97a9d780e54a54968ca06a4d453236f65b45f881fbc6234902ef53ed9aab`.
+  `lean/spec/` sengaja **OUT OF SCOPE`: diagnostik `gate.py lean
+  lean/spec` menghasilkan `FAIL=9` untuk sembilan aksioma deklaratif
+  `XiAnalyticSpec.lean` (dua simbol opak + tujuh obligasi analitik), dan
+  angka itu dicatat sebagai diagnostik, bukan verdict gate. Tidak ada
+  `.smt2` di repo, sehingga sub-gate audit **tidak dipanggil** dan tidak
+  ada klaim SMT PASS. Laporan Paket 7–9 dan entri
+  `A-2026-0012`–`A-2026-0014` **tidak diubah**.
+- **Batas:** PASS ini hanya pemindaian statis placeholder/claim pada
+  empat berkas Lean kernel; **bukan** bukti kebenaran teorema Lean,
+  **bukan** `lake build`, **bukan** audit SMT, **bukan** verifikasi
+  `lean/spec/` (9 aksioma kondisional), dan **bukan** verifikasi ulang
+  Paket 8/9 Coq. Status `TOOL NOT RUN (NO_LEAN_FILES)` pada laporan beku
+  Paket 7–9 tetap berlaku untuk **scope Coq** dan tetap tidak dihitung
+  sebagai sukses; entri ini menetapkan status **repo-level untuk sumber
+  Lean kernel**. Tidak ada klaim RH/P≠NP/fisika; bukan peer review.
+- **Status:** CERTIFIED dengan scope PASS tercatat
+- **Domino:** tidak ada (infrastruktur verifikasi; bukan domino)
+- **Relasi:** melanjutkan `A-2026-0014` tanpa mengubahnya; menetapkan
+  jalur gate yang diminta setelah paket Coq selesai; entri registry
+  ke-20; memori kerja §2.0ag `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_anti_circularity_gate.py -q`
+  (5 uji statis: kernel placeholder, budget spec, log scope, runner/report
+  lock, 12 mutasi negatif); `python -m pytest msaf/tests/test_fence_registry.py -q`;
+  reproduksi lokal `C:\Python314\python.exe harness/run_anti_circularity_gate.py`
+  (gate eksternal; bukan CI).
+- **Sertifikat:**
+
+  ```text
+  sha256LF 8cd30d7bc3372d8d408ff2db6830dbae666f504feadf1bd5e5951a1810c51551 harness/run_anti_circularity_gate.py
+  sha256LF 6e5c97a9d780e54a54968ca06a4d453236f65b45f881fbc6234902ef53ed9aab reports/anti_circularity_gate_2026-10-20.log
+  sha256LF 8de7bc3659d670976be47b31da1d38cc2fb25495d40ae9fbc101773506726f5c reports/ANTI_CIRCULARITY_GATE_RUN_2026-10-20.md
+  sha256LF 0ce3083e283289cd784304f787164e4230b7944993352a1885dbb2010f637ccf msaf/tests/test_anti_circularity_gate.py
+  sha256LF 5b3b263b6796016536653a4511124d9d4b5b81d47798d3580412eef89c86c0e9 lean/ComplexMoore.lean
+  sha256LF e92f77e931a2db7c0c783f05688df17f999b72c2114954431296134fed7bca0b lean/NavierStokesCore.lean
+  sha256LF 25d4bf7ae743b4b53673f120987c9e3daff2b2043ce7c79a92d5d535c863da49 lean/NewtonExistence.lean
+  sha256LF 10ceb227a7f509a655fa4d2616495b2bb56879b7ddc60e3d01e6027c3d3a709b lean/XiNoRealZero.lean
+  sha256LF 38818af1cd85b19f1928070b3b964f3be372df3f9de7fa95e4ccf6a52c1fff9b lean/spec/XiAnalyticSpec.lean
+  ```
+
+Selesai — 20 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

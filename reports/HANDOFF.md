@@ -1546,6 +1546,37 @@ Konsekuensi urutan yang disarankan:
   (`python-tests` 48s + `lean-kernel` 2m2s; kedua job diverifikasi
   lewat `/actions/runs/39302637035/jobs`).
 
+### 2.0ag [BARU, 2026-10-20] Gate anti-circularity dijalankan pada sumber Lean kernel — PASS 4/4; `lean/spec/` OUT OF SCOPE (9 aksioma); tidak ada input SMT; registry `A-2026-0015`
+
+- **Konteks:** setelah Paket 9, gate eksternal tidak lagi diarahkan ke
+  direktori Coq (`formal_bridge/`) yang tidak memuat `.lean`. Inputnya
+  sekarang empat berkas Lean kernel: `lean/ComplexMoore.lean`,
+  `lean/NavierStokesCore.lean`, `lean/NewtonExistence.lean`, dan
+  `lean/XiNoRealZero.lean`.
+- **Fakta mesin:** `gate.py lean` dan `gate.py check` atas empat berkas
+  itu keduanya exit 0, `result: FAIL=0  NOT_RUN=0  SKIP=0`,
+  `verdict: PASS`; tidak ada `sorry`/`admit`/`axiom`/`Abort` di kode
+  setelah komentar dibuang; tidak ada klaim `MACHINE RESULT` tanpa log
+  samping. Log deterministik 51 baris (dua run byte-identik), sha256
+  `6e5c97a9d780e54a54968ca06a4d453236f65b45f881fbc6234902ef53ed9aab`.
+  `lean/spec/` sengaja OUT OF SCOPE: diagnostik `gate.py lean lean/spec`
+  exit 1 dengan `FAIL=9` (sembilan aksioma deklaratif
+  `XiAnalyticSpec.lean`), dicatat sebagai diagnostik, bukan verdict.
+  Tidak ada `.smt2`, jadi sub-gate audit **tidak dipanggil**.
+- **Batas:** PASS ini hanya pemindaian statis placeholder/claim pada
+  empat berkas kernel; **bukan** bukti kebenaran teorema Lean, **bukan**
+  `lake build`, **bukan** audit SMT, **bukan** verifikasi `lean/spec/`,
+  dan **bukan** verifikasi ulang Paket 8/9. Status
+  `TOOL NOT RUN (NO_LEAN_FILES)` pada laporan beku Paket 7–9 tetap
+  berlaku untuk **scope Coq** dan tidak dihitung sebagai sukses; laporan
+  beku tidak ditulis ulang. Tanpa klaim RH/P≠NP/fisika; bukan peer review.
+- **Guard:** `python -m pytest msaf/tests/test_anti_circularity_gate.py -q`
+  (5 uji: kernel placeholder, budget spec, log scope, runner/report lock,
+  12 mutasi negatif); registry `A-2026-0015` (9 sertifikat sha256LF).
+  Reproduksi lokal: `C:\Python314\python.exe
+  harness/run_anti_circularity_gate.py` (gate eksternal; bukan CI). CI
+  setelah push (run id diperbarui di commit dokumentasi berikutnya).
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional
