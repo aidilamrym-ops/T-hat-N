@@ -874,6 +874,68 @@ mengikuti laporan L4).
   sha256LF 1b547049d9e9d9a4a52377f4d7e09248f6c0c55d92fb872e925f96912da06232 reports/PREREG_PAKET6B_2026-10-20.md
   ```
 
-Selesai — 16 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011`). Entri
+### A-2026-0012 — L5 finite core di Coq: perbandingan integral–deret untuk `f_k(x)=x^{-(k+1)}`; trusted base 4 aksioma stdlib tercatat
+
+- **Jenis:** A
+- **Pernyataan:** Lanjutan Paket 7 (pra-registrasi baru
+  `reports/PREREG_PAKET7_2026-10-20.md` + addendum trusted base
+  `reports/PREREG_PAKET7_ADDENDUM_2026-10-20.md`; berkas Paket 1–6b
+  **tidak diubah**). Untuk setiap `k`, `N`, `M` dengan `k ≥ 1` dan
+  `N ≥ 1`, integral Riemann finite
+  `∫_N^{N+M} x^{-(k+1)} dx` berada di antara jumlah bawah
+  `Σ_{i=0}^{M-1} (N+i)^{-(k+1)}` dan jumlah atas
+  `Σ_{i=0}^{M-1} (N+i+1)^{-(k+1)}`. `formal_bridge/IntegralComparison.v`
+  membuktikan **14** hasil, dengan teorema utama
+  **`integral_comparison_power_finite`**; bukti memakai
+  `RiemannInt_P19`/`P15` per unit, `RiemannInt_P25` untuk aditivitas,
+  `continuity_implies_RiemannInt` + `derivable_pt_pow`/
+  `continuity_pt_inv` untuk integrabilitas, dan
+  `pow_incr`/`Rinv_le_contravar` untuk ketaksamaan; **tanpa**
+  `FTC_Riemann`, `C1_fun`, `Rpower`, integral tak-hingga, atau impor
+  modul proyek. `coqc` exit 0; `coqchk` exit 0 "Modules were
+  successfully checked"; 14/14 hasil di keluaran kernel; receipt
+  deterministik (dua capture byte-identik, 128 baris).
+  `Print Assumptions` teorema utama: **tepat empat** aksioma stdlib
+  (`sig_forall_dec`, `sig_not_dec`, `functional_extensionality_dep`,
+  `Classical_Prop.classic`); aksioma keempat masuk melalui mesin
+  integral Riemann stdlib. Tidak ada aksioma proyek, `Axiom`,
+  `Parameter`, `Admitted`, atau `admit`.
+- **Batas:** **hanya finite core** (interval `[N, N+M]`; bukan
+  `∫_N^∞`, tanpa langkah limit/`Un_cv` integral); hanya
+  `f_k(x)=x^{-(k+1)}` dengan `k ≥ 1` (bukan `f` umum, bukan eksponen
+  real `p > 1`/`Rpower`, bukan L3/L4); **bukan** penutupan `[J]`
+  periodic-box `A-2026-0007` (tetap OPEN); `Coq.Reals` aksiomatik,
+  bukan konsistensi; deviasi trusted base tercatat — empat aksioma
+  stdlib, bukan tiga yang diperkirakan pra-registrasi §4; jika owner
+  mensyaratkan literal tiga aksioma, paket ini **tidak** memenuhi
+  syarat itu; anti-circularity gate = `TOOL NOT RUN` (NO_LEAN_FILES,
+  exit 2 menurut kontrak gate) dan **tidak dihitung sebagai sukses**;
+  CI tidak punya toolchain Coq sehingga hanya menjalankan guard
+  statis; tidak menyentuh zeta/Weil/RH/P≠NP; tidak ada klaim fisik;
+  bukan peer review.
+- **Status:** CERTIFIED dengan deviasi trusted base tercatat
+- **Domino:** tidak ada (formal; bukan domino)
+- **Relasi:** melanjutkan `A-2026-0011` (berkas dan sertifikatnya tidak
+  berubah) dan kit `A-2026-0006`; `A-2026-0007` `[J]` tetap OPEN;
+  `PseriesL2.v`/`PseriesL2Bounds.v` tidak diimpor (paket standalone);
+  entri registry ke-17; memori kerja §2.0ad `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_coq_bridge_integral.py -q`
+  (5 uji statis: placeholder, kelengkapan audit, standalone + statement
+  lock, receipt/trusted base, 16 mutasi negatif);
+  `python -m pytest msaf/tests/test_fence_registry.py -q`; reproduksi
+  kernel lokal `formal_bridge/check_integral.sh`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF fc519fd80c22c8b0a3753d35cc3d0ed9842253117b0f544503adef06e493b80c formal_bridge/IntegralComparison.v
+  sha256LF bd61cb42a997cc2b1a50ea7336ccbe2df957df8c211ff8cd80375e459caf94b7 formal_bridge/check_integral.sh
+  sha256LF e11d07f5dcb5b835da1af418ddf45b9a0fa5d6845869420e90a940805931d2e2 formal_bridge/IntegralComparison.receipt.txt
+  sha256LF 8e558deaaa045080cc67f91b56dbc560df3b6bd127b6203464575af506991519 msaf/tests/test_coq_bridge_integral.py
+  sha256LF 96fa060e691fbd79034a89448333b59ef52cc7db2458d74fee8219e8d7d83303 reports/COQ_BRIDGE_L5_FINITE_2026-10-20.md
+  sha256LF 0c655f7af58422e8526e764bbd90ab09b2643eee10942193a02add16b138e917 reports/PREREG_PAKET7_2026-10-20.md
+  sha256LF 1fb0251d2457dbc2265067beedd1249d5d8fd276a7359da4603192ae845a9c19 reports/PREREG_PAKET7_ADDENDUM_2026-10-20.md
+  ```
+
+Selesai — 17 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

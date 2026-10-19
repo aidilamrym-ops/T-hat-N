@@ -1409,6 +1409,55 @@ Konsekuensi urutan yang disarankan:
   (python-tests + lean-kernel; attempt 2 — attempt 1 macet di antrean
   dan di-rerun).
 
+### 2.0ad [BARU, 2026-10-20] L5 finite core di Coq — perbandingan integral–deret untuk `f_k(x)=x^{-(k+1)}` (coqc + coqchk exit 0, 14/14 hasil teraudit); trusted base 4 aksioma stdlib tercatat; registry `A-2026-0012`
+
+- **Konteks:** Paket 7, pra-registrasi baru
+  `reports/PREREG_PAKET7_2026-10-20.md` + addendum trusted base
+  `reports/PREREG_PAKET7_ADDENDUM_2026-10-20.md` (scope dikunci sebelum
+  implementasi). Berkas baru `formal_bridge/IntegralComparison.v`
+  **standalone** (stdlib only, termasuk `Coq.Reals.RiemannInt`); tidak
+  mengimpor `PseriesL2.v`, `PseriesL2Bounds.v`, atau modul geometri.
+  Artefak Paket 1–6b **tidak diubah**.
+- **Hasil:** `integral_comparison_power_finite`: untuk `k ≥ 1`,
+  `N ≥ 1`, dan `M` sembarang,
+  `∫_N^{N+M} x^{-(k+1)} dx` berada di antara
+  `Σ_{i=0}^{M-1} (N+i)^{-(k+1)}` dan
+  `Σ_{i=0}^{M-1} (N+i+1)^{-(k+1)}`. 14 hasil: definisi
+  `fk`/`sum_upto`/`endN`/`unit_val`/`whole_val`; lemma aritmetika
+  endpoint; lemma jumlah; kontinuitas `fk`; integral degenerate;
+  aditivitas `whole_val_split`; `whole_val_eq_sum`; batas unit
+  atas/bawah; teorema utama.
+- **Bukti:** `coqc` exit 0; `coqchk` exit 0 "Modules were successfully
+  checked"; 14/14 hasil di keluaran kernel; receipt deterministik (dua
+  capture byte-identik, 128 baris; sha256
+  `e11d07f5dcb5b835da1af418ddf45b9a0fa5d6845869420e90a940805931d2e2`).
+  Tanpa `Axiom`/`Parameter`/`Admitted`/`admit`.
+- **Trusted base / deviasi:** `Print Assumptions` teorema utama =
+  **tepat empat** aksioma stdlib (`sig_forall_dec`, `sig_not_dec`,
+  `functional_extensionality_dep`, `Classical_Prop.classic`). Tiga yang
+  pertama diperkirakan pra-registrasi §4; `Classical_Prop.classic`
+  masuk melalui `RiemannInt`. Tidak ada aksioma proyek. Peta per hasil:
+  3 closed; 4 hasil dengan 2 aksioma; 1 hasil dengan 1 aksioma; 6 hasil
+  dengan 4 aksioma. Deviasi dicatat di addendum, laporan, dan registry;
+  jika owner mensyaratkan literal tiga aksioma, paket ini tidak
+  memenuhi syarat itu. Status: **CERTIFIED dengan deviasi trusted base
+  tercatat**.
+- **Batas:** **hanya finite core** (interval `[N, N+M]`; bukan
+  `∫_N^∞`, tanpa langkah limit/`Un_cv` integral); hanya
+  `f_k(x)=x^{-(k+1)}` dengan `k ≥ 1` (bukan `f` umum, bukan eksponen
+  real `p > 1`/`Rpower`, bukan L3/L4); **bukan** penutupan `[J]`
+  periodic-box `A-2026-0007` (tetap OPEN); `Coq.Reals` aksiomatik,
+  bukan konsistensi; gate anti-circularity `TOOL NOT RUN`
+  (NO_LEAN_FILES; exit 2 menurut kontrak gate) **tidak dihitung sebagai
+  sukses**; CI tidak punya Coq (hanya guard statis); tanpa klaim
+  zeta/Weil/RH/P≠NP/fisika; bukan peer review.
+- **Guard:** `python -m pytest msaf/tests/test_coq_bridge_integral.py -q`
+  (5 uji: placeholder, kelengkapan audit, standalone + statement lock,
+  receipt/trusted base, 16 mutasi negatif); registry `A-2026-0012`
+  (7 sertifikat sha256LF). Reproduksi lokal:
+  `formal_bridge/check_integral.sh`. CI: menunggu run setelah commit
+  (diisi setelah verifikasi `python-tests` + `lean-kernel`).
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional

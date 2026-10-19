@@ -110,7 +110,14 @@ completeness of R) recorded as an audit deviation; and
 — with the tail limit's existence taken as a hypothesis, the same
 two-sided bounds are proved in Coq from exactly the two shared stdlib
 axioms, isolating `sig_not_dec` to the existence step (still integer
-`p = k+1 ≥ 2` only, periodic-box `[J]` still explicitly OPEN). Every
+`p = k+1 ≥ 2` only, periodic-box `[J]` still explicitly OPEN); and
+`A-2026-0012`, the L5 finite-core pilot
+([`reports/COQ_BRIDGE_L5_FINITE_2026-10-20.md`](reports/COQ_BRIDGE_L5_FINITE_2026-10-20.md))
+— the finite Riemann-integral comparison for `f_k(x)=x^{-(k+1)}`
+(`k ≥ 1`) proved in Coq for `[N, N+M]` only, with the infinite
+integral/limit step, general `f`, real exponents and periodic-box `[J]`
+still explicitly OPEN, and a four-axiom stdlib trusted base recorded as
+an audit deviation. Every
 verdict is a bounded assessment under the scope limits recorded there, not a
 defect claim on any third party's work.
 
