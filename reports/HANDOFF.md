@@ -1307,6 +1307,33 @@ Konsekuensi urutan yang disarankan:
   menjalankan `coqc`/`coqchk` (toolchain Coq tidak ada di runner); bukti
   kernel adalah receipt lokal yang di-hash, bukan eksekusi CI.
 
+### 2.0aa [BARU, 2026-10-19] Penutupan [J] analitik jembatan geometrik di Coq — `Un_cv` ε-N terbukti (coqc + coqchk exit 0, 6/6 hasil teraudit); hanya L1, periodic-box tetap OPEN; registry `A-2026-0009`
+
+- **Konteks:** Paket 5, pra-registrasi baru (scope diperluas dari pilot
+  Paket 4). `GeometricBridge.v` (`A-2026-0008`) **tidak diubah**; berkas
+  baru `formal_bridge/GeometricLimit.v` mengimpornya.
+- **Hasil:** `geom_sum_cv`: untuk `0 ≤ r < 1`,
+  `Un_cv (fun n => geom_sum r n) (1/(1−r))` (definisi ε-N standar
+  `Coq.Reals.Rseries`); `geom_dist_eq_tail` (jarak = suku ekor);
+  instance `r = 1/2` (limit 2); saksi konkret `n = 11`, jarak `1/1024`
+  `< 1/100`. Saksi ε-N dari lemma stdlib `pow_lt_1_zero`.
+- **Bukti:** `coqc` exit 0 (kedua berkas); `coqchk` exit 0 "Modules were
+  successfully checked"; `Print Assumptions` 6/6 hanya dua aksioma stdlib
+  `Coq.Reals`; tanpa `Axiom`/`Parameter`/`Admitted`/`admit`; receipt
+  deterministik (dua capture byte-identik).
+- **Status blok:** untuk **kasus geometrik L1** `[B]/[J]/[U]` tertutup
+  (aljabar `A-2026-0008` + limit ε-N + nilai limit). **Bukan** penutupan
+  `[J]` periodic-box `A-2026-0007` — objeknya berbeda dan tetap OPEN.
+  L2–L5 tidak diformalkan. Tanpa klaim zeta/Weil/RH/P≠NP/fisika.
+- **Gate anti-circularity:** `TOOL NOT RUN (NO_LEAN_FILES)`, exit 2 —
+  **tidak dihitung sebagai sukses**; gate hanya memindai `.lean`/`.smt2`.
+  Kompensasi: bukti Coq-native + uji negatif guard 7/7 mutasi tertangkap.
+- **Guard:** `python -m pytest msaf/tests/test_coq_bridge_limit.py -q`
+  (4 uji; menolak redefinisi `geom_sum`/`geom_tail` dan impor yang
+  hilang); registry `A-2026-0009` (5 sertifikat sha256LF). CI tidak punya
+  Coq: yang dijalankan CI hanya guard statis, bukan kernel. CI: id run
+  dicatat di update menyusul.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional

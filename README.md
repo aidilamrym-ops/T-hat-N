@@ -94,7 +94,11 @@ explicitly OPEN (the tested statistic is shown not to be a bridge); and
 ([`reports/COQ_BRIDGE_PILOT_2026-10-19.md`](reports/COQ_BRIDGE_PILOT_2026-10-19.md))
 — the finite algebraic core of the geometric tail lemma machine-checked
 by `coqc` and re-checked by `coqchk` with no project axioms, while the
-analytic limit step remains explicitly OPEN. Every
+analytic limit step remains explicitly OPEN; and
+`A-2026-0009`, the analytic closure for the geometric bridge
+([`reports/COQ_BRIDGE_LIMIT_2026-10-19.md`](reports/COQ_BRIDGE_LIMIT_2026-10-19.md))
+— the epsilon-N limit (`Un_cv`) proved in Coq for the geometric case
+only, with the periodic-box `[J]` still explicitly OPEN. Every
 verdict is a bounded assessment under the scope limits recorded there, not a
 defect claim on any third party's work.
 
