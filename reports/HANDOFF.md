@@ -1331,8 +1331,8 @@ Konsekuensi urutan yang disarankan:
 - **Guard:** `python -m pytest msaf/tests/test_coq_bridge_limit.py -q`
   (4 uji; menolak redefinisi `geom_sum`/`geom_tail` dan impor yang
   hilang); registry `A-2026-0009` (5 sertifikat sha256LF). CI tidak punya
-  Coq: yang dijalankan CI hanya guard statis, bukan kernel. CI: id run
-  dicatat di update menyusul.
+  Coq: yang dijalankan CI hanya guard statis, bukan kernel. CI: run
+  39237627885 hijau (python-tests + lean-kernel).
 
 ---
 
