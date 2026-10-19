@@ -133,7 +133,16 @@ periodic-box `[J]` remain explicitly OPEN; and
 ([`reports/ANTI_CIRCULARITY_GATE_RUN_2026-10-20.md`](reports/ANTI_CIRCULARITY_GATE_RUN_2026-10-20.md))
 — the external gate now receives the four Lean kernel sources and returns
 PASS (0 placeholders), with `lean/spec/` explicitly OUT OF SCOPE (9 declared
-axioms) and no SMT input; the Coq packages' Coq-kernel status is unchanged.
+axioms) and no SMT input; and `A-2026-0016`, the CI verification hardening
+([`reports/CI_HARDENING_2026-10-20.md`](reports/CI_HARDENING_2026-10-20.md))
+— the per-declaration Lean axiom audit now runs in the `lean-kernel` job and
+a digest-pinned Coq 8.20.1 job rechecks Paket 8/9 with `coqc`/`coqchk`; and
+`A-2026-0017`, the repaired abstract spec V2
+([`reports/XI_SPEC_V2_2026-10-20.md`](reports/XI_SPEC_V2_2026-10-20.md))
+— the historical endpoint contradiction removed (`xiReal` guarded at `x = 1`,
+`xiReal_sub_one` restricted to `x < 0`, false `zetaReal_neg` dropped; 8
+axioms), still conditional and not a proof about the actual xi function; the
+Coq packages' Coq-kernel status is unchanged.
 Every verdict is a bounded assessment under the scope limits recorded there, not a
 defect claim on any third party's work.
 

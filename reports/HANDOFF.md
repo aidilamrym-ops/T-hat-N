@@ -1580,6 +1580,76 @@ Konsekuensi urutan yang disarankan:
   `lean4-cli`, curl 56, bukan input gate). Kedua job diverifikasi lewat
   `/actions/runs/39305543507/jobs`.
 
+### 2.0ah — Audit aksioma Lean per-deklarasi + Coq CI pinned (2026-10-20)
+
+- **Konteks:** dua celah CI ditutup tanpa mengubah laporan/entri beku:
+  audit `#print axioms` per-deklarasi kini dijalankan di job
+  `lean-kernel`, dan job baru `coq-kernel` mengompilasi ulang Paket 8/9
+  dengan Coq yang dipin.
+- **Fakta mesin lokal:** `lake build` 3.089 job / 105,8 dtk; audit 18,6
+  dtk (1 passed, 83 deklarasi, hanya `propext`,
+  `Classical.choice`, `Quot.sound`); `check_integral_limit.sh` 53,0
+  dtk (4/4 hasil, `coqchk` sukses, 4 aksioma stdlib);
+  `check_integral_infinite.sh` 74,9 dtk (17/17 hasil, `coqchk`
+  sukses, 4 aksioma stdlib). Guard statis baru
+  `msaf/tests/test_ci_verification_paths.py` 5 uji lulus (termasuk 7
+  mutasi negatif); suite penuh **449 passed**; `freeze.py --verify`
+  OK (14 pin, digest
+  `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`).
+- **CI:** job `coq-kernel` memakai
+  `coqorg/coq:8.20.1@sha256:18ebf3da56e60e3ddfd7d4e51f4c53d10241a129f34e93dacbc71562dd43c57a`,
+  menjalankan `coqc --version`, lalu kedua skrip secara berurutan;
+  tidak ada `continue-on-error`. Sensor kernel kini mengecualikan
+  `spec_v2`; sensor `spec_v2` mengunci budget 8 aksioma dan melarang
+  `sorry`/`admit`/`unsafe`.
+- **Batas:** bukan hasil matematis; trusted base Coq tetap empat
+  aksioma stdlib; `lean/spec/` dan `lean/spec_v2/` tetap di luar
+  audit kernel; tidak ada SMT. Status `TOOL NOT RUN (NO_LEAN_FILES)`
+  pada laporan beku Paket 7–9 tetap berlaku untuk scope Coq historis.
+- **Guard:** `python -m pytest msaf/tests/test_ci_verification_paths.py -q`;
+  registry `A-2026-0016` (3 sertifikat sha256LF). CI run ID akan
+  ditambahkan di sini setelah push.
+
+### 2.0ai — Koreksi spec Xi V2: kontradiksi endpoint dihapus (2026-10-20)
+
+- **Cacat:** `lean/spec/XiAnalyticSpec.lean` (`A-2026-0015`) tidak
+  konsisten. Probe `False` memakai `xiReal_sub_one 0`, `xiReal 1 = 0`,
+  dan `xiReal 0 = 1/2`; aksioma `zetaReal_neg` juga salah di `x = -2`
+  (zeta(-2)=0) dan tidak dipakai. Berkas lama **tidak diubah**.
+- **Perbaikan:** `lean/spec_v2/XiAnalyticSpecV2.lean` — `xiReal`
+  dijaga di `x = 1` (`1/2`), `xiReal_sub_one` dibatasi ke `x < 0`,
+  `zetaReal_neg` dihapus; 8 aksioma deklaratif. Kompilasi exit 0
+  (16,7 dtk); `#print axioms xi_pos_on_reals` = 8 aksioma V2 + 3
+  aksioma standar Lean, tanpa `zetaReal_neg`; probe kontradiksi lama
+  exit 1. `lean/spec/README.md` menandai berkas lama sebagai tidak
+  sound dan menunjuk V2.
+- **Batas:** V2 tetap **spec abstrak kondisional**; `zetaReal`/`gammaReal`
+  opak dan bentuk produk tidak faithful di bilangan bulat genap negatif
+  (kutub Gamma klasik). Bukan bukti tentang xi sebenarnya, bukan RH,
+  bukan peer review. V3 faithful (Mathlib zeta/Gamma) belum dieksekusi.
+- **Guard:** `python -m pytest msaf/tests/test_xi_spec_v2.py -q`
+  (3 uji; probe Lean dijalankan bila `lake` ada); sensor CI
+  `spec_v2` budget 8; registry `A-2026-0017` (4 sertifikat sha256LF).
+  CI run ID akan ditambahkan setelah push.
+
+### 2.0aj — Triage blueprint lima masalah eksperimental (2026-10-20)
+
+- **Sumber:** `Five Core Experimental Problem Blueprint.md` (artefak
+  pemilik, tidak diubah; 8.197 byte; sha256LF
+  `016ae7c2d16cafc33c272db9a96f5226222768aa88e9b713e236cd04b40625a9`).
+- **Status:** **PLANNING ONLY** — tidak ada eksperimen yang dijalankan,
+  tidak ada klaim baru, tidak ada entri registry (bukan klaim finit).
+- **Isi antrean:** (1) Guinand–Weil non-primitif `χ_{q,n}`;
+  (2) permutasi uniter `Z_N^×` (model periodisitas, bukan faktorisasi);
+  (3) Laplace–Beltrami/Selberg zeta; (4) transisi Anderson random
+  banded; (5) spectral closure Frobenius–Perron/Ulam. Urutan usulan:
+  2 → 4 → 5 → 1 → 3, masing-masing dengan pra-registrasi dan
+  persetujuan pemilik; item 2 paling eksak, item 3 paling berisiko.
+- **Guard:** laporan `reports/FIVE_CORE_BLUEPRINT_TRIAGE_2026-10-20.md`.
+  Tidak ada klaim RH/P≠NP/fisika; item kriptografi hanya model
+  spektral. Langkah berikutnya menunggu pilihan pemilik, bukan
+  eksekusi otomatis.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional

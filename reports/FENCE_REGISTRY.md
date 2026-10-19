@@ -1107,6 +1107,86 @@ mengikuti laporan L4).
   sha256LF 38818af1cd85b19f1928070b3b964f3be372df3f9de7fa95e4ccf6a52c1fff9b lean/spec/XiAnalyticSpec.lean
   ```
 
-Selesai — 20 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015`). Entri
+### A-2026-0016 — Verifikasi berlapis di CI: audit aksioma Lean per-deklarasi + job Coq 8.20.1 pinned untuk Paket 8/9
+
+- **Jenis:** A
+- **Pernyataan:** CI kini menjalankan dua jalur verifikasi nyata yang
+  sebelumnya tidak ada. (1) Job `lean-kernel` menjalankan
+  `msaf/tests/test_lean_axiom_audit.py::test_every_declaration_uses_standard_axioms_only`
+  setelah `lake build`; audit 83 deklarasi kernel gagal jika ada
+  dependensi di luar `propext`, `Classical.choice`, `Quot.sound`.
+  (2) Job baru `coq-kernel` menjalankan `check_integral_limit.sh`
+  (Paket 8, `A-2026-0013`) dan `check_integral_infinite.sh` (Paket 9,
+  `A-2026-0014`) di dalam container
+  `coqorg/coq:8.20.1@sha256:18ebf3da56e60e3ddfd7d4e51f4c53d10241a129f34e93dacbc71562dd43c57a`;
+  kedua skrip memverifikasi hasil 4/4 dan 17/17, `coqchk` "Modules
+  were successfully checked", dan trusted base tepat empat aksioma
+  stdlib. Guard statis baru `msaf/tests/test_ci_verification_paths.py`
+  (5 uji) mengunci urutan, image+digest, kedua skrip, sensor
+  `spec_v2` budget 8, dan ketiadaan `continue-on-error`; tujuh mutasi
+  negatif ditolak.
+- **Batas:** bukan hasil matematis baru; tidak mengubah trusted base
+  Coq empat aksioma stdlib; tidak memverifikasi `lean/spec/` atau
+  `lean/spec_v2/` ke dalam audit kernel; tidak ada input SMT; bukan
+  klaim CI hijau (run ID di `reports/HANDOFF.md` §2.0ah); status
+  `TOOL NOT RUN (NO_LEAN_FILES)` laporan beku Paket 7–9 tidak ditulis
+  ulang. Tanpa klaim RH/P≠NP/fisika.
+- **Status:** CERTIFIED dengan scope tercatat
+- **Domino:** tidak ada (infrastruktur verifikasi; bukan domino)
+- **Relasi:** melanjutkan `A-2026-0015` tanpa mengubahnya; memakai
+  Paket 8/9 (`A-2026-0012`–`A-2026-0014`) sebagai modul beku; entri
+  registry ke-21; memori kerja §2.0ah `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_ci_verification_paths.py -q`;
+  `python -c "import yaml; yaml.safe_load(open('.github/workflows/ci.yml', encoding='utf-8'))"`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF 4124ecb9ebfb4580d4f2ee3c8efc8f1080173a3c72546aa362ab9eaf3a809be3 .github/workflows/ci.yml
+  sha256LF 231ce892f3976b5525e74d18720d85cfe5ada9fcfd2688941467e9c98d144ab7 msaf/tests/test_ci_verification_paths.py
+  sha256LF 3339a51d290c9d47cd3dd8dbd34cbcc8d0fbcca9622aa3fe9254cd724afc9df4 reports/CI_HARDENING_2026-10-20.md
+  ```
+
+### A-2026-0017 — Koreksi spec Xi V2: kontradiksi endpoint dihapus; 8 aksioma; berkas lama tetap beku
+
+- **Jenis:** A
+- **Pernyataan:** `lean/spec/XiAnalyticSpec.lean` (`A-2026-0015`) tidak
+  konsisten: dari `xiReal_sub_one 0`, `xiReal 1 = 0`, dan
+  `xiReal 0 = 1/2` Lean menerima `False`; aksioma `zetaReal_neg` juga
+  salah di `x = -2` dan tidak terpakai. Berkas baru
+  `lean/spec_v2/XiAnalyticSpecV2.lean` memperbaiki batas abstraksi:
+  `xiReal` dijaga di `x = 1` (`1/2`), `xiReal_sub_one` dibatasi ke
+  `x < 0`, dan `zetaReal_neg` dihapus. V2 mendeklarasikan **8**
+  aksioma; `xi_pos_on_reals` lolos kompilasi dan
+  `#print axioms` menunjukkan delapan aksioma V2 plus tiga aksioma
+  standar Lean, tanpa `zetaReal_neg`; probe kontradiksi lama exit 1
+  (tertutup). Guard `msaf/tests/test_xi_spec_v2.py` (3 uji, termasuk
+  probe Lean) dan sensor CI `spec_v2` budget 8 mengunci keadaan itu.
+- **Batas:** V2 tetap **spec abstrak kondisional**, bukan bukti
+  tentang fungsi xi sebenarnya: `zetaReal`/`gammaReal` opak, dan
+  bentuk produk **tidak faithful** di bilangan bulat genap negatif
+  (kutub Gamma klasik). Bukan bukti Riemann Hypothesis, bukan peer
+  review, tidak mengubah trusted base Coq empat aksioma. Berkas lama
+  `lean/spec/XiAnalyticSpec.lean` tetap byte-identik dan hanya
+  ditandai lewat `lean/spec/README.md`; entri `A-2026-0015` tidak
+  diubah. Langkah V3 faithful (Mathlib zeta/Gamma) belum dieksekusi.
+- **Status:** CERTIFIED dengan scope tercatat
+- **Domino:** tidak ada (koreksi spec; bukan domino)
+- **Relasi:** menetapkan pemakaian baru setelah `A-2026-0015`; tidak
+  mengubah `A-2026-0012`–`A-2026-0016`; entri registry ke-22; memori
+  kerja §2.0ai `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `lake env lean spec_v2/XiAnalyticSpecV2.lean`
+  (dari `lean/`); `python -m pytest msaf/tests/test_xi_spec_v2.py -q`;
+  `python -m pytest msaf -q`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF 1acc5c33dbc8b134e0272cf95073bd8e343a34d3abbc76a6fae915a6d9a0c955 lean/spec_v2/XiAnalyticSpecV2.lean
+  sha256LF 99074dfea388855ad0b16418a98ca76b4203c8b4932c2755547142c5fbf04e70 lean/spec/README.md
+  sha256LF 58d7f3866c12d1dc1a18068a57e207e5349df3a416a780565a2c4adac8838da9 msaf/tests/test_xi_spec_v2.py
+  sha256LF 36cd6dd90ed48a0246cbcdb37cb34ddf3d222336adc2be7f0650b619dd392c19 reports/XI_SPEC_V2_2026-10-20.md
+  ```
+
+Selesai — 22 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).
