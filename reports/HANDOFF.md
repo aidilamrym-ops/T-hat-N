@@ -1607,8 +1607,11 @@ Konsekuensi urutan yang disarankan:
   audit kernel; tidak ada SMT. Status `TOOL NOT RUN (NO_LEAN_FILES)`
   pada laporan beku Paket 7–9 tetap berlaku untuk scope Coq historis.
 - **Guard:** `python -m pytest msaf/tests/test_ci_verification_paths.py -q`;
-  registry `A-2026-0016` (3 sertifikat sha256LF). CI run ID akan
-  ditambahkan di sini setelah push.
+  registry `A-2026-0016` (3 sertifikat sha256LF). CI run
+  **39317565343 hijau**: `lean-kernel` 2m22s (build + audit aksioma +
+  probe V2 + tiga sensor), `python-tests` 1m0s, `coq-kernel` 1m53s
+  (Coq toolchain version + Paket 8 + Paket 9). Job `coq-kernel` adalah
+  bukti kompilasi ulang Coq pertama di CI untuk repo ini.
 
 ### 2.0ai — Koreksi spec Xi V2: kontradiksi endpoint dihapus (2026-10-20)
 
@@ -1630,7 +1633,8 @@ Konsekuensi urutan yang disarankan:
 - **Guard:** `python -m pytest msaf/tests/test_xi_spec_v2.py -q`
   (3 uji; probe Lean dijalankan bila `lake` ada); sensor CI
   `spec_v2` budget 8; registry `A-2026-0017` (4 sertifikat sha256LF).
-  CI run ID akan ditambahkan setelah push.
+  CI run **39317565343 hijau** (step "Compile repaired spec V2"
+  lulus di `lean-kernel`; sensor `spec_v2` budget 8 lulus).
 
 ### 2.0aj — Triage blueprint lima masalah eksperimental (2026-10-20)
 
