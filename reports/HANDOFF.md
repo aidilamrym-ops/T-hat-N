@@ -1193,6 +1193,18 @@ Konsekuensi urutan yang disarankan:
   belum dieksekusi.
 - **Batas:** cleanup = pemeliharaan lingkungan, bukan hasil audit; tidak
   mengubah status/registry mana pun; tidak ada klaim baru.
+- **[UPDATE 2026-10-19, keputusan penutupan owner]** `/root/l1` (359 MB) = KEEP
+  eksplisit (jangkar referensi metrologi lokal); `/root/.opam` (1,7 GB) = KEEP
+  (kesiapan toolchain Coq/Rocq); scratch `Temp\opencode\bb5_note_int3.txt`
+  (1.826 B; sha256
+  `2767d1e3c59ff9d03c1db3fe3610d44619523da453dfb7fc6a42c95c3fdcec40`) +
+  `append_int3.sh` (328 B; sha256
+  `0a67c1736ebce30d5760c28e4d88f93b0e9e93a05b698b187144e812e7d67686`) =
+  DIHAPUS (isi catatan sudah tercermin di log R beku baris 1453, 2026-10-18T17:05Z);
+  artefak P2 `audit_collatz/exec_2026-10-19/` = KEEP, tetap untracked (tidak
+  disentuh); keputusan WSL2/podman masih menunggu owner. Item `Temp\opencode`
+  lain tidak disentuh (di luar daftar; mis. cadangan JSON Zenodo §3 memang
+  sengaja disimpan).
 
 ---
 
