@@ -1265,8 +1265,12 @@ Konsekuensi urutan yang disarankan:
   laju, tanpa klaim kontinuum).
 - **Guard:** `msaf/tests/test_periodic_bridge.py` (6 uji); output verbatim
   `reports/PERIODIC_BRIDGE_STUDY_OUTPUT_2026-10-19.txt` (capture ganda);
-  registry `A-2026-0007` (4 sertifikat sha256LF). CI: id run dicatat di
-  update menyusul.
+  registry `A-2026-0007` (4 sertifikat sha256LF).
+- **[UPDATE 2026-10-19] CI hijau:** run `39229797053` (commit `cbe3f95`):
+  python-tests `402 passed, 1 skipped` (35.93 s; skip = `skipif` lama
+  "Lean toolchain absent", bukan artefak studi ini), termasuk verifikasi
+  4 sha256LF `A-2026-0007` + 6 uji periodic_bridge; lean-kernel sukses;
+  tidak ada berkas beku disentuh.
 
 ---
 
