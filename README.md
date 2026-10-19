@@ -70,7 +70,16 @@ series entry `RR-2026-01` (spec
 [`reports/AUDIT_ECDSA_REPORT_2026-10-19.md`](reports/AUDIT_ECDSA_REPORT_2026-10-19.md))
 — a reproduction of the published (t, n) -> ECDSA seed mapping (Anthropic
 page, 2026-10-16: 14/14 published rows matched; B-163 remains an open
-residue; the anti-circularity gate is attached as TOOL NOT RUN). Every
+residue; the anti-circularity gate is attached as TOOL NOT RUN); and
+`A-2026-0005`, the second Replay Record series entry `RR-2026-02` (spec
+[`reports/REPLAY_CERT_SPEC_V0.2_QUANTUM.md`](reports/REPLAY_CERT_SPEC_V0.2_QUANTUM.md),
+prereg [`reports/AUDIT_QUANTUM_PREREG_2026-10-19.md`](reports/AUDIT_QUANTUM_PREREG_2026-10-19.md),
+dashboard [`reports/gw_quantum_diagnostic_v1.html`](reports/gw_quantum_diagnostic_v1.html))
+— a pre-registered campaign of the SIMULATED-entropy kernel at dims
+201/301/401 (simulated entropy stream from the OS CSPRNG; no physical
+claim): 12/12 coordinates certified by two independent exact engines,
+all three statistical dimension verdicts RESOLVED, campaign exit 0;
+ledger head `e7bda4e1…`. Every
 verdict is a bounded assessment under the scope limits recorded there, not a
 defect claim on any third party's work.
 
