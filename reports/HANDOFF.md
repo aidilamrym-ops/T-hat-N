@@ -1692,7 +1692,14 @@ Konsekuensi urutan yang disarankan:
   `A-2026-0015`/`0016`/`0017` tidak diubah; `ci.yml` tidak diubah.
 - **Guard:** `python -m pytest msaf/tests/test_xi_spec_v3.py -q`;
   registry `A-2026-0018` (6 sertifikat sha256LF). Workflow `spec-v3.yml`
-  memiliki path filter dan job `lean-v3`; run ID dicatat setelah push.
+  memiliki path filter dan job `lean-v3`; tidak ada `continue-on-error`.
+- **CI:** run utama **39340871585 hijau**: `lean-kernel` 2m43s
+  (build + audit aksioma + probe V2 + tiga sensor; sensor kernel juga
+  memindai `spec_v3` dan lulus), `python-tests` 1m13s (453 uji),
+  `coq-kernel` 2m47s (toolchain + Paket 8 + Paket 9). Workflow baru
+  **Spec V3** run **39340871761 hijau**: job `lean-v3` 2m5s
+  (`lake build` + guard V3 3 uji). Hanya anotasi deprecation
+  Node.js/Ubuntu dari runner, bukan kegagalan gate.
 
 ---
 
