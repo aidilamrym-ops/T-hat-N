@@ -1,0 +1,51 @@
+{
+  "all_ok": true,
+  "checks": [
+    {
+      "desc": "draws E1 == E1w (7 seeds x 250)",
+      "detail": "",
+      "id": "A",
+      "ok": true
+    },
+    {
+      "desc": "draws E2 == E1 (same vectors)",
+      "detail": "",
+      "id": "B",
+      "ok": true
+    },
+    {
+      "desc": "draws range <= 0x7FFFFFFF",
+      "detail": "",
+      "id": "C",
+      "ok": true
+    },
+    {
+      "desc": "cand/scan equality + semantics (36 subchecks)",
+      "detail": "",
+      "id": "D",
+      "ok": true
+    }
+  ],
+  "formats": {
+    "binary": [
+      5,
+      17,
+      8
+    ],
+    "prime": [
+      20,
+      40,
+      2
+    ]
+  },
+  "k": 250,
+  "seeds": [
+    0,
+    1,
+    42,
+    123456789,
+    872727272,
+    892391072,
+    893000000
+  ]
+}

@@ -1,0 +1,76 @@
+=== RR-2026-01 execution start 2026-10-19T02:00:15Z ===
+host: Linux 6.18.54.1-microsoft-standard-WSL2 / Ubuntu 26.04.1 LTS / gcc 15 / python 3.14.4 / nice nice (uutils coreutils) 0.8.0
+--- step 0: pin check + build 2026-10-19T02:00:16Z ---
+$ sha256sum -c audit_ecdsa/PINS.sha256
+audit_ecdsa/SOURCES.md: OK
+audit_ecdsa/build_manifest.py: OK
+audit_ecdsa/captures/bc_SECNamedCurves.java: OK
+audit_ecdsa/captures/claim_anthropic_ecdsa_curve_origins.html: OK
+audit_ecdsa/captures/claim_anthropic_ecdsa_curve_origins.txt: OK
+audit_ecdsa/captures/fips186-2-change1.pdf: OK
+audit_ecdsa/captures/fips186-2-change1.txt: OK
+audit_ecdsa/captures/fips186-4.pdf: OK
+audit_ecdsa/captures/fips186-4.txt: OK
+audit_ecdsa/captures/neuromancer_prime192v2.html: OK
+audit_ecdsa/captures/neuromancer_prime192v3.html: OK
+audit_ecdsa/captures/neuromancer_prime239v1.html: OK
+audit_ecdsa/captures/neuromancer_prime239v2.html: OK
+audit_ecdsa/captures/neuromancer_prime239v3.html: OK
+audit_ecdsa/captures/saweis_nist_curve_seed_origins.html: OK
+audit_ecdsa/captures/sec2-v2.pdf: OK
+audit_ecdsa/captures/sec2-v2.txt: OK
+audit_ecdsa/captures/x962-1998-draft.pdf: OK
+audit_ecdsa/captures/x962-1998-draft.txt: OK
+audit_ecdsa/engine_e1.c: OK
+audit_ecdsa/engine_e1w.c: OK
+audit_ecdsa/engine_e2.py: OK
+audit_ecdsa/run_v1.py: OK
+audit_ecdsa/seeds_manifest.json: OK
+audit_ecdsa/selftest_v1.py: OK
+audit_ecdsa/tool_claim_text.py: OK
+audit_ecdsa/v1_rows.tsv: OK
+reports/REPLAY_RECORD_SPEC.md: OK
+reports/AUDIT_ECDSA_PREREG_2026-10-19.md: OK
+$ gcc -O2 -std=gnu11 -o audit_ecdsa/exec_2026-10-19/e1  audit_ecdsa/engine_e1.c
+$ gcc -O2 -std=gnu11 -o audit_ecdsa/exec_2026-10-19/e1w audit_ecdsa/engine_e1w.c
+$ sha256sum audit_ecdsa/exec_2026-10-19/e1 audit_ecdsa/exec_2026-10-19/e1w
+5188ed4eb1740400252ce1db63f1d14a64e718cbbe8910fa549ae72a437bd457  audit_ecdsa/exec_2026-10-19/e1
+0fcb720ed9bc67ccf8207b49981c0668f7833f63e72f2c45c28ce51ce0f3b77a  audit_ecdsa/exec_2026-10-19/e1w
+--- I1: engine selftests 2026-10-19T02:00:17Z ---
+$ nice -n 19 python3 audit_ecdsa/selftest_v1.py --e1 audit_ecdsa/exec_2026-10-19/e1 --e1w audit_ecdsa/exec_2026-10-19/e1w --e2 audit_ecdsa/engine_e2.py --json audit_ecdsa/exec_2026-10-19/i1_selftest.json
+[A] draws E1 == E1w (7 seeds x 250): OK
+[B] draws E2 == E1 (same vectors): OK
+[C] draws range <= 0x7FFFFFFF: OK
+[D] cand/scan equality + semantics (36 subchecks): OK
+SELFTEST: ALL OK
+I1 rc=0
+--- I2: prime rows (R01-R10) 2026-10-19T02:00:20Z ---
+$ nice -n 19 python3 audit_ecdsa/run_v1.py i2 --manifest audit_ecdsa/seeds_manifest.json --e1 audit_ecdsa/exec_2026-10-19/e1 --e2 audit_ecdsa/engine_e2.py --out audit_ecdsa/exec_2026-10-19/i2_prime.json
+{"item": "I2", "summary": {"all_match_std": true, "claim_crosscheck_mismatches": [], "n_match": 10, "n_mismatch": 0, "n_rows": 10, "rows_first_reappearance_not_at_n": []}}
+I2 rc=0
+--- I3: binary rows (R11-R14) 2026-10-19T02:00:22Z ---
+$ nice -n 19 python3 audit_ecdsa/run_v1.py i3 --manifest audit_ecdsa/seeds_manifest.json --e1 audit_ecdsa/exec_2026-10-19/e1 --e2 audit_ecdsa/engine_e2.py --out audit_ecdsa/exec_2026-10-19/i3_binary.json
+{"item": "I3", "summary": {"all_match_std": true, "claim_crosscheck_mismatches": [], "n_match": 4, "n_mismatch": 0, "n_rows": 4, "rows_first_reappearance_not_at_n": []}}
+I3 rc=0
+--- I4: word-structure statistic (C3) 2026-10-19T02:00:22Z ---
+$ nice -n 19 python3 audit_ecdsa/run_v1.py i4 --manifest audit_ecdsa/seeds_manifest.json --out audit_ecdsa/exec_2026-10-19/i4_wordstats.json
+{"count_all_top_bits_zero": 4, "item": "I4", "label": "MATCH", "subchecks": {"count_ok": true, "probability_within_tolerance": true}}
+I4 rc=0
+--- I5: timestamp arithmetic (C4) 2026-10-19T02:00:23Z ---
+$ nice -n 19 python3 audit_ecdsa/run_v1.py i5 --manifest audit_ecdsa/seeds_manifest.json --out audit_ecdsa/exec_2026-10-19/i5_timestamps.json
+{"item": "I5", "label": "MATCH", "subchecks": {"doubled_dates_1998_04_17": true, "halved_dates_feb1984": true, "interval_b233_p224_floor_days_14": true, "prime_range_may1997_apr1998": true}}
+I5 rc=0
+--- I6: sources + packaging 2026-10-19T02:00:23Z ---
+$ nice -n 19 python3 audit_ecdsa/run_v1.py i6 --manifest audit_ecdsa/seeds_manifest.json --out audit_ecdsa/exec_2026-10-19/i6_sources.json
+{"item": "I6", "label": "MATCH", "subchecks": {"min_sources_ge_2": true, "rebuild_from_captures_identical": true, "sources_all_agree_with_manifest": true}}
+I6 rc=0
+--- exec artifact hashes (log certificates computed later) 2026-10-19T02:00:23Z ---
+5188ed4eb1740400252ce1db63f1d14a64e718cbbe8910fa549ae72a437bd457  audit_ecdsa/exec_2026-10-19/e1
+0fcb720ed9bc67ccf8207b49981c0668f7833f63e72f2c45c28ce51ce0f3b77a  audit_ecdsa/exec_2026-10-19/e1w
+80cc0d2c9d0c0c1ed5581563acfbc96932bb1854409d566017ebf160ea974327  audit_ecdsa/exec_2026-10-19/i1_selftest.json
+22ed4fa09a30ae2f787d966915766a3e8b1a21d84fbe4d933c39b7563fd67aac  audit_ecdsa/exec_2026-10-19/i2_prime.json
+247f9e511d0efdbe7a76b8f41f9b678b54d9006e8e7cc5d7a41ddab6e7201823  audit_ecdsa/exec_2026-10-19/i3_binary.json
+1139975b4a0cc3f058291048ac0b8de5692af4a1ca4676167975d31a4adfef2d  audit_ecdsa/exec_2026-10-19/i4_wordstats.json
+e1756ee8b5d1d12ef8f24b040c2ff1cbb1a6883fe440f754492ce4c504da6698  audit_ecdsa/exec_2026-10-19/i5_timestamps.json
+da0eccfd38f319d2dde559de7559e49d8578d3ca61bfe7c8a5de275b1368e9b3  audit_ecdsa/exec_2026-10-19/i6_sources.json
+=== RR-2026-01 execution end 2026-10-19T02:00:23Z ===

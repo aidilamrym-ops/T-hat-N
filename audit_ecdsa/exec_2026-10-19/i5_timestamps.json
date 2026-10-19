@@ -1,0 +1,68 @@
+{
+  "binary": [
+    {
+      "curve": "B-233",
+      "doubled_date_utc": "1998-04-17",
+      "doubled_is_1998_04_17": true,
+      "halved_date_utc": "1984-02-23 19:42:09",
+      "halved_in_feb1984": true,
+      "id": "R11",
+      "seed_arg": 446413329,
+      "t_epoch": 892826658,
+      "t_utc": "1998-04-17 15:24:18"
+    },
+    {
+      "curve": "B-283",
+      "doubled_date_utc": "1998-04-17",
+      "doubled_is_1998_04_17": true,
+      "halved_date_utc": "1984-02-23 19:43:52",
+      "halved_in_feb1984": true,
+      "id": "R12",
+      "seed_arg": 446413432,
+      "t_epoch": 892826864,
+      "t_utc": "1998-04-17 15:27:44"
+    },
+    {
+      "curve": "B-409",
+      "doubled_date_utc": "1998-04-17",
+      "doubled_is_1998_04_17": true,
+      "halved_date_utc": "1984-02-23 19:45:09",
+      "halved_in_feb1984": true,
+      "id": "R13",
+      "seed_arg": 446413509,
+      "t_epoch": 892827018,
+      "t_utc": "1998-04-17 15:30:18"
+    },
+    {
+      "curve": "B-571",
+      "doubled_date_utc": "1998-04-17",
+      "doubled_is_1998_04_17": true,
+      "halved_date_utc": "1984-02-23 19:46:04",
+      "halved_in_feb1984": true,
+      "id": "R14",
+      "seed_arg": 446413564,
+      "t_epoch": 892827128,
+      "t_utc": "1998-04-17 15:32:08"
+    }
+  ],
+  "interval": {
+    "exact_seconds": 1218731,
+    "floor_days": 14,
+    "from": "P-224",
+    "from_t_utc": "1998-04-03 12:52:07",
+    "to": "B-233",
+    "to_t_utc": "1998-04-17 15:24:18"
+  },
+  "item": "I5",
+  "label": "MATCH",
+  "prime_range": {
+    "max_utc": "1998-04-03",
+    "min_utc": "1997-05-15"
+  },
+  "subchecks": {
+    "doubled_dates_1998_04_17": true,
+    "halved_dates_feb1984": true,
+    "interval_b233_p224_floor_days_14": true,
+    "prime_range_may1997_apr1998": true
+  }
+}

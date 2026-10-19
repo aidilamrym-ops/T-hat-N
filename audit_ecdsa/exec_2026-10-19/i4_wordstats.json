@@ -1,0 +1,207 @@
+{
+  "claim_one_over_p": 5810,
+  "count_all_top_bits_zero": 4,
+  "curves": [
+    {
+      "all_top_bits_zero": false,
+      "curve": "P-192",
+      "id": "R04",
+      "word_top_bits": [
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "words": [
+        "3045AE6F",
+        "C8422F64",
+        "ED579528",
+        "D38120EA",
+        "E12196D5"
+      ]
+    },
+    {
+      "all_top_bits_zero": false,
+      "curve": "P-521",
+      "id": "R07",
+      "word_top_bits": [
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      "words": [
+        "D09E8800",
+        "291CB853",
+        "96CC6717",
+        "393284AA",
+        "A0DA64BA"
+      ]
+    },
+    {
+      "all_top_bits_zero": false,
+      "curve": "P-256",
+      "id": "R08",
+      "word_top_bits": [
+        1,
+        1,
+        0,
+        0,
+        1
+      ],
+      "words": [
+        "C49D3608",
+        "86E70493",
+        "6A6678E1",
+        "139D26B7",
+        "819F7E90"
+      ]
+    },
+    {
+      "all_top_bits_zero": false,
+      "curve": "P-384",
+      "id": "R09",
+      "word_top_bits": [
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "words": [
+        "A335926A",
+        "A319A27A",
+        "1D00896A",
+        "6773A482",
+        "7ACDAC73"
+      ]
+    },
+    {
+      "all_top_bits_zero": false,
+      "curve": "P-224",
+      "id": "R10",
+      "word_top_bits": [
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "words": [
+        "BD713447",
+        "99D5C7FC",
+        "DC45B59F",
+        "A3B9AB8F",
+        "6A948BC5"
+      ]
+    },
+    {
+      "all_top_bits_zero": true,
+      "curve": "B-233",
+      "id": "R11",
+      "word_top_bits": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "words": [
+        "74D59FF0",
+        "7F6B413D",
+        "0EA14B34",
+        "4B20A2DB",
+        "049B50C3"
+      ]
+    },
+    {
+      "all_top_bits_zero": true,
+      "curve": "B-283",
+      "id": "R12",
+      "word_top_bits": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "words": [
+        "77E2B073",
+        "70EB0F83",
+        "2A6DD5B6",
+        "2DFC88CD",
+        "06BB84BE"
+      ]
+    },
+    {
+      "all_top_bits_zero": true,
+      "curve": "B-409",
+      "id": "R13",
+      "word_top_bits": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "words": [
+        "4099B5A4",
+        "57F9D69F",
+        "79213D09",
+        "4C4BCD4D",
+        "4262210B"
+      ]
+    },
+    {
+      "all_top_bits_zero": true,
+      "curve": "B-571",
+      "id": "R14",
+      "word_top_bits": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "words": [
+        "2AA058F7",
+        "3A0E33AB",
+        "486B0F61",
+        "0410C53A",
+        "7F132310"
+      ]
+    },
+    {
+      "all_top_bits_zero": false,
+      "curve": "B-163",
+      "id": "R15",
+      "word_top_bits": [
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      "words": [
+        "85E25BFE",
+        "5C86226C",
+        "DB12016F",
+        "7553F9D0",
+        "E693A268"
+      ]
+    }
+  ],
+  "expected_count": 4,
+  "item": "I4",
+  "label": "MATCH",
+  "one_over_p": 5809.960481401744,
+  "one_over_p_exact": "281474976710656/48446969237",
+  "p_ge_4_exact": "48446969237/281474976710656",
+  "subchecks": {
+    "count_ok": true,
+    "probability_within_tolerance": true
+  },
+  "tolerance_pct": 1
+}

@@ -1,0 +1,182 @@
+{
+  "item": "I6",
+  "label": "MATCH",
+  "min_sources": 2,
+  "rows": [
+    {
+      "all_agree": true,
+      "curve": "prime239v1",
+      "id": "R01",
+      "n_sources": 2,
+      "sources": [
+        "x962-1998-draft",
+        "neuromancer"
+      ]
+    },
+    {
+      "all_agree": true,
+      "curve": "prime239v2",
+      "id": "R02",
+      "n_sources": 2,
+      "sources": [
+        "x962-1998-draft",
+        "neuromancer"
+      ]
+    },
+    {
+      "all_agree": true,
+      "curve": "prime239v3",
+      "id": "R03",
+      "n_sources": 2,
+      "sources": [
+        "x962-1998-draft",
+        "neuromancer"
+      ]
+    },
+    {
+      "all_agree": true,
+      "curve": "P-192",
+      "id": "R04",
+      "n_sources": 4,
+      "sources": [
+        "fips186-4",
+        "fips186-2-change1",
+        "sec2-v2",
+        "bc-java"
+      ]
+    },
+    {
+      "all_agree": true,
+      "curve": "prime192v3",
+      "id": "R05",
+      "n_sources": 2,
+      "sources": [
+        "x962-1998-draft",
+        "neuromancer"
+      ]
+    },
+    {
+      "all_agree": true,
+      "curve": "prime192v2",
+      "id": "R06",
+      "n_sources": 2,
+      "sources": [
+        "x962-1998-draft",
+        "neuromancer"
+      ]
+    },
+    {
+      "all_agree": true,
+      "curve": "P-521",
+      "id": "R07",
+      "n_sources": 4,
+      "sources": [
+        "fips186-4",
+        "fips186-2-change1",
+        "sec2-v2",
+        "bc-java"
+      ]
+    },
+    {
+      "all_agree": true,
+      "curve": "P-256",
+      "id": "R08",
+      "n_sources": 4,
+      "sources": [
+        "fips186-4",
+        "fips186-2-change1",
+        "sec2-v2",
+        "bc-java"
+      ]
+    },
+    {
+      "all_agree": true,
+      "curve": "P-384",
+      "id": "R09",
+      "n_sources": 4,
+      "sources": [
+        "fips186-4",
+        "fips186-2-change1",
+        "sec2-v2",
+        "bc-java"
+      ]
+    },
+    {
+      "all_agree": true,
+      "curve": "P-224",
+      "id": "R10",
+      "n_sources": 4,
+      "sources": [
+        "fips186-4",
+        "fips186-2-change1",
+        "sec2-v2",
+        "bc-java"
+      ]
+    },
+    {
+      "all_agree": true,
+      "curve": "B-233",
+      "id": "R11",
+      "n_sources": 4,
+      "sources": [
+        "fips186-4",
+        "fips186-2-change1",
+        "sec2-v2",
+        "bc-java"
+      ]
+    },
+    {
+      "all_agree": true,
+      "curve": "B-283",
+      "id": "R12",
+      "n_sources": 4,
+      "sources": [
+        "fips186-4",
+        "fips186-2-change1",
+        "sec2-v2",
+        "bc-java"
+      ]
+    },
+    {
+      "all_agree": true,
+      "curve": "B-409",
+      "id": "R13",
+      "n_sources": 4,
+      "sources": [
+        "fips186-4",
+        "fips186-2-change1",
+        "sec2-v2",
+        "bc-java"
+      ]
+    },
+    {
+      "all_agree": true,
+      "curve": "B-571",
+      "id": "R14",
+      "n_sources": 4,
+      "sources": [
+        "fips186-4",
+        "fips186-2-change1",
+        "sec2-v2",
+        "bc-java"
+      ]
+    },
+    {
+      "all_agree": true,
+      "curve": "B-163",
+      "id": "R15",
+      "n_sources": 4,
+      "sources": [
+        "fips186-4",
+        "fips186-2-change1",
+        "sec2-v2",
+        "bc-java"
+      ]
+    }
+  ],
+  "subchecks": {
+    "min_sources_ge_2": true,
+    "rebuild_from_captures_identical": true,
+    "sources_all_agree_with_manifest": true
+  }
+}
