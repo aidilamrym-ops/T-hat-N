@@ -36,6 +36,23 @@ jobs:
         run: lake exe cache get
       - name: Build kernel
         run: lake build
+      # This is the real per-declaration axiom audit the static gate cannot
+      # perform. It runs after `lake build`, reuses the oleans, and fails if
+      # any of the 83 kernel declarations depends on more than the three
+      # standard Lean axioms. lean/spec/ is out of scope by design.
+      - name: Audit kernel declarations -- standard axioms only
+        working-directory: .
+        run: |
+          python -m pip install --disable-pip-version-check pytest
+          python -m pytest msaf/tests/test_lean_axiom_audit.py::test_every_declaration_uses_standard_axioms_only -q
+      # lean/spec_v2/XiAnalyticSpecV2.lean is the repaired abstract spec.
+      # It is still conditional (eight axioms, opaque zeta/gamma), so it is
+      # NOT part of the kernel axiom audit above; this step compiles it and
+      # proves that the historical endpoint contradiction no longer goes
+      # through. lean/spec/ stays untouched and frozen.
+      - name: Compile repaired spec V2 (conditional, out of kernel scope)
+        working-directory: .
+        run: python -m pytest msaf/tests/test_xi_spec_v2.py -q
       # lean/spec/ holds the CONDITIONAL specification (XiAnalyticSpec.lean):
       # nine declared axioms -- two opaque analytic symbols plus the seven
       # obligation lines -- that the pinned Mathlib cannot discharge. The
@@ -46,12 +63,45 @@ jobs:
       # here.
       - name: Escape-token sensor -- kernel (must be zero hits)
         run: |
-          ! grep -rnE '\bsorry\b|\badmit\b|\bunsafe\b|^axiom\b' --include='*.lean' --exclude-dir=.lake --exclude-dir=spec .
+          ! grep -rnE '\bsorry\b|\badmit\b|\bunsafe\b|^axiom\b' --include='*.lean' --exclude-dir=.lake --exclude-dir=spec --exclude-dir=spec_v2 .
       - name: Escape-token sensor -- spec (placeholders banned; axiom budget frozen)
         run: |
           ! grep -rnE '\bsorry\b|\badmit\b|\bunsafe\b' --include='*.lean' spec
           echo "declared axioms in spec/:"
           grep -rnE '^axiom\b' --include='*.lean' spec || true
           n=$(grep -rhE '^axiom\b' --include='*.lean' spec | wc -l)
-          echo "spec/ axiom budget: $n / 9 (edit this step deliberately to move it)"
+          echo "spec/ axiom budget: $n / 9 (historical A-2026-0015; see lean/spec_v2/)"
           test "$n" -eq 9
+      - name: Escape-token sensor -- spec_v2 (placeholders banned; 8-axiom budget)
+        run: |
+          ! grep -rnE '\bsorry\b|\badmit\b|\bunsafe\b' --include='*.lean' spec_v2
+          echo "declared axioms in spec_v2/:"
+          grep -rnE '^axiom\b' --include='*.lean' spec_v2 || true
+          n=$(grep -rhE '^axiom\b' --include='*.lean' spec_v2 | wc -l)
+          echo "spec_v2 axiom budget: $n / 8 (repaired abstract spec)"
+          test "$n" -eq 8
+
+  # The Coq bridge packages 7-9 (A-2026-0012..A-2026-0014) were only guarded
+  # statically by python-tests; this job actually compiles and re-checks them
+  # with the pinned Coq 8.20.1 toolchain. Scope: f_k only, four stdlib axioms,
+  # no general f, no real exponent, no periodic-box [J]. Docker keeps the
+  # toolchain version pinned instead of relying on the runner's apt Coq.
+  coq-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Coq toolchain version
+        run: docker run --rm coqorg/coq:8.20.1@sha256:18ebf3da56e60e3ddfd7d4e51f4c53d10241a129f34e93dacbc71562dd43c57a coqc --version
+      - name: Paket 8 -- conditional L5 limit step
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/work" -w /work/formal_bridge \
+            coqorg/coq:8.20.1@sha256:18ebf3da56e60e3ddfd7d4e51f4c53d10241a129f34e93dacbc71562dd43c57a \
+            bash check_integral_limit.sh
+      - name: Paket 9 -- unconditional L5 for f_k
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/work" -w /work/formal_bridge \
+            coqorg/coq:8.20.1@sha256:18ebf3da56e60e3ddfd7d4e51f4c53d10241a129f34e93dacbc71562dd43c57a \
+            bash check_integral_infinite.sh
