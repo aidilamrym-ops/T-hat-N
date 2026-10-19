@@ -1298,8 +1298,14 @@ Konsekuensi urutan yang disarankan:
 - **Guard:** `python -m pytest msaf/tests/test_coq_bridge_pilot.py -q`
   (4 uji; mengunci hash isi, kelengkapan audit, dan receipt); registry
   `A-2026-0008` (6 sertifikat sha256LF). CI tidak punya Coq: yang
-  dijalankan CI hanya guard statis, bukan kernel. CI: id run dicatat di
-  update menyusul.
+  dijalankan CI hanya guard statis, bukan kernel.
+- **[UPDATE 2026-10-19] CI hijau:** run `39234108189` (commit `3927c02`):
+  python-tests `406 passed, 1 skipped` (46.48 s; skip = `skipif` lama
+  "Lean toolchain absent", bukan artefak pilot ini), termasuk verifikasi
+  6 sha256LF `A-2026-0008` + 4 uji guard Coq statis; lean-kernel sukses;
+  tidak ada berkas beku disentuh. Catatan jujur: job CI **tidak**
+  menjalankan `coqc`/`coqchk` (toolchain Coq tidak ada di runner); bukti
+  kernel adalah receipt lokal yang di-hash, bukan eksekusi CI.
 
 ---
 
