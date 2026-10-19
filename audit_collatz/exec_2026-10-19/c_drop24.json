@@ -1,0 +1,7 @@
+{
+  "tool": "collatz_sweep",
+  "mode": "drop",
+  "params": {"exp": 24, "bound": 16777216, "step_cap": 1000000},
+  "result": {"bound": 16777216, "odd_checked": 8388607, "max_steps_to_drop": 287, "argmax": 13421671, "sum_drop": "52066189353824", "cap_hits": []},
+  "prefix24": {"bound": 16777216, "odd_checked": 8388607, "max_steps_to_drop": 287, "argmax": 13421671, "sum_drop": "52066189353824"}
+}

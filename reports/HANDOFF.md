@@ -145,6 +145,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | Probe audit eksternal pertama — BB(5) = 47.176.870 (Coq-BB5 v1.0.0): pra-registrasi + Phase A W/S/H/E/P + registry `A-2026-0002` | commit `fe90659` (pra-registrasi, dipush sebelum perintah audit pertama; CI hijau run `39096422610`) + commit yang membawa baris ini; eksekusi 85 s; replay saksi 47.176.870/4.098 eksak oleh 2 engine ×2 run (baterai 15/15); statement sha256LF `cac368d2…` (dua jalur unduh); weld Zenodo↔repo 217/218 (hanya `README.md`); E BB(3) X=20/Y=6 konsisten tabel beku; H: 0 `Admitted`, flag `BusyCoq/LibTactics.v`; R NOT-RUN (izin pemilik; prasyarat sweep L1 selesai) | `reports/AUDIT_BB5_REPORT_2026-10-18.md`, `reports/AUDIT_BB5_PREREG_2026-10-18.md`, `reports/AUDIT_BB5_RECON_2026-10-18.md`, `audit_bb5/`, `reports/FENCE_REGISTRY.md` (A-2026-0002) |
 | Sweep penuh L1 (opsi pra-reg §8) — keputusan owner = JALANKAN; LULUS PENUH | commit `295e716` (pra-registrasi runner+watchdog+header, dipush sebelum perintah pertama) + commit yang membawa baris ini; dibangun di atas `3d2a1bc` (CI hijau run `39097034038`); eksekusi 03:10:00Z → 05:31:18Z (±2 j 21 m; cap 6 j tidak tersentuh); `RESULT: FULL SWEEP REPLAY AND METADATA PASS`; 15/15 lane `[PASS]`; 3.149.013 baris N=690988..3840000 cocok; image `.Id` = pin `5ccd9e3f…`; tree `2e9976c4…` bersih; backup Temp sha256 `11bad912…` (16/16 OK) | `reports/AUDIT_P1_L1_SWEEP_2026-10-18.md`, `reports/audit_p1_l1_sweep_2026-10-18.log`, `audit_p1/l1_sweep.sh`, `audit_p1/l1_sweep_watchdog.sh`, `reports/FENCE_REGISTRY.md` (A-2026-0001) |
 | BB5 audit — Phase R: rebuild Coq 8.20.1 SELESAI (attempt 5, 2026-10-19T00:31:14Z) — blok akhir `Axioms:` = hanya `functional_extensionality_dep` (klaim README upstream cocok); wall/backstop 23:02:55Z tercatat as-is (D-R5, tanpa kill); gate anti-sirkularitas TOOL NOT RUN dilampirkan | commit yang membawa baris ini; dibangun di atas `0a97f2b` (tick v4.1; CI hijau run `39162111073`); attempt 5 `make -j2` `real 267m59.105s`; BusyCoq 25/25 + BB5 50/50 `.vo`; semua langkah exit 0; cert transkrip sha256LF `294d1dd4…` | `reports/AUDIT_BB5_R_ADDENDUM_2026-10-18.md`, `reports/audit_bb5_phaseR_2026-10-18.log`, `reports/FENCE_REGISTRY.md` (A-2026-0002), `audit_bb5/bb5_phaseR_resume4.sh` |
+| P2 audit Collatz (Barina) — SELESAI: replay terpra-registrasi semua item S/W/E/H/P dalam cap; S4/P DISCREPANCY terdokumentasi (15 symlink vs ekspektasi beku); registry `A-2026-0003` | commit log+laporan + commit registry yang membawa baris ini; pra-reg `bbbe9ae` (dipush sebelum perintah audit pertama; CI hijau `39154348599`); HEAD eksekusi `9d9c358` (CI hijau `39181863147`); eksekusi 2026-10-19T00:46:40Z–00:59:52Z (≈13 mnt; cap 6 j); E1 `odd_checked=8589934591` (ganjil 3 ≤ n < 2^34), `max_steps_to_drop=547` @ `12235060455`, 4 m36,8s dari wall 3,5 j; W 98/97/148 semua MATCH ×2 engine; H 25/25 + 14/14 verbatim; gate TOOL NOT RUN dilampirkan | `reports/AUDIT_COLLATZ_REPORT_2026-10-19.md`, `reports/AUDIT_COLLATZ_LOG_2026-10-19.log`, `reports/AUDIT_COLLATZ_PREREG_2026-10-19.md`, `audit_collatz/`, `reports/FENCE_REGISTRY.md` (A-2026-0003) |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -1055,6 +1056,52 @@ Konsekuensi urutan yang disarankan:
 - **Status:** SELESAI. Berikutnya: P2 Collatz (prereg beku `bbbe9ae` +
   sinyal "go" 2026-10-18T19:29Z "berlaku setelah R" → prasyarat kini
   terpenuhi) menunggu eksekusi; setelah itu V1 ECDSA (seri Replay Record).
+
+---
+
+### 2.0t [BARU, 2026-10-19] P2 Collatz — audit terpra-registrasi SELESAI: semua item S/W/E/H/P tuntas dalam cap; S4/P DISCREPANCY terdokumentasi; registry `A-2026-0003`
+
+- **Konteks/urutan:** prasyarat §11 pra-reg terpenuhi (R selesai §2.0s;
+  sinyal "go" pemilik 2026-10-18T19:29Z, "berlaku setelah R"); freeze
+  `bbbe9ae` dipush sebelum perintah audit pertama (CI hijau `39154348599`);
+  HEAD eksekusi `9d9c358` (CI hijau `39181863147`; `origin/main == HEAD`);
+  seluruh perintah "satu dulu" via runner berkas + `tee -a`; log dibuka
+  00:46:40Z, beku 00:59:52.99Z (single writer, tanpa append setelahnya).
+- **Eksekusi:** `reports/AUDIT_COLLATZ_LOG_2026-10-19.log` (sha256LF
+  `ccf178d0…`; 12.760 baris / 336.603 B); runner `audit_collatz/p2_runners/`
+  (8 skrip; dipakai dari `%TEMP%\opencode\p2exec\`, dikomit tanpa modifikasi
+  setelah eksekusi, 8/8 `cmp` identik).
+- **Hasil (label §10 pra-reg; nilai teramati di laporan §5):** S1/S2 lulus
+  (6 capture byte-identik; `site_main` identik setelah normalisasi baris
+  `Generated` saja); S3 pin `e98d0294…`/tree `b290c47a…`; S5 baterai
+  re-derivasi byte-identik; W1 98/97 + W2 148 baris — semua MATCH ×2 engine,
+  semua trajektori mencapai 1, `cap_hits` kosong, JSON deep-equal, re-run
+  stabil, monotonisitas terverifikasi; H1 25/25 + H2 14/14 verbatim; E1
+  `odd_checked = 8589934591` (ganjil 3 ≤ n < 2^34), `cap_hits = []`,
+  `max_steps_to_drop = 547` @ `12235060455`; digest 2^24 C↔Python MATCH;
+  prefix rekod 2^24 = 38 baris MATCH; E1 4 m 36,8 s dari wall 3,5 j; caps:
+  S 2 m 45 s, W 2 m 09 s, H 1 s, P/S4 19 s, E 7 m 37,8 s, total ≈ 13 mnt
+  (cap 6 j) — tanpa overrun/UNRESOLVED-BUDGET.
+- **DISCREPANCY S4/P (dicatat as-is):** ekspektasi beku `only_in_clone []`
+  / `identical 162` → teramati `147 identik / 0 berubah / 0 hanya-di-arsip
+  / 15 hanya-di-clone` (dua kali, termasuk rerun persis §9); mekanisme:
+  15 symlink repo disimpan sebagai member link di arsip GitHub; checkout
+  Windows (`core.symlinks=false`) mematerialisasi jadi berkas berisi teks
+  target; `weld-tar` membandingkan hanya member tar regular → tidak ada
+  drift berkas regular; tanpa perubahan parameter; tool tidak disentuh
+  (laporan §6.2). S3 attempt-1 gagal jaringan di tengah transfer + rerun
+  sekali per §9 (dicatat as-is).
+- **Gate + registry:** gate anti-sirkularitas `TOOL NOT RUN
+  (NO_LEAN_FILES)` exit 2 (verbatim di laporan §7; self-test 13/13 PASS;
+  hanya bisa menurunkan klaim). Registry `A-2026-0003`: 38 baris sertifikat
+  (log + laporan + pra-reg + 11 berkas beku + tool + 15 artefak hasil + 8
+  runner); guard `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **Artefak:** laporan `reports/AUDIT_COLLATZ_REPORT_2026-10-19.md` (§1–§11);
+  transkrip beku; subset hasil dikomit di `audit_collatz/exec_2026-10-19/`;
+  bulk (clone/refetch/tarball/biner) tetap lokal + hash tercatat di laporan
+  §8 dan registry.
+- **Status:** SELESAI. Berikutnya: V1 ECDSA (seri Replay Record) — mesin +
+  pra-reg dulu, freeze, lalu run. Blok T P2 tetap NOT-RUN (keputusan owner).
 
 ---
 

@@ -362,6 +362,126 @@ mengikuti laporan L4).
   sha256LF d1a312a1322a0515a1bb31059b86a256257fbba3f4905a5e863d698034a614ed audit_bb5/bb5_phaseR_keepalive_task.ps1
   ```
 
-Selesai — 7 entri per 2026-10-18 (6 entri awal + `A-2026-0002`). Entri
+### A-2026-0003 — Audit P2: replay rekaman verifikasi konvergensi Collatz (proyek Barina)
+
+- **Jenis:** A
+- **Pernyataan:** Audit terpra-registrasi (pra-reg `bbbe9ae`, dipush sebelum
+  perintah audit pertama; CI hijau `39154348599`; eksekusi
+  2026-10-19T00:46:40Z–00:59:52Z ≈ 13 mnt di HEAD `9d9c358`, CI hijau
+  `39181863147`; `origin/main == HEAD`; tanpa perubahan parameter) atas klaim
+  pihak ketiga C1/C1p/C2 (situs `pcbarina.fit.vutbr.cz`; pin GitHub
+  `e98d0294…`/tree `b290c47a…`): (S) 6 capture byte-identik + `site_main.html`
+  identik setelah normalisasi baris `Generated` saja; (S4/P) weld arsip↔clone =
+  147 identik / 0 berubah / 0 hanya-di-arsip / 15 hanya-di-clone (= 15 symlink
+  repo; DISCREPANCY terdokumentasi, lihat catatan); (W) replay dua engine
+  independen dalam-repo atas seluruh baris terbit — path 98/98,
+  tinggi-standar 97/97, delay 148/148; semua nilai terhitung = terbit, semua
+  trajektori mencapai 1, `cap_hits` kosong (cap 10^6), JSON `result`
+  deep-equal + re-run stabil, monotonisitas terverifikasi (laporan build
+  baterai); (H) fragmen beku verbatim 25/25 (situs) + 14/14 (repo); (S5)
+  re-derivasi baterai byte-identik; (E) sweep C ekshaustif
+  `odd_checked = 8589934591` (semua ganjil 3 ≤ n < 2^34), `cap_hits = []`,
+  `max_steps_to_drop = 547` @ n = `12235060455`; digest 2^24 C↔Python
+  identik (MATCH); prefix rekod 2^24 = 38 baris (MATCH kedua engine); E1
+  selesai 4 m 36,8 s dari wall 3,5 j. Gate anti-sirkularitas `TOOL NOT RUN
+  (NO_LEAN_FILES)` exit 2 (verbatim di laporan §7; self-test 13/13 PASS).
+- **Batas:** replay finit ≠ peer review; bukan bukti/penyangkal konjektur
+  Collatz; tidak ada klaim untuk n ≥ 2^34; target C1 (≈ 2^71,02) TIDAK
+  direproduksi (di luar jangkauan host; item T = NOT-RUN keputusan owner);
+  C1p/C2 hanya fragmen transkripsi H; S = snapshot, bukan verdict; E1 =
+  replay terbatas; label maksimum = §10 pra-reg dengan nilai teramati di
+  laporan; gate anti-sirkularitas hanya bisa menurunkan klaim; tidak
+  menyatakan/menyangkal RH atau P≠NP.
+- **Status:** CERTIFIED
+- **Domino:** tidak ada (probe eksternal; bukan domino RH)
+- **Relasi:** audit pihak ketiga ketiga (setelah `A-2026-0001`,
+  `A-2026-0002`); pra-registrasi `bbbe9ae`; recon
+  `reports/AUDIT_COLLATZ_RECON_2026-10-19.md`; laporan
+  `reports/AUDIT_COLLATZ_REPORT_2026-10-19.md` (§1–§11); transkrip beku
+  `reports/AUDIT_COLLATZ_LOG_2026-10-19.log`; runner
+  `audit_collatz/p2_runners/` (8 skrip; dipakai dari Temp, dikomit tanpa
+  modifikasi, 8/8 `cmp` identik); memakai ulang
+  `audit_bb5/artifact_checks.py` tanpa modifikasi.
+- **Catatan (DISCREPANCY S4/P, 2026-10-19):** ekspektasi beku
+  `only_in_clone []` / `identical 162` tidak terpenuhi; teramati
+  `identical 147` + `only_in_clone 15` (dua kali, termasuk rerun persis per
+  §9). Mekanisme (terekam di log, blok 00:49:39Z): arsip GitHub menyimpan 15
+  symlink sebagai member link (`lrwxrwxrwx`); checkout Windows
+  (`core.symlinks=false`) mematerialisasi tiap link sebagai berkas regular
+  berisi teks target; `weld-tar` hanya membandingkan member tar regular;
+  `ls-tree` mengonfirmasi 15 entri mode-120000 di 15 path yang sama. Tidak
+  ada drift pada 147 berkas regular (`changed []`,
+  `only_in_tarball []`); tanpa perubahan parameter; `weld-tar` tidak
+  disentuh. Selisih dicatat verbatim di laporan §6.2.
+- **Catatan (S3, 2026-10-19):** percobaan clone pertama gagal jaringan di
+  tengah transfer (git exit 128: `RPC failed; curl 56 Recv failure:
+  Connection was reset`; `fatal: early EOF`); blok perintah persis dijalankan
+  ulang sekali per §9 dan sukses (HEAD `e98d0294…`, tree `b290c47a…`);
+  dicatat as-is.
+- **Catatan (bukti lokal, tidak dikomit):** arsip `collatz-e98d0294.tar.gz`
+  sha256LF `daa821f4…` (181.085 B); biner `collatz_sweep` sha256
+  `46d419ad…` (gcc 15.2.0, baris build beku); pohon
+  `audit_collatz/exec_2026-10-19/` 2,8 MB (clone/refetch/baterai
+  re-derivasi/normalisasi — input bulk pihak ketiga; bagian yang dikomit =
+  15 artefak hasil + laporan + log).
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py
+  -q` (guard memverifikasi semua sha di bawah); W1: `python3
+  audit_collatz/collatz_engine_p.py w1 --path-battery
+  audit_collatz/battery_path_records.tsv --std-battery
+  audit_collatz/battery_heights_std_a006885.tsv --out <f>` (engine Q sama),
+  W2: `python3 audit_collatz/collatz_engine_p.py w2 --battery
+  audit_collatz/battery_delay_records.tsv --out <f>` (engine Q sama), lalu
+  `python3 audit_collatz/collatz_tools.py compare <a> <b>`; E: `gcc -O2
+  -std=gnu11 -o collatz_sweep audit_collatz/collatz_sweep.c` + `collatz_sweep
+  drop 24|34 --out <f>` + `collatz_sweep records 24 --out <f>` + `python3
+  audit_collatz/collatz_engine_p.py e2 --bound 16777216 --out <f>` + `e3
+  --bound 16777216 --path-battery audit_collatz/battery_path_records.tsv
+  --out <f>` + `collatz_tools.py compare-prefix|compare-fields|check-prefix
+  …`; S4/P: `python3 audit_bb5/artifact_checks.py weld-tar <tgz> <clone>
+  --out <f>`; H: `python3 audit_collatz/claims_check.py <tsv> <dir>`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF ccf178d070c26e19a8c88af5e34a6d1fbffae743c189b0d8277a96b2b1714e4b reports/AUDIT_COLLATZ_LOG_2026-10-19.log
+  sha256LF 855bd8079f2b2e48256be56700a1fd9892f5a3f7d03408b6f442bdfea52ec18b reports/AUDIT_COLLATZ_REPORT_2026-10-19.md
+  sha256LF d9c334e2e9cc78c13bb66260ee7d9445940a24488b2dda79b118f173476d9cf8 reports/AUDIT_COLLATZ_PREREG_2026-10-19.md
+  sha256LF 03d69223587e4fcae9ecab30e96931de99ccb531db5e20ff988ba7cfd4762ff4 audit_bb5/artifact_checks.py
+  sha256LF faa157b296f6fe4924b81eead8dd1182b4104e4af04110075a2bc6f22a0e54ad audit_collatz/battery_path_records.tsv
+  sha256LF 9f5bed262520a10bafb292d3f1cf689fc6914062ba70d24cb256e07db28cdbe0 audit_collatz/battery_heights_std_a006885.tsv
+  sha256LF 09a252407f6cc89e40499b341671014a8622d3c545d2b636b9ec8a1b45f85cf5 audit_collatz/battery_delay_records.tsv
+  sha256LF 18e763a50eb640866902e765d1bb39712bf6799a188e4bbaaf5901a094d23f6c audit_collatz/collatz_engine_p.py
+  sha256LF 6761704f3f3a7559284e120bb25cc830e74a37adae85fd8a7b8f94457c45c10a audit_collatz/collatz_engine_q.py
+  sha256LF 4c8572927229b9b041cab5c2a186503c2e9d5858524c120c487640c01a6ce365 audit_collatz/collatz_sweep.c
+  sha256LF e00c728bb6335a290a9e7cdae9ddebdd8224794d638895361259806785a00374 audit_collatz/collatz_tools.py
+  sha256LF 4e3b3f2972d1a90bdb11f00785f8c44e49c0f5a864afbfc9ff5afb4ae6d810f5 audit_collatz/build_batteries.py
+  sha256LF d97e074a263efc69fc181dae3b264478ccf00fd300a6ef10b9edec18c4b9d4c5 audit_collatz/claims_check.py
+  sha256LF 1555901ec9caed798296abff62b53b49336667d8060a455ae317b9445833f01c audit_collatz/claims_site.tsv
+  sha256LF 3c20159e0b0c8e6a2870b33e7b5cfa4ae048bb915b4a26319b4195f45dfe3879 audit_collatz/claims_repo.tsv
+  sha256LF 0bdbb5a0b14a730a26e215e63952bd198d5542115115ec5b3df79b7c03eb5cda audit_collatz/exec_2026-10-19/w1_p_r1.json
+  sha256LF 974c2aef4493b7a7e830a37cecc99b60132c277fec311109eeae6a45d3a1e0f1 audit_collatz/exec_2026-10-19/w1_p_r2.json
+  sha256LF ea4239909d941fefa393cb667a7a3c4308b0a703b9295edc08b1c266bb4b81f1 audit_collatz/exec_2026-10-19/w1_q_r1.json
+  sha256LF 800c52445e8c709cbcf6745118607df1bf5ba47668c8c643e8e2d3d587bf9e03 audit_collatz/exec_2026-10-19/w1_q_r2.json
+  sha256LF 96b92a332f985c85b11a2c9e51b0c76030c320b6058a4bdb6c62f6a764b30488 audit_collatz/exec_2026-10-19/w2_p_r1.json
+  sha256LF 5926fd6ac5a8d8db7a3d6b7b651d7ac815ab2af8dcb0ae1ab16c7fc3f30ae5f7 audit_collatz/exec_2026-10-19/w2_p_r2.json
+  sha256LF 0318eaa1c89d026e3342463e5f666a733c186631971fde44c00cba4013cec185 audit_collatz/exec_2026-10-19/w2_q_r1.json
+  sha256LF 7d00d7c964073794296deadac847fac01a68ad97653ef77bd2a4c3e099fbfd91 audit_collatz/exec_2026-10-19/w2_q_r2.json
+  sha256LF 1f6126b209a62793c7b6a3b0d385ffa0a4e60a73a4dcb5b44207c62c2ee02b86 audit_collatz/exec_2026-10-19/c_drop24.json
+  sha256LF 8faaaa59181c0c2543cdf4b4906581963050d03030f6024fceb9d1019deb4130 audit_collatz/exec_2026-10-19/p_e2_24.json
+  sha256LF c06f38bf3468280be984857e28b4e1bb4fa94a570d54a336e0505727f55ef5e6 audit_collatz/exec_2026-10-19/p_e3_24.json
+  sha256LF daa3a5d7a8d3ddb22d3ff069c5091a8819c2927f2b3406e82f68cd9f2ebaef38 audit_collatz/exec_2026-10-19/c_rec24.json
+  sha256LF 458ac1241ffea0b7e39e0974281ea3d946747a7bb111a6298758ca1c8244cf45 audit_collatz/exec_2026-10-19/c_drop34.json
+  sha256LF 5ca7703e2884e9a0b3a4d28b14251232a2ed570e8df04a11be44016d801b37e6 audit_collatz/exec_2026-10-19/weld.json
+  sha256LF 10be3c18bbbf61377225972f5b4cb20313d0f3c5ea2e3cd8d2ea9b55335e80ce audit_collatz/exec_2026-10-19/refetch/battery_build_report.txt
+  sha256LF 2a3dea6ff79f664910ed94073125a174dded81f26de3c084226b793dc1af11f9 audit_collatz/p2_runners/p2_final_hashes.sh
+  sha256LF eef821b1e1181ce62ff798e34b03b05ebcb7f095ca17a3a039eb7669236a47b9 audit_collatz/p2_runners/p2_note_preflight.sh
+  sha256LF 74453d879f983765148dfbf85728fdb775ff108924724ce4423948142fbbc250 audit_collatz/p2_runners/p2_note_s3retry.sh
+  sha256LF 24bb6e83e089d5441aba5aa469d81ac67b611b334bd80f2dc039984c63618df3 audit_collatz/p2_runners/p2_open_log.sh
+  sha256LF ef5d3898b430a0e51ee8ba9a6f7b2904e92754754ae3c2a06256ae89e3a92801 audit_collatz/p2_runners/p2_s4_discrepancy.sh
+  sha256LF 6a7f408ef4010b1f2cbc7ebab5ca6b36f40650ec8f43b228ff2fe22c607c009c audit_collatz/p2_runners/p2_steps.sh
+  sha256LF 74a6612b324bf864dbf45a7db1bc45caf55942482da52fb12b4aea7dbb0d5b52 audit_collatz/p2_runners/p2_w1_criteria.sh
+  sha256LF b4ae5295bd6880acefc7d5b80cd187d7d882b12592be30b66aa89b36fac5de57 audit_collatz/p2_runners/p2_w_criteria.sh
+  ```
+
+Selesai — 8 entri per 2026-10-19 (6 entri awal + `A-2026-0002` + `A-2026-0003`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

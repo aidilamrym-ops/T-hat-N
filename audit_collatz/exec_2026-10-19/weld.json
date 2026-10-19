@@ -1,0 +1,28 @@
+{
+  "changed": [],
+  "clone": "audit_collatz/exec_2026-10-19/clone",
+  "file_counts": {
+    "clone": 162,
+    "tarball": 147
+  },
+  "identical": 147,
+  "only_in_clone": [
+    "src/gpuworker/compat.h",
+    "src/gpuworker/kernel.cl",
+    "src/gpuworker/wideint.h",
+    "src/mclient/compat.h",
+    "src/rs-client/compat.h",
+    "src/rs-server/compat.h",
+    "src/rs-server/wideint.h",
+    "src/rs-worker/compat.h",
+    "src/rs-worker/wideint.h",
+    "src/server/compat.h",
+    "src/server/wideint.h",
+    "src/steps/compat.h",
+    "src/steps/wideint.h",
+    "src/worker/compat.h",
+    "src/worker/wideint.h"
+  ],
+  "only_in_tarball": [],
+  "tarball": "audit_collatz/exec_2026-10-19/collatz-e98d0294.tar.gz"
+}

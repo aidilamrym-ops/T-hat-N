@@ -1,0 +1,32 @@
+P2 battery build report (freeze package transcription)
+SRC = audit_collatz/exec_2026-10-19/refetch
+OUT = audit_collatz/exec_2026-10-19/batteries_re
+
+source site_path_records.html   len=15462   sha256=c4cc03a16ab4c642c9b1fff65fcd82b3c156cbc6ad6074d07c712d406dba468b sha256LF=c4cc03a16ab4c642c9b1fff65fcd82b3c156cbc6ad6074d07c712d406dba468b
+source oeis_A006884.txt         len=1456    sha256=657ec2fbc0ade279ce052005ae11234ea795c47b0fdaf9add6fff5d4f214de86 sha256LF=657ec2fbc0ade279ce052005ae11234ea795c47b0fdaf9add6fff5d4f214de86
+source oeis_A006885.txt         len=2516    sha256=7007b273e50fc2d51afba6e740b201ae61e3ae4f8b5898e3880bb6c5156bf053 sha256LF=7007b273e50fc2d51afba6e740b201ae61e3ae4f8b5898e3880bb6c5156bf053
+source oeis_A006877.txt         len=2254    sha256=4bdd9c264ffb33f6252adad6716f8f0ad55c84687d4300a9bfbe646a1a81327f sha256LF=4bdd9c264ffb33f6252adad6716f8f0ad55c84687d4300a9bfbe646a1a81327f
+source oeis_A006878.txt         len=1237    sha256=1aebb537ac7cbb0290e8614b8e58e879efa24843277c0c437a72672f965233ac sha256LF=1aebb537ac7cbb0290e8614b8e58e879efa24843277c0c437a72672f965233ac
+
+path-records table: 98 rows; indexes 0..97; n and t(n) strictly increasing;
+  B(n)/B(t(n)) bit-length columns and log-ratio column all verified
+convention check (hand-traced): table t(3)=8 and t(7)=26 reproduce under the
+  shortcut map stated by the page (T(n)=(3n+1)/2 odd, n/2 even)
+newest five rows (i=94..98) equal the frozen 2025 constants
+
+A006884: 98 terms; identical to site table n column (positional, 98/98)
+
+A006885: 97 standard-convention heights; strictly increasing;
+  spot rows (hand-traced): term 3 = 16 for n=3; term 4 = 52 for n=7
+
+A006877: 148 delay-record starts; strictly increasing
+A006878: 148 standard-convention delays; strictly increasing;
+  spot row (hand-traced): n=3 -> 7 standard steps
+
+coverage: path rows below 2^24: 38 ; below 2^34: 47
+coverage: delay rows below 2^24: 57 ; below 2^34: 76
+first path row: n=1 t=1 ; last: n=2358909599867980429759 t=494114680693632162318569565806744468898092
+
+wrote battery_path_records.tsv                 len=3757   sha256=faa157b296f6fe4924b81eead8dd1182b4104e4af04110075a2bc6f22a0e54ad sha256LF=faa157b296f6fe4924b81eead8dd1182b4104e4af04110075a2bc6f22a0e54ad
+wrote battery_heights_std_a006885.tsv          len=3828   sha256=9f5bed262520a10bafb292d3f1cf689fc6914062ba70d24cb256e07db28cdbe0 sha256LF=9f5bed262520a10bafb292d3f1cf689fc6914062ba70d24cb256e07db28cdbe0
+wrote battery_delay_records.tsv                len=3109   sha256=09a252407f6cc89e40499b341671014a8622d3c545d2b636b9ec8a1b45f85cf5 sha256LF=09a252407f6cc89e40499b341671014a8622d3c545d2b636b9ec8a1b45f85cf5

@@ -1,0 +1,22 @@
+{
+  "mode": "e2",
+  "params": {
+    "args": {
+      "bound": 16777216,
+      "out": "audit_collatz/exec_2026-10-19/p_e2_24.json"
+    },
+    "caps": {
+      "drop": 1000000,
+      "sim": 1000000
+    }
+  },
+  "result": {
+    "argmax": 13421671,
+    "bound": 16777216,
+    "cap_hits": [],
+    "max_steps_to_drop": 287,
+    "odd_checked": 8388607,
+    "sum_drop": "52066189353824"
+  },
+  "tool": "collatz_engine_p"
+}
