@@ -1272,6 +1272,35 @@ Konsekuensi urutan yang disarankan:
   4 sha256LF `A-2026-0007` + 6 uji periodic_bridge; lean-kernel sukses;
   tidak ada berkas beku disentuh.
 
+### 2.0z [BARU, 2026-10-19] Pilot Coq — satu lemma jembatan geometrik terbukti (coqc + coqchk exit 0, 8/8 lemma teraudit); [J] analitik tetap OPEN; registry `A-2026-0008`
+
+- **Konteks:** Paket 4, scope terkunci: satu lemma jembatan + satu
+  aplikasi konkret, lokal, hash tercatat. Memakai switch opam yang
+  di-KEEP (`/root/.opam/4.14.2`, Coq 8.20.1); repo sebelumnya tidak punya
+  berkas `.v`.
+- **Berkas:** `formal_bridge/GeometricBridge.v` (8 lemma: jumlah parsial
+  geometrik, bentuk tertutup, identitas ekor, ketaknegatifan, batas
+  `S_n ≤ 1/(1−r)`, aplikasi `r = 1/2, n = 11`), `formal_bridge/check.sh`
+  (reproduksi), receipt beku `formal_bridge/GeometricBridge.receipt.txt`,
+  guard `msaf/tests/test_coq_bridge_pilot.py` (4 uji).
+- **Hasil:** `coqc` exit 0; `coqchk` exit 0 "Modules were successfully
+  checked" (48 ribu baris, 10 konstanta); `Print Assumptions` 8/8 lemma
+  hanya memuat dua aksioma stdlib `Coq.Reals`; tidak ada
+  `Axiom`/`Parameter`/`Admitted`/`admit`; capture ganda byte-identik.
+- **Status blok:** [B] CERTIFIED (aljabar berhingga eksak); [J] hanya sisi
+  aljabar (identitas gap), langkah limit/deret tak hingga OPEN; [U] tidak
+  diklaim. Tidak ada klaim zeta/Weil/RH/P≠NP/fisika.
+- **Gate anti-circularity:** `TOOL NOT RUN (NO_LEAN_FILES)`, exit 2 —
+  **tidak dihitung sebagai sukses**; gate itu hanya memindai
+  `.lean`/`.smt2`. Kompensasi: bukti Coq-native (coqc/coqchk/Print
+  Assumptions) + scan placeholder bersih + uji negatif 6/6 mutasi
+  tertangkap.
+- **Guard:** `python -m pytest msaf/tests/test_coq_bridge_pilot.py -q`
+  (4 uji; mengunci hash isi, kelengkapan audit, dan receipt); registry
+  `A-2026-0008` (6 sertifikat sha256LF). CI tidak punya Coq: yang
+  dijalankan CI hanya guard statis, bukan kernel. CI: id run dicatat di
+  update menyusul.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional

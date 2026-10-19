@@ -659,6 +659,59 @@ mengikuti laporan L4).
   sha256LF 0e0c4d873c071bc7278ed0fe3355a235551e113061f32ad21f672c30ae0de026 reports/PERIODIC_BRIDGE_STUDY_OUTPUT_2026-10-19.txt
   ```
 
-Selesai — 12 entri per 2026-10-19 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007`). Entri
+### A-2026-0008 — Pilot Coq: satu lemma jembatan geometrik (inti L1) terbukti tanpa aksioma proyek; langkah limit [J] tetap OPEN
+
+- **Jenis:** A
+- **Pernyataan:** Pilot formal pertama repo (tidak ada berkas `.v`
+  sebelumnya). `formal_bridge/GeometricBridge.v` (Coq 8.20.1, OCaml
+  4.14.2, switch opam yang di-KEEP) membuktikan **delapan** lemma tentang
+  jumlah parsial geometrik berhingga: `geom_sum r n = Σ_{k<n} r^k`;
+  bentuk tertutup `geom_sum r n = (1−r^n)/(1−r)` (`r ≠ 1`); identitas
+  jembatan `1/(1−r) − geom_sum r n = r^n/(1−r)`; ketaknegatifan suku ekor
+  untuk `0 ≤ r < 1`; batas `geom_sum r n ≤ 1/(1−r)`; dan satu aplikasi
+  konkret `r = 1/2, n = 11` (`geom_sum = 2047/1024`, ekor `= 1/1024`).
+  Berkas diterima `coqc` **exit 0** dan diperiksa ulang pemeriksa kernel
+  independen `coqchk` **exit 0** ("Modules were successfully checked";
+  48 ribu baris log, 10 konstanta). `Print Assumptions` untuk **8/8** lemma
+  mencetak tepat dua aksioma stdlib `Coq.Reals`
+  (`ClassicalDedekindReals.sig_forall_dec`,
+  `FunctionalExtensionality.functional_extensionality_dep`); **tidak ada**
+  `Axiom`/`Parameter`/`Admitted`/`admit` di sumber (scan dengan komentar
+  bersarang distrip). Receipt beku deterministik (dua capture byte-identik).
+  **Blok [B] CERTIFIED** (rumus eksak berhingga); **blok [J] hanya sisi
+  aljabar** — identitas gap tertutup, sedangkan langkah limit/deret tak
+  hingga **OPEN**; **[U] tidak diklaim**.
+- **Batas:** bukan formalisasi analisis (tanpa limit, tanpa deret tak
+  hingga, tanpa laju konvergensi); teorema bersandar pada aksioma stdlib
+  `Coq.Reals`, jadi yang disertifikasi adalah "tidak ada aksioma proyek
+  tambahan", bukan konsistensi; satu lemma + satu aplikasi, bukan port
+  L2–L5; **anti-circularity gate skill = `TOOL NOT RUN` (NO_LEAN_FILES,
+  exit 2)** dan tidak dihitung sebagai sukses — gate itu hanya memindai
+  `.lean`/`.smt2`; CI tidak punya toolchain Coq sehingga hanya menjalankan
+  guard statis; tidak menyentuh zeta/Weil/RH/P≠NP; tidak ada klaim fisik;
+  bukan peer review.
+- **Status:** CERTIFIED
+- **Domino:** tidak ada (pilot toolchain; bukan domino)
+- **Relasi:** memformalkan inti aljabar lemma L1 dari `A-2026-0006`
+  (`msaf/bridge.py`, `reports/BRIDGE_PROTOCOL_2026-10-19.md`); melengkapi
+  studi `A-2026-0007` yang meninggalkan `[J] OPEN` — di sini `[J]` juga
+  tetap OPEN pada sisi analitiknya; entri registry ke-13; memori kerja
+  §2.0z `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_coq_bridge_pilot.py -q`
+  (4 uji statis: placeholder, kelengkapan audit, blok asumsi, receipt
+  kernel); `python -m pytest msaf/tests/test_fence_registry.py -q` (semua
+  sha di bawah); reproduksi kernel lokal `formal_bridge/check.sh`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF a382a4ce0514fd1aec459fa83c1edfd83058567cbc50eeb8fd2ca55d7584cd00 formal_bridge/GeometricBridge.v
+  sha256LF 0989028e1e1f23f2b7b6960477a9667e1f90e881b09554f0411dbac9eac4d4ef formal_bridge/check.sh
+  sha256LF 1187954cbe82bd562514385adb19b5c810f11698f3a26ad01225ec79061f74ee formal_bridge/GeometricBridge.compile.log
+  sha256LF 98b265edf282e89b6d83fe410ec34b33ad294ec63d7a5fc892a215026b397b3f formal_bridge/GeometricBridge.receipt.txt
+  sha256LF 9d87f44e16224d94f26e2c64382d47e3c3e49e335a7be13f9070ca6ed8b12d41 msaf/tests/test_coq_bridge_pilot.py
+  sha256LF 63ba4fd0873ddad6ccea989e9fb02d96d3f74f51636e1bd13871647c4b278812 reports/COQ_BRIDGE_PILOT_2026-10-19.md
+  ```
+
+Selesai — 13 entri per 2026-10-19 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

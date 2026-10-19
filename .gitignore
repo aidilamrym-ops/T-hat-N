@@ -6,6 +6,13 @@ lean/.lake/
 .DS_Store
 Thumbs.db
 
+# Coq build artifacts (sources, script and frozen logs stay tracked)
+formal_bridge/*.vo
+formal_bridge/*.vok
+formal_bridge/*.vos
+formal_bridge/*.glob
+formal_bridge/.*.aux
+
 # Private working files: researcher-to-agent instructions, never published
 instruksi_*.md
 msaf_execution_manual.md
