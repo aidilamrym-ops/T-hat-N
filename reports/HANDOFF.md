@@ -1542,8 +1542,9 @@ Konsekuensi urutan yang disarankan:
   (5 uji: placeholder, kelengkapan audit, impor + statement lock,
   receipt/trusted base, 18 mutasi negatif); registry `A-2026-0014`
   (6 sertifikat sha256LF). Reproduksi lokal:
-  `formal_bridge/check_integral_infinite.sh`. CI: dijalankan setelah
-  push (run id diperbarui di commit dokumentasi berikutnya).
+  `formal_bridge/check_integral_infinite.sh`. CI: run 39302637035 hijau
+  (`python-tests` 48s + `lean-kernel` 2m2s; kedua job diverifikasi
+  lewat `/actions/runs/39302637035/jobs`).
 
 ---
 
