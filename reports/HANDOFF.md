@@ -1158,6 +1158,42 @@ Konsekuensi urutan yang disarankan:
   perturbasi diagonal per-channel (K-Q2); bukan klaim RH/P≠NP; replay finit ≠
   peer review.
 
+### 2.0w [BARU, 2026-10-19] Cleanup lingkungan pasca audit dieksekusi (checklist R §9 + item owner) — insiden backup L1 dicatat dan dipulihkan byte-identik
+
+- **Konteks:** menyusul §2.0v (RR-2026-02 tuntas; CI `39207170087` hijau),
+  pemilik menyetujui eksekusi sisa item cleanup (daftar owner + checklist §9
+  `Temp\opencode\R_completion_runbook.md`). Semua aksi dilakukan setelah
+  audit terkait selesai dan terekam; tidak ada berkas beku yang disentuh.
+- **Aksi:** item Startup `T-hat-N-BB5-keepalive.cmd` dihapus (salinan arsip
+  212 B di `…\Temp\opencode\qe_dev\`; folder Startup kembali ke 3 item
+  non-audit). `.wslconfig` hardening `[wsl2] vmIdleTimeout=86400000` (dibuat
+  2026-10-18) dikembalikan: berkas dihapus (salinan 269 B diarsipkan),
+  `wsl --shutdown` dijalankan (Ubuntu `Stopped`). `/root/bb5r` (67 MB;
+  marker `PHASER_COMPLETE` + `STOP_RECORDED` ada; tanpa proses hidup)
+  dihapus — `daemon_stdout.log` (14.286 B) diarsipkan lebih dulu. Loop
+  keepalive Windows berhenti setelah tick terakhir 08:31 lokal melihat
+  `PHASER_COMPLETE` (mekanisme exit 42; tidak ada proses tersisa; tidak ada
+  scheduled task).
+- **Insiden (dicatat, tidak disembunyikan):** backup
+  `l1_sweep_2026-10-18.tar.gz` sempat terhapus keliru saat cleanup (item
+  daftar "l1_sweep backup" dibaca sebagai target hapus; §9 runbook justru
+  menandainya KEEP); tidak ada di Recycle Bin (`Remove-Item` permanen).
+  Dipulihkan 2026-10-19 14:02 lokal dari sumber `/root/l1/replay-out/sweep`
+  (17 berkas utuh, 113 MB): tarball dibuat ulang **byte-identik** — sha256
+  `11bad9123b8f0db2b4ed4ac2a3e4f42aeda7197ee91c78f30ec39f12a3c75509`
+  (24.581.749 B, sama dengan catatan §2.0r), determinisme diuji (dua
+  pembuatan identik), ekstraksi ulang vs `REPLAY_SHA256SUMS` → 16/16 OK
+  (sha256 sums itu sendiri `e035dfd1…`). Mtime berkas = waktu pemulihan;
+  isi byte-identik, sehingga catatan §2.0r tetap valid apa adanya.
+- **Sisa (tidak dihapus; dilaporkan):** `/root/l1` (359 MB: `replay-out`
+  113 MB termasuk outputs sweep, `tree` 56 MB, OCI tar + bundle 191 MB) —
+  pendukung backup L1; `/root/.opam` (1,7 GB) — toolchain Coq; scratch
+  `Temp\opencode\bb5_note_int3.txt` (1.826 B) + `append_int3.sh` (§9:
+  "safe to delete"; belum dieksekusi); keputusan WSL2/podman (owner) —
+  belum dieksekusi.
+- **Batas:** cleanup = pemeliharaan lingkungan, bukan hasil audit; tidak
+  mengubah status/registry mana pun; tidak ada klaim baru.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional
