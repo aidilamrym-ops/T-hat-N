@@ -1574,8 +1574,11 @@ Konsekuensi urutan yang disarankan:
   (5 uji: kernel placeholder, budget spec, log scope, runner/report lock,
   12 mutasi negatif); registry `A-2026-0015` (9 sertifikat sha256LF).
   Reproduksi lokal: `C:\Python314\python.exe
-  harness/run_anti_circularity_gate.py` (gate eksternal; bukan CI). CI
-  setelah push (run id diperbarui di commit dokumentasi berikutnya).
+  harness/run_anti_circularity_gate.py` (gate eksternal; bukan CI). CI:
+  run 39305543507 hijau (`python-tests` 46s; `lean-kernel` 2m31s setelah
+  rerun job — attempt pertama gagal sementara pada `git clone`
+  `lean4-cli`, curl 56, bukan input gate). Kedua job diverifikasi lewat
+  `/actions/runs/39305543507/jobs`.
 
 ---
 
