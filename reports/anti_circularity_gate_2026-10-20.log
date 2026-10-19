@@ -1,0 +1,51 @@
+# Anti-circularity gate run -- Lean kernel scope
+# generated_by: harness/run_anti_circularity_gate.py
+# gate_sha256: aa53c128ff75f468bfc3f1cb2705c64950b213cce758670a8a3b7b80062c3214
+# python: 3.14.4
+# scope: Lean kernel only (lean/*.lean); lean/spec OUT OF SCOPE; no SMT audit input
+kernel_files=4
+spec_axioms=9
+smt2_files=0
+audit_subgate=NOT_INVOKED_NO_SMT2
+
+## kernel file hashes (sha256LF)
+sha256LF 5b3b263b6796016536653a4511124d9d4b5b81d47798d3580412eef89c86c0e9 lean/ComplexMoore.lean
+sha256LF e92f77e931a2db7c0c783f05688df17f999b72c2114954431296134fed7bca0b lean/NavierStokesCore.lean
+sha256LF 25d4bf7ae743b4b53673f120987c9e3daff2b2043ce7c79a92d5d535c863da49 lean/NewtonExistence.lean
+sha256LF 10ceb227a7f509a655fa4d2616495b2bb56879b7ddc60e3d01e6027c3d3a709b lean/XiNoRealZero.lean
+
+## command: C:\Python314\python.exe C:\Users\usER\.config\opencode\skills\anti-circularity\scripts\gate.py lean lean/ComplexMoore.lean lean/NavierStokesCore.lean lean/NewtonExistence.lean lean/XiNoRealZero.lean
+------------------------------------------------------------------------------
+ANTI-CIRCULARITY GATE [lean]
+  result: FAIL=0  NOT_RUN=0  SKIP=0
+  verdict: PASS
+kernel_lean_exit=0
+
+## command: C:\Python314\python.exe C:\Users\usER\.config\opencode\skills\anti-circularity\scripts\gate.py check lean/ComplexMoore.lean lean/NavierStokesCore.lean lean/NewtonExistence.lean lean/XiNoRealZero.lean
+------------------------------------------------------------------------------
+ANTI-CIRCULARITY GATE [check]
+  result: FAIL=0  NOT_RUN=0  SKIP=0
+  verdict: PASS
+kernel_check_exit=0
+
+## out-of-scope diagnostic: C:\Python314\python.exe C:\Users\usER\.config\opencode\skills\anti-circularity\scripts\gate.py lean lean/spec
+# lean/spec is conditional (nine declared axioms). This FAIL=9 is recorded as a diagnostic, not as the kernel gate verdict.
+------------------------------------------------------------------------------
+ANTI-CIRCULARITY GATE [lean]
+  FAIL     lean\spec\XiAnalyticSpec.lean:44: axiom placeholder
+  FAIL     lean\spec\XiAnalyticSpec.lean:47: axiom placeholder
+  FAIL     lean\spec\XiAnalyticSpec.lean:50: axiom placeholder
+  FAIL     lean\spec\XiAnalyticSpec.lean:56: axiom placeholder
+  FAIL     lean\spec\XiAnalyticSpec.lean:60: axiom placeholder
+  FAIL     lean\spec\XiAnalyticSpec.lean:64: axiom placeholder
+  FAIL     lean\spec\XiAnalyticSpec.lean:69: axiom placeholder
+  FAIL     lean\spec\XiAnalyticSpec.lean:70: axiom placeholder
+  FAIL     lean\spec\XiAnalyticSpec.lean:89: axiom placeholder
+  result: FAIL=9  NOT_RUN=0  SKIP=0
+  verdict: FAIL
+spec_diagnostic_exit=1
+spec_diagnostic_expected=FAIL=9
+
+## verdict
+kernel_gate=PASS
+scope=LEAN_KERNEL_ONLY
