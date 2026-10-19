@@ -18,3 +18,13 @@ audit_ecdsa/**/*.pdf binary
 # files are pinned in audit_ecdsa/PINS.sha256 with raw sha256).
 reports/REPLAY_RECORD_SPEC.md text eol=lf
 reports/AUDIT_ECDSA_PREREG_2026-10-19.md text eol=lf
+
+# Campaign V2 (quantum-entropy cert, SIMULATED): byte-stable LF for the frozen
+# package (raw sha256 pinned in audit_quantum/PINS.sha256) and the append-only
+# ledger line format.
+msaf/quantum_entropy/** text eol=lf
+msaf/tests/test_quantum_entropy.py text eol=lf
+audit_quantum/** text eol=lf
+ledger/quantum_evolution.jsonl text eol=lf
+reports/REPLAY_CERT_SPEC_V0.2_QUANTUM.md text eol=lf
+reports/AUDIT_QUANTUM_PREREG_2026-10-19.md text eol=lf

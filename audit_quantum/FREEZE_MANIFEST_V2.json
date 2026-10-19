@@ -1,0 +1,34 @@
+{
+  "campaign": "quantum-v2",
+  "created_utc": "2026-10-19T05:09:47Z",
+  "digest": "f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25",
+  "digest_definition": "sha256 over the raw bytes of audit_quantum/PINS.sha256",
+  "entropy_label": "SIMULATED",
+  "files": {
+    "audit_quantum/freeze.py": "a831441bb600bf05aa8eeb40e76fbea8ef73fee98f249abf9eb7657064270369",
+    "msaf/quantum_entropy/__init__.py": "5114f811056f14ed484d8f76cdb2ed4439091424b360ca539428de0ba2936ab3",
+    "msaf/quantum_entropy/chispec.py": "75307da705b42151ce153cb2ba1bed55f5afad61da3068638c3dfc75a2c3e11a",
+    "msaf/quantum_entropy/dashboard.py": "a4d093b762492e2b20d8792b734e57d85759b43333ad0a299657728a02a8f9d4",
+    "msaf/quantum_entropy/engines.py": "cb8dc9c120085b96e7ed228f883274023571ac1abb7d61d5f0a279f0c56d6c24",
+    "msaf/quantum_entropy/entropy_source.py": "edb97df52a2bea0d40ad1ef62f03a63b6aad35642d0d3b34d637e04255a6da0a",
+    "msaf/quantum_entropy/intervals.py": "cb194a64754e4a2f4b2445722b6dffd2c46a9576870464c565098b6f08a1c28f",
+    "msaf/quantum_entropy/ledger.py": "0dd577ad77c88a7d86bf49c3fbebac7db1c911f368e05537c8a958705f981f72",
+    "msaf/quantum_entropy/runner.py": "88532270d3de50100509296decdff57039c2914079018a6a52638b7f27a10795",
+    "msaf/quantum_entropy/selftest.py": "e823b492137836c0d8c163a0eee7a3a6aa38883356d786d174dcbaba4fccc92c",
+    "msaf/quantum_entropy/sylvester.py": "1ca1e5ff9fc92f5544d3f654b11ef68bcad01d44a055dce5a81e14d47c571bc6",
+    "msaf/tests/test_quantum_entropy.py": "bf4a75c98179a19b233879666280650e213b9a1aefcbea63186fca0bd8feec46",
+    "reports/AUDIT_QUANTUM_PREREG_2026-10-19.md": "1179368367c3fd16f6dd1c15848773d52813231668d6170692c5acbbce427142",
+    "reports/REPLAY_CERT_SPEC_V0.2_QUANTUM.md": "dea0a8dd8132d95937034150553ca1fd490c225627d7ef08e5b2de8c6847d26b"
+  },
+  "format": "quantum-v2-freeze/1",
+  "generated_by": "audit_quantum/freeze.py",
+  "global_claim_supported": false,
+  "ledger_snapshot": {
+    "head": "302d073541099f27b4692e21d2ffa14c0d3a5617f1efd5bfc213b866998be3ba",
+    "note": "snapshot at freeze time; the ledger is append-only and is NOT a pinned file (it grows during the GO-2 campaign run)",
+    "path": "ledger/quantum_evolution.jsonl",
+    "records": 1,
+    "sha256": "806d2611452e91c1fe217cae4ba13d5dbc2c1a52507d5bb06dda2be58be25a5a"
+  },
+  "pins_file": "audit_quantum/PINS.sha256"
+}
