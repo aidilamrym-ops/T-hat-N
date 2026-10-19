@@ -1205,6 +1205,17 @@ Konsekuensi urutan yang disarankan:
   disentuh); keputusan WSL2/podman masih menunggu owner. Item `Temp\opencode`
   lain tidak disentuh (di luar daftar; mis. cadangan JSON Zenodo §3 memang
   sengaja disimpan).
+- **[UPDATE 2026-10-19 — §9-6: keputusan owner; §9 runbook SELESAI 6/6]**
+  Verifikasi penutupan ulang (read-only; WSL diboot untuk cek lalu shutdown):
+  item §9-1..§9-5 tetap sesuai record di atas (Startup bersih; `.wslconfig`
+  absen — arsip 269 B; `/root/bb5r` absen — log 14.286 B diarsipkan; scratch
+  absen; tar KEEP `11bad912…` utuh 24.581.749 B; ps1 tetap tersertifikasi di
+  `A-2026-0002`). **Keputusan owner 2026-10-19: WSL2/podman = KEEP (status
+  quo; nol perubahan sistem)** — podman 5.7.0 + `/var/lib/containers`
+  (506 MB) + image replay `6e29bc53…` (499 MB) + shim `/usr/local/bin/docker`
+  dibiarkan terpasang; pembersihan tetap tersedia kapan pun atas permintaan
+  (sesuai catatan laporan L1 bertanggal). Tidak ada berkas beku yang
+  disentuh; tidak ada klaim baru.
 
 ---
 
