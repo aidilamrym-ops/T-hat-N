@@ -1,0 +1,702 @@
+{
+  "captures": {
+    "audit_ecdsa/captures/bc_SECNamedCurves.java": {
+      "bytes": 46877,
+      "sha256_lf": "486aa8e242427ea36492f4775a626fafbfe1b90071800fbef8d243707dd0fa55",
+      "sha256_raw": "486aa8e242427ea36492f4775a626fafbfe1b90071800fbef8d243707dd0fa55"
+    },
+    "audit_ecdsa/captures/claim_anthropic_ecdsa_curve_origins.html": {
+      "bytes": 171170,
+      "sha256_lf": "266554ce62f84b3c597193b76f7046655004601e39539e2f7619b6231898781d",
+      "sha256_raw": "266554ce62f84b3c597193b76f7046655004601e39539e2f7619b6231898781d"
+    },
+    "audit_ecdsa/captures/claim_anthropic_ecdsa_curve_origins.txt": {
+      "bytes": 18734,
+      "sha256_lf": "35dfbdd84db918e2b678aa0371191f621c7fcac1f1ef28252cf8c43844ad77be",
+      "sha256_raw": "35dfbdd84db918e2b678aa0371191f621c7fcac1f1ef28252cf8c43844ad77be"
+    },
+    "audit_ecdsa/captures/fips186-2-change1.pdf": {
+      "bytes": 506186,
+      "sha256_lf": "0c411bcd9c806f2dccd86ea4f663e86cc864148ce5de342ed3c13a4e46bbb38b",
+      "sha256_raw": "bad948fd373d7b4112e52b86d0b8f17ca969fb328315d93f19d02782ccc68356"
+    },
+    "audit_ecdsa/captures/fips186-2-change1.txt": {
+      "bytes": 91834,
+      "sha256_lf": "e85f5165cc8381bf61963c95af4ca7cebe37789486d92c8693200284116ed798",
+      "sha256_raw": "e85f5165cc8381bf61963c95af4ca7cebe37789486d92c8693200284116ed798"
+    },
+    "audit_ecdsa/captures/fips186-4.pdf": {
+      "bytes": 941581,
+      "sha256_lf": "34222f3b6a9442a3491b6ace810c64da0a4e43b779737ad53a287656e7fc5f6b",
+      "sha256_raw": "081dcccbcd8a1ffe4b5cca7b30dcedb739910e65b39e6182a3cdbae3e5f61689"
+    },
+    "audit_ecdsa/captures/fips186-4.txt": {
+      "bytes": 268348,
+      "sha256_lf": "5da836de5eb14ae8bb4df2fdddaa7cf25df3ba1ad404fb8cf5050a9af1898ab9",
+      "sha256_raw": "5da836de5eb14ae8bb4df2fdddaa7cf25df3ba1ad404fb8cf5050a9af1898ab9"
+    },
+    "audit_ecdsa/captures/neuromancer_prime192v2.html": {
+      "bytes": 252529,
+      "sha256_lf": "ef018c91553ccde243cb6c47405c14c68cf595bf07cfe1fdbaef27beef7baa2c",
+      "sha256_raw": "ef018c91553ccde243cb6c47405c14c68cf595bf07cfe1fdbaef27beef7baa2c"
+    },
+    "audit_ecdsa/captures/neuromancer_prime192v3.html": {
+      "bytes": 252529,
+      "sha256_lf": "bfc658dc5687d3b149108f7ea708de943bd918efea4d6fc54dd53e1d52df75cb",
+      "sha256_raw": "bfc658dc5687d3b149108f7ea708de943bd918efea4d6fc54dd53e1d52df75cb"
+    },
+    "audit_ecdsa/captures/neuromancer_prime239v1.html": {
+      "bytes": 253573,
+      "sha256_lf": "d40e415d883418b9263608bb922e6c12b9a60b4356e723499447d07b3b83300b",
+      "sha256_raw": "d40e415d883418b9263608bb922e6c12b9a60b4356e723499447d07b3b83300b"
+    },
+    "audit_ecdsa/captures/neuromancer_prime239v2.html": {
+      "bytes": 253569,
+      "sha256_lf": "89848baf1e2451b523a247f77f975e345754380d8c72b6504c99bbc32ce0d3ff",
+      "sha256_raw": "89848baf1e2451b523a247f77f975e345754380d8c72b6504c99bbc32ce0d3ff"
+    },
+    "audit_ecdsa/captures/neuromancer_prime239v3.html": {
+      "bytes": 252435,
+      "sha256_lf": "8a8f2bb06df9e72e58c93c0fd8f03df0364db5ecba94d18dc6b04602e822d7a0",
+      "sha256_raw": "8a8f2bb06df9e72e58c93c0fd8f03df0364db5ecba94d18dc6b04602e822d7a0"
+    },
+    "audit_ecdsa/captures/saweis_nist_curve_seed_origins.html": {
+      "bytes": 25781,
+      "sha256_lf": "8218c3c2f16435884691767b6d0259bf41e25819bca91a92d688cd41d8fb4ede",
+      "sha256_raw": "8218c3c2f16435884691767b6d0259bf41e25819bca91a92d688cd41d8fb4ede"
+    },
+    "audit_ecdsa/captures/sec2-v2.pdf": {
+      "bytes": 306784,
+      "sha256_lf": "b52e0a56a18bef949c4342a891b78174c0977a516e2e494247bfb9159c9ea8e2",
+      "sha256_raw": "87b8f3703364ed5b21ba8582e411cc0cbf477bcaa3f4f45e0d6580d1c00d9952"
+    },
+    "audit_ecdsa/captures/sec2-v2.txt": {
+      "bytes": 74669,
+      "sha256_lf": "93d6a91157c802de1226c08fcf36ecd78d292ac814d12bb4deb54e77362f3300",
+      "sha256_raw": "93d6a91157c802de1226c08fcf36ecd78d292ac814d12bb4deb54e77362f3300"
+    },
+    "audit_ecdsa/captures/x962-1998-draft.pdf": {
+      "bytes": 761099,
+      "sha256_lf": "03230cade876901515088c170048660ce1955dd090c1c7ef875f46bcbcc45852",
+      "sha256_raw": "6cb44495bf816008afc11cc6cf65124b484654b2d260559dab6dde55e2609da7"
+    },
+    "audit_ecdsa/captures/x962-1998-draft.txt": {
+      "bytes": 424451,
+      "sha256_lf": "da957ea6ccd36df852f3ceb81f301cae3d57c19c25fbc014c1a6bdfa1ee7a299",
+      "sha256_raw": "da957ea6ccd36df852f3ceb81f301cae3d57c19c25fbc014c1a6bdfa1ee7a299"
+    }
+  },
+  "format": "replay-record/v0.1 seeds-manifest",
+  "generated_by": "audit_ecdsa/build_manifest.py",
+  "model": "srand48(t): x=(t&0xFFFFFFFF)<<16|0x330E; x=(0x5DEECE66D*x+0xB) mod 2^48; lrand48()=x>>17",
+  "rows": [
+    {
+      "claim_hex": "E43BB460F0B80CC0C0B075798E948060F8321B7D",
+      "curve": "prime239v1",
+      "i4": false,
+      "id": "R01",
+      "kind": "prime",
+      "n": 2185,
+      "per": 20,
+      "role": "reproduce",
+      "seed_arg": 863711343,
+      "shift": 40,
+      "sources": [
+        {
+          "hex": "E43BB460F0B80CC0C0B075798E948060F8321B7D",
+          "id": "x962-1998-draft",
+          "ref": "captures/x962-1998-draft.txt line 6146,6752"
+        },
+        {
+          "hex": "E43BB460F0B80CC0C0B075798E948060F8321B7D",
+          "id": "neuromancer",
+          "ref": "captures/neuromancer_prime239v1.html"
+        }
+      ],
+      "std_hex": "E43BB460F0B80CC0C0B075798E948060F8321B7D",
+      "std_source": "x962-1998-draft",
+      "t_epoch": 863711343,
+      "t_utc": "1997-05-15 15:49:03",
+      "width": 2
+    },
+    {
+      "claim_hex": "E8B4011604095303CA3B8099982BE09FCB9AE616",
+      "curve": "prime239v2",
+      "i4": false,
+      "id": "R02",
+      "kind": "prime",
+      "n": 2320,
+      "per": 20,
+      "role": "reproduce",
+      "seed_arg": 863711343,
+      "shift": 40,
+      "sources": [
+        {
+          "hex": "E8B4011604095303CA3B8099982BE09FCB9AE616",
+          "id": "x962-1998-draft",
+          "ref": "captures/x962-1998-draft.txt line 6769"
+        },
+        {
+          "hex": "E8B4011604095303CA3B8099982BE09FCB9AE616",
+          "id": "neuromancer",
+          "ref": "captures/neuromancer_prime239v2.html"
+        }
+      ],
+      "std_hex": "E8B4011604095303CA3B8099982BE09FCB9AE616",
+      "std_source": "x962-1998-draft",
+      "t_epoch": 863711343,
+      "t_utc": "1997-05-15 15:49:03",
+      "width": 2
+    },
+    {
+      "claim_hex": "7D7374168FFE3471B60A857686A19475D3BFA2FF",
+      "curve": "prime239v3",
+      "i4": false,
+      "id": "R03",
+      "kind": "prime",
+      "n": 3048,
+      "per": 20,
+      "role": "reproduce",
+      "seed_arg": 863711343,
+      "shift": 40,
+      "sources": [
+        {
+          "hex": "7D7374168FFE3471B60A857686A19475D3BFA2FF",
+          "id": "x962-1998-draft",
+          "ref": "captures/x962-1998-draft.txt line 6786"
+        },
+        {
+          "hex": "7D7374168FFE3471B60A857686A19475D3BFA2FF",
+          "id": "neuromancer",
+          "ref": "captures/neuromancer_prime239v3.html"
+        }
+      ],
+      "std_hex": "7D7374168FFE3471B60A857686A19475D3BFA2FF",
+      "std_source": "x962-1998-draft",
+      "t_epoch": 863711343,
+      "t_utc": "1997-05-15 15:49:03",
+      "width": 2
+    },
+    {
+      "claim_hex": "3045AE6FC8422F64ED579528D38120EAE12196D5",
+      "curve": "P-192",
+      "i4": true,
+      "id": "R04",
+      "kind": "prime",
+      "n": 139,
+      "per": 20,
+      "role": "reproduce",
+      "seed_arg": 863966734,
+      "shift": 40,
+      "sources": [
+        {
+          "hex": "3045AE6FC8422F64ED579528D38120EAE12196D5",
+          "id": "fips186-4",
+          "ref": "captures/fips186-4.txt line 3541"
+        },
+        {
+          "hex": "3045AE6FC8422F64ED579528D38120EAE12196D5",
+          "id": "fips186-2-change1",
+          "ref": "captures/fips186-2-change1.txt line 1102"
+        },
+        {
+          "hex": "3045AE6FC8422F64ED579528D38120EAE12196D5",
+          "id": "sec2-v2",
+          "ref": "captures/sec2-v2.txt line 342"
+        },
+        {
+          "hex": "3045AE6FC8422F64ED579528D38120EAE12196D5",
+          "id": "bc-java",
+          "ref": "captures/bc_SECNamedCurves.java line 323"
+        }
+      ],
+      "std_hex": "3045AE6FC8422F64ED579528D38120EAE12196D5",
+      "std_source": "fips186-4",
+      "t_epoch": 863966734,
+      "t_utc": "1997-05-18 14:45:34",
+      "width": 2
+    },
+    {
+      "claim_hex": "C469684435DEB378C4B65CA9591E2A5763059A2E",
+      "curve": "prime192v3",
+      "i4": false,
+      "id": "R05",
+      "kind": "prime",
+      "n": 5228,
+      "per": 20,
+      "role": "reproduce",
+      "seed_arg": 863966734,
+      "shift": 40,
+      "sources": [
+        {
+          "hex": "C469684435DEB378C4B65CA9591E2A5763059A2E",
+          "id": "x962-1998-draft",
+          "ref": "captures/x962-1998-draft.txt line 6725"
+        },
+        {
+          "hex": "C469684435DEB378C4B65CA9591E2A5763059A2E",
+          "id": "neuromancer",
+          "ref": "captures/neuromancer_prime192v3.html"
+        }
+      ],
+      "std_hex": "C469684435DEB378C4B65CA9591E2A5763059A2E",
+      "std_source": "x962-1998-draft",
+      "t_epoch": 863966734,
+      "t_utc": "1997-05-18 14:45:34",
+      "width": 2
+    },
+    {
+      "claim_hex": "31A92EE2029FD10D901B113E990710F0D21AC6B6",
+      "curve": "prime192v2",
+      "i4": false,
+      "id": "R06",
+      "kind": "prime",
+      "n": 6013,
+      "per": 20,
+      "role": "reproduce",
+      "seed_arg": 863966734,
+      "shift": 40,
+      "sources": [
+        {
+          "hex": "31A92EE2029FD10D901B113E990710F0D21AC6B6",
+          "id": "x962-1998-draft",
+          "ref": "captures/x962-1998-draft.txt line 6712"
+        },
+        {
+          "hex": "31A92EE2029FD10D901B113E990710F0D21AC6B6",
+          "id": "neuromancer",
+          "ref": "captures/neuromancer_prime192v2.html"
+        }
+      ],
+      "std_hex": "31A92EE2029FD10D901B113E990710F0D21AC6B6",
+      "std_source": "x962-1998-draft",
+      "t_epoch": 863966734,
+      "t_utc": "1997-05-18 14:45:34",
+      "width": 2
+    },
+    {
+      "claim_hex": "D09E8800291CB85396CC6717393284AAA0DA64BA",
+      "curve": "P-521",
+      "i4": true,
+      "id": "R07",
+      "kind": "prime",
+      "n": 1136,
+      "per": 20,
+      "role": "reproduce",
+      "seed_arg": 871002724,
+      "shift": 40,
+      "sources": [
+        {
+          "hex": "D09E8800291CB85396CC6717393284AAA0DA64BA",
+          "id": "fips186-4",
+          "ref": "captures/fips186-4.txt line 3606"
+        },
+        {
+          "hex": "D09E8800291CB85396CC6717393284AAA0DA64BA",
+          "id": "fips186-2-change1",
+          "ref": "captures/fips186-2-change1.txt line 1192"
+        },
+        {
+          "hex": "D09E8800291CB85396CC6717393284AAA0DA64BA",
+          "id": "sec2-v2",
+          "ref": "captures/sec2-v2.txt line 577"
+        },
+        {
+          "hex": "D09E8800291CB85396CC6717393284AAA0DA64BA",
+          "id": "bc-java",
+          "ref": "captures/bc_SECNamedCurves.java line 526"
+        }
+      ],
+      "std_hex": "D09E8800291CB85396CC6717393284AAA0DA64BA",
+      "std_source": "fips186-4",
+      "t_epoch": 871002724,
+      "t_utc": "1997-08-08 01:12:04",
+      "width": 2
+    },
+    {
+      "claim_hex": "C49D360886E704936A6678E1139D26B7819F7E90",
+      "curve": "P-256",
+      "i4": true,
+      "id": "R08",
+      "kind": "prime",
+      "n": 1842,
+      "per": 20,
+      "role": "reproduce",
+      "seed_arg": 871696354,
+      "shift": 40,
+      "sources": [
+        {
+          "hex": "C49D360886E704936A6678E1139D26B7819F7E90",
+          "id": "fips186-4",
+          "ref": "captures/fips186-4.txt line 3571"
+        },
+        {
+          "hex": "C49D360886E704936A6678E1139D26B7819F7E90",
+          "id": "fips186-2-change1",
+          "ref": "captures/fips186-2-change1.txt line 1142"
+        },
+        {
+          "hex": "C49D360886E704936A6678E1139D26B7819F7E90",
+          "id": "sec2-v2",
+          "ref": "captures/sec2-v2.txt line 483"
+        },
+        {
+          "hex": "C49D360886E704936A6678E1139D26B7819F7E90",
+          "id": "bc-java",
+          "ref": "captures/bc_SECNamedCurves.java line 467"
+        }
+      ],
+      "std_hex": "C49D360886E704936A6678E1139D26B7819F7E90",
+      "std_source": "fips186-4",
+      "t_epoch": 871696354,
+      "t_utc": "1997-08-16 01:52:34",
+      "width": 2
+    },
+    {
+      "claim_hex": "A335926AA319A27A1D00896A6773A4827ACDAC73",
+      "curve": "P-384",
+      "i4": true,
+      "id": "R09",
+      "kind": "prime",
+      "n": 2688,
+      "per": 20,
+      "role": "reproduce",
+      "seed_arg": 872952608,
+      "shift": 40,
+      "sources": [
+        {
+          "hex": "A335926AA319A27A1D00896A6773A4827ACDAC73",
+          "id": "fips186-4",
+          "ref": "captures/fips186-4.txt line 3587"
+        },
+        {
+          "hex": "A335926AA319A27A1D00896A6773A4827ACDAC73",
+          "id": "fips186-2-change1",
+          "ref": "captures/fips186-2-change1.txt line 1164"
+        },
+        {
+          "hex": "A335926AA319A27A1D00896A6773A4827ACDAC73",
+          "id": "sec2-v2",
+          "ref": "captures/sec2-v2.txt line 528"
+        },
+        {
+          "hex": "A335926AA319A27A1D00896A6773A4827ACDAC73",
+          "id": "bc-java",
+          "ref": "captures/bc_SECNamedCurves.java line 496"
+        }
+      ],
+      "std_hex": "A335926AA319A27A1D00896A6773A4827ACDAC73",
+      "std_source": "fips186-4",
+      "t_epoch": 872952608,
+      "t_utc": "1997-08-30 14:50:08",
+      "width": 2
+    },
+    {
+      "claim_hex": "BD71344799D5C7FCDC45B59FA3B9AB8F6A948BC5",
+      "curve": "P-224",
+      "i4": true,
+      "id": "R10",
+      "kind": "prime",
+      "n": 7026,
+      "per": 20,
+      "role": "reproduce",
+      "seed_arg": 891607927,
+      "shift": 40,
+      "sources": [
+        {
+          "hex": "BD71344799D5C7FCDC45B59FA3B9AB8F6A948BC5",
+          "id": "fips186-4",
+          "ref": "captures/fips186-4.txt line 3553"
+        },
+        {
+          "hex": "BD71344799D5C7FCDC45B59FA3B9AB8F6A948BC5",
+          "id": "fips186-2-change1",
+          "ref": "captures/fips186-2-change1.txt line 1122"
+        },
+        {
+          "hex": "BD71344799D5C7FCDC45B59FA3B9AB8F6A948BC5",
+          "id": "sec2-v2",
+          "ref": "captures/sec2-v2.txt line 408"
+        },
+        {
+          "hex": "BD71344799D5C7FCDC45B59FA3B9AB8F6A948BC5",
+          "id": "bc-java",
+          "ref": "captures/bc_SECNamedCurves.java line 395"
+        }
+      ],
+      "std_hex": "BD71344799D5C7FCDC45B59FA3B9AB8F6A948BC5",
+      "std_source": "fips186-4",
+      "t_epoch": 891607927,
+      "t_utc": "1998-04-03 12:52:07",
+      "width": 2
+    },
+    {
+      "claim_hex": "74D59FF07F6B413D0EA14B344B20A2DB049B50C3",
+      "curve": "B-233",
+      "i4": true,
+      "id": "R11",
+      "kind": "binary",
+      "n": 155,
+      "per": 5,
+      "role": "reproduce",
+      "seed_arg": 446413329,
+      "seed_arg_mode": "floor(t_epoch/2)",
+      "shift": 17,
+      "sources": [
+        {
+          "hex": "74D59FF07F6B413D0EA14B344B20A2DB049B50C3",
+          "id": "fips186-4",
+          "ref": "captures/fips186-4.txt line 3740"
+        },
+        {
+          "hex": "74D59FF07F6B413D0EA14B344B20A2DB049B50C3",
+          "id": "fips186-2-change1",
+          "ref": "captures/fips186-2-change1.txt line 1329"
+        },
+        {
+          "hex": "74D59FF07F6B413D0EA14B344B20A2DB049B50C3",
+          "id": "sec2-v2",
+          "ref": "captures/sec2-v2.txt line 917"
+        },
+        {
+          "hex": "74D59FF07F6B413D0EA14B344B20A2DB049B50C3",
+          "id": "bc-java",
+          "ref": "captures/bc_SECNamedCurves.java line 867"
+        }
+      ],
+      "std_hex": "74D59FF07F6B413D0EA14B344B20A2DB049B50C3",
+      "std_source": "fips186-4",
+      "t_epoch": 892826658,
+      "t_utc": "1998-04-17 15:24:18",
+      "width": 8
+    },
+    {
+      "claim_hex": "77E2B07370EB0F832A6DD5B62DFC88CD06BB84BE",
+      "curve": "B-283",
+      "i4": true,
+      "id": "R12",
+      "kind": "binary",
+      "n": 32,
+      "per": 5,
+      "role": "reproduce",
+      "seed_arg": 446413432,
+      "seed_arg_mode": "floor(t_epoch/2)",
+      "shift": 17,
+      "sources": [
+        {
+          "hex": "77E2B07370EB0F832A6DD5B62DFC88CD06BB84BE",
+          "id": "fips186-4",
+          "ref": "captures/fips186-4.txt line 3790"
+        },
+        {
+          "hex": "77E2B07370EB0F832A6DD5B62DFC88CD06BB84BE",
+          "id": "fips186-2-change1",
+          "ref": "captures/fips186-2-change1.txt line 1379"
+        },
+        {
+          "hex": "77E2B07370EB0F832A6DD5B62DFC88CD06BB84BE",
+          "id": "sec2-v2",
+          "ref": "captures/sec2-v2.txt line 1030"
+        },
+        {
+          "hex": "77E2B07370EB0F832A6DD5B62DFC88CD06BB84BE",
+          "id": "bc-java",
+          "ref": "captures/bc_SECNamedCurves.java line 962"
+        }
+      ],
+      "std_hex": "77E2B07370EB0F832A6DD5B62DFC88CD06BB84BE",
+      "std_source": "fips186-4",
+      "t_epoch": 892826864,
+      "t_utc": "1998-04-17 15:27:44",
+      "width": 8
+    },
+    {
+      "claim_hex": "4099B5A457F9D69F79213D094C4BCD4D4262210B",
+      "curve": "B-409",
+      "i4": true,
+      "id": "R13",
+      "kind": "binary",
+      "n": 60,
+      "per": 5,
+      "role": "reproduce",
+      "seed_arg": 446413509,
+      "seed_arg_mode": "floor(t_epoch/2)",
+      "shift": 17,
+      "sources": [
+        {
+          "hex": "4099B5A457F9D69F79213D094C4BCD4D4262210B",
+          "id": "fips186-4",
+          "ref": "captures/fips186-4.txt line 3857"
+        },
+        {
+          "hex": "4099B5A457F9D69F79213D094C4BCD4D4262210B",
+          "id": "fips186-2-change1",
+          "ref": "captures/fips186-2-change1.txt line 1437"
+        },
+        {
+          "hex": "4099B5A457F9D69F79213D094C4BCD4D4262210B",
+          "id": "sec2-v2",
+          "ref": "captures/sec2-v2.txt line 1114"
+        },
+        {
+          "hex": "4099B5A457F9D69F79213D094C4BCD4D4262210B",
+          "id": "bc-java",
+          "ref": "captures/bc_SECNamedCurves.java line 1024"
+        }
+      ],
+      "std_hex": "4099B5A457F9D69F79213D094C4BCD4D4262210B",
+      "std_source": "fips186-4",
+      "t_epoch": 892827018,
+      "t_utc": "1998-04-17 15:30:18",
+      "width": 8
+    },
+    {
+      "claim_hex": "2AA058F73A0E33AB486B0F610410C53A7F132310",
+      "curve": "B-571",
+      "i4": true,
+      "id": "R14",
+      "kind": "binary",
+      "n": 73,
+      "per": 5,
+      "role": "reproduce",
+      "seed_arg": 446413564,
+      "seed_arg_mode": "floor(t_epoch/2)",
+      "shift": 17,
+      "sources": [
+        {
+          "hex": "2AA058F73A0E33AB486B0F610410C53A7F132310",
+          "id": "fips186-4",
+          "ref": "captures/fips186-4.txt line 3927"
+        },
+        {
+          "hex": "2AA058F73A0E33AB486B0F610410C53A7F132310",
+          "id": "fips186-2-change1",
+          "ref": "captures/fips186-2-change1.txt line 1515"
+        },
+        {
+          "hex": "2AA058F73A0E33AB486B0F610410C53A7F132310",
+          "id": "sec2-v2",
+          "ref": "captures/sec2-v2.txt line 1204"
+        },
+        {
+          "hex": "2AA058F73A0E33AB486B0F610410C53A7F132310",
+          "id": "bc-java",
+          "ref": "captures/bc_SECNamedCurves.java line 1090"
+        }
+      ],
+      "std_hex": "2AA058F73A0E33AB486B0F610410C53A7F132310",
+      "std_source": "fips186-4",
+      "t_epoch": 892827128,
+      "t_utc": "1998-04-17 15:32:08",
+      "width": 8
+    },
+    {
+      "claim_hex": null,
+      "curve": "B-163",
+      "i4": true,
+      "id": "R15",
+      "kind": "binary",
+      "n": null,
+      "per": null,
+      "role": "seed_only",
+      "seed_arg": null,
+      "shift": null,
+      "sources": [
+        {
+          "hex": "85E25BFE5C86226CDB12016F7553F9D0E693A268",
+          "id": "fips186-4",
+          "ref": "captures/fips186-4.txt line 3689"
+        },
+        {
+          "hex": "85E25BFE5C86226CDB12016F7553F9D0E693A268",
+          "id": "fips186-2-change1",
+          "ref": "captures/fips186-2-change1.txt line 1280"
+        },
+        {
+          "hex": "85E25BFE5C86226CDB12016F7553F9D0E693A268",
+          "id": "sec2-v2",
+          "ref": "captures/sec2-v2.txt line 844"
+        },
+        {
+          "hex": "85E25BFE5C86226CDB12016F7553F9D0E693A268",
+          "id": "bc-java",
+          "ref": "captures/bc_SECNamedCurves.java line 747"
+        }
+      ],
+      "std_hex": "85E25BFE5C86226CDB12016F7553F9D0E693A268",
+      "std_source": "fips186-4",
+      "t_epoch": null,
+      "t_utc": null,
+      "width": null
+    }
+  ],
+  "rows_file": "audit_ecdsa/v1_rows.tsv",
+  "rows_file_sha256_lf": "e27c3202aab424a68759da435d95da3bc5a70042f282c4b5f0b9ae1249f236fe",
+  "sources": {
+    "bc-java": {
+      "files": [
+        "bc_SECNamedCurves.java"
+      ],
+      "origin": "https://raw.githubusercontent.com/bcgit/bc-java/main/core/src/main/java/org/bouncycastle/asn1/sec/SECNamedCurves.java",
+      "role": "independent implementation table"
+    },
+    "claim-anthropic": {
+      "files": [
+        "claim_anthropic_ecdsa_curve_origins.html",
+        "claim_anthropic_ecdsa_curve_origins.txt"
+      ],
+      "origin": "https://www.anthropic.com/research/ecdsa-curve-origins",
+      "role": "claim (verbatim) + cross-check strings"
+    },
+    "fips186-2-change1": {
+      "files": [
+        "fips186-2-change1.pdf",
+        "fips186-2-change1.txt"
+      ],
+      "origin": "https://csrc.nist.gov/CSRC/media/Publications/fips/186/2/archive/2001-10-05/documents/FIPS186-2-change1.pdf",
+      "role": "standards copy"
+    },
+    "fips186-4": {
+      "files": [
+        "fips186-4.pdf",
+        "fips186-4.txt"
+      ],
+      "origin": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf",
+      "role": "standards copy"
+    },
+    "neuromancer": {
+      "files": [
+        "neuromancer_prime192v2.html",
+        "neuromancer_prime192v3.html",
+        "neuromancer_prime239v1.html",
+        "neuromancer_prime239v2.html",
+        "neuromancer_prime239v3.html"
+      ],
+      "origin": "https://neuromancer.sk/std/x962/<curve>/",
+      "role": "independent curve database"
+    },
+    "saweis-context": {
+      "files": [
+        "saweis_nist_curve_seed_origins.html"
+      ],
+      "origin": "https://saweis.net/posts/nist-curve-seed-origins.html",
+      "role": "context only (derived from the neuromancer database; NOT a comparison source)"
+    },
+    "sec2-v2": {
+      "files": [
+        "sec2-v2.pdf",
+        "sec2-v2.txt"
+      ],
+      "origin": "https://www.secg.org/sec2-v2.pdf",
+      "role": "standards copy"
+    },
+    "x962-1998-draft": {
+      "files": [
+        "x962-1998-draft.pdf",
+        "x962-1998-draft.txt"
+      ],
+      "origin": "https://safecurves.cr.yp.to/grouper.ieee.org/groups/1363/private/x9-62-09-20-98.pdf",
+      "role": "standards copy (archival mirror)"
+    }
+  }
+}

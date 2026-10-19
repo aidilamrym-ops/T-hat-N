@@ -1,0 +1,16 @@
+id	role	curve	kind	t_utc	n	i4
+R01	reproduce	prime239v1	prime	1997-05-15 15:49:03	2185	0
+R02	reproduce	prime239v2	prime	1997-05-15 15:49:03	2320	0
+R03	reproduce	prime239v3	prime	1997-05-15 15:49:03	3048	0
+R04	reproduce	P-192	prime	1997-05-18 14:45:34	139	1
+R05	reproduce	prime192v3	prime	1997-05-18 14:45:34	5228	0
+R06	reproduce	prime192v2	prime	1997-05-18 14:45:34	6013	0
+R07	reproduce	P-521	prime	1997-08-08 01:12:04	1136	1
+R08	reproduce	P-256	prime	1997-08-16 01:52:34	1842	1
+R09	reproduce	P-384	prime	1997-08-30 14:50:08	2688	1
+R10	reproduce	P-224	prime	1998-04-03 12:52:07	7026	1
+R11	reproduce	B-233	binary	1998-04-17 15:24:18	155	1
+R12	reproduce	B-283	binary	1998-04-17 15:27:44	32	1
+R13	reproduce	B-409	binary	1998-04-17 15:30:18	60	1
+R14	reproduce	B-571	binary	1998-04-17 15:32:08	73	1
+R15	seed_only	B-163	binary	-	-	1

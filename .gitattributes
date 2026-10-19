@@ -7,3 +7,14 @@
 # Audit P2 freeze package: keep byte-stable LF checkouts (captures are cmp'd
 # byte-for-byte against fresh fetches at execution; batteries/engines hashed).
 audit_collatz/** text eol=lf
+
+# Audit ECDSA V1 (Replay Record RR-2026-01) freeze package: byte-stable LF for
+# text (hashes pinned in reports/AUDIT_ECDSA_PREREG_2026-10-19.md sec 2);
+# PDFs stay binary and committed unconverted (raw sha256 pinned in SOURCES.md).
+audit_ecdsa/** text eol=lf
+audit_ecdsa/**/*.pdf binary
+
+# Replay Record RR-2026-01 freeze docs: byte-stable LF on checkout (these two
+# files are pinned in audit_ecdsa/PINS.sha256 with raw sha256).
+reports/REPLAY_RECORD_SPEC.md text eol=lf
+reports/AUDIT_ECDSA_PREREG_2026-10-19.md text eol=lf
