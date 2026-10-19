@@ -147,6 +147,7 @@ ada di git (pushed), di Zenodo (DOI), atau di berkas ini.
 | BB5 audit — Phase R: rebuild Coq 8.20.1 SELESAI (attempt 5, 2026-10-19T00:31:14Z) — blok akhir `Axioms:` = hanya `functional_extensionality_dep` (klaim README upstream cocok); wall/backstop 23:02:55Z tercatat as-is (D-R5, tanpa kill); gate anti-sirkularitas TOOL NOT RUN dilampirkan | commit yang membawa baris ini; dibangun di atas `0a97f2b` (tick v4.1; CI hijau run `39162111073`); attempt 5 `make -j2` `real 267m59.105s`; BusyCoq 25/25 + BB5 50/50 `.vo`; semua langkah exit 0; cert transkrip sha256LF `294d1dd4…` | `reports/AUDIT_BB5_R_ADDENDUM_2026-10-18.md`, `reports/audit_bb5_phaseR_2026-10-18.log`, `reports/FENCE_REGISTRY.md` (A-2026-0002), `audit_bb5/bb5_phaseR_resume4.sh` |
 | P2 audit Collatz (Barina) — SELESAI: replay terpra-registrasi semua item S/W/E/H/P dalam cap; S4/P DISCREPANCY terdokumentasi (15 symlink vs ekspektasi beku); registry `A-2026-0003` | commit log+laporan + commit registry yang membawa baris ini; pra-reg `bbbe9ae` (dipush sebelum perintah audit pertama; CI hijau `39154348599`); HEAD eksekusi `9d9c358` (CI hijau `39181863147`); eksekusi 2026-10-19T00:46:40Z–00:59:52Z (≈13 mnt; cap 6 j); E1 `odd_checked=8589934591` (ganjil 3 ≤ n < 2^34), `max_steps_to_drop=547` @ `12235060455`, 4 m36,8s dari wall 3,5 j; W 98/97/148 semua MATCH ×2 engine; H 25/25 + 14/14 verbatim; gate TOOL NOT RUN dilampirkan | `reports/AUDIT_COLLATZ_REPORT_2026-10-19.md`, `reports/AUDIT_COLLATZ_LOG_2026-10-19.log`, `reports/AUDIT_COLLATZ_PREREG_2026-10-19.md`, `audit_collatz/`, `reports/FENCE_REGISTRY.md` (A-2026-0003) |
 | Replay Record pertama `RR-2026-01` (halaman Anthropic 2026-10-16) — SELESAI: reproduksi terpra-registrasi pemetaan (t, n) → seed ECDSA; I2 10/10 + I3 4/4 + I4–I6 MATCH, I1 OK; B-163 residu; gate TOOL NOT RUN dilampirkan | pra-reg + spec seri dibekukan di commit `3026d12` (dipush sebelum perintah audit pertama; CI hijau run `39187596038`) + commit yang membawa baris ini; eksekusi 8 s | `reports/AUDIT_ECDSA_REPORT_2026-10-19.md`, `reports/AUDIT_ECDSA_LOG_2026-10-19.log`, `reports/AUDIT_ECDSA_PREREG_2026-10-19.md`, `reports/REPLAY_RECORD_SPEC.md`, `audit_ecdsa/`, `reports/FENCE_REGISTRY.md` (A-2026-0004) |
+| Replay Record kedua `RR-2026-02` (kernel entropi SIMULATED; dim 201/301/401) — SELESAI: 12/12 koordinat tersertifikasi (dual-engine Sturm + sertifikat endpoint; Newton pivot-product CONTRACTED, 2 iterasi; rel_width ≤ 0.02, terburuk 0.0139169) + 3/3 verdict dim RESOLVED statistik (χ² = 7.5088 / 10.3984 / 11.592; 20000 sampel/dim, 500 batch); kampanye exit 0; ledger 128 record, head `e7bda4e1…` | pra-reg + spec v0.2 dibekukan di commit `1febcb5` (dipush sebelum perintah kampanye pertama; CI hijau run `39203227689`) + commit yang membawa baris ini; eksekusi commit `485117f` (CI hijau run `39205368649`) | `reports/REPLAY_CERT_SPEC_V0.2_QUANTUM.md`, `reports/AUDIT_QUANTUM_PREREG_2026-10-19.md`, `reports/gw_quantum_diagnostic_v1.html`, `ledger/quantum_evolution.jsonl`, `audit_quantum/`, `msaf/quantum_entropy/`, `reports/FENCE_REGISTRY.md` (A-2026-0005) |
 
 Empat DOI diverifikasi setelah terbit: `doi.org` → 200, tiap record punya
 `related_identifiers` ke repo GitHub-nya, tiap deskripsi memuat commit sha
@@ -1127,6 +1128,35 @@ Konsekuensi urutan yang disarankan:
   sertifikat; guard pasangannya di CI).
 - **Batas:** replay finit ≠ peer review; bukan klaim keamanan ECDSA; bukan
   bukti NSA menjalankan lrand48; tidak menyatakan/menyangkal RH atau P≠NP.
+
+### 2.0v [BARU, 2026-10-19] Rekaman kedua Replay Record (RR-2026-02) — kampanye kernel entropi SIMULATED dim 201/301/401: RESOLVED; registry `A-2026-0005`
+
+- **Konteks/urutan:** spec v0.2 + pra-reg dibekukan di commit `1febcb5`,
+  dipush sebelum perintah kampanye pertama (CI hijau `39203227689`); dua-GO
+  dipatuhi (tidak ada eksekusi runner sebelum freeze ter-push); eksekusi di
+  commit `485117f` (CI hijau `39205368649`); tanpa perubahan parameter.
+- **Hasil:** dim 201/301/401 + kampanye semua `RESOLVED` (exit 0). Lapisan
+  tersertifikasi: 12/12 koordinat — 150/150 keputusan dual-engine setuju,
+  fallback eksak 0, disagreement 0, sertifikat endpoint OK di kedua engine,
+  rel_width ≤ 0.02 (terburuk 0.0139169), Newton pivot-product CONTRACTED
+  (2 iterasi; lebar akhir ≤ 2.8e-47), Sylvester CERTIFIED_PD. Lapisan
+  statistik float64: 20000 sampel/dim (500 batch), χ² = 7.5088 / 10.3984 /
+  11.592 (window [0, 60]); 16/16 sel dipertahankan; ledger 128 record, head
+  `e7bda4e1…`; digest beku `f6352884…` tidak berubah pasca-run (artefak
+  13:32:56–13:33:59 WITA; cap 30 mnt tidak tersentuh).
+- **Artefak:** `reports/REPLAY_CERT_SPEC_V0.2_QUANTUM.md`,
+  `reports/AUDIT_QUANTUM_PREREG_2026-10-19.md`, paket beku `audit_quantum/`
+  (PINS + `FREEZE_MANIFEST_V2.json` + `freeze.py`), `msaf/quantum_entropy/` +
+  guard CI `msaf/tests/test_quantum_entropy.py`,
+  `ledger/quantum_evolution.jsonl`,
+  `audit_quantum/exec_2026-10-19/stats_d{201,301,401}.bin`,
+  `reports/gw_quantum_diagnostic_v1.html`; registry `A-2026-0005` (21 baris
+  sertifikat; guard pasangannya di CI).
+- **Batas:** SIMULATED (sumber = CSPRNG OS; bukan entropi kuantum fisik, D1);
+  lapisan statistik float64 diagnostik (tidak menyentuh jalur tersertifikasi,
+  D2); replay = replikasi protokol, bukan byte stats; ε=1/250 = envelope Weyl
+  perturbasi diagonal per-channel (K-Q2); bukan klaim RH/P≠NP; replay finit ≠
+  peer review.
 
 ---
 

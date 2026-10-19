@@ -537,6 +537,41 @@ mengikuti laporan L4).
   sha256LF a7b20f214dec09531b0d23f6d728a6f324a0c384a212a12544c3065c9919227f audit_ecdsa/exec_2026-10-19/v1_exec_steps.sh
   ```
 
-Selesai — 9 entri per 2026-10-19 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004`). Entri
+### A-2026-0005 — Rekaman replay RR-2026-02: kampanye kernel entropi SIMULATED (dim 201/301/401) — verdict RESOLVED
+
+- **Jenis:** A
+- **Pernyataan:** Replay terpra-registrasi (pra-reg `reports/AUDIT_QUANTUM_PREREG_2026-10-19.md` + spec `reports/REPLAY_CERT_SPEC_V0.2_QUANTUM.md` v0.2, dibekukan di commit `1febcb5`, dipush sebelum perintah kampanye pertama; CI hijau `39203227689`; eksekusi di commit `485117f`, CI hijau `39205368649`; dua-GO dipatuhi; tanpa perubahan parameter) kampanye finit kernel entropi dengan stream SIMULATED (CSPRNG OS `secrets.token_bytes`; label SIMULATED; `global_claim_supported=false`) atas model tridiagonal eksak `a_i = 2 + (i+1)^2 * h^4`, `b = -1`, `h = 1/(D+1)`, pada dim 201/301/401: (a) lapisan tersertifikasi — 12/12 koordinat {D/4, D/2, 3D/4, D}: bisection eksak 150 langkah, dua engine independen (A: ball Arb 6000 bit; B: mpmath mpf 50 dps) sepakat 150/150 keputusan, fallback eksak 0, disagreement 0, sertifikat endpoint (cnt(e_lo) ≤ k-1 dan cnt(e_hi) ≥ k) benar di kedua engine, rel_width ≤ 0.02 (terburuk 0.0139169 di dim 201 k=50), Newton bentuk pivot-product CONTRACTED di kedua engine (2 iterasi; lebar akhir ≤ 2.8e-47), Sylvester CERTIFIED_PD di kedua engine; (b) lapisan statistik float64 — 20000 sampel/dim dalam 500 batch terhadap 16 knot beku Φ⁻¹(k/16): χ² = 7.5088 / 10.3984 / 11.592, semuanya di window [0, 60], 16/16 sel dipertahankan (0 drop), exceedances z ≥ 3.5 = 2/4/3; verdict dim 201/301/401 dan kampanye semua RESOLVED (exit 0); ledger rantai-hash `ledger/quantum_evolution.jsonl` = 128 record (1 GENESIS + 120 BLOCK + 3 STATS + 4 VERDICT; tanpa REVERT), head `e7bda4e15ecad3f7abe16115436efc97c2cdc627213631e7488371076a2be910`; Codebase/Manifest Digest `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25` tidak berubah pasca-run; artefak 13:32:56–13:33:59 WITA (cap 30 mnt tidak tersentuh).
+- **Batas:** kampanye finit satu-instance per dim — bukan klaim zeta/Weil, bukan RH/P≠NP; tanpa klaim entropi kuantum fisik (sumber = CSPRNG OS, label SIMULATED, D1); lapisan statistik float64 = diagnostik, tidak pernah menyentuh jalur tersertifikasi (D2); replay = replikasi protokol, bukan byte (stream non-deterministik; lapisan tersertifikasi deterministik dan reproducible eksak); ε=1/250 = envelope Weyl ‖E‖₂ ≤ ε untuk perturbasi diagonal per-channel (K-Q2: PD disertifikasi pada blok model itu sendiri, bukan untuk setiap anggota ε-box); replay finit ≠ peer review; tidak menyatakan/menyangkal RH atau P≠NP.
+- **Status:** CERTIFIED
+- **Domino:** tidak ada (kampanye internal V2; bukan domino RH)
+- **Relasi:** rekaman kedua seri Replay Record (spec v0.2 = perluasan seri `reports/REPLAY_RECORD_SPEC.md` v0.1); audit kelima registry (setelah `A-2026-0001`..`A-2026-0004`); paket beku `audit_quantum/` (14 pin; `PINS.sha256` + `FREEZE_MANIFEST_V2.json` + `freeze.py`; `--verify` OK) + selftest 14/14 + guard CI `msaf/tests/test_quantum_entropy.py`; dashboard `reports/gw_quantum_diagnostic_v1.html` (standalone, self-contained); sertifikat 21 baris (spec + pra-reg + freeze.py + PINS + manifest + 10 berkas paket + guard + ledger + 3 stats + dashboard).
+- **Perintah verifikasi:** `python -m msaf.quantum_entropy.selftest` (14/14 ZERO FAILURE); `python audit_quantum/freeze.py --verify`; `python -m msaf.quantum_entropy.ledger --verify ledger/quantum_evolution.jsonl` (128 record; head `e7bda4e1…`); `python -m pytest msaf/tests/test_quantum_entropy.py -q`; guard `python -m pytest msaf/tests/test_fence_registry.py -q` (memverifikasi semua sha di bawah).
+- **Sertifikat:**
+
+  ```text
+  sha256LF dea0a8dd8132d95937034150553ca1fd490c225627d7ef08e5b2de8c6847d26b reports/REPLAY_CERT_SPEC_V0.2_QUANTUM.md
+  sha256LF 1179368367c3fd16f6dd1c15848773d52813231668d6170692c5acbbce427142 reports/AUDIT_QUANTUM_PREREG_2026-10-19.md
+  sha256LF a831441bb600bf05aa8eeb40e76fbea8ef73fee98f249abf9eb7657064270369 audit_quantum/freeze.py
+  sha256LF f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25 audit_quantum/PINS.sha256
+  sha256LF 17d61997be02fcc294c8a76f7950437088de6f8ae4a38a341540748561736d88 audit_quantum/FREEZE_MANIFEST_V2.json
+  sha256LF 5114f811056f14ed484d8f76cdb2ed4439091424b360ca539428de0ba2936ab3 msaf/quantum_entropy/__init__.py
+  sha256LF 75307da705b42151ce153cb2ba1bed55f5afad61da3068638c3dfc75a2c3e11a msaf/quantum_entropy/chispec.py
+  sha256LF a4d093b762492e2b20d8792b734e57d85759b43333ad0a299657728a02a8f9d4 msaf/quantum_entropy/dashboard.py
+  sha256LF cb8dc9c120085b96e7ed228f883274023571ac1abb7d61d5f0a279f0c56d6c24 msaf/quantum_entropy/engines.py
+  sha256LF edb97df52a2bea0d40ad1ef62f03a63b6aad35642d0d3b34d637e04255a6da0a msaf/quantum_entropy/entropy_source.py
+  sha256LF cb194a64754e4a2f4b2445722b6dffd2c46a9576870464c565098b6f08a1c28f msaf/quantum_entropy/intervals.py
+  sha256LF 0dd577ad77c88a7d86bf49c3fbebac7db1c911f368e05537c8a958705f981f72 msaf/quantum_entropy/ledger.py
+  sha256LF 88532270d3de50100509296decdff57039c2914079018a6a52638b7f27a10795 msaf/quantum_entropy/runner.py
+  sha256LF e823b492137836c0d8c163a0eee7a3a6aa38883356d786d174dcbaba4fccc92c msaf/quantum_entropy/selftest.py
+  sha256LF 1ca1e5ff9fc92f5544d3f654b11ef68bcad01d44a055dce5a81e14d47c571bc6 msaf/quantum_entropy/sylvester.py
+  sha256LF bf4a75c98179a19b233879666280650e213b9a1aefcbea63186fca0bd8feec46 msaf/tests/test_quantum_entropy.py
+  sha256LF 6dcb3855cfca71dbcbbbe0ce1bd38cff2a1fcf24528f9c8d3db86b9acb204640 ledger/quantum_evolution.jsonl
+  sha256LF 31e9cb539bd10e527d337d0c3771d73a6a1b3177f1b31dd47b0469c30619d645 audit_quantum/exec_2026-10-19/stats_d201.bin
+  sha256LF 54b204d7e09f8fbd03bf1f884442196c7a7a7771b136fda23806d39738b19054 audit_quantum/exec_2026-10-19/stats_d301.bin
+  sha256LF b68cdd0926256d7d50fbce0ed637768a6d9f1c3f54e83fd52c4bc678b0cc22c6 audit_quantum/exec_2026-10-19/stats_d401.bin
+  sha256LF 9747b13515ed4f1670bc690e3c4917d44c1d1e22fb99c625052c42cab33357cf reports/gw_quantum_diagnostic_v1.html
+  ```
+
+Selesai — 10 entri per 2026-10-19 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).
