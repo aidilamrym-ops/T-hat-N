@@ -1455,8 +1455,9 @@ Konsekuensi urutan yang disarankan:
   (5 uji: placeholder, kelengkapan audit, standalone + statement lock,
   receipt/trusted base, 16 mutasi negatif); registry `A-2026-0012`
   (7 sertifikat sha256LF). Reproduksi lokal:
-  `formal_bridge/check_integral.sh`. CI: menunggu run setelah commit
-  (diisi setelah verifikasi `python-tests` + `lean-kernel`).
+  `formal_bridge/check_integral.sh`. CI: run 39293377480 hijau
+  (`python-tests` 1m3s + `lean-kernel` 2m10s; kedua job diverifikasi
+  lewat `/actions/runs/39293377480/jobs`).
 
 ---
 
