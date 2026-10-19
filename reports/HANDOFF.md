@@ -1459,6 +1459,47 @@ Konsekuensi urutan yang disarankan:
   (`python-tests` 1m3s + `lean-kernel` 2m10s; kedua job diverifikasi
   lewat `/actions/runs/39293377480/jobs`).
 
+### 2.0ae [BARU, 2026-10-20] L5 limit step bersyarat di Coq — perbandingan limit integral–deret untuk `f_k(x)=x^{-(k+1)}` dengan tiga hipotesis `Un_cv`; trusted base 4 aksioma stdlib diwarisi; registry `A-2026-0013`
+
+- **Konteks:** Paket 8, pra-registrasi baru
+  `reports/PREREG_PAKET8_2026-10-20.md` (scope dikunci sebelum
+  implementasi). Berkas baru `formal_bridge/IntegralComparisonLimit.v`
+  **mengimpor** modul beku `formal_bridge/IntegralComparison.v`
+  (`A-2026-0012`) apa adanya; artefak Paket 1–7 **tidak diubah**.
+- **Hasil:** `integral_comparison_power_limit`: untuk `k ≥ 1`, `N ≥ 1`,
+  dan limit `L_N, L_{N+1}, L_S` dengan hipotesis `Un_cv` untuk
+  `whole_val k N M`, `whole_val k (N+1) M`, dan tail sum dari `N+1`,
+  berlaku `L_{N+1} ≤ L_S ≤ L_N`. 4 hasil: `Un_cv_le` (order limit),
+  `tail_sum_le_whole`, `whole_succ_le_tail_sum`, teorema utama.
+  Eksistensi ketiga limit **tidak** dibuktikan; itu Paket 9.
+- **Bukti:** `coqc` exit 0 (dependensi + modul baru); `coqchk` exit 0
+  "Modules were successfully checked"; 4/4 hasil di keluaran kernel;
+  receipt deterministik (dua capture byte-identik, 57 baris; sha256
+  `af90fb87a9f4344e9f3d03741d8de8e0993363f59eeea14b6cff21b632a3faf4`).
+  Tanpa `Axiom`/`Parameter`/`Admitted`/`admit`.
+- **Trusted base:** `Print Assumptions` teorema utama = **tepat empat**
+  aksioma stdlib (`sig_forall_dec`, `sig_not_dec`,
+  `functional_extensionality_dep`, `Classical_Prop.classic`), diwarisi
+  dari `RiemannInt`; `Un_cv_le` = 2 aksioma, tiga hasil lain = 4.
+  Tidak ada aksioma proyek. Peta lengkap di laporan §5. Deviasi
+  4-aksioma Paket 7 tetap tercatat; jika owner mensyaratkan literal tiga
+  aksioma, paket ini juga tidak memenuhi syarat itu. Status:
+  **CERTIFIED dengan deviasi trusted base tercatat**.
+- **Batas:** **bersyarat** (eksistensi limit adalah hipotesis); hanya
+  `f_k(x)=x^{-(k+1)}` dengan `k ≥ 1`, `N ≥ 1`; bukan `f` umum, bukan
+  eksponen real `p > 1` (`Rpower`), bukan L3/L4; **bukan** penutupan
+  `[J]` periodic-box `A-2026-0007` (tetap OPEN); `Coq.Reals` aksiomatik,
+  bukan konsistensi; gate anti-circularity `TOOL NOT RUN`
+  (NO_LEAN_FILES; exit 2 menurut kontrak gate) **tidak dihitung sebagai
+  sukses**; CI tidak punya Coq (hanya guard statis); tanpa klaim
+  zeta/Weil/RH/P≠NP/fisika; bukan peer review.
+- **Guard:** `python -m pytest msaf/tests/test_coq_bridge_integral_limit.py -q`
+  (5 uji: placeholder, kelengkapan audit, impor + statement lock,
+  receipt/trusted base, 16 mutasi negatif); registry `A-2026-0013`
+  (6 sertifikat sha256LF). Reproduksi lokal:
+  `formal_bridge/check_integral_limit.sh`. CI: dijalankan setelah push
+  (run id diperbarui di commit dokumentasi berikutnya).
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional

@@ -117,7 +117,12 @@ axioms, isolating `sig_not_dec` to the existence step (still integer
 (`k ≥ 1`) proved in Coq for `[N, N+M]` only, with the infinite
 integral/limit step, general `f`, real exponents and periodic-box `[J]`
 still explicitly OPEN, and a four-axiom stdlib trusted base recorded as
-an audit deviation. Every
+an audit deviation; and
+`A-2026-0013`, the conditional L5 limit step
+([`reports/COQ_BRIDGE_L5_LIMIT_2026-10-20.md`](reports/COQ_BRIDGE_L5_LIMIT_2026-10-20.md))
+— the same integral–series comparison taken to the limit with the three
+`Un_cv` limits as hypotheses, the four-axiom stdlib trusted base unchanged,
+and existence of the limits still explicitly OPEN (Paket 9 next). Every
 verdict is a bounded assessment under the scope limits recorded there, not a
 defect claim on any third party's work.
 
