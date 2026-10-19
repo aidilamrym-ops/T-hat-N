@@ -12,7 +12,7 @@ arithmetic (`arb` / `acb` / `arb_mat`, version 0.9.0). No floating-point value
 ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
-- **CI:** [![CI](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml) - `python -m pytest msaf -q` (377 tests) plus the Lean kernel build; every push must stay green
+- **CI:** [![CI](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml) - `python -m pytest msaf -q` (453 tests) plus the Lean kernel build; every push must stay green
 - **Permanent archive:** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338271.svg)](https://doi.org/10.5281/zenodo.23338271) (concept DOI, all versions; latest version v1.41.0-alpha: https://doi.org/10.5281/zenodo.23445149)
 - **Sealed releases:** [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha); final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
 - **License:** MIT - see [LICENSE](LICENSE)
@@ -141,8 +141,13 @@ a digest-pinned Coq 8.20.1 job rechecks Paket 8/9 with `coqc`/`coqchk`; and
 ([`reports/XI_SPEC_V2_2026-10-20.md`](reports/XI_SPEC_V2_2026-10-20.md))
 — the historical endpoint contradiction removed (`xiReal` guarded at `x = 1`,
 `xiReal_sub_one` restricted to `x < 0`, false `zetaReal_neg` dropped; 8
-axioms), still conditional and not a proof about the actual xi function; the
-Coq packages' Coq-kernel status is unchanged.
+axioms), still conditional and not a proof about the actual xi function; and
+`A-2026-0018`, the faithful V3 spec
+([`reports/XI_SPEC_V3_2026-10-20.md`](reports/XI_SPEC_V3_2026-10-20.md))
+— xi defined from Mathlib's `completedRiemannZeta`, the functional equation
+proved, zero project axioms, with one explicit midpoint sign hypothesis
+(`hmid`) still unproved; not a proof of RH. The Coq packages' Coq-kernel
+status is unchanged.
 Every verdict is a bounded assessment under the scope limits recorded there, not a
 defect claim on any third party's work.
 

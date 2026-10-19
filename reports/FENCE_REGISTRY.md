@@ -1187,6 +1187,50 @@ mengikuti laporan L4).
   sha256LF 36cd6dd90ed48a0246cbcdb37cb34ddf3d222336adc2be7f0650b619dd392c19 reports/XI_SPEC_V2_2026-10-20.md
   ```
 
-Selesai — 22 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017`). Entri
+### A-2026-0018 — Spec Xi V3 faithful: nol aksioma proyek; satu hipotesis eksplisit `hmid`
+
+- **Jenis:** A
+- **Pernyataan:** `lean/spec_v3/XiAnalyticFaithful.lean` mendefinisikan
+  `xiReal` dari `completedRiemannZeta` Mathlib v4.33.1 (bagian real,
+  guard di `0`/`1`), membuktikan `xiReal (1 - x) = xiReal x` untuk semua
+  real `x`, dan membuktikan `0 < xiReal x` untuk `x > 1` tanpa aksioma
+  proyek. `xi_pos_on_reals` menyisakan tepat satu hipotesis eksplisit
+  `hmid : ∀ x, 0 < x → x < 1 → (completedRiemannZeta (x : ℂ)).re < 0`;
+  bukan aksioma global. `#print axioms` untuk master theorem, persamaan
+  fungsional, dan positivity `x > 1` hanya memuat `propext`,
+  `Classical.choice`, `Quot.sound`; nol deklarasi
+  `XiAnalyticFaithful.*`. Kompilasi exit 0 (18,566 dtk); guard 3 uji
+  lulus; gate anti-circularity PASS pada sumber V3 (`FAIL=0`,
+  `NOT_RUN=0`, `SKIP=0`).
+- **Batas:** V3 **kondisional** pada `hmid`; `hmid` benar secara
+  matematis tetapi belum dibuktikan di Lean/Mathlib. Realness
+  `completedRiemannZeta` pada sumbu real tidak diformalkan terpisah;
+  `xiReal` adalah bagian real dari ekspresi standar. Bukan bukti RH,
+  bukan peer review, bukan verifikasi SMT (tidak ada `.smt2`), bukan
+  klaim P≠NP/fisika. Tidak mengubah trusted base Coq empat aksioma
+  stdlib; V1/V2 dan entri `A-2026-0015`/`0016`/`0017` tidak diubah;
+  `ci.yml` tidak diubah (workflow V3 terpisah).
+- **Status:** CERTIFIED dengan scope tercatat
+- **Domino:** tidak ada (spec/verifikasi; bukan domino)
+- **Relasi:** melanjutkan `A-2026-0017` (V2) tanpa mengubahnya;
+  menggantikan pemakaian V2 untuk pekerjaan berikutnya; entri registry
+  ke-23; memori kerja §2.0ak `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `lake env lean spec_v3/XiAnalyticFaithful.lean`
+  (dari `lean/`); `python -m pytest msaf/tests/test_xi_spec_v3.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`; gate eksternal
+  `python .../gate.py lean lean/spec_v3/XiAnalyticFaithful.lean`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF d9d516965b45e119d1ae6d9feaac124c999c3db77bb028c7376eda1eaad46b6f lean/spec_v3/XiAnalyticFaithful.lean
+  sha256LF d341c45f258d8bf38df7c43210ed903c959f1ee4260be7be580894ff9943eb2a msaf/tests/test_xi_spec_v3.py
+  sha256LF e6c9f2505dfb7bdbb95e9169dd0e68d3d81fbc30046e868e12245675bfa99e63 .github/workflows/spec-v3.yml
+  sha256LF d0c02bc19c117190b7641a68d5d5b5b9e6397b2215b8523d270ecb825b005f12 reports/XI_SPEC_V3_2026-10-20.md
+  sha256LF 18e2cc69a5253df9463c66389593bb4c5cfd53807c95ba6345daa4e638bc69ad reports/PREREG_SPEC_V3_2026-10-20.md
+  sha256LF 00802ed3a139b227922a29b2586d6e81e64d0c3433fa76ab33afd63b071b1ca1 reports/anti_circularity_gate_v3_2026-10-20.log
+  ```
+
+Selesai — 23 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

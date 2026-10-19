@@ -1654,6 +1654,46 @@ Konsekuensi urutan yang disarankan:
   spektral. Langkah berikutnya menunggu pilihan pemilik, bukan
   eksekusi otomatis.
 
+### 2.0ak — Spec Xi V3 faithful dari completed zeta: nol aksioma proyek (2026-10-20)
+
+- **Konteks:** V2 (`A-2026-0017`) memperbaiki kontradiksi endpoint tetapi
+  masih memakai `zetaReal`/`gammaReal` opak dan delapan aksioma. V3
+  menggantinya dengan `completedRiemannZeta` Mathlib v4.33.1.
+- **Berkas baru:** `lean/spec_v3/XiAnalyticFaithful.lean`; guard
+  `msaf/tests/test_xi_spec_v3.py` (3 uji, probe Lean dijalankan bila
+  `lake` ada); workflow terpisah `.github/workflows/spec-v3.yml`.
+  `xiReal` adalah bagian real dari
+  `1/2 * x * (x-1) * completedRiemannZeta x`, dengan guard `1/2` di
+  `x = 0` dan `x = 1`. Persamaan fungsional
+  `xiReal (1-x) = xiReal x` dibuktikan untuk semua real `x` dari
+  `completedRiemannZeta_one_sub`; positivity `x > 1` dibuktikan dari
+  `riemannZeta_pos_of_one_lt` dan positivity `Gammaℝ`.
+- **Fakta mesin lokal:** kompilasi `lake env lean
+  spec_v3/XiAnalyticFaithful.lean` exit 0, 18,566 dtk.
+  `#print axioms` untuk `xi_pos_on_reals`, `xiReal_one_sub`, dan
+  `completedZeta_pos_of_one_lt` hanya memuat `propext`,
+  `Classical.choice`, `Quot.sound`; **nol** deklarasi
+  `XiAnalyticFaithful.*`. `#print` tipe master theorem menunjukkan
+  hipotesis `hmid` eksplisit. Guard V3 **3 passed** (18,96 dtk);
+  suite penuh **453 passed** (144,81 dtk); `freeze.py --verify` OK
+  (14 pin; digest
+  `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`).
+  Gate anti-circularity eksternal pada sumber V3: PASS (`FAIL=0`,
+  `NOT_RUN=0`, `SKIP=0`); log
+  `reports/anti_circularity_gate_v3_2026-10-20.log`.
+- **Batas:** V3 tetap **kondisional** pada satu hipotesis eksplisit
+  `hmid : ∀ x, 0 < x → x < 1 →
+  (completedRiemannZeta (x : ℂ)).re < 0`. `hmid` benar matematis tetapi
+  belum dibuktikan di Mathlib/Lean. Realness `completedRiemannZeta` pada
+  sumbu real tidak diformalkan terpisah; `xiReal` adalah bagian real dari
+  ekspresi standar. Bukan bukti RH, bukan peer review, bukan verifikasi
+  SMT (tidak ada `.smt2`), bukan klaim P≠NP/fisika. Trusted base Coq
+  empat aksioma stdlib tidak berubah; V1/V2 dan entri
+  `A-2026-0015`/`0016`/`0017` tidak diubah; `ci.yml` tidak diubah.
+- **Guard:** `python -m pytest msaf/tests/test_xi_spec_v3.py -q`;
+  registry `A-2026-0018` (6 sertifikat sha256LF). Workflow `spec-v3.yml`
+  memiliki path filter dan job `lean-v3`; run ID dicatat setelah push.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional
