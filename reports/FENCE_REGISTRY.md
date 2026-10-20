@@ -1131,6 +1131,15 @@ mengikuti laporan L4).
   klaim CI hijau (run ID di `reports/HANDOFF.md` §2.0ah); status
   `TOOL NOT RUN (NO_LEAN_FILES)` laporan beku Paket 7–9 tidak ditulis
   ulang. Tanpa klaim RH/P≠NP/fisika.
+- **Amandemen 2026-10-20:** sensor `Escape-token sensor -- kernel`
+  tidak lagi memindai `lean/spec_v3`–`lean/spec_v6` dengan grep mentah.
+  Paket-paket itu bersertifikat dan memiliki guard/workflow sendiri
+  (`test_xi_spec_v3/v4/v5/v6.py`) yang memindai setelah komentar
+  dibuang; grep mentah salah menandai docstring “no `sorry`” di V4/V6.
+  Perubahan hanya pada daftar `--exclude-dir`; audit aksioma
+  per-deklarasi, sensor `spec`/`spec_v2`, dan job Coq tidak berubah.
+  Sertifikat `ci.yml` diperbarui ke hash baru; guard
+  `test_ci_verification_paths.py` tetap 5 uji hijau.
 - **Status:** CERTIFIED dengan scope tercatat
 - **Domino:** tidak ada (infrastruktur verifikasi; bukan domino)
 - **Relasi:** melanjutkan `A-2026-0015` tanpa mengubahnya; memakai
@@ -1142,7 +1151,7 @@ mengikuti laporan L4).
 - **Sertifikat:**
 
   ```text
-  sha256LF 4124ecb9ebfb4580d4f2ee3c8efc8f1080173a3c72546aa362ab9eaf3a809be3 .github/workflows/ci.yml
+  sha256LF 52619c25fe9197f6fe892a052cd86bf858a5c4b91725f7abc84b2e3b6c256079 .github/workflows/ci.yml
   sha256LF 231ce892f3976b5525e74d18720d85cfe5ada9fcfd2688941467e9c98d144ab7 msaf/tests/test_ci_verification_paths.py
   sha256LF 3339a51d290c9d47cd3dd8dbd34cbcc8d0fbcca9622aa3fe9254cd724afc9df4 reports/CI_HARDENING_2026-10-20.md
   ```

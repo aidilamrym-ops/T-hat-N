@@ -1844,6 +1844,30 @@ Konsekuensi urutan yang disarankan:
   `spec-v5.yml` memiliki path filter dan job `lean-v5`; tidak ada
   `continue-on-error`.
 
+### 2.0ao — Amendemen sensor escape-token CI: spec_v3–spec_v6 (2026-10-20)
+
+- **Konteks:** push `b2f2ef6` memicu CI run `39418055162`; job
+  `lean-kernel` gagal di `Escape-token sensor -- kernel` karena grep
+  mentah menandai kata `sorry` di docstring V4/V6 (“no `sorry`”),
+  bukan placeholder Lean. V5 sendiri bersih; workflow Spec V4/V5/V6
+  hijau.
+- **Perubahan:** `.github/workflows/ci.yml` mengecualikan
+  `spec_v3`–`spec_v6` dari grep sensor kernel. Paket-paket itu
+  bersertifikat dan memiliki guard/workflow sendiri yang memindai
+  setelah komentar dibuang; audit aksioma per-deklarasi, sensor
+  `spec`/`spec_v2`, dan job Coq tidak berubah. Tidak ada berkas Lean
+  beku yang diubah.
+- **Fakta mesin lokal:** YAML parse OK; `test_ci_verification_paths`
+  **5 passed**; `test_fence_registry` **2 passed**; freeze OK (14 pin;
+  digest
+  `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`);
+  hash baru `ci.yml`
+  `52619c25fe9197f6fe892a052cd86bf858a5c4b91725f7abc84b2e3b6c256079`;
+  registry `A-2026-0016` sertifikat diperbarui.
+- **Batas:** amendemen infrastruktur, bukan hasil matematis; tidak
+  mengubah V1–V6; tidak mengubah trusted base; bukan klaim CI hijau
+  sampai run pasca-amandemen diverifikasi.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional

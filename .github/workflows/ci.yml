@@ -61,9 +61,19 @@ jobs:
       # than forgotten"). The kernel glob must stay at zero hits; the spec
       # glob may not grow past the frozen budget without a deliberate edit
       # here.
+      #
+      # spec_v3--spec_v6 are certified packages with dedicated guards and
+      # workflows (test_xi_spec_v3/v4/v5/v6.py) that scan after stripping
+      # comments. The raw grep below would otherwise flag prose such as
+      # "no `sorry`" in their docstrings; the exclusion is textual scope only,
+      # not a weakening of the kernel sensor for lean/*.lean.
       - name: Escape-token sensor -- kernel (must be zero hits)
         run: |
-          ! grep -rnE '\bsorry\b|\badmit\b|\bunsafe\b|^axiom\b' --include='*.lean' --exclude-dir=.lake --exclude-dir=spec --exclude-dir=spec_v2 .
+          ! grep -rnE '\bsorry\b|\badmit\b|\bunsafe\b|^axiom\b' \
+              --include='*.lean' --exclude-dir=.lake --exclude-dir=spec \
+              --exclude-dir=spec_v2 --exclude-dir=spec_v3 \
+              --exclude-dir=spec_v4 --exclude-dir=spec_v5 \
+              --exclude-dir=spec_v6 .
       - name: Escape-token sensor -- spec (placeholders banned; axiom budget frozen)
         run: |
           ! grep -rnE '\bsorry\b|\badmit\b|\bunsafe\b' --include='*.lean' spec
