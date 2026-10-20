@@ -1,0 +1,714 @@
+{
+  "config": {
+    "characters": [
+      {
+        "modulus": 12,
+        "number": 7
+      },
+      {
+        "modulus": 12,
+        "number": 5
+      },
+      {
+        "modulus": 15,
+        "number": 4
+      },
+      {
+        "modulus": 15,
+        "number": 11
+      }
+    ],
+    "configs": [
+      {
+        "N": 20,
+        "c": 100,
+        "prec": 600,
+        "role": "primary"
+      },
+      {
+        "N": 20,
+        "c": 200,
+        "prec": 600,
+        "role": "replication"
+      }
+    ],
+    "definition": "tau_pert = W02_zeta - WR_zeta - Wp_chi",
+    "label": "AD HOC PERTURBATION"
+  },
+  "configs": [
+    {
+      "N": 20,
+      "baseline_zeta": {
+        "entries_finite": true,
+        "n_neg": 0,
+        "n_pos": 41,
+        "pivot_transcript_sha256": "367af9009ca7ded133ea9ca165feb03a60aadd60d41cb8e2d587cfc6cfc4a910",
+        "pivots_recorded": 41,
+        "status": "POSITIVE DEFINITE",
+        "undetermined_pivot": null
+      },
+      "c": 100,
+      "cases": [
+        {
+          "activation_count": 4,
+          "activation_terms": [
+            {
+              "lift_value": -1,
+              "prime": 3,
+              "q_k": 3,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 3,
+              "q_k": 9,
+              "value": 0
+            },
+            {
+              "lift_value": -1,
+              "prime": 3,
+              "q_k": 27,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 3,
+              "q_k": 81,
+              "value": 0
+            }
+          ],
+          "checks": {
+            "C3_activation_nonempty": true,
+            "C3_activation_values": true,
+            "C3_lift_zero_criterion": true,
+            "C3_nonprimitive_finite": true,
+            "C3_primitive_finite": true,
+            "C3_wp_zero_criterion": true
+          },
+          "identifier": "chi_12_7",
+          "modulus": 12,
+          "new_primes": [
+            3
+          ],
+          "nonprimitive": {
+            "entries_finite": true,
+            "n_neg": 21,
+            "n_pos": 20,
+            "pivot_transcript_sha256": "62ccb36998e119e1a1578f04636a32d243116aec0d12f54cafecac82cd3d5999",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "number": 7,
+          "primitive": {
+            "entries_finite": true,
+            "n_neg": 24,
+            "n_pos": 17,
+            "pivot_transcript_sha256": "3f4410f948126f1242df0b88ca4611c4dc17d9b152930f00bfa8dca85da1c7b1",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "primitive_lift": {
+            "identifier": "chi_4_3",
+            "modulus": 4,
+            "number": 3,
+            "primitive": true
+          },
+          "status": "PASS",
+          "wp_nonprimitive_vs_primitive_max_abs": {
+            "mid": "1.44180937487476979636611744410",
+            "rad": "0"
+          }
+        },
+        {
+          "activation_count": 6,
+          "activation_terms": [
+            {
+              "lift_value": -1,
+              "prime": 2,
+              "q_k": 2,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 2,
+              "q_k": 4,
+              "value": 0
+            },
+            {
+              "lift_value": -1,
+              "prime": 2,
+              "q_k": 8,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 2,
+              "q_k": 16,
+              "value": 0
+            },
+            {
+              "lift_value": -1,
+              "prime": 2,
+              "q_k": 32,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 2,
+              "q_k": 64,
+              "value": 0
+            }
+          ],
+          "checks": {
+            "C3_activation_nonempty": true,
+            "C3_activation_values": true,
+            "C3_lift_zero_criterion": true,
+            "C3_nonprimitive_finite": true,
+            "C3_primitive_finite": true,
+            "C3_wp_zero_criterion": true
+          },
+          "identifier": "chi_12_5",
+          "modulus": 12,
+          "new_primes": [
+            2
+          ],
+          "nonprimitive": {
+            "entries_finite": true,
+            "n_neg": 20,
+            "n_pos": 21,
+            "pivot_transcript_sha256": "3b21152ac682a0d89bc7b5f1b93b6900f64976d8b66a799dc85f7ce93f515b80",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "number": 5,
+          "primitive": {
+            "entries_finite": true,
+            "n_neg": 25,
+            "n_pos": 16,
+            "pivot_transcript_sha256": "2dd523d74df5adce06a8fcc0158698ee8a4ebf28160962c1cec56d3292642b9d",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "primitive_lift": {
+            "identifier": "chi_3_2",
+            "modulus": 3,
+            "number": 2,
+            "primitive": true
+          },
+          "status": "PASS",
+          "wp_nonprimitive_vs_primitive_max_abs": {
+            "mid": "1.79638449857630038578569653613",
+            "rad": "0"
+          }
+        },
+        {
+          "activation_count": 4,
+          "activation_terms": [
+            {
+              "lift_value": -1,
+              "prime": 3,
+              "q_k": 3,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 3,
+              "q_k": 9,
+              "value": 0
+            },
+            {
+              "lift_value": -1,
+              "prime": 3,
+              "q_k": 27,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 3,
+              "q_k": 81,
+              "value": 0
+            }
+          ],
+          "checks": {
+            "C3_activation_nonempty": true,
+            "C3_activation_values": true,
+            "C3_lift_zero_criterion": true,
+            "C3_nonprimitive_finite": true,
+            "C3_primitive_finite": true,
+            "C3_wp_zero_criterion": true
+          },
+          "identifier": "chi_15_4",
+          "modulus": 15,
+          "new_primes": [
+            3
+          ],
+          "nonprimitive": {
+            "entries_finite": true,
+            "n_neg": 21,
+            "n_pos": 20,
+            "pivot_transcript_sha256": "6d864b61db40570ac305392046ed9f83a952b7853519788aa896bea447e1171e",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "number": 4,
+          "primitive": {
+            "entries_finite": true,
+            "n_neg": 22,
+            "n_pos": 19,
+            "pivot_transcript_sha256": "bed04fe0863eae352d5eca3ae87e1ef351d997e5a8bcba10fd5278d7c118399e",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "primitive_lift": {
+            "identifier": "chi_5_4",
+            "modulus": 5,
+            "number": 4,
+            "primitive": true
+          },
+          "status": "PASS",
+          "wp_nonprimitive_vs_primitive_max_abs": {
+            "mid": "1.44180937487476979636611744410",
+            "rad": "0"
+          }
+        },
+        {
+          "activation_count": 2,
+          "activation_terms": [
+            {
+              "lift_value": -1,
+              "prime": 5,
+              "q_k": 5,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 5,
+              "q_k": 25,
+              "value": 0
+            }
+          ],
+          "checks": {
+            "C3_activation_nonempty": true,
+            "C3_activation_values": true,
+            "C3_lift_zero_criterion": true,
+            "C3_nonprimitive_finite": true,
+            "C3_primitive_finite": true,
+            "C3_wp_zero_criterion": true
+          },
+          "identifier": "chi_15_11",
+          "modulus": 15,
+          "new_primes": [
+            5
+          ],
+          "nonprimitive": {
+            "entries_finite": true,
+            "n_neg": 22,
+            "n_pos": 19,
+            "pivot_transcript_sha256": "c2adba66c90e9c4f889a443ad6a7d29fe86b748ac71428246322cd371673ff90",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "number": 11,
+          "primitive": {
+            "entries_finite": true,
+            "n_neg": 25,
+            "n_pos": 16,
+            "pivot_transcript_sha256": "2dd523d74df5adce06a8fcc0158698ee8a4ebf28160962c1cec56d3292642b9d",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "primitive_lift": {
+            "identifier": "chi_3_2",
+            "modulus": 3,
+            "number": 2,
+            "primitive": true
+          },
+          "status": "PASS",
+          "wp_nonprimitive_vs_primitive_max_abs": {
+            "mid": "1.12933236224854582518748303030",
+            "rad": "0"
+          }
+        }
+      ],
+      "dim": 41,
+      "external_control": {
+        "available": true,
+        "match": true,
+        "max_abs_difference": {
+          "mid": "3.58498038198500018907896109209e-176",
+          "rad": "0"
+        },
+        "status": "MATCH",
+        "threshold": {
+          "mid": "1.03505270065976189609743348056e-171",
+          "rad": "0"
+        }
+      },
+      "prec": 600,
+      "role": "primary"
+    },
+    {
+      "N": 20,
+      "baseline_zeta": {
+        "entries_finite": true,
+        "n_neg": 0,
+        "n_pos": 41,
+        "pivot_transcript_sha256": "98df070547b92da700f62dc35943bddfd01434d8dfcf5341411a3e5dc5396277",
+        "pivots_recorded": 41,
+        "status": "POSITIVE DEFINITE",
+        "undetermined_pivot": null
+      },
+      "c": 200,
+      "cases": [
+        {
+          "activation_count": 4,
+          "activation_terms": [
+            {
+              "lift_value": -1,
+              "prime": 3,
+              "q_k": 3,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 3,
+              "q_k": 9,
+              "value": 0
+            },
+            {
+              "lift_value": -1,
+              "prime": 3,
+              "q_k": 27,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 3,
+              "q_k": 81,
+              "value": 0
+            }
+          ],
+          "checks": {
+            "C3_activation_nonempty": true,
+            "C3_activation_values": true,
+            "C3_lift_zero_criterion": true,
+            "C3_nonprimitive_finite": true,
+            "C3_primitive_finite": true,
+            "C3_wp_zero_criterion": true
+          },
+          "identifier": "chi_12_7",
+          "modulus": 12,
+          "new_primes": [
+            3
+          ],
+          "nonprimitive": {
+            "entries_finite": true,
+            "n_neg": 19,
+            "n_pos": 22,
+            "pivot_transcript_sha256": "fdf40dea3517e549c9d39e99cfd9549d2a78c5be1d4ea80d8f2a5d84569d1637",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "number": 7,
+          "primitive": {
+            "entries_finite": true,
+            "n_neg": 26,
+            "n_pos": 15,
+            "pivot_transcript_sha256": "7bb732a9c3f1e02a3e85df07e30d7670496bd6193b638b5bbc4c93de2cc67453",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "primitive_lift": {
+            "identifier": "chi_4_3",
+            "modulus": 4,
+            "number": 3,
+            "primitive": true
+          },
+          "status": "PASS",
+          "wp_nonprimitive_vs_primitive_max_abs": {
+            "mid": "1.62248081813139685809178452027",
+            "rad": "0"
+          }
+        },
+        {
+          "activation_count": 7,
+          "activation_terms": [
+            {
+              "lift_value": -1,
+              "prime": 2,
+              "q_k": 2,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 2,
+              "q_k": 4,
+              "value": 0
+            },
+            {
+              "lift_value": -1,
+              "prime": 2,
+              "q_k": 8,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 2,
+              "q_k": 16,
+              "value": 0
+            },
+            {
+              "lift_value": -1,
+              "prime": 2,
+              "q_k": 32,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 2,
+              "q_k": 64,
+              "value": 0
+            },
+            {
+              "lift_value": -1,
+              "prime": 2,
+              "q_k": 128,
+              "value": 0
+            }
+          ],
+          "checks": {
+            "C3_activation_nonempty": true,
+            "C3_activation_values": true,
+            "C3_lift_zero_criterion": true,
+            "C3_nonprimitive_finite": true,
+            "C3_primitive_finite": true,
+            "C3_wp_zero_criterion": true
+          },
+          "identifier": "chi_12_5",
+          "modulus": 12,
+          "new_primes": [
+            2
+          ],
+          "nonprimitive": {
+            "entries_finite": true,
+            "n_neg": 22,
+            "n_pos": 19,
+            "pivot_transcript_sha256": "9a645ab9477d662ac972ad80c4b0cf06bbf60c135d5dbe3aa251e082e29a9ec1",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "number": 5,
+          "primitive": {
+            "entries_finite": true,
+            "n_neg": 28,
+            "n_pos": 13,
+            "pivot_transcript_sha256": "ad669293502b20dee50d7586e8589d5e5d562c8c5dc7d7faeb9dbf7184f3f7f3",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "primitive_lift": {
+            "identifier": "chi_3_2",
+            "modulus": 3,
+            "number": 2,
+            "primitive": true
+          },
+          "status": "PASS",
+          "wp_nonprimitive_vs_primitive_max_abs": {
+            "mid": "1.91018336701339289690495241667",
+            "rad": "0"
+          }
+        },
+        {
+          "activation_count": 4,
+          "activation_terms": [
+            {
+              "lift_value": -1,
+              "prime": 3,
+              "q_k": 3,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 3,
+              "q_k": 9,
+              "value": 0
+            },
+            {
+              "lift_value": -1,
+              "prime": 3,
+              "q_k": 27,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 3,
+              "q_k": 81,
+              "value": 0
+            }
+          ],
+          "checks": {
+            "C3_activation_nonempty": true,
+            "C3_activation_values": true,
+            "C3_lift_zero_criterion": true,
+            "C3_nonprimitive_finite": true,
+            "C3_primitive_finite": true,
+            "C3_wp_zero_criterion": true
+          },
+          "identifier": "chi_15_4",
+          "modulus": 15,
+          "new_primes": [
+            3
+          ],
+          "nonprimitive": {
+            "entries_finite": true,
+            "n_neg": 22,
+            "n_pos": 19,
+            "pivot_transcript_sha256": "20d8b7475b053586402c89b382950f900c42102999c24b4d1393ce219a4dd6fa",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "number": 4,
+          "primitive": {
+            "entries_finite": true,
+            "n_neg": 26,
+            "n_pos": 15,
+            "pivot_transcript_sha256": "ee6f4403f253eb7b70f41f444d03784a9fcecf799f0d0ae8a571d38441bf7b4b",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "primitive_lift": {
+            "identifier": "chi_5_4",
+            "modulus": 5,
+            "number": 4,
+            "primitive": true
+          },
+          "status": "PASS",
+          "wp_nonprimitive_vs_primitive_max_abs": {
+            "mid": "1.62248081813139685809178452027",
+            "rad": "0"
+          }
+        },
+        {
+          "activation_count": 3,
+          "activation_terms": [
+            {
+              "lift_value": -1,
+              "prime": 5,
+              "q_k": 5,
+              "value": 0
+            },
+            {
+              "lift_value": 1,
+              "prime": 5,
+              "q_k": 25,
+              "value": 0
+            },
+            {
+              "lift_value": -1,
+              "prime": 5,
+              "q_k": 125,
+              "value": 0
+            }
+          ],
+          "checks": {
+            "C3_activation_nonempty": true,
+            "C3_activation_values": true,
+            "C3_lift_zero_criterion": true,
+            "C3_nonprimitive_finite": true,
+            "C3_primitive_finite": true,
+            "C3_wp_zero_criterion": true
+          },
+          "identifier": "chi_15_11",
+          "modulus": 15,
+          "new_primes": [
+            5
+          ],
+          "nonprimitive": {
+            "entries_finite": true,
+            "n_neg": 20,
+            "n_pos": 21,
+            "pivot_transcript_sha256": "ecd47e53c8650cccc8569d94e1d21b0571af800da0f4cb725016043ccbcae400",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "number": 11,
+          "primitive": {
+            "entries_finite": true,
+            "n_neg": 28,
+            "n_pos": 13,
+            "pivot_transcript_sha256": "ad669293502b20dee50d7586e8589d5e5d562c8c5dc7d7faeb9dbf7184f3f7f3",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "primitive_lift": {
+            "identifier": "chi_3_2",
+            "modulus": 3,
+            "number": 2,
+            "primitive": true
+          },
+          "status": "PASS",
+          "wp_nonprimitive_vs_primitive_max_abs": {
+            "mid": "1.26483033265870768196795262776",
+            "rad": "0"
+          }
+        }
+      ],
+      "dim": 41,
+      "external_control": {
+        "available": true,
+        "match": true,
+        "max_abs_difference": {
+          "mid": "3.28428520783070607295398100467e-176",
+          "rad": "0"
+        },
+        "status": "MATCH",
+        "threshold": {
+          "mid": "1.03505270065976189609743348056e-171",
+          "rad": "0"
+        }
+      },
+      "prec": 600,
+      "role": "replication"
+    }
+  ],
+  "execution_status": "PASS",
+  "external_control": {
+    "available": true,
+    "match": true,
+    "status": "MATCH"
+  },
+  "mathematical_verdict": "AD HOC NEGATIVE",
+  "prereg_sha256": "297b0c9bcce826f1b7b32d3b1d6d48dae6c10fd9aeb65aa485ddf83b8ca83976",
+  "schema": "msaf.gw_char_adhoc.v1",
+  "scope": {
+    "ad_hoc_perturbation": true,
+    "correct_character_weil_block": false,
+    "critical_line_claim": false,
+    "dirichlet_series_claim": false,
+    "factorization_claim": false,
+    "global_claim_supported": false,
+    "rh_claim": false,
+    "sealed_campaigns_rerun": false,
+    "standard_l_function_claim": false,
+    "zero_localization_claim": false,
+    "zeta_archimedean_block_reused": true,
+    "zeta_pole_block_reused": true
+  },
+  "verdict": "AD HOC NEGATIVE"
+}
