@@ -13,6 +13,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -121,8 +122,22 @@ def test_small_campaign_is_deterministic() -> None:
 
 def test_receipt_matches_disk() -> None:
     data = json.loads(RECEIPT.read_text(encoding="utf-8"))
-    if not data["external_control"]["available"]:
-        pytest.skip("committed receipt used an external control that is not available")
+    # Check if external builder is available in the current environment
+    # (not just whether the committed receipt had it available)
+    import sys
+    from pathlib import Path
+    GW_DIR = Path(os.environ.get("GW_DIR", r"C:/Users/usER/oracle-toe/GUINAND_WEIL"))
+    if str(GW_DIR) not in sys.path:
+        sys.path.insert(0, str(GW_DIR))
+    try:
+        import source_arb_ldlt_certify  # type: ignore
+        external_available = True
+    except Exception:
+        external_available = False
+    
+    if not external_available:
+        pytest.skip("external builder source_arb_ldlt_certify not available in this environment")
+    
     first = a.build_receipt()
     assert a.canonical_json(first) == a.canonical_json(data)
     assert a.receipt_sha256(first) == a.receipt_sha256(data)
