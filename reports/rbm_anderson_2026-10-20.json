@@ -1,0 +1,842 @@
+{
+  "bin_mask": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "calibration": {
+    "s1": {
+      "gue": {
+        "L": {
+          "correct": true,
+          "label": "GUE",
+          "other": {
+            "obs_mean": 0.5981098937605892,
+            "obs_sd": 0.018990408396694934,
+            "p_count": 0,
+            "p_n": 2000,
+            "p_two_sided": 0.0,
+            "ref_mean": 0.38611205052221703,
+            "ref_sd": 0.022849719310896664,
+            "z": 9.277918925563073
+          },
+          "own": {
+            "obs_mean": 0.5981098937605892,
+            "obs_sd": 0.018990408396694934,
+            "p_count": 1231,
+            "p_n": 2000,
+            "p_two_sided": 0.6155,
+            "ref_mean": 0.599407527246926,
+            "ref_sd": 0.020795479340355763,
+            "z": -0.06239978723734602
+          }
+        },
+        "T": {
+          "correct": true,
+          "label": "GUE",
+          "other": {
+            "obs_mean": 0.5973352929621601,
+            "obs_sd": 0.019086490923217597,
+            "p_count": 0,
+            "p_n": 2000,
+            "p_two_sided": 0.0,
+            "ref_mean": 0.38598744422846815,
+            "ref_sd": 0.02286960119182106,
+            "z": 9.241431320161242
+          },
+          "own": {
+            "obs_mean": 0.5973352929621601,
+            "obs_sd": 0.019086490923217597,
+            "p_count": 1215,
+            "p_n": 2000,
+            "p_two_sided": 0.6075,
+            "ref_mean": 0.5987854406800583,
+            "ref_sd": 0.020704894598448105,
+            "z": -0.07003888433254285
+          }
+        }
+      },
+      "pois": {
+        "L": {
+          "correct": true,
+          "label": "POISSON",
+          "other": {
+            "obs_mean": 0.38214072600040705,
+            "obs_sd": 0.027044051500312558,
+            "p_count": 0,
+            "p_n": 2000,
+            "p_two_sided": 0.0,
+            "ref_mean": 0.599407527246926,
+            "ref_sd": 0.020795479340355763,
+            "z": -10.447790007171916
+          },
+          "own": {
+            "obs_mean": 0.38214072600040705,
+            "obs_sd": 0.027044051500312558,
+            "p_count": 330,
+            "p_n": 2000,
+            "p_two_sided": 0.165,
+            "ref_mean": 0.38611205052221703,
+            "ref_sd": 0.022849719310896664,
+            "z": -0.17380189523449077
+          }
+        },
+        "T": {
+          "correct": true,
+          "label": "POISSON",
+          "other": {
+            "obs_mean": 0.3815459662643407,
+            "obs_sd": 0.02667285836645814,
+            "p_count": 0,
+            "p_n": 2000,
+            "p_two_sided": 0.0,
+            "ref_mean": 0.5987854406800583,
+            "ref_sd": 0.020704894598448105,
+            "z": -10.492179681610185
+          },
+          "own": {
+            "obs_mean": 0.3815459662643407,
+            "obs_sd": 0.02667285836645814,
+            "p_count": 237,
+            "p_n": 2000,
+            "p_two_sided": 0.1185,
+            "ref_mean": 0.38598744422846815,
+            "ref_sd": 0.02286960119182106,
+            "z": -0.19420880700429066
+          }
+        }
+      }
+    },
+    "s1_correct": 4,
+    "s1_pass": true,
+    "s2": {
+      "gue": {
+        "0.3|L": {
+          "chi2_gue": 12.496802253965246,
+          "chi2_pois": 5327.024821103058,
+          "correct": true,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 0.6235508913621532,
+          "norm_pois": 270.32248637601435,
+          "own_p": 0.705,
+          "own_p_ok": true,
+          "p_gue": 0.705,
+          "p_gue_count": 1410,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "0.3|T": {
+          "chi2_gue": 10.19578104858037,
+          "chi2_pois": 5329.450643843444,
+          "correct": true,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 0.5128648040700128,
+          "norm_pois": 261.4422075632451,
+          "own_p": 0.8125,
+          "own_p_ok": true,
+          "p_gue": 0.8125,
+          "p_gue_count": 1625,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "0.5|L": {
+          "chi2_gue": 7.142015421721327,
+          "chi2_pois": 5033.558408873469,
+          "correct": true,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 0.368632575986387,
+          "norm_pois": 253.28000977809924,
+          "own_p": 0.901,
+          "own_p_ok": true,
+          "p_gue": 0.901,
+          "p_gue_count": 1802,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "0.5|T": {
+          "chi2_gue": 5.815908990106564,
+          "chi2_pois": 4958.488747668403,
+          "correct": true,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 0.286968924794757,
+          "norm_pois": 247.1846161952338,
+          "own_p": 0.952,
+          "own_p_ok": true,
+          "p_gue": 0.952,
+          "p_gue_count": 1904,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "1.0|L": {
+          "chi2_gue": 6.432045871641371,
+          "chi2_pois": 4735.312815402713,
+          "correct": true,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 0.325724702894198,
+          "norm_pois": 229.1264895498071,
+          "own_p": 0.966,
+          "own_p_ok": true,
+          "p_gue": 0.966,
+          "p_gue_count": 1932,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "1.0|T": {
+          "chi2_gue": 8.215878884404717,
+          "chi2_pois": 4697.4267673443655,
+          "correct": true,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 0.41279931197193653,
+          "norm_pois": 238.06483299307027,
+          "own_p": 0.935,
+          "own_p_ok": true,
+          "p_gue": 0.935,
+          "p_gue_count": 1870,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        }
+      },
+      "pois": {
+        "0.3|L": {
+          "chi2_gue": 205510.4397442036,
+          "chi2_pois": 19.47486733920408,
+          "correct": true,
+          "label": "POISSON",
+          "n_bins": 20,
+          "norm_gue": 10279.630315078706,
+          "norm_pois": 0.9536744718283071,
+          "own_p": 0.5435,
+          "own_p_ok": true,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 0.5435,
+          "p_pois_count": 1087
+        },
+        "0.3|T": {
+          "chi2_gue": 197488.25955621628,
+          "chi2_pois": 20.116674276513685,
+          "correct": true,
+          "label": "POISSON",
+          "n_bins": 20,
+          "norm_gue": 9718.968653634849,
+          "norm_pois": 1.0338429196135097,
+          "own_p": 0.579,
+          "own_p_ok": true,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 0.579,
+          "p_pois_count": 1158
+        },
+        "0.5|L": {
+          "chi2_gue": 106802.69368464775,
+          "chi2_pois": 27.721112606548285,
+          "correct": true,
+          "label": "POISSON",
+          "n_bins": 20,
+          "norm_gue": 5406.006037067856,
+          "norm_pois": 1.3845540464267418,
+          "own_p": 0.8095,
+          "own_p_ok": true,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 0.8095,
+          "p_pois_count": 1619
+        },
+        "0.5|T": {
+          "chi2_gue": 104779.13398444504,
+          "chi2_pois": 26.08343997088857,
+          "correct": true,
+          "label": "POISSON",
+          "n_bins": 20,
+          "norm_gue": 5240.267182082299,
+          "norm_pois": 1.2919373519437793,
+          "own_p": 0.7735,
+          "own_p_ok": true,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 0.7735,
+          "p_pois_count": 1547
+        },
+        "1.0|L": {
+          "chi2_gue": 57787.18379931916,
+          "chi2_pois": 21.743629818936796,
+          "correct": true,
+          "label": "POISSON",
+          "n_bins": 20,
+          "norm_gue": 2898.2711314519775,
+          "norm_pois": 1.0893039208738562,
+          "own_p": 0.6425,
+          "own_p_ok": true,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 0.6425,
+          "p_pois_count": 1285
+        },
+        "1.0|T": {
+          "chi2_gue": 57415.990222280314,
+          "chi2_pois": 21.485399535629337,
+          "correct": true,
+          "label": "POISSON",
+          "n_bins": 20,
+          "norm_gue": 2833.7170419940558,
+          "norm_pois": 1.079668088095307,
+          "own_p": 0.649,
+          "own_p_ok": true,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 0.649,
+          "p_pois_count": 1298
+        }
+      }
+    },
+    "s2_correct": 12,
+    "s2_pass": true
+  },
+  "config": {
+    "bandwidths": [
+      1,
+      10,
+      120
+    ],
+    "charts": [
+      "T",
+      "L"
+    ],
+    "dim": 201,
+    "fine_width": 0.02,
+    "n_bootstrap": 2000,
+    "n_calibration": 64,
+    "n_matrices": 64,
+    "n_reference": 2000,
+    "seed": 2430500035454946990,
+    "sigma_e": 0.5,
+    "sigma_u": [
+      0.3,
+      0.5,
+      1.0
+    ],
+    "u_centers": [
+      0.25,
+      0.75,
+      1.25,
+      1.75,
+      2.25,
+      2.75,
+      3.25,
+      3.75,
+      4.25,
+      4.75,
+      5.25,
+      5.75,
+      6.25,
+      6.75,
+      7.25,
+      7.75,
+      8.25,
+      8.75,
+      9.25,
+      9.75
+    ]
+  },
+  "integrity": {
+    "pass": true,
+    "spot_checks": [
+      {
+        "b": 1,
+        "bits": 128,
+        "dim": 201,
+        "imaginary_parts_contain_zero": true,
+        "matrix_sha256": "2dd3e193bea9c9e12f6498933f1134ad5bc71841f915eea6a7f817b79a63b312",
+        "max_abs_eigenvalue_diff": 1.0880185641326534e-14,
+        "pass": true,
+        "tolerance": 1e-08
+      },
+      {
+        "b": 10,
+        "bits": 128,
+        "dim": 201,
+        "imaginary_parts_contain_zero": true,
+        "matrix_sha256": "b7fe37c0dbd4406018be6caa6c909bb9ebb2637dd9627d29708bf13f6c823175",
+        "max_abs_eigenvalue_diff": 2.3092638912203256e-14,
+        "pass": true,
+        "tolerance": 1e-08
+      },
+      {
+        "b": 120,
+        "bits": 128,
+        "dim": 201,
+        "imaginary_parts_contain_zero": true,
+        "matrix_sha256": "926d3cc4ee5fbed407816d8a633ae195785b09cf6b97f45a9494f49e1dc4af71",
+        "max_abs_eigenvalue_diff": 6.217248937900877e-14,
+        "pass": true,
+        "tolerance": 1e-08
+      }
+    ]
+  },
+  "prereg_sha256": "62c9940a831a43e70376077d58972c49c7ef686e20751900be681606a595a014",
+  "rbm": {
+    "1": {
+      "s1": {
+        "L": {
+          "gue": {
+            "obs_mean": 0.3946739162422229,
+            "obs_sd": 0.024021264377683253,
+            "p_count": 0,
+            "p_n": 2000,
+            "p_two_sided": 0.0,
+            "ref_mean": 0.599407527246926,
+            "ref_sd": 0.020795479340355763,
+            "z": -9.845101796109914
+          },
+          "label": "POISSON",
+          "obs_mean": 0.3946739162422229,
+          "obs_sd": 0.024021264377683253,
+          "pois": {
+            "obs_mean": 0.3946739162422229,
+            "obs_sd": 0.024021264377683253,
+            "p_count": 3,
+            "p_n": 2000,
+            "p_two_sided": 0.0015,
+            "ref_mean": 0.38611205052221703,
+            "ref_sd": 0.022849719310896664,
+            "z": 0.374703321450556
+          }
+        },
+        "T": {
+          "gue": {
+            "obs_mean": 0.39459740424391265,
+            "obs_sd": 0.023972015357788385,
+            "p_count": 0,
+            "p_n": 2000,
+            "p_two_sided": 0.0,
+            "ref_mean": 0.5987854406800583,
+            "ref_sd": 0.020704894598448105,
+            "z": -9.861824481417559
+          },
+          "label": "POISSON",
+          "obs_mean": 0.39459740424391265,
+          "obs_sd": 0.023972015357788385,
+          "pois": {
+            "obs_mean": 0.39459740424391265,
+            "obs_sd": 0.023972015357788385,
+            "p_count": 5,
+            "p_n": 2000,
+            "p_two_sided": 0.0025,
+            "ref_mean": 0.38598744422846815,
+            "ref_sd": 0.02286960119182106,
+            "z": 0.37648054914589935
+          }
+        }
+      },
+      "s2": {
+        "0.3|L": {
+          "chi2_gue": 158366.12246943533,
+          "chi2_pois": 73.28466096485555,
+          "label": "POISSON",
+          "n_bins": 20,
+          "norm_gue": 8055.6940881847695,
+          "norm_pois": 3.676688331127494,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 0.9995,
+          "p_pois_count": 1999
+        },
+        "0.3|T": {
+          "chi2_gue": 145534.58157733368,
+          "chi2_pois": 65.98099062242291,
+          "label": "POISSON",
+          "n_bins": 20,
+          "norm_gue": 7043.392088833109,
+          "norm_pois": 3.3422155153327555,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 0.9985,
+          "p_pois_count": 1997
+        },
+        "0.5|L": {
+          "chi2_gue": 83064.55676679581,
+          "chi2_pois": 55.567877383861706,
+          "label": "POISSON",
+          "n_bins": 20,
+          "norm_gue": 4153.020438805389,
+          "norm_pois": 2.7943064579489505,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 0.9975,
+          "p_pois_count": 1995
+        },
+        "0.5|T": {
+          "chi2_gue": 79032.53579245858,
+          "chi2_pois": 55.75892532754947,
+          "label": "POISSON",
+          "n_bins": 20,
+          "norm_gue": 3897.31490861398,
+          "norm_pois": 2.795603732997814,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 0.998,
+          "p_pois_count": 1996
+        },
+        "1.0|L": {
+          "chi2_gue": 45904.81196599322,
+          "chi2_pois": 54.46801039146422,
+          "label": "POISSON",
+          "n_bins": 20,
+          "norm_gue": 2311.54525860987,
+          "norm_pois": 2.7071494308530024,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 0.9915,
+          "p_pois_count": 1983
+        },
+        "1.0|T": {
+          "chi2_gue": 45081.05941619748,
+          "chi2_pois": 51.69925808207376,
+          "label": "POISSON",
+          "n_bins": 20,
+          "norm_gue": 2253.5709828040117,
+          "norm_pois": 2.6025968373561374,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 0.9905,
+          "p_pois_count": 1981
+        }
+      }
+    },
+    "10": {
+      "s1": {
+        "L": {
+          "gue": {
+            "obs_mean": 0.5339778723051083,
+            "obs_sd": 0.022819181106603657,
+            "p_count": 0,
+            "p_n": 2000,
+            "p_two_sided": 0.0,
+            "ref_mean": 0.599407527246926,
+            "ref_sd": 0.020795479340355763,
+            "z": -3.1463403113216426
+          },
+          "label": "GUE",
+          "obs_mean": 0.5339778723051083,
+          "obs_sd": 0.022819181106603657,
+          "pois": {
+            "obs_mean": 0.5339778723051083,
+            "obs_sd": 0.022819181106603657,
+            "p_count": 0,
+            "p_n": 2000,
+            "p_two_sided": 0.0,
+            "ref_mean": 0.38611205052221703,
+            "ref_sd": 0.022849719310896664,
+            "z": 6.471231430504988
+          }
+        },
+        "T": {
+          "gue": {
+            "obs_mean": 0.5337314992714464,
+            "obs_sd": 0.02284132873823829,
+            "p_count": 0,
+            "p_n": 2000,
+            "p_two_sided": 0.0,
+            "ref_mean": 0.5987854406800583,
+            "ref_sd": 0.020704894598448105,
+            "z": -3.1419595545049512
+          },
+          "label": "GUE",
+          "obs_mean": 0.5337314992714464,
+          "obs_sd": 0.02284132873823829,
+          "pois": {
+            "obs_mean": 0.5337314992714464,
+            "obs_sd": 0.02284132873823829,
+            "p_count": 0,
+            "p_n": 2000,
+            "p_two_sided": 0.0,
+            "ref_mean": 0.38598744422846815,
+            "ref_sd": 0.02286960119182106,
+            "z": 6.46028121801339
+          }
+        }
+      },
+      "s2": {
+        "0.3|L": {
+          "chi2_gue": 3356.935837693737,
+          "chi2_pois": 3893.06511857027,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 170.76858992631324,
+          "norm_pois": 194.228301868274,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "0.3|T": {
+          "chi2_gue": 2984.014226391835,
+          "chi2_pois": 3944.641490219128,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 151.7489682368612,
+          "norm_pois": 199.30289589056085,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "0.5|L": {
+          "chi2_gue": 2762.96437739583,
+          "chi2_pois": 3359.0350470138624,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 137.36227623271543,
+          "norm_pois": 165.67991670149266,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "0.5|T": {
+          "chi2_gue": 2535.361495421964,
+          "chi2_pois": 3354.366049741565,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 126.25617416621678,
+          "norm_pois": 165.67161173890213,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "1.0|L": {
+          "chi2_gue": 2309.0945601308294,
+          "chi2_pois": 3124.9736634624232,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 115.90958526093266,
+          "norm_pois": 156.0380993401556,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "1.0|T": {
+          "chi2_gue": 2261.0187027280153,
+          "chi2_pois": 3117.617501712158,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 111.34276844904998,
+          "norm_pois": 157.51848173140928,
+          "p_gue": 0.0,
+          "p_gue_count": 0,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        }
+      }
+    },
+    "120": {
+      "s1": {
+        "L": {
+          "gue": {
+            "obs_mean": 0.6001771749796798,
+            "obs_sd": 0.020037186385097973,
+            "p_count": 1543,
+            "p_n": 2000,
+            "p_two_sided": 0.7715,
+            "ref_mean": 0.599407527246926,
+            "ref_sd": 0.020795479340355763,
+            "z": 0.037010338648948864
+          },
+          "label": "GUE",
+          "obs_mean": 0.6001771749796798,
+          "obs_sd": 0.020037186385097973,
+          "pois": {
+            "obs_mean": 0.6001771749796798,
+            "obs_sd": 0.020037186385097973,
+            "p_count": 0,
+            "p_n": 2000,
+            "p_two_sided": 0.0,
+            "ref_mean": 0.38611205052221703,
+            "ref_sd": 0.022849719310896664,
+            "z": 9.36839186271223
+          }
+        },
+        "T": {
+          "gue": {
+            "obs_mean": 0.599434592596097,
+            "obs_sd": 0.0200216562403665,
+            "p_count": 1608,
+            "p_n": 2000,
+            "p_two_sided": 0.804,
+            "ref_mean": 0.5987854406800583,
+            "ref_sd": 0.020704894598448105,
+            "z": 0.03135258249937212
+          },
+          "label": "GUE",
+          "obs_mean": 0.599434592596097,
+          "obs_sd": 0.0200216562403665,
+          "pois": {
+            "obs_mean": 0.599434592596097,
+            "obs_sd": 0.0200216562403665,
+            "p_count": 0,
+            "p_n": 2000,
+            "p_two_sided": 0.0,
+            "ref_mean": 0.38598744422846815,
+            "ref_sd": 0.02286960119182106,
+            "z": 9.333225646451796
+          }
+        }
+      },
+      "s2": {
+        "0.3|L": {
+          "chi2_gue": 24.49753752810229,
+          "chi2_pois": 5275.394939229873,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 1.2281728064327562,
+          "norm_pois": 262.7306048672227,
+          "p_gue": 0.265,
+          "p_gue_count": 530,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "0.3|T": {
+          "chi2_gue": 19.319639380221634,
+          "chi2_pois": 5259.783284469016,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 0.9672173244882294,
+          "norm_pois": 263.21375899613446,
+          "p_gue": 0.4355,
+          "p_gue_count": 871,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "0.5|L": {
+          "chi2_gue": 6.251108185300437,
+          "chi2_pois": 5024.016718944754,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 0.3194991925020422,
+          "norm_pois": 254.5380095107169,
+          "p_gue": 0.938,
+          "p_gue_count": 1876,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "0.5|T": {
+          "chi2_gue": 6.205078341274079,
+          "chi2_pois": 4943.285854090059,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 0.312549992193198,
+          "norm_pois": 244.84803402023314,
+          "p_gue": 0.945,
+          "p_gue_count": 1890,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "1.0|L": {
+          "chi2_gue": 6.702174529176938,
+          "chi2_pois": 4779.028088565032,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 0.3297721848058593,
+          "norm_pois": 237.0379058547092,
+          "p_gue": 0.963,
+          "p_gue_count": 1926,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        },
+        "1.0|T": {
+          "chi2_gue": 7.0745907293743375,
+          "chi2_pois": 4747.957902456455,
+          "label": "GUE",
+          "n_bins": 20,
+          "norm_gue": 0.3536334774086942,
+          "norm_pois": 237.96197150011793,
+          "p_gue": 0.962,
+          "p_gue_count": 1924,
+          "p_n": 2000,
+          "p_pois": 1.0,
+          "p_pois_count": 2000
+        }
+      }
+    }
+  },
+  "s1_extreme": {
+    "b_max": true,
+    "b_min": true
+  },
+  "s1_pass": true,
+  "s1_trend": {
+    "L": true,
+    "T": true
+  },
+  "s2_extreme": {
+    "b_max": {
+      "count": 6,
+      "n": 6,
+      "pass": true,
+      "target": "GUE"
+    },
+    "b_min": {
+      "count": 6,
+      "n": 6,
+      "pass": true,
+      "target": "POISSON"
+    }
+  },
+  "s2_pass": true,
+  "schema": "msaf.rbm_anderson.v1",
+  "verdict": "PASS"
+}

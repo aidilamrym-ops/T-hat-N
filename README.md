@@ -12,7 +12,7 @@ arithmetic (`arb` / `acb` / `arb_mat`, version 0.9.0). No floating-point value
 ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
-- **CI:** [![CI](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml) - `python -m pytest msaf -q` (471 tests) plus the Lean kernel build; every push must stay green
+- **CI:** [![CI](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml) - `python -m pytest msaf -q` (480 tests) plus the Lean kernel build; every push must stay green
 - **Permanent archive:** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338271.svg)](https://doi.org/10.5281/zenodo.23338271) (concept DOI, all versions; latest version v1.41.0-alpha: https://doi.org/10.5281/zenodo.23445149)
 - **Sealed releases:** [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha); final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
 - **License:** MIT - see [LICENSE](LICENSE)
@@ -577,6 +577,26 @@ claim about RSA/ECC security or the Riemann hypothesis.  Details:
 [`reports/ZN_PERMUTATION_2026-10-20.md`](reports/ZN_PERMUTATION_2026-10-20.md);
 registry `A-2026-0022`.
 
+### 2.6 Finite RBM Anderson diagnostic for S1/S2 (blueprint item 4)
+
+For `D = 201` and bandwidths `b = 1, 10, 120`, the package builds
+exact-rational complex Hermitian banded matrices, adds a float64 statistical
+layer for the S1 gap-ratio and S2 pair-correlation estimators, and calibrates
+both against independent Poisson and GUE null ensembles (2000 reference
+spectra and 64 calibration spectra each).  The six S2 cells are
+`sigma_u in {0.3, 0.5, 1.0}` x `{T, L}`.
+
+The local campaign passes the locked criteria: null S1 calibration 4/4, null
+S2 calibration 12/12, S1 monotone across `b` with `b=1` near-Poisson and
+`b=120` GUE, S2 extreme labels 6/6 at both ends, and three Arb interval spot
+checks (maximum float/eigenvalue deviation `6.22e-14`).  The labels are
+relative distances to the nulls; `b=1` is not an exact Poisson process and
+`b=10` is an intermediate regime.  This is a finite estimator validation, not
+a physical Anderson-transition claim.  Details:
+[`reports/RBM_ANDERSON_2026-10-20.md`](reports/RBM_ANDERSON_2026-10-20.md);
+prereg [`reports/PREREG_RBM_ANDERSON_2026-10-20.md`](reports/PREREG_RBM_ANDERSON_2026-10-20.md);
+registry `A-2026-0023` (after CI green).
+
 ---
 
 ## SECTION 3: STEP-BY-STEP REPRODUCIBILITY MANUAL (HOW TO RUN AUDIT)
@@ -593,7 +613,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (471 tests, every landmine pinned)
+### 3.2 Regression Suite (480 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -1405,7 +1425,7 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
   restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
-- `msaf/tests/` - regression suite (471 tests)
+- `msaf/tests/` - regression suite (480 tests)
 - `lean/` - Lean 4 machine-checked kernels 1D/2D/3D + central variant + Moore box (`lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py); includes the generated workflow / verification-chain diagrams (Section 7)
