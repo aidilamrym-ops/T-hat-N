@@ -1870,6 +1870,48 @@ Konsekuensi urutan yang disarankan:
 - **Batas:** amendemen infrastruktur, bukan hasil matematis; tidak
   mengubah V1–V6; tidak mengubah trusted base.
 
+### 2.0ap — Item 2 blueprint: sertifikat exact permutasi uniter `Z_N^×` (2026-10-20)
+
+- **Konteks/pilihan:** setelah V5, antrean lima item blueprint menunggu
+  pilihan pemilik. Pemilik memilih **item 2** (permutasi uniter untuk
+  periodisitas `Z_N^×`), bukan item 4/5/Q1. Pra-registrasi dikunci
+  sebelum implementasi: `reports/PREREG_ZN_PERMUTATION_2026-10-20.md`,
+  commit `8c5c642`, sha256LF
+  `80474c5447b5215bdc8e19548450ef68c60e879ff2423aac01a7d6ecc34e2cbf`.
+- **Berkas baru:** `msaf/zn_permutation.py`; guard
+  `msaf/tests/test_zn_permutation.py` (9 uji); laporan
+  `reports/ZN_PERMUTATION_2026-10-20.md`; receipt
+  `reports/zn_permutation_2026-10-20.json`. Tidak ada perubahan pada
+  V1–V6, `ci.yml`, workflow spec, `lean/lakefile.toml`, freeze pins,
+  atau artefak beku.
+- **Hasil exact:** `N=15, a=2`, dim 8, `M=4`, dua siklus panjang 4,
+  `charpoly=x^8−2x^4+1`, `minpoly=x^4−1`; `N=21, a=2`, dim 12,
+  `M=6`, dua siklus panjang 6, `charpoly=x^12−2x^6+1`,
+  `minpoly=x^6−1`. Matrix SHA-256: `e4092e...` (N=15) dan
+  `e40b23...` (N=21). Semua C1–C5 `true`; receipt kanonik
+  `c80b6621fcb1797a0c78f615176dc1400e6210011a084f733092bcb3719bda6c`.
+- **Komutasi:** `[CyclicShift, U]` exact `NONZERO` untuk kedua
+  instance (N=15: 10 entri, witness row 1/col 4/value 1; N=21: 14
+  entri, witness row 1/col 6/value 1). Ini hasil finite yang sah:
+  `U` punya dua orbit, `CyclicShift` satu orbit. Kontrol
+  `[U+Uᵀ, U]=ZERO` exact tetapi tautologis; bukan bukti independen.
+- **Fakta mesin lokal:** guard **9 passed**; suite penuh **471 passed**
+  (277,32 dtk); `freeze.py --verify` OK (14 pin; digest
+  `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`);
+  registry `A-2026-0022` (5 sertifikat sha256LF). CI run
+  **39442388960** (commit `6d7b78a`) **success**: `python-tests` 1m1s,
+  `coq-kernel` 1m57s, `lean-kernel` 2m16s.
+- **Batas:** sertifikat finite untuk dua instance mainan; **bukan**
+  algoritma faktorisasi, bukan pemecahan RSA/ECC, bukan klaim keamanan
+  kriptografi, bukan klaim period-finding efisien, bukan teorema umum.
+  `M` adalah order publik; tidak ada klaim spektrum mengekstrak rahasia.
+  Tidak ada klaim RH/lokasi nol/`σ=1/2`/fisika/Lean/Coq/SMT.
+  `PASS` berarti kriteria exact + CI, bukan peer review.
+- **Guard:** `python -m msaf.zn_permutation`;
+  `python -m pytest msaf/tests/test_zn_permutation.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional

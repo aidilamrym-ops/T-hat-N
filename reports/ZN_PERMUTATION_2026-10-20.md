@@ -1,8 +1,9 @@
 # Sertifikat exact permutasi uniter `Z_N^×` — 2026-10-20
 
-**Status:** **PASS-LOCAL** untuk kriteria inti C1–C6 dan guard lokal C7.
-**CI utama:** `TOOL NOT RUN` — paket belum dipush, jadi belum ada run CI untuk
-commit paket ini. Registry `A-2026-0022` **belum** dibuat sampai CI hijau.
+**Status:** **PASS** untuk kriteria inti C1–C6 dan guard/CI C7.
+**CI utama:** run `39442388960` (commit `6d7b78a`) **success**:
+`python-tests` 1m1s, `coq-kernel` 1m57s, `lean-kernel` 2m16s.
+Registry `A-2026-0022` dibuat setelah CI hijau.
 
 **Pra-registrasi:** `reports/PREREG_ZN_PERMUTATION_2026-10-20.md`,
 commit `8c5c642`, sha256LF
@@ -104,6 +105,10 @@ python -m pytest msaf -q
 python audit_quantum/freeze.py --verify
   verify OK: 14 pins
   digest f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25
+
+gh run view 39442388960
+  conclusion: success
+  python-tests 1m1s; coq-kernel 1m57s; lean-kernel 2m16s
 ```
 
 Receipt deterministik: dua kali `build_receipt()` menghasilkan payload dan
@@ -120,8 +125,8 @@ modul inti.
 - `M` adalah order publik `a mod N`; tidak ada klaim bahwa spektrum `U`
   mengekstrak rahasia.
 - Tidak ada klaim RH, lokasi nol, `σ = 1/2`, fisika, Lean, Coq, atau SMT.
-- `PASS-LOCAL` berarti kriteria exact lokal terpenuhi; CI dan registry
-  menyusul hanya setelah push dan run CI hijau.
+- `PASS` berarti kriteria exact lokal dan CI terpenuhi; registry
+  `A-2026-0022` mencatat scope ini, bukan klaim umum.
 
 ## 6. Artefak
 
@@ -131,5 +136,5 @@ modul inti.
 - `reports/zn_permutation_2026-10-20.json`
 - laporan ini
 
-Registry `A-2026-0022` dan HANDOFF §2.0ap belum dibuat; keduanya menunggu
-CI hijau.
+Registry `A-2026-0022` dan HANDOFF §2.0ap mencatat hasil ini setelah CI
+`39442388960` hijau.

@@ -1406,6 +1406,58 @@ mengikuti laporan L4).
   sha256LF 91230f9ac632595feefa2bf12da38627d83dcc88af2f4b7dfdcd9af862ccac15 reports/anti_circularity_gate_v5_2026-10-20.log
   ```
 
-Selesai — 26 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0019` + `A-2026-0020` + `A-2026-0021`). Entri
+### A-2026-0022 — Sertifikat exact permutasi uniter `Z_N^×`: perioda dan spektrum cyclotomic (item 2 blueprint)
+
+- **Jenis:** A
+- **Pernyataan:** `msaf/zn_permutation.py` membangun
+  `U|x⟩ = |a x mod N⟩` pada `X_N = (Z/NZ)^×` terurut dan
+  menyertifikasi dua instance exact: `N=15, a=2` (dim 8, `M=4`) dan
+  `N=21, a=2` (dim 12, `M=6`). Semua jalur inti memakai
+  `fmpq_mat`/`fmpq_poly`, tanpa `float`, `numpy`, atau `arb`.
+  Untuk kedua instance: `U` permutation matrix `0/1`; `UᵀU=I` dan
+  `UUᵀ=I`; `U^M=I` dan `U^k≠I` untuk `1≤k<M`; dua siklus panjang
+  `M`; `charpoly=(x^M−1)^(φ(N)/M)` dan `minpoly=x^M−1`; faktorisasi
+  cyclotomic exact. Nilai: `N=15` `charpoly=x^8−2x^4+1`,
+  `minpoly=x^4−1`, matrix SHA-256
+  `e4092e0155e3ea225966cc8a64e1e0a6cd9f47e4e25e510b3a8e24d99b9a58d8`;
+  `N=21` `charpoly=x^12−2x^6+1`, `minpoly=x^6−1`, matrix SHA-256
+  `e40b2334b942a2fc0feed818e5b5a5a39b79d745625e95acd3fe7f3b21cc2a85`.
+  Receipt kanonik:
+  `c80b6621fcb1797a0c78f615176dc1400e6210011a084f733092bcb3719bda6c`.
+  Komutasi dengan `CyclicShift` adalah `NONZERO` untuk kedua instance
+  (witness `N=15`: row 1, col 4, value 1, 10 entri; `N=21`: row 1,
+  col 6, value 1, 14 entri); kontrol `H=U+Uᵀ` memberi `ZERO` tetapi
+  tautologis. Guard 9 uji lulus; suite penuh 471 lulus (277,32 dtk);
+  CI run `39442388960` (commit `6d7b78a`) sukses: `python-tests` 1m1s,
+  `coq-kernel` 1m57s, `lean-kernel` 2m16s.
+- **Batas:** ini sertifikat finite untuk dua instance mainan, bukan
+  teorema umum; **bukan** algoritma faktorisasi, bukan pemecahan
+  RSA/ECC, bukan klaim keamanan kriptografi, dan bukan klaim
+  period-finding efisien. `M` adalah order publik; tidak ada klaim
+  bahwa spektrum `U` mengekstrak rahasia. Komutasi `NONZERO` dicatat
+  sebagai hasil finite, bukan kegagalan inti. Tidak ada klaim RH,
+  lokasi nol, `σ=1/2`, fisika, Lean, Coq, atau SMT. Tidak mengubah
+  V1–V6 (`A-2026-0015`–`A-2026-0021`), `ci.yml`, workflow spec, freeze
+  pins, atau artefak beku.
+- **Status:** CERTIFIED dengan scope tercatat
+- **Domino:** tidak ada (sertifikat finite; bukan domino)
+- **Relasi:** item 2 dari `reports/FIVE_CORE_BLUEPRINT_TRIAGE_2026-10-20.md`;
+  entri registry ke-27; memori kerja §2.0ap `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `python -m msaf.zn_permutation`;
+  `python -m pytest msaf/tests/test_zn_permutation.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`;
+  `gh run view 39442388960`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF db8b5704aa86092fa3baa4e3872a1d3079594316a28a39ec1384a6246aaf8cd4 msaf/zn_permutation.py
+  sha256LF d488a05d4c75a6de0cd7fa4a60a09ab42f55b20eb3909344ecb3a0214412cc3b msaf/tests/test_zn_permutation.py
+  sha256LF 80474c5447b5215bdc8e19548450ef68c60e879ff2423aac01a7d6ecc34e2cbf reports/PREREG_ZN_PERMUTATION_2026-10-20.md
+  sha256LF 3b272bec1bb0a452adf1d2d3ec6f3f6de36ab911976a0d5848099d9897e226de reports/ZN_PERMUTATION_2026-10-20.md
+  sha256LF ed2bcc517d94dc2f47861ed00bb0badfbad5152dbb41451197f82e3b24894d79 reports/zn_permutation_2026-10-20.json
+  ```
+
+Selesai — 27 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0019` + `A-2026-0020` + `A-2026-0021` + `A-2026-0022`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).
