@@ -1231,6 +1231,122 @@ mengikuti laporan L4).
   sha256LF 00802ed3a139b227922a29b2586d6e81e64d0c3433fa76ab33afd63b071b1ca1 reports/anti_circularity_gate_v3_2026-10-20.log
   ```
 
-Selesai — 23 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018`). Entri
+### A-2026-0019 — Spec Xi V4 unconditional: `hmid` dibuktikan tanpa hipotesis
+
+- **Jenis:** A
+- **Pernyataan:** `lean/spec_v4/XiUnconditional.lean` membuktikan
+  `hmid : ∀ x : ℝ, 0 < x → x < 1 →
+  (completedRiemannZeta (x : ℂ)).re < 0` sebagai teorema tertutup,
+  tanpa aksioma proyek dan tanpa `sorry`. Rute: (1) tanda kernel
+  `cosKernel (1/2) t - 1 < 0` untuk `t > 0` dari pasangan suku θ₄;
+  (2) batas decay + keterdiferensialan Mellin dan jembatan
+  `completedCosZeta (1/2) s = mellin fC (s/2)/2` pada `0 < re s`;
+  (3) kelinearan `mellin` + integral real `fC` memberi
+  `completedCosZeta (1/2) x < 0` untuk `0 < x`; (4) pembuangan faktor
+  `Gammaℝ (x) > 0` memberi `cosZeta (1/2) x < 0` pada `(0, 1)`;
+  (5) identitas eta `cosZeta (1/2) s = (2^(1−s) − 1) ζ(s)` dibuktikan
+  dulu untuk `1 < re s` lewat pemisahan paritas deret Dirichlet
+  (`HasSum.even_add_odd`, skala `2^(−s)`), lalu diperluas ke `s ≠ 1`
+  dengan kontinuasi analitik pada himpunan terhubung `{1}ᶜ`;
+  (6) `2^(1−x) − 1 > 0` untuk `x < 1` memberi `ζ(x) < 0`, dan
+  `completedRiemannZeta = Gammaℝ · ζ` menutup `hmid`.
+  `#print axioms` untuk `hmid`, `cosZeta_half_neg`, dan
+  `completedCosZeta_half_eq_mellin` hanya memuat `propext`,
+  `Classical.choice`, `Quot.sound`; nol `sorryAx`, nol deklarasi
+  `XiUnconditional.*`. Kompilasi exit 0 tanpa diagnostik; guard V4
+  3 uji lulus (49,41 dtk); suite penuh 456 uji lulus (171,93 dtk); gate
+  anti-circularity PASS pada `lean` dan
+  `claim` (`FAIL=0`, `NOT_RUN=0`, `SKIP=0`); subgate `audit` =
+  `TOOL NOT RUN` (UNPARSEABLE — tidak ada `.smt2`), dicatat verbatim.
+- **Batas:** V4 mewujudkan `hmid` untuk `completedRiemannZeta` Mathlib
+  v4.33.1 pada interval real `(0, 1)`; ini **bukan** bukti RH, bukan
+  peer review, bukan verifikasi SMT (tidak ada `.smt2` dan tidak ada
+  klaim SMT), bukan klaim P≠NP/fisika. V4 tidak menyentuh V1/V2/V3
+  (beku), `ci.yml`, `spec-v3.yml`, `test_xi_spec_v3.py`, atau
+  `audit_collatz/exec_2026-10-19/`. Gate PASS hanya menyatakan tidak ada
+  placeholder/klaim-komentar di berkas, bukan kebenaran bukti;
+  kebenaran bersandar pada kernel Lean (exit 0 + `#print axioms`).
+  Trusted base Coq empat aksioma stdlib tidak berubah.
+- **Status:** CERTIFIED dengan scope tercatat
+- **Domino:** tidak ada (spec/verifikasi; bukan domino)
+- **Relasi:** mendischarge hipotesis `hmid` yang ditinggalkan V3
+  (`A-2026-0018`) tanpa mengubah berkas V3; entri registry ke-24;
+  memori kerja §2.0al `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `lake env lean spec_v4/XiUnconditional.lean`
+  (dari `lean/`); `python -m pytest msaf/tests/test_xi_spec_v4.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`; gate eksternal
+  `python .../gate.py lean lean/spec_v4/XiUnconditional.lean`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF 3b2dcd20a32a4ba4f53694024911e1061260820f5701b2b431f5a02adaa5b64c lean/spec_v4/XiUnconditional.lean
+  sha256LF 43b60b7b528b8264ff2b3e5f3460ce088053fb88a5d289a928f2dca11e1127ea msaf/tests/test_xi_spec_v4.py
+  sha256LF 31af3a54c1bb22aa9639691d3f5d540c63b652dc043cad1dc5b835a021e99452 .github/workflows/spec-v4.yml
+  sha256LF b9c88d9c5abfd1b6c8aeebec068229ba3f3b1ca63dd88747fe55fe7c0036c2e3 reports/PREREG_XI_UNCONDITIONAL_2026-10-20.md
+  sha256LF 618d911d82d3a17cc6e8d8f3ff26a3caa98eb841dbaf0ec82c3989b8ebdf16cb reports/anti_circularity_gate_v4_2026-10-20.log
+  ```
+
+### A-2026-0020 — Spec Xi V6: jembatan kisi berhingga → `completedCosZeta (1/2)` dengan galat eksplisit
+
+- **Jenis:** A
+- **Pernyataan:** `lean/spec_v6/FiniteLatticeBridge.lean` membuktikan
+  jembatan bersertifikat dari truncation kisi berhingga ke objek tak hingga
+  `completedCosZeta (1/2)`, tanpa aksioma proyek dan tanpa `sorry`:
+  (T1) `abs_kHalf_sub_lattice_le`: untuk `t > 0` dan `N : ℕ`,
+  `|kHalf t − latticeSum N t| ≤ latticeTerm t N` (batas ekor alternating
+  oleh suku pertama yang dihilangkan); (T2)
+  `completedCosZeta_half_lattice_error`: untuk `x > 0`,
+  `‖completedCosZeta (1/2) (x : ℂ) − (latticeValue N x : ℂ)‖ ≤ latticeError N x`
+  dengan `latticeValue N x = Γ(x/2) π^(−x/2) ∑_{n<N} (−1)^(n+1) (n+1)^(−x)`
+  dan `latticeError N x = Γ(x/2) π^(−x/2) (N+1)^(−x)`; (T3)
+  `completedCosZeta_half_neg_of_lattice_certificate`: sertifikat negatif
+  `latticeValue N x + latticeError N x < 0` mentransfer tanda ke
+  `(completedCosZeta (1/2) (x : ℂ)).re < 0`; (K1)
+  `completedCosZeta_half_neg_of_first_term`: `N = 1` sudah cukup untuk
+  setiap `x > 0`. Jembatan memakai identitas Mellin V4
+  `completedCosZeta_half_eq_mellin` secara baca-saja; lemma
+  `rpow_pi_mul_sq` menyelaraskan basis gabungan `(π(n+1)^2)^(−x/2)`
+  dengan bentuk terpisah §2 pra-registrasi.
+  `#print axioms` untuk T1, T2, T3, K1 hanya memuat `propext`,
+  `Classical.choice`, `Quot.sound`; nol `sorryAx`, nol deklarasi
+  `FiniteLatticeBridge.*` di footprint. Kompilasi exit 0 tanpa error dan
+  tanpa warning; guard V6 3 uji lulus (19,34 dtk); gate anti-circularity
+  PASS pada `lean`, `claim`, dan `check` (`FAIL=0`, `NOT_RUN=0`,
+  `SKIP=0`); subgate `audit` = `TOOL NOT RUN` (UNPARSEABLE — tidak ada
+  `.smt2`), dicatat verbatim.
+- **Batas:** V6 membuktikan pernyataan tentang `completedCosZeta (1/2)`
+  saja; ini **bukan** bukti RH, bukan klaim lokasi nol, bukan derivasi
+  `σ = 1/2`, bukan verifikasi SMT (tidak ada `.smt2`), bukan peer review.
+  Batas L11/L12 `msaf/AUDIT.md` tetap berlaku: kisi adalah instrumen
+  bersertifikat untuk `completedCosZeta`, bukan kunci RH; jembatan RH
+  sesungguhnya memerlukan Weil–Guinand atau konvergensi nol spektral yang
+  tidak tersedia di Mathlib v4.33.1. Gate PASS hanya menyatakan tidak ada
+  placeholder/klaim-komentar di berkas, bukan kebenaran bukti; kebenaran
+  bersandar pada kernel Lean (exit 0 + `#print axioms`). V6 tidak mengubah
+  V1–V5, `ci.yml`, `spec-v3.yml`, `spec-v4.yml`, `test_xi_spec_v3.py`,
+  `lean/lakefile.toml`, atau `audit_collatz/exec_2026-10-19/`.
+- **Status:** CERTIFIED dengan scope tercatat
+- **Domino:** tidak ada (spec/verifikasi; bukan domino)
+- **Relasi:** jembatan pertama dari kisi berhingga ke
+  `completedCosZeta (1/2)`; memakai `completedCosZeta_half_eq_mellin`
+  dari V4 (`A-2026-0019`) secara baca-saja; entri registry ke-25; memori
+  kerja §2.0am `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `lake env lean spec_v6/FiniteLatticeBridge.lean`
+  (dari `lean/`); `python -m pytest msaf/tests/test_xi_spec_v6.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`; gate eksternal
+  `python .../gate.py lean lean/spec_v6/FiniteLatticeBridge.lean`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF 2b04f23d5382a6469be05eaad80426554b2ee8b8763146d49c846e6f6ae18e5b lean/spec_v6/FiniteLatticeBridge.lean
+  sha256LF e09c52abd731c6ca6176bcca7cae945914f9dca3fc89e83cf4df4e895e31beab msaf/tests/test_xi_spec_v6.py
+  sha256LF f714e94fb8f89dedf47f97677ab2e54adf25c2ccfb09201282a40545fc1a3e1e .github/workflows/spec-v6.yml
+  sha256LF 5a69474491ae3821fcc7d9c470135decf04013535013048b3e93527a250af137 reports/PREREG_FINITE_LATTICE_BRIDGE_2026-10-20.md
+  sha256LF c61c9f931f8191e9a633bbedf53ff283408112014edbfa745155eb3d79926844 reports/anti_circularity_gate_v6_2026-10-20.log
+  ```
+
+Selesai — 25 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0019` + `A-2026-0020`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

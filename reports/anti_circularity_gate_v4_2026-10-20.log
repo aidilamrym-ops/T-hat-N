@@ -1,0 +1,61 @@
+# Anti-circularity gate -- V4 scope (lean/spec_v4/XiUnconditional.lean)
+# date: 2026-10-20
+# gate: C:\Users\usER\.config\opencode\skills\anti-circularity\scripts\gate.py
+# python: C:\Python314\python.exe (Python 3.14, z3 5.0.0)
+# scope: Lean source placeholder scan + comment-only-claim scan.
+#        No .smt2 input exists in this package; no SMT/CIRCULARITY verdict
+#        is claimed.  This log records the gate output verbatim; a PASS here
+#        is a statement about artifacts on disk, not about proof correctness.
+#        Correctness evidence is the kernel run recorded in section 4.
+# sha256LF 3b2dcd20a32a4ba4f53694024911e1061260820f5701b2b431f5a02adaa5b64c lean/spec_v4/XiUnconditional.lean
+
+## 1. command: python scripts/gate.py lean lean/spec_v4/XiUnconditional.lean
+
+------------------------------------------------------------------------------
+ANTI-CIRCULARITY GATE [lean]
+  result: FAIL=0  NOT_RUN=0  SKIP=0
+  verdict: PASS
+
+## 2. command: python scripts/gate.py claim lean/spec_v4/XiUnconditional.lean
+
+------------------------------------------------------------------------------
+ANTI-CIRCULARITY GATE [claim]
+  result: FAIL=0  NOT_RUN=0  SKIP=0
+  verdict: PASS
+
+## 3. command: python scripts/gate.py audit lean/spec_v4/XiUnconditional.lean
+
+SMT CIRCULARITY AUDITOR -- z3 5.0.0
+files scanned: 1
+------------------------------------------------------------------------------
+UNPARSEABLE       asserts=0   ctx=-       script=-       core=[-]  XiUnconditional.lean
+                   no (assert ...) form found
+------------------------------------------------------------------------------
+summary: UNPARSEABLE=1
+------------------------------------------------------------------------------
+ANTI-CIRCULARITY GATE [audit]
+  NOT RUN  AUDIT UNPARSEABLE=1 -- no verdict was reached
+  result: FAIL=0  NOT_RUN=1  SKIP=0
+  verdict: TOOL NOT RUN
+
+# TOOL NOT RUN is recorded verbatim and is NOT reported as success.
+# The auditor was pointed at a Lean source, which is not an SMT script;
+# no .smt2 file exists anywhere in the V4 package, so there is nothing to
+# audit and no SMT verdict (GENUINE/CIRCULAR/VACUOUS/SAT) is asserted.
+
+## 4. command: python scripts/gate.py check lean/spec_v4/XiUnconditional.lean
+
+------------------------------------------------------------------------------
+ANTI-CIRCULARITY GATE [check]
+  result: FAIL=0  NOT_RUN=0  SKIP=0
+  verdict: PASS
+
+## 5. kernel probe (not a gate verdict): copy of the file + three #print lines
+
+'#print axioms hmid' -> 'hmid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'#print axioms cosZeta_half_neg' -> 'cosZeta_half_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'#print axioms completedCosZeta_half_eq_mellin' -> 'completedCosZeta_half_eq_mellin' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+# No sorryAx, no project axiom, no XiUnconditional.* declaration in any
+# footprint.  Compilation: `lake env lean spec_v4/XiUnconditional.lean`
+# exit 0 with empty stdout/stderr.

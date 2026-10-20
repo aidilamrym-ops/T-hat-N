@@ -1701,6 +1701,104 @@ Konsekuensi urutan yang disarankan:
   (`lake build` + guard V3 3 uji). Hanya anotasi deprecation
   Node.js/Ubuntu dari runner, bukan kegagalan gate.
 
+### 2.0al — Spec Xi V4 unconditional: `hmid` dibuktikan tanpa hipotesis (2026-10-20)
+
+- **Konteks:** V3 (`A-2026-0018`) membuktikan persamaan fungsional dan
+  positivity `x > 1`, tetapi menyisakan `hmid` sebagai hipotesis
+  eksplisit. V4 mendischarge `hmid` sepenuhnya.
+- **Berkas baru:** `lean/spec_v4/XiUnconditional.lean` (mandiri,
+  Mathlib-only; impor `HurwitzZetaEven`, `RiemannZeta`,
+  `Normed.Module.Connected`); guard `msaf/tests/test_xi_spec_v4.py`
+  (3 uji, probe Lean dijalankan bila `lake` ada); workflow terpisah
+  `.github/workflows/spec-v4.yml`; pra-registrasi
+  `reports/PREREG_XI_UNCONDITIONAL_2026-10-20.md`.
+- **Rute:** (G1) tanda kernel `cosKernel (1/2) t - 1 < 0` untuk `t > 0`
+  dari pasangan suku θ₄; (G2/G3) batas decay + keterdiferensialan
+  Mellin (`b = 0`) dan jembatan
+  `completedCosZeta (1/2) s = mellin fC (s/2)/2` pada `0 < re s`;
+  (G4) kelinearan `mellin` + integral real `fC` memberi
+  `completedCosZeta (1/2) x < 0` untuk `x > 0`; (G5) faktor
+  `Gammaℝ (x) > 0` dibuang → `cosZeta (1/2) x < 0` pada `(0, 1)`;
+  (G6) identitas eta `cosZeta (1/2) s = (2^(1−s) − 1) ζ(s)` untuk
+  `1 < re s` lewat pemisahan paritas deret Dirichlet
+  (`HasSum.even_add_odd`, skala `2^(−s)`), lalu (G7) kontinuasi
+  analitik pada `{1}ᶜ` yang terhubung; (G8) `2^(1−x) − 1 > 0` untuk
+  `x < 1` → `ζ(x) < 0`; (G9) `completedRiemannZeta = Gammaℝ · ζ`
+  menutup `hmid`.
+- **Fakta mesin lokal:** kompilasi `lake env lean
+  spec_v4/XiUnconditional.lean` exit 0, tanpa diagnostik.
+  `#print axioms hmid` = `[propext, Classical.choice, Quot.sound]`;
+  idem untuk `cosZeta_half_neg` dan
+  `completedCosZeta_half_eq_mellin`; nol `sorryAx`, nol deklarasi
+  proyek. Guard V4 **3 passed** (49,41 dtk); suite penuh **456 passed**
+  (171,93 dtk); `freeze.py --verify` OK
+  (14 pin; digest
+  `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`).
+  Gate anti-circularity: `lean` PASS, `claim` PASS, `audit`
+  `TOOL NOT RUN` (UNPARSEABLE; tidak ada `.smt2`), log
+  `reports/anti_circularity_gate_v4_2026-10-20.log`.
+- **Batas:** membuktikan tanda `completedRiemannZeta` pada `(0, 1)`
+  untuk Mathlib v4.33.1. Bukan bukti RH, bukan peer review, bukan
+  verifikasi SMT, bukan klaim P≠NP/fisika. V1/V2/V3 beku tidak
+  disentuh; `ci.yml`, `spec-v3.yml`, `test_xi_spec_v3.py`, dan
+  `audit_collatz/exec_2026-10-19/` tidak diubah. Gate PASS ≠ kebenaran
+  bukti; kebenaran dari kernel (exit 0 + `#print axioms`).
+- **Guard:** `python -m pytest msaf/tests/test_xi_spec_v4.py -q`;
+  registry `A-2026-0019` (5 sertifikat sha256LF). Workflow
+  `spec-v4.yml` memiliki path filter dan job `lean-v4`; tidak ada
+  `continue-on-error`.
+
+### 2.0am — Spec Xi V6: jembatan kisi berhingga → `completedCosZeta (1/2)` (2026-10-20)
+
+- **Konteks:** V4 (`A-2026-0019`) membuktikan `hmid` dari kernel Mellin
+  tanpa kisi. V6 menjawab arahan pemilik: teorema analitik murni yang
+  menjembatani sifat tak hingga kontinu ke representasi kisi berhingga,
+  dengan galat eksplisit dan transfer tanda bersertifikat.
+- **Berkas baru:** `lean/spec_v6/FiniteLatticeBridge.lean` (Mathlib +
+  impor baca-saja `spec_v4.XiUnconditional`); guard
+  `msaf/tests/test_xi_spec_v6.py` (3 uji, probe Lean dijalankan bila
+  `lake` ada; membangun olean V4 bila perlu); workflow terpisah
+  `.github/workflows/spec-v6.yml`; pra-registrasi
+  `reports/PREREG_FINITE_LATTICE_BRIDGE_2026-10-20.md`; log gate
+  `reports/anti_circularity_gate_v6_2026-10-20.log`.
+- **Rute:** (T1) `abs_kHalf_sub_lattice_le`: ekor alternating θ dari
+  `hasSum_nat_cosKernel0` dan batas galat deret alternating; (T2)
+  `completedCosZeta_half_lattice_error`: integral Mellin kisi N-suku
+  dihitung tertutup lewat `integral_rpow_mul_exp_neg_mul_Ioi`, lalu
+  identitas Mellin V4 `completedCosZeta_half_eq_mellin` dan
+  ketaksamaan segitiga memberi galat eksplisit; (T3)
+  `completedCosZeta_half_neg_of_lattice_certificate`: transfer tanda
+  dari sertifikat `latticeValue N x + latticeError N x < 0`; (K1)
+  `completedCosZeta_half_neg_of_first_term`: sertifikat satu suku
+  `N = 1` untuk setiap `x > 0` dari `2^(−x) < 1`. Lemma
+  `rpow_pi_mul_sq` menjembatani basis gabungan
+  `(π(n+1)^2)^(−x/2)` ke bentuk terpisah pra-registrasi.
+- **Fakta mesin lokal:** kompilasi `lake env lean
+  spec_v6/FiniteLatticeBridge.lean` exit 0, tanpa error/warning.
+  `#print axioms` untuk T1, T2, T3, K1 hanya
+  `[propext, Classical.choice, Quot.sound]`; nol `sorryAx`, nol
+  deklarasi proyek di footprint. Guard V6 **3 passed** (19,34 dtk);
+  suite penuh **459 passed** (222,20 dtk); `freeze.py --verify` OK
+  (14 pin; digest
+  `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`).
+  Gate anti-circularity: `lean` PASS, `claim` PASS, `check` PASS,
+  `audit` `TOOL NOT RUN` (UNPARSEABLE; tidak ada `.smt2`), dicatat
+  verbatim.
+- **Batas:** membuktikan pernyataan tentang `completedCosZeta (1/2)`
+  saja; **bukan** bukti RH, bukan klaim lokasi nol, bukan derivasi
+  `σ = 1/2`, bukan verifikasi SMT, bukan peer review. Batas L11/L12
+  `msaf/AUDIT.md`: kisi adalah instrumen bersertifikat untuk
+  `completedCosZeta`, bukan kunci RH; jembatan RH sesungguhnya
+  memerlukan Weil–Guinand atau konvergensi nol spektral yang tidak
+  tersedia di Mathlib v4.33.1. Gate PASS ≠ kebenaran bukti; kebenaran
+  dari kernel (exit 0 + `#print axioms`). V1–V5 beku; `ci.yml`,
+  `spec-v3.yml`, `spec-v4.yml`, `test_xi_spec_v3.py`,
+  `lakefile.toml`, dan `audit_collatz/exec_2026-10-19/` tidak diubah.
+- **Guard:** `python -m pytest msaf/tests/test_xi_spec_v6.py -q`;
+  registry `A-2026-0020` (5 sertifikat sha256LF). Workflow
+  `spec-v6.yml` memiliki path filter dan job `lean-v6`; tidak ada
+  `continue-on-error`.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional
