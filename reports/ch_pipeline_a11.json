@@ -1,0 +1,78 @@
+{
+  "a11": 354294,
+  "search": {
+    "unique": true,
+    "value": 354294
+  },
+  "crt_combiner": {
+    "verdict": "RECOVERED",
+    "value": 354294
+  },
+  "oracle_gate": "ORACLE-HOLD",
+  "leave_one_out": {
+    "1": {
+      "dropped": 1,
+      "recovered": 6,
+      "expected": 6,
+      "match": true
+    },
+    "2": {
+      "dropped": 2,
+      "recovered": 0,
+      "expected": 0,
+      "match": true
+    },
+    "3": {
+      "dropped": 3,
+      "recovered": -27,
+      "expected": -27,
+      "match": true
+    },
+    "4": {
+      "dropped": 4,
+      "recovered": 0,
+      "expected": 0,
+      "match": true
+    },
+    "5": {
+      "dropped": 5,
+      "recovered": -729,
+      "expected": -729,
+      "match": true
+    },
+    "6": {
+      "dropped": 6,
+      "recovered": 2187,
+      "expected": 2187,
+      "match": true
+    },
+    "7": {
+      "dropped": 7,
+      "recovered": 4374,
+      "expected": 4374,
+      "match": true
+    },
+    "8": {
+      "dropped": 8,
+      "recovered": 0,
+      "expected": 0,
+      "match": true
+    },
+    "9": {
+      "dropped": 9,
+      "recovered": -19683,
+      "expected": -19683,
+      "match": true
+    },
+    "10": {
+      "dropped": 10,
+      "recovered": 295245,
+      "expected": 295245,
+      "match": true
+    }
+  },
+  "rehearsal_all_match": true,
+  "circle_test": "PASS",
+  "picard_bound": 22,
+  "status": "CH PIPELINE COMPLETE - VERDICT: INCONCLUSIVE (independent validation of alpha=3/4 and log q* pending)"
+}

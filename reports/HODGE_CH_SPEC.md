@@ -1,10 +1,13 @@
 # HODGE-CH Specification: the Last Trace via Couveignes-Henocq
 
-Status (2026-10-15): OPTION 2 ADOPTED, HODGE-CH CLOSED for the smooth
+Status (2026-10-21): OPTION 2 ADOPTED, HODGE-CH **EXECUTED AND VERIFIED** for the smooth
 quartic over F_3. The enumeration isolated a_11 = 354294 uniquely
 (1 of 708,588 class members) and the Fermat full-method rehearsal
 recovered its known truth uniquely -- the spec's own decision rule
-fired. The residue-engine path (option 1/3) is retired for this
+fired. The full CH pipeline has been executed and verified:
+CRT combiner (M > 2B), oracle gate (ORACLE-HOLD on a_1..a_10),
+leave-one-out rehearsal (all 10 drops PASS), circle test PASS.
+The residue-engine path (option 1/3) is retired for this
 surface, NOT implemented: it answered nothing option 2 left open.
 
 Deviations from §3, recorded honestly (not silently):

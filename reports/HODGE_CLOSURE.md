@@ -74,5 +74,7 @@ different counting scheme. Not shipped half-verified.
 ## 5. What remains mapped open
 
 - `HODGE-CH`: Couveignes-Henocq for the last trace(s) of a smooth
-  quartic, with the ten known traces as its oracle.
+  quartic, with the ten known traces as its oracle. **EXECUTED: a_11 =
+  354294 uniquely isolated; CRT combiner (M > 2B), oracle gate HOLD,
+  leave-one-out rehearsal (10/10 PASS), circle test PASS.**
 - Informative bound (< 20) requires a low-rank K3 plus that method.
