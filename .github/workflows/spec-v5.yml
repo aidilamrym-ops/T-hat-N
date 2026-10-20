@@ -1,0 +1,51 @@
+name: Spec V5
+
+# V5 closes the last explicit hypothesis of V3's `xi_pos_on_reals` by
+# applying V4's closed `hmid` theorem.  It imports the sealed V3 and V4
+# sources read-only, so the workflow materialises both oleans before running
+# the guard.  Kept out of ci.yml so the frozen A-2026-0016 certificate stays
+# byte-identical.
+on:
+  push:
+    paths:
+      - "lean/spec_v5/**"
+      - "msaf/tests/test_xi_spec_v5.py"
+      - ".github/workflows/spec-v5.yml"
+  pull_request:
+    paths:
+      - "lean/spec_v5/**"
+      - "msaf/tests/test_xi_spec_v5.py"
+      - ".github/workflows/spec-v5.yml"
+
+jobs:
+  lean-v5:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: lean
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.1
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Fetch dependencies
+        run: lake update
+      - name: Fetch prebuilt Mathlib oleans
+        run: lake exe cache get
+      - name: Build Mathlib kernel
+        run: lake build
+      - name: Build read-only V3/V4 oleans for the V5 imports
+        run: |
+          mkdir -p .lake/build/lib/lean/spec_v3 .lake/build/lib/lean/spec_v4
+          lake env lean -o .lake/build/lib/lean/spec_v3/XiAnalyticFaithful.olean \
+            spec_v3/XiAnalyticFaithful.lean
+          lake env lean -o .lake/build/lib/lean/spec_v4/XiUnconditional.olean \
+            spec_v4/XiUnconditional.lean
+      - name: Compile V5 and audit its axiom footprint
+        working-directory: .
+        run: |
+          python -m pip install --disable-pip-version-check pytest
+          python -m pytest msaf/tests/test_xi_spec_v5.py -q

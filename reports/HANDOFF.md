@@ -1799,6 +1799,51 @@ Konsekuensi urutan yang disarankan:
   `spec-v6.yml` memiliki path filter dan job `lean-v6`; tidak ada
   `continue-on-error`.
 
+### 2.0an — Spec Xi V5: positivity xi unconditional via V3+V4 (glue) (2026-10-20)
+
+- **Konteks:** V3 (`A-2026-0018`) membuktikan
+  `XiAnalyticFaithful.xi_pos_on_reals` dengan hipotesis midpoint `hmid`
+  eksplisit. V4 (`A-2026-0019`) membuktikan `hmid` sebagai teorema
+  tertutup. V5 menutup gap tersebut: satu teorema glue, tanpa konten
+  analitik baru. Prompt “OPENING DEFERRED V5 VIA V6 PARAMETERS”
+  dikoreksi: V5 **bukan** kampanye H1/engine-B dan **bukan** penggunaan
+  parameter V6; H1/engine-B/dashboard adalah jalur spectral terpisah
+  yang sudah selesai/beku, sedangkan V6 (`A-2026-0020`) adalah jembatan
+  kisi `completedCosZeta (1/2)` yang tidak dipakai V5.
+- **Berkas baru:** `lean/spec_v5/XiPosUnconditional.lean` (impor
+  baca-saja V3 + V4); guard `msaf/tests/test_xi_spec_v5.py` (3 uji,
+  probe Lean dijalankan bila `lake` ada; membangun olean V3/V4 bila
+  perlu; probe scratch di luar `lean/`); workflow terpisah
+  `.github/workflows/spec-v5.yml`; pra-registrasi
+  `reports/PREREG_XI_POS_UNCONDITIONAL_2026-10-20.md`; log gate
+  `reports/anti_circularity_gate_v5_2026-10-20.log`.
+- **Rute:** `XiPosUnconditional.xi_pos_on_reals_unconditional (x : ℝ) :
+  0 < XiAnalyticFaithful.xiReal x` dibuktikan dengan
+  `XiAnalyticFaithful.xi_pos_on_reals hmid x`. `hmid` V4 berada di
+  root namespace, bukan `XiUnconditional.hmid`. Tidak ada estimasi,
+  kisi, data numerik, atau parameter H1/engine-B.
+- **Fakta mesin lokal:** kompilasi `lake env lean
+  spec_v5/XiPosUnconditional.lean` exit 0. `#print axioms` hanya
+  `[propext, Classical.choice, Quot.sound]`; nol `sorryAx`, nol
+  deklarasi proyek di footprint. Guard V5 **3 passed** (16,73 dtk);
+  suite penuh **462 passed** (265,15 dtk); `freeze.py --verify` OK
+  (14 pin; digest
+  `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`).
+  Gate anti-circularity: `lean` PASS, `claim` PASS, `check` PASS,
+  `audit` `TOOL NOT RUN` (UNPARSEABLE; tidak ada `.smt2`), dicatat
+  verbatim.
+- **Batas:** V5 hanya menutup `hmid` V3 memakai V4; **bukan** bukti RH,
+  bukan klaim lokasi nol, bukan derivasi `σ = 1/2`, bukan verifikasi
+  SMT, bukan peer review. V5 tidak memakai V6, H1, engine-B, dashboard,
+  atau data numerik apa pun. Gate PASS ≠ kebenaran bukti; kebenaran
+  dari kernel (exit 0 + `#print axioms`). V1–V4/V6 beku; `ci.yml`,
+  `spec-v3.yml`, `spec-v4.yml`, `spec-v6.yml`, `test_xi_spec_v3.py`,
+  `lakefile.toml`, dan `audit_collatz/exec_2026-10-19/` tidak diubah.
+- **Guard:** `python -m pytest msaf/tests/test_xi_spec_v5.py -q`;
+  registry `A-2026-0021` (5 sertifikat sha256LF). Workflow
+  `spec-v5.yml` memiliki path filter dan job `lean-v5`; tidak ada
+  `continue-on-error`.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional

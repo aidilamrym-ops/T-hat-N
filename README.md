@@ -12,7 +12,7 @@ arithmetic (`arb` / `acb` / `arb_mat`, version 0.9.0). No floating-point value
 ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
-- **CI:** [![CI](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml) - `python -m pytest msaf -q` (453 tests) plus the Lean kernel build; every push must stay green
+- **CI:** [![CI](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml) - `python -m pytest msaf -q` (462 tests) plus the Lean kernel build; every push must stay green
 - **Permanent archive:** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338271.svg)](https://doi.org/10.5281/zenodo.23338271) (concept DOI, all versions; latest version v1.41.0-alpha: https://doi.org/10.5281/zenodo.23445149)
 - **Sealed releases:** [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha); final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
 - **License:** MIT - see [LICENSE](LICENSE)
@@ -145,9 +145,18 @@ axioms), still conditional and not a proof about the actual xi function; and
 `A-2026-0018`, the faithful V3 spec
 ([`reports/XI_SPEC_V3_2026-10-20.md`](reports/XI_SPEC_V3_2026-10-20.md))
 — xi defined from Mathlib's `completedRiemannZeta`, the functional equation
-proved, zero project axioms, with one explicit midpoint sign hypothesis
-(`hmid`) still unproved; not a proof of RH. The Coq packages' Coq-kernel
-status is unchanged.
+proved, zero project axioms, with the midpoint sign `hmid` kept as an explicit
+hypothesis (later discharged by V4/V5); not a proof of RH; and
+`A-2026-0019`, the unconditional V4
+([`reports/PREREG_XI_UNCONDITIONAL_2026-10-20.md`](reports/PREREG_XI_UNCONDITIONAL_2026-10-20.md))
+— `hmid` proved from the half-kernel Mellin representation and the eta
+identity; and `A-2026-0020`, the V6 finite-lattice bridge
+([`reports/PREREG_FINITE_LATTICE_BRIDGE_2026-10-20.md`](reports/PREREG_FINITE_LATTICE_BRIDGE_2026-10-20.md))
+— T1–T3 and the one-term certificate K1 for `completedCosZeta (1/2)` with an
+explicit tail error; and `A-2026-0021`, the V5 glue
+([`reports/PREREG_XI_POS_UNCONDITIONAL_2026-10-20.md`](reports/PREREG_XI_POS_UNCONDITIONAL_2026-10-20.md))
+— unconditional `xi_pos_on_reals_unconditional` by applying V3 to V4's
+`hmid`. The Coq packages' Coq-kernel status is unchanged.
 Every verdict is a bounded assessment under the scope limits recorded there, not a
 defect claim on any third party's work.
 
@@ -348,6 +357,201 @@ exactly, its premise H = n does not survive measurement. The pixel map is:
 
 <p align="center"><img src="docs/math/pixel.svg" alt="k_m = floor(gamma_m / 2pi log_2(N_steps)) mod N_steps"></p>
 
+### 2.4 Lean Xi chain (V3–V6): statements, formulas, and derivations
+
+The four sealed Lean packages form one chain from the real-axis completed xi
+to the finite-lattice half-kernel.  The scope is deliberately narrow: they
+prove the statements below about `xiReal` and `completedCosZeta (1/2)`.  They
+do **not** prove the Riemann hypothesis, do not locate zeros, and do not derive
+`sigma = 1/2`.  The spectral H1/engine-B/dashboard line of Section 6 is a
+separate instrument and is not used here.
+
+#### V3: the real-axis completed xi
+
+[`lean/spec_v3/XiAnalyticFaithful.lean`](lean/spec_v3/XiAnalyticFaithful.lean)
+defines the real part of the completed xi with removable endpoints guarded:
+
+```lean
+noncomputable def xiReal (x : ℝ) : ℝ :=
+  if x = 0 ∨ x = 1 then 1 / 2
+  else (1 / 2 : ℝ) * x * (x - 1) * (completedRiemannZeta (x : ℂ)).re
+```
+
+For `x ≠ 0, 1` this is `Re[ (1/2) x (x-1) completedRiemannZeta(x) ]`.
+The functional equation
+
+```text
+xiReal (1 - x) = xiReal x
+```
+
+is proved from Mathlib's `completedRiemannZeta_one_sub`, with the endpoint
+guards checked separately.  Positivity for `x > 1` follows from
+`riemannZeta_pos_of_one_lt` and positivity of the Gamma factor.  The master
+theorem keeps the remaining midpoint sign as an explicit hypothesis:
+
+```lean
+theorem xi_pos_on_reals
+    (hmid : ∀ x : ℝ, 0 < x → x < 1 →
+      (completedRiemannZeta (x : ℂ)).re < 0)
+    (x : ℝ) : 0 < xiReal x
+```
+
+Derivation of the branch split:
+
+```text
+x < 0        -> xiReal x = xiReal (1 - x) and 1 - x > 1
+x = 0, 1     -> guarded value 1/2
+0 < x < 1    -> (1/2) x (x-1) < 0 and hmid x < 0, product > 0
+x > 1        -> (1/2) x (x-1) > 0 and completed zeta > 0
+```
+
+V3 has zero project axioms; its `#print axioms` footprint is exactly
+`[propext, Classical.choice, Quot.sound]`.  `hmid` is a hypothesis of the
+master theorem, not a global axiom.
+
+#### V4: discharging `hmid`
+
+[`lean/spec_v4/XiUnconditional.lean`](lean/spec_v4/XiUnconditional.lean)
+proves the midpoint sign unconditionally:
+
+```lean
+theorem hmid : ∀ x : ℝ, 0 < x → x < 1 →
+    (completedRiemannZeta (x : ℂ)).re < 0
+```
+
+The derivation proceeds through the half-kernel
+
+```text
+F(t) = cosKernel(1/2, t) - 1
+     = sum_{n >= 0} (-1)^(n+1) * 2 exp(-pi (n+1)^2 t),   t > 0.
+```
+
+1. **Half-kernel negativity.**  Pair even and odd terms.  The magnitude
+   `2 exp(-pi (n+1)^2 t)` is strictly decreasing in `n`, so the alternating
+   sum is strictly negative for every `t > 0`.
+2. **Mellin representation.**  For `Re s > 0`,
+   ```text
+   completedCosZeta(1/2, s) = (1/2) * mellin F(s/2),
+   mellin F(z) = integral_0^inf t^(z-1) F(t) dt.
+   ```
+   This is proved first on `Re s > 1` from the Hurwitz even functional
+   equation, then extended by analytic continuation to the half-plane
+   `Re s > 0`.
+3. **Real negativity on `(0,1)`.**  For `0 < x < 1`, the Mellin integrand is
+   negative, hence `completedCosZeta(1/2, x)` is a strictly negative real
+   number.
+4. **Remove the Gamma factor.**  Since
+   `completedCosZeta(1/2, s) = GammaR(s) * cosZeta(1/2, s)` and `GammaR(x)>0`
+   for `x>0`, also `cosZeta(1/2, x) < 0`.
+5. **Eta identity.**  On `s ≠ 1`,
+   ```text
+   cosZeta(1/2, s) = (2^(1-s) - 1) * riemannZeta(s),
+   ```
+   first proved on `Re s > 1` by splitting the Dirichlet series into even and
+   odd parts, then by analytic continuation.
+6. **Close `hmid`.**  For `0 < x < 1`, `2^(1-x) - 1 > 0`; therefore
+   `riemannZeta(x) < 0`.  Finally
+   `completedRiemannZeta = GammaR * riemannZeta` and `GammaR(x) > 0`, so the
+   real part of `completedRiemannZeta(x)` is negative.
+
+V4 has no project axioms and no `sorry`; its footprint is again exactly
+`[propext, Classical.choice, Quot.sound]`.
+
+#### V5: unconditional xi positivity (the glue)
+
+[`lean/spec_v5/XiPosUnconditional.lean`](lean/spec_v5/XiPosUnconditional.lean)
+closes the V3 hypothesis with the V4 theorem:
+
+```lean
+theorem xi_pos_on_reals_unconditional (x : ℝ) :
+    0 < XiAnalyticFaithful.xiReal x :=
+  XiAnalyticFaithful.xi_pos_on_reals hmid x
+```
+
+`hmid` is V4's root-namespace theorem (not `XiUnconditional.hmid`).  V5 adds
+no new analytic content: it is the one-step composition V3 ∘ V4.  Its
+footprint is exactly `[propext, Classical.choice, Quot.sound]`.
+
+#### V6: finite-lattice bridge for `completedCosZeta (1/2)`
+
+[`lean/spec_v6/FiniteLatticeBridge.lean`](lean/spec_v6/FiniteLatticeBridge.lean)
+turns the infinite half-kernel into a finite alternating lattice with an
+explicit tail error.  The definitions are:
+
+```text
+kHalf(t)        = cosKernel(1/2, t) - 1
+latticeTerm(t,n)= 2 exp(-pi (n+1)^2 t)
+latticeSum(N,t) = sum_{n<N} (-1)^(n+1) latticeTerm(t,n)
+latticeScale(x)= Gamma(x/2) pi^(-x/2)
+latticeValue(N,x) = latticeScale(x) *
+                    sum_{n<N} (-1)^(n+1) (n+1)^(-x)
+latticeError(N,x) = latticeScale(x) (N+1)^(-x)
+```
+
+The four certified statements are:
+
+```lean
+theorem abs_kHalf_sub_lattice_le
+    (t : ℝ) (ht : 0 < t) (N : ℕ) :
+    |kHalf t - latticeSum N t| ≤ latticeTerm t N
+
+theorem completedCosZeta_half_lattice_error
+    (x : ℝ) (hx : 0 < x) (N : ℕ) :
+    ‖completedCosZeta ((1 / 2 : ℝ) : UnitAddCircle) (x : ℂ) -
+      (latticeValue N x : ℂ)‖ ≤ latticeError N x
+
+theorem completedCosZeta_half_neg_of_lattice_certificate
+    (x : ℝ) (hx : 0 < x) (N : ℕ)
+    (hcert : latticeValue N x + latticeError N x < 0) :
+    (completedCosZeta ((1 / 2 : ℝ) : UnitAddCircle) (x : ℂ)).re < 0
+
+theorem completedCosZeta_half_neg_of_first_term
+    (x : ℝ) (hx : 0 < x) :
+    (completedCosZeta ((1 / 2 : ℝ) : UnitAddCircle) (x : ℂ)).re < 0
+```
+
+Derivation:
+
+1. **Alternating tail (T1).**  The magnitudes `latticeTerm(t,n)` are positive
+   and strictly decreasing for `t > 0`; the alternating-series error bound
+   gives `|kHalf(t) - latticeSum(N,t)| <= latticeTerm(t,N)`.
+2. **Mellin term.**  For `x > 0`,
+   ```text
+   integral_0^inf t^(x/2-1) latticeTerm(t,n) dt
+     = 2 Gamma(x/2) (pi (n+1)^2)^(-x/2)
+     = 2 Gamma(x/2) pi^(-x/2) (n+1)^(-x).
+   ```
+   Summing the finite lattice gives
+   `integral_0^inf t^(x/2-1) latticeSum(N,t) dt = 2 latticeValue(N,x)`.
+3. **Explicit error (T2).**  Combine the V4 Mellin identity with T1 and the
+   triangle inequality:
+   ```text
+   |completedCosZeta(1/2,x) - latticeValue(N,x)|
+     <= (1/2) integral_0^inf t^(x/2-1) |kHalf(t) - latticeSum(N,t)| dt
+     <= (1/2) integral_0^inf t^(x/2-1) latticeTerm(t,N) dt
+     = latticeError(N,x).
+   ```
+4. **Sign transfer (T3).**  If the finite certificate
+   `latticeValue(N,x) + latticeError(N,x) < 0` holds, then
+   `Re completedCosZeta(1/2,x) <= latticeValue(N,x) + latticeError(N,x) < 0`.
+5. **One-term certificate (K1).**  For `N = 1`,
+   ```text
+   latticeValue(1,x) + latticeError(1,x)
+     = Gamma(x/2) pi^(-x/2) (-1 + 2^(-x)) < 0
+   ```
+   because `2^(-x) < 1` for every `x > 0`.  T3 then gives the negative sign
+   for all `x > 0`.
+
+V6 is about `completedCosZeta (1/2)`, not `completedRiemannZeta`; K1 is a
+one-term sign certificate, not a zero-location statement.  Its footprint is
+again exactly `[propext, Classical.choice, Quot.sound]`.
+
+The registry entries are `A-2026-0018` (V3), `A-2026-0019` (V4),
+`A-2026-0020` (V6), and `A-2026-0021` (V5), with the exact certificate hashes
+in [`reports/FENCE_REGISTRY.md`](reports/FENCE_REGISTRY.md).  The V5
+pre-registration is
+[`reports/PREREG_XI_POS_UNCONDITIONAL_2026-10-20.md`](reports/PREREG_XI_POS_UNCONDITIONAL_2026-10-20.md).
+
 ---
 
 ## SECTION 3: STEP-BY-STEP REPRODUCIBILITY MANUAL (HOW TO RUN AUDIT)
@@ -364,7 +568,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (377 tests, every landmine pinned)
+### 3.2 Regression Suite (462 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -1176,7 +1380,7 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
   restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
-- `msaf/tests/` - regression suite (377 tests)
+- `msaf/tests/` - regression suite (462 tests)
 - `lean/` - Lean 4 machine-checked kernels 1D/2D/3D + central variant + Moore box (`lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py); includes the generated workflow / verification-chain diagrams (Section 7)

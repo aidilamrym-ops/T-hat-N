@@ -1347,6 +1347,54 @@ mengikuti laporan L4).
   sha256LF c61c9f931f8191e9a633bbedf53ff283408112014edbfa745155eb3d79926844 reports/anti_circularity_gate_v6_2026-10-20.log
   ```
 
-Selesai — 25 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0019` + `A-2026-0020`). Entri
+### A-2026-0021 — Spec Xi V5: positivity xi unconditional via V3+V4 (glue)
+
+- **Jenis:** A
+- **Pernyataan:** `lean/spec_v5/XiPosUnconditional.lean` menutup hipotesis
+  midpoint `hmid` yang eksplisit di V3
+  (`XiAnalyticFaithful.xi_pos_on_reals`) dengan teorema tertutup V4
+  (`hmid`). Teorema V5:
+  `XiPosUnconditional.xi_pos_on_reals_unconditional :
+  ∀ x : ℝ, 0 < XiAnalyticFaithful.xiReal x`, dibuktikan dengan
+  `XiAnalyticFaithful.xi_pos_on_reals hmid x` (V4 `hmid` berada di root
+  namespace). Ini adalah **glue**: tidak ada konten analitik baru, tidak
+  ada estimasi, kisi, atau parameter numerik. `#print axioms` hanya
+  memuat `propext`, `Classical.choice`, `Quot.sound`; nol `sorryAx`, nol
+  deklarasi `XiPosUnconditional.*` di footprint. Kompilasi exit 0; guard
+  V5 3 uji lulus (16,73 dtk); gate anti-circularity PASS pada `lean`,
+  `claim`, dan `check` (`FAIL=0`, `NOT_RUN=0`, `SKIP=0`); subgate `audit`
+  = `TOOL NOT RUN` (UNPARSEABLE — tidak ada `.smt2`), dicatat verbatim.
+- **Batas:** V5 hanya menutup `hmid` V3 memakai V4; **bukan** bukti RH,
+  bukan klaim lokasi nol, bukan derivasi `σ = 1/2`, bukan verifikasi SMT,
+  bukan peer review. V5 **bukan** “V5 Campaign (H1 + engine-B)” dan
+  **bukan** “V5 via V6 parameters”: H1/engine-B/dashboard adalah jalur
+  spectral terpisah yang sudah selesai/beku, sedangkan V6 (`A-2026-0020`)
+  adalah jembatan kisi `completedCosZeta (1/2)` dan tidak dipakai V5.
+  Gate PASS hanya menyatakan tidak ada placeholder/klaim-komentar di
+  berkas, bukan kebenaran bukti; kebenaran bersandar pada kernel Lean
+  (exit 0 + `#print axioms`). V5 tidak mengubah V1–V4/V6, `ci.yml`,
+  `spec-v3.yml`, `spec-v4.yml`, `spec-v6.yml`, `test_xi_spec_v3.py`,
+  `lean/lakefile.toml`, atau `audit_collatz/exec_2026-10-19/`.
+- **Status:** CERTIFIED dengan scope tercatat
+- **Domino:** tidak ada (spec/verifikasi; bukan domino)
+- **Relasi:** menutup hipotesis `hmid` V3 (`A-2026-0018`) memakai V4
+  (`A-2026-0019`) secara baca-saja; entri registry ke-26; memori kerja
+  §2.0an `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `lake env lean spec_v5/XiPosUnconditional.lean`
+  (dari `lean/`); `python -m pytest msaf/tests/test_xi_spec_v5.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`; gate eksternal
+  `python .../gate.py lean lean/spec_v5/XiPosUnconditional.lean`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF dcea803d9f16f2dc42239532e9df41a2643a0da9867565136d2fc8bce3879a57 lean/spec_v5/XiPosUnconditional.lean
+  sha256LF 32354492154c0ceacd4826f40a1047bfb860e90042689b93d55782c1d70bec9a msaf/tests/test_xi_spec_v5.py
+  sha256LF ed6f76718b2b9be9135ccb4762db34487439d094f1a526201cb0f5b3786e4137 .github/workflows/spec-v5.yml
+  sha256LF a20ee9bb3d7ec08e079631e0b95d855028bc151a425155c641df27982828304a reports/PREREG_XI_POS_UNCONDITIONAL_2026-10-20.md
+  sha256LF 91230f9ac632595feefa2bf12da38627d83dcc88af2f4b7dfdcd9af862ccac15 reports/anti_circularity_gate_v5_2026-10-20.log
+  ```
+
+Selesai — 26 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0019` + `A-2026-0020` + `A-2026-0021`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).
