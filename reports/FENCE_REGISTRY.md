@@ -1637,15 +1637,14 @@ mengikuti laporan L4).
   atau gap yang diklaim. `AD HOC NEGATIVE` berarti matriks perturbasi yang
   dikunci tidak positif definit; itu **bukan** bukti bahwa `L(s,chi)`
   tidak positif, dan tidak boleh dikutip sebagai kesimpulan tentang
-  `L(s,chi)`. Tidak ada klaim nol, lokasi nol, `sigma=1/2`,
-  critical-line lock, RH/GRH, global positivity/Weil positivity,
-  faktorisasi, RSA/ECC, Anderson, atau fisika. Eksekusi PASS dipisahkan
-  dari verdict matematis dalam receipt (`execution_status` versus
-  `mathematical_verdict`). Tidak mengubah V1–V6
-  (`A-2026-0015`–`A-2026-0021`), `A-2026-0022`–`A-2026-0025`, `ci.yml`,
-  workflow spec, freeze pins, artefak beku, atau
-  `source_arb_ldlt_certify.py`; tidak ada kampanye tersegel yang
-  dijalankan ulang.
+  `L(s,chi)`. Tidak ada klaim nol, `sigma=1/2`, critical-line lock,
+  RH/GRH, global positivity/Weil positivity, faktorisasi, RSA/ECC,
+  Anderson, atau fisika. Eksekusi PASS dipisahkan dari verdict matematis
+  dalam receipt (`execution_status` versus `mathematical_verdict`).
+  Tidak mengubah V1–V6 (`A-2026-0015`–`A-2026-0021`), `A-2026-0022`,
+  `A-2026-0023`, `A-2026-0024`, `A-2026-0025`, `ci.yml`, workflow spec,
+  freeze pins, artefak beku, atau `source_arb_ldlt_certify.py`; tidak ada
+  kampanye tersegel yang dijalankan ulang.
 - **Status:** CERTIFIED dengan scope tercatat
 - **Domino:** tidak ada (sertifikat matriks finite ad hoc; bukan domino)
 - **Relasi:** item 1 blueprint, opsi B dari
@@ -1667,6 +1666,38 @@ mengikuti laporan L4).
   sha256LF f7cb0327fa0b9a559513b18dc4fda8e5d3ec5fbca8ee440698d0ba4dc185b37f reports/gw_char_adhoc_2026-10-21.json
   ```
 
-Selesai — 31 entri per 2026-10-21 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0019` + `A-2026-0020` + `A-2026-0021` + `A-2026-0022` + `A-2026-0023` + `A-2026-0024` + `A-2026-0025` + `A-2026-0026`). Entri
+### A-2026-0027 — Kandidat blok Guinand–Weil berkarakter (item 1 blueprint, opsi C)
+
+- **Jenis:** A
+- **Pernyataan:** `msaf/gw_char_block.py` mengimplementasikan kandidat blok
+  Guinand–Weil berkarakter untuk karakter primitif real non-principal
+  (`chi_{4,3}`, `chi_{3,2}`, `chi_{5,4}`) dan karakter principal
+  (`chi_{4,1}`, `chi_{3,1}`, `chi_{5,1}`), dengan reduksi zeta `q*=1, a=0`
+  terverifikasi. Blok pole principal diimplementasikan dengan residu
+  `φ(q)/q`. Verdict: `INCONCLUSIVE` (validasi independen blok paritas/
+  konduktor belum tersedia).
+- **Batas:** kandidat saja; bukan blok Guinand–Weil tercertifikasi; tidak
+  ada klaim nol, `sigma=1/2`, critical-line lock, RH/GRH, global
+  positivity, faktorisasi, RSA/ECC, Anderson, atau fisika.
+- **Status:** INCONCLUSIVE
+- **Domino:** tidak ada
+- **Relasi:** item 1 blueprint, opsi C dari
+  `reports/SCOPE_AUDIT_GW_NONPRIMITIVE_2026-10-21.md`; prasyarat dari
+  `A-2026-0025` dan `A-2026-0026`.
+- **Perintah verifikasi:** `python -m msaf.gw_char_block`;
+  `python -m pytest msaf/tests/test_gw_char_block.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF 0f870fcabdd52cbc7f7183d64bc2933730cededae13da2d4166aefaddd6b456f msaf/gw_char_block.py
+  sha256LF e8956d72fc47b7368defd8374142a226a42657f5cf397d2004b033208a75531c msaf/tests/test_gw_char_block.py
+  sha256LF 9a3f46c1f59c9e37088603d2d1e15d328369428d366557bb8e1870faa94afa64 reports/PREREG_GW_CHAR_BLOCK_2026-10-21.md
+  sha256LF 96d34fe48e70309d557b99536ff49939063f6b21818bf293e4619850eeafba72 reports/GW_CHAR_BLOCK_2026-10-21.md
+  sha256LF c58a2e4ec2c7c89bca49bc7adee148bbcd79b7f24e7ee2a488d56cca574527ed reports/gw_char_block_2026-10-21.json
+  ```
+
+Selesai — 32 entri per 2026-10-21 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0013` + `A-2026-0014` + `A-2026-0014` + `A-2026-0015` + `A-2026-0015` + `A-2026-0016` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0018` + `A-2026-0019` + `A-2026-0019` + `A-2026-0020` + `A-2026-0020` + `A-2026-0021` + `A-2026-0021` + `A-2026-0022` + `A-2026-0022` + `A-2026-0023` + `A-2026-0023` + `A-2026-0024` + `A-2026-0025` + `A-2026-0026` + `A-2026-0027`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

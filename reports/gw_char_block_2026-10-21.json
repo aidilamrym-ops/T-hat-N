@@ -72,7 +72,7 @@
         {
           "alpha": "3/4",
           "checks": {
-            "C2_pole_block_zero": true,
+            "C2_pole_block_correct": true,
             "C2_tau_finite": true,
             "C2_wp_finite": true,
             "C2_wp_zero_criterion": true,
@@ -105,7 +105,7 @@
         {
           "alpha": "3/4",
           "checks": {
-            "C2_pole_block_zero": true,
+            "C2_pole_block_correct": true,
             "C2_tau_finite": true,
             "C2_wp_finite": true,
             "C2_wp_zero_criterion": true,
@@ -138,7 +138,7 @@
         {
           "alpha": "1/4",
           "checks": {
-            "C2_pole_block_zero": true,
+            "C2_pole_block_correct": true,
             "C2_tau_finite": true,
             "C2_wp_finite": true,
             "C2_wp_zero_criterion": true,
@@ -171,7 +171,7 @@
         {
           "alpha": "3/4",
           "checks": {
-            "C2_pole_block_zero": true,
+            "C2_pole_block_correct": true,
             "C2_tau_finite": true,
             "C2_wp_finite": true,
             "C2_wp_zero_criterion": true,
@@ -225,7 +225,7 @@
         {
           "alpha": "3/4",
           "checks": {
-            "C2_pole_block_zero": true,
+            "C2_pole_block_correct": true,
             "C2_tau_finite": true,
             "C2_wp_finite": true,
             "C2_wp_zero_criterion": true,
@@ -258,7 +258,7 @@
         {
           "alpha": "3/4",
           "checks": {
-            "C2_pole_block_zero": true,
+            "C2_pole_block_correct": true,
             "C2_tau_finite": true,
             "C2_wp_finite": true,
             "C2_wp_zero_criterion": true,
@@ -291,7 +291,7 @@
         {
           "alpha": "1/4",
           "checks": {
-            "C2_pole_block_zero": true,
+            "C2_pole_block_correct": true,
             "C2_tau_finite": true,
             "C2_wp_finite": true,
             "C2_wp_zero_criterion": true,
@@ -316,6 +316,105 @@
             "identifier": "chi_5_4",
             "modulus": 5,
             "number": 4,
+            "primitive": true
+          },
+          "source": "standard",
+          "status": "PASS"
+        },
+        {
+          "alpha": "1/4",
+          "checks": {
+            "C2_pole_block_correct": true,
+            "C2_tau_finite": true,
+            "C2_wp_finite": true,
+            "C2_wp_zero_criterion": true,
+            "C2_wr_finite": true
+          },
+          "conductor": 1,
+          "identifier": "chi_4_1",
+          "inertia": {
+            "entries_finite": true,
+            "n_neg": 1,
+            "n_pos": 40,
+            "pivot_transcript_sha256": "e420b4c7a11b46a577df6425817abd5a4c83b750c9a8612195722ccb20db4f85",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "modulus": 4,
+          "number": 1,
+          "parity": 0,
+          "pole_block": "SCALED POLE (residue 2/4)",
+          "primitive_lift": {
+            "identifier": "chi_1_1",
+            "modulus": 1,
+            "number": 1,
+            "primitive": true
+          },
+          "source": "standard",
+          "status": "PASS"
+        },
+        {
+          "alpha": "1/4",
+          "checks": {
+            "C2_pole_block_correct": true,
+            "C2_tau_finite": true,
+            "C2_wp_finite": true,
+            "C2_wp_zero_criterion": true,
+            "C2_wr_finite": true
+          },
+          "conductor": 1,
+          "identifier": "chi_3_1",
+          "inertia": {
+            "entries_finite": true,
+            "n_neg": 1,
+            "n_pos": 40,
+            "pivot_transcript_sha256": "cbf13890d9b155488ade92e92c4ec4034fe8c43735e6b170ea0314f9f575d716",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "modulus": 3,
+          "number": 1,
+          "parity": 0,
+          "pole_block": "SCALED POLE (residue 2/3)",
+          "primitive_lift": {
+            "identifier": "chi_1_1",
+            "modulus": 1,
+            "number": 1,
+            "primitive": true
+          },
+          "source": "standard",
+          "status": "PASS"
+        },
+        {
+          "alpha": "1/4",
+          "checks": {
+            "C2_pole_block_correct": true,
+            "C2_tau_finite": true,
+            "C2_wp_finite": true,
+            "C2_wp_zero_criterion": true,
+            "C2_wr_finite": true
+          },
+          "conductor": 1,
+          "identifier": "chi_5_1",
+          "inertia": {
+            "entries_finite": true,
+            "n_neg": 1,
+            "n_pos": 40,
+            "pivot_transcript_sha256": "8b86606374151b0d373a9e96ba087c3347b5a81c80bdc93f71b7237f12aed8c6",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "modulus": 5,
+          "number": 1,
+          "parity": 0,
+          "pole_block": "SCALED POLE (residue 4/5)",
+          "primitive_lift": {
+            "identifier": "chi_1_1",
+            "modulus": 1,
+            "number": 1,
             "primitive": true
           },
           "source": "standard",
@@ -501,7 +600,7 @@
         {
           "alpha": "3/4",
           "checks": {
-            "C2_pole_block_zero": true,
+            "C2_pole_block_correct": true,
             "C2_tau_finite": true,
             "C2_wp_finite": true,
             "C2_wp_zero_criterion": true,
@@ -534,7 +633,7 @@
         {
           "alpha": "3/4",
           "checks": {
-            "C2_pole_block_zero": true,
+            "C2_pole_block_correct": true,
             "C2_tau_finite": true,
             "C2_wp_finite": true,
             "C2_wp_zero_criterion": true,
@@ -567,7 +666,7 @@
         {
           "alpha": "1/4",
           "checks": {
-            "C2_pole_block_zero": true,
+            "C2_pole_block_correct": true,
             "C2_tau_finite": true,
             "C2_wp_finite": true,
             "C2_wp_zero_criterion": true,
@@ -600,7 +699,7 @@
         {
           "alpha": "3/4",
           "checks": {
-            "C2_pole_block_zero": true,
+            "C2_pole_block_correct": true,
             "C2_tau_finite": true,
             "C2_wp_finite": true,
             "C2_wp_zero_criterion": true,
@@ -654,7 +753,7 @@
         {
           "alpha": "3/4",
           "checks": {
-            "C2_pole_block_zero": true,
+            "C2_pole_block_correct": true,
             "C2_tau_finite": true,
             "C2_wp_finite": true,
             "C2_wp_zero_criterion": true,
@@ -687,7 +786,7 @@
         {
           "alpha": "3/4",
           "checks": {
-            "C2_pole_block_zero": true,
+            "C2_pole_block_correct": true,
             "C2_tau_finite": true,
             "C2_wp_finite": true,
             "C2_wp_zero_criterion": true,
@@ -720,7 +819,7 @@
         {
           "alpha": "1/4",
           "checks": {
-            "C2_pole_block_zero": true,
+            "C2_pole_block_correct": true,
             "C2_tau_finite": true,
             "C2_wp_finite": true,
             "C2_wp_zero_criterion": true,
@@ -745,6 +844,105 @@
             "identifier": "chi_5_4",
             "modulus": 5,
             "number": 4,
+            "primitive": true
+          },
+          "source": "standard",
+          "status": "PASS"
+        },
+        {
+          "alpha": "1/4",
+          "checks": {
+            "C2_pole_block_correct": true,
+            "C2_tau_finite": true,
+            "C2_wp_finite": true,
+            "C2_wp_zero_criterion": true,
+            "C2_wr_finite": true
+          },
+          "conductor": 1,
+          "identifier": "chi_4_1",
+          "inertia": {
+            "entries_finite": true,
+            "n_neg": 1,
+            "n_pos": 40,
+            "pivot_transcript_sha256": "b99b64350610507d4c541eda2be605100f6b6ba048003e2af08e4e86c6565929",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "modulus": 4,
+          "number": 1,
+          "parity": 0,
+          "pole_block": "SCALED POLE (residue 2/4)",
+          "primitive_lift": {
+            "identifier": "chi_1_1",
+            "modulus": 1,
+            "number": 1,
+            "primitive": true
+          },
+          "source": "standard",
+          "status": "PASS"
+        },
+        {
+          "alpha": "1/4",
+          "checks": {
+            "C2_pole_block_correct": true,
+            "C2_tau_finite": true,
+            "C2_wp_finite": true,
+            "C2_wp_zero_criterion": true,
+            "C2_wr_finite": true
+          },
+          "conductor": 1,
+          "identifier": "chi_3_1",
+          "inertia": {
+            "entries_finite": true,
+            "n_neg": 1,
+            "n_pos": 40,
+            "pivot_transcript_sha256": "1478317e78dd2a5c355a789a9e46e935e72cc3badddf8a305e69e6c47fe7302c",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "modulus": 3,
+          "number": 1,
+          "parity": 0,
+          "pole_block": "SCALED POLE (residue 2/3)",
+          "primitive_lift": {
+            "identifier": "chi_1_1",
+            "modulus": 1,
+            "number": 1,
+            "primitive": true
+          },
+          "source": "standard",
+          "status": "PASS"
+        },
+        {
+          "alpha": "1/4",
+          "checks": {
+            "C2_pole_block_correct": true,
+            "C2_tau_finite": true,
+            "C2_wp_finite": true,
+            "C2_wp_zero_criterion": true,
+            "C2_wr_finite": true
+          },
+          "conductor": 1,
+          "identifier": "chi_5_1",
+          "inertia": {
+            "entries_finite": true,
+            "n_neg": 1,
+            "n_pos": 40,
+            "pivot_transcript_sha256": "58cb9cb5a7e24f1ef9292576a1309eb8bf1df7d5f15636d13588928cfe6a7bef",
+            "pivots_recorded": 41,
+            "status": "NOT POSITIVE DEFINITE",
+            "undetermined_pivot": null
+          },
+          "modulus": 5,
+          "number": 1,
+          "parity": 0,
+          "pole_block": "SCALED POLE (residue 4/5)",
+          "primitive_lift": {
+            "identifier": "chi_1_1",
+            "modulus": 1,
+            "number": 1,
             "primitive": true
           },
           "source": "standard",
@@ -938,7 +1136,7 @@
   "execution_status": "PASS",
   "independent_validation": "Q1_REDUCTION_ONLY",
   "prereg_sha256": "9a3f46c1f59c9e37088603d2d1e15d328369428d366557bb8e1870faa94afa64",
-  "principal_pole_status": "NOT IMPLEMENTED",
+  "principal_pole_status": "IMPLEMENTED",
   "registry_entry": null,
   "schema": "msaf.gw_char_block.v1",
   "scope": {
@@ -949,7 +1147,7 @@
     "global_positivity_claim": false,
     "imprimitive_and_standard_identified": false,
     "independent_validation_complete": false,
-    "principal_pole_included": false,
+    "principal_pole_included": true,
     "rh_claim": false,
     "sealed_campaigns_rerun": false,
     "standard_l_function_block_certified": false,

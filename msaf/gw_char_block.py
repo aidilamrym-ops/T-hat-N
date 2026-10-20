@@ -56,9 +56,10 @@ CONFIGS = (
 )
 
 PRIMITIVE_CHARACTERS = ((4, 3), (3, 2), (5, 4))
+PRINCIPAL_CHARACTERS = ((4, 1), (3, 1), (5, 1))
 NONPRIMITIVE_PARENTS = ((12, 7), (12, 5), (15, 4), (15, 11))
 
-PRINCIPAL_POLE_IMPLEMENTED = False
+PRINCIPAL_POLE_IMPLEMENTED = True
 INDEPENDENT_VALIDATION = "Q1_REDUCTION_ONLY"
 Q1_CONTROL = {"c": 13, "N": 4, "prec": 200}
 
@@ -194,6 +195,43 @@ def wr_from_closed(S, CC, XC, L, kappa, J, N: int) -> arb_mat:
     return out
 
 
+def w02_zeta(c: int, N: int, prec: int) -> arb_mat:
+    """Build the zeta pole block W02_zeta (pole_B from the external builder)."""
+    with adhoc._precision(prec):
+        L = arb(c).log()
+        PI = arb.pi()
+        sp2 = 16 * PI * PI
+        l2 = L * L
+        pref02 = 32 * L * (L / 4).sinh() ** 2
+        dim = 2 * N + 1
+        W02 = arb_mat(dim, dim)
+        for i in range(dim):
+            n = i - N
+            for j in range(i, dim):
+                m = j - N
+                num = l2 - sp2 * m * n
+                den = (l2 + sp2 * m * m) * (l2 + sp2 * n * n)
+                w02 = pref02 * num / den
+                W02[i, j] = W02[j, i] = w02
+        return W02
+
+
+def totient(n: int) -> int:
+    """Euler's totient function φ(n)."""
+    result = n
+    p = 2
+    temp = n
+    while p * p <= temp:
+        if temp % p == 0:
+            while temp % p == 0:
+                temp //= p
+            result -= result // p
+        p += 1 if p == 2 else 2
+    if temp > 1:
+        result -= result // temp
+    return result
+
+
 def q1_reduction_control(c: int, N: int, prec: int) -> dict:
     """Check that ``q*=1, a=0`` reproduces the zeta archimedean block.
 
@@ -242,6 +280,7 @@ def candidate_block(
         raise ValueError("source must be 'standard' or 'dirichlet_series'")
     q_star, n_star, chi_star = chars.primitive_lift(modulus, number)
     parity = int(chi_star.parity())
+    is_principal = (int(chi_star.conductor()) == 1 and int(chi_star.parity()) == 0 and int(chi_star.order()) == 1)
     alpha = alpha_arb(parity)
     S, CC, XC, L = arch_closed_forms(N, c, prec, alpha)
     kappa = _arb_kappa(L) + arb(q_star).log()
@@ -255,11 +294,34 @@ def candidate_block(
         zero_modulus = modulus
     wp = adhoc.wp_from_values(base, values)
 
+    # Build W02 (pole block): zero for non-principal, scaled for principal
+    dim = 2 * N + 1
+    if is_principal:
+        # For principal character modulo q, residue = φ(q)/q
+        residue = arb(totient(modulus)) / arb(modulus)
+        W02 = w02_zeta(c, N, prec)
+        # Scale by residue φ(q)/q
+        for i in range(dim):
+            for j in range(i, dim):
+                W02[i, j] = W02[j, i] = W02[i, j] * residue
+        pole_block = f"SCALED POLE (residue {totient(modulus)}/{modulus})"
+    else:
+        W02 = arb_mat(dim, dim)  # zero matrix
+        pole_block = "ZERO (non-principal)"
+
+    if source == "standard":
+        values = adhoc.character_values(q_star, n_star, c)
+        zero_modulus = q_star
+    else:
+        values = adhoc.character_values(modulus, number, c)
+        zero_modulus = modulus
+    wp = adhoc.wp_from_values(base, values)
+
     dim = 2 * N + 1
     tau = arb_mat(dim, dim)
     for i in range(dim):
         for j in range(i, dim):
-            value = arb(0) - wr[i, j] - wp[i, j]
+            value = W02[i, j] - wr[i, j] - wp[i, j]
             tau[i, j] = tau[j, i] = value
 
     inertia = adhoc.inertia_record(tau)
@@ -271,7 +333,7 @@ def candidate_block(
             (values[q] == 0) == (math.gcd(q, zero_modulus) > 1)
             for q, _ in base["pdata"]
         ),
-        "C2_pole_block_zero": True,
+        "C2_pole_block_correct": is_principal or all(W02[i, j] == 0 for i in range(dim) for j in range(dim)),
     }
     return {
         "record": {
@@ -288,7 +350,7 @@ def candidate_block(
             "conductor": q_star,
             "parity": parity,
             "alpha": str(alpha_fraction(parity)),
-            "pole_block": "ZERO (non-principal)",
+            "pole_block": pole_block,
             "inertia": inertia,
             "checks": checks,
             "status": "PASS" if all(checks.values()) else "FAILED",
@@ -297,6 +359,7 @@ def candidate_block(
         "tau": tau,
         "wr": wr,
         "wp": wp,
+        "W02": W02,
     }
 
 
@@ -312,7 +375,7 @@ def run_config(config: dict) -> dict:
         )
         standard = {}
         standard_records = []
-        for modulus, number in PRIMITIVE_CHARACTERS:
+        for modulus, number in PRIMITIVE_CHARACTERS + PRINCIPAL_CHARACTERS:
             built = candidate_block(base, c, N, prec, modulus, number, "standard")
             standard[(modulus, number)] = built
             standard_records.append(built["record"])
@@ -449,14 +512,14 @@ def build_receipt(prereg_sha256: str | None = None) -> dict:
         "candidate_result": candidate_result,
         "verdict": verdict,
         "block_status": "CANDIDATE",
-        "principal_pole_status": "NOT IMPLEMENTED",
+        "principal_pole_status": "IMPLEMENTED" if PRINCIPAL_POLE_IMPLEMENTED else "NOT IMPLEMENTED",
         "independent_validation": INDEPENDENT_VALIDATION,
         "registry_entry": None,
         "scope": {
             "candidate_block_only": True,
             "certified_character_weil_block": False,
             "standard_l_function_block_certified": False,
-            "principal_pole_included": False,
+            "principal_pole_included": PRINCIPAL_POLE_IMPLEMENTED,
             "independent_validation_complete": False,
             "imprimitive_and_standard_identified": False,
             "critical_line_claim": False,

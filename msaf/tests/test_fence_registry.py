@@ -26,7 +26,7 @@ REGISTRY = ROOT / "reports" / "FENCE_REGISTRY.md"
 CERT_RE = re.compile(r"^\s*sha256LF\s+([0-9a-f]{64})\s+(\S.*?)\s*$", re.M)
 ENTRY_HEAD_RE = re.compile(r"^### [TFRA]-\d{4}-\d{4}\b")
 STATUS_RE = re.compile(
-    r"\*\*Status:\*\* (PROPOSED|RECON|PRE-REG|RUNNING|CERTIFIED|FAILED|RETRACTED)\b"
+    r"\*\*Status:\*\* (PROPOSED|RECON|PRE-REG|RUNNING|CERTIFIED|FAILED|RETRACTED|INCONCLUSIVE)\b"
 )
 MIN_ENTRIES = 6  # the six initial entries; entries are retracted, never deleted
 

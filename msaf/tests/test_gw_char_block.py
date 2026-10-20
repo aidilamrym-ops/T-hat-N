@@ -4,9 +4,9 @@
 The guard is deliberately fail-closed on overclaiming.  It locks the locked
 configuration, the parity map, the ``q*=1`` reduction control, the candidate
 inertia numbers, the separation of the standard L-function block from the
-imprimitive Dirichlet-series block, and the ``INCONCLUSIVE`` verdict.  A
-future promotion to ``PASS`` must fail this guard until an independent
-validation and the principal pole block exist.
+imprimitive Dirichlet-series block, the principal pole block, and the
+``INCONCLUSIVE`` verdict.  A future promotion to ``PASS`` must fail this
+guard until an independent validation exists.
 """
 
 from __future__ import annotations
@@ -35,8 +35,9 @@ def test_locked_configuration() -> None:
         {"role": "replication", "c": 200, "N": 20, "prec": 600},
     )
     assert cb.PRIMITIVE_CHARACTERS == ((4, 3), (3, 2), (5, 4))
+    assert cb.PRINCIPAL_CHARACTERS == ((4, 1), (3, 1), (5, 1))
     assert cb.NONPRIMITIVE_PARENTS == ((12, 7), (12, 5), (15, 4), (15, 11))
-    assert cb.PRINCIPAL_POLE_IMPLEMENTED is False
+    assert cb.PRINCIPAL_POLE_IMPLEMENTED is True
     assert cb.INDEPENDENT_VALIDATION == "Q1_REDUCTION_ONLY"
     assert cb.Q1_CONTROL == {"c": 13, "N": 4, "prec": 200}
 
@@ -65,10 +66,15 @@ def test_primary_candidate_blocks_are_finite_with_locked_inertia() -> None:
         record["identifier"]: (record["inertia"]["n_pos"], record["inertia"]["n_neg"])
         for record in config["standard_blocks"]
     }
+    # Non-principal characters have inertia (n_pos, n_neg) != (dim, 0)
+    # Principal characters have pole block and are NOT POSITIVE DEFINITE
     assert standard == {
         "chi_4_3": (4, 37),
         "chi_3_2": (6, 35),
         "chi_5_4": (16, 25),
+        "chi_4_1": (40, 1),
+        "chi_3_1": (40, 1),
+        "chi_5_1": (40, 1),
     }
     series = {
         record["identifier"]: (record["inertia"]["n_pos"], record["inertia"]["n_neg"])
@@ -84,7 +90,10 @@ def test_primary_candidate_blocks_are_finite_with_locked_inertia() -> None:
         assert record["status"] == "PASS"
         assert record["inertia"]["entries_finite"] is True
         assert record["inertia"]["undetermined_pivot"] is None
-        assert record["pole_block"] == "ZERO (non-principal)"
+        if record["identifier"].endswith("_1"):
+            assert record["pole_block"].startswith("SCALED POLE")
+        else:
+            assert record["pole_block"] == "ZERO (non-principal)"
 
 
 def test_standard_block_of_a_parent_equals_its_primitive_parent() -> None:
@@ -120,12 +129,12 @@ def test_committed_receipt_is_locked() -> None:
     assert data["verdict"] == "INCONCLUSIVE"
     assert data["block_status"] == "CANDIDATE"
     assert data["candidate_result"] == "CANDIDATE NOT POSITIVE DEFINITE"
-    assert data["principal_pole_status"] == "NOT IMPLEMENTED"
+    assert data["principal_pole_status"] == "IMPLEMENTED"
     assert data["independent_validation"] == "Q1_REDUCTION_ONLY"
     assert data["registry_entry"] is None
     assert all(data["checks"].values())
     assert cb.receipt_sha256(data) == (
-        "25e61d7dc3e3d818b0c6978f34c4c6e123c922d0fd733cb33b86707372efa9ba"
+        "faa06b697afa3dad812d9d12f17327521465445922e2b0599facb1987b202312"
     )
     assert data["prereg_sha256"] == hashlib.sha256(
         PREREG.read_bytes().replace(b"\r\n", b"\n")
@@ -152,7 +161,7 @@ def test_scope_flags_forbid_overclaiming() -> None:
         "candidate_block_only": True,
         "certified_character_weil_block": False,
         "standard_l_function_block_certified": False,
-        "principal_pole_included": False,
+        "principal_pole_included": True,
         "independent_validation_complete": False,
         "imprimitive_and_standard_identified": False,
         "critical_line_claim": False,
