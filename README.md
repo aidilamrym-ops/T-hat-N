@@ -12,7 +12,7 @@ arithmetic (`arb` / `acb` / `arb_mat`, version 0.9.0). No floating-point value
 ever touches the numeric path, and no zero claim is ever certified by
 equality: only by containment.
 
-- **CI:** [![CI](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml) - `python -m pytest msaf -q` (480 tests) plus the Lean kernel build; every push must stay green
+- **CI:** [![CI](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml) - `python -m pytest msaf -q` (489 tests) plus the Lean kernel build; every push must stay green
 - **Permanent archive:** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338271.svg)](https://doi.org/10.5281/zenodo.23338271) (concept DOI, all versions; latest version v1.41.0-alpha: https://doi.org/10.5281/zenodo.23445149)
 - **Sealed releases:** [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha); final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
 - **License:** MIT - see [LICENSE](LICENSE)
@@ -597,6 +597,35 @@ Anderson-transition claim.  Details:
 prereg [`reports/PREREG_RBM_ANDERSON_2026-10-20.md`](reports/PREREG_RBM_ANDERSON_2026-10-20.md);
 registry `A-2026-0023` (CI run `39451466416`).
 
+### 2.7 Finite Ulam spectral closure for a chaotic skew tent map (blueprint item 5)
+
+For `N = 16` and `N = 32`, let `p_N = N/(2(N+1))` and use the
+full-branched skew tent map with breakpoint `p_N`.  On the uniform partition
+`I_i = [i/N,(i+1)/N]`, every Ulam entry
+
+```text
+P_ij = N * |I_i intersect T_N^{-1}(I_j)|
+```
+
+is an exact rational (`Fraction`/`fmpq`), and both matrices are
+non-symmetric, row-stochastic, full rank, and have simple spectra
+(`rank(P-I)=N-1`, nonzero characteristic-polynomial discriminant).
+
+An `arb_mat.eig(multiple=True, algorithm="rump")` ladder at
+`64, 128, 256, 512, 1024` bits returns one Perron enclosure containing `1`
+and all other `abs_upper < 1`.  The width target `1e-25` is first met at
+128 bits; widths contract strictly to `5.70e-307` (`N=16`) and `1.15e-306`
+(`N=32`) at 1024 bits.  The interval spectral-gap lower bounds are `0.6131`
+and `0.5954`.  `ResolutionAlarm` is fail-closed in the guard but is not
+triggered by the campaign.
+
+This is a finite matrix certificate.  It is **not** a claim about the
+continuous transfer operator, ergodicity/mixing, a 60-iteration Newton
+contraction, the logistic map, or any general chaotic system.  Details:
+[`reports/ULAM_SPECTRAL_2026-10-21.md`](reports/ULAM_SPECTRAL_2026-10-21.md);
+prereg [`reports/PREREG_ULAM_SPECTRAL_2026-10-21.md`](reports/PREREG_ULAM_SPECTRAL_2026-10-21.md);
+registry `A-2026-0024`.
+
 ---
 
 ## SECTION 3: STEP-BY-STEP REPRODUCIBILITY MANUAL (HOW TO RUN AUDIT)
@@ -613,7 +642,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (480 tests, every landmine pinned)
+### 3.2 Regression Suite (489 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q
@@ -1425,7 +1454,7 @@ Landmine register L1-L38: [`msaf/AUDIT.md`](msaf/AUDIT.md).
   restoring projection, adaptive precision, 2D/3D renderers, multi-grid check
 - `msaf/milenium_frontier/` - scaffolding only: RH localization + Z3
   conformance, rational Hodge cycles (no proofs claimed)
-- `msaf/tests/` - regression suite (480 tests)
+- `msaf/tests/` - regression suite (489 tests)
 - `lean/` - Lean 4 machine-checked kernels 1D/2D/3D + central variant + Moore box (`lake build` green)
 - `msaf_core_lattice.py` - the four mandated entry points
 - `docs/math/` - versioned equation renderings plus [`render script`](harness/render_math.py); includes the generated workflow / verification-chain diagrams (Section 7)

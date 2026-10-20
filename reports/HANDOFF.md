@@ -1955,6 +1955,54 @@ Konsekuensi urutan yang disarankan:
   `python -m pytest msaf/tests/test_fence_registry.py -q`;
   `gh run view 39451466416`.
 
+### 2.0ar - Item 5 blueprint: spectral closure Ulam finite untuk skew tent (2026-10-21)
+
+- **Konteks/pilihan:** setelah item 4, pemilik memberi `lanjut eksekusi`;
+  item berikutnya dalam urutan triage adalah **item 5** (Frobenius-Perron /
+  matriks Ulam non-simetris, `arb_mat.eig`, alarm resolusi). Pra-registrasi
+  dikunci sebelum implementasi:
+  `reports/PREREG_ULAM_SPECTRAL_2026-10-21.md`, commit `7cfbca5`,
+  sha256LF `b07e3aba4ead7a3676db10b3ccfb204265eba1ef61eb31d9f17caebe3078f82d`.
+- **Berkas baru:** `msaf/ulam_spectral.py`; guard
+  `msaf/tests/test_ulam_spectral.py` (9 uji); laporan
+  `reports/ULAM_SPECTRAL_2026-10-21.md`; receipt
+  `reports/ulam_spectral_2026-10-21.json`. Tidak ada perubahan pada V1-V6,
+  `A-2026-0022`, `A-2026-0023`, `ci.yml`, workflow spec,
+  `lean/lakefile.toml`, freeze pins, atau artefak beku.
+- **Instance:** peta skew tent penuh-cabang `T_N` dengan breakpoint
+  `p_N=N/(2(N+1))`; `N=16, p=8/17` (primer) dan `N=32, p=16/33`
+  (replikasi). Partisi seragam; entri Ulam dihitung exact sebagai
+  `Fraction`/`fmpq`. Kedua matriks non-simetris, row-stochastic, full rank;
+  `rank(P-I)=N-1` dan diskriminan charpoly nonzero (spektrum simple).
+- **Hasil:** `arb_mat.eig(multiple=True, algorithm="rump")` pada ladder
+  64/128/256/512/1024 bit memberikan satu Perron yang memuat `1`, semua
+  non-Perron `abs_upper < 1`. Target lebar `1e-25` pertama tercapai di
+  **128 bit**. Lebar pada 1024 bit: `5.70e-307` (`N=16`) dan `1.15e-306`
+  (`N=32`); spectral-gap lower bound `0.6131` dan `0.5954`.
+  `ResolutionAlarm` fail-closed di guard, tidak terpicu kampanye.
+  Receipt `verdict=PASS`; canonical
+  `4a850532be255fd0f68a55d529c12d3406696b50e281997daba20528dcb883ac`;
+  file sha256LF
+  `5b2cc32a795053fdac13e12e1f7e4cf763c7a46aacc8113b280268d9766903b7`.
+- **Batas:** ini sertifikat **matriks Ulam finite** `N=16/32`, bukan
+  operator transfer kontinu, bukan klaim ergodisitas/mixing, bukan klaim
+  discretization error, dan bukan klaim `N -> infinity`. **Newton
+  contraction 60 iterasi TIDAK diuji** (`newton_contraction_tested=false`);
+  angka 60 hanya budget attempt resolusi. Logistic r=4 tidak dipakai untuk
+  spektrum karena partisi seragamnya rank-deficient dengan klaster nol;
+  tidak ada klaim spektrum logistic. Tidak ada klaim RH, lokasi nol,
+  `sigma=1/2`, faktorisasi, RSA/ECC, Anderson, atau fisika. Tidak ada
+  kampanye tersegel yang dijalankan ulang.
+- **Fakta mesin/CI:** guard **9 passed** (7,25 dtk); suite penuh
+  **489 passed** (238,31 dtk); freeze OK (14 pin; digest
+  `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`).
+  Runtime kampanye lokal **4,01 dtk**. Registry `A-2026-0024` (5
+  sertifikat sha256LF). CI dicatat setelah push.
+- **Guard:** `python -m msaf.ulam_spectral`;
+  `python -m pytest msaf/tests/test_ulam_spectral.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional
