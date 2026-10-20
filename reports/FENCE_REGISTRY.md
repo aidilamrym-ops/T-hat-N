@@ -1501,6 +1501,59 @@ mengikuti laporan L4).
   sha256LF 4ff31e634f6250174aad30c12354f152fd8919d195b9d0883844c0f7c66c3257 reports/rbm_anderson_2026-10-20.json
   ```
 
-Selesai — 28 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0019` + `A-2026-0020` + `A-2026-0021` + `A-2026-0022` + `A-2026-0023`). Entri
+### A-2026-0024 — Spectral closure Ulam finite untuk peta skew tent chaotik (item 5 blueprint)
+
+- **Jenis:** A
+- **Pernyataan:** `msaf/ulam_spectral.py` membangun matriks Ulam
+  exact-rational untuk peta skew tent penuh-cabang
+  `T_N(x)=x/p_N` di `[0,p_N]` dan `(1-x)/(1-p_N)` di `[p_N,1]`,
+  dengan `p_N=N/(2(N+1))`, pada partisi seragam. Dua instance dikunci:
+  `N=16, p=8/17` (primer) dan `N=32, p=16/33` (replikasi). Setiap entri
+  `P_ij=N*|I_i ∩ T_N^{-1}(I_j)|` dihitung sebagai `Fraction` exact.
+  Kedua matriks nonnegative, row-stochastic tepat, non-simetris, dan
+  full rank; `rank(P-I)=N-1` serta diskriminan charpoly nonzero,
+  sehingga eigenvalue Perron `1` simple dan seluruh spektrum simple.
+  Enclosure `arb_mat.eig(multiple=True, algorithm="rump")` pada ladder
+  `64/128/256/512/1024` bit memberi satu Perron yang memuat `1`,
+  semua eigenvalue non-Perron `abs_upper < 1`, dan lebar menurun ketat.
+  Target `1e-25` pertama tercapai di **128 bit**; lebar 1024 bit
+  `5.70e-307` (`N=16`) dan `1.15e-306` (`N=32`); spectral-gap lower
+  bound `0,6131` dan `0,5954`. `ResolutionAlarm` fail-closed di guard,
+  tidak terpicu kampanye. Receipt kanonik
+  `4a850532be255fd0f68a55d529c12d3406696b50e281997daba20528dcb883ac`.
+  Guard 9 uji lulus; suite penuh 489 lulus (238,31 dtk); CI run
+  `39460603962` (commit `2ad4228`) sukses.
+- **Batas:** ini sertifikat **matriks Ulam finite** `N=16/32`, bukan
+  klaim tentang operator transfer kontinu, ergodisitas global, mixing,
+  invariant density kontinu, discretization error, atau limit
+  `N -> infinity`. **Newton contraction 60 iterasi tidak diuji**
+  (`newton_contraction_tested=false`); angka 60 hanya budget attempt
+  resolusi. Logistic `r=4` tidak dipakai untuk spektrum karena partisi
+  seragamnya rank-deficient dengan klaster nol; tidak ada klaim spektrum
+  logistic. Tidak ada klaim RH, lokasi nol, `σ=1/2`, faktorisasi,
+  RSA/ECC, Anderson, atau fisika. Tidak mengubah V1–V6
+  (`A-2026-0015`–`A-2026-0021`), `A-2026-0022`, `A-2026-0023`, `ci.yml`,
+  workflow spec, freeze pins, atau artefak beku; tidak ada kampanye
+  tersegel yang dijalankan ulang.
+- **Status:** CERTIFIED dengan scope tercatat
+- **Domino:** tidak ada (sertifikat finite; bukan domino)
+- **Relasi:** item 5 dari `reports/FIVE_CORE_BLUEPRINT_TRIAGE_2026-10-20.md`;
+  entri registry ke-29; memori kerja §2.0ar `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `python -m msaf.ulam_spectral`;
+  `python -m pytest msaf/tests/test_ulam_spectral.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`;
+  `gh run view 39460603962`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF 0b722f6402142235cc40ff4e3a62d1b0c7d589df813cf07565e88c352ac7a0ff msaf/ulam_spectral.py
+  sha256LF 7729ad2f5566b05c5baec96f58584bcddf55fcfe7626f25cd5a815e38650fa2d msaf/tests/test_ulam_spectral.py
+  sha256LF b07e3aba4ead7a3676db10b3ccfb204265eba1ef61eb31d9f17caebe3078f82d reports/PREREG_ULAM_SPECTRAL_2026-10-21.md
+  sha256LF 88996bafc274c228b7225410121f8083de1cb4dc1171410d292753ddc2e69378 reports/ULAM_SPECTRAL_2026-10-21.md
+  sha256LF 5b2cc32a795053fdac13e12e1f7e4cf763c7a46aacc8113b280268d9766903b7 reports/ulam_spectral_2026-10-21.json
+  ```
+
+Selesai — 29 entri per 2026-10-21 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0019` + `A-2026-0020` + `A-2026-0021` + `A-2026-0022` + `A-2026-0023` + `A-2026-0024`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

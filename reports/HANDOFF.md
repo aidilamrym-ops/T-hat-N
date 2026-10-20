@@ -1997,7 +1997,9 @@ Konsekuensi urutan yang disarankan:
   **489 passed** (238,31 dtk); freeze OK (14 pin; digest
   `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`).
   Runtime kampanye lokal **4,01 dtk**. Registry `A-2026-0024` (5
-  sertifikat sha256LF). CI dicatat setelah push.
+  sertifikat sha256LF). CI run **39460603962** (commit `2ad4228`)
+  **success**: `python-tests` 49 dtk, `coq-kernel` 2m10s,
+  `lean-kernel` 2m35s.
 - **Guard:** `python -m msaf.ulam_spectral`;
   `python -m pytest msaf/tests/test_ulam_spectral.py -q`;
   `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;

@@ -1,6 +1,7 @@
 # Sertifikat spectral closure Ulam finite untuk peta skew tent chaotik — 2026-10-21
 
-**Status lokal:** `PASS` untuk kriteria yang dikunci; CI dicatat setelah push.
+**Status:** `PASS` (CI run `39460603962`, commit `2ad4228`, conclusion
+`success`).
 **Paket:** item 5 dari
 [`reports/FIVE_CORE_BLUEPRINT_TRIAGE_2026-10-20.md`](FIVE_CORE_BLUEPRINT_TRIAGE_2026-10-20.md).
 **Pra-registrasi:** [`reports/PREREG_ULAM_SPECTRAL_2026-10-21.md`](PREREG_ULAM_SPECTRAL_2026-10-21.md)
@@ -246,6 +247,8 @@ logistic tidak chaotik. Paket ini tidak membuat klaim spektrum logistic.
 - Suite penuh: **489 passed** dalam **238.31 s**.
 - Freeze: `verify OK: 14 pins`; digest
   `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`.
+- CI run `39460603962` (commit `2ad4228`) **success**: `python-tests`
+  49 s, `coq-kernel` 2m10s, `lean-kernel` 2m35s.
 
 Perintah reproduksi:
 
