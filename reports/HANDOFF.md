@@ -1864,9 +1864,11 @@ Konsekuensi urutan yang disarankan:
   hash baru `ci.yml`
   `52619c25fe9197f6fe892a052cd86bf858a5c4b91725f7abc84b2e3b6c256079`;
   registry `A-2026-0016` sertifikat diperbarui.
+- **CI pasca-amandemen:** run `39426728099` (commit `1c806cb`)
+  **success** — `lean-kernel` 3m29s, `python-tests` 1m17s,
+  `coq-kernel` 2m29s; semua job hijau.
 - **Batas:** amendemen infrastruktur, bukan hasil matematis; tidak
-  mengubah V1–V6; tidak mengubah trusted base; bukan klaim CI hijau
-  sampai run pasca-amandemen diverifikasi.
+  mengubah V1–V6; tidak mengubah trusted base.
 
 ---
 

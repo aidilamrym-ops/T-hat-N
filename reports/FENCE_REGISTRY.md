@@ -1139,7 +1139,9 @@ mengikuti laporan L4).
   Perubahan hanya pada daftar `--exclude-dir`; audit aksioma
   per-deklarasi, sensor `spec`/`spec_v2`, dan job Coq tidak berubah.
   Sertifikat `ci.yml` diperbarui ke hash baru; guard
-  `test_ci_verification_paths.py` tetap 5 uji hijau.
+  `test_ci_verification_paths.py` tetap 5 uji hijau. Run CI
+  pasca-amandemen `39426728099` (commit `1c806cb`) hijau:
+  `lean-kernel`, `python-tests`, dan `coq-kernel` sukses.
 - **Status:** CERTIFIED dengan scope tercatat
 - **Domino:** tidak ada (infrastruktur verifikasi; bukan domino)
 - **Relasi:** melanjutkan `A-2026-0015` tanpa mengubahnya; memakai
