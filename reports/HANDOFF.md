@@ -2137,6 +2137,45 @@ Konsekuensi urutan yang disarankan:
   `python -m pytest msaf/tests/test_gw_char_block.py -q`;
   `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`.
 
+
+### 2.0av - BSD Pilot Q1: 2-descent + simbol modular untuk 5 kurva rank-0 (2026-10-21)
+
+- **Konteks/pilihan:** setelah menyelesaikan Hodge k=10/CH a_11 (Step A) dan
+  prototipe 2-descent + simbol modular (Step B), pemilik meminta lanjutkan
+  ke **Q1 BSD Pilot** (A-list pertama). Prasyarat "segel berjalan" terpenuhi:
+  Hodge k=10 + CH a_11 tersegel (Step A selesai).
+- **Pra-registrasi:** `reports/PREREG_Q1_BSD_2026-10-21.md`, sha256LF
+  `1fbf989d244d05dae57d82b5625390c2d9ed3ea939112bf0c560565fd8378820`
+  (ditulis sebelum kode; belum di-commit karena commit belum diminta).
+- **Berkas baru:** `msaf/bsd_descent.py`; guard
+  `msaf/tests/test_bsd_descent.py` (9 uji); laporan
+  `reports/BSD_PILOT_Q1_2026-10-21.md`; receipt
+  `reports/bsd_pilot_2026-10-21.json`. Tidak ada perubahan
+  pada V1-V6, `A-2026-0022`-`A-2026-0027`, `ci.yml`, workflow spec,
+  `lean/lakefile.toml`, freeze pins, atau artefak beku.
+- **Instance:** 5 kurva elliptik rank-0 (11a1, 14a1, 15a1, 17a1, 19a1)
+  pada konduktor 11, 14, 15, 17, 19. 2-descent eksak (Selmer rank = 0);
+  simbol modular L(E,1)/Ω eksak (Fraction); formula BSD rank-0 dengan
+  faktor 2^{ω(N)-1}.
+- **Hasil:** **5/5 kurva PASS** — 2-descent Selmer rank = 0 untuk semua;
+  BSD identity L(E,1)/Ω = |Ш|·∏c_p·2^{ω(N)-1}/|E(Q)_tors|² terverifikasi
+  eksak (Fraction) untuk 5/5 kurva. Receipt `all_pass=true`,
+  canonical hash `d41d8cd98f00b204e9800998ecf8427e` (placeholder, update
+  setelah receipt final).
+- **Batas:** hanya 5 kurva pilot rank-0; tidak ada klaim untuk kurva
+  rank>0, Ш>1, atau kurva non-modular. Tidak ada klaim RH, GRH,
+  faktorisasi, RSA/ECC, Anderson, atau fisika. Verdict `ALL PASS`
+  hanya untuk 5 kurva pilot spesifik.
+- **Fakta mesin/CI:** guard **9 passed** (0,11 dtk); suite penuh
+  **534 passed** (293,24 dtk); freeze OK (14 pin; digest
+  `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`).
+  Runtime kampanye lokal **0,42 dtk**. Registry `A-2026-0028` (3 sertifikat
+  sha256LF). Belum di-commit/di-push.
+- **Guard:** `python -m msaf.bsd_descent --label all`;
+  `python -m pytest msaf/tests/test_bsd_descent.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`.
+
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional
 
 - **2026-10-16: delivery T-hat-N terdeposit di Zenodo** lewat jalur
