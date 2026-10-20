@@ -626,6 +626,87 @@ contraction, the logistic map, or any general chaotic system.  Details:
 prereg [`reports/PREREG_ULAM_SPECTRAL_2026-10-21.md`](reports/PREREG_ULAM_SPECTRAL_2026-10-21.md);
 registry `A-2026-0024`.
 
+### 2.8 Exact Dirichlet-character arithmetic and structural zeros (blueprint item 1, option A)
+
+For five real Dirichlet characters on `1 <= n <= 200` (four imprimitive
+non-principal: `chi_{12,7}`, `chi_{12,5}`, `chi_{15,4}`, `chi_{15,11}`, plus
+the imprimitive principal control `chi_{12,1}`), every character value is
+computed as an **exact** integer `-1`, `0`, `+1` (FLINT `Acb` values are
+rejected unless real and exact).  The certificate checks, per instance:
+
+* metadata (`conductor`, `is_primitive`, `parity`, `order`) against the
+  pre-registered table;
+* periodicity `chi(n+q)=chi(n)` and multiplicativity `chi(ab)=chi(a)chi(b)`;
+* the structural-zero criterion `chi(n)=0` **iff** `gcd(n,q)>1`;
+* a **unique** primitive lift `chi*` modulo `q*`, primitive, matching on all
+  units, with the lift zero criterion `chi*(n)=0` iff `gcd(n,q*)>1`;
+* minimality: no character modulo a proper divisor `d | q` matches on all
+  units;
+* activation of the new primes `p | q`, `p` not dividing `q*`: there
+  `chi(p^a)=0` while `chi*(p^a) != 0`.
+
+The receipt keeps per-instance table hashes, zero counts and activation
+counts.  Two analytic objects are kept explicitly apart: the standard
+`L(s,chi) = L(s,chi*)` and the imprimitive Dirichlet series
+`F(s) = L(s,chi*) prod_{p|q, p not|q*} (1 - chi*(p) p^{-s})`.
+
+This is a **coefficient-arithmetic** certificate only.  It builds no
+Guinand-Weil matrix, evaluates no L-function, and claims no zero, no
+critical-line location, no `sigma = 1/2`, no RH/GRH, no global positivity,
+no factorization, no RSA/ECC, no Anderson transition, and no physics.
+Details: [`reports/GW_CHARACTER_ARITHMETIC_2026-10-21.md`](reports/GW_CHARACTER_ARITHMETIC_2026-10-21.md);
+prereg [`reports/PREREG_GW_CHARACTER_ARITHMETIC_2026-10-21.md`](reports/PREREG_GW_CHARACTER_ARITHMETIC_2026-10-21.md);
+registry `A-2026-0025`.
+
+### 2.9 AD HOC zeta-block perturbation with character coefficients (blueprint item 1, option B)
+
+Keeping the zeta pole block `W02_zeta` and the zeta archimedean block
+`WR_zeta` and replacing **only** the prime-power block,
+
+```text
+tau_pert(chi) = W02_zeta - WR_zeta - Wp_chi,
+Wp_chi(q_k)   = log(p) q_k^{-1/2} chi(q_k) shape(q_k),
+```
+
+gives a matrix labelled **`AD HOC PERTURBATION`** everywhere.  On the two
+locked configurations (`c=100, N=20, prec=600` and `c=200, N=20, prec=600`,
+`dim=41`) the local builder reproduces the published zeta matrix
+(`max_abs` `3.58e-176` and `3.28e-176`, below the `1.03e-171` ball
+threshold), the zeta baseline has inertia `(41,0)`, and **every** character
+matrix - primitive lift included - has an inertia different from `(41,0)`
+with no undetermined pivot, e.g. at `c=100`: `chi_{12,7}` `(17,24)` primitive
+and `(20,21)` imprimitive; `chi_{12,5}` `(16,25)` and `(21,20)`; `chi_{15,4}`
+`(19,22)` and `(20,21)`; `chi_{15,11}` `(16,25)` and `(19,22)`.
+
+The receipt separates `execution_status` (`PASS`) from
+`mathematical_verdict` (`AD HOC NEGATIVE`).  This is **not** the
+Guinand-Weil block of a Dirichlet L-function, inertia is a sign statement
+about a finite matrix only, and `AD HOC NEGATIVE` is **not** evidence about
+positivity of `L(s,chi)`.  No zero, critical-line, `sigma = 1/2`, RH/GRH,
+global positivity, factorization, RSA/ECC, Anderson, or physics claim is
+made.  Details: [`reports/GW_CHAR_ADHOC_2026-10-21.md`](reports/GW_CHAR_ADHOC_2026-10-21.md);
+prereg [`reports/PREREG_GW_CHAR_ADHOC_2026-10-21.md`](reports/PREREG_GW_CHAR_ADHOC_2026-10-21.md);
+registry `A-2026-0026`.
+
+### 2.10 Candidate character-aware block - NOT READY (blueprint item 1, option C)
+
+A candidate archimedean block for a real primitive character is derived
+from `Lambda(s,chi) = (q*/pi)^((s+a)/2) Gamma((s+a)/2) L(s,chi)` with
+`h_chi(r) = Re psi((1+2a)/4 + i r/2) + log q* - log pi` and the digamma
+poles shifted to `c_k = 2k + 2 alpha`, `alpha = (1+2a)/4`.  Non-principal
+characters have no pole, so `W02_chi = 0`.  The `q*=1`, `alpha=1/4` reduction
+reproduces the zeta archimedean block to `4.0e-57` (threshold `2.7e-51`),
+the standard block of an imprimitive character equals the block of its
+primitive parent, and the standard `L(s,chi)` block stays distinguishable
+from the imprimitive Dirichlet-series block.
+
+The verdict stays **`INCONCLUSIVE` / `NOT READY`** and there is **no
+registry entry**: the parity shift `alpha = 3/4` and the conductor shift
+`log q*` have no independent validation here, and the principal-character
+pole block is not implemented.  The inertia numbers are exploratory only.
+Details: [`reports/GW_CHAR_BLOCK_2026-10-21.md`](reports/GW_CHAR_BLOCK_2026-10-21.md);
+prereg [`reports/PREREG_GW_CHAR_BLOCK_2026-10-21.md`](reports/PREREG_GW_CHAR_BLOCK_2026-10-21.md).
+
 ---
 
 ## SECTION 3: STEP-BY-STEP REPRODUCIBILITY MANUAL (HOW TO RUN AUDIT)
@@ -642,7 +723,7 @@ only already-certified integers (no float produced by any computation ever
 reaches the plotter) and typesets the equations in `docs/math/`;
 `pytest` runs the regression suite.
 
-### 3.2 Regression Suite (489 tests, every landmine pinned)
+### 3.2 Regression Suite (525 tests, every landmine pinned)
 
 ```bash
 python -m pytest msaf -q

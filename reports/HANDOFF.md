@@ -2007,6 +2007,136 @@ Konsekuensi urutan yang disarankan:
 
 ---
 
+### 2.0as - Item 1 blueprint opsi A: aritmetika karakter exact dan zero struktural (2026-10-21)
+
+- **Konteks/pilihan:** pemilik meminta `audit: A dulu dan lakukan semua opsi
+  secara berurutan satu demi satu opsi` untuk item 1 (Guinand-Weil
+  non-primitif). Audit scope (`reports/SCOPE_AUDIT_GW_NONPRIMITIVE_2026-10-21.md`)
+  memberi verdict `NOT IMPLEMENTATION-READY` untuk blueprint apa adanya, lalu
+  menawarkan empat opsi A-D. Opsi A (aritmetika karakter/struktural-zero)
+  dipilih lebih dulu; tiap opsi punya pra-registrasi, implementasi, guard,
+  receipt, dan laporan sendiri.
+- **Pra-registrasi:** `reports/PREREG_GW_CHARACTER_ARITHMETIC_2026-10-21.md`,
+  sha256LF
+  `526b731b89b5351192c959c84034da6860dd85e8841caa0a1fdc41b5f1cb7074`
+  (ditulis sebelum kode; belum di-commit karena commit belum diminta).
+- **Berkas baru:** `msaf/gw_character_arithmetic.py`; guard
+  `msaf/tests/test_gw_character_arithmetic.py` (12 uji); laporan
+  `reports/GW_CHARACTER_ARITHMETIC_2026-10-21.md`; receipt
+  `reports/gw_character_arithmetic_2026-10-21.json`. Tidak ada perubahan
+  pada V1-V6, `A-2026-0022`-`A-2026-0024`, `ci.yml`, workflow spec,
+  `lean/lakefile.toml`, freeze pins, atau artefak beku.
+- **Instance:** lima karakter real pada cutoff `C=200`: non-primitif
+  `chi_{12,7}` (q*=4), `chi_{12,5}` (q*=3), `chi_{15,4}` (q*=5),
+  `chi_{15,11}` (q*=3) dan kontrol principal `chi_{12,1}` (q*=1).
+- **Hasil:** semua nilai karakter exact `0/+1/-1`; periodisitas dan
+  multiplikativitas berlaku; `chi(n)=0` iff `gcd(n,q)>1` pada
+  `1<=n<=200`; primitive lift tunggal, primitif, cocok pada semua unit;
+  tidak ada modulus proper yang cocok pada semua unit; aktivasi prime baru
+  33/67/53/27/133. Receipt `verdict=PASS`; canonical
+  `cfd966c5795d3e0b7e0009ee89f80e9b26592745e0a6b0c08f430b24d4473eb2`.
+- **Batas:** ini sertifikat **tabel koefisien**, bukan matriks, bukan
+  `L(s,chi)`. Dua objek dipisahkan: `L(s,chi)=L(s,chi*)` versus deret
+  Dirichlet `F(s)=L(s,chi*) prod_{p|q,p tidak|q*}(1-chi*(p)p^{-s})`; paket
+  ini tidak memilih objek analitik. Zero struktural adalah fakta koefisien,
+  bukan zero fungsi. Tidak ada klaim nol, `sigma=1/2`, critical-line, RH/GRH,
+  global positivity, faktorisasi, RSA/ECC, Anderson, atau fisika.
+- **Fakta mesin/CI:** guard **12 passed** (1,15 dtk); suite penuh
+  **525 passed** (264,33 dtk); freeze OK (14 pin; digest
+  `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`).
+  Runtime kampanye lokal **0,65 dtk**. Registry `A-2026-0025` (5 sertifikat
+  sha256LF). Belum di-commit/di-push.
+- **Guard:** `python -m msaf.gw_character_arithmetic`;
+  `python -m pytest msaf/tests/test_gw_character_arithmetic.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`.
+
+### 2.0at - Item 1 blueprint opsi B: perturbasi blok zeta AD HOC (2026-10-21)
+
+- **Konteks/pilihan:** lanjut dari opsi A sesuai urutan yang diminta.
+  Opsi B sengaja **ad hoc**: hanya `Wp` diganti nilai karakter, `W02` dan
+  `WR` tetap blok zeta, dan hasilnya diberi label `AD HOC PERTURBATION`
+  di seluruh laporan, receipt, dan registry.
+- **Pra-registrasi:** `reports/PREREG_GW_CHAR_ADHOC_2026-10-21.md`, sha256LF
+  `297b0c9bcce826f1b7b32d3b1d6d48dae6c10fd9aeb65aa485ddf83b8ca83976`.
+- **Berkas baru:** `msaf/gw_char_adhoc.py`; guard
+  `msaf/tests/test_gw_char_adhoc.py` (12 uji); laporan
+  `reports/GW_CHAR_ADHOC_2026-10-21.md`; receipt
+  `reports/gw_char_adhoc_2026-10-21.json`. Builder lokal adalah mirror
+  dari `source_arb_ldlt_certify.py` (file eksternal **tidak** diubah);
+  file eksternal dipakai sebagai kontrol bila tersedia.
+- **Instance:** `c=100,N=20,prec=600` (primer) dan `c=200,N=20,prec=600`
+  (replikasi), `dim=41`; empat karakter non-primitif real plus lift
+  primitifnya.
+- **Hasil:** kontrol builder lokal vs eksternal MATCH (`max_abs` `3.58e-176`
+  dan `3.28e-176` di bawah ambang `1.03e-171`); baseline zeta `(41,0)`;
+  semua matriks karakter ber-inertia bukan `(41,0)` tanpa pivot
+  undetermined, mis. `chi_{12,7}` `(17,24)`/`(20,21)`, `chi_{12,5}`
+  `(16,25)`/`(21,20)`, `chi_{15,4}` `(19,22)`/`(20,21)`, `chi_{15,11}`
+  `(16,25)`/`(19,22)` pada `c=100`. Receipt `execution_status=PASS`,
+  `mathematical_verdict=AD HOC NEGATIVE`; canonical
+  `76e43dac29f299cd7ec222bbf5bafce74850d1b6a24a33046f2b3ea9676093c1`.
+- **Batas:** `AD HOC PERTURBATION` **bukan** blok Guinand-Weil berkarakter
+  dan **bukan** explicit formula untuk `L(s,chi)`. Inertia hanya tanda
+  matriks finite (tanpa eigenvalue/magnitude/gap). `AD HOC NEGATIVE` bukan
+  bukti bahwa `L(s,chi)` tidak positif. Tidak ada klaim nol, `sigma=1/2`,
+  critical-line, RH/GRH, global positivity, faktorisasi, RSA/ECC, Anderson,
+  atau fisika. Eksekusi dan verdict matematis dipisah di receipt.
+- **Fakta mesin/CI:** guard **12 passed** (12,38 dtk); suite penuh
+  **525 passed**; freeze OK (14 pin). Runtime kampanye lokal **9,06 dtk**.
+  Registry `A-2026-0026` (5 sertifikat sha256LF). Belum di-commit/di-push.
+- **Guard:** `python -m msaf.gw_char_adhoc`;
+  `python -m pytest msaf/tests/test_gw_char_adhoc.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`.
+
+### 2.0au - Item 1 blueprint opsi C: kandidat blok berkarakter, `NOT READY` (2026-10-21)
+
+- **Konteks/pilihan:** opsi C adalah derivasi blok pole/archimedean yang
+  benar untuk karakter. Turunan yang dipakai:
+  `h_chi(r)=Re psi((1+2a)/4 + i r/2) + log q* - log pi` dengan pergeseran
+  pole digamma `c_k = 2k + 2 alpha`, `alpha = (1+2a)/4`; karakter
+  non-principal tidak ber-pole sehingga `W02_chi = 0`.
+- **Pra-registrasi:** `reports/PREREG_GW_CHAR_BLOCK_2026-10-21.md`, sha256LF
+  `9a3f46c1f59c9e37088603d2d1e15d328369428d366557bb8e1870faa94afa64`.
+- **Berkas baru:** `msaf/gw_char_block.py`; guard
+  `msaf/tests/test_gw_char_block.py` (12 uji); laporan
+  `reports/GW_CHAR_BLOCK_2026-10-21.md`; receipt
+  `reports/gw_char_block_2026-10-21.json`.
+- **Instance:** tiga karakter primitif real non-principal (`chi_{4,3}`
+  paritas 1, `chi_{3,2}` paritas 1, `chi_{5,4}` paritas 0) plus empat
+  parent non-primitif untuk uji pemisahan objek; `c=100,N=20` dan
+  `c=200,N=20`, `prec=600`.
+- **Hasil:** kontrol reduksi zeta `q*=1,a=0` MATCH (`max_abs`
+  `3.99513295963740023489496109252e-57` vs ambang
+  `2.67276471009219564614053646715e-51`); seluruh entri finite dan semua
+  pivot terdefinisi; blok standar parent identik dengan blok primitifnya
+  dalam toleransi ball; blok deret Dirichlet berbeda dari blok standar
+  pada prime baru (aktivasi 2-7 suku). Receipt
+  `execution_status=PASS`, `certification_status=INCONCLUSIVE`,
+  `verdict=INCONCLUSIVE`, `registry_entry=None`; canonical
+  `25e61d7dc3e3d818b0c6978f34c4c6e123c922d0fd733cb33b86707372efa9ba`.
+- **Batas:** **tidak ada** entri registry untuk opsi C. Pergeseran paritas
+  `alpha=3/4` dan konstanta konduktor `log q*` belum punya validasi
+  independen; blok pole karakter principal belum diimplementasikan
+  (`principal_pole_status=NOT IMPLEMENTED`). Angka inertia hanya
+  eksploratif. Tidak ada klaim nol, `sigma=1/2`, critical-line, RH/GRH,
+  global positivity, faktorisasi, RSA/ECC, Anderson, atau fisika.
+- **Fakta mesin/CI:** guard **12 passed** (15,17 dtk); suite penuh
+  **525 passed**; freeze OK (14 pin). Runtime kampanye lokal **8,04 dtk**.
+  Catatan metode: ball `arb` untuk fungsi transenden tidak bit-reproduktif
+  antar pemanggilan, jadi kesamaan antar blok dinilai dengan ambang ball.
+- **Langkah penutup C (untuk sesi berikutnya):** (1) validasi independen
+  blok `alpha=3/4` dan `log q*`, misalnya pencocokan explicit formula pada
+  test vector terhadap jumlah nol `L(s,chi)` yang dihitung numerik, atau
+  implementasi kedua yang independen; (2) derivasi blok pole principal
+  (sumber `psi_0` diskalakan residu `phi(q)/q`) beserta uji fungsinya;
+  (3) baru setelah keduanya tertutup, tulis registry dan boleh naik ke
+  `PASS`.
+- **Guard:** `python -m msaf.gw_char_block`;
+  `python -m pytest msaf/tests/test_gw_char_block.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`.
+
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional
 
 - **2026-10-16: delivery T-hat-N terdeposit di Zenodo** lewat jalur

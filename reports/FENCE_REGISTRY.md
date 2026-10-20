@@ -1554,6 +1554,119 @@ mengikuti laporan L4).
   sha256LF 5b2cc32a795053fdac13e12e1f7e4cf763c7a46aacc8113b280268d9766903b7 reports/ulam_spectral_2026-10-21.json
   ```
 
-Selesai — 29 entri per 2026-10-21 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0019` + `A-2026-0020` + `A-2026-0021` + `A-2026-0022` + `A-2026-0023` + `A-2026-0024`). Entri
+### A-2026-0025 — Sertifikat aritmetika karakter Dirichlet dan zero struktural (item 1 blueprint, opsi A)
+
+- **Jenis:** A
+- **Pernyataan:** `msaf/gw_character_arithmetic.py` memverifikasi dengan
+  aritmetika **exact** (tanpa float) lima tabel karakter Dirichlet real
+  pada cutoff `C=200`: empat karakter non-primitif yang dikunci
+  (`chi_{12,7}`, `chi_{12,5}`, `chi_{15,4}`, `chi_{15,11}`) dan satu
+  kontrol principal (`chi_{12,1}`). Untuk setiap instance: metadata
+  `conductor`, `is_primitive`, `parity`, `order` cocok dengan tabel
+  pra-registrasi; seluruh nilai karakter pada `1 <= n <= 200` adalah exact
+  `0/+1/-1`; periodisitas `chi(n+q)=chi(n)` dan multiplikativitas
+  `chi(ab)=chi(a)chi(b)` berlaku; kriteria zero struktural
+  `chi(n)=0` **iff** `gcd(n,q)>1` berlaku untuk semua `n` pada rentang
+  terkunci; primitive lift ditemukan **tunggal**, primitif, dan cocok pada
+  semua unit; tidak ada modulus proper `d | q` yang karakternya cocok pada
+  semua unit; prime baru `p | q`, `p tidak | q*` mengaktifkan koefisien
+  nol `chi(p^a)=0` sementara `chi*(p^a) != 0` (33, 67, 53, 27, dan 133
+  aktivasi masing-masing). Receipt kanonik
+  `cfd966c5795d3e0b7e0009ee89f80e9b26592745e0a6b0c08f430b24d4473eb2`.
+  Guard 12 uji lulus.
+- **Batas:** ini sertifikat **tabel aritmetika koefisien** untuk lima
+  instance dan cutoff `C=200` saja. Dua objek dipisahkan secara
+  eksplisit: `L(s,chi)=L(s,chi*)` (L standar) versus
+  `F(s)=sum chi(n) n^{-s}=L(s,chi*) prod_{p|q,p tidak|q*}(1-chi*(p)p^{-s})`
+  (deret Dirichlet); paket ini **tidak memilih** objek analitik mana pun.
+  Zero struktural adalah fakta tentang **koefisien** `chi(n)`, bukan zero
+  dari `L` maupun `F`. Tidak ada matriks Guinand–Weil, tidak ada
+  `W02/WR/Wp`, tidak ada inertia, tidak ada klaim nol, lokasi nol,
+  `sigma=1/2`, critical-line lock, RH/GRH, global positivity,
+  faktorisasi, RSA/ECC, Anderson, atau fisika. Tidak ada klaim bahwa
+  `L(s,chi)` dan deret Dirichlet non-primitif adalah objek yang sama.
+  Tidak mengubah V1–V6 (`A-2026-0015`–`A-2026-0021`), `A-2026-0022`,
+  `A-2026-0023`, `A-2026-0024`, `ci.yml`, workflow spec, freeze pins, atau
+  artefak beku; tidak ada kampanye tersegel yang dijalankan ulang.
+- **Status:** CERTIFIED dengan scope tercatat
+- **Domino:** tidak ada (sertifikat aritmetika finite; bukan domino)
+- **Relasi:** item 1 blueprint, opsi A dari
+  `reports/SCOPE_AUDIT_GW_NONPRIMITIVE_2026-10-21.md`; entri registry
+  ke-30; memori kerja §2.0as `reports/HANDOFF.md`; prasyarat aritmetik
+  bagi opsi B (`A-2026-0026`).
+- **Perintah verifikasi:** `python -m msaf.gw_character_arithmetic`;
+  `python -m pytest msaf/tests/test_gw_character_arithmetic.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF 4047537e3e4557f91feca05a34aa03cbbbc0e3a6d5f4317c7aaf5d5aefbbd68f msaf/gw_character_arithmetic.py
+  sha256LF 9c0e4205db7c46c202a4ebe0d94860f1a4ef9e4ca558748d5a1500bcdfc07bd2 msaf/tests/test_gw_character_arithmetic.py
+  sha256LF 526b731b89b5351192c959c84034da6860dd85e8841caa0a1fdc41b5f1cb7074 reports/PREREG_GW_CHARACTER_ARITHMETIC_2026-10-21.md
+  sha256LF e7444245852719e7161f124820c6deed8ada4b907adc99e8e9501f4e01ff4287 reports/GW_CHARACTER_ARITHMETIC_2026-10-21.md
+  sha256LF bf52cc5c69db44d536c2ace411bfb86a973b0a32ac5823f93a07d74052cbfbf3 reports/gw_character_arithmetic_2026-10-21.json
+  ```
+
+### A-2026-0026 — Perturbasi blok zeta AD HOC dengan nilai karakter Dirichlet (item 1 blueprint, opsi B)
+
+- **Jenis:** A
+- **Pernyataan:** `msaf/gw_char_adhoc.py` membangun matriks
+  **`AD HOC PERTURBATION`** `tau_pert(chi) = W02_zeta - WR_zeta - Wp_chi`
+  pada dua konfigurasi terkunci (`c=100,N=20,prec=600` primer dan
+  `c=200,N=20,prec=600` replikasi; `dim=41`) untuk empat karakter real
+  non-primitif (`chi_{12,7}`, `chi_{12,5}`, `chi_{15,4}`, `chi_{15,11}`)
+  beserta lift primitifnya, dengan `Wp_chi(q_k)=log(p) q_k^{-1/2} chi(q_k)`
+  dan `chi(q_k)=0` tepat pada `p | q`. Builder lokal **mereproduksi**
+  matriks zeta eksternal `source_arb_ldlt_certify.build_arb_tau`
+  (`max_abs` `3.58e-176` dan `3.28e-176`, di bawah ambang `1.03e-171`).
+  Baseline zeta ber-inertia `(41,0)` pada kedua konfigurasi; **setiap**
+  matriks karakter (primitif maupun non-primitif) ber-inertia bukan
+  `(41,0)` dan tanpa pivot undetermined, yaitu
+  `chi_{12,7}` `(17,24)`/`(20,21)`, `chi_{12,5}` `(16,25)`/`(21,20)`,
+  `chi_{15,4}` `(19,22)`/`(20,21)`, `chi_{15,11}` `(16,25)`/`(19,22)` pada
+  `c=100`, dan analog pada `c=200`. Verdict matematis paket:
+  **`AD HOC NEGATIVE`**. Receipt kanonik
+  `76e43dac29f299cd7ec222bbf5bafce74850d1b6a24a33046f2b3ea9676093c1`.
+  Guard 12 uji lulus.
+- **Batas:** `W02` dan `WR` tetap blok **zeta** (karakter-blind); hanya
+  `Wp` yang diganti nilai karakter. Eksperimen ini **bukan** blok
+  Guinand–Weil berkarakter dan **bukan** explicit formula untuk
+  `L(s,chi)` maupun untuk deret Dirichlet non-primitif. Inertia adalah
+  pernyataan **tanda** matriks finite: tidak ada eigenvalue, magnitude,
+  atau gap yang diklaim. `AD HOC NEGATIVE` berarti matriks perturbasi yang
+  dikunci tidak positif definit; itu **bukan** bukti bahwa `L(s,chi)`
+  tidak positif, dan tidak boleh dikutip sebagai kesimpulan tentang
+  `L(s,chi)`. Tidak ada klaim nol, lokasi nol, `sigma=1/2`,
+  critical-line lock, RH/GRH, global positivity/Weil positivity,
+  faktorisasi, RSA/ECC, Anderson, atau fisika. Eksekusi PASS dipisahkan
+  dari verdict matematis dalam receipt (`execution_status` versus
+  `mathematical_verdict`). Tidak mengubah V1–V6
+  (`A-2026-0015`–`A-2026-0021`), `A-2026-0022`–`A-2026-0025`, `ci.yml`,
+  workflow spec, freeze pins, artefak beku, atau
+  `source_arb_ldlt_certify.py`; tidak ada kampanye tersegel yang
+  dijalankan ulang.
+- **Status:** CERTIFIED dengan scope tercatat
+- **Domino:** tidak ada (sertifikat matriks finite ad hoc; bukan domino)
+- **Relasi:** item 1 blueprint, opsi B dari
+  `reports/SCOPE_AUDIT_GW_NONPRIMITIVE_2026-10-21.md`; entri registry
+  ke-31; memori kerja §2.0at `reports/HANDOFF.md`; prasyarat aritmetik
+  dari `A-2026-0025`; motivated opsi C (`reports/GW_CHAR_BLOCK_2026-10-21.md`,
+  status `INCONCLUSIVE`).
+- **Perintah verifikasi:** `python -m msaf.gw_char_adhoc`;
+  `python -m pytest msaf/tests/test_gw_char_adhoc.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF b0e7b6a7e85ca7d9155276af5b904eb30bc9d39a745d1348380c7ab102f88713 msaf/gw_char_adhoc.py
+  sha256LF 0f5850da81a86f2062f83412181e186133c0ac0ab8a4a33c69dc79b8c5910bf3 msaf/tests/test_gw_char_adhoc.py
+  sha256LF 297b0c9bcce826f1b7b32d3b1d6d48dae6c10fd9aeb65aa485ddf83b8ca83976 reports/PREREG_GW_CHAR_ADHOC_2026-10-21.md
+  sha256LF 1e70713970418b5d454df3b0c6e29f04cda53acaba1f3f0140513d0663e87b95 reports/GW_CHAR_ADHOC_2026-10-21.md
+  sha256LF f7cb0327fa0b9a559513b18dc4fda8e5d3ec5fbca8ee440698d0ba4dc185b37f reports/gw_char_adhoc_2026-10-21.json
+  ```
+
+Selesai — 31 entri per 2026-10-21 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0019` + `A-2026-0020` + `A-2026-0021` + `A-2026-0022` + `A-2026-0023` + `A-2026-0024` + `A-2026-0025` + `A-2026-0026`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).
