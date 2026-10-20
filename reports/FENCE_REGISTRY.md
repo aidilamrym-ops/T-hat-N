@@ -1661,7 +1661,7 @@ mengikuti laporan L4).
 
   ```text
   sha256LF b0e7b6a7e85ca7d9155276af5b904eb30bc9d39a745d1348380c7ab102f88713 msaf/gw_char_adhoc.py
-  sha256LF 0f5850da81a86f2062f83412181e186133c0ac0ab8a4a33c69dc79b8c5910bf3 msaf/tests/test_gw_char_adhoc.py
+  sha256LF 185c896f62995c8333d38dbb74a126fd8123f5d77d80f8805d6647bb1f7b78fc msaf/tests/test_gw_char_adhoc.py
   sha256LF 297b0c9bcce826f1b7b32d3b1d6d48dae6c10fd9aeb65aa485ddf83b8ca83976 reports/PREREG_GW_CHAR_ADHOC_2026-10-21.md
   sha256LF 1e70713970418b5d454df3b0c6e29f04cda53acaba1f3f0140513d0663e87b95 reports/GW_CHAR_ADHOC_2026-10-21.md
   sha256LF f7cb0327fa0b9a559513b18dc4fda8e5d3ec5fbca8ee440698d0ba4dc185b37f reports/gw_char_adhoc_2026-10-21.json
