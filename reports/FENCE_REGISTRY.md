@@ -1458,6 +1458,49 @@ mengikuti laporan L4).
   sha256LF ed2bcc517d94dc2f47861ed00bb0badfbad5152dbb41451197f82e3b24894d79 reports/zn_permutation_2026-10-20.json
   ```
 
-Selesai — 27 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0019` + `A-2026-0020` + `A-2026-0021` + `A-2026-0022`). Entri
+### A-2026-0023 — Benchmark diagnostik RBM Anderson S1/S2 (item 4 blueprint)
+
+- **Jenis:** A
+- **Pernyataan:** `msaf/rbm_anderson.py` membangun ensemble finite
+  complex Hermitian banded matrices berukuran `D=201`, bandwidth
+  `b=1,10,120`, dari entri rasional exact integer 16-bit dengan seed
+  master `2430500035454946990`; lapisan statistik S1/S2 memakai float64
+  dan tiga spot-check `acb_mat.eig` 128-bit. Null model Poisson/GUE
+  memakai 2000 reference spectra dan 64 calibration spectra masing-masing;
+  grid S2 adalah 3 `σ_u` × 2 chart. Hasil: kalibrasi S1 4/4; kalibrasi S2
+  12/12; S1 monotonik `b=1 < b=10 < b=120` di kedua chart dengan
+  `b=1` near-Poisson (`0,3946`) dan `b=120` GUE (`0,6002`); label S2
+  ekstrem 6/6 Poisson (`b=1`) dan 6/6 GUE (`b=120`); spot-check maksimum
+  deviasi eigenvalue `6,22e-14`, semua bagian imajiner memuat nol.
+  Receipt kanonik
+  `3744cbe92546256f8cb9c25c0dabb16a98921838ebfa026c07c60e5c4892bca3`.
+  Guard 9 uji lulus; suite penuh 480 lulus (239,64 dtk); CI run
+  `39451466416` (commit `d629823`) sukses.
+- **Batas:** benchmark estimator finite satu dimensi; label fase adalah
+  jarak **relatif** ke null, bukan kesamaan distribusi. `b=1` bukan
+  Poisson eksak dan `b=10` bukan GUE eksak. **Bukan** klaim transisi
+  Anderson fisik, universalitas RMT, fisika, faktorisasi, RSA/ECC, RH,
+  lokasi nol, atau `σ=1/2`. Tidak mengubah V1–V6, `ci.yml`, workflow spec,
+  freeze pins, atau artefak beku.
+- **Status:** CERTIFIED dengan scope tercatat
+- **Domino:** tidak ada (benchmark diagnostik finite; bukan domino)
+- **Relasi:** item 4 dari `reports/FIVE_CORE_BLUEPRINT_TRIAGE_2026-10-20.md`;
+  entri registry ke-28; memori kerja §2.0aq `reports/HANDOFF.md`.
+- **Perintah verifikasi:** `python -m msaf.rbm_anderson`;
+  `python -m pytest msaf/tests/test_rbm_anderson.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`;
+  `gh run view 39451466416`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF ea3cce26480d06b55269865e1e18cde86e2c60510abc31159d9400695e6d73f8 msaf/rbm_anderson.py
+  sha256LF 5105bc429bbc1dda2a6abfd1f91039edd4423463ef981636cb0f125d162f68ba msaf/tests/test_rbm_anderson.py
+  sha256LF 62c9940a831a43e70376077d58972c49c7ef686e20751900be681606a595a014 reports/PREREG_RBM_ANDERSON_2026-10-20.md
+  sha256LF f0cb4e0894799b40f5add4eaf302de9bbeb8b023802f7ccec72417678497925a reports/RBM_ANDERSON_2026-10-20.md
+  sha256LF 4ff31e634f6250174aad30c12354f152fd8919d195b9d0883844c0f7c66c3257 reports/rbm_anderson_2026-10-20.json
+  ```
+
+Selesai — 28 entri per 2026-10-20 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0008` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0014` + `A-2026-0015` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0019` + `A-2026-0020` + `A-2026-0021` + `A-2026-0022` + `A-2026-0023`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

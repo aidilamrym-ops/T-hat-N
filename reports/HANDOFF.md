@@ -1912,6 +1912,49 @@ Konsekuensi urutan yang disarankan:
   `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
   `python -m pytest msaf/tests/test_fence_registry.py -q`.
 
+### 2.0aq — Item 4 blueprint: benchmark diagnostik RBM Anderson S1/S2 (2026-10-20)
+
+- **Konteks/pilihan:** setelah item 2, pemilik memberi `lanjut eksekusi`;
+  item berikutnya dalam urutan triage adalah **item 4** (random banded
+  Hermitian matrices, estimator S1/S2). Pra-registrasi dikunci sebelum
+  implementasi: `reports/PREREG_RBM_ANDERSON_2026-10-20.md`, commit
+  `531972e`, sha256LF
+  `62c9940a831a43e70376077d58972c49c7ef686e20751900be681606a595a014`.
+- **Berkas baru:** `msaf/rbm_anderson.py`; guard
+  `msaf/tests/test_rbm_anderson.py` (9 uji); laporan
+  `reports/RBM_ANDERSON_2026-10-20.md`; receipt
+  `reports/rbm_anderson_2026-10-20.json`. Tidak ada perubahan pada V1–V6,
+  `ci.yml`, workflow spec, `lean/lakefile.toml`, freeze pins, atau artefak
+  beku.
+- **Konfigurasi:** `D=201`; bandwidth `b=1,10,120`; 64 matriks per `b`;
+  null reference GUE/Poisson 2000 spectra; kalibrasi independen 64 spectra;
+  seed master `2430500035454946990`; grid S2 3 `σ_u` × 2 chart. Matriks
+  memakai entri rasional exact dari integer 16-bit; statistik S1/S2
+  float64; tiga spot-check `acb_mat.eig` 128-bit.
+- **Hasil:** receipt `verdict=PASS`; kalibrasi S1 4/4; kalibrasi S2 12/12;
+  S1 `b=1` 0,3946 (near-Poisson), `b=10` 0,5338 (intermediate),
+  `b=120` 0,6002 (GUE), monotonik di T/L; label S2 ekstrem 6/6 Poisson
+  (`b=1`) dan 6/6 GUE (`b=120`). Spot-check maksimum deviasi eigenvalue
+  `6,22e-14`; ketiga matriks memenuhi Hermitian/band dan interval imajiner
+  memuat nol. Receipt `sha256LF
+  4ff31e634f6250174aad30c12354f152fd8919d195b9d0883844c0f7c66c3257`;
+  canonical `3744cbe92546256f8cb9c25c0dabb16a98921838ebfa026c07c60e5c4892bca3`.
+- **Batas:** label fase adalah jarak **relatif** ke null; `b=1` bukan
+  Poisson eksak dan `b=10` bukan GUE eksak. Ini benchmark estimator finite
+  satu dimensi, bukan klaim transisi Anderson fisik, universalitas RMT,
+  fisika, faktorisasi, RSA/ECC, RH, lokasi nol, atau `σ=1/2`.
+- **Fakta mesin/CI:** guard **9 passed** (1,97 dtk); suite penuh
+  **480 passed** (239,64 dtk); freeze OK (14 pin; digest
+  `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`);
+  registry `A-2026-0023` (5 sertifikat sha256LF). CI run
+  **39451466416** (commit `d629823`) **success**: `python-tests` 1m16s,
+  `coq-kernel` 1m45s, `lean-kernel` 2m31s.
+- **Guard:** `python -m msaf.rbm_anderson`;
+  `python -m pytest msaf/tests/test_rbm_anderson.py -q`;
+  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`;
+  `gh run view 39451466416`.
+
 ---
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional

@@ -586,16 +586,16 @@ both against independent Poisson and GUE null ensembles (2000 reference
 spectra and 64 calibration spectra each).  The six S2 cells are
 `sigma_u in {0.3, 0.5, 1.0}` x `{T, L}`.
 
-The local campaign passes the locked criteria: null S1 calibration 4/4, null
-S2 calibration 12/12, S1 monotone across `b` with `b=1` near-Poisson and
-`b=120` GUE, S2 extreme labels 6/6 at both ends, and three Arb interval spot
-checks (maximum float/eigenvalue deviation `6.22e-14`).  The labels are
-relative distances to the nulls; `b=1` is not an exact Poisson process and
-`b=10` is an intermediate regime.  This is a finite estimator validation, not
-a physical Anderson-transition claim.  Details:
+The campaign passes the locked criteria: null S1 calibration 4/4, null S2
+calibration 12/12, S1 monotone across `b` with `b=1` near-Poisson and `b=120`
+GUE, S2 extreme labels 6/6 at both ends, and three Arb interval spot checks
+(maximum float/eigenvalue deviation `6.22e-14`).  The labels are relative
+distances to the nulls; `b=1` is not an exact Poisson process and `b=10` is an
+intermediate regime.  This is a finite estimator validation, not a physical
+Anderson-transition claim.  Details:
 [`reports/RBM_ANDERSON_2026-10-20.md`](reports/RBM_ANDERSON_2026-10-20.md);
 prereg [`reports/PREREG_RBM_ANDERSON_2026-10-20.md`](reports/PREREG_RBM_ANDERSON_2026-10-20.md);
-registry `A-2026-0023` (after CI green).
+registry `A-2026-0023` (CI run `39451466416`).
 
 ---
 

@@ -1,7 +1,7 @@
 # Sertifikat diagnostik RBM Anderson untuk estimator S1/S2 — 2026-10-20
 
-**Status:** `PASS-LOCAL` (verdict receipt: `PASS`; status `PASS` baru setelah CI
-hijau dan registry diperbarui). **Paket:** item 4 dari
+**Status:** `PASS` (CI run `39451466416`, commit `d629823`, conclusion
+`success`). **Paket:** item 4 dari
 [`reports/FIVE_CORE_BLUEPRINT_TRIAGE_2026-10-20.md`](FIVE_CORE_BLUEPRINT_TRIAGE_2026-10-20.md).
 **Pra-registrasi:** [`reports/PREREG_RBM_ANDERSON_2026-10-20.md`](PREREG_RBM_ANDERSON_2026-10-20.md)
 (`sha256LF 62c9940a831a43e70376077d58972c49c7ef686e20751900be681606a595a014`).
@@ -162,7 +162,7 @@ sertifikasi interval untuk seluruh statistik S1/S2.
 | S1 monotonik + ekstrem | kedua chart; `b=1` Poisson, `b=120` GUE | PASS |
 | S2 ekstrem | `b=1` 6/6 Poisson; `b=120` 6/6 GUE | PASS |
 | Integritas | 3/3 spot-check + hash | PASS |
-| **Total** | receipt `verdict = PASS` | **PASS-LOCAL** |
+| **Total** | receipt `verdict = PASS` | **PASS** |
 
 ## 8. Batas eksplisit
 
@@ -190,8 +190,9 @@ sertifikasi interval untuk seluruh statistik S1/S2.
 - Suite penuh: **480 passed** dalam **239.64 s**.
 - Freeze: `verify OK: 14 pins`; digest
   `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`.
-- CI: **belum dijalankan** pada saat laporan ini ditulis; status `PASS` baru
-  setelah run CI sukses dan registry `A-2026-0023` diperbarui.
+- CI: run **39451466416** (commit `d629823`) **success**:
+  `python-tests` 1m16s, `coq-kernel` 1m45s, `lean-kernel` 2m31s.
+- Registry: `A-2026-0023` (5 sertifikat sha256LF).
 
 Perintah reproduksi:
 
