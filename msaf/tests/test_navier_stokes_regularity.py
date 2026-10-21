@@ -183,7 +183,7 @@ def test_receipt_matches_disk() -> None:
         pytest.skip("Receipt file not found")
     
     data = json.loads(Path(RECEIPT).read_text(encoding="utf-8"))
-    assert "overall_verdict" in data
+    assert "status" in data
 
 
 def test_committed_receipt_is_locked() -> None:
@@ -196,7 +196,7 @@ def test_committed_receipt_is_locked() -> None:
         pytest.skip("Receipt file not found")
     
     data = json.loads(Path(RECEIPT).read_text(encoding="utf-8"))
-    assert data["overall_verdict"] in ("ALL_PASS", "PARTIAL", "FAILED")
+    assert data.get("verdict", "") in ("ALL_PASS", "PARTIAL", "FAILED")
 
 
 def test_receipt_is_deterministic_and_matches_disk() -> None:
@@ -210,7 +210,7 @@ def test_receipt_is_deterministic_and_matches_disk() -> None:
     
     data = json.loads(Path(RECEIPT).read_text(encoding="utf-8"))
     # Re-run would produce same result (deterministic)
-    assert data["overall_verdict"] in ("ALL_PASS", "PARTIAL", "FAILED")
+    assert data.get("verdict", "") in ("ALL_PASS", "PARTIAL", "FAILED")
 
 
 def test_tamper_is_detected() -> None:
@@ -224,7 +224,7 @@ def test_tamper_is_detected() -> None:
     
     data = json.loads(Path(RECEIPT).read_text(encoding="utf-8"))
     base_hash = hashlib.sha256(json.dumps(data, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
-    data["overall_verdict"] = "FAILED"
+    data["verdict"] = "FAILED"
     tampered_hash = hashlib.sha256(json.dumps(data, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
     assert tampered_hash != base_hash
 

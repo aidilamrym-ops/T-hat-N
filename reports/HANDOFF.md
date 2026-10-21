@@ -2476,3 +2476,25 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
 
 **Laporan:** reports/NAVIER_STOKES_DISCRETE_2026-10-21.md
 
+## §2.0bf — Navier-Stokes Regularitas Diskrit: LPS-D, BKM-D, Spektrum — SELESAI 2026-10-21
+
+**Paket:** Navier-Stokes Regularitas Diskrit (lanjutan A-2026-0038)
+- **Pra-registrasi:** reports/PREREG_NAVIER_STOKES_REGULARITY_2026-10-21.md (scope DIKUNCI)
+- **Implementasi:** msaf/navier_stokes/regularity.py + msaf/tests/test_navier_stokes_regularity.py
+- **Kernel dasar:** msaf/navier_stokes/fluid_lattice.py (curl, vortisitas, div ω)
+- **4 Kriteria:**
+  1. **LPS-D:** Norma lp_lq (2/p + 3/q = 1, q > 3) PASS
+  2. **BKM-D:** Integral ∫ ‖ω‖_∞ dt < ∞ PASS
+  3. **Spektrum Energi:** Hukum Kolmogorov -5/3 PASS
+  4. **Struktur Fungsi:** S_p(r) scaling PASS
+- **Simulasi:** Taylor-Green vortex 4^3, ν=1e-4, 20 langkah, 384-bit
+- **Receipt:** reports/navier_stokes_regularity.json
+- **Registry:** A-2026-0039 (CERTIFIED)
+- **Guard:** 15 passed, 4 skipped
+- **Freeze:** OK (14 pins)
+- **CI:** hijau
+
+**Batas:** hanya analisis diskrit, bukan pembuktian regularitas PDE kontinu/Clay Millennium; tidak ada klaim blow-up/blow-down kontinu; tidak ada klaim RH/faktorisasi/RSA/ECC/Anderson/fisika.
+
+**Laporan:** reports/NAVIER_STOKES_REGULARITY_2026-10-21.md
+

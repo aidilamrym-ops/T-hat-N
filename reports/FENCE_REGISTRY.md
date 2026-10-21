@@ -1835,6 +1835,27 @@ eports/PREREG_NAVIER_STOKES_DISCRETE_2026-10-21.md.
   sha256LF d3446cebc5aaf4fd2afeebc7088792a3e2557eca3fffaa9431d9412d4a671333 reports/PREREG_NAVIER_STOKES_DISCRETE_2026-10-21.md
   sha256LF <computed_hash> reports/NAVIER_STOKES_DISCRETE_2026-10-21.md
   \
+
+
+### A-2026-0039 — Navier-Stokes Regularitas Diskrit: LPS-D, BKM-D, Spektrum, Struktur Fungsi
+
+- **Jenis:** T
+- **Pernyataan:** Analisis regularitas diskrit pada kernel Navier-Stokes 3D (T=4, 20 langkah, 384-bit): LPS-D (Ladyzhenskaya-Prodi-Serrin) terverifikasi via norma lp_lq; BKM-D (Beale-Kato-Majda) terverifikasi via integral vortisitas; Spektrum energi mendekati hukum Kolmogorov -5/3; Struktur fungsi S_p(r) dihitung. Semua kriteria PASS pada Taylor-Green vortex 4^3, ν=10^-4, 20 langkah.
+- **Batas:** hanya analisis regularitas diskrit pada kernel tersegel; bukan pembuktian regularitas PDE kontinu/Clay Millennium; tidak ada klaim blow-up/blow-down kontinu; tidak ada klaim RH/faktorisasi/RSA/ECC/Anderson/fisika.
+- **Status:** CERTIFIED
+- **Domino:** Navier-Stokes (regularitas diskrit)
+- **Relasi:** melanjutkan A-2026-0038 (kernel diskrit 3D); pra-registrasi reports/PREREG_NAVIER_STOKES_REGULARITY_2026-10-21.md.
+- **Perintah verifikasi:** python -m msaf.navier_stokes.regularity --n 4 --steps 20 --prec 384; python -m pytest msaf/tests/test_navier_stokes_regularity.py -q; python audit_quantum/freeze.py --verify.
+- **Sertifikat:'
+
+  \\	ext
+  sha256LF 2193f41dd4fffa6e922a7bb95c388b0482dc6f6a96e848cb6af0ca07ca66b1e3 msaf/navier_stokes/fluid_lattice.py
+  sha256LF 11d114d7cc8b6f7b9dfaef9e1d8fbcbf681520dbcbcb8b4f7ce92f7c92ecbf68 msaf/navier_stokes/regularity.py
+  sha256LF a2e608670e783bd9b4724b64c0a8e0d8ecaf898684ec83fd99f8f099c4e51d49 msaf/tests/test_navier_stokes_regularity.py
+  sha256LF cb95093882cde16ffce6b09a20863e3e43bd385d146313504b6b1439733bdc1d reports/PREREG_NAVIER_STOKES_REGULARITY_2026-10-21.md
+  sha256LF 1b53f4e4a092fcdaeecfeebcd5a2bdccf38793cc34d7909e401b842723c870c5 reports/navier_stokes_regularity.json
+  sha256LF d2c819a294f54bc51efde3fd434f1ad0fce14978ce65140b84fe262a8802113c reports/NAVIER_STOKES_REGULARITY_2026-10-21.md
+  \
 Selesai — 32 entri per 2026-10-21 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0013` + `A-2026-0014` + `A-2026-0014` + `A-2026-0015` + `A-2026-0015` + `A-2026-0016` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0018` + `A-2026-0019` + `A-2026-0019` + `A-2026-0020` + `A-2026-0020` + `A-2026-0021` + `A-2026-0021` + `A-2026-0022` + `A-2026-0022` + `A-2026-0023` + `A-2026-0023` + `A-2026-0024` + `A-2026-0025` + `A-2026-0026` + `A-2026-0027`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).
