@@ -2552,3 +2552,29 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
 - **Laporan:** `reports/AUDIT_BSD_SEAL_2026-10-21.md`.
 - **Berikutnya:** trek baru Daftar-B (b) dengan milestone prasyarat.
 
+## 2.0bh - Trek T1 Daftar-B dibuka: integrator ODE tervalidasi (PREREG) - 2026-10-21
+
+- **Konteks:** setelah celah ledger ditutup (§2.0bg) dan CI hijau, pemilik
+  meminta membuka trek baru dari Daftar-B beserta milestone prasyaratnya.
+- **Pilihan:** integrator ODE tervalidasi (T1) - satu-satunya prasyarat yang
+  membuka dua item Daftar-B sekaligus: item 16 (Three-Body) dan item 20
+  (Soliton). Dua kandidat lain (enclosure probabilitas untuk Anderson; target
+  formalisasi Lean untuk P-vs-NP/Schanuel) tetap di Daftar-B.
+- **Status:** trek DIBUKA dengan pra-registrasi
+  `reports/PREREG_ODE_VALIDATED_2026-10-21.md` (sha256LF
+  `0630557deec4f18a526e89bc797e7f3cd2b5d2bcf1b3122b6929210fa6a9a4d6`;
+  scope dikunci; implementasi BELUM dimulai). Registry yang direncanakan:
+  `A-2026-0040` hanya bila verdict `ALL PASS`.
+- **Isi kunci:** aritmetika bola `arb` 256-bit + deret Taylor orde 24 dengan
+  remainder eksplisit; sistem uji S1 (`x'=x^2`), S2 (osilator harmonik), S3
+  (Kepler sirkular), S4 (RHS three-body, data uji stress); kriteria C1-C6
+  (containment eksak, toleransi, determinisme, 4 uji mutasi, pemindai AST
+  anti-float).
+- **Kapabilitas terukur (probe):** arb 256-bit ~1,1 juta operasi bola/dtk;
+  `arb.sin` 20.000 evaluasi = 0,08 dtk; kampanye S3+S4 diperkirakan detik
+  hingga beberapa menit.
+- **Batas:** bukan bukti figure-eight/Soliton; tidak ada klaim chaos,
+  ergodisitas, PDE kontinu/NS, RH/GRH, faktorisasi, RSA/ECC, Anderson, fisika.
+- **Berikutnya:** implementasi `msaf/ode_validated.py` + guard setelah
+  persetujuan; laporan `reports/ODE_VALIDATED_2026-10-21.md`.
+
