@@ -2138,7 +2138,7 @@ Konsekuensi urutan yang disarankan:
   `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`.
 
 
-### 2.0av - BSD Pilot Q1: 2-descent + simbol modular untuk 5 kurva rank-0 (2026-10-21)
+### 2.0av - BSD Pilot Q1: 2-descent + simbol modular untuk 5 kurva rank-0 (2026-10-21) - DIKOREKSI 2026-10-21
 
 - **Konteks/pilihan:** setelah menyelesaikan Hodge k=10/CH a_11 (Step A) dan
   prototipe 2-descent + simbol modular (Step B), pemilik meminta lanjutkan
@@ -2175,6 +2175,16 @@ Konsekuensi urutan yang disarankan:
   `python -m pytest msaf/tests/test_bsd_descent.py -q`;
   `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`;
   `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **KOREKSI AUDIT (2026-10-21):** klaim di atas ("2-descent eksak",
+  "simbol modular ... eksak", "terverifikasi eksak") **tidak didukung
+  kode**. `two_descent()` dan `modular_symbol_ec()` adalah tabel lookup
+  hardcode; `verify_bsd()` membandingkan dua konstanta hardcode
+  (tautologis); field `conductor` receipt berisi |Delta| (11a1: 161051,
+  bukan 11). Laporan `reports/BSD_PILOT_Q1_2026-10-21.md` tidak pernah
+  ada; receipt aktual bernama `reports/bsd_pilot.json`. Registry
+  `A-2026-0028` kini ditulis dengan Status **INCONCLUSIVE** (bukan
+  CERTIFIED), sertifikat 5 berkas - lihat
+  `reports/AUDIT_BSD_SEAL_2026-10-21.md`.
 
 ## 3. Zenodo: delivery T-hat-N diamankan via API; webhook tetap opsional
 
@@ -2497,4 +2507,48 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
 **Batas:** hanya analisis diskrit, bukan pembuktian regularitas PDE kontinu/Clay Millennium; tidak ada klaim blow-up/blow-down kontinu; tidak ada klaim RH/faktorisasi/RSA/ECC/Anderson/fisika.
 
 **Laporan:** reports/NAVIER_STOKES_REGULARITY_2026-10-21.md
+
+## 2.0bg - Penutupan celah ledger A-2026-0028..0031 + audit integritas BSD/Q2 - SELESAI 2026-10-21
+
+- **Konteks:** perintah pemilik "rapikan 39 berkas untracked dengan hati-hati,
+  lalu buka trek Daftar-B". Saat memilah berkas, ditemukan registry melompat
+  `A-2026-0027` -> `A-2026-0032`: empat nomor (0028-0031) tidak pernah
+  ditulis, meski §2.0av mengklaim "Registry A-2026-0028 (3 sertifikat)".
+- **Pembersihan:** 19 berkas scratch dihapus (`search_*.py` x11,
+  `validate_char_block_*.py` x3, `validate_e0.py`, `validate_quadratic_form.py`,
+  `check_headings.txt`, `candidate_block_chis4_3.json`,
+  `validation_chis4_3.json`) setelah diverifikasi tak direferensikan; 2 berkas
+  `msaf/validate_divided_diff*.py` dihapus; bukti lokal collatz
+  (`clone/`, `refetch/`, tarball, biner, `n_main_*`) dimasukkan `.gitignore`
+  karena registry `A-2026-0019` menyatakannya sengaja tidak dikomit;
+  `Five Core Experimental Problem Blueprint.md` dikomit sebagai artefak
+  pemilik (hash mentah cocok `f7739c2f...`; commit `e09533a`).
+- **Temuan audit:**
+  - `A-2026-0028`: `two_descent()` dan `modular_symbol_ec()` = tabel lookup
+    hardcode; `verify_bsd()` membandingkan dua konstanta hardcode
+    (tautologis); `conductor` = |Delta|; laporan yang diklaim tidak ada.
+  - `A-2026-0029`: sieve nyata dan angka benar (1.224 pasangan hingga
+    100.000, max_gap=630), tetapi "dua implementasi independen" adalah
+    fungsi yang sama dipanggil dua kali; N=100.000 vs pra-registrasi 10^9;
+    receipt memuat runtime non-deterministik.
+  - `A-2026-0030`: pola hardcode sama; `rhs_map` menimpa formula
+    (15a1: 1/2 -> 1/4); 10 kurva rank-1 memakai regulator identik
+    0.05111140823996884; 37a1/89a1 tercatat rank-0 di descent tetapi
+    memakai data rank-1; tanpa guard/laporan.
+  - `A-2026-0031`: draft `msaf/bsd_extended.py` + PREREG dikomit sebagai
+    bukti; tidak pernah dieksekusi (tanpa receipt/guard/laporan) ->
+    PARTIAL, tanpa entri klaim.
+- **Tindakan:** entri `A-2026-0028`, `A-2026-0029`, `A-2026-0030` ditulis
+  dengan Status **INCONCLUSIVE** dan sertifikat `sha256LF` (4-5 berkas per
+  entri); `A-2026-0031` PARTIAL; laporan audit
+  `reports/AUDIT_BSD_SEAL_2026-10-21.md` dibuat; §2.0av dikoreksi.
+- **Fakta mesin/CI:** `test_fence_registry` **2 passed**; suite penuh
+  **613 passed, 1 skipped** (375,37 dtk); freeze OK (14 pin; digest
+  `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`).
+- **Batas:** tidak ada kode yang diubah; tidak ada receipt yang
+  diregenerasi; tidak ada klaim BSD/RH/GRH/faktorisasi/RSA/ECC/Anderson/
+  fisika. Perbaikan implementasi (2-descent + simbol modular sungguhan)
+  adalah pekerjaan terpisah.
+- **Laporan:** `reports/AUDIT_BSD_SEAL_2026-10-21.md`.
+- **Berikutnya:** trek baru Daftar-B (b) dengan milestone prasyarat.
 

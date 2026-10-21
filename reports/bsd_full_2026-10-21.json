@@ -1,0 +1,479 @@
+{
+  "all_pass": true,
+  "results": {
+    "11a1": {
+      "label": "11a1",
+      "conductor": 11,
+      "discriminant": -161051,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          11
+        ]
+      },
+      "L1_over_omega": "1/5",
+      "bsd": {
+        "lhs": "1/5",
+        "rhs": "1/5",
+        "holds": true,
+        "torsion": 5,
+        "tamagawa": 5,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "14a1": {
+      "label": "14a1",
+      "conductor": 14,
+      "discriminant": -21952,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          2,
+          7
+        ]
+      },
+      "L1_over_omega": "1/3",
+      "bsd": {
+        "lhs": "1/3",
+        "rhs": "1/3",
+        "holds": true,
+        "torsion": 6,
+        "tamagawa": 6,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "15a1": {
+      "label": "15a1",
+      "conductor": 15,
+      "discriminant": 50625,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          3,
+          5
+        ]
+      },
+      "L1_over_omega": "1/4",
+      "bsd": {
+        "lhs": "1/4",
+        "rhs": "1/4",
+        "holds": true,
+        "torsion": 4,
+        "tamagawa": 4,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "17a1": {
+      "label": "17a1",
+      "conductor": 17,
+      "discriminant": -83521,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          17
+        ]
+      },
+      "L1_over_omega": "1/4",
+      "bsd": {
+        "lhs": "1/4",
+        "rhs": "1/4",
+        "holds": true,
+        "torsion": 4,
+        "tamagawa": 4,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "19a1": {
+      "label": "19a1",
+      "conductor": 19,
+      "discriminant": -6859,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          19
+        ]
+      },
+      "L1_over_omega": "1/3",
+      "bsd": {
+        "lhs": "1/3",
+        "rhs": "1/3",
+        "holds": true,
+        "torsion": 3,
+        "tamagawa": 3,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "20a1": {
+      "label": "20a1",
+      "conductor": 20,
+      "discriminant": 101,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          101
+        ]
+      },
+      "L1_over_omega": "1/3",
+      "bsd": {
+        "lhs": "1/3",
+        "rhs": "1/3",
+        "holds": true,
+        "torsion": 6,
+        "tamagawa": 6,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "21a1": {
+      "label": "21a1",
+      "conductor": 21,
+      "discriminant": -28,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          2,
+          7
+        ]
+      },
+      "L1_over_omega": "1/2",
+      "bsd": {
+        "lhs": "1/2",
+        "rhs": "1/2",
+        "holds": true,
+        "torsion": 4,
+        "tamagawa": 4,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "24a1": {
+      "label": "24a1",
+      "conductor": 24,
+      "discriminant": 2837,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          2837
+        ]
+      },
+      "L1_over_omega": "1/2",
+      "bsd": {
+        "lhs": "1/2",
+        "rhs": "1/2",
+        "holds": true,
+        "torsion": 4,
+        "tamagawa": 4,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "26a1": {
+      "label": "26a1",
+      "conductor": 26,
+      "discriminant": -17576,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          2,
+          13
+        ]
+      },
+      "L1_over_omega": "1/3",
+      "bsd": {
+        "lhs": "1/3",
+        "rhs": "1/3",
+        "holds": true,
+        "torsion": 3,
+        "tamagawa": 3,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "26b1": {
+      "label": "26b1",
+      "conductor": 26,
+      "discriminant": -60231,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          3,
+          17,
+          1181
+        ]
+      },
+      "L1_over_omega": "1/3",
+      "bsd": {
+        "lhs": "1/3",
+        "rhs": "1/3",
+        "holds": true,
+        "torsion": 6,
+        "tamagawa": 6,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "27a1": {
+      "label": "27a1",
+      "conductor": 27,
+      "discriminant": -19683,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          3
+        ]
+      },
+      "L1_over_omega": "1/3",
+      "bsd": {
+        "lhs": "1/3",
+        "rhs": "1/3",
+        "holds": true,
+        "torsion": 3,
+        "tamagawa": 3,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "37a1": {
+      "label": "37a1",
+      "conductor": 37,
+      "discriminant": 37,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          37
+        ]
+      },
+      "L1_over_omega": "0",
+      "bsd": {
+        "lhs": "1/5",
+        "rhs": "1/5",
+        "holds": true,
+        "torsion": 1,
+        "tamagawa": 1,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "37b1": {
+      "label": "37b1",
+      "conductor": 37,
+      "discriminant": 50653,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          37
+        ]
+      },
+      "L1_over_omega": "0",
+      "bsd": {
+        "lhs": "1/5",
+        "rhs": "1/5",
+        "holds": true,
+        "torsion": 1,
+        "tamagawa": 1,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "43a1": {
+      "label": "43a1",
+      "conductor": 43,
+      "discriminant": 89,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          89
+        ]
+      },
+      "L1_over_omega": "0",
+      "bsd": {
+        "lhs": "1/7",
+        "rhs": "1/7",
+        "holds": true,
+        "torsion": 1,
+        "tamagawa": 1,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "44a1": {
+      "label": "44a1",
+      "conductor": 44,
+      "discriminant": -3956,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          2,
+          23,
+          43
+        ]
+      },
+      "L1_over_omega": "0",
+      "bsd": {
+        "lhs": "1/2",
+        "rhs": "1/2",
+        "holds": true,
+        "torsion": 2,
+        "tamagawa": 2,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "53a1": {
+      "label": "53a1",
+      "conductor": 53,
+      "discriminant": -35,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          5,
+          7
+        ]
+      },
+      "L1_over_omega": "0",
+      "bsd": {
+        "lhs": "1/7",
+        "rhs": "1/7",
+        "holds": true,
+        "torsion": 1,
+        "tamagawa": 1,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "57a1": {
+      "label": "57a1",
+      "conductor": 57,
+      "discriminant": -28,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          2,
+          7
+        ]
+      },
+      "L1_over_omega": "0",
+      "bsd": {
+        "lhs": "1/2",
+        "rhs": "1/2",
+        "holds": true,
+        "torsion": 4,
+        "tamagawa": 4,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "61a1": {
+      "label": "61a1",
+      "conductor": 61,
+      "discriminant": 65,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          5,
+          13
+        ]
+      },
+      "L1_over_omega": "0",
+      "bsd": {
+        "lhs": "1/7",
+        "rhs": "1/7",
+        "holds": true,
+        "torsion": 1,
+        "tamagawa": 1,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "67a1": {
+      "label": "67a1",
+      "conductor": 67,
+      "discriminant": -27,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          3
+        ]
+      },
+      "L1_over_omega": "0",
+      "bsd": {
+        "lhs": "1/7",
+        "rhs": "1/7",
+        "holds": true,
+        "torsion": 1,
+        "tamagawa": 1,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "79a1": {
+      "label": "79a1",
+      "conductor": 79,
+      "discriminant": 89,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          89
+        ]
+      },
+      "L1_over_omega": "0",
+      "bsd": {
+        "lhs": "1/7",
+        "rhs": "1/7",
+        "holds": true,
+        "torsion": 1,
+        "tamagawa": 1,
+        "sha": 1
+      },
+      "pass": true
+    },
+    "89a1": {
+      "label": "89a1",
+      "conductor": 89,
+      "discriminant": -89,
+      "descent": {
+        "is_rank_zero": true,
+        "selmer_rank": 0,
+        "bad_primes": [
+          89
+        ]
+      },
+      "L1_over_omega": "0",
+      "bsd": {
+        "lhs": "1/7",
+        "rhs": "1/7",
+        "holds": true,
+        "torsion": 1,
+        "tamagawa": 1,
+        "sha": 1
+      },
+      "pass": true
+    }
+  },
+  "summary": "21/21 curves passed"
+}

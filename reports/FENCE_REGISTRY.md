@@ -1700,6 +1700,107 @@ mengikuti laporan L4).
 
 
 
+### A-2026-0028 - Q1 BSD pilot: audit integritas (verifikasi belum terpenuhi)
+
+- **Jenis:** A
+- **Pernyataan:** Paket Q1 BSD pilot menyegel receipt deterministik
+  `reports/bsd_pilot.json` (`all_pass=true`, 5/5 kurva pilot) untuk kurva
+  rank-0 11a1/14a1/15a1/17a1/19a1, tetapi audit menemukan bahwa
+  2-descent dan simbol modular diimplementasikan sebagai tabel lookup
+  hardcode dan `verify_bsd()` membandingkan dua konstanta hardcode
+  (tautologis); field `conductor` receipt berisi |Delta| (11a1: 161051,
+  bukan 11). Verdict: `INCONCLUSIVE` - kriteria C1/C2/C3 pra-registrasi
+  belum terpenuhi.
+- **Batas:** tidak ada klaim identitas BSD terverifikasi; tidak ada klaim
+  2-descent atau simbol modular dihitung; receipt hanya mereproduksi
+  tabel nilai; tidak ada klaim RH/GRH/faktorisasi/RSA/ECC/Anderson/fisika.
+- **Status:** INCONCLUSIVE
+- **Domino:** tidak ada
+- **Relasi:** Q1 dari `reports/DAFTAR_MASALAH_KERJA.md`; audit
+  `reports/AUDIT_BSD_SEAL_2026-10-21.md`; pra-registrasi
+  `reports/PREREG_Q1_BSD_2026-10-21.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_bsd_descent.py -q`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`;
+  `python audit_quantum/freeze.py --verify`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF 71219abedb6efa06b29037ab86549bff27d7e7e77f9c4b972dce33121c8f80c0 msaf/bsd_descent.py
+  sha256LF a23398137abaa1e6f99fd5771210e2d6982cf8e22b2fb07745ba859e786aebe5 msaf/tests/test_bsd_descent.py
+  sha256LF 3cd7e8653d9f933b0a8c90e7b5af2d83c5dd7065fab25b910c79e71d79abcb9c reports/bsd_pilot.json
+  sha256LF 1fbf989d244d05dae57d82b5625390c2d9ed3ea939112bf0c560565fd8378820 reports/PREREG_Q1_BSD_2026-10-21.md
+  sha256LF af1546891fa01dab8cf50bd47d2ff668e1d40d1d3a07bec523a15b3c1196ffca reports/AUDIT_BSD_SEAL_2026-10-21.md
+  ```
+
+
+
+### A-2026-0029 - Sensus twin prime N=100.000: angka benar, kriteria pra-registrasi tidak terpenuhi
+
+- **Jenis:** A
+- **Pernyataan:** Sensus twin prime dengan sieve Eratosthenes tunggal
+  hingga N=100.000 menghasilkan tepat 1.224 pasangan (max_gap=630;
+  pasangan pertama (3,5), terakhir (99989,99991)), konsisten dengan nilai
+  referensi pi_2(10^3)=35, pi_2(10^4)=205, pi_2(10^5)=1.224; tetapi
+  pra-registrasi mensyaratkan dua implementasi sieve independen dan
+  N=10^9 - kode memanggil fungsi yang sama dua kali
+  (`_twin_prime_reference`), receipt berjalan pada N=100.000, dan memuat
+  field runtime non-deterministik. Verdict: `INCONCLUSIVE`.
+- **Batas:** hanya sensus hingga N=100.000; bukan bukti konjektur twin
+  prime; bukan dua implementasi independen; tidak ada klaim asimtotik;
+  tidak ada klaim RH/GRH/faktorisasi/RSA/ECC/Anderson/fisika.
+- **Status:** INCONCLUSIVE
+- **Domino:** tidak ada
+- **Relasi:** Q2 dari `reports/DAFTAR_MASALAH_KERJA.md`; audit
+  `reports/AUDIT_BSD_SEAL_2026-10-21.md`; pra-registrasi
+  `reports/PREREG_Q2_TWIN_PRIME_2026-10-21.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_twin_prime_sieve.py -q`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`;
+  `python audit_quantum/freeze.py --verify`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF 081808b4e99802a40491bf14d1b615f74d67967848b1ebd41b99686204bd8562 msaf/twin_prime_sieve.py
+  sha256LF f73a48934c7bf006183b1b192eceeb09baa5d94a5df2273ac31ca0ecb5344f76 msaf/tests/test_twin_prime_sieve.py
+  sha256LF 7cfded7feca72ba85c8375a10fbe489de7691d8897bef18f2926f937398f44d5 reports/twin_prime_census.json
+  sha256LF 5fe1ab5bafddaeb0f25e948dd0d5ac0183f4f34d54c8e7d85d1360bc3fae5edc reports/PREREG_Q2_TWIN_PRIME_2026-10-21.md
+  sha256LF af1546891fa01dab8cf50bd47d2ff668e1d40d1d3a07bec523a15b3c1196ffca reports/AUDIT_BSD_SEAL_2026-10-21.md
+  ```
+
+
+
+### A-2026-0030 - BSD Full 21 kurva: audit integritas (verifikasi belum terpenuhi)
+
+- **Jenis:** A
+- **Pernyataan:** Paket BSD Full menyegel receipt
+  `reports/bsd_full_2026-10-21.json` (`all_pass=true`, 21/21 kurva),
+  tetapi audit menemukan pola hardcode yang sama seperti Q1:
+  `two_descent()` tabel lookup, `rhs_map` menimpa nilai formula yang
+  dihitung (15a1: 1/2 -> 1/4), sepuluh kurva rank-1 diberi regulator
+  identik 0.05111140823996884, dan 37a1/89a1 tercatat rank-0 di blok
+  descent tetapi memakai data rank-1. Tidak ada guard `test_bsd_full.py`
+  maupun laporan. Verdict: `INCONCLUSIVE`.
+- **Batas:** tidak ada klaim identitas BSD terverifikasi; tidak ada klaim
+  2-descent atau simbol modular dihitung; tidak ada klaim
+  RH/GRH/faktorisasi/RSA/ECC/Anderson/fisika.
+- **Status:** INCONCLUSIVE
+- **Domino:** tidak ada
+- **Relasi:** item 3 blueprint (BSD); audit
+  `reports/AUDIT_BSD_SEAL_2026-10-21.md`; pra-registrasi
+  `reports/PREREG_BSD_FULL_2026-10-21.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py -q`;
+  `python audit_quantum/freeze.py --verify`;
+  `python -m msaf.bsd_full` (receipt deterministik, tanpa field runtime).
+- **Sertifikat:**
+
+  ```text
+  sha256LF 0c3a76e71cda56c62443ef27b05094546c3a50c96bbb656c5ad71fd26e343bc2 msaf/bsd_full.py
+  sha256LF 94ee3e84f8e6cd0cab4995d8a0e395d0280c49d0a51d6569acbc0c9199a2dea3 reports/bsd_full_2026-10-21.json
+  sha256LF d39c2776276a5588889a4b4c20969cc92b23b62385e446272ddef2a32e338e34 reports/PREREG_BSD_FULL_2026-10-21.md
+  sha256LF af1546891fa01dab8cf50bd47d2ff668e1d40d1d3a07bec523a15b3c1196ffca reports/AUDIT_BSD_SEAL_2026-10-21.md
+  ```
+
+
+
 ### A-2026-0032 - Sensus abc tersertifikasi hingga C=100.000: 6 triple dengan q > 1.4
 
 - **Jenis:** T
