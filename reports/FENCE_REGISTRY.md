@@ -1698,6 +1698,26 @@ mengikuti laporan L4).
   sha256LF c58a2e4ec2c7c89bca49bc7adee148bbcd79b7f24e7ee2a488d56cca574527ed reports/gw_char_block_2026-10-21.json
   ```
 
+
+
+### A-2026-0032 - Sensus abc tersertifikasi hingga C=100.000: 6 triple dengan q > 1.4
+
+- **Jenis:** T
+- **Pernyataan:** Sensus lengkap abc hingga C=100.000 menemukan tepat 6 triple (a,b,c) dengan a+b=c, gcd(a,b,c)=1, dan kualitas q = log(c)/log(rad(abc)) > 1.4; kedua implementasi sieve independen (A: rad-sieve + bilangan halus; B: sympy.factorint) sepakat eksak pada count=6, max_gap=6825, dan daftar triple: (3,125,128), (1,2400,2401), (1,4374,4375), (37,32768,32805), (343,59049,59392), (7168,78125,85293).
+- **Batas:** hanya sensus hingga C=100.000 untuk kampanye ini; bukan pembuktian konjektur abc; tidak ada klaim asimtotik; tidak ada klaim RH/GRH/faktorisasi/RSA/ECC/Anderson/fisika.
+- **Status:** CERTIFIED
+- **Domino:** kombinatorik / teori bilangan (abc)
+- **Relasi:** Q3 dari reports/DAFTAR_MASALAH_KERJA.md; laporan reports/ABC_CENSUS_2026-10-21.md (akan dibuat); pra-registrasi reports/PREREG_Q3_ABC_CENSUS_2026-10-21.md.
+- **Perintah verifikasi:** python -m msaf.abc_census --N 100000; python -m pytest msaf/tests/test_abc_census.py -q; python audit_quantum/freeze.py --verify.
+- **Sertifikat:'
+
+  \\	ext
+  sha256LF b546fc2b193b65c9eb09c007abe9b4fe057e1acfbf6da481fb455ac06bfe81e8 msaf/abc_census.py
+  sha256LF ef938bcccb804b07504fb0f3bd37b5df79c383f707b6b1242761c8afa5150bc6 msaf/tests/test_abc_census.py
+  sha256LF 50c57a25056f84f5c2adf8f1ec883369eaf35fea0ce8f2f489e43748c56f0cf4 reports/PREREG_Q3_ABC_CENSUS_2026-10-21.md
+  sha256LF 276c4dc095f28d901c9aaa56b25c10e0802d6b158a2ed63d16e28a7a1ae8a06f reports/abc_census.json
+  sha256LF 00420dfe9af16dfd0b9f7b965131dabd95f8d8ae67350f1fc2aade80d121efea reports/ABC_CENSUS_2026-10-21.md
+  \
 Selesai — 32 entri per 2026-10-21 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0013` + `A-2026-0014` + `A-2026-0014` + `A-2026-0015` + `A-2026-0015` + `A-2026-0016` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0018` + `A-2026-0019` + `A-2026-0019` + `A-2026-0020` + `A-2026-0020` + `A-2026-0021` + `A-2026-0021` + `A-2026-0022` + `A-2026-0022` + `A-2026-0023` + `A-2026-0023` + `A-2026-0024` + `A-2026-0025` + `A-2026-0026` + `A-2026-0027`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

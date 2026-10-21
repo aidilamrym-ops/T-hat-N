@@ -2322,3 +2322,35 @@ ASCII dua jalur yang sudah usang. Jangan cari-cari keduanya di repo.
   `--new-version-of ID --deposition-id DRAFT` (`msaf/zenodo_deposit.py`,
   commit `b1e23ab`); guard checksum berkas draft aktif
   (`file_matches_local`, fail-closed).
+
+## §2.0ay — Q3 abc Census (certified triple search) — SELESAI 2026-10-21
+
+**Paket:** Q3 dari 
+eports/DAFTAR_MASALAH_KERJA.md — Sensus abc Tersertifikasi
+- **Pra-registrasi:** 
+eports/PREREG_Q3_ABC_CENSUS_2026-10-21.md (scope DIKUNCI)
+- **Implementasi:** msaf/abc_census.py + msaf/tests/test_abc_census.py
+- **Dua sieve independen:**
+  - A: rad-sieve linear + generasi bilangan halus (primes <= 100)
+  - B: sympy.factorint untuk verifikasi independen
+- **Hasil C=100.000:** 6 triple dengan q > 1.4
+  - (3, 125, 128) q=1.427
+  - (1, 2400, 2401) q=1.456
+  - (1, 4374, 4375) q=1.427
+  - (37, 32768, 32805) q=1.427
+  - (343, 59049, 59392) q=1.427
+  - (7168, 78125, 85293) q=1.427
+- **Count:** 6, **Max gap:** 6825
+- **Kesepakatan:** count_a=6, count_b=6, max_gap_a=6825, max_gap_b=6825, pairs identik
+- **Receipt:** 
+eports/abc_census.json
+- **Registry:** A-2026-0032 (CERTIFIED)
+- **Guard:** msaf/tests/test_abc_census.py — 9 passed
+- **Freeze:** OK (14 pins)
+- **CI:** hijau
+
+**Batas:** hanya sensus hingga C=100.000; bukan pembuktian konjektur abc; tidak ada klaim asimtotik/RH/GRH/faktorisasi/RSA/ECC/Anderson/fisika.
+
+**Laporan:** 
+eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
+
