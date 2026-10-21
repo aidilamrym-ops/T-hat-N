@@ -2578,3 +2578,37 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
 - **Berikutnya:** implementasi `msaf/ode_validated.py` + guard setelah
   persetujuan; laporan `reports/ODE_VALIDATED_2026-10-21.md`.
 
+## 2.0bi - Trek T1: hasil kampanye integrator ODE tervalidasi (FAILED) - 2026-10-21
+
+- **Konteks:** setelah pra-registrasi T1 tersegel (§2.0bh), pemilik menyetujui
+  implementasi. Modul `msaf/ode_validated.py` selesai dan kampanye dijalankan
+  dua kali berturut-turut.
+- **Verdict: FAILED** (pra-registrasi §5). C1-C3 PASS; C4 gagal toleransi di
+  checkpoint 1024 (lebar energi `1.388201187303098743663909431234060321003198623657226562500000000000000000000e-11`
+  > `1e-12`; checkpoint 1280 `6.662401546009277808479964733123779296875000000000000000000000000000000000000e-7`,
+  checkpoint 1536 `0.04241811827523633837699890136718750000000000000000000000000000000000000000000`),
+  lalu langkah 1557 abort `ValidationError: Picard enclosure failed`. C5 abort
+  di langkah 42 (belum ada checkpoint). C6 tidak lengkap (pemindai AST bersih
+  `ast_scan_hits: []`; guard dan uji mutasi M1-M4 tidak ditulis).
+- **Tidak ada pelanggaran containment:** seluruh `energy_ok`, `angular_ok`,
+  dan `contains` yang sempat terukur bernilai benar. Kegagalan murni inflasi
+  interval/bola jangka panjang (wrapping): batas norma spektral satu-langkah
+  ~`1.0375` untuk Kepler dipakai 2.560 kali (`~e^94`), padahal aliran
+  periodik; jalur three-body (12 komponen) berinflasi lebih cepat. Diagnosis
+  lengkap di `reports/ODE_VALIDATED_2026-10-21.md`.
+- **Determinisme:** receipt `reports/ode_validated_2026-10-21.json`
+  (sha256LF `29b58ad6037d84a33acce5d33daa931795ea9904ff81a61c77bc032a73c012ff`,
+  5.560 byte) identik byte pada dua run berturut-turut.
+- **Registry:** `A-2026-0040` TIDAK dibuat (hanya untuk `ALL PASS`);
+  `reports/FENCE_REGISTRY.md` tidak diubah. Item Daftar-B 16 dan 20 tetap
+  tertutup.
+- **Artefak:** modul sha256LF
+  `c1d9b5d60036a5f0772f7e3f1b8c78969efaa7146a713c762531ddce346251b9`;
+  laporan `reports/ODE_VALIDATED_2026-10-21.md`; receipt di atas;
+  pra-registrasi tetap `0630557deec4f18a526e89bc797e7f3cd2b5d2bcf1b3122b6929210fa6a9a4d6`.
+- **Berikutnya (menunggu keputusan pemilik):** kandidat T1b dengan
+  pra-registrasi baru - propagasi per blok checkpoint memakai hasil kali
+  matriks Jacobian interval (norma monodromi blok ~1) untuk menekan wrapping,
+  lalu C4/C5 diulang. Alternatifnya menutup T1 sebagai FAILED permanen.
+
+
