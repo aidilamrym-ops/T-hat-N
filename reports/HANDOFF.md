@@ -2378,3 +2378,24 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
 
 **Laporan:** reports/RH_EXTENSION_2026-10-21.md
 
+## §2.0ba — Q4 RH Extension Lanjutan T ∈ {100,200,300,400,500} — SELESAI 2026-10-21
+
+**Paket:** Q4-Extended (lanjutan A-2026-0033)
+- **Pra-registrasi:** reports/PREREG_Q4_RH_EXTENSION_EXTENDED_2026-10-21.md
+- **Implementasi:** msaf/gw_rh_extension_extended.py + msaf/tests/test_gw_rh_extension_extended.py
+- **Cakupan:** 5 konduktor T ∈ {100,200,300,400,500} × 2 resolusi (N=100 dim 201, N=150 dim 301)
+- **4 Langkah Terkunci:** Wall → Cross-lock → Engine A → Engine B
+- **Hasil:** 10/10 kombinasi ALL_PASS
+  - λ_min dim 201: 2.44e-191 (T=100) → 9.75e-192 (T=500)
+  - λ_min dim 301: 6.58e-248 (T=100) → 2.63e-248 (T=500)
+- **Kesepakatan:** rel_tol <= 1e-12, engine A == engine B untuk semua T
+- **Receipt:** reports/rh_extension_extended.json
+- **Registry:** A-2026-0034 (CERTIFIED)
+- **Guard:** 15 passed
+- **Freeze:** OK (14 pins)
+- **CI:** hijau
+
+**Batas:** hanya T ≤ 500, bukan pembuktian RH, tidak ada klaim asimtotik/sigma=1/2/faktorisasi/RSA/ECC/Anderson/fisika.
+
+**Laporan:** reports/RH_EXTENSION_EXTENDED_2026-10-21.md
+

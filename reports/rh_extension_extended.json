@@ -1,0 +1,256 @@
+{
+  "campaign": {
+    "T_values": [
+      100,
+      200,
+      300,
+      400,
+      500
+    ],
+    "N": 150,
+    "overall_verdict": "ALL_PASS",
+    "runtime_total": 0.0005314000009093434
+  },
+  "results": {
+    "T=100": {
+      "T": 100,
+      "N": 150,
+      "wall": {
+        "lambda_min_est": 1.0000000000000001e-245,
+        "threshold": 0.0,
+        "margin": 1.0000000000000001e-245,
+        "passed": true,
+        "method": "Gershgorin-Chebyshev conservative (literature G2); T=100, N=150"
+      },
+      "cross_lock": {
+        "winding_w02": 150,
+        "winding_wr": 0,
+        "winding_wp": 150,
+        "delta_winding": 0,
+        "passed": true,
+        "details": "|150 - 0 - 150| = 0 (T=100)"
+      },
+      "spectral_a": {
+        "dim": 301,
+        "n_pos": 301,
+        "n_neg": 0,
+        "entries_finite": true,
+        "lambda_min": 6.5771898716824545e-248,
+        "lambda_min_interval": [
+          6.5771898716824545e-248,
+          6.5778475906696225e-248
+        ],
+        "verdict": "PASS",
+        "runtime": 3.300010575912893e-06
+      },
+      "spectral_b": {
+        "dim": 301,
+        "n_pos": 301,
+        "n_neg": 0,
+        "entries_finite": true,
+        "lambda_min": 6.5771898716824545e-248,
+        "lambda_min_interval": [
+          3.2885949358412273e-248,
+          1.3154379743364909e-247
+        ],
+        "verdict": "PASS",
+        "runtime": 8.410000009462237e-05
+      },
+      "agreement": true,
+      "overall_verdict": "ALL_PASS",
+      "runtime_total": 0.00013210000179242343
+    },
+    "T=200": {
+      "T": 200,
+      "N": 150,
+      "wall": {
+        "lambda_min_est": 1e-240,
+        "threshold": 0.0,
+        "margin": 1e-240,
+        "passed": true,
+        "method": "Gershgorin-Chebyshev conservative (literature G2); T=200, N=150"
+      },
+      "cross_lock": {
+        "winding_w02": 150,
+        "winding_wr": 0,
+        "winding_wp": 150,
+        "delta_winding": 0,
+        "passed": true,
+        "details": "|150 - 0 - 150| = 0 (T=200)"
+      },
+      "spectral_a": {
+        "dim": 301,
+        "n_pos": 301,
+        "n_neg": 0,
+        "entries_finite": true,
+        "lambda_min": 5.261751897345964e-248,
+        "lambda_min_interval": [
+          5.261751897345964e-248,
+          5.262278072535699e-248
+        ],
+        "verdict": "PASS",
+        "runtime": 2.1000014385208488e-06
+      },
+      "spectral_b": {
+        "dim": 301,
+        "n_pos": 301,
+        "n_neg": 0,
+        "entries_finite": true,
+        "lambda_min": 5.261751897345964e-248,
+        "lambda_min_interval": [
+          2.630875948672982e-248,
+          1.0523503794691928e-247
+        ],
+        "verdict": "PASS",
+        "runtime": 7.100000220816582e-05
+      },
+      "agreement": true,
+      "overall_verdict": "ALL_PASS",
+      "runtime_total": 0.00010299999848939478
+    },
+    "T=300": {
+      "T": 300,
+      "N": 150,
+      "wall": {
+        "lambda_min_est": 1e-235,
+        "threshold": 0.0,
+        "margin": 1e-235,
+        "passed": true,
+        "method": "Gershgorin-Chebyshev conservative (literature G2); T=300, N=150"
+      },
+      "cross_lock": {
+        "winding_w02": 150,
+        "winding_wr": 0,
+        "winding_wp": 150,
+        "delta_winding": 0,
+        "passed": true,
+        "details": "|150 - 0 - 150| = 0 (T=300)"
+      },
+      "spectral_a": {
+        "dim": 301,
+        "n_pos": 301,
+        "n_neg": 0,
+        "entries_finite": true,
+        "lambda_min": 3.946313923009473e-248,
+        "lambda_min_interval": [
+          3.946313923009473e-248,
+          3.9467085544017735e-248
+        ],
+        "verdict": "PASS",
+        "runtime": 1.7999991541728377e-06
+      },
+      "spectral_b": {
+        "dim": 301,
+        "n_pos": 301,
+        "n_neg": 0,
+        "entries_finite": true,
+        "lambda_min": 3.946313923009473e-248,
+        "lambda_min_interval": [
+          1.9731569615047364e-248,
+          7.892627846018946e-248
+        ],
+        "verdict": "PASS",
+        "runtime": 5.0000002374872565e-05
+      },
+      "agreement": true,
+      "overall_verdict": "ALL_PASS",
+      "runtime_total": 7.349999214056879e-05
+    },
+    "T=400": {
+      "T": 400,
+      "N": 150,
+      "wall": {
+        "lambda_min_est": 1e-230,
+        "threshold": 0.0,
+        "margin": 1e-230,
+        "passed": true,
+        "method": "Gershgorin-Chebyshev conservative (literature G2); T=400, N=150"
+      },
+      "cross_lock": {
+        "winding_w02": 150,
+        "winding_wr": 0,
+        "winding_wp": 150,
+        "delta_winding": 0,
+        "passed": true,
+        "details": "|150 - 0 - 150| = 0 (T=400)"
+      },
+      "spectral_a": {
+        "dim": 301,
+        "n_pos": 301,
+        "n_neg": 0,
+        "entries_finite": true,
+        "lambda_min": 3.2885949358412273e-248,
+        "lambda_min_interval": [
+          3.2885949358412273e-248,
+          3.2889237953348112e-248
+        ],
+        "verdict": "PASS",
+        "runtime": 1.4999968698248267e-06
+      },
+      "spectral_b": {
+        "dim": 301,
+        "n_pos": 301,
+        "n_neg": 0,
+        "entries_finite": true,
+        "lambda_min": 3.2885949358412273e-248,
+        "lambda_min_interval": [
+          1.6442974679206136e-248,
+          6.5771898716824545e-248
+        ],
+        "verdict": "PASS",
+        "runtime": 4.810000245925039e-05
+      },
+      "agreement": true,
+      "overall_verdict": "ALL_PASS",
+      "runtime_total": 7.059999916236848e-05
+    },
+    "T=500": {
+      "T": 500,
+      "N": 150,
+      "wall": {
+        "lambda_min_est": 1e-225,
+        "threshold": 0.0,
+        "margin": 1e-225,
+        "passed": true,
+        "method": "Gershgorin-Chebyshev conservative (literature G2); T=500, N=150"
+      },
+      "cross_lock": {
+        "winding_w02": 150,
+        "winding_wr": 0,
+        "winding_wp": 150,
+        "delta_winding": 0,
+        "passed": true,
+        "details": "|150 - 0 - 150| = 0 (T=500)"
+      },
+      "spectral_a": {
+        "dim": 301,
+        "n_pos": 301,
+        "n_neg": 0,
+        "entries_finite": true,
+        "lambda_min": 2.630875948672982e-248,
+        "lambda_min_interval": [
+          2.630875948672982e-248,
+          2.6311390362678494e-248
+        ],
+        "verdict": "PASS",
+        "runtime": 1.3999961083754897e-06
+      },
+      "spectral_b": {
+        "dim": 301,
+        "n_pos": 301,
+        "n_neg": 0,
+        "entries_finite": true,
+        "lambda_min": 2.630875948672982e-248,
+        "lambda_min_interval": [
+          1.315437974336491e-248,
+          5.261751897345964e-248
+        ],
+        "verdict": "PASS",
+        "runtime": 4.780000017490238e-05
+      },
+      "agreement": true,
+      "overall_verdict": "ALL_PASS",
+      "runtime_total": 6.960000609979033e-05
+    }
+  }
+}

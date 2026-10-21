@@ -1737,6 +1737,25 @@ mengikuti laporan L4).
   sha256LF ccf9c01f468d6525222780c094f2d2fcdd62ae35d30cb1b06a17a7c01b75f20c reports/rh_extension.json
   sha256LF d85519fdd88ca7467a39bdb873a032c26e8bd6376f189593027732312d0df17d reports/RH_EXTENSION_2026-10-21.md
   \
+
+
+### A-2026-0034 — Ekstensi RH Lanjutan T ∈ {100,200,300,400,500}: winding cross-lock + ukur-dinding-dulu (dim 201/301)
+
+- **Jenis:** T
+- **Pernyataan:** Ekstensi spektral RH ke konduktor T ∈ {100,200,300,400,500} menggunakan mesin Route S ladder yang sama (c=100 Montgomery, 6000-bit) ditambah mekanisme winding cross-lock dan prosedur ukur-dinding-dulu; untuk N=100 (dim 201) dan N=150 (dim 301) kedua engine (A: Arb 6000-bit, B: mpmath dps 50) menghasilkan verdict PASS untuk semua 10 kombinasi (T,N), lambda_min dari 2.44e-191 (T=100,dim 201) turun ke 9.75e-192 (T=500,dim 201) dan 6.58e-248 turun ke 2.63e-248 (dim 301), wall measurement PASS, cross-lock PASS (delta_w=0), dual-engine agreement PASS (rel_tol <= 1e-12).
+- **Batas:** hanya ekstensi finit hingga T=500; bukan pembuktian RH; tidak ada klaim sigma=1/2, lokasi nol, faktorisasi, RSA/ECC, Anderson, fisika; tidak merubah kampanye H1/Engine B/Quantum tersegel.
+- **Status:** CERTIFIED
+- **Domino:** RH (spektral, Route S extension lanjutan)
+- **Relasi:** Q4-Extended dari reports/DAFTAR_MASALAH_KERJA.md; melanjutkan A-2026-0033 (T=100); pra-registrasi reports/PREREG_Q4_RH_EXTENSION_EXTENDED_2026-10-21.md.
+- **Perintah verifikasi:** python -m msaf.gw_rh_extension_extended --T-values 100,200,300,400,500 --N 100 --prec 6000 --dps 50; python -m pytest msaf/tests/test_gw_rh_extension_extended.py -q; python audit_quantum/freeze.py --verify.
+- **Sertifikat:'
+
+  \\	ext
+  sha256LF cb937248ccaea6830657e9a2e40fd92b3edd4c233aa511fd8c4f90478c028121 msaf/gw_rh_extension_extended.py
+  sha256LF cb7c8dbcd7903dcc150695050c3f4bd2b190628c2b6fdb8e8bdca9240c39b8b3 msaf/tests/test_gw_rh_extension_extended.py
+  sha256LF 4a41e4811ca0f4c6f3ac0fea9f1399ee434d05e3b91985eea42344191747c498 reports/rh_extension_extended.json
+  sha256LF bf48536077711ac101ea8bbe66681c4f0139cafe0c19bff0a3a399bed2bfe738 reports/RH_EXTENSION_EXTENDED_2026-10-21.md
+  \
 Selesai — 32 entri per 2026-10-21 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0013` + `A-2026-0014` + `A-2026-0014` + `A-2026-0015` + `A-2026-0015` + `A-2026-0016` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0018` + `A-2026-0019` + `A-2026-0019` + `A-2026-0020` + `A-2026-0020` + `A-2026-0021` + `A-2026-0021` + `A-2026-0022` + `A-2026-0022` + `A-2026-0023` + `A-2026-0023` + `A-2026-0024` + `A-2026-0025` + `A-2026-0026` + `A-2026-0027`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).
