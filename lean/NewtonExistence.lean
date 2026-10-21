@@ -34,10 +34,11 @@ lemma isFixedPt_newtonMap_iff (f f' : ℝ → ℝ) {x : ℝ} (hne : f' x ≠ 0) 
   simp only [newtonMap]
   constructor
   · intro h
-    by_contra hfz
-    have h1 : f x / f' x ≠ 0 := div_ne_zero hfz hne
-    have h0 : f x / f' x = 0 := by linarith [h]
-    exact h1 h0
+    have h₁ : f x / f' x = 0 := by
+      have h₂ : x - f x / f' x = x := by linarith
+      have h₃ : f x / f' x = 0 := by linarith
+      exact h₃
+  exact mul_left_cancel₀ hne h₁
   · intro h
     rw [h, zero_div, sub_zero]
 
@@ -421,9 +422,8 @@ lemma moore_neg_image (a b m : ℝ) (hab : a < b)
       have hmem := Set.mem_Icc.mp hc
       exact hD0 ⟨by linarith [hmem.2], by linarith [hmem.1]⟩
     have hnl : -l < 0 := by
-      by_contra hc2
-      push Not at hc2
-      exact hD0g ⟨h1, hc2⟩
+      have hDpos : 0 < l := by exact hDpos
+      linarith
     exact moore_pos_image_neg a b m hab hm (-f) (fun x => -f' x)
       hcont_g hdiff_g hpos_g (-u) (-l) hnl henc_g hN_g
 
@@ -450,10 +450,14 @@ theorem moore_test_existence (a b m : ℝ) (hab : a < b)
       · exact (moore_pos_image_pos a b m hab hm f f' hcont hdiff hpos
           l u hDpos henc hN).elim
       · have hu : u < 0 := by
-          by_contra hc
-          push Not at hc
-          have hl0 : l ≤ 0 := le_of_not_gt hDpos
-          exact hD0 ⟨hl0, hc⟩
+        by_cases hu : u < 0
+        · exact hu
+        · -- If u ≥ 0, then 0 ∈ Set.Icc l u (since l > 0 by hDpos and u ≥ 0)
+          -- This contradicts hD0 : 0 ∉ Set.Icc l u
+          have hu' : u ≥ 0 := by linarith
+          have h₁ : (0 : ℝ) ∈ Set.Icc l u := by
+            constructor <;> linarith [hDpos]
+          exact absurd h₁ hD0
         exact (moore_pos_image_neg a b m hab hm f f' hcont hdiff hpos
           l u hu henc hN).elim
     · push Not at hpos
