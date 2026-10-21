@@ -2354,3 +2354,27 @@ eports/abc_census.json
 **Laporan:** 
 eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
 
+## §2.0az — Q4 RH Extension T=100 (winding cross-lock) — SELESAI 2026-10-21
+
+**Paket:** Q4 dari reports/DAFTAR_MASALAH_KERJA.md — Ekstensi RH T=100
+- **Pra-registrasi:** reports/PREREG_Q4_RH_EXTENSION_2026-10-21.md (scope DIKUNCI)
+- **Implementasi:** msaf/gw_rh_extension.py + msaf/tests/test_gw_rh_extension.py
+- **4 Langkah Terkunci:**
+  1. Ukur Dinding (Wall Measurement): Chebyshev/Gershgorin, threshold=0, PASS
+  2. Winding Cross-lock: |w_p - w_R - w_02| <= 1, delta=0, PASS
+  3. Engine A (Arb 6000-bit): LDL^T interval, PASS
+  4. Engine B (mpmath dps 50): Verifikasi independen, PASS
+- **Hasil Dua Resolusi:**
+  - N=100 (dim 201): lambda_min=2.4366e-191, ALL_PASS
+  - N=150 (dim 301): lambda_min=6.5772e-248, ALL_PASS
+- **Kesepakatan:** rel_tol <= 1e-12, engine A == engine B
+- **Receipt:** reports/rh_extension.json
+- **Registry:** A-2026-0033 (CERTIFIED)
+- **Guard:** 7 passed, 4 skipped
+- **Freeze:** OK (14 pins)
+- **CI:** hijau
+
+**Batas:** hanya T=100, bukan pembuktian RH, tidak ada klaim asimtotik/sigma=1/2/faktorisasi/RSA/ECC/Anderson/fisika.
+
+**Laporan:** reports/RH_EXTENSION_2026-10-21.md
+

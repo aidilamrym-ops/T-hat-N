@@ -1,0 +1,98 @@
+{
+  "N=100": {
+    "T": 100,
+    "N": 100,
+    "wall": {
+      "lambda_min_est": 1e-195,
+      "threshold": 0.0,
+      "margin": 1e-195,
+      "passed": true,
+      "method": "Gershgorin-Chebyshev conservative (literature G2); threshold=0"
+    },
+    "cross_lock": {
+      "winding_w02": 100,
+      "winding_wr": 0,
+      "winding_wp": 100,
+      "delta_winding": 0,
+      "passed": true,
+      "details": "|100 - 0 - 100| = 0"
+    },
+    "spectral_a": {
+      "dim": 201,
+      "n_pos": 201,
+      "n_neg": 0,
+      "entries_finite": true,
+      "lambda_min": 2.4366351145008994e-191,
+      "lambda_min_interval": [
+        2.4366351145008994e-191,
+        2.4368787780123494e-191
+      ],
+      "verdict": "PASS",
+      "runtime": 2.0000006770715117e-06
+    },
+    "spectral_b": {
+      "dim": 201,
+      "n_pos": 201,
+      "n_neg": 0,
+      "entries_finite": true,
+      "lambda_min": 2.4366351145008994e-191,
+      "lambda_min_interval": [
+        1.2183175572504497e-191,
+        4.873270229001799e-191
+      ],
+      "verdict": "PASS",
+      "runtime": 0.00011829999857582152
+    },
+    "agreement": true,
+    "overall_verdict": "ALL_PASS",
+    "runtime_total": 0.00034350001078564674
+  },
+  "N=150": {
+    "T": 100,
+    "N": 150,
+    "wall": {
+      "lambda_min_est": 1e-252,
+      "threshold": 0.0,
+      "margin": 1e-252,
+      "passed": true,
+      "method": "Gershgorin-Chebyshev conservative (literature G2); threshold=0"
+    },
+    "cross_lock": {
+      "winding_w02": 150,
+      "winding_wr": 0,
+      "winding_wp": 150,
+      "delta_winding": 0,
+      "passed": true,
+      "details": "|150 - 0 - 150| = 0"
+    },
+    "spectral_a": {
+      "dim": 301,
+      "n_pos": 301,
+      "n_neg": 0,
+      "entries_finite": true,
+      "lambda_min": 6.5771898716824545e-248,
+      "lambda_min_interval": [
+        6.5771898716824545e-248,
+        6.5778475906696225e-248
+      ],
+      "verdict": "PASS",
+      "runtime": 2.7999922167509794e-06
+    },
+    "spectral_b": {
+      "dim": 301,
+      "n_pos": 301,
+      "n_neg": 0,
+      "entries_finite": true,
+      "lambda_min": 6.5771898716824545e-248,
+      "lambda_min_interval": [
+        3.2885949358412273e-248,
+        1.3154379743364909e-247
+      ],
+      "verdict": "PASS",
+      "runtime": 8.249998791143298e-05
+    },
+    "agreement": true,
+    "overall_verdict": "ALL_PASS",
+    "runtime_total": 0.0001289999927394092
+  }
+}
