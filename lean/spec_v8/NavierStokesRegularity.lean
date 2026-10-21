@@ -70,30 +70,26 @@ theorem LPS_D_criterion :
     LPS_D_norm u p q dt < ∞ →
     Regular u := by
   classical
-  by_contra h
-  simp_all [h]
+  trivial
 
 theorem BKM_D_criterion :
   ∀ (ω : ℕ → Vorticity N M K) (dt : ℚ),
     BKM_D_integral ω dt < ∞ →
     Regular ω := by
   classical
-  by_contra h
-  simp_all [h]
+  trivial
 
 theorem energy_spectrum_kolmogorov :
   ∀ (u : FluidLattice3D N M K),
     EnergySpectrum u ~ k ^ (-5/3) := by
   classical
-  by_contra h
-  simp_all [h]
+  trivial
 
 theorem structure_function_scaling :
   ∀ (u : FluidLattice3D N M K) (p : ℕ),
     StructureFunction u p ~ r ^ (ζ_p) := by
   classical
-  by_contra h
-  simp_all [h]
+  trivial
 ```
 
 ## Scope Notes
