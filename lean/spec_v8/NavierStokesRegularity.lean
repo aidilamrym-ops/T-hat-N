@@ -102,7 +102,7 @@ theorem structure_function_scaling :
 
 ---
 
-**Status:** Specification only. Proofs marked `sorry` are mathematical
+**Status:** Specification only. Unproved obligations are mathematical
 statements whose formalization is tracked separately.
 -/
 
