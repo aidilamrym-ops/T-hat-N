@@ -903,3 +903,115 @@ class FluidLattice:
         if not bool(self.dx.lower() >= _ell_p_ball().upper()):
             return {"alarm": True, "reason": "dx below Planck floor", "energy": energy}
         return {"alarm": False, "reason": "within finite information capacity", "energy": energy}
+
+    # -- Vorticity (curl) computation --
+    def curl_at(self, i: int, j: int, l: int) -> tuple[arb, arb, arb]:
+        """Vorticity ω = ∇ × u at cell (i,j,l) using central differences.
+        
+        ω_x = ∂_y u_z - ∂_z u_y
+        ω_y = ∂_z u_x - ∂_x u_z
+        ω_z = ∂_x u_y - ∂_y u_x
+        
+        Central differences with periodic boundary conditions.
+        Ball arithmetic only.
+        """
+        inv2dx = arb(1) / (arb(2) * self.dx)
+        n = self.n
+        
+        # ∂_y u_z
+        uz_py = self.cell(i, j + 1, l)[2]
+        uz_my = self.cell(i, j - 1, l)[2]
+        duy_dz = (uz_py - uz_my) * inv2dx
+        
+        # ∂_z u_y
+        uy_pz = self.cell(i, j, l + 1)[1]
+        uy_mz = self.cell(i, j, l - 1)[1]
+        duy_dy = (uy_pz - uy_mz) * inv2dx
+        
+        # ∂_z u_x
+        ux_pz = self.cell(i, j, l + 1)[0]
+        ux_mz = self.cell(i, j, l - 1)[0]
+        dux_dz = (ux_pz - ux_mz) * inv2dx
+        
+        # ∂_x u_z
+        uz_px = self.cell(i + 1, j, l)[2]
+        uz_mx = self.cell(i - 1, j, l)[2]
+        duz_dx = (uz_px - uz_mx) * inv2dx
+        
+        # ∂_x u_y
+        uy_px = self.cell(i + 1, j, l)[1]
+        uy_mx = self.cell(i - 1, j, l)[1]
+        duy_dx = (uy_px - uy_mx) * inv2dx
+        
+        # ∂_y u_x
+        ux_py = self.cell(i, j + 1, l)[0]
+        ux_my = self.cell(i, j - 1, l)[0]
+        dux_dy = (ux_py - ux_my) * inv2dx
+        
+        # ω = ∇ × u
+        wx = duy_dz - duy_dy
+        wy = dux_dz - duz_dx
+        wz = duy_dx - dux_dy
+        
+        return (wx, wy, wz)
+    
+    def vorticity_field(self) -> list[tuple[arb, arb, arb]]:
+        """Vorticity field ω = ∇ × u for all cells."""
+        n = self.n
+        ncells = self.ncells
+        omega: list[tuple[arb, arb, arb]] = [(arb(0), arb(0), arb(0))] * ncells
+        for i in range(self.n):
+            for j in range(self.n):
+                for k in range(self.n):
+                    idx = self._idx(i, j, k)
+                    omega[idx] = self.curl_at(i, j, k)
+        return omega
+    
+    def max_vorticity_magnitude(self) -> arb:
+        """Maximum |ω| over all cells."""
+        omega = self.vorticity_field()
+        max_mag = arb(0)
+        for wx, wy, wz in omega:
+            mag_sq = wx * wx + wy * wy + wz * wz
+            mag = mag_sq.sqrt()
+            if mag > max_mag:
+                max_mag = mag
+        return max_mag
+    
+    def max_vorticity_component(self) -> arb:
+        """Maximum |ω_i| component over all cells."""
+        omega = self.vorticity_field()
+        max_comp = arb(0)
+        for wx, wy, wz in omega:
+            for comp in (wx, wy, wz):
+                # Use abs_upper for upper bound on absolute value
+                abs_comp = comp.abs_upper()
+                if abs_comp > max_comp:
+                    max_comp = abs_comp
+        return max_comp
+    
+    def vorticity_divergence_max(self) -> arb:
+        """Max |∇·ω| over all cells (should be zero analytically)."""
+        n = self.n
+        max_div = arb(0)
+        for i in range(self.n):
+            for j in range(self.n):
+                for k in range(self.n):
+                    # ∇·ω = ∂_x ω_x + ∂_y ω_y + ∂_z ω_z
+                    # Using finite differences on the vorticity field
+                    wx_px = self.curl_at(i + 1, j, k)[0]
+                    wx_mx = self.curl_at(i - 1, j, k)[0]
+                    wy_py = self.curl_at(i, j + 1, k)[1]
+                    wy_my = self.curl_at(i, j - 1, k)[1]
+                    wz_pz = self.curl_at(i, j, k + 1)[2]
+                    wz_mz = self.curl_at(i, j, k - 1)[2]
+                    
+                    inv2dx = arb(1) / (arb(2) * self.dx)
+                    div_wx = (wx_px - wx_mx) * inv2dx
+                    div_wy = (self.curl_at(i, j + 1, k)[1] - self.curl_at(i, j - 1, k)[1]) * inv2dx
+                    div_wz = (self.curl_at(i, j, k + 1)[2] - self.curl_at(i, j, k - 1)[2]) * inv2dx
+                    
+                    div_omega = div_wx + div_wy + div_wz
+                    if div_omega.abs_upper() > max_div:
+                        max_div = div_omega.abs_upper()
+        return max_div
