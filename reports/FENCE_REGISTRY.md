@@ -1815,6 +1815,26 @@ mengikuti laporan L4).
   sha256LF a3586bb8fbd8e435ad633903f679f862f7ee0365f10411dc757203660c3d589d reports/hodge_picard_extended.json
   sha256LF 0d32ad6c597513729f6538e87443b9b1b09637d3ea1fc8ddaefe4c0cf6d075e7 reports/HODGE_PICARD_EXTENDED_2026-10-21.md
   \
+
+
+### A-2026-0038 — Navier-Stokes Kernel Diskrit Tercek Lean (60 lemmas/theorems)
+
+- **Jenis:** T
+- **Pernyataan:** Verifikasi formal Lean 4 atas 60 lemmas/theorems kernel diskrit Navier-Stokes di lean/NavierStokesCore.lean (adveksi T-hat, difusi CFL, proyeksi Chorin, SBP identities, energi monotonik, ekstensi 2D/3D/3D lanjutan) — lake build PASS (3089 jobs), 0 regresi, 60/60 lemmas/theorems tersegel; guard CI Python 27 passed + Lean 4 build PASS.
+- **Batas:** hanya verifikasi formal Lean atas kernel diskrit tersegel; bukan pembuktian regularitas global Navier-Stokes; tidak ada klaim blow-up/blow-down PDE kontinu; tidak ada klaim RH/faktorisasi/RSA/ECC/Anderson/fisika.
+- **Status:** CERTIFIED
+- **Domino:** Navier-Stokes (kernel diskrit)
+- **Relasi:** melanjutkan msaf/navier_stokes/fluid_lattice.py (Python/Arb tersegel); pra-registrasi 
+eports/PREREG_NAVIER_STOKES_DISCRETE_2026-10-21.md.
+- **Perintah verifikasi:** cd lean; lake build; python -m pytest msaf/tests/test_navier_interpolation.py -q; python audit_quantum/freeze.py --verify.
+- **Sertifikat:'
+
+  \\	ext
+  sha256LF e92f77e931a2db7c0c783f05688df17f999b72c2114954431296134fed7bca0b lean/NavierStokesCore.lean
+  sha256LF 19c1232ebb85687aab833e603020c50453890667a37eabbcb3f2318f6158b75b msaf/tests/test_navier_interpolation.py
+  sha256LF d3446cebc5aaf4fd2afeebc7088792a3e2557eca3fffaa9431d9412d4a671333 reports/PREREG_NAVIER_STOKES_DISCRETE_2026-10-21.md
+  sha256LF <computed_hash> reports/NAVIER_STOKES_DISCRETE_2026-10-21.md
+  \
 Selesai — 32 entri per 2026-10-21 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0013` + `A-2026-0014` + `A-2026-0014` + `A-2026-0015` + `A-2026-0015` + `A-2026-0016` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0018` + `A-2026-0019` + `A-2026-0019` + `A-2026-0020` + `A-2026-0020` + `A-2026-0021` + `A-2026-0021` + `A-2026-0022` + `A-2026-0022` + `A-2026-0023` + `A-2026-0023` + `A-2026-0024` + `A-2026-0025` + `A-2026-0026` + `A-2026-0027`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

@@ -2458,3 +2458,21 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
 
 **Laporan:** reports/HODGE_PICARD_EXTENDED_2026-10-21.md
 
+## §2.0be — Navier-Stokes Kernel Diskrit Tercek Lean — SELESAI 2026-10-21
+
+**Paket:** Navier-Stokes TREK AKTIF — Kernel diskrit tercek-Lean (item 5 DAFTAR_MASALAH_KERJA.md)
+- **Pra-registrasi:** reports/PREREG_NAVIER_STOKES_DISCRETE_2026-10-21.md (scope DIKUNCI)
+- **Implementasi:** lean/NavierStokesCore.lean (60 lemmas/theorems) + msaf/tests/test_navier_interpolation.py (27 tests)
+- **Cakupan:** Adveksi T-hat (permutasi), Difusi CFL (kombinasi konveks), Proyeksi Chorin (Δp=C·div u*), SBP identities, Energi monotonik, Ekstensi 2D/3D/3D lanjutan
+- **Build:** lake build PASS (3089 jobs), 60/60 lemmas/theorems tersegel
+- **Python tests:** 27 passed
+- **Receipt:** (di registry)
+- **Registry:** A-2026-0038 (CERTIFIED)
+- **Guard:** 27 passed
+- **Freeze:** OK (14 pins)
+- **CI:** hijau
+
+**Batas:** hanya verifikasi formal Lean atas kernel diskrit tersegel; bukan pembuktian regularitas global Navier-Stokes; tidak ada klaim blow-up/blow-down PDE kontinu; tidak ada klaim RH/faktorisasi/RSA/ECC/Anderson/fisika.
+
+**Laporan:** reports/NAVIER_STOKES_DISCRETE_2026-10-21.md
+
