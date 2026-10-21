@@ -2616,14 +2616,16 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
 - **Konteks:** T1 disegel FAILED (§2.0bi); pemilik memilih membuka
   pra-registrasi T1b alih-alih menutup trek.
 - **Berkas:** `reports/PREREG_ODE_VALIDATED_T1B_2026-10-21.md` (sha256LF
-  `9e77aaa1823bf5773eac545bb8930ab47622726e189e25b3d27c3dc933ba7c67`; versi
-  awal sebelum amendemen §10:
+  `fd31210f7e5ad6e19f6f3a1aa5776ee108276bafa306d29bd87860ca5cf0a04d`; versi
+  awal sebelum amendemen:
   `79a4e87965cdc1682d4fa5ddb38cd2719201e316ddba1f2b32004c8379c9b0b1`).
-- **Amendemen pra-implementasi (§10):** `3*rem` tidak dilipat ke `rho`;
-  `rho` hanya pembulatan dan tidak dikalikan `||J_step||_2` per langkah;
-  `kappa_nl*r_tot^2` disisipkan sebagai kolom noise kecil dan tetap wajib
-  `<= 1e-30` per blok di receipt. Alasan: rumus lama akan mereproduksi mode
-  kegagalan T1 (`sigma^k`). Sistem/konfigurasi/toleransi/C7 tidak berubah.
+- **Amendemen pra-implementasi (§10-§11):** (a) `3*rem` tidak dilipat ke
+  `rho`; `rho` hanya pembulatan dan tidak dikalikan `||J_step||_2` per
+  langkah; `kappa_nl*r_tot^2` wajib `<= 1e-30` per blok. (b) Bound kotak
+  dihitung dua pass (maju: midpoint + Picard + `J_k`; mundur:
+  `P = J_B...J_{k+1}` dan `sum |P|*(rem+quad)`) - ekuivalen dengan
+  formulasi kolom tanpa penggabungan; penggabungan kolom §2.2 dibatalkan
+  karena tidak sound. Sistem/konfigurasi/toleransi/C7 tidak berubah.
 - **Isi kunci:** ketidakpastian state sebagai himpunan bertanda
   `m + S*xi + rho`; `S' = J_step*S` (perkalian matriks interval, dilarang
   norma skalar per langkah); sisa lokal sebagai arah noise; kapasitas noise

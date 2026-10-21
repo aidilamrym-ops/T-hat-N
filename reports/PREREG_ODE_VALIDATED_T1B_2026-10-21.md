@@ -208,3 +208,35 @@ Amendemen (berlaku sebelum kode dan sebelum hasil apa pun):
    dicatat di receipt/laporan; hash versi awal
    `79a4e87965cdc1682d4fa5ddb38cd2719201e316ddba1f2b32004c8379c9b0b1`
    tetap disebut pada laporan sebagai versi sebelum amendemen.
+
+## 11. Amendemen kedua pra-implementasi (sebelum kode T1b)
+
+Koreksi kedua, juga ditemukan sebelum ada kode T1b dan sebelum hasil apa pun:
+
+- Penggabungan dua kolom `S_a`, `S_b` menjadi satu kolom `|S_a| + |S_b|`
+  (§2.2) **tidak sound**: himpunan `{xi_a*S_a + xi_b*S_b}` adalah
+  jajar-genjang 2 dimensi, sedangkan satu kolom `xi*c` hanya garis `[-c, c]`
+  dan tidak memuatnya secara umum. Penggabungan yang sound memerlukan
+  `n` kolom basis (kembali ke kotak), sehingga tidak mengurangi jumlah kolom.
+- Tanpa penggabungan, jumlah kolom tumbuh `n` per langkah dan biaya
+  `J*S` menjadi tidak wajar (`~10^8` operasi bola untuk S3+S4).
+
+Amendemen (berlaku sebelum kode dan sebelum hasil apa pun):
+
+1. Bound kotak yang dikunci §2.1 dihitung dengan **dua pass ekuivalen**,
+   tanpa menyimpan kolom:
+   - pass maju: titik tengah `m_k`, kotak Picard, `rem_k`, `quad_k`,
+     dan Jacobian interval `J_k` (semua tersimpan per langkah);
+   - pass mundur: `P = J_steps ... J_{k+1}`; bound kotak
+     `c_out,i = sum_j |P_B[i,j]| * c_in,j`
+     `+ sum_k sum_j |P_{B<-k+1}[i,j]| * (rem_k,j + quad_k)`.
+   Identitas aljabar: hasil ini sama dengan bound yang diberikan formulasi
+   kolom tanpa penggabungan. Yang dikunci adalah **bound kotak dan perkalian
+   bertanda**, bukan urutan evaluasinya.
+2. Penggabungan kolom §2.2 tidak dipakai karena tidak sound dan tidak perlu;
+   tidak ada informasi yang dibuang.
+3. Kotak Picard di dalam blok memakai bound berjalan yang sound (boleh
+   longgar, mis. `rowsum(|J_k|)*c_k + rem_k + quad_k`); bound **checkpoint**
+   dihitung ketat dengan pass mundur §11.1.
+4. Tidak ada perubahan lain: sistem, konfigurasi, toleransi C1-C6, kriteria
+   C7, verdict, dan falsifier tetap.
