@@ -2611,4 +2611,26 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
   matriks Jacobian interval (norma monodromi blok ~1) untuk menekan wrapping,
   lalu C4/C5 diulang. Alternatifnya menutup T1 sebagai FAILED permanen.
 
+## 2.0bj - Trek T1b dibuka: propagasi blok bertanda (PREREG) - 2026-10-21
+
+- **Konteks:** T1 disegel FAILED (§2.0bi); pemilik memilih membuka
+  pra-registrasi T1b alih-alih menutup trek.
+- **Berkas:** `reports/PREREG_ODE_VALIDATED_T1B_2026-10-21.md` (sha256LF
+  `79a4e87965cdc1682d4fa5ddb38cd2719201e316ddba1f2b32004c8379c9b0b1`).
+- **Isi kunci:** ketidakpastian state sebagai himpunan bertanda
+  `m + S*xi + rho`; `S' = J_step*S` (perkalian matriks interval, dilarang
+  norma skalar per langkah); sisa lokal sebagai arah noise; kapasitas noise
+  `m_max = 64` (S3) / `96` (S4); `kappa_nl = 1e18` dengan kewajiban receipt
+  `kappa_nl*r_tot^2 <= 1e-30` per blok; blok = interval checkpoint (S3 256,
+  S4 64); modul T1 beku (hanya diimpor, tidak diubah); sistem/konfigurasi/
+  toleransi identik T1; kriteria baru C7 (mutasi M5 harus mereproduksi
+  kegagalan T1, jika tidak verdict INCONCLUSIVE).
+- **Registry:** `A-2026-0040` hanya bila verdict `ALL PASS`; belum dibuat.
+- **Artefak direncanakan:** `msaf/ode_validated_block.py`, guard
+  `msaf/tests/test_ode_validated_block.py`, receipt
+  `reports/ode_validated_t1b_2026-10-21.json`, laporan
+  `reports/ODE_VALIDATED_T1B_2026-10-21.md`.
+- **Berikutnya:** implementasi setelah persetujuan pemilik.
+
+
 
