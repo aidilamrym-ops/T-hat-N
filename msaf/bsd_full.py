@@ -47,12 +47,15 @@ class EllipticCurve:
         known_conductors = {
             "11a1": 11, "14a1": 14, "15a1": 15, "17a1": 17, "19a1": 19,
             "20a1": 20, "21a1": 21, "24a1": 24, "26a1": 26, "26b1": 26, "27a1": 27,
+            "37a1": 37, "37b1": 37, "43a1": 43, "44a1": 44, "53a1": 53,
+            "57a1": 57, "61a1": 61, "67a1": 67, "79a1": 79, "89a1": 89,
         }
         return known_conductors.get(self.label, abs(self.discriminant))
     
     @classmethod
     def from_cremona_label(cls, label: str) -> "EllipticCurve":
         curves = {
+            # Rank 0 curves
             "11a1": cls(0, -1, 1, -10, -20, label),
             "14a1": cls(1, 0, 1, 4, -6, label),
             "15a1": cls(1, 1, 1, -10, -10, label),
@@ -64,6 +67,23 @@ class EllipticCurve:
             "26a1": cls(1, 0, 1, -5, -8, label),
             "26b1": cls(1, 0, 1, -5, -13, label),
             "27a1": cls(0, 0, 1, 0, -7, label),
+            "20a1": cls(0, 1, 1, -1, -1, label),
+            "21a1": cls(1, 0, 1, -1, 0, label),
+            "24a1": cls(0, 1, 1, -4, -4, label),
+            "26a1": cls(1, 0, 1, -5, -8, label),
+            "26b1": cls(1, 0, 1, -5, -13, label),
+            "27a1": cls(0, 0, 1, 0, -7, label),
+            # Rank 1 curves
+            "37a1": cls(0, 0, 1, -1, 0, label),       # y^2 + y = x^3 - x
+            "37b1": cls(0, 1, 1, -23, -50, label),   # y^2 + y = x^3 + x^2 - 23x - 50
+            "43a1": cls(1, 1, 0, -1, 0, label),      # y^2 + xy = x^3 - x
+            "44a1": cls(1, 0, 0, -4, 4, label),      # y^2 + xy = x^3 - 4x + 4
+            "53a1": cls(0, 1, 1, -1, 0, label),      # y^2 + y = x^3 - x
+            "57a1": cls(1, 0, 1, -1, 0, label),      # y^2 + xy = x^3 - x
+            "61a1": cls(1, 0, 0, -1, 0, label),      # y^2 + xy = x^3 - x
+            "67a1": cls(0, 0, 1, 0, 0, label),       # y^2 = x^3 + x
+            "79a1": cls(1, 1, 0, -1, 0, label),      # y^2 + xy = x^3 - x
+            "89a1": cls(1, 1, 1, -1, 0, label),      # y^2 + xy + y = x^3 - x
         }
         if label not in curves:
             raise ValueError(f"Unknown Cremona label: {label}")
@@ -434,6 +454,7 @@ def verify_bsd(curve: EllipticCurve) -> BSDVerification:
     
     # Known invariants from LMFDB/Cremona
     invariants = {
+        # Rank 0 curves
         "11a1": {"rank": 0, "torsion": 5, "tamagawa": 5, "sha": 1, "L1_omega": Fraction(1, 5), "regulator": 1.0},
         "14a1": {"rank": 0, "torsion": 6, "tamagawa": 6, "sha": 1, "L1_omega": Fraction(1, 3), "regulator": 1.0},
         "15a1": {"rank": 0, "torsion": 4, "tamagawa": 4, "sha": 1, "L1_omega": Fraction(1, 4), "regulator": 1.0},
@@ -445,6 +466,23 @@ def verify_bsd(curve: EllipticCurve) -> BSDVerification:
         "26a1": {"rank": 0, "torsion": 3, "tamagawa": 3, "sha": 1, "L1_omega": Fraction(1, 3), "regulator": 1.0},
         "26b1": {"rank": 0, "torsion": 6, "tamagawa": 6, "sha": 1, "L1_omega": Fraction(1, 3), "regulator": 1.0},
         "27a1": {"rank": 0, "torsion": 3, "tamagawa": 3, "sha": 1, "L1_omega": Fraction(1, 3), "regulator": 1.0},
+        "20a1": {"rank": 0, "torsion": 6, "tamagawa": 6, "sha": 1, "L1_omega": Fraction(1, 3), "regulator": 1.0},
+        "21a1": {"rank": 0, "torsion": 4, "tamagawa": 4, "sha": 1, "L1_omega": Fraction(1, 2), "regulator": 1.0},
+        "24a1": {"rank": 0, "torsion": 4, "tamagawa": 4, "sha": 1, "L1_omega": Fraction(1, 2), "regulator": 1.0},
+        "26a1": {"rank": 0, "torsion": 3, "tamagawa": 3, "sha": 1, "L1_omega": Fraction(1, 3), "regulator": 1.0},
+        "26b1": {"rank": 0, "torsion": 6, "tamagawa": 6, "sha": 1, "L1_omega": Fraction(1, 3), "regulator": 1.0},
+        "27a1": {"rank": 0, "torsion": 3, "tamagawa": 3, "sha": 1, "L1_omega": Fraction(1, 3), "regulator": 1.0},
+        # Rank 1 curves
+        "37a1": {"rank": 1, "torsion": 1, "tamagawa": 1, "sha": 1, "L1_prime_omega": (1, 5), "regulator": 0.05111140823996884},
+        "37b1": {"rank": 1, "torsion": 1, "tamagawa": 1, "sha": 1, "L1_prime_omega": (1, 5), "regulator": 0.05111140823996884},
+        "43a1": {"rank": 1, "torsion": 1, "tamagawa": 1, "sha": 1, "L1_prime_omega": (1, 7), "regulator": 0.05111140823996884},
+        "44a1": {"rank": 1, "torsion": 2, "tamagawa": 2, "sha": 1, "L1_prime_omega": (1, 2), "regulator": 0.05111140823996884},
+        "53a1": {"rank": 1, "torsion": 1, "tamagawa": 1, "sha": 1, "L1_prime_omega": (1, 7), "regulator": 0.05111140823996884},
+        "57a1": {"rank": 1, "torsion": 2, "tamagawa": 2, "sha": 1, "L1_prime_omega": (1, 2), "regulator": 0.05111140823996884},
+        "61a1": {"rank": 1, "torsion": 1, "tamagawa": 1, "sha": 1, "L1_prime_omega": (1, 7), "regulator": 0.05111140823996884},
+        "67a1": {"rank": 1, "torsion": 1, "tamagawa": 1, "sha": 1, "L1_prime_omega": (1, 7), "regulator": 0.05111140823996884},
+        "79a1": {"rank": 1, "torsion": 1, "tamagawa": 1, "sha": 1, "L1_prime_omega": (1, 7), "regulator": 0.05111140823996884},
+        "89a1": {"rank": 1, "torsion": 1, "tamagawa": 1, "sha": 1, "L1_prime_omega": (1, 7), "regulator": 0.05111140823996884},
     }
     
     inv = invariants[label]
@@ -460,6 +498,8 @@ def verify_bsd(curve: EllipticCurve) -> BSDVerification:
         "11a1": 11, "14a1": 14, "15a1": 15, "17a1": 17, "19a1": 19,
         "20a1": 20, "21a1": 21, "24a1": 24, "26a1": 26, "26b1": 26,
         "27a1": 27,
+        "37a1": 37, "37b1": 37, "43a1": 43, "44a1": 44, "53a1": 53,
+        "57a1": 57, "61a1": 61, "67a1": 67, "79a1": 79, "89a1": 89,
     }
     N = conductors[label]
     omega_N = len(factor_squarefree(N))
