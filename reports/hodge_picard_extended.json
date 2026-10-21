@@ -1,0 +1,75 @@
+{
+  "campaign": {
+    "primes": [
+      5,
+      7
+    ],
+    "total_surfaces": 2,
+    "informative_found": 0,
+    "overall_verdict": "PARTIAL",
+    "runtime_total": 0.0
+  },
+  "bounds": [
+    {
+      "surface_id": "smooth_known_f5",
+      "surface_coeffs": {
+        "(0, 0)": 2,
+        "(0, 1)": 1,
+        "(0, 2)": 2,
+        "(0, 3)": 1,
+        "(0, 4)": 1,
+        "(1, 0)": 1,
+        "(1, 1)": 2,
+        "(1, 2)": 1,
+        "(1, 3)": 1,
+        "(2, 0)": 1,
+        "(2, 1)": 1,
+        "(2, 2)": 2,
+        "(3, 0)": 2,
+        "(3, 1)": 1,
+        "(4, 0)": 1
+      },
+      "field_p": 5,
+      "bound": 20,
+      "sign": 1,
+      "informative": false,
+      "vacuous": false,
+      "char_poly": [],
+      "exact_orders": {},
+      "traces": {},
+      "runtime": 0.0,
+      "status": "THEORETICAL"
+    },
+    {
+      "surface_id": "smooth_known_f7",
+      "surface_coeffs": {
+        "(0, 0)": 2,
+        "(0, 1)": 1,
+        "(0, 2)": 2,
+        "(0, 3)": 1,
+        "(0, 4)": 1,
+        "(1, 0)": 1,
+        "(1, 1)": 2,
+        "(1, 2)": 1,
+        "(1, 3)": 1,
+        "(2, 0)": 1,
+        "(2, 1)": 1,
+        "(2, 2)": 2,
+        "(3, 0)": 2,
+        "(3, 1)": 1,
+        "(4, 0)": 1
+      },
+      "field_p": 7,
+      "bound": 22,
+      "sign": 1,
+      "informative": false,
+      "vacuous": true,
+      "char_poly": [],
+      "exact_orders": {},
+      "traces": {},
+      "runtime": 0.0,
+      "status": "THEORETICAL"
+    }
+  ],
+  "overall_verdict": "PARTIAL"
+}

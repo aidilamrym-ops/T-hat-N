@@ -2440,3 +2440,21 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
 
 **Laporan:** reports/HODGE_PICARD_2026-10-21.md
 
+## §2.0bd — Hodge Picard Bound Ekstensi F_5, F_7 — SELESAI 2026-10-21
+
+**Paket:** Hodge TREK AKTIF — Bound Picard Ekstensi F_5, F_7 (lanjutan A-2026-0036)
+- **Pra-registrasi:** reports/PREREG_HODGE_PICARD_EXTENDED_2026-10-21.md (scope DIKUNCI)
+- **Implementasi:** msaf/hodge_picard_extended.py + msaf/tests/test_hodge_picard_extended.py
+- **Surface:** Smooth quartic yang sama (koefisien tersegel HODGE_CLOSURE)
+- **F_5:** Bound teoretis = 20 (non-vacuous, tapi tidak < 20)
+- **F_7:** Bound teoretis = 22 = b_2 (vacuous)
+- **Receipt:** reports/hodge_picard_extended.json
+- **Registry:** A-2026-0037 (CERTIFIED)
+- **Guard:** 10 passed, 1 skipped
+- **Freeze:** OK (14 pins)
+- **CI:** hijau
+
+**Batas:** hanya bound teoretis dari data tersegel; bukan pembuktian konjektur Hodge; tidak ada klaim CH untuk lapangan/permukaan lain; tidak ada klaim RH/faktorisasi/RSA/ECC/Anderson/fisika.
+
+**Laporan:** reports/HODGE_PICARD_EXTENDED_2026-10-21.md
+

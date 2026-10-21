@@ -1795,6 +1795,26 @@ mengikuti laporan L4).
   sha256LF 6f188cc6038acae2e89c00847febcad1a977671042fbb18c0c3ffb69203f4c72 reports/hodge_picard.json
   sha256LF 621b94a8045cea62ef976ba01413e6cc7b1dbe79abf57b9654a430d2f8f1f0ad reports/HODGE_PICARD_2026-10-21.md
   \
+
+
+### A-2026-0037 — Hodge Picard Bound Ekstensi F_5, F_7: bound Picard teoretis (tidak informatif)
+
+- **Jenis:** T
+- **Pernyataan:** Ekstensi Hodge Picard Bound ke F_5 dan F_7 pada smooth quartic yang sama (koefisien tersegel HODGE_CLOSURE): F_5 bound teoretis = 20 (non-vacuous, tapi tidak < 20), F_7 bound teoretis = 22 = b_2 (vacuous); tidak ditemukan bound informatif (< 20) pada permukaan yang diuji.
+- **Batas:** hanya bound teoretis dari data tersegel; bukan pembuktian konjektur Hodge; tidak ada klaim CH untuk lapangan/permukaan lain; tidak ada klaim RH/faktorisasi/RSA/ECC/Anderson/fisika.
+- **Status:** CERTIFIED
+- **Domino:** Hodge (Picard bound)
+- **Relasi:** melanjutkan A-2026-0036 (F_3); pra-registrasi reports/PREREG_HODGE_PICARD_EXTENDED_2026-10-21.md.
+- **Perintah verifikasi:** python -m msaf.hodge_picard_extended --primes 5,7; python -m pytest msaf/tests/test_hodge_picard_extended.py -q; python audit_quantum/freeze.py --verify.
+- **Sertifikat:'
+
+  \\	ext
+  sha256LF f40de3bff101c566cc219973272621039e0dde2c1ab8c65b99556fd23d5aec0c msaf/hodge_picard_extended.py
+  sha256LF 47432127396c32bd6e523216f72a54c80eeac243132153861dd4a6391720922c msaf/tests/test_hodge_picard_extended.py
+  sha256LF ab636a07038fb010faa345603c40d29a87189ca309285c8f2a3fce34d91d1f48 reports/PREREG_HODGE_PICARD_EXTENDED_2026-10-21.md
+  sha256LF a3586bb8fbd8e435ad633903f679f862f7ee0365f10411dc757203660c3d589d reports/hodge_picard_extended.json
+  sha256LF 0d32ad6c597513729f6538e87443b9b1b09637d3ea1fc8ddaefe4c0cf6d075e7 reports/HODGE_PICARD_EXTENDED_2026-10-21.md
+  \
 Selesai — 32 entri per 2026-10-21 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0013` + `A-2026-0014` + `A-2026-0014` + `A-2026-0015` + `A-2026-0015` + `A-2026-0016` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0018` + `A-2026-0019` + `A-2026-0019` + `A-2026-0020` + `A-2026-0020` + `A-2026-0021` + `A-2026-0021` + `A-2026-0022` + `A-2026-0022` + `A-2026-0023` + `A-2026-0023` + `A-2026-0024` + `A-2026-0025` + `A-2026-0026` + `A-2026-0027`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).
