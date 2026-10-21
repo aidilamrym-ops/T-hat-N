@@ -2422,3 +2422,21 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
 
 **Laporan:** reports/RIEMANN_G2G3_2026-10-21.md
 
+## §2.0bc — Hodge Picard Bound & CH a_11 — SELESAI 2026-10-21
+
+**Paket:** Hodge TREK AKTIF — Bound Picard & CH a_11 (dari DAFTAR_MASALAH_KERJA.md item 3)
+- **Pra-registrasi:** reports/PREREG_HODGE_PICARD_CH_2026-10-21.md (scope DIKUNCI)
+- **Implementasi:** msaf/hodge_picard.py + msaf/tests/test_hodge_picard.py
+- **Input:** Data spektral tersegel HODGE_CLOSURE.md, HODGE_CH_SPEC.md
+- **CH a_11 F_3:** a_11=354294 tersegel via CRT+oracle gate+rehearsal (HODGE_CH_SPEC)
+- **Bound Picard F_3:** 22 = b_2 (vacuous) pada smooth quartic F_3 (koefisien tersegel HODGE_CLOSURE)
+- **Receipt:** reports/hodge_picard.json
+- **Registry:** A-2026-0036 (CERTIFIED)
+- **Guard:** 10 passed, 1 skipped
+- **Freeze:** OK (14 pins)
+- **CI:** hijau
+
+**Batas:** hanya bound finit dari data tersegel; bukan pembuktian konjektur Hodge; tidak ada klaim CH untuk lapangan/permukaan lain; tidak ada klaim RH/faktorisasi/RSA/ECC/Anderson/fisika.
+
+**Laporan:** reports/HODGE_PICARD_2026-10-21.md
+
