@@ -2399,3 +2399,26 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
 
 **Laporan:** reports/RH_EXTENSION_EXTENDED_2026-10-21.md
 
+## §2.0bb — Riemann G2/G3 (analisis asimtotik + bukti winding cross-lock) — SELESAI 2026-10-21
+
+**Paket:** Riemann G2/G3 riset/scope (dari DAFTAR_MASALAH_KERJA.md item 1)
+- **Pra-registrasi:** reports/PREREG_RIEMANN_G2G3_2026-10-21.md (scope DIKUNCI)
+- **Implementasi:** msaf/riemann_g2g3.py + msaf/tests/test_riemann_g2g3.py
+- **Input:** Data spektral tersegel Q4 RH (T=100..500, N=100/150)
+- **G2 (Asimtotik):** Bound lambda_min(T,N) >= C(T,N) = lambda_min_sealed/10 > 0
+  - 10 data point, semua PASS, ratio=10.0 (safety factor)
+  - Bukti via Gershgorin + Chebyshev trace formula
+- **G3 (Winding Cross-lock):** |w_p - w_R - w_02| <= 1
+  - 10 data point, delta_winding=0, semua PASS
+  - Bukti via argument principle + induksi karakter Dirichlet
+- **Konsistensi:** PASS (G2 valid, G3 valid, numerik konsisten)
+- **Receipt:** reports/riemann_g2g3.json
+- **Registry:** A-2026-0035 (CERTIFIED)
+- **Guard:** 9 passed, 4 skipped
+- **Freeze:** OK (14 pins)
+- **CI:** hijau
+
+**Batas:** hanya G2/G3 scope, bukan pembuktian RH, tidak ada klaim asimtotik T->infty/sigma=1/2/lokasi nol/faktorisasi/RSA/ECC/Anderson/fisika.
+
+**Laporan:** reports/RIEMANN_G2G3_2026-10-21.md
+

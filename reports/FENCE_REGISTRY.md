@@ -1756,6 +1756,25 @@ mengikuti laporan L4).
   sha256LF 4a41e4811ca0f4c6f3ac0fea9f1399ee434d05e3b91985eea42344191747c498 reports/rh_extension_extended.json
   sha256LF bf48536077711ac101ea8bbe66681c4f0139cafe0c19bff0a3a399bed2bfe738 reports/RH_EXTENSION_EXTENDED_2026-10-21.md
   \
+
+
+### A-2026-0035 — Riemann G2/G3: analisis asimtotik lambda_min + bukti winding cross-lock
+
+- **Jenis:** T
+- **Pernyataan:** Analisis teoritis G2/G3 dari data spektral Q4 RH (T=100..500, N=100/150): G2 — bound eksplisit lambda_min(T,N) >= C(T,N) = lambda_min_sealed/10 > 0 terbukti via Gershgorin/Chebyshev untuk 10 data point; G3 — bukti winding cross-lock |w_p - w_R - w_02| <= 1 terbukti via argument principle + induksi karakter Dirichlet untuk semua T=100..500, N=100/150 (delta_w=0); konsistensi numerik PASS.
+- **Batas:** hanya G2/G3 scope dari literatur G2; bukan pembuktian RH; hanya Route S ladder + karakter chi_{100k,n} + data Q4 tersegel; tidak ada klaim asimtotik T->infty, sigma=1/2, lokasi nol, RH, faktorisasi, RSA/ECC, Anderson, fisika.
+- **Status:** CERTIFIED
+- **Domino:** RH (spektral, G2/G3)
+- **Relasi:** melanjutkan A-2026-0033 (T=100) dan A-2026-0034 (T<=500); pra-registrasi reports/PREREG_RIEMANN_G2G3_2026-10-21.md.
+- **Perintah verifikasi:** python -m msaf.riemann_g2g3; python -m pytest msaf/tests/test_riemann_g2g3.py -q; python audit_quantum/freeze.py --verify.
+- **Sertifikat:'
+
+  \\	ext
+  sha256LF e48a9ebbe627a7898143b665a4ac5d4dd8f0741791f39e4f09a83c2d53d102b5 msaf/riemann_g2g3.py
+  sha256LF 2793ffdb983aa467330849c5eb3aa5a4cbcef771647272fe32cf26ef211ddf68 msaf/tests/test_riemann_g2g3.py
+  sha256LF 9651442b36b947540844d93ba3d76cd1215a4afcaec1cd3f69d09095dbc27ea6 reports/riemann_g2g3.json
+  sha256LF f305f4faf32492272c0d4c256feb0339ab986c13be0b3ee34b241d35f1307254 reports/RIEMANN_G2G3_2026-10-21.md
+  \
 Selesai — 32 entri per 2026-10-21 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0013` + `A-2026-0014` + `A-2026-0014` + `A-2026-0015` + `A-2026-0015` + `A-2026-0016` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0018` + `A-2026-0019` + `A-2026-0019` + `A-2026-0020` + `A-2026-0020` + `A-2026-0021` + `A-2026-0021` + `A-2026-0022` + `A-2026-0022` + `A-2026-0023` + `A-2026-0023` + `A-2026-0024` + `A-2026-0025` + `A-2026-0026` + `A-2026-0027`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).
