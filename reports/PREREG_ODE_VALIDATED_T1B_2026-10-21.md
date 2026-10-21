@@ -174,3 +174,37 @@ M2 (remainder = 0 pada C2), M3 (ubah `E0` di receipt), M4 (suntik
   kontinu/Navier-Stokes, RH/GRH, faktorisasi, RSA/ECC, Anderson, atau fisika.
 - Hasil T1 (FAILED) tetap berlaku sebagai rekaman historis; T1b tidak
   mengubahnya.
+
+## 10. Amendemen pra-implementasi (sebelum kode T1b)
+
+Analisis implementasi - dilakukan **sebelum ada kode T1b maupun hasil apa
+pun** - menemukan dua hal:
+
+- §2.2 mewajibkan sisa Taylor disisipkan sebagai arah noise (kolom), tetapi
+  §2.1 ikut melipat `3*rem` ke `rho`. Lipatan ganda itu tidak perlu, dan
+  karena `rho` dikalikan `||J_step||_2` setiap langkah, suku tersebut akan
+  tumbuh `sigma^k` - persis mode kegagalan T1 (untuk S4 `sigma ~ 31`),
+  sehingga metode bertanda tidak mungkin lulus.
+- Jacobian yang dipakai adalah **Jacobian interval atas seluruh kotak
+  state**; dalam bentuk nilai rata-rata
+  `P_x(h) - P_m(h) in J_box * (x - m)`, bagian polinomial Taylor orde `p`
+  sudah terwakili eksak (tanpa suku kuadratik tambahan).
+
+Amendemen (berlaku sebelum kode dan sebelum hasil apa pun):
+
+1. `3*rem` TIDAK dilipat ke `rho`; sisa Taylor dibawa oleh kolom noise baru
+   sesuai §2.2.
+2. `rho` hanya membawa pembulatan (`<= 1e-70` per langkah) dan **tidak**
+   dikalikan `||J_step||_2` per langkah. Batas kotak tetap dihitung dari
+   `sum_j |S_ij| + rho` seperti §2.1.
+3. `kappa_nl * r_tot^2` tetap dihitung dan disisipkan sebagai kolom noise
+   kecil (bukan ke `rho`), dan tetap direkam di receipt dengan kewajiban
+   `<= 1e-30` per blok; suku ini konservatif dan tidak dipakai untuk
+   menutupi kesalahan orde dua yang tidak ada.
+4. Kolom bertanda adalah satu-satunya mekanisme propagasi; §2.2 berlaku
+   untuk semua sisa lokal (Taylor dan kuadratik).
+5. Tidak ada perubahan lain: sistem, konfigurasi, toleransi C1-C6, kriteria
+   C7, verdict, dan falsifier tetap. Hash pra-registrasi setelah amendemen
+   dicatat di receipt/laporan; hash versi awal
+   `79a4e87965cdc1682d4fa5ddb38cd2719201e316ddba1f2b32004c8379c9b0b1`
+   tetap disebut pada laporan sebagai versi sebelum amendemen.
