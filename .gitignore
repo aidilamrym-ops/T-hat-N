@@ -24,3 +24,13 @@ Kompilasi Rumus, Turunan, dan Penjelasan Simbol.md
 .env
 .env.*
 !.env.example
+
+# Collatz audit local bulk evidence (documented as intentionally uncommitted in FENCE_REGISTRY A-2026-0019)
+audit_collatz/exec_2026-10-19/clone/
+audit_collatz/exec_2026-10-19/batteries_re/
+audit_collatz/exec_2026-10-19/refetch/oeis_*.txt
+audit_collatz/exec_2026-10-19/refetch/site_*.html
+audit_collatz/exec_2026-10-19/collatz-e98d0294.tar.gz
+audit_collatz/exec_2026-10-19/collatz_sweep
+audit_collatz/exec_2026-10-19/n_main_frozen
+audit_collatz/exec_2026-10-19/n_main_refetched
