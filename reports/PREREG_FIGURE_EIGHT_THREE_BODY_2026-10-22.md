@@ -325,3 +325,76 @@ Pra-registrasi ini gagal/terbantahkan bila:
   Lean".
 - Kode/docstring Inggris; laporan peneliti (HANDOFF/registry/daftar/laporan
   T2) bahasa Indonesia.
+
+---
+
+## 9. Amendemen #1 (ditulis SEBELUM ada kode; hash berkas ini terkunci pada commit amendemen)
+
+Diungkap jujur: analisis kelayakan mekanisme Krawczyk (masih pra-kode,
+belum ada satu baris pun implementasi) menemukan tiga hal yang menuntut
+perubahan angka/mutasi di bawah. Tidak ada ambang kriteria K1-K6 yang
+dilonggarkan; semua perubahan MEMPERKETAT kotak/mutasi atau membetulkan
+gerbang mutasi yang terbukti vakum. Angka probe §2, jendela, grid, T̃,
+K2, K4, K5 tidak berubah.
+
+**9.1 Alasan (dependensi waktu-silang).** Pada kampanye kotak, waktu
+silang t₂(x) untuk x ∈ B menyebar |dt₂/dx|·r_B ≈ 10.5·r_B (turunan
+implisit, terkunci §3.3-§3.6). Membungkus S pada rentang waktu selebar
+ini menambah lebarDF(B) ~ A·r_B dengan A ≈ 1e3-1e4 (faktor ketergantungan;
+melebihi variasi sah ‖D²F‖·r_B ~ 10·r_B sebesar ~100×). Syarat kontraksi
+‖Ŵ‖·A·r_B < 0.9 pada kasus terburuk terukur σ_min = 1.5368e-09 menuntut
+r_B < ~2.5e-13, bukan 1e-10.
+
+**9.2 Perubahan angka terkunci:**
+
+- r_B: 1e-10 → **2e-13**; ambang suksesi K3 tetap K(B) ⊆ box(x̂, 0.9·r_B)
+  (kini 1.8e-13).
+- Target Newton §3.6: |F|∞ ≤ 1e-20 → **|F|∞ ≤ 1e-22** (masih ≤ target lama;
+  lebar aktual tabung titik diperkirakan ~1e-76 - rems Taylor ~ h^25/25! -
+  sehingga target 1e-22 punya kepala-ruang ~54 pesanan; sekaligus membatasi
+  ‖x̂ − x*‖ ≤ τ_F/σ_min ≤ 6.7e-14 < r_B pada kasus terburuk).
+- Setiap iterasi Newton (termasuk x̂ final) dibulatkan ke **25 desimal**
+  (rasional eksak, K1); pembulatan ≤ 5e-26 tidak material.
+- Sensitivitas §3.7 kini: total suksesi (kasus terburuk σ_min = 1.5e-09)
+  ≈ ‖Ŵ‖·(τ_F + F-rad) + ‖Ŵ‖·A·r_B² ≈ 6.7e-14 + A·2.7e-13·(A/1e3); dengan
+  A ~ 1e3 muat di 1.8e-13 (margin ~1.2×); pada σ_min ≥ 1e-08 semua margin
+  ≥ 5×. Bila σ_min sesungguhnya ≪ 1e-08 atau A ≫ 1e4 → inclusion gagal →
+  **FAILED jujur** (falsifier §6 butir 2 tetap berlaku).
+
+**9.3 Gerbang mutasi (M1, M5) dibetulkan sebelum vakum terbukti:**
+
+- Lebar aktual tabung ~1e-76 berada ~50 pesanan di bawah ambang K2
+  (1e-22) dan K4 (1e-16); oleh itu:
+- **M1 (diubah):** `REMAINDER_FACTOR := 1e70` (sebelumnya 10): faktor 10
+  terbukti tak terdeteksi (lebar tetap ~1e-75 ≪ 1e-22 - gerbang vakum);
+  faktor 1e70 mendorong rem ~1e-14 → tabung > 1e-22 pada checkpoint
+  pertama → K2 gagal **cepat** (abort pada checkpoint pertama yang
+  melebihi ambang, tetap sesuai semangat §4/M1).
+- **M5 (gerbang diperbaiki):** `SWEEP_SIGNED := False` (reset-per-blok)
+  menggembungkan c_out/S ~8.7e7× per periode (ukuran T1b §2.3); pada
+  checkpoint titik lebar tetap di bawah ambang K2 (vakum di sana), tetapi
+  pada **kampanye kotak** DF(B) meledak sehingga K(B) ⊄ box(x̂, 0.9·r_B) →
+  **K3 gagal** (bukan K2 seperti §4 semula). Ekspektasi kegagalan dan
+  sifat fail-early-nya (K3 gagal pada akhir kampanye kotak) dikunci di sini.
+
+**9.4 Mekanisme tambahan yang dikunci (implementasi wajib mengikuti):**
+
+- Tabung pada waktu sembarang t di dalam langkah k: polinomial Taylor
+  langkah-k dari titik-tengah tersimpan + perpanjangan suara dari
+  checkpoint blok terakhir (|J|·c + rem + quad) + Jacobian parsial pada τ
+  (bentuk nilai-rata-rata, sama seperti `forward_step`); untuk uji tanda
+  pembuangan-bisection, radius boleh dibatasi kasar ‖J_τ‖∞ ≤ 2 dengan
+  justifikasi jarak-pasir-badan bersertifikat ≥ 1/2 di seluruh horizon
+  (verifikasi internal, bukan kriteria).
+- Pembungkus waktu-silang: bisection-berpagar pada polinomial tersertifikasi
+  hingga lantai radius tabung q3y tercapai; lebar aktual diperkirakan
+  ~1e-75 (ambang K2 ≤ 1e-19 tetap berlaku sebagai batas-atas).
+- F(x̂) dan Ŵ berasal dari **kampanye titik (point-run) Newton terakhir**
+  (tabung tajam); kampanye kotak menyumbang DF(B) dan konfirmasi tabung;
+  K5 dibaca dari kampanye titik final.
+- Iterasi Newton memakai inversi matriks titik-tengah DF(x) di 256-bit
+  (`arb_mat`); aturan monoton (§3.6) tetap berlaku.
+
+Amendemen berikutnya hanya boleh ditulis sebelum kode modul
+`msaf/figure_eight.py`; setelah modul ditulis, scope terkunci penuh
+(pola T1b: tanpa perubahan ambang pasca-kode).
