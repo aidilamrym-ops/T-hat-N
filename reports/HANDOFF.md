@@ -2790,4 +2790,56 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
   tidak berubah (`c1d9...`/`42d1...`). Tanpa registry.
 
 
+## 2.0bn - T2-r2: FAILED di K2 (slack T1b vs R_B) - 2026-10-22
+
+- **Verdict T2-r2: FAILED.** K1 PASS; Newton 8x8 PASS dalam 3 iterasi
+  (`2.186e-11` -> `3.057e-22` -> `4.222845715357848e-25`); K2 FAILED
+  pada checkpoint pertama; K3/K4/K5 tidak dievaluasi; registry
+  `A-2026-0041` **tidak dibuat**. Ini trek baru, bukan amendemen T2.
+- **Pra-registrasi:** `reports/PREREG_FIGURE_EIGHT_R2_2026-10-22.md`,
+  sha256LF `c6b7d4c7cf253962f7d50b8c6d25f0df5079972d498c63a849cb96f4a226bb39`,
+  di-commit sebelum kode di `8e1fd2b`.
+- **K2:** error fail-fast di step 96, width
+  `320.0766289023929117...` vs cap `1e-7`. Akar masalah: sertifikat
+  sapuan bertanda T1b menambahkan slack kuadratik beku
+  `KAPPA_NL=1e18` pada radius kotak. Untuk `R_B=1e-10`, radius state
+  q3/v3 ~`2e-10` sehingga slack pertama ~`4.2479e-2`; umpan balik
+  checkpoint meledak. Diagnostik: `R_B=1e-13` -> width `3.2008e-4`
+  di step 96; `R_B=1e-15` -> width `2.0549e6` di step 192; running
+  bound T1b tanpa slack `5.9459e-3` juga di atas cap. Mengecilkan
+  `R_B` saja bukan perbaikan; perlu metode K2/tabung nonlinear lain.
+- **Temuan implementasi (diperbaiki sebelum receipt final):** parser
+  `_round25` string ilmiah memotong mantissa (diganti konversi
+  `man_exp()` eksak); turunan 8x8 hanya kolom independen dan urutan
+  produk terbalik (diperbaiki menjadi `J_indep - J_dependen` dan
+  perkalian kronologis; uji beda hingga horizon pendek `2.16e-17`);
+  grid 25-desimal terdekat berhenti di `1.5805e-24` (dipilih titik
+  floor/ceil yang meminimalkan residu terlinearisasi, hasil
+  `4.2228e-25`, tetap grid 25-desimal); entry point `main()`
+  ditambahkan.
+- **Artefak:** modul `msaf/figure_eight_r2.py` sha256LF
+  `22fcc6ecdd63fccb9caf7c0ddab3ae55e888dfdd74600a1d3a30dc1f5aa34f04`;
+  receipt `reports/figure_eight_r2_2026-10-22.json` 3942 byte,
+  sha256LF `b25c7692e0bf3236e5b1d8945b8a0159c6f1f9a93a962ee19583b36a46866aa4`
+  (dua run byte-identical); laporan
+  `reports/FIGURE_EIGHT_R2_2026-10-22.md`; guard
+  `msaf/tests/test_figure_eight_r2.py`. Modul T1/T1b beku tidak
+  berubah (`c1d9...`/`42d1...`).
+- **Verifikasi:** 11/11 tes guard r2 lulus dalam run terpisah
+  (baseline + M1-M5 + unit); suite non-r2 `629 passed, 1 skipped`
+  (37:43); `freeze.py --verify` OK (14 pin, digest
+  `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`).
+  Kampanye penuh lambat (~24-43 menit per run), jadi suite penuh
+  termasuk r2 tidak dijalankan dalam satu perintah; semua tes r2
+  dijalankan terpisah.
+- **Batas klaim:** tidak ada klaim keberadaan/keunikan figure-eight,
+  stabilitas, spektrum, chaos, ergodisitas, RH/PDE/Soliton/Evans,
+  fisika, prioritas, atau Lean. Tidak ada entri registry.
+- **Langkah berikutnya:** bila dilanjutkan, buka pra-registrasi r3
+  **sebelum kode** dengan metode K2 yang tidak memakai feedback
+  `KAPPA_NL=1e18` pada radius kotak (mis. batas kuadratik lokal orde
+  kedua atau metode tabung lain), lalu implementasi terpisah. Jangan
+  mengubah r2 secara diam-diam.
+
+
 

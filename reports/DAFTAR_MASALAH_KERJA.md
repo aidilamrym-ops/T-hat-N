@@ -42,7 +42,7 @@ nilainya, termasuk 20). Aturan §0.1 tanpa kecuali.
 | 12 | Twin Prime | **Q2** | Sensus twin + rekor gap s.d. N; dua sieve independen sepakat |
 | 13 | abc | **Q3** | Sensus triple s.d. C + rekor kualitas; verifikasi ulang independen |
 | 2 | P vs NP | DAFTAR-B (formalisasi saja) | Barier (relativisasi/natural proofs) bilang TAK ADA serangan komputasional; yang mungkin hanya formalisasi fragmen (mis. Cook-Levin) di Lean |
-| 16 | Three-Body | TREK AKTIF (T2 FAILED; T2-r2 menyusul) | T2 figure-eight **FAILED**: K3 singular eksak akibat simetri translasi-x (`DF e = 0`, witness residual 8.89e-22); K5 frame probe mismatch; K2/K4/K5 tidak dievaluasi; **tanpa** registry A-2026-0041. Perbaikan lewat pra-registrasi baru T2-r2 (quotien simetri + frame absolut + mutasi diskriminatif) |
+| 16 | Three-Body | TREK AKTIF (T2 FAILED; T2-r2 FAILED; r3 belum dibuka) | T2 gagal di K3 karena singularitas translasi-x eksak (`DF e = 0`). T2-r2 (8x8 terreduksi, periode tetap) **FAILED di K2**: Newton 3 iterasi mencapai 4.22e-25 dan K1 PASS, tetapi slack kuadratik T1b beku (`KAPPA_NL=1e18`) pada `R_B=1e-10` memberi width 320 di step 96; mengecilkan `R_B` saja tidak stabil (1e-13: 3.2e-4; 1e-15: 2.05e6 di step 192). K3/K4/K5 tidak dievaluasi; **tanpa** registry A-2026-0041. Trek berikutnya memerlukan pra-registrasi r3 dengan metode tabung nonlinear lebih ketat sebelum kode |
 | 19 | Anderson | DAFTAR-B (syarat) | Kriteria volume-hingga Germinet-Klein; SYARAT MASUK: enclosure probabilitas dulu |
 | 20 | Soliton | DAFTAR-B (syarat) | Indeks stabilitas via fungsi Evans terenclosure; SYARAT MASUK: sama dengan Three-Body |
 | 17 | Schanuel | DAFTAR-B (formalisasi saja) | Tak ada serangan komputasional; hanya formalisasi instans Lindemann-Weierstrass |
