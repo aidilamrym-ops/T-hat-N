@@ -2751,5 +2751,43 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
   **tidak** masuk repo; seluruh angka kunci sudah terdokumentasi di §2
   pra-registrasi.
 
+## 2.0bm - T2 figure-eight: FAILED (K3 singular eksak) - 2026-10-22
+
+- **Verdict T2: FAILED.** K1 PASS; K3 FAILED; K2/K4/K5 tidak dievaluasi;
+  registry `A-2026-0041` **tidak dibuat**. Laporan:
+  `reports/FIGURE_EIGHT_2026-10-22.md`; receipt
+  `reports/figure_eight_three_body_2026-10-22.json`
+  (sha256LF `72309f63d2bd9da14659fda0461ca1a9aaee85eec6f0cc9dabd3cf5e18842fce`;
+  dua run byte-identical: 7,17 dan 8,06 menit).
+- **Sebab K3:** peta Kembali-2 invarian terhadap translasi-x seragam.
+  Dengan `e = (1,0,1,0,1,0,0,0,0,0,0)`, `DF e = 0` **eksak**. Witness
+  interval di receipt: semua komponen `DF @ e` memuat nol, residual
+  `8.8895e-22`. Invers titik-tengah singular; titik tetap tidak terisolasi
+  (kontinum `x* + c e` di dalam B), jadi klaim "tepat satu titik tetap di
+  B" salah untuk formulasi 11-dimensi terkunci. Probe FD
+  `sigma_min = 1.5e-9` adalah lantai noise, bukan nilai sejati (0);
+  presisi tambahan tidak menolong.
+- **K5 (temuan probe, bukan verdict):** jendela K5(a) terkunci
+  `2.108735283`/`4.217376381` adalah waktu **relatif** (anchor `w1` dan
+  `x_c2`), bukan absolut; silang-naik sejati di `1.054388268` dan
+  `5.271750210`. K5(b) range q3x w1/w2 tertukar (aktual ~0 dan ~-4.77e-5).
+  K5 tidak dievaluasi di receipt karena K3 gagal lebih dulu.
+- **K6:** determinisme OK; guard 8/8 PASS setelah assertion M1 disesuaikan
+  dengan perilaku aktual (`Picard enclosure failed` di step 2, bukan
+  gerbang lebar K2); M2/M5 tidak diskriminatif karena singularitas K3.
+  K6 tidak terpenuhi penuh; verdict tetap FAILED. Suite penuh: 629 passed,
+  1 skipped (29:19); `freeze.py --verify` OK (14 pin, digest
+  `f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`).
+- **Riwayat kegagalan (diungkap):** run 1 `ZeroDivisionError` setelah 6,49
+  menit; run 1b K1 FAILED karena scanner AST sendiri memakai nama `float`
+  (`name:float:1089`), receipt superseded; run 1c/2 final.
+- **T2-r2 (pra-registrasi baru, belum ditulis):** quotien translasi/boost
+  (frame COM), kunci energi atau perlakukan periode sebagai variabel,
+  tangani simetri rotasi/`L=0`; frame K5 absolut; mutasi M2/M5
+  transverse/diskriminatif. T2b spektrum tetap terpisah.
+- **Artefak:** `msaf/figure_eight.py` `a36cbe34...`, guard
+  `msaf/tests/test_figure_eight.py` `fbef84d7...`; modul beku T1/T1b
+  tidak berubah (`c1d9...`/`42d1...`). Tanpa registry.
+
 
 

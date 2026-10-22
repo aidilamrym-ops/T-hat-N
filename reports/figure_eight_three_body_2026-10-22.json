@@ -1,0 +1,109 @@
+{
+  "all_pass": false,
+  "checks": {
+    "K1": {
+      "ast_scan_hits": [],
+      "ast_scan_passed": true,
+      "passed": true
+    },
+    "K2": null,
+    "K3": {
+      "df_singular": true,
+      "error": "iteration 1: singular section derivative DF (exact x-translation null direction); K3 cannot certify a locally unique fixed point",
+      "f_inf_final": null,
+      "iterations": 1,
+      "krawczyk": null,
+      "newton": [
+        {
+          "f_inf": "[3.472944747528028818997538721126432618653075900709138328507495961663232947344e-12 +/- 1.28e-88]",
+          "iter": 1
+        },
+        {
+          "f_inf": "[3.472944747528028818997538721126432618653075900709138328507495961663232947344e-12 +/- 1.28e-88]",
+          "iter": 1,
+          "singular_df": true
+        }
+      ],
+      "newton_ok": false,
+      "null_witness": {
+        "residual_inf": "[8.889540874705036720169762511019484523641894350159950509743603060615433269673e-22 +/- 1.93e-98]",
+        "row_sums": [
+          "[+/- 4.45e-22]",
+          "[+/- 2.45e-22]",
+          "[+/- 4.45e-22]",
+          "[+/- 2.45e-22]",
+          "[+/- 8.89e-22]",
+          "[+/- 8.80e-22]",
+          "[+/- 4.71e-22]",
+          "[+/- 8.80e-22]",
+          "[+/- 4.71e-22]",
+          "[+/- 2.77e-25]",
+          "[+/- 2.39e-25]"
+        ],
+        "translation_null": true
+      },
+      "passed": false,
+      "x_hat": null
+    },
+    "K4": null,
+    "K5": null
+  },
+  "collision_guard": null,
+  "config": {
+    "T_tilde": "39537519/6250000",
+    "block_steps": 96,
+    "h": "13179173/3200000000",
+    "newton_target": "1/10000000000000000000000",
+    "r_B": "1/5000000000000",
+    "remainder_factor": 1,
+    "section": "{q3y = 0, v3y < 0}",
+    "seed": [
+      "176365177181/200000000000",
+      "471573247799/1000000000000",
+      "-881817147851/1000000000000",
+      "-235815386681/500000000000",
+      "-4800619/100000000000",
+      "-557287392981/1000000000000",
+      "38260213959/125000000000",
+      "-278678224987/500000000000",
+      "30604477969/100000000000",
+      "557321921477/500000000000",
+      "-306063245681/500000000000"
+    ],
+    "steps": 1554,
+    "sweep_signed": true,
+    "window_w1": [
+      "3153014927/1000000000",
+      "3173014927/1000000000"
+    ],
+    "window_w2": [
+      "39475019/6250000",
+      "39600019/6250000"
+    ]
+  },
+  "order": 24,
+  "precision": 256,
+  "prereg_sha256lf": "6cc2ef2a613ae9ed5f9d1917624c57e3b1a0cbe915d2a0052dcf8a7f99f27ddf",
+  "python_flint": "0.9.0",
+  "schema": "msaf.figure_eight.v1",
+  "summary": "FAILED",
+  "t1_module_sha256lf": "c1d9b5d60036a5f0772f7e3f1b8c78969efaa7146a713c762531ddce346251b9",
+  "t1b_module_sha256lf": "42d196a51c5ae45e3b87b8c1e36319abfeb93df776b3c2317e812f7c2c0b5b97",
+  "thresholds": {
+    "K2_crossing_width": "1/10000000000000000000",
+    "K2_tube_width": "1/10000000000000000000000",
+    "K3_krawczyk_margin": "9/10",
+    "K3_newton_max_iter": 6,
+    "K3_newton_target": "1/10000000000000000000000",
+    "K4_entry_width": "1/10000000000000000",
+    "K5_choreo": "1/1000000",
+    "K5_period_diff": "1/1000000000",
+    "K6_mutations": [
+      "M1 remainder_factor 1e70 -> K2 fail-fast",
+      "M2 seed q1x +1e-3 -> K3 fail",
+      "M3 receipt byte tamper -> guard hash mismatch",
+      "M4 float injection -> AST scan fail",
+      "M5 sweep_signed False -> K3 fail"
+    ]
+  }
+}
