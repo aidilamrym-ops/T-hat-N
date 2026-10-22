@@ -395,6 +395,17 @@ r_B < ~2.5e-13, bukan 1e-10.
 - Iterasi Newton memakai inversi matriks titik-tengah DF(x) di 256-bit
   (`arb_mat`); aturan monoton (§3.6) tetap berlaku.
 
+- **Amendemen #2 (masih sebelum kode):** dua kekeliruan pencatatan probe
+  di §3.3 dibetulkan tanpa mengubah gerbang kriteria: (a) silang-**turun**
+  (v3y < 0) berarti q3y **lo > 0 dan hi < 0** untuk KEDUA jendela — pola
+  tertulis "w₁: −/+" adalah kebalikan; kini keduanya "+/−"; (b) margin
+  terukur pada jendela terkunci (setengah-lebar 0.01) adalah **0.0061
+  (w₁) dan 0.0107 (w₂)** — angka "0.06/0.10" tercatat milik hipotesis
+  jendela ±0.1 yang tidak jadi terkunci. Gerbang K2 tetap: perubahan tanda
+  ketat di kedua ujung + monotonitas v3y ≤ −1/2 (tidak berubah).
+  Dibuka sebagai kesalahan pencatatan, pola kejujuran yang sama dengan
+  kecacatan probe variational §2k.
+
 Amendemen berikutnya hanya boleh ditulis sebelum kode modul
 `msaf/figure_eight.py`; setelah modul ditulis, scope terkunci penuh
 (pola T1b: tanpa perubahan ambang pasca-kode).
