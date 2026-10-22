@@ -42,7 +42,7 @@ nilainya, termasuk 20). Aturan §0.1 tanpa kecuali.
 | 12 | Twin Prime | **Q2** | Sensus twin + rekor gap s.d. N; dua sieve independen sepakat |
 | 13 | abc | **Q3** | Sensus triple s.d. C + rekor kualitas; verifikasi ulang independen |
 | 2 | P vs NP | DAFTAR-B (formalisasi saja) | Barier (relativisasi/natural proofs) bilang TAK ADA serangan komputasional; yang mungkin hanya formalisasi fragmen (mis. Cook-Levin) di Lean |
-| 16 | Three-Body | DAFTAR-B (syarat) | Orbit figure-eight tervalidasi; SYARAT MASUK: integrator ODE tervalidasi dulu (kapabilitas baru) |
+| 16 | Three-Body | TREK AKTIF | Orbit figure-eight tervalidasi; syarat "integrator ODE tervalidasi" terpenuhi via T1b (A-2026-0040); trek T2 dibuka dengan pra-registrasi terkunci `PREREG_FIGURE_EIGHT_THREE_BODY_2026-10-22.md` |
 | 19 | Anderson | DAFTAR-B (syarat) | Kriteria volume-hingga Germinet-Klein; SYARAT MASUK: enclosure probabilitas dulu |
 | 20 | Soliton | DAFTAR-B (syarat) | Indeks stabilitas via fungsi Evans terenclosure; SYARAT MASUK: sama dengan Three-Body |
 | 17 | Schanuel | DAFTAR-B (formalisasi saja) | Tak ada serangan komputasional; hanya formalisasi instans Lindemann-Weierstrass |

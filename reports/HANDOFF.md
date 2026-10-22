@@ -2699,4 +2699,57 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
   di-commit**; commit/push hanya bila diminta pemilik.
 
 
+## 2.0bl - Trek T2 dibuka: orbit figure-eight tervalidasi (PREREG) - 2026-10-22
+
+- **Konteks:** pemilik membuka Daftar-B 16 (Three-Body) via pilihan soal
+  ("Daftar-B 16: Three-Body"); pola T1/T1b: ukur-dulu (probe) → pra-registrasi
+  di-commit sebelum kode → implementasi → seal → registry hanya bila ALL PASS.
+  Prasyarat "integrator ODE tervalidasi" sudah terpenuhi T1b (A-2026-0040);
+  T2 adalah lintasan klaim **terpisah** (mekanisme, pra-registrasi, receipt
+  sendiri). Batas T1b tetap berlaku: S4 tetap uji-stress tersegel, **bukan**
+  klaim keberadaan orbit figure-eight.
+- **Probe (sebelum pra-registrasi dikunci, diungkap di §2 dokumen):**
+  orbit periodik sejati ditemukan via Newton least-squares dengan pangkal
+  Jacobian analitik (residu |G|∞ 1.7e-6 → 4.561e-14; T* = 6.326003039910031;
+  jarak benih 1.089e-04; E(orbit) −1.2871299154104481, Δ = 1.458e-05 dari
+  E0; L ≈ −1.9e-12). Seksi Σ = {q3y=0, orientasi v3y<0} punya 4 penyilangan
+  per periode (silang turun pada t=0 dan t≈3.163; naik pada t≈2.109 dan
+  t≈4.217; jarak antar-silang ≥ 3.16). Titik kerja x_fixed |F| = 6.176e-12
+  (sesudah langkah lstsq dari x_c2), benih rasional 12-desimal dikunci di
+  §2d. Koreografi **eksak** terukur: ‖q1(t+T/3)−q2(t)‖ ≤ 2.524e-11,
+  ‖q1(t+2T/3)−q3(t)‖ ≤ 2.687e-11. Simetri antipodal setengah-periode
+  **FALSE** (residu terbaik atas semua permutasi label 6.946e-1) → tanpa
+  klaim simetri.
+- **Kecacatan probe (diungkap, angka lama dibuang):** matriks variasional
+  probe sempat salah tanda **dan** salah skala (−K, /d² seharusnya +K, /d³);
+  nilai monodromy lama (953, 28) tidak sah dan dihitung ulang → monodromy
+  benar: 12 multiplikator {4 real nyaris-1, 2 pasang nyaris-1, 2 pasang
+  unit −0.2976±0.9547j & 0.9986±0.0529j}, |detM−1| = 5.77e-14.
+- **Deferensi → T2b:** klaster multiplikator nyaris-1 **tidak konvergen
+  antar-metode** (FD ≈ 5e-4 vs monodromy ≈ 1.2e-6; lantai noise FD ~5e-7
+  per entri, σmin DF = 1.5368e-09 tidak terukur andal di presisi ganda) →
+  **stabilitas spektral dikecualikan dari T2**; K4 hanya menghasilkan
+  matriks monodromy terenclosure (lebar entri ≤1e-16, 1 ∈ det), tanpa
+  klaim eigen. T2b butuh pra-registrasi tersendiri.
+- **Pra-registrasi** `reports/PREREG_FIGURE_EIGHT_THREE_BODY_2026-10-22.md`
+  (status: DITULIS, belum di-commit pada saat seksi ini ditulis → hash-nya
+  dikunci pada commit pembuka trek ini): formulasi terkunci (seksi codim-1,
+  F(x)=Π(P̃²(x))−x di R^11, Krawczyk r_B = 1e-10, Newton ≤6 langkah
+  monoton ke |F|∞ ≤ 1e-20, jendela w1/w2 = 3.163014927/6.326003040 ± 0.01,
+  grid h = T̃/1536 = 0.0041184915625, N = 1554, 256-bit orde 24, knob
+  `REMAINDER_FACTOR=1`/`SWEEP_SIGNED=True`), kriteria K1–K6, verdict
+  (ALL PASS → registry `A-2026-0041`; K1/K2/K3/K6 gagal → FAILED;
+  K4/K5 gagal → INCONCLUSIVE; durasi = catatan saja), falsifier, batas
+  eksplisit (keunikan **lokal** di kotak saja; bukan data figure-eight
+  real-sejati; tanpa klaim RH/PDE/chaos/ergodisitas/Soliton/Evans/fisika/
+  prioritas; bukan bukti Lean).
+- **Artefak menyusul (setelah commit ini):** `msaf/figure_eight.py`,
+  `msaf/tests/test_figure_eight.py`, receipt
+  `reports/figure_eight_three_body_2026-10-22.json`, laporan
+  `reports/FIGURE_EIGHT_2026-10-22.md`, registry `A-2026-0041` (hanya bila
+  ALL PASS). Probe pribadi (t2_true.npy, t2_sec.npy) ada di temp lokal,
+  **tidak** masuk repo; seluruh angka kunci sudah terdokumentasi di §2
+  pra-registrasi.
+
+
 
