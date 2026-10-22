@@ -1957,6 +1957,25 @@ eports/PREREG_NAVIER_STOKES_DISCRETE_2026-10-21.md.
   sha256LF 1b53f4e4a092fcdaeecfeebcd5a2bdccf38793cc34d7909e401b842723c870c5 reports/navier_stokes_regularity.json
   sha256LF d2c819a294f54bc51efde3fd434f1ad0fce14978ce65140b84fe262a8802113c reports/NAVIER_STOKES_REGULARITY_2026-10-21.md
   \
+
+### A-2026-0040 — Integrator ODE Tervalidasi: Propagasi Blok Bertanda (T1b)
+
+- **Jenis:** T
+- **Pernyataan:** Untuk seluruh empat sistem terkunci pra-registrasi (S1 `x'=x^2` 16 langkah `h=1/32`, orde 16/24; S2 `x''=-x` 64 langkah `pi/32`; S3 Kepler sirkular 2.560 langkah `2*pi/256`; S4 three-body RHS 512 langkah `T/512`), integrator Taylor-validated aritmetika bola (python-flint 0.9.0, presisi 256 bit, orde 24) dengan propagasi ketidakpastian **bertanda** (perkalian matriks interval `J_step*S`, sisa Taylor di kotak jalur, sertifikat sapuan mundur kontinu tanpa reset blok) mensertifikasi enclosure yang memuat semua nilai eksak yang diketahui, dengan seluruh kriteria C1-C7 pra-registrasi lulus penuh: lebar energi maksimum S3 `4.49e-25` (<= `1e-12`), lebar energi maksimum S4 `5.26e-26` (<= `1e-10`), slack §2.3 `kappa_nl*r_tot^2` di bawah `1e-30` pada setiap blok, determinisme byte antar run, dan mutasi guard M1-M5 yang semuanya gagal sebagaimana mestinya.
+- **Batas:** hanya mesin enclosure untuk S1-S4 dengan konfigurasi terkunci; bukan bukti formal Lean; bukan bukti global; bukan klaim keberadaan/stabilitas orbit figure-eight periodik (S4 = data uji stress RHS terhadap `E0`/`L0`/pusat massa yang diketahui eksak); bukan klaim Soliton/Evans; tidak ada klaim chaos/ergodisitas/PDE kontinu/Navier-Stokes/RH/GRH/faktorisasi/RSA/ECC/Anderson/fisika; T1 (`reports/ODE_VALIDATED_2026-10-21.md`, FAILED) tetap berlaku dan tidak diubah.
+- **Status:** CERTIFIED
+- **Domino:** Integrator ODE tervalidasi (mekanisme bertanda; prasyarat Daftar-B 16 Three-Body dan 20 Soliton)
+- **Relasi:** melanjutkan T1 `reports/ODE_VALIDATED_2026-10-21.md` (FAILED; modul beku `msaf/ode_validated.py` diimpor tanpa diubah); pra-registrasi `reports/PREREG_ODE_VALIDATED_T1B_2026-10-21.md` (§10-§12 amendemen sebelum kode/kampanye; hash pasca-§12 dipinjam di receipt).
+- **Perintah verifikasi:** python -m pytest msaf/tests/test_ode_validated_block.py -q; python -m msaf.ode_validated_block; python audit_quantum/freeze.py --verify.
+- **Sertifikat:**
+
+  ```text
+  sha256LF 42d196a51c5ae45e3b87b8c1e36319abfeb93df776b3c2317e812f7c2c0b5b97 msaf/ode_validated_block.py
+  sha256LF f061e7ebeabfaa808280455f6d5bff595c32d9feaef164fa11d76bcbcf8aa98f msaf/tests/test_ode_validated_block.py
+  sha256LF 921a502d7c8663bdad22e779a22ac7c8a6ba7b2755c7f166bd657ce2dfcfa2d2 reports/PREREG_ODE_VALIDATED_T1B_2026-10-21.md
+  sha256LF fa2c27f045a299231b45135bd85c1a6db5ae8cab5a327ab2454072a65e3daaf8 reports/ode_validated_t1b_2026-10-21.json
+  sha256LF e761041f3055287d77a9df744a901e1b06e2365b4f0e4c015d3d56fa24492825 reports/ODE_VALIDATED_T1B_2026-10-21.md
+  ```
 Selesai — 32 entri per 2026-10-21 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0013` + `A-2026-0014` + `A-2026-0014` + `A-2026-0015` + `A-2026-0015` + `A-2026-0016` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0018` + `A-2026-0019` + `A-2026-0019` + `A-2026-0020` + `A-2026-0020` + `A-2026-0021` + `A-2026-0021` + `A-2026-0022` + `A-2026-0022` + `A-2026-0023` + `A-2026-0023` + `A-2026-0024` + `A-2026-0025` + `A-2026-0026` + `A-2026-0027`). Entri
 berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
 (perubahan = status/relasi/catatan).

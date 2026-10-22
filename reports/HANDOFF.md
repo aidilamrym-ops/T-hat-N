@@ -2641,5 +2641,62 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
   `reports/ODE_VALIDATED_T1B_2026-10-21.md`.
 - **Berikutnya:** implementasi setelah persetujuan pemilik.
 
+## 2.0bk - Trek T1b: hasil kampanye (ALL PASS) + registry A-2026-0040 - 2026-10-21
+
+- **Konteks:** implementasi `msaf/ode_validated_block.py` selesai setelah
+  amendemen §10-§11 ter-commit sebelum kode (CI hijau `1922684`, `d9da2a0`).
+  Amendemen §12 (implementasi; posisi jujur: ditulis setelah jalur
+  diagnostik C4/C5 untuk debug, **sebelum** kampanye bersertifikat; tidak
+  ada toleransi/konfigurasi/ambang yang berubah) mengunci: sisa Taylor di
+  kotak jalur; inflasi kotak Picard; **produk bertanda kontinu antar blok**
+  (sapuan mundur dari checkpoint ke langkah 0 tanpa reset - akar masalah
+  §2.3: komposisi per-blok `|P_blok8|...|P_blok1| ~ 8.7e7` per periode S4
+  membuang korelasi tanda); produk midpoint-radius; slack
+  `kappa_nl*r_tot^2` non-referensi-diri yang kini **mengunci `passed`**
+  C4/C5.
+- **Verdict: ALL PASS** (pra-registrasi §5), C1-C7 lulus penuh. C4: 10/10
+  checkpoint Kepler; lebar energi maksimum
+  `4.490592590381955201797400852730644345643499799197728705735244147945195436478e-25`
+  (<= `1e-12`); checkpoint 1024 (titik gagal T1 `1.388...e-11`) kini
+  `1.259481798924398876545007804758425848459962735748019705164682012304110114709e-34`.
+  C5: 8/8 checkpoint three-body RHS; lebar energi maksimum
+  `5.259447368674909888295650856740895431940379105457961106395714523387141525745e-26`
+  (<= `1e-10`); `E0`/`L0`/pusat massa eksak terkonten di semua checkpoint.
+  C2/C3 angka lengkap di laporan.
+- **§2.3:** slack semua blok `<= 1e-30` (S3 maks blok 10
+  `9.51146745745473119526150099062976831482355573694027752747131933560092598e-32`,
+  margin ~10.5x - dicatat jujur sebagai margin paling tipis; S4 maks blok 6
+  `3.383707261598853680946110591789996036372725241384919026248304153922956054e-35`);
+  kewajiban diverifikasi guard lewat mutasi (slack_ok false -> passed false).
+- **C7/M5:** mekanisme T1 beku (radius skalar) pada konfigurasi identik
+  mereproduksi kegagalan verbatim: S3 abort langkah 1557, S4 abort langkah
+  42 (`Picard enclosure failed`) - diagnosis T1 terkonfirmasi, mekanisme
+  bertanda pembedanya.
+- **Determinisme/integritas:** dua run kampanye + rerun guard semuanya
+  identik byte (sha256 receipt
+  `fa2c27f045a299231b45135bd85c1a6db5ae8cab5a327ab2454072a65e3daaf8`);
+  receipt memuat hash pra-registrasi `921a502d...` (pasca-§12; linieage
+  `79a4e879...` -> `9e77aaa1...` (§10) -> `fd31210f...` (§11, sesuai §2.0bj)
+  -> `921a502d...` (§12)) dan hash modul T1 beku `c1d9b5d6...` (tidak
+  berubah); guard 8/8 tes lulus termasuk mutasi M1-M5 dan pemindai AST.
+- **Registry:** `A-2026-0040` **DIBUAT** di `reports/FENCE_REGISTRY.md`
+  (satu entri baru; entri lama tidak diubah) dengan sertifikat sha256LF
+  (modul, guard, pra-registrasi, receipt, laporan).
+- **Daftar-B 16/20:** prasyarat mekanisme ("integrator ODE tervalidasi")
+  kini terpenuhi; pembukaan item tetap memerlukan trek dan pra-registrasi
+  tersendiri dengan kriteria masing-masing. Tidak ada klaim figure-eight,
+  Soliton/Evans, chaos, ergodisitas, PDE kontinu/NS, RH/GRH, faktorisasi,
+  RSA/ECC, Anderson, atau fisika.
+- **Artefak:** modul `msaf/ode_validated_block.py` sha256LF
+  `42d196a51c5ae45e3b87b8c1e36319abfeb93df776b3c2317e812f7c2c0b5b97`;
+  guard `msaf/tests/test_ode_validated_block.py`
+  `f061e7ebeabfaa808280455f6d5bff595c32d9feaef164fa11d76bcbcf8aa98f`;
+  receipt `fa2c27f045a299231b45135bd85c1a6db5ae8cab5a327ab2454072a65e3daaf8`;
+  laporan `reports/ODE_VALIDATED_T1B_2026-10-21.md`
+  `e761041f3055287d77a9df744a901e1b06e2365b4f0e4c015d3d56fa24492825`.
+- **Status berkas:** seluruh perubahan trek T1b (modul, guard, receipt,
+  laporan, §12 pra-registrasi, entri registry, HANDOFF ini) **belum
+  di-commit**; commit/push hanya bila diminta pemilik.
+
 
 

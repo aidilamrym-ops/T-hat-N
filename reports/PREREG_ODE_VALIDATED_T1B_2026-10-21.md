@@ -240,3 +240,60 @@ Amendemen (berlaku sebelum kode dan sebelum hasil apa pun):
    dihitung ketat dengan pass mundur §11.1.
 4. Tidak ada perubahan lain: sistem, konfigurasi, toleransi C1-C6, kriteria
    C7, verdict, dan falsifier tetap.
+
+## 12. Amendemen implementasi (sebelum kampanye bersertifikat)
+
+Catatan jujur tentang posisi amendemen ini: ditulis selama pengembangan
+modul T1b, **setelah** jalur diagnostik C4/C5 pernah dijalankan untuk
+mem-debug implementasi, tetapi **sebelum** kampanye bersertifikat
+(`python -m msaf.ode_validated_block`) dan sebelum receipt ditulis. Tidak ada
+toleransi, konfigurasi, ambang §2.3, atau kriteria yang berubah karenanya —
+hanya koreksi evaluasi mekanisme yang sudah dikunci, ke arah yang lebih setia
+pada §2.1/§2.4/§11.1:
+
+1. **Sisa Taylor dihitung di kotak jalur (path box), bukan kotak masukan.**
+   Varian kotak masukan (bound turunan orde `p+1` hanya di sekitar titik
+   masukan langkah) terbukti **tidak sound** saat pengujian: ia melanggar
+   containment C2/C3 (`contains_2=False`, `contains=False`), karena sisa
+   Lagrange melibatkan turunan di sepanjang jalur, bukan di titik awal.
+   Modul T1 beku juga mem-batasinya di kotak jalur. Implementasi kembali ke
+   `tail = coeff_fn(box, order+1)` dengan `box` = kotak Picard tervalidasi.
+2. **Inflasi kotak Picard.** `delta = (span/16 + r_tot + eps) * factor`,
+   `factor` digandakan (maksimal 16 kali) sampai **cek Picard yang sama persis**
+   lulus. Gerbang soundness (containment `box[i].contains(m + c + h*image)`)
+   tidak diubah; kotak lebih kecil hanya memperketat sisa, dan ukuran kotak
+   minimum yang lulus ditentukan oleh dinamika, bukan oleh parameter bebas.
+3. **Produk bertanda kontinu antar blok (koreksi utama §2.3).** Sertifikat
+   checkpoint dihitung dengan satu sapuan mundur dari langkah checkpoint
+   sampai langkah **0**: `P = J_{t-1} ... J_{k+1}` untuk semua langkah `k < t`,
+   tanpa reset di batas blok. Dasar: §11.1 menyatakan hasil dua-pass **identik**
+   dengan formulasi kolom tanpa penggabungan (yang membawa kolom S bertanda
+   melintasi seluruh langkah), dan §2.4 melarang reset yang mengubah data
+   ("`S` dan `rho` dibawa apa adanya antar blok"). Variasi sapuan-per-blok yang
+   sempat diuji menyusun kotak antar blok (`|P_blok8| ... |P_blok1|`),
+   membuang korelasi tanda antar blok — diagnostik menunjukkan komposisi
+   itu ≈ `13.6^8 ≈ 8.7e7` per periode untuk S4, padahal produk bertanda
+   sesungguhnya hanya ≈ `1.0e2`. Akibatnya `r_tot` S4 melewati ambang §2.3
+   (blk7 `2.84054741614440e-30`, blk8 `7.05568884064224e-29`); dengan sapuan
+   kontinu slack maksimum S4 = `9.724087015952757e-36` (lihat §5 tetap:
+   ambang tetap `1e-30`, tidak dilonggarkan).
+4. **Produk matriks dalam bentuk midpoint-radius.** Produk interval polos
+   (`(M1±R1)(M2±R2)` alami) membungkus lebar Jacobian pada panjang sapuan;
+   bentuk `M1*M2 ± (|M1|R2 + R1|M2| + R1R2)` membatasi pertumbuhan radius
+   pada akumulasi lebar Jacobian per langkah. Perkalian tetap bertanda pada
+   bagian midpoint (dilarang norma skalar §2.1 tetap berlaku).
+5. **Slack kuadratik non-referensi-diri.** Per blok:
+   `slack = kappa_nl * r_tot^2` dengan `r_tot` = radius kotak sertifikat
+   checkpoint **sebelum** slack (tanpa referensi diri), disisipkan sebagai
+   radius noise per langkah pada bloknya (§10.3, kolom noise, bukan ke `rho`),
+   dan tercatat di receipt dengan kewajiban `<= 1e-30` (§2.3). Kewajiban §2.3
+   kini ikut mengunci `all_pass` di kampanye (bukan hanya angka yang direkam).
+6. **Jacobi interval dihitung over `[midpoint ± c]`** (kotak masukan langkah),
+   seperti modul T1 beku; bound berjalan `c` dipakai hanya untuk kotak Picard
+   dan kotak Jacobi (§11.3), tidak pernah sebagai sertifikat checkpoint.
+7. **Presisi.** Semua pemeriksaan C1-C5 dijalankan di dalam
+   `flint.ctx.workprec(256)`; jalur di luar konteks presisi menghasilkan
+   angka yang salah (pernah terdeteksi saat diagnostik: kegagalan containment
+   palsu dengan radius 3e-15) dan dilarang untuk hasil apa pun yang dicatat.
+8. Tidak ada perubahan lain: sistem, konfigurasi, toleransi C1-C6, kriteria
+   C7, ambang §2.3, verdict, dan falsifier tetap persis seperti §3-§6.
