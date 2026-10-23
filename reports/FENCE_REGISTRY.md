@@ -1976,6 +1976,28 @@ eports/PREREG_NAVIER_STOKES_DISCRETE_2026-10-21.md.
   sha256LF fa2c27f045a299231b45135bd85c1a6db5ae8cab5a327ab2454072a65e3daaf8 reports/ode_validated_t1b_2026-10-21.json
   sha256LF e761041f3055287d77a9df744a901e1b06e2365b4f0e4c015d3d56fa24492825 reports/ODE_VALIDATED_T1B_2026-10-21.md
   ```
-Selesai — 32 entri per 2026-10-21 (6 entri awal + `A-2026-0002` + `A-2026-0003` + `A-2026-0004` + `A-2026-0005` + `A-2026-0006` + `A-2026-0007` + `A-2026-0009` + `A-2026-0010` + `A-2026-0011` + `A-2026-0012` + `A-2026-0013` + `A-2026-0013` + `A-2026-0014` + `A-2026-0014` + `A-2026-0015` + `A-2026-0015` + `A-2026-0016` + `A-2026-0016` + `A-2026-0017` + `A-2026-0018` + `A-2026-0018` + `A-2026-0019` + `A-2026-0019` + `A-2026-0020` + `A-2026-0020` + `A-2026-0021` + `A-2026-0021` + `A-2026-0022` + `A-2026-0022` + `A-2026-0023` + `A-2026-0023` + `A-2026-0024` + `A-2026-0025` + `A-2026-0026` + `A-2026-0027`). Entri
-berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus
-(perubahan = status/relasi/catatan).
+
+### T-2026-0043 — Orbit Figure-Eight Periodik Tervalidasi (Reduced 8x8, T2-r4)
+
+- **Jenis:** T
+- **Pernyataan:** Orbit periodik figure-eight masalah tiga-benda massa sama rata di bidang pada periode eksak T0 = 6.32600304 tersertifikasi ada dan **lokal unik** di dalam box B radius R_B = 1e-18 di sekitar titik Newton xh, dengan gauge q1y = 1/5 dan I_xy = 0. Sertifikat terkomposisi dari: (i) base T2-r3 K1-K5 (Hessian path-box, QUAD_STEP, DR_MAX, Krawczyk, koreografi) lulus penuh dengan receipt byte-identik; (ii) K6 r4 matriks M1-M9 semuanya diskriminatif dan gagal sebagaimana mestinya (M1: sisa Taylor dipompa → K2 abort; M2: periode +1/10 → K3/K5 fail; M3: receipt tamper → hash mismatch; M4: float injection → AST hit; M5: TUBE_CAP=1e-30 → K2 fail; M6: KAPPA_MAX=1e-12 → K3 kappa fail; M7: GAUSS_DET_MIN=1e3 → K4 det fail; M8: CHOREO_TOL=1e-30 → K5 fail; M9: GAUSS_COND_MAX=1e3 → K4 cond fail). Dua kampanye r4 penuh identik byte (SHA-256LF 8b6088c27f79129f8d28109a75efe2f888406b9d7e6d884c9cf7ab95cf611086).
+- **Batas:** keunikan **lokal** di dalam B modulo gauge terkunci; tidak ada klaim keunikan global, stabilitas, spektrum, chaos, ergodisitas, KAM, PDE, RH, fisika, prioritas, Lean/Coq, atau penyelesaian umum three-body. M5 lama r3 (SWEEP_SIGNED=False) terdokumen **non-diskriminatif** dan digantikan.
+- **Status:** CERTIFIED
+- **Domino:** Three-Body (orbita periodik lokal tervalidasi; prasyarat Daftar-B 16)
+- **Relasi:** melanjutkan T2-r3 
+eports/FIGURE_EIGHT_R3_2026-10-23.md (INCONCLUSIVE karena K6/M5 non-diskriminatif); pra-registrasi 
+eports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md (SHA-256LF 14cf5c9fbaff6b2e6e67617fe724e1fc01ec18fe2e4323c51e5531256bcb21c5).
+- **Perintah verifikasi:** python -m pytest msaf/tests/test_figure_eight_r4.py -q; python -m pytest msaf/tests -q; python audit_quantum/freeze.py --verify.
+- **Sertifikat:**
+
+  `	ext
+  sha256LF 8b6088c27f79129f8d28109a75efe2f888406b9d7e6d884c9cf7ab95cf611086 reports/figure_eight_r4_2026-10-23.json
+  sha256LF 14cf5c9fbaff6b2e6e67617fe724e1fc01ec18fe2e4323c51e5531256bcb21c5 reports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md
+  sha256LF 6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9 reports/figure_eight_r3_2026-10-23.json
+  sha256LF 23ab24254f13539dddf1bd3cccd87dbbcef01b3398dab1ccf5fb2d75099a6b93 reports/PREREG_FIGURE_EIGHT_R3_2026-10-23.md
+  sha256LF 8eddc2bb17647d452e15325397e852e224e1af028f055fa4fe41de94af939ec6 msaf/figure_eight_r3.py
+  sha256LF c1d9b5d60036a5f0772f7e3f1b8c78969efaa7146a713c762531ddce346251b9 msaf/ode_validated.py
+  sha256LF 42d196a51c5ae45e3b87b8c1e36319abfeb93df776b3c2317e812f7c2c0b5b97 msaf/ode_validated_block.py
+  `
+
+Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus (perubahan = status/relasi/catatan).
