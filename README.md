@@ -181,6 +181,7 @@ author takes responsibility for all content.
 - [Section 5: Finite Hydrodynamic Lattice & Millennium Frontier](#section-5-finite-hydrodynamic-lattice--millennium-frontier)
 - [Section 6: Guinand-Weil Interval Spectra & the Montgomery Question (201/301/401)](#section-6-guinand-weil-interval-spectra--the-montgomery-question-201301401)
 - [Section 7: Sealed Status, Workflow and Verification Chain](#section-7-sealed-status-workflow-and-verification-chain)
+- [Section 8: Figure-Eight Three-Body Reduced 8x8 (T2-r4, A-2026-0043)](#section-8-figure-eight-three-body-reduced-8x8-t2-r4-a-2026-0043)
 - [Symbol Glossary](#symbol-glossary)
 - [Proven vs Postulated](#proven-vs-postulated-standing-disclosure)
 - [Repository Layout](#repository-layout)
@@ -1453,6 +1454,65 @@ tag `v1.41.0-alpha` (ref) -> run
 resume-fix push commit `b1e23ab` -> run
 [`39091124813`](https://github.com/aidilamrym-ops/T-hat-N/actions/runs/39091124813).
 Version of record: [10.5281/zenodo.23445149](https://doi.org/10.5281/zenodo.23445149); earlier version v1.40.0-alpha archived unchanged at [10.5281/zenodo.23410894](https://doi.org/10.5281/zenodo.23410894).
+
+---
+
+## Section 8: Figure-Eight Three-Body Reduced 8x8 (T2-r4, A-2026-0043)
+
+### 8.1 Overview
+
+T2-r4 closes the figure-eight reduced 8x8 three-body problem with a **discriminative K6 matrix** (M1-M9) that certifies local uniqueness of the period-`T0 = 6.32600304` orbit inside box `B` (radius `R_B = 1e-18`) modulo gauge (`q1y = 1/5`, `I_xy = 0`). The certifying instrument is `msaf/figure_eight_r4.py` (wrapper kampanye base + runner K6) and `msaf/tests/test_figure_eight_r4.py` (guard K6).
+
+- **Jenis**: T (teorema kelas finit tersertifikasi)
+- **Status**: CERTIFIED (19/19 guard lulus, freeze verify OK)
+- **Registry**: `A-2026-0043` — entri terbaru terakhir pada `reports/FENCE_REGISTRY.md` (2026-10-23)
+- **Domino**: Three-Body (orbita periodik lokal tervalidasi; prasyarat Daftar-B 16)
+- **Relasi**: melanjutkan `reports/FIGURE_EIGHT_R3_2026-10-23.md` (INCONCLUSIVE karena K6/M5 lama non-diskriminatif); pra-registrasi `reports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md` (SHA-256LF `14cf5c9f...`).
+
+### 8.2 Sertifikat K6 diskriminatif (M1-M9)
+
+Seluruh 9 baris K6 diuji dan **gagal sebagaimana mestinya** (M1-M2, M5-M9 `must_fail: true` terverifikasi; M3/M4 deteksi tamper/AST). Dua kampanye r4 penuh identik byte-per-byte (SHA-256LF `8b6088c27f79129f8d28109a75efe2f888406b9d7e6d884c9cf7ab95cf611086`). Verdict `ALL PASS` hanya bila base K1-K5 PASS dan K6 `all_pass`.
+
+| Mutasi | Parameter | Gate yang harus gagal | Hasil aktual | Passed |
+|---|---|---|---|---|
+| M1 | `REMAINDER_FACTOR=10^70` | K2 abort step 2 (Picard) | K2 FAILED, error memuat "aborted at step 2" dan "Picard enclosure failed" | ✅ |
+| M2 | `T0 -> T0 + 1/10` | K3 FAILED + Krawczyk; K5 FAILED | K3 FAILED, Krawczyk present, K5 FAILED | ✅ |
+| M3 | 1 byte receipt diubah | SHA-256 berubah | SHA sebelum ≠ SHA sesudah | ✅ |
+| M4 | injeksi `1.5` / `float(x)` | AST scan hit | AST hit untuk literal dan call; source asli bersih | ✅ |
+| M5 | `TUBE_CAP=10^-30` | K2 `widths_ok=False` | K2 FAILED, `widths_ok=False` | ✅ |
+| M6 | `KAPPA_MAX=10^-12` | K3 `kappa_ok=False` | K3 FAILED, `kappa_ok=False` | ✅ |
+| M7 | `GAUSS_DET_MIN=10^3` | K4 `det_ok=False` | K4 FAILED, `det_ok=False` | ✅ |
+| M8 | `CHOREO_TOL=10^-30` | K5 FAILED | K5 FAILED | ✅ |
+| M9 | `GAUSS_COND_MAX=10^3` | K4 `cond_ok=False` | K4 FAILED, `cond_ok=False` | ✅ |
+
+**Semua 9 baris K6 `passed: true`.** K6 `all_pass: true` → r4 `all_pass: true` → `summary: "ALL PASS"` → `registry: "A-2026-0043"`.
+
+### 8.3 Verifikasi
+
+Perintah lulus sebelum commit:
+
+```
+python -m pytest msaf/tests/test_figure_eight_r4.py -q
+python -m pytest msaf/tests -q
+python audit_quantum/freeze.py --verify
+```
+
+Hasil eksekusi final:
+
+- Guard r4 (run final, pasca-fiks): `19 passed in 9033.27s (2:30:33)`; hash test `c91d96a0805853d424f0b49a6efc8d895951188ba8f6557499a117e09537e279`.
+- Full suite: `19 passed, 0 skipped in 9033.27s (2:30:33)`.
+- Freeze: `verify OK: 14 pins; Codebase/Manifest Digest = sha256(PINS.sha256) = f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`.
+
+### 8.4 Batas Klaim
+
+- Keunikan **lokal** di dalam B modulo gauge terkunci; tidak ada klaim keunikan global, stabilitas, spektrum, chaos, ergodisitas, KAM, PDE, RH, fisika, prioritas, Lean/Coq, atau penyelesaian umum three-body.
+- M5 lama r3 (`SWEEP_SIGNED=False`) terdokumen **non-diskriminatif** dan digantikan.
+- Entry registry `A-2026-0041` dan `A-2026-0042` tetap tidak ada (dikosongkan sesuai keputusan pra-registrasi r4).
+
+### 8.5 Langkah Selanjutnya
+
+- Jika registry `A-2026-0044` diinginkan: buka trek r5 dengan pra-registrasi baru **sebelum kode**, K6 yang benar-benar diskriminatif, tanpa mengubah r4 retrospektif.
+- R4 ditutup sebagai **ALL PASS** dengan registry `A-2026-0043`.
 
 ---
 
