@@ -1461,35 +1461,35 @@ Version of record: [10.5281/zenodo.23445149](https://doi.org/10.5281/zenodo.2344
 
 ### 8.1 Overview
 
-T2-r4 closes the figure-eight reduced 8x8 three-body problem with a **discriminative K6 matrix** (M1-M9) that certifies local uniqueness of the period-`T0 = 6.32600304` orbit inside box `B` (radius `R_B = 1e-18`) modulo gauge (`q1y = 1/5`, `I_xy = 0`). The certifying instrument is `msaf/figure_eight_r4.py` (wrapper kampanye base + runner K6) and `msaf/tests/test_figure_eight_r4.py` (guard K6).
+T2-r4 closes the figure-eight reduced 8x8 three-body problem with a **discriminative K6 matrix** (M1-M9) that certifies local uniqueness of the period-`T0 = 6.32600304` orbit inside box `B` (radius `R_B = 1e-18`) modulo gauge (`q1y = 1/5`, `I_xy = 0`). The certifying instrument is `msaf/figure_eight_r4.py` (base campaign wrapper + K6 runner) and `msaf/tests/test_figure_eight_r4.py` (guard K6).
 
-- **Jenis**: T (teorema kelas finit tersertifikasi)
-- **Status**: CERTIFIED (19/19 guard lulus, freeze verify OK)
-- **Registry**: `A-2026-0043` — entri terbaru terakhir pada `reports/FENCE_REGISTRY.md` (2026-10-23)
-- **Domino**: Three-Body (orbita periodik lokal tervalidasi; prasyarat Daftar-B 16)
-- **Relasi**: melanjutkan `reports/FIGURE_EIGHT_R3_2026-10-23.md` (INCONCLUSIVE karena K6/M5 lama non-diskriminatif); pra-registrasi `reports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md` (SHA-256LF `14cf5c9f...`).
+- **Type**: T (certified formal finite-class theorem)
+- **Status**: CERTIFIED (19/19 guard passed, freeze verify OK)
+- **Registry**: `A-2026-0043` — latest entry at `reports/FENCE_REGISTRY.md` (2026-10-23)
+- **Domino**: Three-Body (locally validated periodic orbit; Daftar-B gate 16 prerequisite)
+- **Relation**: continues `reports/FIGURE_EIGHT_R3_2026-10-23.md` (INCONCLUSIVE because old K6/M5 was non-discriminative); preregistration `reports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md` (SHA-256LF `14cf5c9f...`).
 
-### 8.2 Sertifikat K6 diskriminatif (M1-M9)
+### 8.2 Discriminative K6 Certificate (M1-M9)
 
-Seluruh 9 baris K6 diuji dan **gagal sebagaimana mestinya** (M1-M2, M5-M9 `must_fail: true` terverifikasi; M3/M4 deteksi tamper/AST). Dua kampanye r4 penuh identik byte-per-byte (SHA-256LF `8b6088c27f79129f8d28109a75efe2f888406b9d7e6d884c9cf7ab95cf611086`). Verdict `ALL PASS` hanya bila base K1-K5 PASS dan K6 `all_pass`.
+All 9 K6 rows tested and **failed as required** (M1-M2, M5-M9 `must_fail: true` verified; M3/M4 detect tamper/AST). Two full r4 campaigns identical byte-for-byte (SHA-256LF `8b6088c27f79129f8d28109a75efe2f888406b9d7e6d884c9cf7ab95cf611086`). `ALL PASS` verdict only when base K1-K5 PASS and K6 `all_pass`.
 
-| Mutasi | Parameter | Gate yang harus gagal | Hasil aktual | Passed |
+| Mutation | Parameter | Gate that must fail | Actual result | Passed |
 |---|---|---|---|---|
-| M1 | `REMAINDER_FACTOR=10^70` | K2 abort step 2 (Picard) | K2 FAILED, error memuat "aborted at step 2" dan "Picard enclosure failed" | ✅ |
+| M1 | `REMAINDER_FACTOR=10^70` | K2 abort step 2 (Picard) | K2 FAILED, error loading "aborted at step 2" and "Picard enclosure failed" | ✅ |
 | M2 | `T0 -> T0 + 1/10` | K3 FAILED + Krawczyk; K5 FAILED | K3 FAILED, Krawczyk present, K5 FAILED | ✅ |
-| M3 | 1 byte receipt diubah | SHA-256 berubah | SHA sebelum ≠ SHA sesudah | ✅ |
-| M4 | injeksi `1.5` / `float(x)` | AST scan hit | AST hit untuk literal dan call; source asli bersih | ✅ |
+| M3 | 1 byte receipt modified | SHA-256 changed | SHA before ≠ SHA after | ✅ |
+| M4 | inject `1.5` / `float(x)` | AST scan hit | AST hit for literal and call; source clean | ✅ |
 | M5 | `TUBE_CAP=10^-30` | K2 `widths_ok=False` | K2 FAILED, `widths_ok=False` | ✅ |
 | M6 | `KAPPA_MAX=10^-12` | K3 `kappa_ok=False` | K3 FAILED, `kappa_ok=False` | ✅ |
 | M7 | `GAUSS_DET_MIN=10^3` | K4 `det_ok=False` | K4 FAILED, `det_ok=False` | ✅ |
 | M8 | `CHOREO_TOL=10^-30` | K5 FAILED | K5 FAILED | ✅ |
 | M9 | `GAUSS_COND_MAX=10^3` | K4 `cond_ok=False` | K4 FAILED, `cond_ok=False` | ✅ |
 
-**Semua 9 baris K6 `passed: true`.** K6 `all_pass: true` → r4 `all_pass: true` → `summary: "ALL PASS"` → `registry: "A-2026-0043"`.
+**All 9 K6 rows `passed: true`.** K6 `all_pass: true` → r4 `all_pass: true` → `summary: "ALL PASS"` → `registry: "A-2026-0043"`.
 
-### 8.3 Verifikasi
+### 8.3 Verification
 
-Perintah lulus sebelum commit:
+Commands run before commit:
 
 ```
 python -m pytest msaf/tests/test_figure_eight_r4.py -q
@@ -1497,22 +1497,22 @@ python -m pytest msaf/tests -q
 python audit_quantum/freeze.py --verify
 ```
 
-Hasil eksekusi final:
+Final execution results:
 
-- Guard r4 (run final, pasca-fiks): `19 passed in 9033.27s (2:30:33)`; hash test `c91d96a0805853d424f0b49a6efc8d895951188ba8f6557499a117e09537e279`.
+- Guard r4 (final run, post-fix): `19 passed in 9033.27s (2:30:33)`; test hash `c91d96a0805853d424f0b49a6efc8d895951188ba8f6557499a117e09537e279`.
 - Full suite: `19 passed, 0 skipped in 9033.27s (2:30:33)`.
 - Freeze: `verify OK: 14 pins; Codebase/Manifest Digest = sha256(PINS.sha256) = f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`.
 
-### 8.4 Batas Klaim
+### 8.4 Scope Limits
 
-- Keunikan **lokal** di dalam B modulo gauge terkunci; tidak ada klaim keunikan global, stabilitas, spektrum, chaos, ergodisitas, KAM, PDE, RH, fisika, prioritas, Lean/Coq, atau penyelesaian umum three-body.
-- M5 lama r3 (`SWEEP_SIGNED=False`) terdokumen **non-diskriminatif** dan digantikan.
-- Entry registry `A-2026-0041` dan `A-2026-0042` tetap tidak ada (dikosongkan sesuai keputusan pra-registrasi r4).
+- **Local** uniqueness within B modulo gauge locked; no claims of global uniqueness, stability, spectrum, chaos, ergodicity, KAM, PDE, RH, physics, priority, Lean/Coq, or general three-body solution.
+- Old r3 M5 (`SWEEP_SIGNED=False`) documented **non-discriminative** and replaced.
+- Registry entries `A-2026-0041` and `A-2026-0042` remain absent (cleared per r4 preregistration decision).
 
-### 8.5 Langkah Selanjutnya
+### 8.5 Next Steps
 
-- Jika registry `A-2026-0044` diinginkan: buka trek r5 dengan pra-registrasi baru **sebelum kode**, K6 yang benar-benar diskriminatif, tanpa mengubah r4 retrospektif.
-- R4 ditutup sebagai **ALL PASS** dengan registry `A-2026-0043`.
+- If registry `A-2026-0044` is desired: open trek r5 with new preregistration **before code**, truly discriminative K6, without retroactively changing r4.
+- R4 closed as **ALL PASS** with registry `A-2026-0043`.
 
 ---
 
