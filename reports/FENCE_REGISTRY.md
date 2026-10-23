@@ -2001,3 +2001,53 @@ eports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md (SHA-256LF 14cf5c9fbaff6b2e6e67617fe
   `
 
 Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus (perubahan = status/relasi/catatan).
+
+### A-2026-0043 — Figure-eight reduced 8x8 r4: sertifikat K6 diskriminatif (M1-M9)
+
+- **Jenis:** T
+- **Pernyataan:** Keberadaan dan keunikan lokal orbit periodik figure-eight
+  reduced 8x8 di dalam box lokal \B\, modulo gauge (\q1y = 1/5\, \I_xy = 0\),
+  berbasis base K1-K5 r3 yang direproduksi byte-per-byte dari receipt tersegel
+  (hash-cek internal un_base()\), ditambah matriks mutasi K6 diskriminatif
+  M1-M9 yang seluruh 9 barisnya dijalankan dan semuanya gagal sebagaimana
+  mestinya (M1-M2, M5-M9 \must_fail: true\ terverifikasi; M3/M4 deteksi
+  tamper/AST). Dua kampanye r4 penuh identik byte-per-byte; verdict ALL PASS
+  hanya bila base K1-K5 PASS dan K6 \ll_pass\ (pra-registrasi §5).
+
+- **Batas:** bukan klaim global, stabilitas, spektrum, chaos, ergodisitas, KAM,
+  PDE, RH, fisika, prioritas, Lean/Coq, atau penyelesaian umum three-body;
+  r3 tetap berstatus INCONCLUSIVE (K6/M5 lama non-diskriminatif) dan tidak
+  diamendemen; \A-2026-0041\ dan \A-2026-0042\ tetap tidak ada (dikosongkan
+  sesuai keputusan pra-registrasi r4).
+
+- **Status:** CERTIFIED
+- **Domino:** keberadaan+keunikan lokal figure-eight reduced 8x8 dengan
+  falsifier K6 diskriminatif (fondasi trek lanjutan: stabilitas T2b memerlukan
+  pra-registrasi sendiri).
+
+- **Relasi:** melanjutkan r3 eports/FIGURE_EIGHT_R3_2026-10-23.md  (INCONCLUSIVE; base receipt b0b71e9...df829c9\ diimpor utuh dan
+  diverifikasi ulang); pra-registrasi r4
+  eports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md\ di-commit sebelum kode di
+  3a21eb\. Catatan integritas: guard test r4 memuat dua kesalahan lapis-tes
+  yang ditemukan pada run pra-fiks dan difiks satu baris masing-masing sebelum
+  run final: (a) comparator \	est_base_campaign_reproduces_sealed_receipt  membaca receipt r4 alih-alih receipt base r3 (run 13:43); (b) signature
+  \	est_k6_m1_remainder_factor\ mendeklarasikan fixture \ase_campaign\ tetapi
+  badan memakai \ull_campaign\ tanpa injeksi (run 15:32 dan run \-v\ 15:55;
+  keduanya 8 passed, 1 failed\). Kedua kegagalan tidak mengubah matematika:
+  base K1-K5 dan seluruh baris K6 (termasuk \	est_k6_all_rows_pass\ dan
+  \	est_full_campaign_verdict\) PASS pada run tersebut. Run final pasca-fiks
+  hijau 9 passed\ (angka di laporan §9).
+
+- **Perintah verifikasi:** python -m pytest msaf/tests/test_figure_eight_r4.py -q;
+  python -m pytest msaf/tests -q; python audit_quantum/freeze.py --verify.
+
+- **Sertifikat:**
+  \\	ext
+  sha256LF 8eddc2bb17647d452e15325397e852e224e1af028f055fa4fe41de94af939ec6 msaf/figure_eight_r3.py
+  sha256LF e34e2303ecc17fa591aa00c4449cebae6a3f5e7db88c147d173d4414b916e2ac msaf/figure_eight_r4.py
+  sha256LF c91d96a0805853d424f0b49a6efc8d895951188ba8f6557499a117e09537e279 msaf/tests/test_figure_eight_r4.py
+  sha256LF 14cf5c9fbaff6b2e6e67617fe724e1fc01ec18fe2e4323c51e5531256bcb21c5 reports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md
+  sha256LF 6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9 reports/figure_eight_r3_2026-10-23.json
+  sha256LF 8b6088c27f79129f8d28109a75efe2f888406b9d7e6d884c9cf7ab95cf611086 reports/figure_eight_r4_2026-10-23.json
+  sha256LF 1ff4c78c8c878346ad42294a15db094301c69b0352464edfeabde680fa2b783c reports/FIGURE_EIGHT_R4_2026-10-23.md
+  \

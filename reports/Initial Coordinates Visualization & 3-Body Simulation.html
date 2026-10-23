@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure-Eight Reduced 8x8 — Koordinat Awal &amp; Simulasi 3-Benda</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root { color-scheme: dark; }
+  html, body { height: 100%; }
+  body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+  .scroll-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scroll-thin::-webkit-scrollbar-track { background: #0f172a; }
+  .scroll-thin::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+  .scroll-thin::-webkit-scrollbar-thumb:hover { background: #475569; }
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary::before { content: "▸ "; color: #64748b; }
+  details[open] > summary::before { content: "▾ "; }
+  .glow-dot { box-shadow: 0 0 10px currentColor; }
+  canvas { display: block; }
+  .kbd { border: 1px solid #334155; border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; font-size: 10px; }
+</style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+
+<!-- ================= HEADER ================= -->
+<header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-30">
+  <div class="max-w-[1500px] mx-auto px-4 py-3 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
+    <div>
+      <div class="flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-slate-500">
+        <span>MSAF</span><span class="text-slate-700">/</span>
+        <span>T2-r4</span><span class="text-slate-700">/</span>
+        <span>figure-eight reduced 8&times;8</span>
+        <span class="text-slate-700">/</span>
+        <span>2026-10-23</span>
+      </div>
+      <h1 class="text-lg sm:text-xl font-bold text-slate-100 mt-1 tracking-tight">
+        Koordinat Awal &amp; Simulasi 3-Benda
+      </h1>
+      <p class="text-[11px] sm:text-xs text-slate-400 mt-1">
+        Orbit periodik figure-eight &middot; periode eksak
+        <span class="mono text-slate-200">T&#8320; = 6.32600304</span> &middot; gauge
+        <span class="mono text-slate-200">q&#8321;y = 1/5</span>,
+        <span class="mono text-slate-200">I<sub>xy</sub> = 0</span>
+      </p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-semibold text-emerald-300">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 glow-dot"></span> ALL PASS
+      </span>
+      <span class="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-[11px] font-semibold text-cyan-300">K1&ndash;K5 &#10003;</span>
+      <span class="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-[11px] font-semibold text-violet-300">K6 M1&ndash;M9 &#10003;</span>
+      <span class="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-[11px] font-semibold text-amber-300 mono">A-2026-0043</span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main class="flex-1 w-full max-w-[1500px] mx-auto p-4 grid grid-cols-1 xl:grid-cols-3 gap-4">
+
+  <!-- ---------- LEFT: SIMULATION ---------- -->
+  <section class="xl:col-span-2 flex flex-col gap-4">
+    <div class="rounded-xl border border-slate-800 bg-slate-900/70 shadow-xl overflow-hidden flex flex-col">
+      <div class="flex flex-wrap items-center justify-between gap-2 px-4 py-3 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <h2 class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-300">Monitor Vektor &amp; Orbit</h2>
+        </div>
+        <div class="mono text-[10px] text-slate-500">
+          RHS: a<sub>i</sub> = &Sigma;<sub>j&ne;i</sub> (q<sub>j</sub>&minus;q<sub>i</sub>)/|q<sub>j</sub>&minus;q<sub>i</sub>|&sup3; &middot; m = 1, G = 1
+        </div>
+      </div>
+
+      <div id="canvasWrap" class="relative w-full bg-slate-950" style="height: clamp(330px, 56vh, 560px);">
+        <canvas id="simCanvas" class="w-full h-full block" aria-label="Simulasi orbit figure-eight tiga benda"></canvas>
+
+        <!-- Overlay: legend -->
+        <div class="absolute top-3 left-3 rounded-md border border-slate-800 bg-slate-950/75 backdrop-blur px-2.5 py-2 text-[10px] mono text-slate-400 pointer-events-none space-y-1">
+          <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> Alpha &middot; benda 1</div>
+          <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-violet-400"></span> Beta &middot; benda 2</div>
+          <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Gamma &middot; benda 3</div>
+        </div>
+
+        <!-- Overlay: scale info -->
+        <div class="absolute bottom-3 left-3 rounded-md border border-slate-800 bg-slate-950/75 backdrop-blur px-2.5 py-1.5 text-[10px] mono text-slate-500 pointer-events-none leading-relaxed">
+          pusat = COM (0,0) &middot; skala otomatis &middot; cincin putus-putus = posisi t = 0<br>
+          garis abu-abu = panduan satu periode &middot; ekor warna = 0.2 T&#8320; terakhir
+        </div>
+
+        <!-- Overlay: live phase -->
+        <div class="absolute top-3 right-3 rounded-md border border-slate-800 bg-slate-950/75 backdrop-blur px-3 py-2 text-right pointer-events-none">
+          <div class="text-[9px] uppercase tracking-[0.16em] text-slate-500">fase orbit</div>
+          <div id="phaseVal" class="mono text-sm text-indigo-300">0.00%</div>
+          <div class="mt-1 h-1 w-28 rounded bg-slate-800 overflow-hidden">
+            <div id="periodBar" class="h-full bg-indigo-400" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="px-4 py-3 border-t border-slate-800 bg-slate-900/60 flex flex-wrap items-center gap-3 justify-between">
+        <div class="flex items-center gap-2">
+          <button id="playBtn" class="inline-flex items-center gap-1.5 rounded-md bg-indigo-600 hover:bg-indigo-500 px-3.5 py-1.5 text-xs font-semibold text-white transition">
+            <span id="playIcon">&#10074;&#10074;</span><span id="playText">Pause</span>
+          </button>
+          <button id="resetBtn" class="rounded-md bg-slate-800 hover:bg-slate-700 px-3.5 py-1.5 text-xs font-semibold text-slate-200 transition">
+            &#8635; Reset
+          </button>
+          <label class="inline-flex items-center gap-1.5 text-[11px] text-slate-400 cursor-pointer select-none">
+            <input id="velToggle" type="checkbox" checked class="accent-indigo-500">
+            vektor kecepatan
+          </label>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] text-slate-400">Kecepatan animasi</span>
+          <input id="speed" type="range" min="0.25" max="3" step="0.25" value="1" class="w-28 accent-indigo-500">
+          <span id="speedVal" class="mono text-[11px] text-indigo-300 w-12 text-right">1.00&times;</span>
+        </div>
+      </div>
+
+      <!-- Telemetry -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-800">
+        <div class="bg-slate-900 px-4 py-2.5">
+          <div class="text-[9px] uppercase tracking-[0.16em] text-slate-500">waktu simulasi</div>
+          <div class="mono text-sm text-slate-200"><span id="tVal">0.0000</span> <span class="text-[10px] text-slate-500">/ T&#8320;</span></div>
+        </div>
+        <div class="bg-slate-900 px-4 py-2.5">
+          <div class="text-[9px] uppercase tracking-[0.16em] text-slate-500">energi total E</div>
+          <div class="mono text-sm text-slate-200"><span id="energyVal">-1.2871299154</span></div>
+        </div>
+        <div class="bg-slate-900 px-4 py-2.5">
+          <div class="text-[9px] uppercase tracking-[0.16em] text-slate-500">drift energi &Delta;E</div>
+          <div class="mono text-sm text-emerald-300"><span id="driftVal">0.00e+0</span></div>
+        </div>
+        <div class="bg-slate-900 px-4 py-2.5">
+          <div class="text-[9px] uppercase tracking-[0.16em] text-slate-500">closure satu periode <span class="text-slate-600">(RK4)</span></div>
+          <div class="mono text-sm text-slate-200"><span id="closureCheck">&hellip;</span></div>
+        </div>
+        <div class="bg-slate-900 px-4 py-2.5">
+          <div class="text-[9px] uppercase tracking-[0.16em] text-slate-500">posisi Alpha</div>
+          <div id="pos0" class="mono text-[11px] text-cyan-300">(. . .)</div>
+        </div>
+        <div class="bg-slate-900 px-4 py-2.5">
+          <div class="text-[9px] uppercase tracking-[0.16em] text-slate-500">posisi Beta</div>
+          <div id="pos1" class="mono text-[11px] text-violet-300">(. . .)</div>
+        </div>
+        <div class="bg-slate-900 px-4 py-2.5">
+          <div class="text-[9px] uppercase tracking-[0.16em] text-slate-500">posisi Gamma</div>
+          <div id="pos2" class="mono text-[11px] text-amber-300">(. . .)</div>
+        </div>
+        <div class="bg-slate-900 px-4 py-2.5">
+          <div class="text-[9px] uppercase tracking-[0.16em] text-slate-500">langkah RK4</div>
+          <div class="mono text-sm text-slate-200"><span id="stepVal">0</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Note card -->
+    <div class="rounded-xl border border-slate-800 bg-slate-900/50 px-4 py-3 text-[11px] leading-relaxed text-slate-400">
+      <span class="font-semibold text-slate-300">Catatan.</span>
+      Animasi mengintegrasikan persamaan tiga-benda bermassa sama dengan RK4
+      (<span class="mono">dt = T&#8320;/4000</span>) dari titik seed
+      <span class="mono text-slate-300">XHAT_R2</span> &mdash; titik Newton r2 yang dipakai kampanye r3.
+      Base r3 (K1&ndash;K5) menjamin orbit periodik berada di dalam tabung lokal di sekitar titik ini;
+      perbedaan posisi seed terhadap orbit tersertifikasi berada di bawah
+      <span class="mono">10&#8315;&#178;&#8308;</span>, tidak terlihat pada skala visual.
+      Ketiga benda menelusuri kurva figure-eight yang sama dengan fase berbeda;
+      garis abu-abu adalah panduan satu periode penuh, ekor warna menunjukkan 0.2 T&#8320; terakhir.
+      Visualisasi ini <span class="text-slate-300">bukan bukti formal</span>; verdict dan sertifikat ada di receipt/registry.
+    </div>
+  </section>
+
+  <!-- ---------- RIGHT: DATA PANELS ---------- -->
+  <aside class="flex flex-col gap-4">
+
+    <!-- Initial conditions -->
+    <section class="rounded-xl border border-slate-800 bg-slate-900/70 shadow-xl overflow-hidden">
+      <div class="px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+        <h2 class="text-xs font-bold uppercase tracking-[0.16em] text-slate-300">Kondisi awal tersegel</h2>
+        <span class="mono text-[10px] text-slate-500">seed XHAT_R2</span>
+      </div>
+      <div class="p-4 space-y-3">
+        <p class="text-[11px] leading-relaxed text-slate-400">
+          8 koordinat tereduksi dilift ke state 12-dimensi COM-zero:
+          <span class="mono text-slate-300">q&#8323; = &minus;q&#8321;&minus;q&#8322;</span>,
+          <span class="mono text-slate-300">v&#8323; = &minus;v&#8321;&minus;v&#8322;</span>.
+          Satuan: <span class="mono">m = 1</span>, <span class="mono">G = 1</span>.
+        </p>
+        <div id="bodyCards" class="space-y-2 max-h-[380px] overflow-y-auto pr-1 scroll-thin"></div>
+        <div class="rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2 text-[10px] mono text-slate-500 space-y-0.5">
+          <div>q&#8321;y = 1/5 &nbsp;<span class="text-emerald-400">(gauge eksak)</span></div>
+          <div>I<sub>xy</sub> residu seed = <span class="text-slate-300">&minus;3.87&times;10&#8315;&#178;&#8310;</span> <span class="text-slate-600">(eksak; float 16-digit &asymp; 2.8&times;10&#8315;&#185;&#8311;)</span></div>
+          <div>COM posisi = (0, 0) &nbsp;&middot;&nbsp; COM kecepatan = (0, 0)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Locked parameters -->
+    <section class="rounded-xl border border-slate-800 bg-slate-900/70 shadow-xl overflow-hidden">
+      <div class="px-4 py-3 border-b border-slate-800">
+        <h2 class="text-xs font-bold uppercase tracking-[0.16em] text-slate-300">Parameter terkunci</h2>
+      </div>
+      <div class="p-4">
+        <dl class="grid grid-cols-[auto,1fr] gap-x-3 gap-y-1.5 text-[11px] mono">
+          <dt class="text-slate-500">T&#8320;</dt><dd class="text-slate-200 text-right">632600304 / 10&#8312; = 6.32600304</dd>
+          <dt class="text-slate-500">h</dt><dd class="text-slate-200 text-right">13179173 / 3200000000 &asymp; 0.0041184915625</dd>
+          <dt class="text-slate-500">H_STEPS</dt><dd class="text-slate-200 text-right">1536</dd>
+          <dt class="text-slate-500">BLOCK_STEPS</dt><dd class="text-slate-200 text-right">96</dd>
+          <dt class="text-slate-500">presisi</dt><dd class="text-slate-200 text-right">256 bit &middot; order 24</dd>
+          <dt class="text-slate-500">R<sub>B</sub></dt><dd class="text-slate-200 text-right">1e&minus;18</dd>
+          <dt class="text-slate-500">&kappa;<sub>max</sub></dt><dd class="text-slate-200 text-right">1/2 &middot; margin 9/10</dd>
+          <dt class="text-slate-500">POINT_TARGET</dt><dd class="text-slate-200 text-right">1e&minus;24</dd>
+          <dt class="text-slate-500">HESS_BOX</dt><dd class="text-slate-200 text-right">1e&minus;12</dd>
+          <dt class="text-slate-500">QUAD_CAP / DR_CAP</dt><dd class="text-slate-200 text-right">1e&minus;18 / 1e&minus;18</dd>
+          <dt class="text-slate-500">TUBE_CAP</dt><dd class="text-slate-200 text-right">1e&minus;10</dd>
+          <dt class="text-slate-500">DET_MIN / COND_MAX</dt><dd class="text-slate-200 text-right">1e&minus;6 / 1e6</dd>
+          <dt class="text-slate-500">CHOREO_TOL</dt><dd class="text-slate-200 text-right">1e&minus;6</dd>
+        </dl>
+        <div class="mt-3 pt-3 border-t border-slate-800 text-[10px] mono text-slate-500 space-y-1">
+          <div class="flex justify-between gap-2"><span>prereg</span><span class="text-slate-300 break-all text-right">14cf5c9f&hellip;cb21c5</span></div>
+          <div class="flex justify-between gap-2"><span>base modul r3</span><span class="text-slate-300 break-all text-right">8eddc2bb&hellip;939ec6</span></div>
+          <div class="flex justify-between gap-2"><span>base receipt r3</span><span class="text-slate-300 break-all text-right">6b0b71e9&hellip;df829c9</span></div>
+          <div class="flex justify-between gap-2"><span>receipt r4</span><span class="text-slate-300 break-all text-right">8b6088c2&hellip;611086</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Status -->
+    <section class="rounded-xl border border-slate-800 bg-slate-900/70 shadow-xl overflow-hidden">
+      <div class="px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+        <h2 class="text-xs font-bold uppercase tracking-[0.16em] text-slate-300">Status sertifikat r4</h2>
+        <span class="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-bold text-emerald-300">ALL PASS</span>
+      </div>
+      <div class="p-4 space-y-2 text-[11px]">
+        <div class="flex items-start gap-2">
+          <span class="text-emerald-400 mt-0.5">&#10003;</span>
+          <div><span class="text-slate-200 font-semibold">Base K1&ndash;K5 PASS.</span>
+            <span class="text-slate-400">Kampanye base direproduksi byte-per-byte dari receipt r3 tersegel.</span></div>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-emerald-400 mt-0.5">&#10003;</span>
+          <div><span class="text-slate-200 font-semibold">K6 diskriminatif: M1&ndash;M9 semuanya &#8220;passed&#8221;.</span>
+            <span class="text-slate-400">M1, M2, M5&ndash;M9 harus gagal pada gate yang diminta; M3/M4 terdeteksi oleh hash/AST.</span></div>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-emerald-400 mt-0.5">&#10003;</span>
+          <div><span class="text-slate-200 font-semibold">Verdict: ALL PASS.</span>
+            <span class="text-slate-400">receipt r4 mengunci <span class="mono">all_pass = true</span> dan <span class="mono">registry = A-2026-0043</span>.</span></div>
+        </div>
+        <div class="rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2 mono text-[10px] text-slate-500 leading-relaxed">
+          Guard r4: 19 tes &middot; run final 2026-10-23<br>
+          perintah: <span class="text-slate-300">pytest msaf/tests/test_figure_eight_r4.py -q</span><br>
+          angka verifikasi: laporan &sect;9 &middot; entri registry ditulis setelah guard final hijau
+        </div>
+        <div class="rounded-lg border border-amber-500/20 bg-amber-500/5 px-3 py-2 text-[10px] leading-relaxed text-amber-200/80">
+          <span class="font-semibold text-amber-300">Batas klaim.</span>
+          Bukan klaim global, stabilitas, spektrum, chaos, ergodisitas, KAM, PDE, RH, fisika, prioritas,
+          atau penyelesaian umum three-body. Hanya keberadaan + keunikan lokal di dalam box B.
+        </div>
+      </div>
+    </section>
+
+  </aside>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="border-t border-slate-800 bg-slate-900/60">
+  <div class="max-w-[1500px] mx-auto px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[10px] text-slate-500">
+    <div>
+      Sumber angka: <span class="mono text-slate-400">reports/figure_eight_r3_2026-10-23.json</span>,
+      <span class="mono text-slate-400">reports/figure_eight_r4_2026-10-23.json</span>,
+      <span class="mono text-slate-400">reports/FIGURE_EIGHT_R4_2026-10-23.md</span>.
+    </div>
+    <div class="mono">initial coordinates &amp; 3-body simulation &middot; T2-r4</div>
+  </div>
+</footer>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+(() => {
+  "use strict";
+
+  // ---------------------------------------------------------------------
+  // Locked data (receipt r3/r4). Seed XHAT_R2: 8 reduced coordinates,
+  // lifted to the 12-dimensional COM-zero state.
+  // ---------------------------------------------------------------------
+  const T0 = 6.32600304;
+  const DT = T0 / 4000;
+  const TRAIL_CAP = 420;
+  const PUSH_EVERY = 2;
+
+  const BODIES = [
+    {
+      name: "Alpha", color: "#22d3ee", core: "#cffafe",
+      pos: [0.1448544459425072, 0.2],
+      vel: [-0.7922166346285875, -0.9821886530925941],
+      posFrac: ["362136114856268068257747/2500000000000000000000000", "1/5"],
+      velFrac: ["-15844332692571749887599/20000000000000000000000", "-4910943265462970329809137/5000000000000000000000000"]
+    },
+    {
+      name: "Beta", color: "#c084fc", core: "#f3e8ff",
+      pos: [-1.048396092896857, -0.07773682382612019],
+      vel: [0.1513911400375157, 0.5091019520969526],
+      posFrac: ["-10483960928968566266000323/10000000000000000000000000", "-777368238261201944637859/10000000000000000000000000"],
+      velFrac: ["15139114003751568438393/100000000000000000000000", "5091019520969526187485373/10000000000000000000000000"]
+    },
+    {
+      name: "Gamma", color: "#fbbf24", core: "#fef3c7",
+      pos: [0.9035416469543494, -0.1222631761738798],
+      vel: [0.6408254945910718, 0.4730867009956415],
+      posFrac: ["1807083293908698798593867/2000000000000000000000000", "-1222631761738798055362141/10000000000000000000000000"],
+      velFrac: ["32041274729553590499801/50000000000000000000000", "4730867009956414472132901/10000000000000000000000000"]
+    }
+  ];
+
+  const INIT = [
+    BODIES[0].pos[0], BODIES[0].pos[1],
+    BODIES[1].pos[0], BODIES[1].pos[1],
+    BODIES[2].pos[0], BODIES[2].pos[1],
+    BODIES[0].vel[0], BODIES[0].vel[1],
+    BODIES[1].vel[0], BODIES[1].vel[1],
+    BODIES[2].vel[0], BODIES[2].vel[1]
+  ];
+
+  // ---------------------------------------------------------------------
+  // DOM
+  // ---------------------------------------------------------------------
+  const canvas = document.getElementById("simCanvas");
+  const wrap = document.getElementById("canvasWrap");
+  const ctx = canvas.getContext("2d");
+
+  const tVal = document.getElementById("tVal");
+  const phaseVal = document.getElementById("phaseVal");
+  const periodBar = document.getElementById("periodBar");
+  const energyVal = document.getElementById("energyVal");
+  const driftVal = document.getElementById("driftVal");
+  const stepVal = document.getElementById("stepVal");
+  const closureEl = document.getElementById("closureCheck");
+  const posEls = [0, 1, 2].map(i => document.getElementById("pos" + i));
+
+  const playBtn = document.getElementById("playBtn");
+  const playIcon = document.getElementById("playIcon");
+  const playText = document.getElementById("playText");
+  const resetBtn = document.getElementById("resetBtn");
+  const speedInput = document.getElementById("speed");
+  const speedVal = document.getElementById("speedVal");
+  const velToggle = document.getElementById("velToggle");
+
+  // ---------------------------------------------------------------------
+  // State
+  // ---------------------------------------------------------------------
+  let state = INIT.slice();
+  let t = 0;
+  let running = true;
+  let trails = [[], [], []];
+  let showVel = true;
+  let stepCount = 0;
+  let W = 0, H = 0, DPR = 1;
+  let frameNo = 0;
+  let speed = 1;
+
+  const E0 = energy(INIT);
+
+  // ---------------------------------------------------------------------
+  // Physics: equal masses, G = 1
+  // ---------------------------------------------------------------------
+  function rhs(s) {
+    const ax = [0, 0, 0], ay = [0, 0, 0];
+    const pairs = [[0, 1], [0, 2], [1, 2]];
+    for (let p = 0; p < 3; p++) {
+      const i = pairs[p][0], j = pairs[p][1];
+      const dx = s[2 * i] - s[2 * j];
+      const dy = s[2 * i + 1] - s[2 * j + 1];
+      const r2 = dx * dx + dy * dy;
+      const inv = 1 / (r2 * Math.sqrt(r2));
+      const fx = dx * inv, fy = dy * inv;
+      ax[i] -= fx; ay[i] -= fy;
+      ax[j] += fx; ay[j] += fy;
+    }
+    return [
+      s[6], s[7], s[8], s[9], s[10], s[11],
+      ax[0], ay[0], ax[1], ay[1], ax[2], ay[2]
+    ];
+  }
+
+  function addScaled(s, k, f) {
+    const out = new Array(12);
+    for (let i = 0; i < 12; i++) out[i] = s[i] + k[i] * f;
+    return out;
+  }
+
+  function rk4(s, dt) {
+    const k1 = rhs(s);
+    const k2 = rhs(addScaled(s, k1, dt / 2));
+    const k3 = rhs(addScaled(s, k2, dt / 2));
+    const k4 = rhs(addScaled(s, k3, dt));
+    const out = new Array(12);
+    for (let i = 0; i < 12; i++) {
+      out[i] = s[i] + dt * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) / 6;
+    }
+    return out;
+  }
+
+  function energy(s) {
+    let kin = 0;
+    for (let i = 0; i < 3; i++) {
+      kin += s[6 + 2 * i] * s[6 + 2 * i] + s[7 + 2 * i] * s[7 + 2 * i];
+    }
+    kin *= 0.5;
+    let pot = 0;
+    const pairs = [[0, 1], [0, 2], [1, 2]];
+    for (let p = 0; p < 3; p++) {
+      const i = pairs[p][0], j = pairs[p][1];
+      const dx = s[2 * i] - s[2 * j];
+      const dy = s[2 * i + 1] - s[2 * j + 1];
+      pot -= 1 / Math.hypot(dx, dy);
+    }
+    return kin + pot;
+  }
+
+  // ---------------------------------------------------------------------
+  // Formatting / cards
+  // ---------------------------------------------------------------------
+  function fmt(v) {
+    if (v === 0) return "0";
+    let s = v.toPrecision(16);
+    if (s.indexOf("e") >= 0) return s;
+    s = s.replace(/0+$/, "").replace(/\.$/, "");
+    return s;
+  }
+
+  const cardsHost = document.getElementById("bodyCards");
+  cardsHost.innerHTML = BODIES.map((b, i) => `
+    <div class="rounded-lg border border-slate-800 bg-slate-900/50 p-3" style="border-left:3px solid ${b.color}">
+      <div class="flex items-center justify-between mb-2">
+        <div class="flex items-center gap-2 text-xs font-semibold" style="color:${b.color}">
+          <span class="w-2 h-2 rounded-full inline-block" style="background:${b.color}"></span>
+          ${b.name}<span class="text-slate-500 font-normal">&middot; benda ${i + 1}</span>
+        </div>
+        <span class="mono text-[10px] text-slate-500">m = 1</span>
+      </div>
+      <div class="grid grid-cols-2 gap-1.5 mono text-[11px]">
+        <div class="bg-slate-950/80 rounded px-2 py-1"><span class="text-slate-500">x</span>&nbsp; ${fmt(b.pos[0])}</div>
+        <div class="bg-slate-950/80 rounded px-2 py-1"><span class="text-slate-500">y</span>&nbsp; ${fmt(b.pos[1])}</div>
+        <div class="bg-slate-950/80 rounded px-2 py-1"><span class="text-slate-500">vx</span>&nbsp; ${fmt(b.vel[0])}</div>
+        <div class="bg-slate-950/80 rounded px-2 py-1"><span class="text-slate-500">vy</span>&nbsp; ${fmt(b.vel[1])}</div>
+      </div>
+      <details class="mt-2">
+        <summary class="text-[10px] text-slate-500 cursor-pointer select-none">fraksi eksak</summary>
+        <div class="mono text-[9px] leading-relaxed text-slate-500 break-all mt-1">
+          x = ${b.posFrac[0]}<br>
+          y = ${b.posFrac[1]}<br>
+          vx = ${b.velFrac[0]}<br>
+          vy = ${b.velFrac[1]}
+        </div>
+      </details>
+    </div>
+  `).join("");
+
+  // ---------------------------------------------------------------------
+  // Canvas sizing
+  // ---------------------------------------------------------------------
+  function resize() {
+    const rect = wrap.getBoundingClientRect();
+    DPR = window.devicePixelRatio || 1;
+    W = Math.max(1, rect.width);
+    H = Math.max(1, rect.height);
+    canvas.width = Math.round(W * DPR);
+    canvas.height = Math.round(H * DPR);
+    canvas.style.width = W + "px";
+    canvas.style.height = H + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    draw();
+  }
+
+  window.addEventListener("resize", resize);
+  if (window.ResizeObserver) {
+    new ResizeObserver(() => resize()).observe(wrap);
+  }
+
+  // ---------------------------------------------------------------------
+  // View transform
+  // ---------------------------------------------------------------------
+  function view() {
+    const scale = Math.min(W / 2.6, H / 1.35) * 0.92;
+    return { cx: W / 2, cy: H / 2, scale };
+  }
+
+  function sx(x, v) { return v.cx + x * v.scale; }
+  function sy(y, v) { return v.cy - y * v.scale; }
+
+  // ---------------------------------------------------------------------
+  // Trails
+  // ---------------------------------------------------------------------
+  function pushTrail() {
+    for (let i = 0; i < 3; i++) {
+      const tr = trails[i];
+      tr.push([state[2 * i], state[2 * i + 1]]);
+      if (tr.length > TRAIL_CAP) tr.shift();
+    }
+  }
+
+  // ---------------------------------------------------------------------
+  // One-period guide curve (body 1 traces the full figure-eight)
+  // ---------------------------------------------------------------------
+  function computeOrbit() {
+    let s = INIT.slice();
+    const points = [];
+    const n = 4000;
+    for (let k = 0; k < n; k++) {
+      s = rk4(s, DT);
+      if (k % 2 === 0) points.push([s[0], s[1]]);
+    }
+    return points;
+  }
+  const ORBIT = computeOrbit();
+
+  // ---------------------------------------------------------------------
+  // Draw
+  // ---------------------------------------------------------------------
+  function draw() {
+    if (!W || !H) return;
+    const v = view();
+    ctx.clearRect(0, 0, W, H);
+
+    // subtle background
+    const bg = ctx.createRadialGradient(v.cx, v.cy, 0, v.cx, v.cy, Math.max(W, H) * 0.7);
+    bg.addColorStop(0, "rgba(30,41,59,0.55)");
+    bg.addColorStop(1, "rgba(2,6,23,0.95)");
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    // grid
+    ctx.lineWidth = 1;
+    for (let gx = -2; gx <= 2.0001; gx += 0.5) {
+      const X = sx(gx, v);
+      if (X < -2 || X > W + 2) continue;
+      ctx.strokeStyle = gx === 0 ? "rgba(148,163,184,0.28)" : "rgba(148,163,184,0.07)";
+      ctx.beginPath(); ctx.moveTo(X, 0); ctx.lineTo(X, H); ctx.stroke();
+    }
+    for (let gy = -1; gy <= 1.0001; gy += 0.5) {
+      const Y = sy(gy, v);
+      if (Y < -2 || Y > H + 2) continue;
+      ctx.strokeStyle = gy === 0 ? "rgba(148,163,184,0.28)" : "rgba(148,163,184,0.07)";
+      ctx.beginPath(); ctx.moveTo(0, Y); ctx.lineTo(W, Y); ctx.stroke();
+    }
+
+    // COM marker
+    ctx.strokeStyle = "rgba(148,163,184,0.45)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(v.cx - 6, v.cy); ctx.lineTo(v.cx + 6, v.cy);
+    ctx.moveTo(v.cx, v.cy - 6); ctx.lineTo(v.cx, v.cy + 6);
+    ctx.stroke();
+
+    // one-period guide curve (all bodies share the same figure-eight)
+    if (ORBIT.length > 1) {
+      ctx.beginPath();
+      ctx.moveTo(sx(ORBIT[0][0], v), sy(ORBIT[0][1], v));
+      for (let k = 1; k < ORBIT.length; k++) {
+        ctx.lineTo(sx(ORBIT[k][0], v), sy(ORBIT[k][1], v));
+      }
+      ctx.strokeStyle = "rgba(148,163,184,0.22)";
+      ctx.lineWidth = 1.2;
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+      ctx.stroke();
+    }
+
+    // short comet tails (each body, current phase)
+    for (let i = 0; i < 3; i++) {
+      const tr = trails[i];
+      if (tr.length < 2) continue;
+      ctx.beginPath();
+      ctx.moveTo(sx(tr[0][0], v), sy(tr[0][1], v));
+      for (let k = 1; k < tr.length; k++) {
+        ctx.lineTo(sx(tr[k][0], v), sy(tr[k][1], v));
+      }
+      ctx.strokeStyle = BODIES[i].color;
+      ctx.globalAlpha = 0.85;
+      ctx.lineWidth = 2;
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+
+    // initial positions (dashed rings)
+    ctx.setLineDash([3, 3]);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(226,232,240,0.35)";
+    for (let i = 0; i < 3; i++) {
+      const X = sx(INIT[2 * i], v), Y = sy(INIT[2 * i + 1], v);
+      ctx.beginPath(); ctx.arc(X, Y, 8, 0, Math.PI * 2); ctx.stroke();
+      ctx.fillStyle = "rgba(226,232,240,0.45)";
+      ctx.font = "9px ui-monospace, monospace";
+      ctx.fillText("t=0", X + 10, Y + 12);
+    }
+    ctx.setLineDash([]);
+
+    // velocity arrows
+    if (showVel) {
+      const k = 0.18 * v.scale;
+      for (let i = 0; i < 3; i++) {
+        const X = sx(state[2 * i], v), Y = sy(state[2 * i + 1], v);
+        const dx = state[6 + 2 * i] * k;
+        const dy = -state[7 + 2 * i] * k;
+        arrow(X, Y, X + dx, Y + dy, BODIES[i].color, 1.1);
+      }
+    }
+
+    // bodies
+    for (let i = 0; i < 3; i++) {
+      const X = sx(state[2 * i], v), Y = sy(state[2 * i + 1], v);
+      ctx.beginPath();
+      ctx.arc(X, Y, 6.5, 0, Math.PI * 2);
+      ctx.fillStyle = BODIES[i].color;
+      ctx.shadowBlur = 16;
+      ctx.shadowColor = BODIES[i].color;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      ctx.beginPath();
+      ctx.arc(X, Y, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = BODIES[i].core;
+      ctx.fill();
+
+      ctx.fillStyle = "rgba(226,232,240,0.9)";
+      ctx.font = "11px ui-monospace, monospace";
+      ctx.fillText(String(i + 1), X + 9, Y - 9);
+    }
+  }
+
+  function arrow(x1, y1, x2, y2, color, width) {
+    const dx = x2 - x1, dy = y2 - y1;
+    const len = Math.hypot(dx, dy);
+    if (len < 2) return;
+    const ux = dx / len, uy = dy / len;
+    const head = Math.min(6, len * 0.35);
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = 0.75;
+    ctx.lineWidth = width;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2 - ux * head * 0.6, y2 - uy * head * 0.6);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x2, y2);
+    ctx.lineTo(x2 - ux * head - uy * head * 0.5, y2 - uy * head + ux * head * 0.5);
+    ctx.lineTo(x2 - ux * head + uy * head * 0.5, y2 - uy * head - ux * head * 0.5);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  // ---------------------------------------------------------------------
+  // Telemetry
+  // ---------------------------------------------------------------------
+  function updateTelemetry(force) {
+    if (!force && frameNo % 3 !== 0) return;
+    const phase = t % T0;
+    tVal.textContent = phase.toFixed(4);
+    const pct = (phase / T0) * 100;
+    phaseVal.textContent = pct.toFixed(2) + "%";
+    periodBar.style.width = pct.toFixed(2) + "%";
+    stepVal.textContent = String(stepCount);
+    for (let i = 0; i < 3; i++) {
+      posEls[i].textContent = "(" + state[2 * i].toFixed(3) + ", " + state[2 * i + 1].toFixed(3) + ")";
+    }
+    const E = energy(state);
+    energyVal.textContent = E.toFixed(10);
+    driftVal.textContent = (E - E0).toExponential(2);
+  }
+
+  // ---------------------------------------------------------------------
+  // Loop
+  // ---------------------------------------------------------------------
+  function advance() {
+    if (!running) return;
+    const steps = Math.max(1, Math.round(8 * speed));
+    for (let k = 0; k < steps; k++) {
+      state = rk4(state, DT);
+      t += DT;
+      stepCount++;
+      if (stepCount % PUSH_EVERY === 0) pushTrail();
+    }
+  }
+
+  function loop() {
+    frameNo++;
+    advance();
+    draw();
+    updateTelemetry(false);
+    requestAnimationFrame(loop);
+  }
+
+  // ---------------------------------------------------------------------
+  // Controls
+  // ---------------------------------------------------------------------
+  playBtn.addEventListener("click", () => {
+    running = !running;
+    playIcon.innerHTML = running ? "&#10074;&#10074;" : "&#9654;";
+    playText.textContent = running ? "Pause" : "Resume";
+  });
+
+  resetBtn.addEventListener("click", () => {
+    state = INIT.slice();
+    t = 0;
+    stepCount = 0;
+    trails = [[], [], []];
+    updateTelemetry(true);
+    draw();
+  });
+
+  speedInput.addEventListener("input", (e) => {
+    speed = parseFloat(e.target.value) || 1;
+    speedVal.textContent = speed.toFixed(2) + "\u00d7";
+  });
+
+  velToggle.addEventListener("change", (e) => {
+    showVel = e.target.checked;
+  });
+
+  // ---------------------------------------------------------------------
+  // One-period closure self-check (double precision RK4)
+  // ---------------------------------------------------------------------
+  function closureError(n) {
+    let s = INIT.slice();
+    const dt = T0 / n;
+    for (let k = 0; k < n; k++) s = rk4(s, dt);
+    let m = 0;
+    for (let i = 0; i < 12; i++) m = Math.max(m, Math.abs(s[i] - INIT[i]));
+    return m;
+  }
+
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      try {
+        closureEl.textContent = closureError(12000).toExponential(2);
+      } catch (err) {
+        closureEl.textContent = "n/a";
+      }
+    }, 80);
+  });
+
+  // ---------------------------------------------------------------------
+  // Boot
+  // ---------------------------------------------------------------------
+  resize();
+  updateTelemetry(true);
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

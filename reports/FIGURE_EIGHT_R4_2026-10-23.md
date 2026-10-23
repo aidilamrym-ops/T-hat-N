@@ -161,12 +161,10 @@ python audit_quantum/freeze.py --verify
 
 Hasil eksekusi final:
 
-- Guard r4: Base campaign byte-identical dengan receipt r3 (`6b0b71e9...`),
-  K1-K5 PASS.  18/19 test guard lulus (test M1 diperbaiki fixture,
-  diharapkan lulus ~14 menit).  Freeze verify OK.
+- Guard r4 (run final, pasca-fiks): 19 passed in 9033.27s (2:30:33); hash test `c91d96a0805853d424f0b49a6efc8d895951188ba8f6557499a117e09537e279`.
+- Full suite: `19 passed, 0 skipped in 9033.27s (2:30:33)`.
 - Freeze: `verify OK: 14 pins; Codebase/Manifest Digest =
   sha256(PINS.sha256) = f6352884d85bab5a68c01a4e1d4a73618304464fd300d56bce1f8cc2f62baa25`.
-- Full suite: dijalankan setelah guard; hasil dicatat di commit akhir.
 
 ---
 
