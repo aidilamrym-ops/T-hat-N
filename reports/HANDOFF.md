@@ -2899,10 +2899,12 @@ falsifikasi 2026-10-24, dan suite T2N — SELESAI 2026-10-24
 - **Protokol fase** (keputusan owner 2026-10-24): setiap fase suite
   T2N = satu commit di `main` + push segera; roadmap fase untuk
   pengguna lain ada di README `SECTION 9`. Kemajuan: F0 (inti),
-  F1 (`repokeeper`, `archivist`), dan F2 (`scribe`,
-  `watchtower`) hidup — terverifikasi `opencode mcp list` 8/8 ✓;
-  urutan aktif kini: **F3** `science` → F4 `illumina` → F5
-  graf pengetahuan + hook data LearnHarness.
+  F1 (`repokeeper`, `archivist`), F2 (`scribe`, `watchtower`),
+  dan F3 (`science`: `iv_eval` AST-whitelist,
+  `frac_compare` eksak, `ast_float_scan`) hidup —
+  terverifikasi `opencode mcp list` 8/8 ✓; urutan aktif kini:
+  **F4** `illumina` → F5 graf pengetahuan + hook data
+  LearnHarness.
 - **Batas**: tidak ada klaim matematis baru di seksi ini; tidak ada
   penarikan; `A-2026-0044` tetap kosong sampai r6 (opsional, wajib
   prereg-sebelum-kode dengan mutasi yang benar-benar diskriminatif

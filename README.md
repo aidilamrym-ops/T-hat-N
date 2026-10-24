@@ -1668,7 +1668,7 @@ opencode mcp list
 | `t2n_archivist` | `corpus_search`, `doc_outline`, `registry_lookup`, `summarize_receipt`, `timeline`, `read_slice` | F1 | **HIDUP** (`9649c10`) |
 | `t2n_scribe` | `ledger_append`, `ledger_tail`, `audit_state`, `area_claim`/`area_release` (TTL, pelepasan paksa tercatat di ledger), `areas_list`, `resume_brief`, `handoff_draft` | F2 | **HIDUP** (F2) |
 | `t2n_watchtower` | `guarded_run` (log streaming yang tetap tertulis), `watch`, `reap`, `reap_all_stale`, `run_history` — verifikasi identitas pid + tanda tangan pembuatan proses | F2 | **HIDUP** (F2) |
-| `t2n_science` | `iv_eval` AST-whitelist, `frac` eksak, scan float | F3 | kerangka (ping) |
+| `t2n_science` | `iv_eval` (interval dengan pembulatan-ke-luar, AST-whitelist tanpa `eval`), `frac_compare` (rasional eksak `Fraction`), `ast_float_scan` (pemindai literal `float`/`float()`/`eval`-`exec`) | F3 | **HIDUP** (F3) |
 | `t2n_illumina` | render SVG/HTML (gate-tree, dependency map, orbit) | F4 | kerangka (ping) |
 
 Fase **P1** (penyegelan jujur r5 + pendokumentasian) selesai di
@@ -1689,12 +1689,11 @@ kemajuan lewat `git log --oneline` secara langsung.
    - `registry_state` sebelum membahas id (id tertinggi =
      maksimum numerik; `A-2026-0044` masih kosong),
    - `pytest_run` hanya menerima target di `msaf/tests/`.
-4. Baru kerja fase berikutnya: **F3** `science` (eval ekspresi
-   interval dengan AST-whitelist, hitung eksak, pemindai float) →
-   F4 `illumina` (SVG/HTML) → F5 graf pengetahuan + hook data
-   LearnHarness (`LEARNHARNESS_DATA_ROOT` dibaca read-only
-   sesuai etos SKILL.md-nya). F2 (`scribe` + `watchtower`)
-   sudah hidup (tabel di atas).
+4. Baru kerja fase berikutnya: **F4** `illumina` (SVG/HTML ke
+   `mcp/out/`) → F5 graf pengetahuan + hook data LearnHarness
+   (`LEARNHARNESS_DATA_ROOT` dibaca read-only sesuai etos
+   SKILL.md-nya). F2 (`scribe` + `watchtower`) dan F3
+   (`science`) sudah hidup (tabel di atas).
 5. Semua keluaran tulis suite mendarat di `mcp/out/`
    (`ledger/`, `runs/`, `handoff/`, `adversarial/`) — di-ignore
    git; owner dapat commit artefak yang dianggap penting secara manual.
