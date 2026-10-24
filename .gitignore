@@ -13,6 +13,9 @@ formal_bridge/*.vos
 formal_bridge/*.glob
 formal_bridge/.*.aux
 
+# T2N MCP generated zone (ledger, runs, handoff outbox, adversarial artifacts)
+mcp/out/
+
 # Private working files: researcher-to-agent instructions, never published
 instruksi_*.md
 msaf_execution_manual.md

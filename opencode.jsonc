@@ -1,0 +1,71 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // T2N MCP suite (T-hat-N): six role servers sharing mcp/t2n/core.
+  // F0 skeleton (ping/self_check); F1 tools live for repokeeper + archivist.
+  // Writes are allowlisted to mcp/out ONLY (reports/ is sealed).
+  // Paths absolute -> cwd-independent; no secrets needed here.
+  "mcp": {
+    "servers": {
+      "t2n_repokeeper": {
+        "type": "local",
+        "command": ["C:\\Python314\\python.exe", "-u", "D:\\Opencode AI Agent\\mcp\\t2n\\repokeeper.py"],
+        "environment": {
+          "T2N_REPO_ROOT": "D:\\Opencode AI Agent",
+          "T2N_WRITE_ROOTS": "D:\\Opencode AI Agent\\mcp\\out",
+          "PYTHONIOENCODING": "utf-8"
+        },
+        "timeout": { "startup": 30000, "catalog": 30000, "execution": 5400000 }
+      },
+      "t2n_archivist": {
+        "type": "local",
+        "command": ["C:\\Python314\\python.exe", "-u", "D:\\Opencode AI Agent\\mcp\\t2n\\archivist.py"],
+        "environment": {
+          "T2N_REPO_ROOT": "D:\\Opencode AI Agent",
+          "T2N_WRITE_ROOTS": "D:\\Opencode AI Agent\\mcp\\out",
+          "PYTHONIOENCODING": "utf-8"
+        },
+        "timeout": { "startup": 30000, "catalog": 30000, "execution": 300000 }
+      },
+      "t2n_science": {
+        "type": "local",
+        "command": ["C:\\Python314\\python.exe", "-u", "D:\\Opencode AI Agent\\mcp\\t2n\\science.py"],
+        "environment": {
+          "T2N_REPO_ROOT": "D:\\Opencode AI Agent",
+          "T2N_WRITE_ROOTS": "D:\\Opencode AI Agent\\mcp\\out",
+          "PYTHONIOENCODING": "utf-8"
+        },
+        "timeout": { "startup": 30000, "catalog": 30000, "execution": 300000 }
+      },
+      "t2n_illumina": {
+        "type": "local",
+        "command": ["C:\\Python314\\python.exe", "-u", "D:\\Opencode AI Agent\\mcp\\t2n\\illumina.py"],
+        "environment": {
+          "T2N_REPO_ROOT": "D:\\Opencode AI Agent",
+          "T2N_WRITE_ROOTS": "D:\\Opencode AI Agent\\mcp\\out",
+          "PYTHONIOENCODING": "utf-8"
+        },
+        "timeout": { "startup": 30000, "catalog": 30000, "execution": 600000 }
+      },
+      "t2n_scribe": {
+        "type": "local",
+        "command": ["C:\\Python314\\python.exe", "-u", "D:\\Opencode AI Agent\\mcp\\t2n\\scribe.py"],
+        "environment": {
+          "T2N_REPO_ROOT": "D:\\Opencode AI Agent",
+          "T2N_WRITE_ROOTS": "D:\\Opencode AI Agent\\mcp\\out",
+          "PYTHONIOENCODING": "utf-8"
+        },
+        "timeout": { "startup": 30000, "catalog": 30000, "execution": 300000 }
+      },
+      "t2n_watchtower": {
+        "type": "local",
+        "command": ["C:\\Python314\\python.exe", "-u", "D:\\Opencode AI Agent\\mcp\\t2n\\watchtower.py"],
+        "environment": {
+          "T2N_REPO_ROOT": "D:\\Opencode AI Agent",
+          "T2N_WRITE_ROOTS": "D:\\Opencode AI Agent\\mcp\\out",
+          "PYTHONIOENCODING": "utf-8"
+        },
+        "timeout": { "startup": 30000, "catalog": 30000, "execution": 7200000 }
+      }
+    }
+  }
+}
