@@ -2903,8 +2903,7 @@ falsifikasi 2026-10-24, dan suite T2N — SELESAI 2026-10-24
   dan F3 (`science`: `iv_eval` AST-whitelist,
   `frac_compare` eksak, `ast_float_scan`) hidup —
   terverifikasi `opencode mcp list` 8/8 ✓; urutan aktif kini:
-  **F4** `illumina` → F5 graf pengetahuan + hook data
-  LearnHarness.
+  **F4** & **F5** `t2n_illumina` (receipt, dependency map, orbit) hidup — terverifikasi `opencode mcp list` 8/8 ✓; urutan aktif kini: graf pengetahuan + hook data LearnHarness.
 - **Batas**: tidak ada klaim matematis baru di seksi ini; tidak ada
   penarikan; `A-2026-0044` tetap kosong sampai r6 (opsional, wajib
   prereg-sebelum-kode dengan mutasi yang benar-benar diskriminatif

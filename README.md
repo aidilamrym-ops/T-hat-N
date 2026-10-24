@@ -1669,7 +1669,7 @@ opencode mcp list
 | `t2n_scribe` | `ledger_append`, `ledger_tail`, `audit_state`, `area_claim`/`area_release` (TTL, pelepasan paksa tercatat di ledger), `areas_list`, `resume_brief`, `handoff_draft` | F2 | **HIDUP** (F2) |
 | `t2n_watchtower` | `guarded_run` (log streaming yang tetap tertulis), `watch`, `reap`, `reap_all_stale`, `run_history` — verifikasi identitas pid + tanda tangan pembuatan proses | F2 | **HIDUP** (F2) |
 | `t2n_science` | `iv_eval` (interval dengan pembulatan-ke-luar, AST-whitelist tanpa `eval`), `frac_compare` (rasional eksak `Fraction`), `ast_float_scan` (pemindai literal `float`/`float()`/`eval`-`exec`) | F3 | **HIDUP** (F3) |
-| `t2n_illumina` | render SVG/HTML (gate-tree, dependency map, orbit) | F4 | kerangka (ping) |
+| `t2n_illumina` | render SVG/HTML (gate-tree, dependency map, orbit) | F5 | **HIDUP** (F5) |
 
 Fase **P1** (penyegelan jujur r5 + pendokumentasian) selesai di
 commit `a41b9be`. Setiap fase berakhir **satu commit di `main`

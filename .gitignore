@@ -22,8 +22,7 @@ msaf_execution_manual.md
 msaf_terminus_phase*.md
 system_prompt_opencode.md
 Kompilasi Rumus, Turunan, dan Penjelasan Simbol.md
-
-# Local secret injection: never published
+msaf/learnharness/
 .env
 .env.*
 !.env.example
