@@ -1514,6 +1514,25 @@ Final execution results:
 - If registry `A-2026-0044` is desired: open trek r5 with new preregistration **before code**, truly discriminative K6, without retroactively changing r4.
 - R4 closed as **ALL PASS** with registry `A-2026-0043`.
 
+### 8.6 T2-r5 status (2026-10-24) — FAILED, no registry (honest interim record)
+
+r5 was opened exactly as §8.5 item 1 prescribes: preregistration locked at commit `fad7dc7` (`reports/PREREG_FIGURE_EIGHT_R5_2026-10-23.md`, target registry `A-2026-0044`) **before code** (`bb3fe56`, `msaf/figure_eight_r5.py`), with the tighter box `R_B = 1e-30` and a new K6 matrix M1-M10.
+
+Interim status (base campaign verified; guard regeneration with an archived log under way; the sealing commit of the receipt + formal report follows):
+
+- **Base K1-K5 (sealed r3 certificate, byte-reproduced): PASS** — K1, K2, K3, K4, K5 all true.
+- **K6 matrix M1-M10: FAILED** — two rows do not discriminate:
+  - **M3** (`C = 1/3`): expected the gauge gate K1 to fail; K1 still passes → non-discriminative.
+  - **M8** (`GAUSS_COND_MAX=10^6`): expected K4 `cond_ok=False`; the measured condition ≈ 2.96e4 stays far below the mutated cap → non-discriminative.
+  - M6/M7 logged as INCONCLUSIVE under the module rules and are not pass-blocking.
+- Verdict: `all_pass = false`, `summary = FAILED`, `registry = null` → **`A-2026-0044` is NOT created**; r4 (`A-2026-0043`) is untouched and remains the certified claim.
+
+Infra repairs shipped inside the r5 window (no mathematical content changed):
+
+- `msaf/hodge/gauss_exact.py`: fixed an IndentationError shipped in `4e282c9` (the p=3/even-n `raise` was not indented, breaking the module import); the stray column-0 `# TODO` was folded back into the original refusal comment. The guard now refuses loudly exactly as documented, with `NotImplementedError` naming the `F_{p^2}` remedy.
+- `msaf/tests/test_hodge_fermat_k3.py`: realigned to the precise refusal and **a new `p=7`/even-n case keeps the generic Davenport-Hasse `RuntimeError` branch covered** — no coverage was lost.
+- `msaf/prime_integration.py`: qualified `prime_bridge` imports to `msaf.prime_bridge.*` (bare top-level names made collection fail from the repository root).
+
 ---
 
 ## SYMBOL GLOSSARY

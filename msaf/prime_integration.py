@@ -1,8 +1,8 @@
 from msaf import precision, certify, operators
-from prime_bridge.sieve_flow import prime_pi, segmented_sieve
-from prime_bridge.feature   import gaps, gap_histogram, dirichlet_sums
-from prime_bridge.learner   import train, predict
-from prime_bridge.ai_insight import extract_conjecture
+from msaf.prime_bridge.sieve_flow import prime_pi, segmented_sieve
+from msaf.prime_bridge.feature   import gaps, gap_histogram, dirichlet_sums
+from msaf.prime_bridge.learner   import train, predict
+from msaf.prime_bridge.ai_insight import extract_conjecture
 
 def prime_data_bundle(N: int):
     primes = segmented_sieve(N)

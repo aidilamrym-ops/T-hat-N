@@ -50,10 +50,17 @@ def test_exact_beyond_ball_reach():
 
 def test_lift_refused_where_invalid():
     # p = 3, even n: characters of order 4 over F_{3^n} have no lift
-    # from F_3 -- refuse loudly rather than return a wrong integer.
-    with pytest.raises(RuntimeError, match="Davenport-Hasse"):
+    # from F_3 and the naive lift is the WRONG sum. The module refuses
+    # loudly with NotImplementedError, naming the F_{p^2} remedy,
+    # instead of returning a plausible-looking integer.
+    with pytest.raises(NotImplementedError, match="not yet implemented"):
         exact(2, 3)
     assert exact(1, 3)["projective"] == 16  # odd n: e = 2 lifts fine
+    # Distinct motivation, distinct branch: for p = 3 mod 4 with even n
+    # (p here = 7) Davenport-Hasse genuinely does not cover the order-4
+    # case -> the generic RuntimeError must stay in place and covered.
+    with pytest.raises(RuntimeError, match="Davenport-Hasse"):
+        exact(2, 7)
 
 
 def test_exact_input_gates():
