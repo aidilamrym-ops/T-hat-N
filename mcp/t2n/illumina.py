@@ -126,8 +126,44 @@ def render_orbit_svg(params: dict) -> dict:
             "svg": ET.tostring(svg, encoding="unicode")}
 
 # ---------------------------------------------------------------------
-# HTML Dashboard
-def render_html_dashboard(params: dict) -> dict:
+# Materials dashboard – combines crystal and phase diagram SVGs
+def render_materials_dashboard(params: dict) -> dict:
+    """Render HTML dashboard with crystal structure and phase diagram.
+
+    Expected params:
+    - chemsys: chemical system for phase diagram (e.g. "Li-Fe-O")
+    - material_id: material id for crystal SVG (e.g. "mp-149")
+    - title: optional dashboard title
+    """
+    chemsys = params.get("chemsys")
+    material_id = params.get("material_id")
+    title = params.get("title", "Materials Dashboard")
+    if not chemsys or not material_id:
+        raise ValueError("chemsys and material_id required")
+    # Query structure
+    struct_res = materials.mp_query({
+        "endpoint": "structure",
+        "filters": {"material_ids": [material_id]},
+        "save_json": False
+    })
+    if not struct_res.get("data"):
+        raise RuntimeError("Structure fetch failed")
+    struct_svg = visualize_materials.render_crystal_svg(struct_res["data"][0])
+    # Query phase diagram entries
+    pd_res = materials.mp_query({
+        "endpoint": "phase_diagram",
+        "filters": {"chemsys": chemsys, "fields": ["material_id", "composition", "energy_above_hull"]},
+        "save_json": False
+    })
+    if not pd_res.get("data"):
+        raise RuntimeError("Phase diagram fetch failed")
+    pd_svg = visualize_materials.render_phase_diagram_svg(chemsys, pd_res["data"])
+    sections = [
+        {"header": "Crystal Structure", "content": struct_svg},
+        {"header": f"Phase Diagram ({chemsys})", "content": pd_svg}
+    ]
+    return render_html_dashboard({"title": title, "sections": sections})
+
     title = params.get("title", "T2N Documentation Visual")
     sections = params.get("sections", [])
     if not isinstance(sections, list):
@@ -162,17 +198,23 @@ def render_html_dashboard(params: dict) -> dict:
         header = str(sec.get("header", "Section"))
         content = str(sec.get("content", ""))
         is_json = False
+        is_svg = False
         try:
-            if content.startswith(("{", "[")):
+            if content.lstrip().startswith('<svg'):
+                is_svg = True
+            elif content.startswith(('{', '[')):
                 json_content = json.loads(content)
                 content = json.dumps(json_content, indent=2)
                 is_json = True
         except:
             pass
-            
+        
         html_parts.append("      <div class='section'>")
         html_parts.append(f"        <h2>{header}</h2>")
-        html_parts.append(f"        <div class='content'>{'<pre>' if is_json else ''}{content}{'</pre>' if is_json else ''}</div>")
+        if is_svg:
+            html_parts.append(f"        <div class='content'>{content}</div>")
+        else:
+            html_parts.append(f"        <div class='content'>{'<pre>' if is_json else ''}{content}{'</pre>' if is_json else ''}</div>")
         html_parts.append("      </div>")
         
     html_parts.extend([
