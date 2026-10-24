@@ -1642,3 +1642,75 @@ Final certified delivery: v1.40.0-alpha-final-certified-delivery (GitHub tag).
 ## LICENSE
 
 MIT - see [LICENSE](LICENSE).
+
+---
+
+## SECTION 9: T2N MCP SUITE — ROADMAP FASE UNTUK PENGGUNA BARU
+
+Suite enam server MCP milik repo ini ("T2N") berjalan di atas satu inti
+protokol bersama (`mcp/t2n/core/`): stdio JSON-RPC newline-delimited,
+Python 3.14 stdlib saja, tulis SEMUA hanya ke `mcp/out/` (zona tunggal;
+`reports/` tersegel), dan kegagalan alat tidak pernah mematikan server.
+
+Server terdaftar di `opencode.jsonc` proyek (`mcp.servers.<nama>`,
+bentuk V2). Verifikasi koneksi (harap 8 ✓ — 6 milik repo + 2 global
+Anda):
+
+```sh
+opencode mcp list
+```
+
+### 9.1 Server & status fase
+
+| Server | Tools (utama) | Fase | Status |
+|---|---|---|---|
+| `t2n_repokeeper` | `repo_status`, `hash_artifact`, `receipt_verify`, `pytest_run`, `registry_state`, `handoff_queue` | F1 | **HIDUP** (`9649c10`) |
+| `t2n_archivist` | `corpus_search`, `doc_outline`, `registry_lookup`, `summarize_receipt`, `timeline`, `read_slice` | F1 | **HIDUP** (`9649c10`) |
+| `t2n_scribe` | ledger berantai-hash lintas-sesi, klaim wilayah TTL, resume-brief | F2 | kerangka (ping) |
+| `t2n_watchtower` | `guarded_run` + log selalu-tertulis, watch, reap PID aman | F2 | kerangka (ping) |
+| `t2n_science` | `iv_eval` AST-whitelist, `frac` eksak, scan float | F3 | kerangka (ping) |
+| `t2n_illumina` | render SVG/HTML (gate-tree, dependency map, orbit) | F4 | kerangka (ping) |
+
+Fase **P1** (penyegelan jujur r5 + pendokumentasian) selesai di
+commit `a41b9be`. Setiap fase berakhir **satu commit di `main`
++ push** — putusan owner 2026-10-24 — sehingga pengguna melacak
+kemajuan lewat `git log --oneline` secara langsung.
+
+### 9.2 Urutan eksekusi untuk pengguna lain (ketajaman disiplin tetap)
+
+1. `git clone` repo → `cd` root → jalankan OpenCode di root itu
+   (config `opencode.jsonc` ikut ter-commit, jadi semua `t2n_*`
+   langsung terdaftar; bila interpreter Python 3.14 Anda bukan
+   `C:\Python314`, sesuaikan jalur `command` di `opencode.jsonc`).
+2. `opencode mcp list` → pastikan semua `t2n_*` ✓ connected.
+3. **Verifikasi dulu, jangan percaya**:
+   - `receipt_verify` SEMUA receipt `reports/*.json` sebelum
+     mengutip apapun (anti-pemalsuan; insiden 2026-10-24 nyata),
+   - `registry_state` sebelum membahas id (id tertinggi =
+     maksimum numerik; `A-2026-0044` masih kosong),
+   - `pytest_run` hanya menerima target di `msaf/tests/`.
+4. Baru kerja fase berikutnya: **F2** `scribe`+`watchtower` →
+   F3 `science` → F4 `illumina` → F5 graf pengetahuan +
+   hook data LearnHarness (`LEARNHARNESS_DATA_ROOT` dibaca
+   read-only sesuai etos SKILL.md-nya).
+5. Semua keluaran tulis suite mendarat di `mcp/out/`
+   (`ledger/`, `runs/`, `handoff/`, `adversarial/`) — di-ignore
+   git; owner boleh memanually commit artefak yang dianggap
+   penting.
+6. Pemburuan cacat hanya lewat **matriks serangan yang
+   di-prereg** dengan budget ≤2 siklus per perbaikan (anti
+   loop-tanpa-ujung); temuan baru masuk matriks kampanye
+   berikutnya, dan setiap siklus terekam di ledger
+   `mcp/out/ledger/t2n_ledger_v1.jsonl`.
+
+### 9.3 Batas
+
+- Suite T2N **tidak membuat klaim matematis baru**; ia
+  instrumen integritas & produktivitas. Klaim ilmiah tetap
+  berada di registry `reports/FENCE_REGISTRY.md` dengan
+  protokol prereg-sebelum-kode.
+- Jalur mutlak di `opencode.jsonc` (`C:\Python314\python.exe`,
+  `D:\Opencode AI Agent\...`) menyimpan lokal-mesin; pengguna
+  lain harus menyesuaikannya (satu-satunya bagian yang tidak
+  portabel di setup ini).
+
