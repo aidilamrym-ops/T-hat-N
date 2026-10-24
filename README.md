@@ -1676,7 +1676,7 @@ commit `a41b9be`. Setiap fase berakhir **satu commit di `main`
 + push** — putusan owner 2026-10-24 — sehingga pengguna melacak
 kemajuan lewat `git log --oneline` secara langsung.
 
-### 9.2 Urutan eksekusi untuk pengguna lain (ketajaman disiplin tetap)
+### 9.2 Urutan eksekusi untuk pengguna lain (disiplin tetap ditegakkan)
 
 1. `git clone` repo → `cd` root → jalankan OpenCode di root itu
    (config `opencode.jsonc` ikut ter-commit, jadi semua `t2n_*`
@@ -1695,8 +1695,7 @@ kemajuan lewat `git log --oneline` secara langsung.
    read-only sesuai etos SKILL.md-nya).
 5. Semua keluaran tulis suite mendarat di `mcp/out/`
    (`ledger/`, `runs/`, `handoff/`, `adversarial/`) — di-ignore
-   git; owner boleh memanually commit artefak yang dianggap
-   penting.
+   git; owner dapat commit artefak yang dianggap penting secara manual.
 6. Pemburuan cacat hanya lewat **matriks serangan yang
    di-prereg** dengan budget ≤2 siklus per perbaikan (anti
    loop-tanpa-ujung); temuan baru masuk matriks kampanye
