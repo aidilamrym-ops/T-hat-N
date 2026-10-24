@@ -2841,5 +2841,61 @@ eports/ABC_CENSUS_2026-10-21.md (akan dibuat)
   kedua atau metode tabung lain), lalu implementasi terpisah. Jangan
   mengubah r2 secara diam-diam.
 
+## 2.0bo — Penyehatan dokumen: pointer r3/r4, penutupan r5 (FAILED), insiden
+falsifikasi 2026-10-24, dan suite T2N — SELESAI 2026-10-24
+
+- **Sinkron tertunda sejak 2.0bn (zaman r2).** Penelusuran T2
+  berikutnya tidak pernah dapat seksi HANDOFF sendiri; sumber
+  kebenarannya tetap dokumen formal yang sudah disegel:
+  `reports/FIGURE_EIGHT_R3_2026-10-23.md` (r3 **INKONklusif** — K6
+  lama non-diskriminatif; tidak ada entri registry) dan
+  `reports/FIGURE_EIGHT_R4_2026-10-23.md` (r4 **ALL PASS** — registry
+  **`A-2026-0043`** dibuat; base r3 terekam byte-identik dua
+  kampanye). Seksi ini mengisi gap tersebut dengan pointer saja,
+  tanpa menulis ulang isinya.
+- **r5 ditutup JUJUR: FAILED, registry null.** Prereg r5
+  `reports/PREREG_FIGURE_EIGHT_R5_2026-10-23.md` (SHA-256LF
+  `6c845bbdbc8724d9bb07b7798927bacee9bebab5714a69328ccc3d6bc1edd03`)
+  dikunci **sebelum kode** (`bb3fe56`); modul
+  `msaf/figure_eight_r5.py` SHA-256LF
+  `246857d4742067838814ec1da869552d0263ba8cebf50d9e13ed305e5bc0a62d`;
+  receipt `reports/figure_eight_r5_2026-10-23.json` (5314 byte,
+  SHA-256LF `1932be979a9ee91066fd169c83e8eeba6fcb3b9d0a5f8dd988ad881fad46b0cf`): base K1-K5 **PASS** (byte-reproduksi sertifikat
+  r3), K6 M1-M10 **FAILED** — M3 (`C=1/3`: `K1_passed=true`) dan
+  M8 (`GAUSS_COND_MAX=1e6`: kondisi terukur ≈29649.6 tetap di bawah
+  cap) non-diskriminatif; M6/M7 INKONklusif menurut aturan modul.
+  `all_pass=false`, `registry=null` → **`A-2026-0044` TIDAK
+  dibuat**; r4 tidak disentuh. Laporan formal:
+  `reports/FIGURE_EIGHT_R5_2026-10-23.md` (6130 byte, SHA-256LF
+  `0528c3dd3d618ed3a39a3cee191e73dc5b49caa15466cf3a65310cd609470643`).
+- **Byte-check pass-2**: guard
+  `msaf/tests/test_figure_eight_r5.py` menjalankan kampanye penuh
+  dua kali; receipt r5 tidak memiliki field waktu (skema
+  `msaf.figure_eight_r5.v1`) → pass-2 harus menulis ulang
+  byte-identik; pasca-selesai rerun, `git hash-object`
+  dibandingkan dengan hash yang di-commit dan hasilnya direkam
+  sebagai event pada ledger `t2n_ledger_v1.jsonl` (zona tulis
+  `mcp/out/`).
+- **Insiden falsifikasi 2026-10-24 (15:19)**: receipt palsu
+  `ALL PASS` beregistry `A-2026-0044` + modul r5 yang di-tamper
+  sempat muncul dari sesi paralel; terdeteksi, di-revert
+  (`git checkout`), bukti forensik diarsipkan (temp berlabel
+  `TAMPERED_*`). Respons struktural: suite MCP **T2N**
+  (commit `9649c10` — `repokeeper.receipt_verify` anti-forgery,
+  ledger berantai-hash dua-kunci, zona tulis tunggal `mcp/out/`).
+- **Infra di jendela r5** (tanpa konten matematika baru): perbaikan
+  import-ability `msaf/hodge/gauss_exact.py` (IndentationError dari
+  `4e282c9`) + realign guard + kasus p=7 baru, serta import
+  `prime_bridge`; README 8.6 — commit `4af845a`.
+- **Protokol fase** (keputusan owner 2026-10-24): setiap fase suite
+  T2N = satu commit di `main` + push segera; roadmap fase untuk
+  pengguna lain ada di README `SECTION 9`. Urutan aktif: **F2**
+  (`scribe` + `watchtower`) → F3 `science` → F4 `illumina` → F5
+  graf pengetahuan + hook data LearnHarness.
+- **Batas**: tidak ada klaim matematis baru di seksi ini; tidak ada
+  penarikan; `A-2026-0044` tetap kosong sampai r6 (opsional, wajib
+  prereg-sebelum-kode dengan mutasi yang benar-benar diskriminatif
+  pada pelajaran M3/M8 di laporan r5).
+
 
 

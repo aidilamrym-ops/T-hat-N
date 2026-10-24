@@ -1,0 +1,159 @@
+{
+  "all_pass": false,
+  "base": {
+    "K2_width_max": "[4.375764330275093479072173756299383027704756423307118008194399677529249856e-14 +/- 8.06e-87]",
+    "K3_f_inf_final": "[4.222845715357847910637323998643523507567862899636295014679650259478241866838e-25 +/- 4.64e-101]",
+    "K4_det": "[-7.62340755583888116663998805 +/- 4.29e-27]",
+    "K5_defect": "[1.212132602582212128642850918829943957140899920031779056126538927385849407e-14 +/- 3.13e-87]",
+    "all_pass": true,
+    "checks_passed": {
+      "K1": true,
+      "K2": true,
+      "K3": true,
+      "K4": true,
+      "K5": true
+    },
+    "module": "msaf/figure_eight_r3.py",
+    "module_sha256lf": "8eddc2bb17647d452e15325397e852e224e1af028f055fa4fe41de94af939ec6",
+    "prereg_sha256lf": "6c845bbbdbc8724d9bb07b7798927bacee9bebab5714a69328ccc3d6bc1edd03",
+    "receipt": "reports/figure_eight_r3_2026-10-23.json",
+    "receipt_sha256lf": "6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9",
+    "schema": "msaf.figure_eight_r3.v1",
+    "summary": "ALL PASS"
+  },
+  "claim": "local existence and uniqueness in B (tighter R_B=1e-30), conditional on base K1-K5 and r5 K6 M1-M10; no global or physical claim",
+  "k6": {
+    "all_pass": false,
+    "matrix": "M1-M10",
+    "old_r3_m5": {
+      "parameter": "SWEEP_SIGNED=False",
+      "status": "non-discriminative in r3; diagnostic only; not a r5 pass condition"
+    },
+    "rows": [
+      {
+        "actual": {
+          "K2_error": "aborted at step 2: Picard enclosure failed",
+          "K2_passed": false,
+          "summary": "FAILED"
+        },
+        "expected": "K2 FAILED at step 2 (Picard enclosure failed)",
+        "id": "M1",
+        "parameter": "REMAINDER_FACTOR=10^100",
+        "passed": true
+      },
+      {
+        "actual": {
+          "call_hits": [
+            "name:float:418"
+          ],
+          "literal_hits": [
+            "literal:float:418"
+          ],
+          "original_clean": true
+        },
+        "expected": "AST hits for literal and call; clean original",
+        "id": "M10",
+        "parameter": "inject 1.5 and float(x) into a source copy",
+        "passed": true
+      },
+      {
+        "actual": {
+          "K3_f_inf_final": "[1.061130891393260605918192915315745754167585235624593681071257243371312754221 +/- 1.51e-77]",
+          "K3_krawczyk_passed": false,
+          "K3_krawczyk_present": true,
+          "K3_passed": false,
+          "K5_passed": false,
+          "summary": "FAILED"
+        },
+        "expected": "K3 FAILED with Krawczyk present; K5 FAILED",
+        "id": "M2",
+        "parameter": "T0 -> T0 + 1",
+        "passed": true
+      },
+      {
+        "actual": {
+          "K1_passed": true,
+          "summary": "FAILED"
+        },
+        "expected": "Gauge condition I_xy != 0, K1 should fail",
+        "id": "M3",
+        "parameter": "C = 1/3",
+        "passed": false
+      },
+      {
+        "actual": {
+          "K2_passed": false,
+          "K2_width_max": null,
+          "K2_widths_ok": false,
+          "summary": "FAILED"
+        },
+        "expected": "K2 FAILED with widths_ok=False",
+        "id": "M4",
+        "parameter": "TUBE_CAP=10^-50",
+        "passed": true
+      },
+      {
+        "actual": {
+          "K3_kappa_inf": "[0.0003376789173614763082806101085567345829527377267338976536845222223977244780842 +/- 7.76e-81]",
+          "K3_kappa_ok": false,
+          "K3_passed": false,
+          "summary": "FAILED"
+        },
+        "expected": "K3 FAILED with kappa_ok=False",
+        "id": "M5",
+        "parameter": "KAPPA_MAX=10^-20",
+        "passed": true
+      },
+      {
+        "actual": {
+          "K4_det": "[-7.62340755583888116663998805 +/- 4.29e-27]",
+          "K4_det_ok": false,
+          "K4_passed": false,
+          "summary": "INCONCLUSIVE"
+        },
+        "expected": "K4 FAILED with det_ok=False",
+        "id": "M6",
+        "parameter": "GAUSS_DET_MIN=10^6",
+        "passed": true
+      },
+      {
+        "actual": {
+          "K5_defect": "[1.212132602582212128642850918829943957140899920031779056126538927385849407e-14 +/- 3.13e-87]",
+          "K5_passed": false,
+          "summary": "INCONCLUSIVE"
+        },
+        "expected": "K5 FAILED (positive defect above cap)",
+        "id": "M7",
+        "parameter": "CHOREO_TOL=10^-50",
+        "passed": true
+      },
+      {
+        "actual": {
+          "K4_cond_inf": "[29649.63760391575706697521057457355981231035243000495552906011464528223181393 +/- 7.42e-72]",
+          "K4_cond_ok": true,
+          "K4_passed": true,
+          "summary": "ALL PASS"
+        },
+        "expected": "K4 FAILED with cond_ok=False",
+        "id": "M8",
+        "parameter": "GAUSS_COND_MAX=10^6",
+        "passed": false
+      },
+      {
+        "actual": {
+          "different": true,
+          "sha_after": "08cc9af88c1f3ac94e25b0bef359e86aac93de2d83cbbc068a2bea6f3659476c",
+          "sha_before": "93174381a15e8dc4f3be482ace729e4c17875f8ef4c997feca562fcf95d04338"
+        },
+        "expected": "SHA-256 before != after",
+        "id": "M9",
+        "parameter": "one byte of receipt-shaped payload flipped",
+        "passed": true
+      }
+    ]
+  },
+  "prereg_sha256lf": "6c845bbbdbc8724d9bb07b7798927bacee9bebab5714a69328ccc3d6bc1edd03",
+  "registry": null,
+  "schema": "msaf.figure_eight_r5.v1",
+  "summary": "FAILED"
+}

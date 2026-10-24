@@ -1518,7 +1518,7 @@ Final execution results:
 
 r5 was opened exactly as §8.5 item 1 prescribes: preregistration locked at commit `fad7dc7` (`reports/PREREG_FIGURE_EIGHT_R5_2026-10-23.md`, target registry `A-2026-0044`) **before code** (`bb3fe56`, `msaf/figure_eight_r5.py`), with the tighter box `R_B = 1e-30` and a new K6 matrix M1-M10.
 
-Interim status (base campaign verified; guard regeneration with an archived log under way; the sealing commit of the receipt + formal report follows):
+Status sealed (2026-10-24): the honest receipt `reports/figure_eight_r5_2026-10-23.json` (SHA-256LF `1932be97...`) and the formal report `reports/FIGURE_EIGHT_R5_2026-10-23.md` are committed (also see HANDOFF `reports/HANDOFF.md` §2.0bo; the guard pass-2 byte-check runs as a queued ledger event):
 
 - **Base K1-K5 (sealed r3 certificate, byte-reproduced): PASS** — K1, K2, K3, K4, K5 all true.
 - **K6 matrix M1-M10: FAILED** — two rows do not discriminate:
