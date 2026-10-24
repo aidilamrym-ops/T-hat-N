@@ -66,11 +66,12 @@ disclosed sebagai unpaired-adjacent, direkomputasi terpisah di atas).
 4. `t2n_repokeeper.receipt_verify` memverifikasi receipt
    (0 problems; 2 hash dicocokkan; korespondensi prereg OK).
 5. Receipt r5 TIDAK punya field waktu → dua pass kampanye penuh
-   (pytest double-call) harus byte-identik; saat laporan ini
-   disegel pass-2 masih berjalan — cek byte setelah-selesai
-   (`git hash-object` vs hash di tabel) sudah dijadwalkan sebagai
-   event ledger (bukan sesuatu yang dijanjikan dulu kala ini
-   diragukan).
+   (pytest double-call: `test_campaign` + `test_registry_entry`)
+   harus byte-identik. Pass-2 kini SELESAI (14425.95 dtk):
+   receipt kerja tetap byte-identik dengan yang di-commit
+   (`1932be97...`, `git diff` kosong) — reproduksi dipastikan;
+   semua angka terekam sebagai event `r5_pass2_bytecheck` pada
+   ledger `t2n_ledger_v1.jsonl`.
 
 ## 2. Tabel baris K6 (machine-extracted dari receipt)
 

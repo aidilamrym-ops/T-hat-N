@@ -2866,16 +2866,25 @@ falsifikasi 2026-10-24, dan suite T2N — SELESAI 2026-10-24
   cap) non-diskriminatif; M6/M7 INKONklusif menurut aturan modul.
   `all_pass=false`, `registry=null` → **`A-2026-0044` TIDAK
   dibuat**; r4 tidak disentuh. Laporan formal:
-  `reports/FIGURE_EIGHT_R5_2026-10-23.md` (6130 byte, SHA-256LF
-  `0528c3dd3d618ed3a39a3cee191e73dc5b49caa15466cf3a65310cd609470643`).
-- **Byte-check pass-2**: guard
+  `reports/FIGURE_EIGHT_R5_2026-10-23.md` (6208 byte, SHA-256LF
+  `1cba58636a5c8825dc242bf8177f07b53ffdc673d8d23635fb0d15e5a052aa13`).
+- **Byte-check pass-2: SELESAI — reproduksi byte-identik.** Guard
   `msaf/tests/test_figure_eight_r5.py` menjalankan kampanye penuh
-  dua kali; receipt r5 tidak memiliki field waktu (skema
-  `msaf.figure_eight_r5.v1`) → pass-2 harus menulis ulang
-  byte-identik; pasca-selesai rerun, `git hash-object`
-  dibandingkan dengan hash yang di-commit dan hasilnya direkam
-  sebagai event pada ledger `t2n_ledger_v1.jsonl` (zona tulis
-  `mcp/out/`).
+  dua kali (`test_campaign` + `test_registry_entry`); receipt r5
+  tidak memiliki field waktu (skema `msaf.figure_eight_r5.v1`).
+  Rerun selesai dalam 14425.95 dtk (≈ 4 jam 00 menit 25 detik,
+  PID 14292 sudah berakhir): semua tulisan ulang memberikan hasil
+  byte-identik — receipt kerja tetap SHA-256LF `1932be97...` ==
+  hash yang di-commit, `git diff` kosong. Pytest
+  `1 failed, 5 passed`; satu-satunya kegagalan adalah
+  `test_campaign` pada `assert row["passed"] is True` — baris
+  jujur M3/M8 bernilai `passed=false`, sehingga warna merah
+  adalah hasil yang benar, bukan cacat; sementara assert
+  hash-receipt dan panjang matriks pada tes yang sama LULUS,
+  membuktikan file == payload. Log rerun diarsipkan
+  (`r5_guard.out`, SHA-256LF `d1522eee...`); semua angka terekam
+  sebagai event `r5_pass2_bytecheck` pada ledger
+  `t2n_ledger_v1.jsonl` (zona tulis `mcp/out/`).
 - **Insiden falsifikasi 2026-10-24 (15:19)**: receipt palsu
   `ALL PASS` beregistry `A-2026-0044` + modul r5 yang di-tamper
   sempat muncul dari sesi paralel; terdeteksi, di-revert
