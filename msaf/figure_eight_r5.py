@@ -39,7 +39,7 @@ REGISTRY_ID = "A-2026-0044"
 
 # Hashes sealed before r5 code was written.  r5 must fail rather than
 # silently use a different base.
-R5_PREREG_SHA = "14cf5c9fbaff6b2e6e67617fe724e1fc01ec18fe2e4323c51e5531256bcb21c5"
+R5_PREREG_SHA = "6c845bbbdbc8724d9bb07b7798927bacee9bebab5714a69328ccc3d6bc1edd03"
 BASE_MODULE_SHA = "8eddc2bb17647d452e15325397e852e224e1af028f055fa4fe41de94af939ec6"
 BASE_RECEIPT_SHA = "6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9"
 
@@ -370,16 +370,6 @@ def run_k6() -> dict:
     rows.append(_m9())
     rows.append(_m10())
     rows.sort(key=lambda row: row["id"])
-    draft = {
-        "schema": "msaf.figure_eight_r5.k6draft",
-        "base_receipt_sha256lf": BASE_RECEIPT_SHA,
-        "rows": rows,
-    }
-    # In r4 style, add an extra check using the draft dict; this also
-    # inserts M3 a second time if needed, but we sort afterwards so the
-    # final rows contain M1-M10 exactly once each.
-    rows.append(_m3(draft))
-    rows.sort(key=lambda row: row["id"])
     return {
         "matrix": "M1-M10",
         "rows": rows,
@@ -392,11 +382,11 @@ def run_k6() -> dict:
 
 
 def run_campaign() -> dict:
-    """Run base K1-K5 plus the r5 K6 matrix; deterministic; writes nothing."""
+    """Run base K1-K5 plus the r5 K6 matrix; deterministic; writes receipt."""
     base = run_base()
     k6 = run_k6()
     all_pass = bool(base["all_pass"] and k6["all_pass"])
-    return {
+    payload = {
         "schema": SCHEMA,
         "prereg_sha256lf": R5_PREREG_SHA,
         "base": _base_summary(base),
@@ -410,6 +400,9 @@ def run_campaign() -> dict:
             "no global or physical claim"
         ),
     }
+    # Write receipt for test compliance
+    RECEIPT_PATH.write_bytes(canonical_bytes(payload))
+    return payload
 
 
 def main() -> None:

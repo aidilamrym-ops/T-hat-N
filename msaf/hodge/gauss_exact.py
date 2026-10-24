@@ -267,7 +267,9 @@ def fermat_quartic_projective_exact(n: int, p: int) -> dict:
     # have order 4 while over F_p only order 2 exists: the naive lift
     # is then the WRONG sum (caught: non-rational counts over F_3).
     # Refuse loudly instead of returning a plausible-looking number;
-    # the correct fix is a base field F_{p^2} (not implemented).
+    if p == 3 and n % 2 == 0:
+    raise NotImplementedError("Base‑field F_{p^2} extension not yet implemented for p=3, even n.")
+# TODO: implement base-field F_{p^2} extension for p=3, n even cases
     if gcd(4, q - 1) != e:
         raise RuntimeError(
             f"Davenport-Hasse lift does not cover p={p}, n={n}: "
