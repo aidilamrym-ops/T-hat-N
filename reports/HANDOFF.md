@@ -2898,8 +2898,10 @@ falsifikasi 2026-10-24, dan suite T2N — SELESAI 2026-10-24
   `prime_bridge`; README 8.6 — commit `4af845a`.
 - **Protokol fase** (keputusan owner 2026-10-24): setiap fase suite
   T2N = satu commit di `main` + push segera; roadmap fase untuk
-  pengguna lain ada di README `SECTION 9`. Urutan aktif: **F2**
-  (`scribe` + `watchtower`) → F3 `science` → F4 `illumina` → F5
+  pengguna lain ada di README `SECTION 9`. Kemajuan: F0 (inti),
+  F1 (`repokeeper`, `archivist`), dan F2 (`scribe`,
+  `watchtower`) hidup — terverifikasi `opencode mcp list` 8/8 ✓;
+  urutan aktif kini: **F3** `science` → F4 `illumina` → F5
   graf pengetahuan + hook data LearnHarness.
 - **Batas**: tidak ada klaim matematis baru di seksi ini; tidak ada
   penarikan; `A-2026-0044` tetap kosong sampai r6 (opsional, wajib

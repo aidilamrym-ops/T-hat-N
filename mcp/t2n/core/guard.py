@@ -221,3 +221,87 @@ def assert_allowed_run(cmd: Iterable[str],
         raise PermissionError(
             f"guarded_run refused (not on allowlist): {joined[:160]}")
     return argv
+
+
+# ------------------------------------------------------- locked json store ---
+class LockedJson:
+    """Read-modify-write JSON store with the Ledger's two-tier locking.
+
+    Same discipline as Ledger: same-process threads serialise on a per-path
+    threading.Lock, cross-process writers serialise on an OS byte-range
+    lock file (<path>.lock), and the write itself publishes via an atomic
+    os.replace so readers never observe a torn file.
+    """
+
+    def __init__(self, path: str | os.PathLike) -> None:
+        self.path = make_dirs_writable(path)
+        self.lock_path = Path(str(self.path) + ".lock")
+        self._tlock = _thread_lock(str(self.path))
+
+    @contextmanager
+    def _os_lock(self):
+        fh = open(self.lock_path, "a+b")
+        locked = False
+        try:
+            if msvcrt is not None:
+                msvcrt.locking(fh.fileno(), msvcrt.LK_LOCK, 1)
+                locked = True
+            elif fcntl is not None:
+                fcntl.flock(fh.fileno(), fcntl.LOCK_EX)
+                locked = True
+            yield
+        finally:
+            if locked and msvcrt is not None:
+                try:
+                    fh.seek(0)
+                    msvcrt.locking(fh.fileno(), msvcrt.LK_UNLCK, 1)
+                except OSError:
+                    pass  # released automatically on close anyway
+            fh.close()
+
+    def read(self, default: dict | None = None) -> dict:
+        """Read unlocked (callers read-only); corrupt store fails closed.
+
+        Windows tolerates a .$sharing window around the writer's
+        os.replace, so PermissionError/missing-file hiccups are retried
+        briefly instead of failing a legitimate concurrent reader.
+        """
+        fallback = {} if default is None else default
+        if not self.path.exists():
+            return fallback
+        last_exc: Exception | None = None
+        for _ in range(10):
+            try:
+                return json.loads(self.path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError as exc:
+                raise RuntimeError(
+                    f"locked json CORRUPT: {self.path}: {exc}") from exc
+            except FileNotFoundError:
+                last_exc = None
+                if not self.path.exists():
+                    return fallback      # replaced between exists() and open
+                time.sleep(0.03)         # one rename window, then re-read
+            except OSError as exc:
+                last_exc = exc
+                time.sleep(0.03)         # transient sharing violation
+        if not self.path.exists():
+            return fallback
+        raise RuntimeError(
+            f"locked json unreadable after retries: {self.path}: {last_exc}")
+
+    @contextmanager
+    def transaction(self, default: dict | None = None):
+        with self._tlock, self._os_lock():
+            data = self.read(default)          # inside both locks
+            yield data                         # caller mutates in place
+            tmp = Path(str(self.path) + ".tmp")
+            tmp.write_text(json.dumps(data, ensure_ascii=True, sort_keys=True,
+                                      indent=2) + "\n", encoding="utf-8")
+            for attempt in range(10):
+                try:
+                    os.replace(tmp, self.path)
+                    break
+                except OSError:
+                    if attempt == 9:
+                        raise
+                    time.sleep(0.03)           # reader still holding a handle
