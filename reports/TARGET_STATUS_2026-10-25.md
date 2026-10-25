@@ -22,7 +22,7 @@ PARTIAL dicatat apa adanya dan tidak "dinaikkan" menjadi CERTIFIED.
 | RH / Guinand–Weil (ladder, T=100..500) | Beberapa fragmen CERTIFIED (T-2026-0001/0002, F-2026-0001/0002, A-2026-0033/0034/0035); RH global TIDAK diklaim |
 | Hodge Picard bound | CERTIFIED terbatas (A-2026-0036/0037); hasil F_5/F_7 tidak informatif |
 | BSD Q1 | Audit integritas (A-2026-0028/0030); verifikasi identitas BSD BELUM terpenuhi; recon 2026-10-25 menemukan formula pra-registrasi salah dan 14a1/15a1 tidak cocok dengan LMFDB |
-| Twin prime Q2 | Sensus v2 N=10^7 **ALL PASS** dengan dua sieve independen (A-2026-0045); entri lama N=100.000 tetap INCONCLUSIVE (A-2026-0029); N=10^9 belum dikerjakan |
+| Twin prime Q2 | Sensus v3 N=10^9 **ALL PASS** dengan dua sieve independen (**A-2026-0046**); v2 N=10^7 tetap CERTIFIED (A-2026-0045); entri lama N=100.000 tetap INCONCLUSIVE (A-2026-0029) |
 | ABC Q3 | CERTIFIED sensus C=100.000 (A-2026-0032) — 6 triple q>1.4 |
 | RH scaffold Stage 1–4 | Scaffold Lean **kernel-checked PASS** (definisi + lemma trivial); **bukan bukti analitik penuh** |
 | Quantum audit | Statistik 16-bin + χ² + tail z≥3.5 direproduksi; verdict RESOLVED (layer statistik, bukan klaim fisika) |
@@ -46,7 +46,7 @@ PARTIAL dicatat apa adanya dan tidak "dinaikkan" menjadi CERTIFIED.
 | 9 | Konstanta kosmologis | TIDAK MASUK | Puzzle fisika; energi vakum tak terhitung rigorous |
 | 10 | Pengukuran kuantum | TIDAK MASUK | Interpretasional |
 | 11 | Gravitasi kuantum | TIDAK MASUK | Tak ada teori untuk dihitung |
-| 12 | Twin prime | Q2 — fragmen finit CERTIFIED | A-2026-0045: N=10^7, dua sieve independen sepakat (count=58.980, max_gap=1.722); A-2026-0029 (N=100.000) tetap INCONCLUSIVE; N=10^9 belum dikerjakan |
+| 12 | Twin prime | Q2 - fragmen finit CERTIFIED | A-2026-0046: N=10^9, dua sieve independen sepakat (count=3.424.506, max_gap=4.770, digest 427f9211…); A-2026-0045: N=10^7 (count=58.980); A-2026-0029 (N=100.000) tetap INCONCLUSIVE |
 | 13 | abc | Q3 — CERTIFIED sensus | A-2026-0032: C=100.000, 6 triple q>1.4 |
 | 14 | Asimetri materi | TIDAK MASUK | Model-dependent, kosmologi |
 | 15 | Superkonduktivitas Tc-tinggi | TIDAK MASUK | Numerik Hubbard bukan rigorous-verifiable |
