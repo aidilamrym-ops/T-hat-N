@@ -99,13 +99,16 @@ analytic tail bound". Ini hanya kerangka kerja yang bisa diperluas.
 - **Batas:** belum ada analisis statistik, belum ada perbandingan S1/S2,
   belum ada klaim fisika. Status: PARTIAL (hash + inventaris).
 
-### 4.3 Learnharness (`msaf/learnharness/`)
+### 4.3 Learnharness (`msaf/learnharness_prototype.py`)
 
-- `src/engine.py`: kelas `LearnEngine` stub (`train` menyimpan panjang data,
-  `predict` mengembalikan matriks identitas 8×8).
-- `tests/test_engine.py`: tes dasar.
+- `msaf/learnharness_prototype.py`: kelas `LearnEngine` stub (`train` menyimpan
+  panjang data, `predict` mengembalikan matriks identitas 8×8).
+- `msaf/tests/test_learnharness_prototype.py`: tes dasar.
 - **Batas:** bukan model ML nyata, tidak dilatih pada data kampanye, tidak
   terintegrasi ke pipeline figure-eight. Status: PROTOTIPE.
+- Catatan: `msaf/learnharness/` adalah repo pihak ketiga terpisah (nested git,
+  di-ignore oleh repo utama). Prototipe MSAF sengaja diletakkan di
+  `msaf/learnharness_prototype.py` agar dapat dilacak oleh repo utama.
 
 ---
 
@@ -140,6 +143,10 @@ analytic tail bound". Ini hanya kerangka kerja yang bisa diperluas.
 7. **MCP T2N**: modul asli sudah dipulihkan; `opencode.jsonc` masih menunjuk
    enam server. Perubahan MCP belum dilakukan dan tidak boleh dicampur dengan
    kampanye matematika.
+
+8. **Arsip**: artefak yang dirujuk `FENCE_REGISTRY.md` tetap di `reports/`;
+   `archive/README.md` mencatat kebijakan ini. Jangan memindahkan sertifikat
+   sealed ke `archive/` karena akan memutus baris `sha256LF <hash> <path>`.
 
 ---
 
