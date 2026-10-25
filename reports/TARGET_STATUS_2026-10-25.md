@@ -21,7 +21,7 @@ PARTIAL dicatat apa adanya dan tidak "dinaikkan" menjadi CERTIFIED.
 | Navier–Stokes diskrit | CERTIFIED terbatas (A-2026-0038/0039); regularitas global TIDAK diklaim |
 | RH / Guinand–Weil (ladder, T=100..500) | Beberapa fragmen CERTIFIED (T-2026-0001/0002, F-2026-0001/0002, A-2026-0033/0034/0035); RH global TIDAK diklaim |
 | Hodge Picard bound | CERTIFIED terbatas (A-2026-0036/0037); hasil F_5/F_7 tidak informatif |
-| BSD Q1 | Audit integritas (A-2026-0028/0030); verifikasi identitas BSD BELUM terpenuhi |
+| BSD Q1 | Audit integritas (A-2026-0028/0030); verifikasi identitas BSD BELUM terpenuhi; recon 2026-10-25 menemukan formula pra-registrasi salah dan 14a1/15a1 tidak cocok dengan LMFDB |
 | Twin prime Q2 | Sensus v2 N=10^7 **ALL PASS** dengan dua sieve independen (A-2026-0045); entri lama N=100.000 tetap INCONCLUSIVE (A-2026-0029); N=10^9 belum dikerjakan |
 | ABC Q3 | CERTIFIED sensus C=100.000 (A-2026-0032) — 6 triple q>1.4 |
 | RH scaffold Stage 1–4 | Scaffold Lean **kernel-checked PASS** (definisi + lemma trivial); **bukan bukti analitik penuh** |
@@ -40,7 +40,7 @@ PARTIAL dicatat apa adanya dan tidak "dinaikkan" menjadi CERTIFIED.
 | 3 | Hodge | TREK AKTIF — fragmen finit | Picard bound CH a_11 F_3 (A-2026-0036); F_5/F_7 non-informatif (A-2026-0037) |
 | 4 | Yang–Mills mass gap | TIDAK MASUK | Butuh konstruksi QFT; di luar alat |
 | 5 | Navier–Stokes | TREK AKTIF — diskrit | Kernel diskrit Lean (A-2026-0038), regularitas diskrit (A-2026-0039); global TIDAK diklaim |
-| 6 | BSD | Q1 — audit integritas | A-2026-0028 (pilot 5 kurva), A-2026-0030 (full 21 kurva); identitas BSD BELUM terverifikasi |
+| 6 | BSD | Q1 — INCONCLUSIVE/BLOCKED | A-2026-0028 (pilot 5 kurva), A-2026-0030 (full 21 kurva); recon 2026-10-25 menemukan hardcode, formula `2^{ω(N)-1}` tidak standar, dan 14a1/15a1 tidak cocok dengan LMFDB; tidak ada entri baru |
 | 7 | Renormalisasi QFT | TIDAK MASUK | Fondasi, bukan klaim komputasional |
 | 8 | Informasi black hole | TIDAK MASUK | Interpretasional |
 | 9 | Konstanta kosmologis | TIDAK MASUK | Puzzle fisika; energi vakum tak terhitung rigorous |
@@ -137,6 +137,24 @@ kernel, SHA-256LF, axiom footprint, dan anti-circularity gate PASS).
 - **Batas:** bukan bukti konjektur twin prime, bukan klaim asimtotik, dan
   tidak mencakup `N = 10^9`.
 
+### 4.5 BSD Q1 recon (`reports/BSD_Q1_RECON_2026-10-25.md`)
+
+- Audit lama `A-2026-0028` hanya menunjukkan hardcode/tautologi; recon
+  baru memeriksa nilai tabel terhadap LMFDB.
+- Kode `msaf/bsd_descent.py` tetap hardcode: `two_descent()` tabel lookup,
+  `modular_symbol_ec()` tabel, `real_period()` = 1,
+  `verify_bsd()` membandingkan `invariants` dengan `rhs_map`, dan
+  `conductor` mengembalikan `|Δ|`.
+- Formula pra-registrasi `2^(ω(N)-1)` bukan formula BSD standar. Untuk
+  `14a1` faktor itu menghasilkan `1/3`, sedangkan LMFDB memberi `1/6`.
+  Untuk `15a1` pra-registrasi menulis torsion `4`/Tamagawa `4`/`1/4`,
+  sedangkan LMFDB memberi torsion `8`/Tamagawa `8`/`1/8`.
+- `11a1`, `17a1`, dan `19a1` cocok dengan LMFDB; ketiganya berkonduktor
+  prima sehingga faktor tambahan bernilai 1 dan kesalahan formula tidak
+  terlihat.
+- Verdict: **INCONCLUSIVE/BLOCKED**; C1/C2/C3 tidak terpenuhi. Tidak ada
+  entri registry baru; `A-2026-0028` dan `A-2026-0030` tetap `INCONCLUSIVE`.
+
 ---
 
 ## 5. Registry (ringkas)
@@ -168,8 +186,11 @@ kernel, SHA-256LF, axiom footprint, dan anti-circularity gate PASS).
 4. **Figure-eight r6** (opsional): PRREG baru sebelum kode, perbaiki M3
    (mutasi gauge yang benar-benar memindahkan `I_xy`) dan M8 (cap di bawah
    nilai terukur ≈2.96e4), lalu jalankan K6 M1–M10.
-5. **BSD Q1**: selesaikan verifikasi identitas BSD per kurva; audit
-   integritas saja belum cukup.
+5. **BSD Q1**: recon 2026-10-25
+   (`reports/BSD_Q1_RECON_2026-10-25.md`) menunjukkan paket lama
+   hardcode/tautologis dan nilai pra-registrasi `14a1`/`15a1` salah.
+   Verifikasi identitas BSD belum dimulai; perlu pra-registrasi baru
+   sebelum kode baru. `A-2026-0028`/`A-2026-0030` tetap `INCONCLUSIVE`.
 6. **Twin prime Q2 lanjutan**: v2 sudah ALL PASS pada N=10^7 (A-2026-0045).
    Target asli N=10^9 belum dikerjakan; jika dilanjutkan, butuh pra-registrasi
    baru dan mesin/memori yang memadai. Jangan memperluas klaim tanpa sensus
