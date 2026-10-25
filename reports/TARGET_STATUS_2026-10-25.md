@@ -22,7 +22,7 @@ PARTIAL dicatat apa adanya dan tidak "dinaikkan" menjadi CERTIFIED.
 | RH / Guinand–Weil (ladder, T=100..500) | Beberapa fragmen CERTIFIED (T-2026-0001/0002, F-2026-0001/0002, A-2026-0033/0034/0035); RH global TIDAK diklaim |
 | Hodge Picard bound | CERTIFIED terbatas (A-2026-0036/0037); hasil F_5/F_7 tidak informatif |
 | BSD Q1 | Audit integritas (A-2026-0028/0030); verifikasi identitas BSD BELUM terpenuhi |
-| Twin prime Q2 | Sensus N=100.000 benar, tetapi kriteria pra-registrasi TIDAK terpenuhi (A-2026-0029) |
+| Twin prime Q2 | Sensus v2 N=10^7 **ALL PASS** dengan dua sieve independen (A-2026-0045); entri lama N=100.000 tetap INCONCLUSIVE (A-2026-0029); N=10^9 belum dikerjakan |
 | ABC Q3 | CERTIFIED sensus C=100.000 (A-2026-0032) — 6 triple q>1.4 |
 | RH scaffold Stage 1–4 | Scaffold Lean + receipt dibuat; **bukan bukti analitik penuh** |
 | Quantum audit | Statistik 16-bin + χ² + tail z≥3.5 direproduksi; verdict RESOLVED (layer statistik, bukan klaim fisika) |
@@ -46,7 +46,7 @@ PARTIAL dicatat apa adanya dan tidak "dinaikkan" menjadi CERTIFIED.
 | 9 | Konstanta kosmologis | TIDAK MASUK | Puzzle fisika; energi vakum tak terhitung rigorous |
 | 10 | Pengukuran kuantum | TIDAK MASUK | Interpretasional |
 | 11 | Gravitasi kuantum | TIDAK MASUK | Tak ada teori untuk dihitung |
-| 12 | Twin prime | Q2 — census, kriteria gagal | `twin_prime_census.json`; A-2026-0029: angka benar, kriteria pra-registrasi tidak terpenuhi |
+| 12 | Twin prime | Q2 — fragmen finit CERTIFIED | A-2026-0045: N=10^7, dua sieve independen sepakat (count=58.980, max_gap=1.722); A-2026-0029 (N=100.000) tetap INCONCLUSIVE; N=10^9 belum dikerjakan |
 | 13 | abc | Q3 — CERTIFIED sensus | A-2026-0032: C=100.000, 6 triple q>1.4 |
 | 14 | Asimetri materi | TIDAK MASUK | Model-dependent, kosmologi |
 | 15 | Superkonduktivitas Tc-tinggi | TIDAK MASUK | Numerik Hubbard bukan rigorous-verifiable |
@@ -119,16 +119,32 @@ kerangka kerja yang bisa diperluas.
   di-ignore oleh repo utama). Prototipe MSAF sengaja diletakkan di
   `msaf/learnharness_prototype.py` agar dapat dilacak oleh repo utama.
 
+### 4.4 Twin prime Q2 v2 (`msaf/twin_prime_v2.py`)
+
+- Dua sieve independen: A = Eratosthenes bytearray penuh; B = segmented
+  sieve, base prime sampai `isqrt(N+2)`, blok `2^20`.
+- Konfigurasi terkunci: `N = 10_000_000`; integer Python eksak; receipt tanpa
+  runtime/timestamp.
+- Hasil: `count = 58.980`, `max_gap = 1.722`, pasangan pertama `(3,5)`,
+  pasangan terakhir `(9.999.971, 9.999.973)`; `pairs_A == pairs_B`;
+  `pairs_sha256 = 64ecf493…d380`.
+- Determinisme: dua run menghasilkan receipt SHA-256
+  `6c613dd573867e2d54cf7ed162413cb7f1b5e40b8be2724797681dddb72094d4`.
+- Registry: `A-2026-0045` (CERTIFIED untuk fragmen finit ini).
+- **Batas:** bukan bukti konjektur twin prime, bukan klaim asimtotik, dan
+  tidak mencakup `N = 10^9`.
+
 ---
 
 ## 5. Registry (ringkas)
 
 - Entri **T** (teorema finit): `T-2026-0001`, `T-2026-0002`, `T-2026-0043`.
 - Entri **F** (pagar): `F-2026-0001`, `F-2026-0002`.
-- Entri **A** (audit/verdict): `A-2026-0001` … `A-2026-0040` (dengan `A-2026-0031` tidak ada), dan `A-2026-0043`.
+- Entri **A** (audit/verdict): `A-2026-0001` … `A-2026-0040` (dengan `A-2026-0031` tidak ada), `A-2026-0043`, dan `A-2026-0045`.
 - `A-2026-0041` dan `A-2026-0042` **tidak ada** (r2/r3 gagal/inconclusive).
 - `A-2026-0044` **tidak ada** (r5 FAILED).
 - Entri terbaru figure-eight: `T-2026-0043` (r4) dan `A-2026-0043` (audit K6 r4).
+- Entri terbaru twin prime: `A-2026-0045` (Q2 v2, N=10^7).
 
 ---
 
@@ -149,8 +165,10 @@ kerangka kerja yang bisa diperluas.
    nilai terukur ≈2.96e4), lalu jalankan K6 M1–M10.
 5. **BSD Q1**: selesaikan verifikasi identitas BSD per kurva; audit
    integritas saja belum cukup.
-6. **Twin prime Q2**: penuhi kriteria pra-registrasi (dua sieve independen
-   sepakat integer-per-integer) atau nyatakan ulang kriteria secara jujur.
+6. **Twin prime Q2 lanjutan**: v2 sudah ALL PASS pada N=10^7 (A-2026-0045).
+   Target asli N=10^9 belum dikerjakan; jika dilanjutkan, butuh pra-registrasi
+   baru dan mesin/memori yang memadai. Jangan memperluas klaim tanpa sensus
+   eksak baru.
 7. **MCP T2N**: modul asli sudah dipulihkan; `opencode.jsonc` masih menunjuk
    enam server. Perubahan MCP belum dilakukan dan tidak boleh dicampur dengan
    kampanye matematika.

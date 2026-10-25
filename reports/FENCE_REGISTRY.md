@@ -2051,3 +2051,40 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   sha256LF 8b6088c27f79129f8d28109a75efe2f888406b9d7e6d884c9cf7ab95cf611086 reports/figure_eight_r4_2026-10-23.json
   sha256LF 1ff4c78c8c878346ad42294a15db094301c69b0352464edfeabde680fa2b783c reports/FIGURE_EIGHT_R4_2026-10-23.md
   \
+
+### A-2026-0045 - Sensus twin prime Q2 v2: dua sieve independen sepakat hingga N=10^7
+
+- **Jenis:** T
+- **Pernyataan:** Sensus lengkap pasangan twin prime (p, p+2) dengan p <= 10^7
+  memakai dua implementasi sieve independen (A: Eratosthenes bytearray penuh;
+  B: segmented sieve dengan base prime sampai isqrt(N+2), blok 2^20) menghasilkan
+  hasil yang sepakat integer-per-integer: count = 58.980 pada kedua sieve,
+  max_gap = 1.722 pada kedua sieve, pairs_A == pairs_B element-wise, pasangan
+  pertama (3, 5), pasangan terakhir (9.999.971, 9.999.973), dan pairs_sha256 =
+  64ecf4931529e89ea888b511009ddcc545be95f551424540fd322694afe5d380. Dua run
+  berturut-turut menghasilkan receipt kanonik byte-identik dengan SHA-256
+  6c613dd573867e2d54cf7ed162413cb7f1b5e40b8be2724797681dddb72094d4. Nilai
+  count = 58.980 konsisten dengan hitungan referensi pi_2(10^7) = 58.980.
+  Kriteria pra-registrasi C1-C4 lulus penuh; verdict ALL PASS.
+- **Batas:** hanya sensus finit hingga N = 10^7; bukan bukti konjektur twin
+  prime; tidak ada klaim asimtotik, distribusi, N > 10^7, RH/GRH, faktorisasi,
+  RSA/ECC, Anderson, atau fisika. Entri lama A-2026-0029 (N = 100.000) tetap
+  INCONCLUSIVE dan tidak diubah.
+- **Status:** CERTIFIED
+- **Domino:** teori bilangan komputasional (sensus twin prime finit)
+- **Relasi:** Q2 dari reports/DAFTAR_MASALAH_KERJA.md; melanjutkan A-2026-0029
+  (N = 100.000, INCONCLUSIVE) sebagai fragmen finit baru; pra-registrasi
+  reports/PREREG_Q2_TWIN_PRIME_V2_2026-10-25.md; laporan
+  reports/TWIN_PRIME_V2_2026-10-25.md.
+- **Perintah verifikasi:** python msaf/twin_prime_v2.py; python -m pytest
+  msaf/tests/test_twin_prime_v2.py -q; python -m pytest
+  msaf/tests/test_fence_registry.py -q; python audit_quantum/freeze.py --verify.
+- **Sertifikat:**
+
+  ```text
+  sha256LF 24c24a0b88f113ebc5ec2e9d356a82a96cc207200838e7979842ac9afa87017d msaf/twin_prime_v2.py
+  sha256LF da31890563a24f61b4ddd3b5b4da3ceffb08ce1d485bc6b94012c24d00ff247c msaf/tests/test_twin_prime_v2.py
+  sha256LF 45ad2266516c4b6429ead77151ac160f043a1fb255a576f1e0c4c94f60201645 reports/PREREG_Q2_TWIN_PRIME_V2_2026-10-25.md
+  sha256LF 6c613dd573867e2d54cf7ed162413cb7f1b5e40b8be2724797681dddb72094d4 reports/twin_prime_v2_2026-10-25.json
+  sha256LF 491cbef301689d14d0d8cc13118bade437b879c6e1fd7482fa7f427b3ea24ee5 reports/TWIN_PRIME_V2_2026-10-25.md
+  ```
