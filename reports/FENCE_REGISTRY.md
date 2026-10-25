@@ -986,7 +986,7 @@ mengikuti laporan L4).
 - **Sertifikat:**
 
   ```text
-  sha256LF e298ad996916074e2fdb900bee9c7a7f86a41bf9fa39ce3bdb7803bed47d293f formal_bridge/IntegralComparisonLimit.v
+  sha256LF 8cd4d8aaf3d1ff69703627e4a3cef5505c845c1366eea25066582dfc639671c4 reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean
   sha256LF 3a8bf37a009960fb6df7c02e51699e385e27b77cabf117a05acd691012f830bd formal_bridge/check_integral_limit.sh
   sha256LF af90fb87a9f4344e9f3d03741d8de8e0993363f59eeea14b6cff21b632a3faf4 formal_bridge/IntegralComparisonLimit.receipt.txt
   sha256LF a8e305f20624fd24048693bcd54b41fba868c46e69a14db4dc0359b2402e8a6f msaf/tests/test_coq_bridge_integral_limit.py
