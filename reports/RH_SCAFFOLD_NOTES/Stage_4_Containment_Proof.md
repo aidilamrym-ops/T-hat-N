@@ -31,8 +31,10 @@ Execute the #print axioms audit command immediately after compilation. The outpu
 
 ## STATUS
 
-- **Stage 4** scaffold added (not kernel-checked).
+- **Stage 4** scaffold added and **kernel-checked PASS** with Lean 4.33.1 / Mathlib `0df444a360`.
 - Lean file: `Stage_4_Containment_Proof.lean`
-- SHA-256: `f70159479b7ee9d375fdd097d4ab10d3e42c44709c9676dbe3f721af0a6e6071`
+- SHA-256LF: `622caed5f30e3fa5b20fe009d68fdfbcef66c71ebf35d2d932498d09e289c1b4`
+- Scope: only the placeholder predicate `TestFunctionInL2 := True` and its trivial proof are checked. This is **not** an L² containment proof and not an RH result.
+- Import migration: `Topology.Algebra.Module` → `Topology.Algebra.Module.Basic`; `MeasureTheory.Measure.Lebesgue` → `MeasureTheory.Measure.Lebesgue.Basic`.
 
 ---

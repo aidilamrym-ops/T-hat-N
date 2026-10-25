@@ -1,11 +1,11 @@
 import Mathlib.Analysis.SpecialFunctions.Exp
-import Mathlib.MeasureTheory.Measure.Lebesgue
+import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
 open MeasureTheory Real
 
 -- Analytic tail bound placeholder: define a non‑negative constant bound B
 
-def AnalyticTailBound (B : ℝ) (x : ℝ) : ℝ :=
+noncomputable def AnalyticTailBound (B : ℝ) (x : ℝ) : ℝ :=
   if 0 ≤ x then B else 0
 
 -- Trivial theorem: bound is non‑negative when B is non‑negative

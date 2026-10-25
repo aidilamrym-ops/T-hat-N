@@ -35,8 +35,10 @@ This step must strictly honor the zero-fudging prohibition. If any pivot ball or
 
 ## STATUS
 
-- **Stage 3** scaffold added (not kernel-checked).
+- **Stage 3** scaffold added and **kernel-checked PASS** with Lean 4.33.1 / Mathlib `0df444a360`.
 - Lean file: `Stage_3_Eigenvalue_Locking_Dimension_Induction.lean`
-- SHA-256: `aeb166a0316fd5941fe59e3e3a06f0530c11da9d4c8349225d92caca504dcd38`
+- SHA-256LF: `81583b203b55d207ed2f1abec248fa8735c904046fb2711421243b9c73ef159a`
+- Scope: only the placeholder predicate `EigenvalueLocking` and the trivial lemma are checked. This is **not** a dimension induction and not an RH result.
+- Import migration: `Analysis.InnerProductSpace.QuadraticForm` → `LinearAlgebra.QuadraticForm.Basic`; the identifier `λ` was renamed to `lam` because `λ` is reserved for lambda syntax in Lean 4.
 
 ---

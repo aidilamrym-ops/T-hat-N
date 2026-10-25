@@ -24,7 +24,7 @@ PARTIAL dicatat apa adanya dan tidak "dinaikkan" menjadi CERTIFIED.
 | BSD Q1 | Audit integritas (A-2026-0028/0030); verifikasi identitas BSD BELUM terpenuhi |
 | Twin prime Q2 | Sensus v2 N=10^7 **ALL PASS** dengan dua sieve independen (A-2026-0045); entri lama N=100.000 tetap INCONCLUSIVE (A-2026-0029); N=10^9 belum dikerjakan |
 | ABC Q3 | CERTIFIED sensus C=100.000 (A-2026-0032) — 6 triple q>1.4 |
-| RH scaffold Stage 1–4 | Scaffold Lean + receipt dibuat; **bukan bukti analitik penuh** |
+| RH scaffold Stage 1–4 | Scaffold Lean **kernel-checked PASS** (definisi + lemma trivial); **bukan bukti analitik penuh** |
 | Quantum audit | Statistik 16-bin + χ² + tail z≥3.5 direproduksi; verdict RESOLVED (layer statistik, bukan klaim fisika) |
 | Learnharness | Prototipe stub (engine + test); model nyata belum ada |
 | MCP T2N | Modul asli dipulihkan; `opencode.jsonc` tetap menunjuk enam server |
@@ -81,18 +81,21 @@ prioritas.
 
 | Stage | Berkas Lean | Receipt | Status jujur |
 |---|---|---|---|
-| 1 | `Stage_1_Formalization_Test_Function_Space.lean` | `stage1_receipt.json` | Scaffold definisi `MSAFTestFunctionSpace` dan `continuous_quadratic_form`; belum ada bukti analitik penuh |
-| 2 | `Stage_2_Derivation_Analytic_Tail_Bound.lean` | `Stage_2_..._receipt.json` | Scaffold bound non-negatif; **bukan** derivasi tail Archimedean penuh |
-| 3 | `Stage_3_Eigenvalue_Locking_Dimension_Induction.lean` | `Stage_3_..._receipt.json` | Scaffold predikat locking; **bukan** induksi dimensi penuh |
-| 4 | `Stage_4_Containment_Proof.lean` | `Stage_4_..._receipt.json` | Scaffold predikat containment; **bukan** bukti L² penuh |
+| 1 | `Stage_1_Formalization_Test_Function_Space.lean` | `Stage_1_..._receipt.json` | Scaffold definisi `MSAFTestFunctionSpace` dan `continuous_quadratic_form`; **kernel-checked PASS**, belum ada bukti analitik penuh |
+| 2 | `Stage_2_Derivation_Analytic_Tail_Bound.lean` | `Stage_2_..._receipt.json` | Scaffold bound non-negatif; **kernel-checked PASS**, **bukan** derivasi tail Archimedean penuh |
+| 3 | `Stage_3_Eigenvalue_Locking_Dimension_Induction.lean` | `Stage_3_..._receipt.json` | Scaffold predikat locking; **kernel-checked PASS**, **bukan** induksi dimensi penuh |
+| 4 | `Stage_4_Containment_Proof.lean` | `Stage_4_..._receipt.json` | Scaffold predikat containment; **kernel-checked PASS**, **bukan** bukti L² penuh |
 
-Semua berkas Lean bebas `sorry`/`admit`/`unsafe`/`axiom`, tetapi isinya masih
-definisi dan lemma trivial. Berkas-berkas ini **belum di-kernel-check** di
-mesin ini karena sebagian olean Mathlib tidak tersedia (import
-`Mathlib.Topology.ContinuousFunction.Bounded` gagal, dan `import Mathlib`
-melebihi batas waktu); statusnya scaffold sumber, bukan verified Lean.
-Jangan menyebutnya "bukti RH" atau "bukti analytic tail bound". Ini hanya
-kerangka kerja yang bisa diperluas.
+Semua berkas Lean bebas `sorry`/`admit`/`unsafe`/`axiom`, dan keempatnya
+sekarang **lulus kernel check** dengan Lean 4.33.1 / Mathlib `0df444a360`
+(perintah `lake env lean`, receipt mencatat hasil PASS). Namun isinya masih
+definisi dan lemma trivial: Stage 2 bukan derivasi tail Archimedean, Stage 3
+bukan induksi dimensi, Stage 4 memakai predikat placeholder `True`. Jangan
+menyebutnya "bukti RH" atau "bukti analytic tail bound". Ini hanya kerangka
+kerja yang sudah dikompilasi, bukan bukti analitik.
+
+Log lengkap: `reports/RH_SCAFFOLD_NOTES/KERNEL_CHECK_2026-10-25.md` (perintah
+kernel, SHA-256LF, axiom footprint, dan anti-circularity gate PASS).
 
 ### 4.2 Quantum audit (`audit_quantum/`)
 
@@ -150,9 +153,11 @@ kerangka kerja yang bisa diperluas.
 
 ## 6. Sisa pekerjaan yang jujur
 
-1. **RH scaffold Stage 2–4**: ganti scaffold trivial dengan pembuktian
-   Archimedean tail, eigenvalue locking, dan containment L² yang sebenarnya.
-   Jangan menaikkan status sebelum ada Lean kernel check + receipt baru.
+1. **RH scaffold Stage 1–4**: scaffold sudah kernel-checked (PASS), tetapi
+   isinya masih definisi dan lemma trivial. Pekerjaan sebenarnya adalah
+   mengganti placeholder dengan derivasi tail Archimedean, induksi eigenvalue
+   locking, dan bukti containment L². Jangan menaikkan status sebelum ada
+   pembuktian baru + kernel check + receipt baru.
 2. **Quantum audit lanjutan**: layer statistik 16-bin sudah selesai
    (χ² 7.5088/10.3984/11.592; tail 2/4/3; RESOLVED). Jika ingin klaim
    fisik, perlu studi baru dengan null ensemble eksplisit dan prereg

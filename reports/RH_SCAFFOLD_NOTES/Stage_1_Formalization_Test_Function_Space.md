@@ -39,18 +39,25 @@ Output only the mathematical definitions, verification steps, and compiled Lean 
 ```json
 {
   "name": "Stage 1 Formalization Test Function Space",
-  "sha256": "8fa2df16fcd8e7f699809ed52da12e34ba1c574983760332450673d715c39db8",
-  "path": "reports\\RH_SCAFFOLD_NOTES\\Stage_1_Formalization_Test_Function_Space.lean"
+  "sha256_raw": "f03396816e38cf1090aa504d2811146613d53478e589949319aa7c572683043b",
+  "sha256lf": "f03396816e38cf1090aa504d2811146613d53478e589949319aa7c572683043b",
+  "path": "reports/RH_SCAFFOLD_NOTES/Stage_1_Formalization_Test_Function_Space.lean",
+  "kernel_checked": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.1",
+  "mathlib_rev": "0df444a360",
+  "command": "lake env lean reports/RH_SCAFFOLD_NOTES/Stage_1_Formalization_Test_Function_Space.lean",
+  "result": "PASS"
 }
 ```
 
 ## STATUS
 
-- **Stage 1** Formalization scaffold added (Lean 4 definitions + receipt generated; not kernel-checked).
-- **Stage 2** Analytic tail bound completed, Lean file `Stage_2_Derivation_Analytic_Tail_Bound.lean` + receipt.
-- **Stage 3** Eigenvalue locking completed, Lean file `Stage_3_Eigenvalue_Locking_Dimension_Induction.lean` + receipt.
-- **Stage 4** Containment proof completed, Lean file `Stage_4_Containment_Proof.lean` + receipt.
-- **Quantum audit** completed – binary stats markdown generated, receipt stored.
-- **Learnharness** prototype completed – engine and test added.
+- **Stage 1** scaffold `MSAFTestFunctionSpace` + `continuous_quadratic_form`; **kernel-checked PASS** with Lean 4.33.1 / Mathlib `0df444a360`. This checks only the definitions, not an analytic RH result.
+- **Stage 2** analytic tail bound scaffold; kernel-checked PASS (trivial non-negativity lemma only, not the Archimedean tail derivation).
+- **Stage 3** eigenvalue locking scaffold; kernel-checked PASS (trivial lemma only, not a dimension induction).
+- **Stage 4** containment scaffold; kernel-checked PASS (placeholder predicate `True`, not an L² containment proof).
+- **Import migration:** Mathlib 4.33.1 renamed several modules; imports now use `Topology.ContinuousMap.Bounded.Basic`, `MeasureTheory.Integral.Lebesgue.Basic`, `MeasureTheory.Integral.Bochner.Basic`, and `MeasureTheory.Measure.Lebesgue.Basic`.
+- **Quantum audit** statistical layer completed; see `reports/TARGET_STATUS_2026-10-25.md`.
+- **Learnharness** prototype only.
 
 ---

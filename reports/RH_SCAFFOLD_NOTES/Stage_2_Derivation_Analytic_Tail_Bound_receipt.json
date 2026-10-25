@@ -1,5 +1,11 @@
 {
   "name": "Stage 2 Analytic Tail Bound",
-  "sha256": "bb974ac962140e341272ef586ebb9b0af3badb3bf53e9d0bd97aa1a02d97e60d",
-  "path": "reports\\RH_SCAFFOLD_NOTES\\Stage_2_Derivation_Analytic_Tail_Bound.lean"
+  "sha256_raw": "773d24c61809a46a17de760955224b7e13fe1678ad6dc1b751a4c20d6889f498",
+  "sha256lf": "773d24c61809a46a17de760955224b7e13fe1678ad6dc1b751a4c20d6889f498",
+  "path": "reports/RH_SCAFFOLD_NOTES/Stage_2_Derivation_Analytic_Tail_Bound.lean",
+  "kernel_checked": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.1",
+  "mathlib_rev": "0df444a360",
+  "command": "lake env lean reports/RH_SCAFFOLD_NOTES/Stage_2_Derivation_Analytic_Tail_Bound.lean",
+  "result": "PASS"
 }

@@ -1,0 +1,11 @@
+{
+  "name": "Stage 1 Formalization Test Function Space",
+  "sha256_raw": "f03396816e38cf1090aa504d2811146613d53478e589949319aa7c572683043b",
+  "sha256lf": "f03396816e38cf1090aa504d2811146613d53478e589949319aa7c572683043b",
+  "path": "reports/RH_SCAFFOLD_NOTES/Stage_1_Formalization_Test_Function_Space.lean",
+  "kernel_checked": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.1",
+  "mathlib_rev": "0df444a360",
+  "command": "lake env lean reports/RH_SCAFFOLD_NOTES/Stage_1_Formalization_Test_Function_Space.lean",
+  "result": "PASS"
+}

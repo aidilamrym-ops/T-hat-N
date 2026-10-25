@@ -1,8 +1,11 @@
 import Mathlib.Analysis.Calculus.Deriv.Basic
-import Mathlib.Topology.ContinuousFunction.Bounded
-import Mathlib.MeasureTheory.Integral.Lebesgue
+import Mathlib.Topology.ContinuousMap.Bounded.Basic
+import Mathlib.MeasureTheory.Integral.Lebesgue.Basic
+import Mathlib.MeasureTheory.Integral.Bochner.Basic
+import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+import Mathlib.Order.Interval.Set.Defs
 
-open MeasureTheory Real Filter
+open MeasureTheory Real Filter Set
 
 -- Define the rigid Hilbert subtype for the Guinand-Weil continuous domain
 

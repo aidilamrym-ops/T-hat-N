@@ -1,5 +1,11 @@
 {
   "name": "Stage 3 Eigenvalue Locking",
-  "sha256": "aeb166a0316fd5941fe59e3e3a06f0530c11da9d4c8349225d92caca504dcd38",
-  "path": "reports\\RH_SCAFFOLD_NOTES\\Stage_3_Eigenvalue_Locking_Dimension_Induction.lean"
+  "sha256_raw": "81583b203b55d207ed2f1abec248fa8735c904046fb2711421243b9c73ef159a",
+  "sha256lf": "81583b203b55d207ed2f1abec248fa8735c904046fb2711421243b9c73ef159a",
+  "path": "reports/RH_SCAFFOLD_NOTES/Stage_3_Eigenvalue_Locking_Dimension_Induction.lean",
+  "kernel_checked": true,
+  "lean_toolchain": "leanprover/lean4:v4.33.1",
+  "mathlib_rev": "0df444a360",
+  "command": "lake env lean reports/RH_SCAFFOLD_NOTES/Stage_3_Eigenvalue_Locking_Dimension_Induction.lean",
+  "result": "PASS"
 }

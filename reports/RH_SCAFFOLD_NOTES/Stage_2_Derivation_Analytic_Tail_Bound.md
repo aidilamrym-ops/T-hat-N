@@ -37,8 +37,10 @@ Ensure no floating-point arithmetic is introduced into the tail bound equation. 
 
 ## STATUS
 
-- **Stage 2** scaffold added (not kernel-checked).
+- **Stage 2** scaffold added and **kernel-checked PASS** with Lean 4.33.1 / Mathlib `0df444a360`.
 - Lean file: `Stage_2_Derivation_Analytic_Tail_Bound.lean`
-- SHA-256: `bb974ac962140e341272ef586ebb9b0af3badb3bf53e9d0bd97aa1a02d97e60d`
+- SHA-256LF: `773d24c61809a46a17de760955224b7e13fe1678ad6dc1b751a4c20d6889f498`
+- Scope: only the placeholder definition `AnalyticTailBound` and the trivial non-negativity lemma are checked. This is **not** a derivation of the Archimedean tail bound and not an RH result.
+- Import migration: `MeasureTheory.Measure.Lebesgue` → `MeasureTheory.Measure.Lebesgue.Basic`.
 
 ---
