@@ -25,7 +25,7 @@ PARTIAL dicatat apa adanya dan tidak "dinaikkan" menjadi CERTIFIED.
 | Twin prime Q2 | Sensus N=100.000 benar, tetapi kriteria pra-registrasi TIDAK terpenuhi (A-2026-0029) |
 | ABC Q3 | CERTIFIED sensus C=100.000 (A-2026-0032) — 6 triple q>1.4 |
 | RH scaffold Stage 1–4 | Scaffold Lean + receipt dibuat; **bukan bukti analitik penuh** |
-| Quantum audit | Hash binary + laporan dibuat; analisis statistik belum dilakukan |
+| Quantum audit | Statistik 16-bin + χ² + tail z≥3.5 direproduksi; verdict RESOLVED (layer statistik, bukan klaim fisika) |
 | Learnharness | Prototipe stub (engine + test); model nyata belum ada |
 | MCP T2N | Modul asli dipulihkan; `opencode.jsonc` tetap menunjuk enam server |
 
@@ -96,12 +96,17 @@ kerangka kerja yang bisa diperluas.
 
 ### 4.2 Quantum audit (`audit_quantum/`)
 
-- `audit_quantum/process_stats.py` membaca tiga binary `stats_d201.bin`,
-  `stats_d301.bin`, `stats_d401.bin`.
-- `reports/audit_quantum_2026-10-19.md` mencatat ukuran dan SHA-256 setiap
-  binary.
-- **Batas:** belum ada analisis statistik, belum ada perbandingan S1/S2,
-  belum ada klaim fisika. Status: PARTIAL (hash + inventaris).
+- `audit_quantum/analyze_stats.py` membaca tiga binary `stats_d201.bin`,
+  `stats_d301.bin`, `stats_d401.bin` (masing-masing 20.000 float64
+  little-endian).
+- Setiap set dibagi ke 16 bin equiprobable normal; expected 1250/bin.
+- Hasil: χ² = 7.508800 / 10.398400 / 11.592000, semuanya di dalam window
+  [0, 60]; tail satu sisi z ≥ 3.5 = 2 / 4 / 3. Overall **RESOLVED**.
+- `reports/audit_quantum_2026-10-19.md` memuat tabel bin, verdict, dan
+  receipt JSON; `reports/audit_quantum_2026-10-19.json` memuat receipt
+  lengkap (hash file, counts, χ², mean, stdev).
+- **Batas:** ini layer statistik SIMULATED; bukan klaim fisika, bukan
+  pengganti layer interval tersertifikasi.
 
 ### 4.3 Learnharness (`msaf/learnharness_prototype.py`)
 
@@ -132,8 +137,10 @@ kerangka kerja yang bisa diperluas.
 1. **RH scaffold Stage 2–4**: ganti scaffold trivial dengan pembuktian
    Archimedean tail, eigenvalue locking, dan containment L² yang sebenarnya.
    Jangan menaikkan status sebelum ada Lean kernel check + receipt baru.
-2. **Quantum audit**: tulis pembaca binary yang menghitung statistik S1/S2,
-   bandingkan dengan null ensemble, dan buat laporan verdict.
+2. **Quantum audit lanjutan**: layer statistik 16-bin sudah selesai
+   (χ² 7.5088/10.3984/11.592; tail 2/4/3; RESOLVED). Jika ingin klaim
+   fisik, perlu studi baru dengan null ensemble eksplisit dan prereg
+   terpisah.
 3. **Learnharness**: tentukan use-case nyata, latih model pada dataset
    kampanye, tambahkan guard agar prediksi tidak pernah menggantikan
    sertifikat.
