@@ -21,7 +21,7 @@ PARTIAL dicatat apa adanya dan tidak "dinaikkan" menjadi CERTIFIED.
 | Navier–Stokes diskrit | CERTIFIED terbatas (A-2026-0038/0039); regularitas global TIDAK diklaim |
 | RH / Guinand–Weil (ladder, T=100..500) | Beberapa fragmen CERTIFIED (T-2026-0001/0002, F-2026-0001/0002, A-2026-0033/0034/0035); RH global TIDAK diklaim |
 | Hodge Picard bound | CERTIFIED terbatas (A-2026-0036/0037); hasil F_5/F_7 tidak informatif |
-| BSD Q1 | Audit integritas (A-2026-0028/0030); verifikasi identitas BSD BELUM terpenuhi; recon 2026-10-25 menemukan formula pra-registrasi salah dan 14a1/15a1 tidak cocok dengan LMFDB |
+| BSD Q1 | **CERTIFIED v2 (T-2026-0049)**: 5 kurva rank-0 (11a1, 14a1, 15a1, 17a1, 19a1) verifikasi eksak formula BSD L(E,1)/Ω = |Ш|·∏c_p/|E(Q)_tors|² dengan parameter LMFDB; v1 (A-2026-0028) INCONCLUSIVE diganti |
 | Twin prime Q2 | Sensus v4 N=10^10 **ALL PASS** (A-2026-0048); v3 N=10^9 **ALL PASS** (A-2026-0046); v2 N=10^7 tetap CERTIFIED (A-2026-0045); entri lama N=100.000 tetap INCONCLUSIVE (A-2026-0029) |
 | ABC Q3 | CERTIFIED sensus C=100.000 (A-2026-0032) — 6 triple q>1.4 |
 | RH scaffold Stage 1–4 | Scaffold Lean **kernel-checked PASS** (definisi + lemma trivial); **bukan bukti analitik penuh** |
@@ -40,7 +40,7 @@ PARTIAL dicatat apa adanya dan tidak "dinaikkan" menjadi CERTIFIED.
 | 3 | Hodge | TREK AKTIF — fragmen finit | Picard bound CH a_11 F_3 (A-2026-0036); F_5/F_7 non-informatif (A-2026-0037) |
 | 4 | Yang–Mills mass gap | TIDAK MASUK | Butuh konstruksi QFT; di luar alat |
 | 5 | Navier–Stokes | TREK AKTIF — diskrit | Kernel diskrit Lean (A-2026-0038), regularitas diskrit (A-2026-0039); global TIDAK diklaim |
-| 6 | BSD | Q1 — INCONCLUSIVE/BLOCKED | A-2026-0028 (pilot 5 kurva), A-2026-0030 (full 21 kurva); recon 2026-10-25 menemukan hardcode, formula `2^{ω(N)-1}` tidak standar, dan 14a1/15a1 tidak cocok dengan LMFDB; tidak ada entri baru |
+| 6 | BSD | **Q1 v2 CERTIFIED (T-2026-0049)** — 5 kurva rank-0 | v2 verifikasi eksak formula BSD rank-0; A-2026-0028 v1 tetap INCONCLUSIVE; v2 receipt `82fa29fc…`; pra-reg `reports/PREREG_Q1_BSD_V2_2026-10-30.md` |
 | 7 | Renormalisasi QFT | TIDAK MASUK | Fondasi, bukan klaim komputasional |
 | 8 | Informasi black hole | TIDAK MASUK | Interpretasional |
 | 9 | Konstanta kosmologis | TIDAK MASUK | Puzzle fisika; energi vakum tak terhitung rigorous |

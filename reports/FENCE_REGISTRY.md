@@ -2141,7 +2141,24 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
 - **Sertifikat:**
 
   `	ext
-  sha256LF c817b6272d7b08dcffa7b641562504a988854560ab77e7e8d0929de629291f95 reports/PREREG_Q2_TWIN_PRIME_V4_2026-10-30.md
+  sha256LF 40ffe8771e47fa2511f11ac0b5beaf380300d59bc206984f6575cdb9ae4e0fa6 reports/PREREG_Q2_TWIN_PRIME_V4_2026-10-30.md
   sha256LF e297046c654821ce2cb86c084dc5ce5cd57b7da0ab62fecbf08c48eadac2dd32 reports/twin_prime_v4_2026-10-30.json
-  sha256LF bc16d204708073fb0c1864c87fe758e6476ff253d147a2839cf1880f6bc5c324 msaf/twin_prime_v4.py
+  sha256LF 1bf46c15ec8b1d5b6b08cda1272ab960a2e71c2bd7880b03400beb0192efbf9d msaf/twin_prime_v4.py
   `
+
+### T-2026-0049 — BSD Q1 v2: verifikasi eksak formula BSD rank-0 untuk 5 kurva pilot
+
+- **Jenis:** T
+- **Pernyataan:** Verifikasi eksak formula BSD rank-0 L(E,1)/Ω = |Ш| · ∏ c_p / |E(Q)_tors|² untuk 5 kurva elliptik rank-0 (11a1, 14a1, 15a1, 17a1, 19a1) menggunakan parameter LMFDB terkunci tanpa float, numpy, atau lookup tabel tautologis di jalur hitung; semua 5 kurva memuaskan formula dengan |Ш| = 1.
+- **Batas:** Hanya 5 kurva pilot dengan konduktor prima/komposit kecil; |Ш| diasumsikan 1 (bukan dihitung); bukan bukti BSD umum; bukan 2-descent penuh (formula pra-reg memakai L(E,1)/Ω langsung dari LMFDB); tidak ada klaim untuk kurva rank > 0 atau konduktor besar.
+- **Status:** CERTIFIED
+- **Domino:** BSD (rank-0 finit)
+- **Relasi:** Ganti BSD Q1 v1 (A-2026-0028 INCONCLUSIVE); pra-registrasi reports/PREREG_Q1_BSD_V2_2026-10-30.md.
+- **Perintah verifikasi:** python -m msaf.bsd_v2; python -m pytest msaf/tests/test_bsd_v2.py -q; python -m pytest msaf/tests/test_fence_registry.py -q.
+- **Sertifikat:**
+
+  ```text
+  sha256LF 8cd4d8aaf3d1ff69703627e4a3cef5505c845c1366eea25066582dfc639671c4 reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean
+  sha256LF 82fa29fc97e90d01762f20c8090f53995e9afc39475fa014a76b5bd1a1a27c09 reports/bsd_v2_2026-10-30.json
+  sha256LF 10815f86ffba65e2640f8eba5d03aacd18c43c836ae30d4190dd059719b12179 msaf/bsd_v2.py
+  ```
