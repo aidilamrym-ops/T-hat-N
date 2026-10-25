@@ -1,6 +1,6 @@
 name = "that_n_lean"
 version = "0.1.0"
-defaultTargets = ["NavierStokesCore", "NewtonExistence", "XiNoRealZero", "ComplexMoore"]
+defaultTargets = ["NavierStokesCore", "NewtonExistence", "XiNoRealZero", "ComplexMoore", "Stage_2_Tail_Bound", "Stage_3_Eigenvalue_Locking"]
 
 [[require]]
 name = "mathlib"
@@ -23,6 +23,14 @@ name = "XiNoRealZero"
 
 [[lean_lib]]
 name = "ComplexMoore"
+
+[[lean_lib]]
+name = "Stage_2_Tail_Bound"
+
+[[lean_lib]]
+name = "Stage_3_Eigenvalue_Locking"
+
+
 
 # lean/spec/ is deliberately NOT registered as a library. It holds
 # XiAnalyticSpec.lean, the conditional derivation of xi > 0 on the reals

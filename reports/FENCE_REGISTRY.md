@@ -986,7 +986,7 @@ mengikuti laporan L4).
 - **Sertifikat:**
 
   ```text
-  sha256LF 8cd4d8aaf3d1ff69703627e4a3cef5505c845c1366eea25066582dfc639671c4 reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean
+  sha256LF e298ad996916074e2fdb900bee9c7a7f86a41bf9fa39ce3bdb7803bed47d293f formal_bridge/IntegralComparisonLimit.v
   sha256LF 3a8bf37a009960fb6df7c02e51699e385e27b77cabf117a05acd691012f830bd formal_bridge/check_integral_limit.sh
   sha256LF af90fb87a9f4344e9f3d03741d8de8e0993363f59eeea14b6cff21b632a3faf4 formal_bridge/IntegralComparisonLimit.receipt.txt
   sha256LF a8e305f20624fd24048693bcd54b41fba868c46e69a14db4dc0359b2402e8a6f msaf/tests/test_coq_bridge_integral_limit.py
@@ -2158,7 +2158,56 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
 - **Sertifikat:**
 
   ```text
-  sha256LF 8cd4d8aaf3d1ff69703627e4a3cef5505c845c1366eea25066582dfc639671c4 reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean
+  sha256LF 8ffc1b4822abcce9c8da1e34cc9fd338223b4415b8c7280633708587160552b6 reports/PREREG_Q1_BSD_V2_2026-10-30.md
   sha256LF 82fa29fc97e90d01762f20c8090f53995e9afc39475fa014a76b5bd1a1a27c09 reports/bsd_v2_2026-10-30.json
   sha256LF 10815f86ffba65e2640f8eba5d03aacd18c43c836ae30d4190dd059719b12179 msaf/bsd_v2.py
+  ```
+
+### T-2026-0050 — RH scaffold: Stage 2 tail bound, Stage 3 eigenvalue locking, Stage 4 L² containment
+
+- **Jenis:** T
+- **Pernyataan:** Tiga modul Lean scaffold RH diselesaikan dan dikompilasi
+  dengan `lake build` (3240 jobs, exit 0). `lean/Stage_2_Tail_Bound.lean`
+  mendefinisikan `TailBound N` (`C`, `α`, `0 ≤ C`, `1/2 < α`) dan membuktikan
+  `tail_bound_nonneg`; disertakan contoh konkret `N = 100`, `C = 5`, `α = 1`,
+  `lam_min = 0.1` beserta lemma `example_tail_bound_lt_eigenvalue`.
+  `lean/Stage_3_Eigenvalue_Locking.lean` mendefinisikan `EigenvalueLock N`
+  dengan field `lam_min`, `lam_min_pos`, dan `bound_from_tail`
+  (`∃ tb : TailBound N, tb.C / N ^ tb.α ≤ lam_min`), lalu membuktikan
+  `eigenvalue_min_positive` dan memberikan contoh `example_EigenvalueLock`
+  untuk `N = 100`. `reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean`
+  mendefinisikan `MSAFTestFunctionSpace`, `PolynomialDecay`, dan
+  `TestFunctionInL2`, serta membuktikan `test_function_l2_containment`:
+  polinomial decay `|f x| ≤ C/x` (x ≥ 1) mengakibatkan `f²` terintegralkan
+  pada `(0, ∞)`. Pembuktian memecah domain di `1`, memakai kekompakan
+  `[0,1]` untuk bagian kiri dan dominasi `(C/x)² = C²·x⁻²` (dengan
+  `integrableOn_Ioi_rpow_of_lt` untuk eksponen `-2 < -1`) untuk bagian kanan.
+- **Batas:** Ini adalah **scaffold formal**, bukan bukti RH. Konstanta
+  `C = 5`, `α = 1`, `N = 100`, `lam_min = 0.1` adalah contoh aritmetika
+  sintetis, **bukan** keluaran perhitungan Guinand–Weil atau data zeta.
+  Teorema umum `tail_bound_lt_eigenvalue` masih menerima ketaksamaan
+  `C/N^α < lam_min` sebagai hipotesis; ia belum membuktikan ketaksamaan itu
+  dari matriks Guinand–Weil. Stage 4 hanya membuktikan containment L² dari
+  hipotesis polynomial decay; tidak menyentuh spektrum zeta, hipotesis RH,
+  atau klaim analitik lanjutan. Tidak ada klaim `sorry`/`admit`/`axiom`.
+- **Status:** CERTIFIED
+- **Domino:** tidak ada (formal scaffold; bukan domino RH)
+- **Relasi:** melanjutkan entri scaffold RH sebelumnya; berkas baru
+  `lean/Stage_2_Tail_Bound.lean`, `lean/Stage_3_Eigenvalue_Locking.lean`;
+  berkas diperbarui `reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean`;
+  target lake baru `Stage_2_Tail_Bound` dan `Stage_3_Eigenvalue_Locking`.
+- **Perintah verifikasi:** `lake build` di `lean/` (exit 0);
+  `lake env lean ../reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean`
+  (exit 0); `python scripts/gate.py check lean/Stage_2_Tail_Bound.lean
+  lean/Stage_3_Eigenvalue_Locking.lean
+  reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean`
+  (PASS, FAIL=0 NOT_RUN=0 SKIP=0); `python -m pytest
+  msaf/tests/test_fence_registry.py -q`.
+- **Sertifikat:**
+
+  ```text
+  sha256LF 8e2cf67a973ba657379b98db78c32f350ac77f830a105c40ef7f4177b26d275d lean/Stage_2_Tail_Bound.lean
+  sha256LF 571f600a45cb90daa95fcfd4526247e64d323f1b50e2d3e7ddf3edffa64054df lean/Stage_3_Eigenvalue_Locking.lean
+  sha256LF 5786929a607aa73bc2395481af8f3cb848fff79d3bfff82536b5be88b69a7d61 reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean
+  sha256LF cbe01538ea67cb3372e13500735a113d2413072962418f9dae1cf8fdc29b22df lean/lakefile.toml
   ```
