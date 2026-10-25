@@ -31,7 +31,7 @@ Execute the #print axioms audit command immediately after compilation. The outpu
 
 ## STATUS
 
-- **Stage 4** completed.
+- **Stage 4** scaffold added (not kernel-checked).
 - Lean file: `Stage_4_Containment_Proof.lean`
 - SHA-256: `f70159479b7ee9d375fdd097d4ab10d3e42c44709c9676dbe3f721af0a6e6071`
 

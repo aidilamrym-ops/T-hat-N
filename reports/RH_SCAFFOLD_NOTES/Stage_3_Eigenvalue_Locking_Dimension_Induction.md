@@ -35,7 +35,7 @@ This step must strictly honor the zero-fudging prohibition. If any pivot ball or
 
 ## STATUS
 
-- **Stage 3** completed.
+- **Stage 3** scaffold added (not kernel-checked).
 - Lean file: `Stage_3_Eigenvalue_Locking_Dimension_Induction.lean`
 - SHA-256: `aeb166a0316fd5941fe59e3e3a06f0530c11da9d4c8349225d92caca504dcd38`
 

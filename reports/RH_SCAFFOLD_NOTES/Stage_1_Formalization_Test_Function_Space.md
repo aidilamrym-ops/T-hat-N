@@ -46,7 +46,7 @@ Output only the mathematical definitions, verification steps, and compiled Lean 
 
 ## STATUS
 
-- **Stage 1** Formalization completed, Lean 4 definitions added, receipt generated.
+- **Stage 1** Formalization scaffold added (Lean 4 definitions + receipt generated; not kernel-checked).
 - **Stage 2** Analytic tail bound completed, Lean file `Stage_2_Derivation_Analytic_Tail_Bound.lean` + receipt.
 - **Stage 3** Eigenvalue locking completed, Lean file `Stage_3_Eigenvalue_Locking_Dimension_Induction.lean` + receipt.
 - **Stage 4** Containment proof completed, Lean file `Stage_4_Containment_Proof.lean` + receipt.

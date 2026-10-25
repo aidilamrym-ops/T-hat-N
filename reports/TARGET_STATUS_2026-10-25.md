@@ -87,8 +87,12 @@ prioritas.
 | 4 | `Stage_4_Containment_Proof.lean` | `Stage_4_..._receipt.json` | Scaffold predikat containment; **bukan** bukti L² penuh |
 
 Semua berkas Lean bebas `sorry`/`admit`/`unsafe`/`axiom`, tetapi isinya masih
-definisi dan lemma trivial. Jangan menyebutnya "bukti RH" atau "bukti
-analytic tail bound". Ini hanya kerangka kerja yang bisa diperluas.
+definisi dan lemma trivial. Berkas-berkas ini **belum di-kernel-check** di
+mesin ini karena sebagian olean Mathlib tidak tersedia (import
+`Mathlib.Topology.ContinuousFunction.Bounded` gagal, dan `import Mathlib`
+melebihi batas waktu); statusnya scaffold sumber, bukan verified Lean.
+Jangan menyebutnya "bukti RH" atau "bukti analytic tail bound". Ini hanya
+kerangka kerja yang bisa diperluas.
 
 ### 4.2 Quantum audit (`audit_quantum/`)
 

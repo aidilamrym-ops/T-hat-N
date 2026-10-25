@@ -37,7 +37,7 @@ Ensure no floating-point arithmetic is introduced into the tail bound equation. 
 
 ## STATUS
 
-- **Stage 2** completed.
+- **Stage 2** scaffold added (not kernel-checked).
 - Lean file: `Stage_2_Derivation_Analytic_Tail_Bound.lean`
 - SHA-256: `bb974ac962140e341272ef586ebb9b0af3badb3bf53e9d0bd97aa1a02d97e60d`
 
