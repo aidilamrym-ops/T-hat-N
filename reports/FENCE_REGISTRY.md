@@ -2128,3 +2128,20 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   sha256LF 61e6731b012a90282ffecc29a9da070db8ee5247279ab45b812bea3c7245ab70 reports/twin_prime_v3_2026-10-25.json
   sha256LF 0519911cbc2453314011c30141d999653119bf0a183aaeda76174a72d9fb7081 reports/TWIN_PRIME_V3_2026-10-25.md
   ```
+
+### A-2026-0048 — Sensus Twin-prime Q2 v4: 10^10 pasangan (p, p + 2)
+
+- **Jenis:** A
+- **Pernyataan:** Dua sieve independen (Eratosthenes penuh bytearray vs Eratosthenes tersegmentasi) di N = 10^10 menghasilkan daftar pasangan (p, p + 2) yang identik integer-per-integer pada seluruh rentang; jumlah total = 27,412,679.
+- **Batas:** Sensus finit N = 10^10; tidak ada klaim tentang konjektur twin prime, asimtotik, atau sifat global.
+- **Status:** CERTIFIED
+- **Domino:** RH (Twin Prime Conjecture — verifikasi numerik finit)
+- **Relasi:** v3 (N=10^9); laporan reports/PREREG_Q2_TWIN_PRIME_V4_2026-10-30.md.
+- **Perintah verifikasi:** python -m msaf.twin_prime_v4 menghasilkan receipt di reports/twin_prime_v4_2026-10-30.json; guard CI memeriksa sha.
+- **Sertifikat:**
+
+  `	ext
+  sha256LF c817b6272d7b08dcffa7b641562504a988854560ab77e7e8d0929de629291f95 reports/PREREG_Q2_TWIN_PRIME_V4_2026-10-30.md
+  sha256LF e297046c654821ce2cb86c084dc5ce5cd57b7da0ab62fecbf08c48eadac2dd32 reports/twin_prime_v4_2026-10-30.json
+  sha256LF bc16d204708073fb0c1864c87fe758e6476ff253d147a2839cf1880f6bc5c324 msaf/twin_prime_v4.py
+  `

@@ -1,0 +1,39 @@
+{
+  "all_pass": true,
+  "checkpoints": [
+    {
+      "count_a": 8169,
+      "count_b": 8169,
+      "reference": 8169,
+      "x": 1000000
+    },
+    {
+      "count_a": 58980,
+      "count_b": 58980,
+      "reference": 58980,
+      "x": 10000000
+    },
+    {
+      "count_a": 440312,
+      "count_b": 440312,
+      "reference": 440312,
+      "x": 100000000
+    },
+    {
+      "count_a": 3424506,
+      "count_b": 3424506,
+      "reference": 3424506,
+      "x": 1000000000
+    }
+  ],
+  "count_a": 27412679,
+  "count_b": 27412679,
+  "elementwise_mismatches": 0,
+  "module_sha256lf": "1bf46c15ec8b1d5b6b08cda1272ab960a2e71c2bd7880b03400beb0192efbf9d",
+  "pairs_sha256_a": "768f2fdb73bf760c7706550b08bf1ae5a2087b2efdb9c62e39fd7061ad05178f",
+  "pairs_sha256_b": "768f2fdb73bf760c7706550b08bf1ae5a2087b2efdb9c62e39fd7061ad05178f",
+  "prereg_sha256lf": "40ffe8771e47fa2511f11ac0b5beaf380300d59bc206984f6575cdb9ae4e0fa6",
+  "schema": "msaf.twin_prime_v4.v1",
+  "summary": "ALL PASS",
+  "volatile_fields": []
+}
