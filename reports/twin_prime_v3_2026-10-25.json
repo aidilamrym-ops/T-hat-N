@@ -1,0 +1,75 @@
+{
+  "N": 1000000000,
+  "all_pass": true,
+  "base_limit": 31623,
+  "block_size": 16777216,
+  "census_arithmetic": "exact integer; no float; no numpy",
+  "checkpoint_references": {
+    "1000000": 8169,
+    "10000000": 58980,
+    "100000000": 440312,
+    "1000000000": 3424506
+  },
+  "checkpoints": [
+    {
+      "count_a": 8169,
+      "count_b": 8169,
+      "reference": 8169,
+      "x": 1000000
+    },
+    {
+      "count_a": 58980,
+      "count_b": 58980,
+      "reference": 58980,
+      "x": 10000000
+    },
+    {
+      "count_a": 440312,
+      "count_b": 440312,
+      "reference": 440312,
+      "x": 100000000
+    },
+    {
+      "count_a": 3424506,
+      "count_b": 3424506,
+      "reference": 3424506,
+      "x": 1000000000
+    }
+  ],
+  "count_a": 3424506,
+  "count_b": 3424506,
+  "criteria": {
+    "C1_two_independent_exact_sieves": true,
+    "C2_full_stream_agreement": true,
+    "C3_reference_checkpoints": true,
+    "C4_deterministic_receipt_schema": true
+  },
+  "elementwise_mismatches": 0,
+  "first_mismatches": [],
+  "first_pair_a": [
+    3,
+    5
+  ],
+  "first_pair_b": [
+    3,
+    5
+  ],
+  "last_pair_a": [
+    999999191,
+    999999193
+  ],
+  "last_pair_b": [
+    999999191,
+    999999193
+  ],
+  "length_equal": true,
+  "max_gap_a": 4770,
+  "max_gap_b": 4770,
+  "module_sha256lf": "55a4683324836054971ce4dc5b7e6f8a716e60bb04242f9306c1f325ce401322",
+  "pairs_sha256_a": "427f9211b736afbb6acdc98faec4ed97be9f85f20d5334381dacae12619ea1b8",
+  "pairs_sha256_b": "427f9211b736afbb6acdc98faec4ed97be9f85f20d5334381dacae12619ea1b8",
+  "prereg_sha256lf": "5c46e9e0b0a9d82fd58b451b1e83af65f42352fdde81bfeb1a9901d200cebf3d",
+  "schema": "msaf.twin_prime_v3.v1",
+  "summary": "ALL PASS",
+  "volatile_fields": []
+}

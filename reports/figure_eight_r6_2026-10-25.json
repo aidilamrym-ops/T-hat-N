@@ -1,0 +1,95 @@
+{
+  "all_pass": true,
+  "base": {
+    "K2_width_max": "[4.375764330275093479072173756299383027704756423307118008194399677529249856e-14 +/- 8.06e-87]",
+    "K3_f_inf_final": "[4.222845715357847910637323998643523507567862899636295014679650259478241866838e-25 +/- 4.64e-101]",
+    "K4_det": "[-7.62340755583888116663998805 +/- 4.29e-27]",
+    "K5_defect": "[1.212132602582212128642850918829943957140899920031779056126538927385849407e-14 +/- 3.13e-87]",
+    "all_pass": true,
+    "checks_passed": {
+      "K1": true,
+      "K2": true,
+      "K3": true,
+      "K4": true,
+      "K5": true
+    },
+    "module": "msaf/figure_eight_r3.py",
+    "module_sha256lf": "8eddc2bb17647d452e15325397e852e224e1af028f055fa4fe41de94af939ec6",
+    "prereg_sha256lf": "92b687f5ee6237fd01a0b43374c91cce4ba72898f32bfd3f655925a61e591b6b",
+    "receipt": "reports/figure_eight_r3_2026-10-23.json",
+    "receipt_sha256lf": "6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9",
+    "schema": "msaf.figure_eight_r3.v1",
+    "summary": "ALL PASS"
+  },
+  "claim": "local existence and uniqueness in B (tighter R_B=1e-30), conditional on base K1-K5 and r6 K6 M1-M10; no global or physical claim",
+  "k6": {
+    "all_pass": true,
+    "matrix": "M1-M10",
+    "rows": [
+      {
+        "expected": "K2 FAILED at step 2 (Picard enclosure failed)",
+        "id": "M1",
+        "parameter": "REMAINDER_FACTOR=10^100",
+        "passed": true
+      },
+      {
+        "expected": "AST hits for literal and call; clean original",
+        "id": "M10",
+        "parameter": "inject 1.5 and float(x) into a source copy",
+        "passed": true
+      },
+      {
+        "expected": "K3 FAILED with Krawczyk present; K5 FAILED",
+        "id": "M2",
+        "parameter": "T0 -> T0 + 1",
+        "passed": true
+      },
+      {
+        "expected": "Gauge condition I_xy != 0, K1 should fail",
+        "id": "M3",
+        "parameter": "C = 1/3",
+        "passed": true
+      },
+      {
+        "expected": "K2 FAILED with widths_ok=False",
+        "id": "M4",
+        "parameter": "TUBE_CAP=10^-50",
+        "passed": true
+      },
+      {
+        "expected": "K3 FAILED with kappa_ok=False",
+        "id": "M5",
+        "parameter": "KAPPA_MAX=10^-20",
+        "passed": true
+      },
+      {
+        "expected": "K4 FAILED with det_ok=False",
+        "id": "M6",
+        "parameter": "GAUSS_DET_MIN=10^6",
+        "passed": true
+      },
+      {
+        "expected": "K5 FAILED (positive defect above cap)",
+        "id": "M7",
+        "parameter": "CHOREO_TOL=10^-50",
+        "passed": true
+      },
+      {
+        "expected": "K4 FAILED with cond_ok=False",
+        "id": "M8",
+        "parameter": "GAUSS_COND_MAX=20_000",
+        "passed": true
+      },
+      {
+        "expected": "SHA-256 before != after",
+        "id": "M9",
+        "parameter": "one byte of receipt-shaped payload flipped",
+        "passed": true
+      }
+    ]
+  },
+  "prereg_sha256lf": "92b687f5ee6237fd01a0b43374c91cce4ba72898f32bfd3f655925a61e591b6b",
+  "registry": "A-2026-0047",
+  "schema": "msaf.figure_eight_r6.v1",
+  "summary": "ALL PASS"
+}
