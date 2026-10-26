@@ -35,14 +35,15 @@ KERNEL = (
     "lean/XiNoRealZero.lean",
 )
 
-# Stage 2/3 are finite scaffold modules added after the 2026-10-20 gate run.
-# The recorded log still describes its four-file kernel-only scope; these two
-# files are checked for placeholders here but are NOT retroactively folded
-# into that historical log.
+# Stage 2/3/5/6 are finite scaffold modules added after the 2026-10-20 gate
+# run.  The recorded log still describes its four-file kernel-only scope;
+# these four files are checked for placeholders here but are NOT retroactively
+# folded into that historical log.
 SCAFFOLD = (
     "lean/Stage_2_Tail_Bound.lean",
     "lean/Stage_3_Eigenvalue_Locking.lean",
     "lean/Stage_5_EntryError_Perturbation.lean",
+    "lean/Stage_6_Analytic_Tail.lean",
 )
 
 SPEC_AXIOM_BUDGET = 9
@@ -165,7 +166,7 @@ def test_kernel_sources_are_placeholder_free() -> None:
     violation = _scope_violation(KERNEL + SCAFFOLD)
     assert violation is None, violation
     sources = _lean_sources()
-    assert len(sources) == 7, "expected four kernel + three scaffold Lean sources"
+    assert len(sources) == 8, "expected four kernel + four scaffold Lean sources"
     for path in sources:
         hits = _placeholders(path.read_text(encoding="utf-8"))
         assert not hits, "%s: placeholders %r" % (path.name, hits)

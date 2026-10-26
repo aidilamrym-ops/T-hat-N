@@ -1099,7 +1099,7 @@ mengikuti laporan L4).
   sha256LF 8cd30d7bc3372d8d408ff2db6830dbae666f504feadf1bd5e5951a1810c51551 harness/run_anti_circularity_gate.py
   sha256LF 6e5c97a9d780e54a54968ca06a4d453236f65b45f881fbc6234902ef53ed9aab reports/anti_circularity_gate_2026-10-20.log
   sha256LF 8de7bc3659d670976be47b31da1d38cc2fb25495d40ae9fbc101773506726f5c reports/ANTI_CIRCULARITY_GATE_RUN_2026-10-20.md
-  sha256LF 4ed32fd9016dee61ed7c975f3acc77e951762ffc11176fe43be9fa2105ebf92d msaf/tests/test_anti_circularity_gate.py
+  sha256LF 50a3d0a425d7e83c9f56995e51f570a3cfbaeaa209200c4c5ebb4474db11c673 msaf/tests/test_anti_circularity_gate.py
   sha256LF 5b3b263b6796016536653a4511124d9d4b5b81d47798d3580412eef89c86c0e9 lean/ComplexMoore.lean
   sha256LF e92f77e931a2db7c0c783f05688df17f999b72c2114954431296134fed7bca0b lean/NavierStokesCore.lean
   sha256LF 25d4bf7ae743b4b53673f120987c9e3daff2b2043ce7c79a92d5d535c863da49 lean/NewtonExistence.lean
@@ -2223,11 +2223,12 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   dimensi. Baris sertifikat versi `08ae970` dapat dipulihkan dari git history
   (`8e2cf67a…` Stage 2, `571f600a…` Stage 3); baris saat ini adalah versi
   `9d13787`.
-- **Catatan 2026-10-26 (P1):** hash `lean/lakefile.toml` diperbarui dari
+- **Catatan 2026-10-26 (P1/P2):** hash `lean/lakefile.toml` diperbarui dari
   `cbe01538…` ke `674c3a67…` karena library
-  `Stage_5_EntryError_Perturbation` didaftarkan untuk entri `T-2026-0051`.
-  Perubahan lakefile hanya penambahan target/library tersebut; hash berkas
-  Stage 2/3/4 dan sertifikat lain tidak berubah.
+  `Stage_5_EntryError_Perturbation` didaftarkan untuk entri `T-2026-0051`,
+  lalu ke `b7a6fa47…` karena `Stage_6_Analytic_Tail` didaftarkan untuk
+  `T-2026-0052`. Perubahan lakefile hanya penambahan target/library tersebut;
+  hash berkas Stage 2/3/4 dan sertifikat lain tidak berubah.
 - **Perintah verifikasi:** `lake build` di `lean/` (exit 0);
   `lake env lean ../reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean`
   (exit 0); `python C:/Users/usER/.config/opencode/skills/anti-circularity/scripts/gate.py
@@ -2241,7 +2242,7 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   sha256LF 2149a89242c3fc010a84d5796c6b4412746a07e6f8c6f8a3ccb917104941f71d lean/Stage_2_Tail_Bound.lean
   sha256LF 551e7e31f73de57ef2c8ee0c9c84fbd7da93295fbde8e6946b5f42db5916155f lean/Stage_3_Eigenvalue_Locking.lean
   sha256LF 5786929a607aa73bc2395481af8f3cb848fff79d3bfff82536b5be88b69a7d61 reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean
-  sha256LF 674c3a67485808036594931e773021c1a7e8da8ac1497a63f728f2159f01a7c3 lean/lakefile.toml
+  sha256LF b7a6fa474c34aedb0d447358327a988ab37544c425f82efb6c90c5189064311f lean/lakefile.toml
   sha256LF afcb7d811408fab1b5aac08c2e4d3b8515bb8db768d65e887518ba2d2ca6fa4f reports/GW_TAIL_CONSTANTS_2026-10-26.md
   sha256LF e92e05ef8d37b10bb3e39c65e7537e23c8e3a426da548028a0a560126b60b696 reports/lambda_min_eig_ladder_dim321.json
   sha256LF 84152da16f02125e85563184053ba958786efed65de68a0d48bfc5f741fdfc84 reports/lambda_min_eig_ladder_big.json
@@ -2302,8 +2303,65 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   sha256LF e057ff3780597f9a3de83ef08a61a92332e2bde8ef2efd6003002a50c7345b0f msaf/entry_error_envelope.py
   sha256LF 65f9ac60282baada3437c4f594bba36d5e4c4b4b134179fb597191c9498a844f reports/entry_error_envelope_c13_n160.json
   sha256LF 27e292f7f9c5d035a5451008564c410db33372a9a08257d914ac72888e42d68a lean/Stage_5_EntryError_Perturbation.lean
-  sha256LF 674c3a67485808036594931e773021c1a7e8da8ac1497a63f728f2159f01a7c3 lean/lakefile.toml
+  sha256LF b7a6fa474c34aedb0d447358327a988ab37544c425f82efb6c90c5189064311f lean/lakefile.toml
   sha256LF d5450db860052eee8baf918bcf7816498f412a027331ab134cd6c2f6aaac5479 msaf/tests/test_entry_error_envelope.py
   sha256LF c5686414a56e074e5a99cb9e0bde6ced569085237e7d783e6815cf446294eb7a reports/ENTRY_ERROR_ENVELOPE_2026-10-26.md
   sha256LF 2149a89242c3fc010a84d5796c6b4412746a07e6f8c6f8a3ccb917104941f71d lean/Stage_2_Tail_Bound.lean
+  ```
+
+### T-2026-0052 — Batas tail diagonal `XC`: `|XC(n)| < 1/n^2` dan `epsilon_XC(N) -> 0`
+
+- **Jenis:** T
+- **Pernyataan:** Untuk `c = 13`, `L = log 13`, dan semua `n >= 1`, tail
+  diagonal archimedean `XC` dari implementasi Guinand–Weil memenuhi
+  `|XC(n)| < 1/n^2`, sehingga
+  `epsilon_XC(N) = (4/L) * sum_{n>N} |XC(n)| < 2/N -> 0`. Derivasi memakai
+  representasi integral trigamma (DLMF 5.15.1), dua integrasi parsial, dan
+  mayoran geometrik dengan konstanta yang dikunci sebelum kode:
+  `Cpsi <= 47/12 < 4`, `Q0 < 0.28`, `Q1 < 0.143`, `L < 2.6`, `pi > 3`,
+  `A = 23259/25000 = 0.93036 < 1`. Grid Arb `n = 1..4096` pada 512 bit
+  memberi `max n^2|XC(n)| = 0.0661824765...` di `n = 1`. Empat deklarasi Lean
+  di `lean/Stage_6_Analytic_Tail.lean` (`sum_Ico_one_div_sq_le`,
+  `sum_Ico_abs_le_of_pointwise`, `epsilon_le_of_pointwise`,
+  `tendsto_epsilon_majorant`) lulus kernel dengan aksioma hanya `propext`,
+  `Classical.choice`, `Quot.sound`; `lake build` 8721 jobs exit 0.
+- **Batas:** Ini **hanya diagonal `XC`**. `S(n)`, `Wp`, `W02`, entri
+  off-diagonal, positivity matriks, spektrum zeta, Weil positivity, dan RH
+  **tidak** tercakup. Batas pointwise `|XC(n)| < 1/n^2` adalah bukti kertas
+  (report) plus grid Arb, **bukan** hasil kernel Lean; Lean hanya
+  memformalkan jumlah tail finit `sum 1/n^2 <= 1/N` dan limit mayoran
+  `(4/L)/N -> 0`. Tidak ada klaim bahwa `epsilon_XC(N) < lambda_min(N)`.
+  Tidak ada klaim bahwa representasi integral trigamma diformalkan di Lean.
+  `A_upper = 0.93036` adalah aritmetika rasional dari batas yang dikunci,
+  bukan eksponen yang di-fit. Grid 4096 adalah perluasan dari 512 yang
+  tercatat di amendment pra-registrasi; ambang tetap `< 1`.
+- **Status:** CERTIFIED
+- **Domino:** tidak ada (batas tail diagonal; bukan domino RH)
+- **Relasi:** melanjutkan `T-2026-0051` (Stage 5) dan `T-2026-0050`
+  (Stage 2/3); pra-registrasi `reports/PREREG_ANALYTIC_TAIL_2026-10-26.md`
+  dikomit dan dipush sebagai `fc33084` **sebelum** kode P2; implementasi dan
+  report ada di commit P2. Entri ini **tidak** menulis ulang `T-2026-0051`.
+- **Perintah verifikasi:** `python -m msaf.analytic_tail_bound --check`;
+  `python -m pytest msaf/tests/test_analytic_tail_bound.py -q`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`;
+  `cd lean; lake build` (8721 jobs, exit 0);
+  `cd lean; lake env lean Stage_6_Analytic_Tail.lean` (exit 0);
+  `#print axioms` untuk empat deklarasi (hanya tiga aksioma standar);
+  `python C:/Users/usER/.config/opencode/skills/anti-circularity/scripts/gate.py
+  check lean/Stage_2_Tail_Bound.lean lean/Stage_3_Eigenvalue_Locking.lean
+  reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean
+  lean/Stage_5_EntryError_Perturbation.lean lean/Stage_6_Analytic_Tail.lean`
+  (PASS, `FAIL=0 NOT_RUN=0 SKIP=0`).
+- **Sertifikat:**
+
+  ```text
+  sha256LF 323aae42db12bf89ec8b623b2ff18d975a2b70c950f430e3cd3f6c04736de13a reports/PREREG_ANALYTIC_TAIL_2026-10-26.md
+  sha256LF 6d4e3e710a9d141dc11a4dc4da8fb39c2d3f89eaf4b5bf2538c06164a3c1f378 msaf/analytic_tail_bound.py
+  sha256LF 1e581f8bdccc4abb2e39af48e54758c60840f4e3deea6ce3b103a7903320e95a reports/analytic_tail_bound_c13.json
+  sha256LF 552f9296b20da6681a6c77a592aab5032c28ff692b901c231aacedc196d0d0db lean/Stage_6_Analytic_Tail.lean
+  sha256LF b7a6fa474c34aedb0d447358327a988ab37544c425f82efb6c90c5189064311f lean/lakefile.toml
+  sha256LF c51cac58ffd5e7f1d26aa1b339c6a16224c238f478f85a5e3e5149e1eee302f3 msaf/tests/test_analytic_tail_bound.py
+  sha256LF 52c13cc41a002c3a8aa8997c2a4c6707fb92a03fa3d62fdf187a4d0e03ed9929 reports/ANALYTIC_TAIL_BOUND_2026-10-26.md
+  sha256LF b28fd1068a9afbbe1bb044293df65fb687ca8d43d736d81a4c3ef1de90818129 reports/TARGET_STATUS_2026-10-25.md
+  sha256LF 50a3d0a425d7e83c9f56995e51f570a3cfbaeaa209200c4c5ebb4474db11c673 msaf/tests/test_anti_circularity_gate.py
   ```

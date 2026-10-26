@@ -24,7 +24,7 @@ PARTIAL dicatat apa adanya dan tidak "dinaikkan" menjadi CERTIFIED.
 | BSD Q1 | **CERTIFIED v2 (T-2026-0049)**: 5 kurva rank-0 (11a1, 14a1, 15a1, 17a1, 19a1) verifikasi eksak formula BSD L(E,1)/Ω = |Ш|·∏c_p/|E(Q)_tors|² dengan parameter LMFDB; v1 (A-2026-0028) INCONCLUSIVE diganti |
 | Twin prime Q2 | Sensus v4 N=10^10 **ALL PASS** (A-2026-0048); v3 N=10^9 **ALL PASS** (A-2026-0046); v2 N=10^7 tetap CERTIFIED (A-2026-0045); entri lama N=100.000 tetap INCONCLUSIVE (A-2026-0029) |
 | ABC Q3 | CERTIFIED sensus C=100.000 (A-2026-0032) — 6 triple q>1.4 |
-| RH scaffold Stage 1–5 | Stage 1–4 scaffold **kernel-checked PASS**; Stage 5 menambahkan teorema perturbasi finit kondisional + envelope error entry `c=13,N=160` (`T-2026-0051`); **bukan bukti analitik penuh dan bukan RH** |
+| RH scaffold Stage 1–6 | Stage 1–4 scaffold **kernel-checked PASS**; Stage 5 menambahkan teorema perturbasi finit kondisional + envelope error entry `c=13,N=160` (`T-2026-0051`); Stage 6 menambahkan batas tail diagonal `XC` finit dan limit mayoran (`T-2026-0052`); **bukan bukti analitik penuh, bukan kontrol seluruh matriks, dan bukan RH** |
 | Quantum audit | Statistik 16-bin + χ² + tail z≥3.5 direproduksi; verdict RESOLVED (layer statistik, bukan klaim fisika) |
 | Learnharness | Prototipe stub (engine + test); model nyata belum ada |
 | MCP T2N | Modul asli dipulihkan; `opencode.jsonc` tetap menunjuk enam server |
@@ -91,17 +91,22 @@ folder arsip prompt. Lihat
 | 3 | `Stage_3_Eigenvalue_Locking_Dimension_Induction.lean` (placeholder) | `lean/Stage_3_Eigenvalue_Locking.lean` | record data untuk dua run Arb (`dim=321`, `dim=257`); **bukan** induksi dimensi, dan induksi naik memang tidak valid karena Cauchy interlacing |
 | 4 | `Stage_4_Containment_Proof.lean` | sama (sudah ditulis ulang) | `test_function_l2_containment` dari polynomial decay; **bukan** containment spektrum zeta |
 | 5 | — (tidak ada arsip prompt) | `lean/Stage_5_EntryError_Perturbation.lean` | envelope entry `epsilon=10^-100`, `delta=321*10^-100 < lambda_min`; `posDef_add_of_quadratic_bound` dan `gw_entry_perturbation_posDef` **kondisional** pada `A.PosDef` dan batas kuadratik `A`; **bukan** bukti positivity matriks Arb |
+| 6 | — (tidak ada arsip prompt) | `lean/Stage_6_Analytic_Tail.lean` | langkah tail finit `∑ 1/n² ≤ 1/N`, propagasi batas pointwise, dan `(4/L)/N → 0`; batas pointwise `|XC(n)| < 1/n²` adalah **input analitik + grid Arb**, bukan hasil kernel; **bukan** kontrol tail seluruh matriks |
 
 Semua berkas Lean bebas `sorry`/`admit`/`unsafe`/`axiom`, dan modul aktif
 **lulus kernel check** dengan Lean 4.33.1 / Mathlib `0df444a360`. Namun isinya
 tetap terbatas: Stage 2 bukan derivasi tail Archimedean, Stage 3 bukan induksi
-dimensi, Stage 4 hanya containment L² dari hipotesis polynomial decay, dan
-Stage 5 hanya aritmetika perturbasi finit yang kondisional. Stage 5 **tidak**
-membuktikan bahwa matriks Arb positif-definit; sertifikat eigenvalue tetap run
-`arb_mat.eig` eksternal, dan hubungan sertifikat itu ke hipotesis
-`A.PosDef`/`hAquad` belum diformalkan. Jangan menyebutnya "bukti RH",
-"bukti analytic tail bound", atau `|XC(n)| = O(1/n^2)`. Rincian P1:
-`reports/ENTRY_ERROR_ENVELOPE_2026-10-26.md`.
+dimensi, Stage 4 hanya containment L² dari hipotesis polynomial decay, Stage 5
+hanya aritmetika perturbasi finit yang kondisional, dan Stage 6 hanya langkah
+tail finit/limit. Stage 5 **tidak** membuktikan bahwa matriks Arb
+positif-definit; sertifikat eigenvalue tetap run `arb_mat.eig` eksternal, dan
+hubungan sertifikat itu ke hipotesis `A.PosDef`/`hAquad` belum diformalkan.
+Stage 6 **tidak** memformalkan representasi integral trigamma: batas pointwise
+`|XC(n)| < 1/n²` adalah derivasi analitik di laporan P2 plus grid Arb, bukan
+keluaran kernel. Jangan menyebutnya "bukti RH", "bukti analytic tail bound
+penuh", atau kontrol tail seluruh matriks. Rincian P1:
+`reports/ENTRY_ERROR_ENVELOPE_2026-10-26.md`; rincian P2:
+`reports/ANALYTIC_TAIL_BOUND_2026-10-26.md`.
 
 Log lengkap: `reports/RH_SCAFFOLD_NOTES/KERNEL_CHECK_2026-10-25.md` (perintah
 kernel, SHA-256LF, axiom footprint, dan anti-circularity gate PASS).
@@ -170,7 +175,8 @@ kernel, SHA-256LF, axiom footprint, dan anti-circularity gate PASS).
 
 - Entri **T** (teorema finit): `T-2026-0001`, `T-2026-0002`, `T-2026-0043`,
   `T-2026-0049` (BSD Q1 v2), `T-2026-0050` (RH scaffold Stage 2–4),
-  `T-2026-0051` (envelope error entry + perturbasi finit Stage 5).
+  `T-2026-0051` (envelope error entry + perturbasi finit Stage 5),
+  `T-2026-0052` (batas tail diagonal `XC` + langkah tail Stage 6).
 - Entri **F** (pagar): `F-2026-0001`, `F-2026-0002`.
 - Entri **A** (audit/verdict): `A-2026-0001` … `A-2026-0040` (dengan
   `A-2026-0031` tidak ada), `A-2026-0043`, `A-2026-0045` (Q2 v2),
@@ -186,11 +192,14 @@ kernel, SHA-256LF, axiom footprint, dan anti-circularity gate PASS).
 
 ## 6. Sisa pekerjaan yang jujur
 
-1. **RH scaffold Stage 1–5**: Stage 5 sudah menambahkan teorema perturbasi
+1. **RH scaffold Stage 1–6**: Stage 5 sudah menambahkan teorema perturbasi
    finit yang benar-benar diperiksa kernel, tetapi ia **kondisional** pada
    `A.PosDef` dan batas kuadratik `A`; envelope entry hanya membatasi radius
-   entry, bukan tail analitik. Sisa pekerjaan nyata: (a) derivasi
-   `|XC(n)| = O(1/n^2)` dan `epsilon(N) -> 0` (P2); (b) formalisasi hubungan
+   entry, bukan tail analitik. Stage 6/P2 sudah menambahkan derivasi analitik
+   `|XC(n)| < 1/n^2` (di laporan, bukan Lean) dan langkah tail finit/limit
+   yang diperiksa kernel, tetapi hanya untuk **diagonal `XC`**. Sisa pekerjaan
+   nyata: (a) tail `S(n)`, `Wp`, `W02`, dan entri off-diagonal; (b) formalisasi
+   representasi integral trigamma bila diinginkan; (c) formalisasi hubungan
    sertifikat Arb ke `A.PosDef`/`hAquad`, atau jalur positivity lain. Jangan
    menaikkan status RH sebelum itu ada dan lulus kernel check + receipt baru.
 2. **Quantum audit lanjutan**: layer statistik 16-bin sudah selesai
@@ -252,3 +261,22 @@ Tabel §4.1 adalah snapshot 2026-10-25. Sejak itu:
 
 Ini tetap **bukan** bukti RH. `α=3261/2` adalah indeks truncation
 archimedean, bukan eksponen decay polinomial.
+
+### 8.1 P2 — batas tail diagonal `XC` (2026-10-26)
+
+- Klaim yang dikunci di `reports/PREREG_ANALYTIC_TAIL_2026-10-26.md`:
+  untuk `c=13`, `L=log 13`, `|XC(n)| < 1/n²` untuk semua `n ≥ 1`, sehingga
+  `epsilon_XC(N) = (4/L) Σ_{n>N} |XC(n)| < 2/N → 0`.
+- Derivasi memakai representasi integral trigamma (DLMF 5.15.1), dua
+  integrasi parsial, dan mayoran geometrik `Q0 < 0.28`, `Q1 < 0.143`,
+  `Cψ ≤ 47/12 < 4`, `L < 2.6`, `π > 3`; tidak ada eksponen yang di-fit.
+- Grid Arb `n = 1..4096` pada 512 bit: `max n²|XC(n)|` terukur
+  `0.0661824765…` di `n=1`, di bawah 1. Record:
+  `reports/analytic_tail_bound_c13.json`.
+- `lean/Stage_6_Analytic_Tail.lean` memformalkan empat deklarasi:
+  `sum_Ico_one_div_sq_le`, `sum_Ico_abs_le_of_pointwise`,
+  `epsilon_le_of_pointwise`, `tendsto_epsilon_majorant`; `#print axioms`
+  hanya memuat `propext`, `Classical.choice`, `Quot.sound`.
+- Batas: ini **hanya diagonal `XC`**. `S(n)`, `Wp`, `W02`, entri off-diagonal,
+  positivity matriks, spektrum zeta, dan RH **tidak** tercakup. Batas
+  pointwise adalah input analitik + numerik, bukan hasil kernel.

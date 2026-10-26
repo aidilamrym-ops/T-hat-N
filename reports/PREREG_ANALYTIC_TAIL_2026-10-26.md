@@ -259,3 +259,27 @@ Jika checkout eksternal tidak tersedia, builder mengembalikan
 
 Dokumen ini tidak boleh diubah setelah kode P2 dimulai, kecuali dengan
 amendment bertanggal yang menjelaskan penyimpangan dan alasannya.
+
+## 9. Amendment 2026-10-26 (setelah kode P2 dimulai)
+
+Dua penyimpangan implementasi dicatat di sini; **tidak ada** konstanta,
+klaim, atau kriteria penerimaan yang dilonggarkan.
+
+1. **Nama dan bentuk indeks Lean.** Mathlib v4.33.1 yang dipin tidak
+   menyediakan `Finset.sum_Icc_eq_sum_range`. Implementasi memakai
+   `Finset.Ico (N + 1) (M + 1)`, yang merupakan himpunan bilangan bulat
+   `N+1, ..., M` yang sama dengan `Icc (N+1) M`. Karena itu deklarasi
+   bernama `sum_Ico_one_div_sq_le`, `sum_Ico_abs_le_of_pointwise`,
+   `epsilon_le_of_pointwise`, dan `tendsto_epsilon_majorant`; pernyataan
+   matematikanya tidak berubah. `tendsto_epsilon_majorant` memakai binder
+   `_hL` (tidak dipakai) dengan tipe `0 < L`; tipe dan kesimpulannya sama.
+
+2. **Grid diperbesar.** §4.1 menulis `N_CHECK = 512`; implementasi memakai
+   `N_CHECK = 4096` pada `PREC_BITS = 512`. Ini memperluas cakupan uji
+   numerik, bukan mengubah ambang: kriteria tetap `max n^2|XC(n)| < 1` dan
+   `A_upper < 1`. Nilai `n_check = 4096` tercatat di
+   `reports/analytic_tail_bound_c13.json`.
+
+Tidak ada perubahan pada `Cpsi <= 47/12 < 4`, `Q0 < 0.28`, `Q1 < 0.143`,
+`L < 2.6`, `pi > 3`, `A = 23259/25000 = 0.93036 < 1`, atau batas
+`epsilon_XC(N) < 2/N`.

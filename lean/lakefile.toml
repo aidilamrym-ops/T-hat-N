@@ -1,6 +1,6 @@
 name = "that_n_lean"
 version = "0.1.0"
-defaultTargets = ["NavierStokesCore", "NewtonExistence", "XiNoRealZero", "ComplexMoore", "Stage_2_Tail_Bound", "Stage_3_Eigenvalue_Locking", "Stage_5_EntryError_Perturbation"]
+defaultTargets = ["NavierStokesCore", "NewtonExistence", "XiNoRealZero", "ComplexMoore", "Stage_2_Tail_Bound", "Stage_3_Eigenvalue_Locking", "Stage_5_EntryError_Perturbation", "Stage_6_Analytic_Tail"]
 
 [[require]]
 name = "mathlib"
@@ -35,6 +35,12 @@ name = "Stage_3_Eigenvalue_Locking"
 # it does not diagonalise the Arb matrix.
 [[lean_lib]]
 name = "Stage_5_EntryError_Perturbation"
+
+# Stage 6 formalises the finite harmonic-square tail bound and the vanishing
+# majorant for the diagonal XC term.  It does not formalise the trigamma
+# integral representation; the pointwise 1/n^2 input is analytic/numerical.
+[[lean_lib]]
+name = "Stage_6_Analytic_Tail"
 
 # lean/spec/ is deliberately NOT registered as a library. It holds
 # XiAnalyticSpec.lean, the conditional derivation of xi > 0 on the reals
