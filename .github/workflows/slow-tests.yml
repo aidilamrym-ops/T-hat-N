@@ -24,5 +24,7 @@ jobs:
           python-version: "3.14"
       - name: Install dependencies
         run: pip install "python-flint==0.9.0" matplotlib pytest z3-solver "scipy==1.18.0" "mpmath==1.3.0"
+      - name: Verify sealed receipts
+        run: python -m pytest msaf/tests/test_fence_registry.py -q
       - name: Run slow regression suite
         run: python -m pytest msaf -q -m slow

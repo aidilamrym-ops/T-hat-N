@@ -42,3 +42,14 @@ def test_both_campaign_tests_are_marked_slow():
         for name in ("test_campaign", "test_registry_entry"):
             pattern = re.compile(r"@pytest\.mark\.slow\ndef " + name + r"\(")
             assert pattern.search(text), f"{rel}::{name} is not marked slow"
+
+
+def test_slow_workflow_verifies_sealed_receipts_first():
+    text = (ROOT / ".github" / "workflows" / "slow-tests.yml").read_text(
+        encoding="utf-8")
+    seal = "python -m pytest msaf/tests/test_fence_registry.py -q"
+    campaign = "python -m pytest msaf -q -m slow"
+    assert seal in text, "slow workflow must verify registry receipts"
+    assert campaign in text, "slow workflow must still run the campaigns"
+    assert text.index(seal) < text.index(campaign), (
+        "sealed-receipt check must run before the expensive campaigns")
