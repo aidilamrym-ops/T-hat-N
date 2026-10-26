@@ -1,0 +1,12 @@
+2026-10-26T21:14:38Z campaign start N=10000000 out=reports\abc_census_v2_10000000.json resume=True state_a=0/0 state_b=0/0
+2026-10-26T21:14:48Z sieve_a prep smooth=269882 seconds=9.559
+2026-10-26T21:15:02Z sieve_a scan done=True next=269882 count=12 seconds=14.007
+2026-10-26T21:15:15Z sieve_b prep smooth=269882 seconds=13.104
+2026-10-26T21:15:24Z campaign start N=10000000 out=reports\abc_census_v2_10000000.json resume=True state_a=0/0 state_b=0/0
+2026-10-26T21:15:34Z sieve_a prep smooth=269882 seconds=9.464
+2026-10-26T21:15:34Z sieve_b scan done=True next=269882 count=12 seconds=19.037
+2026-10-26T21:15:34Z receipt written path=reports\abc_census_v2_10000000.json verdict=ALL PASS count=12 canonical=07bf76341ed2cb87f2291b69a348faafeba622b0ccb98a87a299c8869fb689b2
+2026-10-26T21:15:45Z sieve_a scan done=True next=269882 count=12 seconds=11.509
+2026-10-26T21:16:02Z sieve_b prep smooth=269882 seconds=16.869
+2026-10-26T21:16:37Z sieve_b scan done=True next=269882 count=12 seconds=34.906
+2026-10-26T21:16:37Z receipt written path=reports\abc_census_v2_10000000.json verdict=ALL PASS count=12 canonical=07bf76341ed2cb87f2291b69a348faafeba622b0ccb98a87a299c8869fb689b2

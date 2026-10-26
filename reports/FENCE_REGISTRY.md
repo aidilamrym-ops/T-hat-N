@@ -1810,11 +1810,12 @@ mengikuti laporan L4).
 - **Domino:** kombinatorik / teori bilangan (abc)
 - **Relasi:** Q3 dari reports/DAFTAR_MASALAH_KERJA.md; laporan reports/ABC_CENSUS_2026-10-21.md (akan dibuat); pra-registrasi reports/PREREG_Q3_ABC_CENSUS_2026-10-21.md.
 - **Perintah verifikasi:** python -m msaf.abc_census --N 100000; python -m pytest msaf/tests/test_abc_census.py -q; python audit_quantum/freeze.py --verify.
+- **Catatan 2026-10-27:** Dua baris sertifikat `msaf/abc_census.py` dan `msaf/tests/test_abc_census.py` diperbarui ke hash v3 karena modul dinaikkan ke sensus low-rad lengkap (Q3 v3, `A-2026-0052`). Klaim entri ini tidak berubah: C=100.000 tetap 6 triple dengan max_gap=6825, dan gate v3 mereproduksi daftar triple yang sama persis.
 - **Sertifikat:'
 
   \\	ext
-  sha256LF b546fc2b193b65c9eb09c007abe9b4fe057e1acfbf6da481fb455ac06bfe81e8 msaf/abc_census.py
-  sha256LF ef938bcccb804b07504fb0f3bd37b5df79c383f707b6b1242761c8afa5150bc6 msaf/tests/test_abc_census.py
+  sha256LF d3834fc91fd238cd8e27c76e07fa47eabd113d1a07ea21002c2a42105d28a293 msaf/abc_census.py
+  sha256LF 1628c60a26dde17082a1fbb66b5dc8158c97d647e94059c75fe4cc338916dd2e msaf/tests/test_abc_census.py
   sha256LF 50c57a25056f84f5c2adf8f1ec883369eaf35fea0ce8f2f489e43748c56f0cf4 reports/PREREG_Q3_ABC_CENSUS_2026-10-21.md
   sha256LF 276c4dc095f28d901c9aaa56b25c10e0802d6b158a2ed63d16e28a7a1ae8a06f reports/abc_census.json
   sha256LF 00420dfe9af16dfd0b9f7b965131dabd95f8d8ae67350f1fc2aade80d121efea reports/ABC_CENSUS_2026-10-21.md
@@ -2456,3 +2457,22 @@ sha256LF 9938164acef542bd039f4610e99005a177eb466490359bf9ef323a321e5a24e4 msaf/t
   sha256LF b28fd1068a9afbbe1bb044293df65fb687ca8d43d736d81a4c3ef1de90818129 reports/TARGET_STATUS_2026-10-25.md
   sha256LF 50a3d0a425d7e83c9f56995e51f570a3cfbaeaa209200c4c5ebb4474db11c673 msaf/tests/test_anti_circularity_gate.py
   ```
+
+### A-2026-0052 - Sensus abc Q3 v3: sensus lengkap hingga C = 10^7 (17 triple q > 1.4)
+
+- **Jenis:** A
+- **Pernyataan:** `msaf/abc_census.py` menjalankan dua sieve independen (A: multiplicative rad sieve; B: segmented rad sieve) atas himpunan low-rad (rad(n) <= N^(5/7)+1), dengan re-verifikasi factorint; receipt `reports/abc_census_v3_10000000.json` mencatat count=17, max_gap=40640, dan 17 triple dengan q>1.4 hingga C=10^7; kedua sieve sepakat eksak (count_a=count_b=17, max_gap_a=max_gap_b=40640, pairs identik); verdict ALL PASS; canonical_sha256=fb0ea6f8345054058d7d1b9659e8c167d82602f90d349908f9b67284e73f3c4d. Validasi: C=10^5 count=6/max_gap=6825; C=10^6 count=11/max_gap=6825.
+- **Batas:** sensus hingga C=10^7 exhaustive low-rad (rad(n) <= N^(5/7)); bukan pembuktian konjektur abc; tidak ada klaim asimtotik; q memakai math.log float64; triple yang dilaporkan integer eksak dan diverifikasi ulang. Tidak ada klaim RH/GRH/faktorisasi/RSA/ECC/Anderson/fisika.
+- **Status:** CERTIFIED
+- **Domino:** tidak ada
+- **Relasi:** melanjutkan `A-2026-0032` (C=100.000); pra-registrasi `reports/PREREG_Q3_ABC_CENSUS_V3_2026-10-27.md` (hash aed8e63c...).
+- **Perintah verifikasi:** `python -m msaf.abc_census --N 10000000 --max-seconds 0 --out reports/abc_census_v3_10000000.json`; `python -m msaf.abc_census --N 100000`; `python -m msaf.abc_census --N 1000000`; `python -m pytest msaf/tests/test_abc_census.py -q`; `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **Sertifikat:**
+
+```text
+sha256LF aed8e63cdbb463b58bf207686ddf562ae50114b1d38b40f52174e53f1a6001a2 reports/PREREG_Q3_ABC_CENSUS_V3_2026-10-27.md
+sha256LF e2176e22df095e19015422e6ed2d7564b131ca90f8d866cfa3edaa6dbef69af8 reports/abc_census_v3_10000000.json
+sha256LF d3834fc91fd238cd8e27c76e07fa47eabd113d1a07ea21002c2a42105d28a293 msaf/abc_census.py
+sha256LF 1628c60a26dde17082a1fbb66b5dc8158c97d647e94059c75fe4cc338916dd2e msaf/tests/test_abc_census.py
+sha256LF c9fef6de7d9f7c7e2ca5d6b1a143cf272111ef22e7ab286ce80f086f816d61ab reports/ABC_CENSUS_2026-10-27.md
+```

@@ -1,0 +1,95 @@
+{
+  "N": 100000,
+  "candidate_rule": "low-rad enumeration; exact prod**7 < c**5",
+  "canonical_sha256": "cc077c8a0d5b9b07ea6fcb7cf63b9f801b57dd176a7f3b9ab05dd898aaaf163f",
+  "count": 6,
+  "count_a": 6,
+  "count_b": 6,
+  "factorint_verified": true,
+  "first_triple": [
+    3,
+    125,
+    128
+  ],
+  "last_triple": [
+    7168,
+    78125,
+    85293
+  ],
+  "max_gap": 6825,
+  "max_gap_a": 6825,
+  "max_gap_b": 6825,
+  "module_sha256lf": "d3834fc91fd238cd8e27c76e07fa47eabd113d1a07ea21002c2a42105d28a293",
+  "pairs_a": [
+    [
+      3,
+      125,
+      128
+    ],
+    [
+      1,
+      2400,
+      2401
+    ],
+    [
+      1,
+      4374,
+      4375
+    ],
+    [
+      37,
+      32768,
+      32805
+    ],
+    [
+      343,
+      59049,
+      59392
+    ],
+    [
+      7168,
+      78125,
+      85293
+    ]
+  ],
+  "pairs_b": [
+    [
+      3,
+      125,
+      128
+    ],
+    [
+      1,
+      2400,
+      2401
+    ],
+    [
+      1,
+      4374,
+      4375
+    ],
+    [
+      37,
+      32768,
+      32805
+    ],
+    [
+      343,
+      59049,
+      59392
+    ],
+    [
+      7168,
+      78125,
+      85293
+    ]
+  ],
+  "prereg_sha256lf": "aed8e63cdbb463b58bf207686ddf562ae50114b1d38b40f52174e53f1a6001a2",
+  "quality_bound": "exact integer prod**7 < c**5; q reported via float64 math.log",
+  "rad_limit": 3728,
+  "runtime_a": 0.4247423999986495,
+  "runtime_b": 0.37454210000214516,
+  "schema": "msaf.abc_census.v3",
+  "threshold": 1.4,
+  "verdict": "ALL PASS"
+}

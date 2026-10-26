@@ -1,0 +1,6 @@
+2026-10-26T21:23:50Z campaign start N=100000 rad_limit=3728 out=reports\abc_census_v3_100000.json resume=True state_a=0/0 state_b=0/0
+2026-10-26T21:23:50Z sieve_a prep low=15350 seconds=0.071
+2026-10-26T21:23:51Z sieve_a scan done=True next=15350 count=6 seconds=0.595
+2026-10-26T21:23:51Z sieve_b prep low=15350 seconds=0.101
+2026-10-26T21:23:51Z sieve_b scan done=True next=15350 count=6 seconds=0.589
+2026-10-26T21:23:51Z receipt written path=reports\abc_census_v3_100000.json verdict=ALL PASS count=6 canonical=cc077c8a0d5b9b07ea6fcb7cf63b9f801b57dd176a7f3b9ab05dd898aaaf163f

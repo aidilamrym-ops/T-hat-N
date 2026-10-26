@@ -1,0 +1,12 @@
+2026-10-26T21:24:23Z campaign start N=10000000 rad_limit=100001 out=reports\abc_census_v3_10000000.json resume=True state_a=0/0 state_b=0/0
+2026-10-26T21:24:35Z sieve_a prep low=642424 seconds=12.091
+2026-10-26T21:25:39Z sieve_a scan done=True next=642424 count=17 seconds=63.960
+2026-10-26T21:25:52Z sieve_b prep low=642424 seconds=12.335
+2026-10-26T21:28:15Z sieve_b scan done=True next=642424 count=17 seconds=142.643
+2026-10-26T21:28:15Z receipt written path=reports\abc_census_v3_10000000.json verdict=ALL PASS count=17 canonical=fb0ea6f8345054058d7d1b9659e8c167d82602f90d349908f9b67284e73f3c4d
+2026-10-26T21:29:01Z campaign start N=10000000 rad_limit=100001 out=reports\abc_census_v3_10000000.json resume=True state_a=0/0 state_b=0/0
+2026-10-26T21:29:23Z sieve_a prep low=642424 seconds=21.591
+2026-10-26T21:31:39Z sieve_a scan done=True next=642424 count=17 seconds=136.892
+2026-10-26T21:32:17Z sieve_b prep low=642424 seconds=36.001
+2026-10-26T21:34:16Z sieve_b scan done=True next=642424 count=17 seconds=119.066
+2026-10-26T21:34:16Z receipt written path=reports\abc_census_v3_10000000.json verdict=ALL PASS count=17 canonical=fb0ea6f8345054058d7d1b9659e8c167d82602f90d349908f9b67284e73f3c4d
