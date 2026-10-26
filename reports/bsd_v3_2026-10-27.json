@@ -1,0 +1,68 @@
+{
+  "schema": "msaf.bsd_v3.v1",
+  "result": {
+    "schema": "msaf.bsd_v2.v1",
+    "prereg_sha256lf": "8ffc1b4822abcce9c8da1e34cc9fd338223b4415b8c7280633708587160552b6",
+    "module_sha256lf": "e83fe1506518d5e5da4f8b412c394706092125276d4b821b12057459296bbff4",
+    "curves": [
+      {
+        "label": "11a1",
+        "conductor": 11,
+        "discriminant": -161051,
+        "torsion_order": 5,
+        "prod_cp": 5,
+        "sha_order": 1,
+        "l_omega_expected": "1/5",
+        "bsd_rhs": "1/5",
+        "match": true
+      },
+      {
+        "label": "14a1",
+        "conductor": 14,
+        "discriminant": -21952,
+        "torsion_order": 6,
+        "prod_cp": 6,
+        "sha_order": 1,
+        "l_omega_expected": "1/6",
+        "bsd_rhs": "1/6",
+        "match": true
+      },
+      {
+        "label": "15a1",
+        "conductor": 15,
+        "discriminant": 50625,
+        "torsion_order": 8,
+        "prod_cp": 8,
+        "sha_order": 1,
+        "l_omega_expected": "1/8",
+        "bsd_rhs": "1/8",
+        "match": true
+      },
+      {
+        "label": "17a1",
+        "conductor": 17,
+        "discriminant": -83521,
+        "torsion_order": 4,
+        "prod_cp": 4,
+        "sha_order": 1,
+        "l_omega_expected": "1/4",
+        "bsd_rhs": "1/4",
+        "match": true
+      },
+      {
+        "label": "19a1",
+        "conductor": 19,
+        "discriminant": -6859,
+        "torsion_order": 3,
+        "prod_cp": 3,
+        "sha_order": 1,
+        "l_omega_expected": "1/3",
+        "bsd_rhs": "1/3",
+        "match": true
+      }
+    ],
+    "all_pass": true,
+    "summary": "ALL PASS",
+    "volatile_fields": []
+  }
+}
