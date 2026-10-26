@@ -33,7 +33,7 @@
   "active": {
     "agents": {
       "path": "AGENTS.md",
-      "sha256lf": "a5bef3027ed3d684425e0303a4f51ecf791c54b6f2051dd03fed55b8bbdb94c7"
+      "sha256lf": "0133f4d1a7df3ba1f7c41d7896b9e47e42f6d2954a3f2b92f60c88f718d1a07e"
     },
     "current_authority": {
       "path": "CURRENT_AUTHORITY.md",
@@ -41,7 +41,7 @@
     },
     "decision_log": {
       "path": "reports/DECISION_LOG.md",
-      "sha256lf": "569fb6ec720f9aa9596a533826c5562c91ef409e5bbf02b650fb23d4f215f469"
+      "sha256lf": "fcf5438db2a17b08480a4ce12ff09de0d7263de70d773fc371be008d20976757"
     },
     "archive_tombstones": {
       "path": "reports/ARCHIVE_TOMBSTONES.md",

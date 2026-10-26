@@ -95,9 +95,12 @@ python -m pytest msaf/tests/test_anti_circularity_gate.py -q
 cd lean && lake build
 ```
 
-Suite penuh `python -m pytest msaf -q` berjalan di CI dan mahal. Jangan
-mengklaim CI hijau sebelum job `python-tests` selesai sukses. Untuk hasil
-Lean/SMT, jalankan skill `anti-circularity` sebelum menulis "verified".
+Suite CI default menjalankan `python -m pytest msaf -q -m "not slow"`. Kampanye
+figure-eight r5/r6 ditandai `slow` dan hanya berjalan di workflow `Slow tests`
+(terjadwal/manual). Jangan mengklaim CI hijau sebelum job `python-tests` selesai
+sukses, dan jangan mengklaim r5/r6 hijau tanpa hasil workflow `Slow tests`.
+Untuk hasil Lean/SMT, jalankan skill `anti-circularity` sebelum menulis
+"verified".
 
 ## Konflik
 

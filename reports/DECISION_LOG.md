@@ -211,17 +211,40 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   RH/abc/BSD/figure-eight/Lean/Coq/fisika; `materials.mp_query` tetap butuh
   jaringan dan tidak diuji.
 
+## 2026-10-27 — Pemisahan suite lambat dari CI default
+
+- **Keputusan:** kampanye figure-eight r5/r6 ditandai `slow` dan dipindah ke
+  workflow `Slow tests` (terjadwal 02:00 WIB + manual, `timeout-minutes:
+  300`); job `python-tests` menjalankan
+  `python -m pytest msaf -q -m "not slow"`.
+- **Alasan:** `python-tests` dibatasi 60 menit, sedangkan run `40401144645`
+  berjalan 57+ menit tanpa selesai; `msaf/tests/test_figure_eight_r6.py`
+  juga memanggil `run_campaign()` dua kali tanpa fixture.
+- **Perubahan:** `pytest.ini` mendaftarkan marker `slow`; dua uji kampanye r5
+  diberi marker; r6 memakai fixture `scope="module"` (satu kampanye, bukan
+  dua) dan dua uji kampanye diberi marker; guard
+  `msaf/tests/test_ci_slow_split.py` mengunci pemisahan ini.
+- **Verifikasi:** koleksi `-m slow` = 4 uji, `-m "not slow"` = 786 uji,
+  total 790; uji murah r5/r6 8 passed; `test_fence_registry` dan
+  `test_ci_verification_paths` lulus setelah hash `ci.yml` dan
+  `test_figure_eight_r6.py` diperbarui dengan catatan bertanggal.
+- **Commit:** pra-registrasi `a33d5db`; implementasi `4570e0a`.
+- **Batas:** "CI hijau" kini berarti suite cepat. r5/r6 hanya dibuktikan oleh
+  workflow `Slow tests`; jangan menyebut r5/r6 hijau tanpa hasil workflow itu.
+  Tidak ada asersi, ambang, receipt, atau verdict yang dihapus/diubah.
+
 ## Keputusan yang masih menunggu pemilik
 
 1. Status sertifikasi `T-2026-0049` dan `A-2026-0048` sehubungan dengan
    pelanggaran prereg 2026-10-25. `A-2026-0047` sudah diputuskan pada
    2026-10-26 (CERTIFIED).
-2. Entri Registry Learn-harness v1: `A-2026-0050` kini ada di registry dengan
-   status CERTIFIED untuk stub deterministik. Keputusan yang tersisa adalah
-   apakah CERTIFIED layak untuk stub, atau perlu direklasifikasi seperti
-   `A-2026-0051`; `T-2026-0050` adalah ID berbeda.
-3. Pemisahan uji r5 yang mahal dari suite default agar CI tidak memakan
-   sekitar dua jam.
-4. Pembersihan 6 proses `shp_*` (3 batch) yang masih berjalan; memerlukan
-   persetujuan karena `shp_*` berada di luar lingkup yang boleh disentuh.
+2. Entri Registry Learn-harness v1: `A-2026-0050` ada di registry dengan
+   status CERTIFIED untuk stub deterministik. Verifikasi 2026-10-27
+   menemukan pra-registrasi nyata, receipt `ALL PASS`, dan hash cocok; keputusan
+   yang tersisa adalah apakah label CERTIFIED layak untuk stub, atau perlu
+   direklasifikasi seperti `A-2026-0051`; `T-2026-0050` adalah ID berbeda.
+3. CI default kini mengecualikan uji `slow`. Perlu persetujuan berkelanjutan:
+   apakah workflow `Slow tests` cukup, atau r5/r6 harus tetap menjadi syarat
+   wajib sebelum klaim apa pun tentang r5/r6.
+
 

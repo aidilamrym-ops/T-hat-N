@@ -250,6 +250,7 @@ Snapshot ini dibekukan pada 27 Okt 03:08 WIB; status terkini ada di §10.3.
 | Learn-harness v1 | STUB (jujur) | `A-2026-0050` | Stub deterministik; bukan ML nyata |
 | Q3 abc C=10^7 | DONE/CERTIFIED | `A-2026-0052`, `reports/abc_census_v3_10000000.json` | 17 triple, max_gap 40640; v2 100-smooth superseded; jangan rerun N sama tanpa upgrade contract |
 | MCP consolidation | DONE (aktif setelah restart) | `mcp/t2n_core.py`, `mcp/t2n_viz.py`, `opencode.jsonc` | 2 server t2n: 30 + 7 tool; guard 7 test; shp tidak disentuh |
+| CI slow split | **DONE (kode); VERIFY CI** | `pytest.ini`, `.github/workflows/slow-tests.yml` | 4 uji kampanye dipisah; suite cepat 786 uji; r5/r6 hanya di workflow `Slow tests` |
 
 ### 10.4 Protokol anti-loop (mengikat)
 
