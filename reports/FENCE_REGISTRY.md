@@ -1142,6 +1142,12 @@ mengikuti laporan L4).
   `test_ci_verification_paths.py` tetap 5 uji hijau. Run CI
   pasca-amandemen `39426728099` (commit `1c806cb`) hijau:
   `lean-kernel`, `python-tests`, dan `coq-kernel` sukses.
+- **Amandemen 2026-10-27:** job `python-tests` menjalankan
+  `python -m pytest msaf -q -m "not slow"`; kampanye figure-eight r5/r6
+  dipindah ke workflow `Slow tests` (terjadwal/manual, `timeout-minutes:
+  300`). Audit aksioma Lean per-deklarasi, sensor `spec`/`spec_v2`, dan job
+  Coq tidak berubah. Sertifikat `ci.yml` diperbarui ke hash baru; klaim
+  entri ini tidak berubah.
 - **Status:** CERTIFIED dengan scope tercatat
 - **Domino:** tidak ada (infrastruktur verifikasi; bukan domino)
 - **Relasi:** melanjutkan `A-2026-0015` tanpa mengubahnya; memakai
@@ -1149,11 +1155,11 @@ mengikuti laporan L4).
   registry ke-21; memori kerja §2.0ah `reports/HANDOFF.md`.
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_ci_verification_paths.py -q`;
   `python -c "import yaml; yaml.safe_load(open('.github/workflows/ci.yml', encoding='utf-8'))"`;
-  `python -m pytest msaf -q`; `python audit_quantum/freeze.py --verify`.
+  `python -m pytest msaf -q -m "not slow"`; `python audit_quantum/freeze.py --verify`.
 - **Sertifikat:**
 
   ```text
-  sha256LF 52619c25fe9197f6fe892a052cd86bf858a5c4b91725f7abc84b2e3b6c256079 .github/workflows/ci.yml
+  sha256LF ce2fd7486fa9eb6dba37e9e6be6588a2acae03c3413e57ebb3de2f19de8641b7 .github/workflows/ci.yml
   sha256LF 231ce892f3976b5525e74d18720d85cfe5ada9fcfd2688941467e9c98d144ab7 msaf/tests/test_ci_verification_paths.py
   sha256LF 3339a51d290c9d47cd3dd8dbd34cbcc8d0fbcca9622aa3fe9254cd724afc9df4 reports/CI_HARDENING_2026-10-20.md
   ```
@@ -2147,6 +2153,11 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   ada laporan formal terpisah; receipt JSON, pra-registrasi, modul, dan test
   adalah sertifikatnya.
 - **Status:** CERTIFIED
+- **Catatan 2026-10-27:** berkas guard `msaf/tests/test_figure_eight_r6.py`
+  diubah untuk konsolidasi CI: kampanye memakai fixture `scope="module"`
+  (dijalankan sekali, bukan dua kali) dan kedua uji kampanye ditandai
+  `slow`. Tidak ada asersi, ambang, receipt, atau verdict yang berubah;
+  baris sertifikat test diperbarui ke hash baru.
 - **Domino:** figure-eight reduced 8x8 (fondasi trek T2b; stabilitas tetap
   memerlukan pra-registrasi sendiri).
 - **Relasi:** Melanjutkan basis r3 (`reports/figure_eight_r3_2026-10-23.json`,
@@ -2165,7 +2176,7 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
 
   ```text
   sha256LF e4beaefeb859bd3da760e097582527759c5a1132efdf8a5b1ef0e9528025ab88 msaf/figure_eight_r6.py
-  sha256LF e7c7f6e0457ade2e5a6373ad48b5cfc826326b2ab6e4773a43de1d019a2b5e81 msaf/tests/test_figure_eight_r6.py
+  sha256LF a7781bb075b77687d6137c6505398d1e1c1a6c0a28d2f78ca725af6ce2c9ddad msaf/tests/test_figure_eight_r6.py
   sha256LF 8eddc2bb17647d452e15325397e852e224e1af028f055fa4fe41de94af939ec6 msaf/figure_eight_r3.py
   sha256LF 92b687f5ee6237fd01a0b43374c91cce4ba72898f32bfd3f655925a61e591b6b reports/PREREG_FIGURE_EIGHT_R6_2026-10-25.md
   sha256LF 6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9 reports/figure_eight_r3_2026-10-23.json

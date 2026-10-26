@@ -74,6 +74,7 @@ def campaign():
 _EXPECTED_FAILED = {"M3", "M8"}
 
 
+@pytest.mark.slow
 def test_campaign(campaign):
     payload = campaign
     # receipt file exists
@@ -107,6 +108,7 @@ def test_ast_float_forbid():
     hits = r5.r3._ast_hits(source)
     assert hits == []
 
+@pytest.mark.slow
 def test_registry_entry(campaign):
     # only added if all_pass true
     payload = campaign

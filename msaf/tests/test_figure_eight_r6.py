@@ -52,8 +52,15 @@ def test_base_receipt_hash():
     assert hashlib.sha256(data).hexdigest() == EXPECTED_BASE_RECEIPT_SHA
 
 
-def test_campaign():
-    payload = r6.run_campaign()
+@pytest.fixture(scope="module")
+def campaign():
+    """Run the expensive campaign once for both campaign tests."""
+    return r6.run_campaign()
+
+
+@pytest.mark.slow
+def test_campaign(campaign):
+    payload = campaign
     assert RECEIPT.exists(), "receipt not written"
     with open(RECEIPT, "rb") as f:
         receipt_bytes = f.read()
@@ -78,8 +85,9 @@ def test_ast_float_forbid():
     assert hits == []
 
 
-def test_registry_entry():
-    payload = r6.run_campaign()
+@pytest.mark.slow
+def test_registry_entry(campaign):
+    payload = campaign
     if payload["all_pass"]:
         assert payload["registry"] == r6.REGISTRY_ID
     else:
