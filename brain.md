@@ -200,6 +200,8 @@ Newton-derived spectrum module (`zetazeros.py`); multi-precision stress sweep
 
 ## 10. 2026-10-27 — Review 7 hari (20–27 Okt 2026) + protokol anti-loop
 
+**Laporan lengkap:** `reports/WEEKLY_REVIEW_2026-10-20_27.md`.
+
 ### 10.1 Snapshot
 
 - **139 commit** dalam rentang 20 Okt 00:20 – 27 Okt 03:08 WIB.
