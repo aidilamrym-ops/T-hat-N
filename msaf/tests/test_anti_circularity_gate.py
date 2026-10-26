@@ -42,6 +42,7 @@ KERNEL = (
 SCAFFOLD = (
     "lean/Stage_2_Tail_Bound.lean",
     "lean/Stage_3_Eigenvalue_Locking.lean",
+    "lean/Stage_5_EntryError_Perturbation.lean",
 )
 
 SPEC_AXIOM_BUDGET = 9
@@ -164,7 +165,7 @@ def test_kernel_sources_are_placeholder_free() -> None:
     violation = _scope_violation(KERNEL + SCAFFOLD)
     assert violation is None, violation
     sources = _lean_sources()
-    assert len(sources) == 6, "expected four kernel + two scaffold Lean sources"
+    assert len(sources) == 7, "expected four kernel + three scaffold Lean sources"
     for path in sources:
         hits = _placeholders(path.read_text(encoding="utf-8"))
         assert not hits, "%s: placeholders %r" % (path.name, hits)

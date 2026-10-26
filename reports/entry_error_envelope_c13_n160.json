@@ -1,0 +1,18 @@
+{
+  "N": 160,
+  "c": 13,
+  "delta": "3.21e-98",
+  "digest_convention": "sha256 of LF-joined 'i j mid rad' lines; mid/rad are arb.str(140, radius=False)",
+  "digest_sha256": "69e5986e605b56f174541a8c3c1647cf4079af0b2042518894f142c5a659b84f",
+  "dim": 321,
+  "epsilon": "1e-100",
+  "lambda_min": "3.123458832662237e-59",
+  "max_entry_radius_plus_slack": "1.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-120",
+  "max_entry_radius_upper": "7.1914155376658473965293017526957343044333917984215755378759885908592866832516155956378392624582265061519137723422577365087585735710678120654e-1714",
+  "n_entries": 103041,
+  "prec_bits": 6000,
+  "schema": "msaf.entry_error_envelope.v1",
+  "scope": "entry-radius envelope only; not a proof of matrix positive definiteness, not a zeta-spectrum or RH claim",
+  "serialization_slack": "1e-120",
+  "verdict": "PASS"
+}

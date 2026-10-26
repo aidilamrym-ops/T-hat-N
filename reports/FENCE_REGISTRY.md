@@ -1099,7 +1099,7 @@ mengikuti laporan L4).
   sha256LF 8cd30d7bc3372d8d408ff2db6830dbae666f504feadf1bd5e5951a1810c51551 harness/run_anti_circularity_gate.py
   sha256LF 6e5c97a9d780e54a54968ca06a4d453236f65b45f881fbc6234902ef53ed9aab reports/anti_circularity_gate_2026-10-20.log
   sha256LF 8de7bc3659d670976be47b31da1d38cc2fb25495d40ae9fbc101773506726f5c reports/ANTI_CIRCULARITY_GATE_RUN_2026-10-20.md
-  sha256LF 75eec8ed8f09bcff853122d69ece37459e4669469bcd138edc5352a353c2b43a msaf/tests/test_anti_circularity_gate.py
+  sha256LF 4ed32fd9016dee61ed7c975f3acc77e951762ffc11176fe43be9fa2105ebf92d msaf/tests/test_anti_circularity_gate.py
   sha256LF 5b3b263b6796016536653a4511124d9d4b5b81d47798d3580412eef89c86c0e9 lean/ComplexMoore.lean
   sha256LF e92f77e931a2db7c0c783f05688df17f999b72c2114954431296134fed7bca0b lean/NavierStokesCore.lean
   sha256LF 25d4bf7ae743b4b53673f120987c9e3daff2b2043ce7c79a92d5d535c863da49 lean/NewtonExistence.lean
@@ -2223,6 +2223,11 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   dimensi. Baris sertifikat versi `08ae970` dapat dipulihkan dari git history
   (`8e2cf67a…` Stage 2, `571f600a…` Stage 3); baris saat ini adalah versi
   `9d13787`.
+- **Catatan 2026-10-26 (P1):** hash `lean/lakefile.toml` diperbarui dari
+  `cbe01538…` ke `674c3a67…` karena library
+  `Stage_5_EntryError_Perturbation` didaftarkan untuk entri `T-2026-0051`.
+  Perubahan lakefile hanya penambahan target/library tersebut; hash berkas
+  Stage 2/3/4 dan sertifikat lain tidak berubah.
 - **Perintah verifikasi:** `lake build` di `lean/` (exit 0);
   `lake env lean ../reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean`
   (exit 0); `python C:/Users/usER/.config/opencode/skills/anti-circularity/scripts/gate.py
@@ -2236,10 +2241,69 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   sha256LF 2149a89242c3fc010a84d5796c6b4412746a07e6f8c6f8a3ccb917104941f71d lean/Stage_2_Tail_Bound.lean
   sha256LF 551e7e31f73de57ef2c8ee0c9c84fbd7da93295fbde8e6946b5f42db5916155f lean/Stage_3_Eigenvalue_Locking.lean
   sha256LF 5786929a607aa73bc2395481af8f3cb848fff79d3bfff82536b5be88b69a7d61 reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean
-  sha256LF cbe01538ea67cb3372e13500735a113d2413072962418f9dae1cf8fdc29b22df lean/lakefile.toml
+  sha256LF 674c3a67485808036594931e773021c1a7e8da8ac1497a63f728f2159f01a7c3 lean/lakefile.toml
   sha256LF afcb7d811408fab1b5aac08c2e4d3b8515bb8db768d65e887518ba2d2ca6fa4f reports/GW_TAIL_CONSTANTS_2026-10-26.md
   sha256LF e92e05ef8d37b10bb3e39c65e7537e23c8e3a426da548028a0a560126b60b696 reports/lambda_min_eig_ladder_dim321.json
   sha256LF 84152da16f02125e85563184053ba958786efed65de68a0d48bfc5f741fdfc84 reports/lambda_min_eig_ladder_big.json
   sha256LF 0ae3747dc9d486b589e23bf380ae740a3d5b7c825a1bbae1eb974a345bcc35e7 reports/GW_LADDER_DIM321_2026-10-17.md
   sha256LF a54bd9befdb9e386b1f542427af81c86dd3719befdc0ed2ecc956c99ebc7f263 reports/GW_RADIUS_REGISTRY_CORRECTION_2026-10-17.md
+  ```
+
+### T-2026-0051 — Envelope error entry `c=13, N=160, dim=321` dan teorema perturbasi finit
+
+- **Jenis:** T
+- **Pernyataan:** Envelope radius entry matriks Guinand–Weil
+  `build_arb_tau(c=13, N=160, prec=6000)` untuk 103041 entry dibatasi
+  `epsilon = 10^-100` (radius maksimum terukur
+  `7.1914155376658473965293017526957343044333917984215755378759885908592866832516155956378392624582265061519137723422577365087585735710678120654e-1714`,
+  plus slack serialisasi `1e-120`), `delta = 321 * 10^-100 = 3.21 * 10^-98`
+  lebih kecil dari `lambda_min = 3.123458832662237e-59`, dan lima deklarasi
+  Lean `qform_add`, `abs_qform_le_of_entrywise`,
+  `posDef_add_of_quadratic_bound`, `gw_entry_delta_lt_lambda_min`,
+  `gw_entry_perturbation_posDef` lulus kernel dengan aksioma hanya
+  `propext`, `Classical.choice`, `Quot.sound`. `posDef_add_of_quadratic_bound`
+  dan `gw_entry_perturbation_posDef` bersifat **kondisional** pada
+  `A.PosDef`, batas kuadratik `lam * qform 1 x <= qform A x`, dan
+  `E.IsHermitian`.
+- **Batas:** **Bukan bukti RH**, bukan bukti Weil positivity, bukan bukti tail
+  analitik, dan bukan bukti bahwa Lean mendiagonalisasi matriks Arb.
+  `A.PosDef` dan batas kuadratik `A` adalah hipotesis; otoritas positivity
+  matriks tetap run `arb_mat.eig` eksternal (`all_exclude_zero = true`).
+  `epsilon = 10^-100` adalah batas radius **entry**, bukan batas tail
+  analitik dan bukan `|XC(n)| = O(1/n^2)`. `delta` adalah pagar konservatif
+  yang dipilih sebelum pengukuran, bukan error entry aktual. Hubungan antara
+  matriks Arb dan `A.PosDef`/`hAquad` tidak diformalkan di Lean. Digest
+  `69e5986e…` adalah komitmen atas dump kanonik `(i,j,mid,rad)`; dump penuh
+  tidak disimpan di repo, sehingga reproduksi memerlukan rebuild matriks.
+  Tidak ada klaim tentang spektrum zeta, zero zeta, atau hipotesis RH.
+- **Status:** CERTIFIED
+- **Domino:** tidak ada (aritmetika perturbasi finit; bukan domino RH)
+- **Relasi:** melanjutkan `T-2026-0050` untuk konstanta `gw_dim`,
+  `gw_lambda_min`, dan `gw_epsilon`; pra-registrasi
+  `reports/PREREG_ENTRY_ERROR_ENVELOPE_2026-10-26.md` dikomit dan dipush
+  sebagai `34ee072` **sebelum** kode P1; audit P0 ada di `5fea118`.
+  Entri ini **tidak** menulis ulang klaim `T-2026-0050`; satu-satunya
+  perubahan pada entri lama adalah hash `lean/lakefile.toml` karena library
+  Stage 5 didaftarkan (lihat catatan P1 di `T-2026-0050`).
+- **Perintah verifikasi:** `python -m msaf.entry_error_envelope --check`;
+  `python -m pytest msaf/tests/test_entry_error_envelope.py -q`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`;
+  `cd lean; lake build` (3258 jobs, exit 0);
+  `cd lean; lake env lean Stage_5_EntryError_Perturbation.lean` (exit 0);
+  `python C:/Users/usER/.config/opencode/skills/anti-circularity/scripts/gate.py
+  check lean/Stage_2_Tail_Bound.lean lean/Stage_3_Eigenvalue_Locking.lean
+  reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean
+  lean/Stage_5_EntryError_Perturbation.lean` (PASS,
+  `FAIL=0 NOT_RUN=0 SKIP=0`).
+- **Sertifikat:**
+
+  ```text
+  sha256LF 0d045efe90e0d9347b8441329034c7ed5c943bf07f9185aea778355521b49026 reports/PREREG_ENTRY_ERROR_ENVELOPE_2026-10-26.md
+  sha256LF e057ff3780597f9a3de83ef08a61a92332e2bde8ef2efd6003002a50c7345b0f msaf/entry_error_envelope.py
+  sha256LF 65f9ac60282baada3437c4f594bba36d5e4c4b4b134179fb597191c9498a844f reports/entry_error_envelope_c13_n160.json
+  sha256LF 27e292f7f9c5d035a5451008564c410db33372a9a08257d914ac72888e42d68a lean/Stage_5_EntryError_Perturbation.lean
+  sha256LF 674c3a67485808036594931e773021c1a7e8da8ac1497a63f728f2159f01a7c3 lean/lakefile.toml
+  sha256LF d5450db860052eee8baf918bcf7816498f412a027331ab134cd6c2f6aaac5479 msaf/tests/test_entry_error_envelope.py
+  sha256LF c5686414a56e074e5a99cb9e0bde6ced569085237e7d783e6815cf446294eb7a reports/ENTRY_ERROR_ENVELOPE_2026-10-26.md
+  sha256LF 2149a89242c3fc010a84d5796c6b4412746a07e6f8c6f8a3ccb917104941f71d lean/Stage_2_Tail_Bound.lean
   ```

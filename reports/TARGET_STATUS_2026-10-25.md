@@ -24,7 +24,7 @@ PARTIAL dicatat apa adanya dan tidak "dinaikkan" menjadi CERTIFIED.
 | BSD Q1 | **CERTIFIED v2 (T-2026-0049)**: 5 kurva rank-0 (11a1, 14a1, 15a1, 17a1, 19a1) verifikasi eksak formula BSD L(E,1)/Ω = |Ш|·∏c_p/|E(Q)_tors|² dengan parameter LMFDB; v1 (A-2026-0028) INCONCLUSIVE diganti |
 | Twin prime Q2 | Sensus v4 N=10^10 **ALL PASS** (A-2026-0048); v3 N=10^9 **ALL PASS** (A-2026-0046); v2 N=10^7 tetap CERTIFIED (A-2026-0045); entri lama N=100.000 tetap INCONCLUSIVE (A-2026-0029) |
 | ABC Q3 | CERTIFIED sensus C=100.000 (A-2026-0032) — 6 triple q>1.4 |
-| RH scaffold Stage 1–4 | Scaffold Lean **kernel-checked PASS** (definisi + lemma trivial); **bukan bukti analitik penuh** |
+| RH scaffold Stage 1–5 | Stage 1–4 scaffold **kernel-checked PASS**; Stage 5 menambahkan teorema perturbasi finit kondisional + envelope error entry `c=13,N=160` (`T-2026-0051`); **bukan bukti analitik penuh dan bukan RH** |
 | Quantum audit | Statistik 16-bin + χ² + tail z≥3.5 direproduksi; verdict RESOLVED (layer statistik, bukan klaim fisika) |
 | Learnharness | Prototipe stub (engine + test); model nyata belum ada |
 | MCP T2N | Modul asli dipulihkan; `opencode.jsonc` tetap menunjuk enam server |
@@ -90,13 +90,18 @@ folder arsip prompt. Lihat
 | 2 | `Stage_2_Derivation_Analytic_Tail_Bound.lean` (placeholder) | `lean/Stage_2_Tail_Bound.lean` | konstanta truncation archimedean GW nyata (`c=13`, `C=169/42`, `alpha=3261/2`, `K=814`) dan ketaksamaan skalar; **bukan** derivasi tail analitik, **bukan** `C/n` atau `C/n^2` |
 | 3 | `Stage_3_Eigenvalue_Locking_Dimension_Induction.lean` (placeholder) | `lean/Stage_3_Eigenvalue_Locking.lean` | record data untuk dua run Arb (`dim=321`, `dim=257`); **bukan** induksi dimensi, dan induksi naik memang tidak valid karena Cauchy interlacing |
 | 4 | `Stage_4_Containment_Proof.lean` | sama (sudah ditulis ulang) | `test_function_l2_containment` dari polynomial decay; **bukan** containment spektrum zeta |
+| 5 | — (tidak ada arsip prompt) | `lean/Stage_5_EntryError_Perturbation.lean` | envelope entry `epsilon=10^-100`, `delta=321*10^-100 < lambda_min`; `posDef_add_of_quadratic_bound` dan `gw_entry_perturbation_posDef` **kondisional** pada `A.PosDef` dan batas kuadratik `A`; **bukan** bukti positivity matriks Arb |
 
 Semua berkas Lean bebas `sorry`/`admit`/`unsafe`/`axiom`, dan modul aktif
 **lulus kernel check** dengan Lean 4.33.1 / Mathlib `0df444a360`. Namun isinya
 tetap terbatas: Stage 2 bukan derivasi tail Archimedean, Stage 3 bukan induksi
-dimensi, Stage 4 hanya containment L² dari hipotesis polynomial decay. Jangan
-menyebutnya "bukti RH" atau "bukti analytic tail bound". Ini hanya artefak
-finit yang sudah dikompilasi, bukan bukti analitik.
+dimensi, Stage 4 hanya containment L² dari hipotesis polynomial decay, dan
+Stage 5 hanya aritmetika perturbasi finit yang kondisional. Stage 5 **tidak**
+membuktikan bahwa matriks Arb positif-definit; sertifikat eigenvalue tetap run
+`arb_mat.eig` eksternal, dan hubungan sertifikat itu ke hipotesis
+`A.PosDef`/`hAquad` belum diformalkan. Jangan menyebutnya "bukti RH",
+"bukti analytic tail bound", atau `|XC(n)| = O(1/n^2)`. Rincian P1:
+`reports/ENTRY_ERROR_ENVELOPE_2026-10-26.md`.
 
 Log lengkap: `reports/RH_SCAFFOLD_NOTES/KERNEL_CHECK_2026-10-25.md` (perintah
 kernel, SHA-256LF, axiom footprint, dan anti-circularity gate PASS).
@@ -164,7 +169,8 @@ kernel, SHA-256LF, axiom footprint, dan anti-circularity gate PASS).
 ## 5. Registry (ringkas)
 
 - Entri **T** (teorema finit): `T-2026-0001`, `T-2026-0002`, `T-2026-0043`,
-  `T-2026-0049` (BSD Q1 v2), `T-2026-0050` (RH scaffold Stage 2–4).
+  `T-2026-0049` (BSD Q1 v2), `T-2026-0050` (RH scaffold Stage 2–4),
+  `T-2026-0051` (envelope error entry + perturbasi finit Stage 5).
 - Entri **F** (pagar): `F-2026-0001`, `F-2026-0002`.
 - Entri **A** (audit/verdict): `A-2026-0001` … `A-2026-0040` (dengan
   `A-2026-0031` tidak ada), `A-2026-0043`, `A-2026-0045` (Q2 v2),
@@ -180,11 +186,13 @@ kernel, SHA-256LF, axiom footprint, dan anti-circularity gate PASS).
 
 ## 6. Sisa pekerjaan yang jujur
 
-1. **RH scaffold Stage 1–4**: scaffold sudah kernel-checked (PASS), tetapi
-   isinya masih definisi dan lemma trivial. Pekerjaan sebenarnya adalah
-   mengganti placeholder dengan derivasi tail Archimedean, induksi eigenvalue
-   locking, dan bukti containment L². Jangan menaikkan status sebelum ada
-   pembuktian baru + kernel check + receipt baru.
+1. **RH scaffold Stage 1–5**: Stage 5 sudah menambahkan teorema perturbasi
+   finit yang benar-benar diperiksa kernel, tetapi ia **kondisional** pada
+   `A.PosDef` dan batas kuadratik `A`; envelope entry hanya membatasi radius
+   entry, bukan tail analitik. Sisa pekerjaan nyata: (a) derivasi
+   `|XC(n)| = O(1/n^2)` dan `epsilon(N) -> 0` (P2); (b) formalisasi hubungan
+   sertifikat Arb ke `A.PosDef`/`hAquad`, atau jalur positivity lain. Jangan
+   menaikkan status RH sebelum itu ada dan lulus kernel check + receipt baru.
 2. **Quantum audit lanjutan**: layer statistik 16-bin sudah selesai
    (χ² 7.5088/10.3984/11.592; tail 2/4/3; RESOLVED). Jika ingin klaim
    fisik, perlu studi baru dengan null ensemble eksplisit dan prereg

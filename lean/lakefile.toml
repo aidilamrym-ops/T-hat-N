@@ -1,6 +1,6 @@
 name = "that_n_lean"
 version = "0.1.0"
-defaultTargets = ["NavierStokesCore", "NewtonExistence", "XiNoRealZero", "ComplexMoore", "Stage_2_Tail_Bound", "Stage_3_Eigenvalue_Locking"]
+defaultTargets = ["NavierStokesCore", "NewtonExistence", "XiNoRealZero", "ComplexMoore", "Stage_2_Tail_Bound", "Stage_3_Eigenvalue_Locking", "Stage_5_EntryError_Perturbation"]
 
 [[require]]
 name = "mathlib"
@@ -30,7 +30,11 @@ name = "Stage_2_Tail_Bound"
 [[lean_lib]]
 name = "Stage_3_Eigenvalue_Locking"
 
-
+# Stage 5 is the finite perturbation theorem for the pre-registered
+# entry-error envelope. It is conditional on the matrix quadratic bound;
+# it does not diagonalise the Arb matrix.
+[[lean_lib]]
+name = "Stage_5_EntryError_Perturbation"
 
 # lean/spec/ is deliberately NOT registered as a library. It holds
 # XiAnalyticSpec.lean, the conditional derivation of xi > 0 on the reals
