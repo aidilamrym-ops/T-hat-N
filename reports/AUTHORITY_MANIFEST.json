@@ -41,7 +41,7 @@
     },
     "decision_log": {
       "path": "reports/DECISION_LOG.md",
-      "sha256lf": "8dcd4e319c7ab2e22a466eb526c01ebf646619ccf1228f5d7c3414d953836c5e"
+      "sha256lf": "569fb6ec720f9aa9596a533826c5562c91ef409e5bbf02b650fb23d4f215f469"
     },
     "archive_tombstones": {
       "path": "reports/ARCHIVE_TOMBSTONES.md",

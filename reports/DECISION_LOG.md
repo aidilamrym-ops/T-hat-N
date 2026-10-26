@@ -200,7 +200,9 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   `msaf/tests/test_mcp_servers.py`.
 - **Verifikasi:** `python -m pytest msaf/tests/test_mcp_servers.py -q` →
   7 passed; smoke produksi menunjukkan `t2n_core` 30 tool dan `t2n_viz`
-  7 tool dengan `repo_root`/`write_roots` benar. Gate minimum 21 passed.
+  7 tool dengan `repo_root`/`write_roots` benar. Empat guard minimum plus
+  guard MCP: 21 passed. `lake build` tidak dijalankan karena tidak ada
+  perubahan Lean.
 - **Commit:** pra-registrasi `91818bc`; implementasi `7412eff`.
 - **Proses:** seluruh 10 proses t2n berhenti saat `opencode.jsonc` di-reload;
   6 proses `shp_*` (3 batch) tetap berjalan. Duplikasi shp tidak diubah
