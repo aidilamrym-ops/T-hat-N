@@ -135,6 +135,8 @@ def render_materials_dashboard(params: dict) -> dict:
     - material_id: material id for crystal SVG (e.g. "mp-149")
     - title: optional dashboard title
     """
+    from t2n import materials, visualize_materials
+
     chemsys = params.get("chemsys")
     material_id = params.get("material_id")
     title = params.get("title", "Materials Dashboard")
@@ -164,6 +166,9 @@ def render_materials_dashboard(params: dict) -> dict:
     ]
     return render_html_dashboard({"title": title, "sections": sections})
 
+
+def render_html_dashboard(params: dict) -> dict:
+    """Render a standalone HTML dashboard into the illumina write root."""
     title = params.get("title", "T2N Documentation Visual")
     sections = params.get("sections", [])
     if not isinstance(sections, list):
