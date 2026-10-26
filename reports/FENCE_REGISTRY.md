@@ -2204,6 +2204,24 @@ sha256LF 1be5f3d3a3ca41b2da51539a143599d17f010cf76b78a364be35a633f632c1bb report
 sha256LF 5b28978633a19522caa1b75724d76e61453432e60abdf04f33340eb1f1a02b22 msaf/figure_eight_r7.py
 ```
 
+### A-2026-0050 — Learn-harness v1: deterministic certified stub
+
+- **Jenis:** A
+- **Pernyataan:** `msaf/learnharness_v1.py` mengimplementasikan `LearnEngine` deterministik tanpa float/numpy; `train` mencatat panjang data, `predict` mengembalikan matriks identitas eksak; receipt `learnharness_v1_2026-10-25.json` memverifikasi `trained_samples = 4` dan `prediction_sample = [[1,0,0],[0,1,0],[0,0,1]]` dengan `ALL PASS`.
+- **Batas:** hanya stub deterministik; tidak ada klaim performa belajar dunia nyata; tidak menggunakan float, numpy, torch, scipy, atau library ML eksternal.
+- **Status:** CERTIFIED
+- **Domino:** tidak ada
+- **Relasi:** pra-registrasi `reports/PREREG_LEARNHARNES_V1_2026-10-25.md`; guard `msaf/tests/test_learnharness_v1.py`.
+- **Perintah verifikasi:** `python -m msaf.learnharness_v1`; `python -m pytest msaf/tests/test_learnharness_v1.py -q`; `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **Sertifikat:**
+
+```text
+sha256LF a443e3ab728d615e36ade81aa16d35c5ddedc08388af769e3b8a621c352be853 reports/PREREG_LEARNHARNES_V1_2026-10-25.md
+sha256LF 4f980a2b795c7d2c0e2b4affa5224ca0115b8e4d165ddf225dc4d7649fa26c59 reports/learnharness_v1_2026-10-25.json
+sha256LF 1cbdfb200368cc6591febfacfc07726903b0a4871787225b08abcb3a191e3563 msaf/learnharness_v1.py
+sha256LF 821312e2fd86e4126f3b02652ffa52bdbafaa0b32e1bc88fcf62f41d5e96adbf msaf/tests/test_learnharness_v1.py
+```
+
 - **Jenis:** T
 - **Pernyataan:** Verifikasi eksak formula BSD rank-0 L(E,1)/Ω = |Ш| · ∏ c_p / |E(Q)_tors|² untuk 5 kurva elliptik rank-0 (11a1, 14a1, 15a1, 17a1, 19a1) menggunakan parameter LMFDB terkunci tanpa float, numpy, atau lookup tabel tautologis di jalur hitung; semua 5 kurva memuaskan formula dengan |Ш| = 1.
 - **Batas:** Hanya 5 kurva pilot dengan konduktor prima/komposit kecil; |Ш| diasumsikan 1 (bukan dihitung); bukan bukti BSD umum; bukan 2-descent penuh (formula pra-reg memakai L(E,1)/Ω langsung dari LMFDB); tidak ada klaim untuk kurva rank > 0 atau konduktor besar.
