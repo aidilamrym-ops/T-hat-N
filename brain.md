@@ -5,7 +5,8 @@ project. Read this file first when opening a new session. Updated every time
 the project state changes. Language of this file: Indonesian (project memory,
 not code).
 
-Last updated: 2026-10-13 — adversarial self-audit done (blind spots L31–L35,
+Last updated: 2026-10-27 — review 7 hari 20–27 Okt 2026 + protokol anti-loop
+(§10). Previous: 2026-10-13 — adversarial self-audit done (blind spots L31–L35,
 one UNSOUND: L33 one-sided widening, fixed + verified). 67 tests green, both
 ledgers V(L)=True, final seal=True, artifacts workspace-local.
 
@@ -194,3 +195,121 @@ re-verified at 0 non-ASCII. Pending push (needs researcher auth).
 Next (only if researcher orders): replace postulated γ_m DFT definition with
 Newton-derived spectrum module (`zetazeros.py`); multi-precision stress sweep
 (128/256/512/1024 bit) as campaign matrix.
+
+---
+
+## 10. 2026-10-27 — Review 7 hari (20–27 Okt 2026) + protokol anti-loop
+
+### 10.1 Snapshot
+
+- **139 commit** dalam rentang 20 Okt 00:20 – 27 Okt 03:08 WIB.
+- Commit per hari: 20=29, 21=42, 22=6, 23=10, 24=11, 25=24, 26=16, 27=1.
+- Registry: **41 heading baru** (37 `A` + 4 `T`); ID terakhir `A-2026-0051`,
+  `T-2026-0052`.
+- `git status`: 2 file untracked — `reports/PREREG_Q3_ABC_CENSUS_2026-10-27.md`
+  dan `reports/bsd_v3_2026-10-27.json`.
+- 1 komputasi aktif: `abc_census` C=10^7 (PID 15272, mulai 03:35:35, ~58 menit,
+  CPU ~3.367,8 s, RAM ~382 MB, belum ada file output).
+- **16 proses Python MCP**: 2x `t2n_archivist`/`repokeeper`/`science`/`scribe`/
+  `watchtower`, 0x `t2n_illumina`, 3x `shp_asymmetric_wager`, 3x `shp_bridge`.
+  Ini double-run nyata, bukan wrapper+child.
+- CI `ad1fd91`: `lean-kernel` + `coq-kernel` success; `python-tests` masih
+  berjalan — belum boleh disebut hijau.
+- CI `0e8b623` (BSD v3): `python-tests` **FAILED**.
+
+### 10.2 Hasil per hari (ringkas)
+
+| Tanggal | Fokus | Hasil utama |
+|---|---|---|
+| 20 Okt | Coq bridge + Xi spec + audit | `A-2026-0011`–`0023`; anti-circularity gate PASS; Xi V3/V4/V5/V6; CI hijau |
+| 21 Okt | Gelombang sertifikat lintas domain | Ulam `0024`; GW `0025/0026`; block `0027` INCONCLUSIVE; BSD pilot; abc C=100k `0032`; RH ext `0033/0034`; Riemann `0035`; Hodge `0036/0037`; NS `0038/0039`; ODE T1 FAILED; T1b prereg |
+| 22 Okt | T1b + T2 figure-eight | T1b ALL PASS `A-2026-0040`; r1/r2 FAILED (K3/K2); `DAFTAR_MASALAH_KERJA.md` |
+| 23 Okt | r3/r4 | r3 INCONCLUSIVE; r4 CERTIFIED `A-2026-0043`; r5 prereg |
+| 24 Okt | MCP F0–F6 + r5 | core/repokeeper/archivist/scribe/watchtower/science live; r5 FAILED disegel; F4/F5/F6 illumina |
+| 25 Okt | Twin prime + r6 + RH scaffold | v2 N=10^7 `0045`; v3 N=10^9 `0046`; v4 N=10^10 `0048`; r6 `0047`; RH scaffold; F7c |
+| 26 Okt | P0/P1/P2 + authority | P0 `5fea118`; P1 `b7b5f2e` `T-2026-0051`; P2 `0b0a32c` `T-2026-0052`; CI 40261066426 hijau; tag `p2-green-0b0a32c`; authority layer; r7 stub `A-2026-0049`; Learn-harness `A-2026-0050`; BSD v3 stub `A-2026-0051` |
+| 27 Okt | BSD v2 fix + Q3 | `ad1fd91`; Q3 prereg placeholder (untracked); census C=10^7 berjalan, belum ada receipt |
+
+### 10.3 Status ledger — jangan diulang tanpa upgrade contract
+
+| Item | Status | Artefak | Aturan |
+|---|---|---|---|
+| P1 entry-error envelope | DONE/CERTIFIED | `b7b5f2e`, `T-2026-0051` | Kondisional `A.PosDef`; jangan klaim positivity matriks |
+| P2 analytic XC tail | DONE/CERTIFIED | `0b0a32c`, `T-2026-0052` | Diagonal XC saja; bukan RH |
+| Twin prime v2/v3/v4 | DONE/CERTIFIED | `A-2026-0045/0046/0048` | Jangan rerun N yang sama tanpa tujuan baru |
+| Figure-eight r6 | DONE/CERTIFIED | `A-2026-0047` | K6 M1–M10 |
+| abc C=100k | DONE/CERTIFIED | `A-2026-0032` | 6 triple, max_gap 6825 |
+| Coq bridge L2/L5 | DONE/CERTIFIED | `A-2026-0011`–`0014` | — |
+| r7 | **STUB** | `A-2026-0049` | Receipt `result: {}`; laporan placeholder; jangan dianggap selesai |
+| BSD v3 | **STUB/CI FAILED** | `A-2026-0051` | `python-tests` FAILED; status "pending CI" tidak sah |
+| Learn-harness v1 | STUB (jujur) | `A-2026-0050` | Stub deterministik; bukan ML nyata |
+| Q3 abc C=10^7 | **RUNNING/INVALID** | PID 15272 | Prereg placeholder; `--out` diabaikan; tidak certifiable |
+| MCP consolidation | PENDING | `mcp/t2n_combined.py` | Belum mandiri; belum terdaftar; 16 proses |
+
+### 10.4 Protokol anti-loop (mengikat)
+
+1. **Baca brain.md dulu.** Sebelum menyentuh kode/registry, cek status item di
+   §10.3.
+2. **Satu status eksplisit:** `DONE`, `STUB`, `PENDING`, `BLOCKED`, `RUNNING`.
+   Tidak ada status "sudah pernah dikerjakan" tanpa artefak.
+3. **DONE tidak boleh diulang** kecuali memenuhi *upgrade contract*:
+   - ada bukti/requirement baru yang spesifik;
+   - ada acceptance criteria yang terukur;
+   - ada delta artefak (N lebih besar, bound lebih kuat, bug fix, receipt baru);
+   - untuk item CERTIFIED, ada persetujuan pemilik dan entri koreksi aditif.
+4. **STUB tidak boleh diklaim DONE.** Stub hanya naik status jika artefak nyata
+   menggantikan placeholder.
+5. **PENDING** dilanjutkan dari *next step* yang tercatat, bukan dari awal.
+6. **BLOCKED** wajib mencatat blocker + keputusan pemilik yang dibutuhkan.
+7. **Loop detector:** jika item yang sama dikerjakan 3 kali tanpa perubahan
+   status/artefak, hentikan dan eskalasi ke pemilik.
+8. **Modular forward:** setiap pekerjaan harus menghasilkan modul/receipt/test
+   yang bisa dipakai ulang. Jangan membuat implementasi paralel kecuali untuk
+   verifikasi independen (dan beri label).
+9. **Prereg sebelum kode; satu commit satu tujuan; jangan rewrite entri
+   CERTIFIED; jangan hapus artefak ber-sha256LF.**
+10. **Kelompokkan pekerjaan per track** (A/B/C) dan selesaikan satu track
+    sebelum pindah, kecuali ada blocker yang butuh keputusan pemilik.
+
+### 10.5 Work queue (next)
+
+- **A0 — karantina Q3:** tetapkan run PID 15272 sebagai *exploratory/invalid*
+  (prereg placeholder, `--out` diabaikan). Jangan klaim hasilnya. Keputusan:
+  biarkan selesai atau hentikan untuk menghemat panas.
+- **A1 — Q3 v2:** tulis prereg baru dengan hash nyata, commit terpisah;
+  perbaiki `abc_census.main()` agar menulis `args.out`, progress log, dan test
+  C=10^5; validasi C=10^5 sebelum C=10^7.
+- **B1 — koreksi registry:** siapkan dossier koreksi (bukan edit diam-diam)
+  untuk r7, BSD v3, dan `T-2026-0049`; minta keputusan pemilik; tambahkan entri
+  koreksi + guard test.
+- **C1 — MCP:** matikan batch duplikat 02:01/04:01 setelah verifikasi; daftarkan
+  `t2n_combined` + satu core; jangan hapus modul sumber sebelum combined mandiri.
+- **D1 — rekonsiliasi:** `DECISION_LOG` (`A-2026-0050`), dua file untracked,
+  `TARGET_STATUS` §6.
+
+### 10.6 Keputusan pemilik yang masih terbuka
+
+1. Status `T-2026-0049` dan `A-2026-0048` terkait pelanggaran prereg 2026-10-25.
+2. Pemisahan uji r5 mahal dari CI default (~2 jam).
+3. Pilihan core MCP keempat: `t2n_watchtower` atau `t2n_scribe`.
+4. Sikap terhadap r7 dan BSD v3: retraksi, reklasifikasi, atau lengkapi artefak.
+5. Apakah run `abc_census` PID 15272 dihentikan atau dibiarkan selesai.
+
+### 10.7 Catatan integritas yang tidak boleh hilang
+
+- Commit `d56242c` mengganti heading `### T-2026-0049 — BSD Q1 v2` dengan
+  `### A-2026-0049 — Figure-eight r7`, sehingga badan entri BSD v2 menjadi
+  yatim (tanpa ID).
+- `A-2026-0051` menulis "melanjutkan `A-2026-0048` (BSD Q1 v2)", padahal
+  `A-2026-0048` adalah twin prime v4.
+- `reports/PREREG_BSD_V3_2026-10-27.md` berisi kode pytest + hash placeholder,
+  bukan pra-registrasi.
+- `reports/PREREG_Q3_ABC_CENSUS_2026-10-27.md` masih untracked +
+  `sha256LF <placeholder_prereg_hash>`.
+- `reports/figure_eight_r7_2026-10-26.json` = `{"schema": ..., "result": {}}`;
+  laporan r7 masih placeholder.
+- `reports/bsd_v3_2026-10-27.json` untracked meskipun hash-nya tercatat di
+  registry.
+- `DECISION_LOG` masih menyebut `A-2026-0050` kosong, padahal registry sudah
+  punya entri CERTIFIED.
+- 16 proses MCP = double-run; `t2n_illumina` 0 proses.
