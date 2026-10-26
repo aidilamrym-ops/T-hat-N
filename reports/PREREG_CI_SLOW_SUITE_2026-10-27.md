@@ -78,3 +78,31 @@ python -m pytest msaf/tests/test_figure_eight_r5.py msaf/tests/test_figure_eight
 - Tidak menjalankan kampanye r5/r6 penuh secara lokal (mahal/panas).
 - Tidak mengubah jadwal menjadi setiap push.
 - Tidak menyentuh workflow `spec-v3`..`spec-v6`.
+
+## 8. Amendemen 2026-10-27 — guard segel receipt di workflow lambat
+
+Bagian 1–7 di atas tetap terkunci; amendemen ini aditif.
+
+- **Latar:** uji kampanye r6 menulis ulang receipt lalu membandingkan hash
+  payload yang baru ditulis, sehingga asersi itu tautologis. Pengunci
+  integritas receipt yang sebenarnya adalah
+  `msaf/tests/test_fence_registry.py`, yang memverifikasi setiap baris
+  `sha256LF` di registry. Workflow `Slow tests` yang hanya menjalankan
+  `-m slow` tidak memverifikasi segel itu sebelum kampanye.
+- **Keputusan:** tambahkan langkah murah `Verify sealed receipts` yang
+  menjalankan `python -m pytest msaf/tests/test_fence_registry.py -q`
+  **sebelum** `python -m pytest msaf -q -m slow`. Jika hash receipt bergeser,
+  workflow gagal sebelum kampanye mahal dimulai.
+- **Kriteria tambahan:**
+
+  | # | Kriteria | Ambang |
+  |---|---|---|
+  | K7 | Workflow lambat memverifikasi registry | langkah `python -m pytest msaf/tests/test_fence_registry.py -q` ada dan mendahului `python -m pytest msaf -q -m slow` |
+  | K8 | Guard mengunci urutan | `msaf/tests/test_ci_slow_split.py` memuat asersi urutan langkah |
+
+- **Batas:** tidak mem-pin hash payload Arb penuh (string interval Arb tidak
+  stabil lintas platform); tidak menjalankan ulang kampanye; tidak mengubah
+  receipt, asersi, atau verdict.
+- **Konsekuensi klaim:** klaim r5/r6 mensyaratkan `python-tests` hijau **dan**
+  `Slow tests` hijau pada commit yang sama; `Slow tests` kini ikut
+  membuktikan segel receipt.
