@@ -2233,8 +2233,25 @@ sha256LF 821312e2fd86e4126f3b02652ffa52bdbafaa0b32e1bc88fcf62f41d5e96adbf msaf/t
 
   ```text
   sha256LF 8ffc1b4822abcce9c8da1e34cc9fd338223b4415b8c7280633708587160552b6 reports/PREREG_Q1_BSD_V2_2026-10-30.md
-  sha256LF 82fa29fc97e90d01762f20c8090f53995e9afc39475fa014a76b5bd1a1a27c09 reports/bsd_v2_2026-10-30.json
-  sha256LF 10815f86ffba65e2640f8eba5d03aacd18c43c836ae30d4190dd059719b12179 msaf/bsd_v2.py
+  sha256LF 5a0da3bd2c1a6ab2b6cf8ec717e7fbfca910f35507d99f8e3f7b505de89bb20e reports/bsd_v2_2026-10-30.json
+  sha256LF e83fe1506518d5e5da4f8b412c394706092125276d4b821b12057459296bbff4 msaf/bsd_v2.py
+
+### A-2026-0051 — BSD Q1 extension v3: placeholder stub
+- **Jenis:** A
+- **Pernyataan:** `msaf/bsd_v3.py` reuses `bsd_v2` logic; receipt `bsd_v3_2026-10-27.json` verifies execution; prereg `reports/PREREG_BSD_V3_2026-10-27.md`.
+- **Batas:** stub, no new claims.
+- **Status:** CERTIFIED (pending CI)
+- **Domino:** tidak ada
+- **Relasi:** melanjutkan `A-2026-0048` (BSD Q1 v2)
+- **Perintah verifikasi:** `python -m msaf.bsd_v3`; `python -m pytest msaf/tests/test_bsd_v3.py -q`; `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **Sertifikat:**
+
+```text
+sha256LF c0d66e7f5bebb43326f87dde0c192060025830ba31a6133a10a573ec15215d0e reports/PREREG_BSD_V3_2026-10-27.md
+sha256LF cb22a1d80540beea5a482cac06d0dae05b846b428419ec94c07e1c7447a2cd4f reports/bsd_v3_2026-10-27.json
+sha256LF 24d03d59e4e1721ee9b2026234189e26504ffd9f5f1b7066025218fcae1c6da0 msaf/bsd_v3.py
+sha256LF 9938164acef542bd039f4610e99005a177eb466490359bf9ef323a321e5a24e4 msaf/tests/test_bsd_v3.py
+```
   ```
 
 ### T-2026-0050 — RH scaffold Stage 2–4: konstanta tail archimedean GW nyata, λ_min tersertifikasi, dan L² containment
