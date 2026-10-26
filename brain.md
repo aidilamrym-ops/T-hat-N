@@ -204,6 +204,8 @@ Newton-derived spectrum module (`zetazeros.py`); multi-precision stress sweep
 
 ### 10.1 Snapshot
 
+Snapshot ini dibekukan pada 27 Okt 03:08 WIB; status terkini ada di §10.3.
+
 - **139 commit** dalam rentang 20 Okt 00:20 – 27 Okt 03:08 WIB.
 - Commit per hari: 20=29, 21=42, 22=6, 23=10, 24=11, 25=24, 26=16, 27=1.
 - Registry: **41 heading baru** (37 `A` + 4 `T`); ID terakhir `A-2026-0051`,
@@ -230,7 +232,7 @@ Newton-derived spectrum module (`zetazeros.py`); multi-precision stress sweep
 | 24 Okt | MCP F0–F6 + r5 | core/repokeeper/archivist/scribe/watchtower/science live; r5 FAILED disegel; F4/F5/F6 illumina |
 | 25 Okt | Twin prime + r6 + RH scaffold | v2 N=10^7 `0045`; v3 N=10^9 `0046`; v4 N=10^10 `0048`; r6 `0047`; RH scaffold; F7c |
 | 26 Okt | P0/P1/P2 + authority | P0 `5fea118`; P1 `b7b5f2e` `T-2026-0051`; P2 `0b0a32c` `T-2026-0052`; CI 40261066426 hijau; tag `p2-green-0b0a32c`; authority layer; r7 stub `A-2026-0049`; Learn-harness `A-2026-0050`; BSD v3 stub `A-2026-0051` |
-| 27 Okt | BSD v2 fix + Q3 | `ad1fd91`; Q3 prereg placeholder (untracked); census C=10^7 berjalan, belum ada receipt |
+| 27 Okt | BSD v2 fix + Q3 v3 | `ad1fd91`; Q3 v2 (12 triple) superseded; Q3 v3 17 triple `A-2026-0052`; gate 6/6825; validasi 11/6825 |
 
 ### 10.3 Status ledger — jangan diulang tanpa upgrade contract
 
@@ -245,7 +247,7 @@ Newton-derived spectrum module (`zetazeros.py`); multi-precision stress sweep
 | r7 | **STUB** | `A-2026-0049` | Receipt `result: {}`; laporan placeholder; jangan dianggap selesai |
 | BSD v3 | **STUB/CI FAILED** | `A-2026-0051` | `python-tests` FAILED; status "pending CI" tidak sah |
 | Learn-harness v1 | STUB (jujur) | `A-2026-0050` | Stub deterministik; bukan ML nyata |
-| Q3 abc C=10^7 | **RUNNING/INVALID** | PID 15272 | Prereg placeholder; `--out` diabaikan; tidak certifiable |
+| Q3 abc C=10^7 | DONE/CERTIFIED | `A-2026-0052`, `reports/abc_census_v3_10000000.json` | 17 triple, max_gap 40640; v2 100-smooth superseded; jangan rerun N sama tanpa upgrade contract |
 | MCP consolidation | PENDING | `mcp/t2n_combined.py` | Belum mandiri; belum terdaftar; 16 proses |
 
 ### 10.4 Protokol anti-loop (mengikat)
@@ -275,12 +277,11 @@ Newton-derived spectrum module (`zetazeros.py`); multi-precision stress sweep
 
 ### 10.5 Work queue (next)
 
-- **A0 — karantina Q3:** tetapkan run PID 15272 sebagai *exploratory/invalid*
-  (prereg placeholder, `--out` diabaikan). Jangan klaim hasilnya. Keputusan:
-  biarkan selesai atau hentikan untuk menghemat panas.
-- **A1 — Q3 v2:** tulis prereg baru dengan hash nyata, commit terpisah;
-  perbaiki `abc_census.main()` agar menulis `args.out`, progress log, dan test
-  C=10^5; validasi C=10^5 sebelum C=10^7.
+- **A0 — DONE:** run PID 15272 dihentikan dan dinyatakan eksploratori/invalid;
+  hasilnya tidak menjadi klaim.
+- **A1 — DONE:** Q3 v2 (12 triple, 100-smooth) dikunci lalu superseded oleh
+  Q3 v3 (17 triple, low-rad exhaustive). Prereg v3 `aed8e63c...`; registry
+  `A-2026-0052`; receipt `reports/abc_census_v3_10000000.json`.
 - **B1 — koreksi registry:** siapkan dossier koreksi (bukan edit diam-diam)
   untuk r7, BSD v3, dan `T-2026-0049`; minta keputusan pemilik; tambahkan entri
   koreksi + guard test.
@@ -295,7 +296,8 @@ Newton-derived spectrum module (`zetazeros.py`); multi-precision stress sweep
 2. Pemisahan uji r5 mahal dari CI default (~2 jam).
 3. Pilihan core MCP keempat: `t2n_watchtower` atau `t2n_scribe`.
 4. Sikap terhadap r7 dan BSD v3: retraksi, reklasifikasi, atau lengkapi artefak.
-5. Apakah run `abc_census` PID 15272 dihentikan atau dibiarkan selesai.
+5. **Selesai 2026-10-27:** run `abc_census` PID 15272 dihentikan dan
+   dinyatakan eksploratori/invalid; digantikan Q3 v3 (`A-2026-0052`).
 
 ### 10.7 Catatan integritas yang tidak boleh hilang
 
@@ -306,8 +308,9 @@ Newton-derived spectrum module (`zetazeros.py`); multi-precision stress sweep
   `A-2026-0048` adalah twin prime v4.
 - `reports/PREREG_BSD_V3_2026-10-27.md` berisi kode pytest + hash placeholder,
   bukan pra-registrasi.
-- `reports/PREREG_Q3_ABC_CENSUS_2026-10-27.md` masih untracked +
-  `sha256LF <placeholder_prereg_hash>`.
+- `reports/PREREG_Q3_ABC_CENSUS_2026-10-27.md` (placeholder) sudah dihapus
+  2026-10-27; diganti `reports/PREREG_Q3_ABC_CENSUS_V3_2026-10-27.md`
+  (sha256LF `aed8e63c...`).
 - `reports/figure_eight_r7_2026-10-26.json` = `{"schema": ..., "result": {}}`;
   laporan r7 masih placeholder.
 - `reports/bsd_v3_2026-10-27.json` untracked meskipun hash-nya tercatat di

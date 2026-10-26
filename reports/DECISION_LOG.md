@@ -143,6 +143,27 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   registry. ID itu masih kosong; `T-2026-0050` adalah ID berbeda (RH
   scaffold). Klaim README belum bisa diverifikasi dari ledger.
 
+## 2026-10-27 — Q3 v2 superseded oleh Q3 v3 (sensus abc low-rad lengkap)
+
+- **Keputusan:** Sensus Q3 v2 yang mengunci `max_prime = 100` dinyatakan
+  parsial dan superseded. Q3 v3 memakai batas kelengkapan
+  `rad(abc) < c^(5/7)`, sehingga enumerasi low-rad lengkap.
+- **Alasan:** v2 menemukan 12 triple pada C=10^7; enumerasi lengkap menemukan
+  17 triple. Lima triple yang hilang memuat prima 109–173, jadi
+  `max_prime=100` bukan batas yang sah untuk kelengkapan.
+- **Commit:** pra-registrasi v3 `0d229bb` (sha256LF `aed8e63c...`);
+  implementasi, receipt, laporan, dan registry dicatat pada commit `29b1739`.
+- **Registry:** `A-2026-0052` (v3, 17 triple) ditambahkan dengan verdict
+  `ALL PASS`. `A-2026-0032` (C=100.000, 6 triple) tidak di-retract; dua baris
+  hash modul/guard diperbarui ke v3 dengan catatan tanggal, dan klaim 6 triple
+  tidak berubah.
+- **Batas:** sensus finit C=10^7; bukan pembuktian konjektur abc; tidak ada
+  klaim asimtotik/RH/GRH/faktorisasi/RSA/ECC/Anderson/fisika.
+- **Dampak:** `reports/DAFTAR_MASALAH_KERJA.md` Q3 menjadi ALL PASS v3;
+  `brain.md` §10.3 Q3 menjadi DONE/CERTIFIED. Receipt v2 parsial disimpan di
+  `reports/abc_census_v2_10000000.json` sebagai bukti supersession, bukan
+  sertifikat.
+
 ## Keputusan yang masih menunggu pemilik
 
 1. Status sertifikasi `T-2026-0049` dan `A-2026-0048` sehubungan dengan

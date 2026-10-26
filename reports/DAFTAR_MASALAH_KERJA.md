@@ -85,6 +85,11 @@ integer-per-integer. Modul baru: sieve tersertifikasi.
 q > 1.4 yang terverifikasi ulang independen. Modul baru: pencarian
 triple + pemeriksa kualitas.
 
+**Status Q3:** CERTIFIED (A-2026-0052) — sensus hingga C=10^7, 17 triple
+dengan q>1.4, max_gap=40640, dua sieve independen sepakat, receipt
+`reports/abc_census_v3_10000000.json` (verdict ALL PASS). Gate C=10^5:
+6/6825; validasi C=10^6: 11/6825.
+
 **Q4 — Ekstensi RH.** Fragmen: T = 100 dengan mesin yang sama
 (COMPLETE + winding cross-lock), DENGAN ukur-dinding-dulu. Latar:
 kerja literatur G2. Ini background, bukan trek utama.
