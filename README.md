@@ -23,8 +23,8 @@ Display equations below are versioned local SVG assets under
 installation, so the archive stays self-contained forever.
 
 **Status (2026-10-18) - H1 floor-amendment closed (stages A + B + C).** The
-- Figure‑eight campaign now includes **r6** (CERTIFIED, entry `A‑2026‑0047`).
-- Learn‑harness v1 stub certified (entry `A‑2026‑0050`).
+- Figure‑eight campaign now includes **r6** (CERTIFIED, entry `A‑2026‑0047`) and **r7** (CERTIFIED, entry `A‑2026‑0049`).
+- Learn‑harness v1 stub certified (entry `A‑2026‑0050`), now verified with registry entry.
 statistical floor of the Section 6 campaign was lifted from 2000 to 20000
 surrogates on the pre-registered 18-cell grid (A), the single cell that
 clears the floor was re-measured with a five-seed robustness array (B), and
