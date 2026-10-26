@@ -240,17 +240,17 @@ Snapshot ini dibekukan pada 27 Okt 03:08 WIB; status terkini ada di §10.3.
 |---|---|---|---|
 | P1 entry-error envelope | DONE/CERTIFIED | `b7b5f2e`, `T-2026-0051` | Kondisional `A.PosDef`; jangan klaim positivity matriks |
 | P2 analytic XC tail | DONE/CERTIFIED | `0b0a32c`, `T-2026-0052` | Diagonal XC saja; bukan RH |
-| Twin prime v2/v3/v4 | DONE/CERTIFIED | `A-2026-0045/0046/0048` | Jangan rerun N yang sama tanpa tujuan baru |
+| Twin prime v2/v3/v4 | DONE/CERTIFIED | `A-2026-0045/0046/0048` | v4: pengecualian proses tercatat; jangan rerun N yang sama tanpa tujuan baru |
 | Figure-eight r6 | DONE/CERTIFIED | `A-2026-0047` | K6 M1–M10 |
 | abc C=100k | DONE/CERTIFIED | `A-2026-0032` | 6 triple, max_gap 6825 |
 | Coq bridge L2/L5 | DONE/CERTIFIED | `A-2026-0011`–`0014` | — |
 | r7 | **RETRACTED (stub)** | `A-2026-0049` | Retraksi pemilik 2026-10-27; receipt kosong, test tidak ada; artefak disimpan |
-| BSD v2 | DONE/CERTIFIED | `T-2026-0049` | 5 kurva pilot; heading dipulihkan 2026-10-27 |
+| BSD v2 | DONE/CERTIFIED | `T-2026-0049` | 5 kurva pilot; heading dipulihkan; pengecualian proses tercatat |
 | BSD v3 | **RECON (stub)** | `A-2026-0051` | Reklasifikasi 2026-10-27; prereg tidak sah; receipt stub di-track; bukan sertifikasi |
-| Learn-harness v1 | STUB (jujur) | `A-2026-0050` | Stub deterministik; bukan ML nyata |
+| Learn-harness v1 | CERTIFIED (stub deterministik) | `A-2026-0050` | Bukan klaim ML; label hanya untuk perilaku stub |
 | Q3 abc C=10^7 | DONE/CERTIFIED | `A-2026-0052`, `reports/abc_census_v3_10000000.json` | 17 triple, max_gap 40640; v2 100-smooth superseded; jangan rerun N sama tanpa upgrade contract |
 | MCP consolidation | DONE (aktif setelah restart) | `mcp/t2n_core.py`, `mcp/t2n_viz.py`, `opencode.jsonc` | 2 server t2n: 30 + 7 tool; guard 7 test; shp tidak disentuh |
-| CI slow split | **DONE (kode); VERIFY CI** | `pytest.ini`, `.github/workflows/slow-tests.yml` | 4 uji kampanye dipisah; suite cepat 786 uji; r5/r6 hanya di workflow `Slow tests` |
+| CI slow split | DONE (kode + guard segel); VERIFY CI | `pytest.ini`, `.github/workflows/slow-tests.yml` | 4 uji kampanye dipisah; suite cepat 786 uji; `Slow tests` memverifikasi registry sebelum kampanye |
 
 ### 10.4 Protokol anti-loop (mengikat)
 
@@ -293,12 +293,20 @@ Snapshot ini dibekukan pada 27 Okt 03:08 WIB; status terkini ada di §10.3.
   aktivasi penuh menunggu restart opencode. `shp_*` tidak disentuh.
 - **D1 — rekonsiliasi:** `DECISION_LOG` (`A-2026-0050`), dua file untracked,
   `TARGET_STATUS` §6.
+- **D2 — DONE 2026-10-27:** tiga keputusan delegasi (D1–D3) ditulis ke
+  `reports/DECISION_LOG.md`; registry diberi catatan aditif; gerbang klaim
+  r5/r6 dikunci di `AGENTS.md`; `Slow tests` memverifikasi segel receipt
+  sebelum kampanye.
 
 ### 10.6 Keputusan pemilik yang masih terbuka
 
-1. Status `T-2026-0049` dan `A-2026-0048` terkait pelanggaran prereg 2026-10-25.
-2. Pemisahan uji r5 mahal dari CI default (~2 jam).
-3. Pilihan core MCP keempat: `t2n_watchtower` atau `t2n_scribe`.
+1. **Selesai 2026-10-27:** `T-2026-0049` dan `A-2026-0048` tetap
+   `CERTIFIED` dengan pengecualian proses tercatat (preseden r6).
+2. **Selesai 2026-10-27:** r5/r6 dipisah ke workflow `Slow tests`; klaim
+   mensyaratkan `python-tests` hijau dan `Slow tests` hijau pada commit yang
+   sama; r5 tetap `FAILED`.
+3. **Selesai 2026-10-27:** pemilik memutuskan MCP final 2 server t2n
+   (`t2n_core` + `t2n_viz`); `watchtower`/`scribe` tidak dipakai.
 4. **Selesai 2026-10-27:** r7 di-retract (`A-2026-0049`) dan BSD v3
    direklasifikasi RECON (`A-2026-0051`); kelengkapan artefak tetap pekerjaan
    terpisah.

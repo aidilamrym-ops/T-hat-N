@@ -233,18 +233,69 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   workflow `Slow tests`; jangan menyebut r5/r6 hijau tanpa hasil workflow itu.
   Tidak ada asersi, ambang, receipt, atau verdict yang dihapus/diubah.
 
+## 2026-10-27 — Tiga keputusan delegasi: status sertifikasi dan gerbang klaim r5/r6
+
+- **Dasar delegasi:** pemilik menyerahkan keputusan dengan syarat klaim hanya
+  boleh jika semua syarat terpenuhi dan terbukti/dapat dibuktikan. Keputusan
+  berikut berbasis pemeriksaan artefak, bukan asumsi.
+
+### D1 — `T-2026-0049` dan `A-2026-0048` tetap CERTIFIED dengan pengecualian proses tercatat
+
+- **Keputusan:** kedua entri tetap `CERTIFIED`. Pelanggaran prereg 2026-10-25
+  (commit campuran; tanggal 2026-10-30 adalah tanggal target, bukan tanggal
+  registrasi) dicatat sebagai pengecualian proses, bukan alasan menurunkan
+  status. Preseden: `A-2026-0047` (r6), diputuskan pemilik 2026-10-26.
+- **Bukti `T-2026-0049`:** receipt `reports/bsd_v2_2026-10-30.json` mencatat
+  `all_pass: true`, 5 kurva, dan `match: true` pada setiap kurva; hash
+  pra-registrasi, receipt, dan modul cocok dengan baris `sha256LF`;
+  `msaf/tests/test_bsd_v2.py` lulus 2/2 dan menghitung ulang formula eksak
+  melalui `bsd_v2.build_payload()` tanpa float/numpy.
+- **Bukti `A-2026-0048`:** receipt `reports/twin_prime_v4_2026-10-30.json`
+  mencatat `all_pass: true`, `count_a = count_b = 27.412.679`,
+  `elementwise_mismatches = 0`, dan `pairs_sha256_a == pairs_sha256_b`;
+  checkpoint 10^6–10^9 cocok dengan nilai referensi (8169, 58980, 440312,
+  3424506); hash pra-registrasi, receipt, dan modul cocok.
+- **Batas:** klaim tetap finit — 5 kurva pilot rank-0 dengan `|Ш| = 1`
+  diasumsikan (BSD v2), dan sensus 10^10 (twin v4). Bukan bukti BSD atau twin
+  prime umum. Tidak ada uji lokal yang menjalankan ulang sensus 10^10;
+  integritas receipt dijaga `test_fence_registry` dan checkpoint referensi.
+- **Konsekuensi:** tanggal tidak diedit retroaktif; tidak ada penulisan ulang
+  entri `CERTIFIED`; cukup catatan bertanggal yang aditif.
+
+### D2 — `A-2026-0050` tetap CERTIFIED untuk stub deterministik
+
+- **Keputusan:** `CERTIFIED` dipertahankan. Label ini menyatakan perilaku stub
+  deterministik yang tercatat, bukan klaim belajar.
+- **Bukti:** pra-registrasi nyata, receipt `ALL PASS`, hash
+  pra-registrasi/receipt/modul/test cocok, dan
+  `msaf/tests/test_learnharness_v1.py` lulus.
+- **Batas:** tidak ada klaim performa ML, generalisasi, atau kualitas model;
+  label `CERTIFIED` tidak menaikkan stub menjadi implementasi ML.
+
+### D3 — Gerbang klaim r5/r6
+
+- **Keputusan:** "CI hijau" default **tidak pernah** mencakup r5/r6. Klaim
+  tentang r5/r6 hanya boleh jika (a) job `python-tests` hijau dan (b) workflow
+  `Slow tests` hijau pada commit yang sama.
+- **r5:** verdict tersegel adalah `FAILED` (`all_pass: false`, 8/10 baris K6
+  lulus). r5 tidak boleh disebut "green"; yang boleh diklaim hanyalah verdict
+  `FAILED` yang direproduksi.
+- **r6:** verdict `ALL PASS`; klaim tetap lokal di box B dan kondisional pada
+  K1–K5 serta M1–M10.
+- **Penguatan bukti:** `slow-tests.yml` kini menjalankan
+  `test_fence_registry` **sebelum** kampanye (amendemen pra-registrasi §8,
+  commit `0d25a53`; implementasi `3a56b86`), sehingga `Slow tests` yang hijau
+  ikut membuktikan segel receipt. Guard `test_ci_slow_split.py` mengunci
+  urutan langkah.
+- **Batas:** hash payload Arb penuh tidak di-pin karena string interval Arb
+  tidak stabil lintas platform.
+
 ## Keputusan yang masih menunggu pemilik
 
-1. Status sertifikasi `T-2026-0049` dan `A-2026-0048` sehubungan dengan
-   pelanggaran prereg 2026-10-25. `A-2026-0047` sudah diputuskan pada
-   2026-10-26 (CERTIFIED).
-2. Entri Registry Learn-harness v1: `A-2026-0050` ada di registry dengan
-   status CERTIFIED untuk stub deterministik. Verifikasi 2026-10-27
-   menemukan pra-registrasi nyata, receipt `ALL PASS`, dan hash cocok; keputusan
-   yang tersisa adalah apakah label CERTIFIED layak untuk stub, atau perlu
-   direklasifikasi seperti `A-2026-0051`; `T-2026-0050` adalah ID berbeda.
-3. CI default kini mengecualikan uji `slow`. Perlu persetujuan berkelanjutan:
-   apakah workflow `Slow tests` cukup, atau r5/r6 harus tetap menjadi syarat
-   wajib sebelum klaim apa pun tentang r5/r6.
+Tiga pertanyaan delegasi 2026-10-27 sudah diputuskan di atas (D1–D3). Tidak
+ada item dari daftar itu yang tersisa. Risiko residual yang dicatat, bukan
+keputusan terbuka: `A-2026-0048` tidak memiliki uji khusus v4 yang dapat
+menjalankan ulang sensus 10^10 secara lokal; verifikasinya bergantung pada
+receipt tersegel, checkpoint referensi, dan guard registry.
 
 

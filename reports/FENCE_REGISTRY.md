@@ -2189,6 +2189,7 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
 - **Pernyataan:** Dua sieve independen (Eratosthenes penuh bytearray vs Eratosthenes tersegmentasi) di N = 10^10 menghasilkan daftar pasangan (p, p + 2) yang identik integer-per-integer pada seluruh rentang; jumlah total = 27,412,679.
 - **Batas:** Sensus finit N = 10^10; tidak ada klaim tentang konjektur twin prime, asimtotik, atau sifat global.
 - **Status:** CERTIFIED
+- **Catatan keputusan 2026-10-27:** Status dipertahankan atas keputusan delegasi pemilik. Pelanggaran prereg 2026-10-25 (commit `ee9a5f3`; tanggal `2026-10-30` adalah tanggal target) dicatat sebagai pengecualian proses. Bukti: receipt `all_pass: true`, `count_a = count_b = 27.412.679`, `elementwise_mismatches = 0`, `pairs_sha256_a == pairs_sha256_b`; checkpoint 10^6–10^9 cocok dengan referensi (8169, 58980, 440312, 3424506); hash sertifikat cocok. Tidak ada uji lokal yang menjalankan ulang 10^10; integritas receipt dijaga `test_fence_registry`.
 - **Domino:** RH (Twin Prime Conjecture — verifikasi numerik finit)
 - **Relasi:** v3 (N=10^9); laporan reports/PREREG_Q2_TWIN_PRIME_V4_2026-10-30.md.
 - **Perintah verifikasi:** python -m msaf.twin_prime_v4 menghasilkan receipt di reports/twin_prime_v4_2026-10-30.json; guard CI memeriksa sha.
@@ -2223,6 +2224,7 @@ sha256LF 5b28978633a19522caa1b75724d76e61453432e60abdf04f33340eb1f1a02b22 msaf/f
 - **Pernyataan:** `msaf/learnharness_v1.py` mengimplementasikan `LearnEngine` deterministik tanpa float/numpy; `train` mencatat panjang data, `predict` mengembalikan matriks identitas eksak; receipt `learnharness_v1_2026-10-25.json` memverifikasi `trained_samples = 4` dan `prediction_sample = [[1,0,0],[0,1,0],[0,0,1]]` dengan `ALL PASS`.
 - **Batas:** hanya stub deterministik; tidak ada klaim performa belajar dunia nyata; tidak menggunakan float, numpy, torch, scipy, atau library ML eksternal.
 - **Status:** CERTIFIED
+- **Catatan keputusan 2026-10-27:** `CERTIFIED` dipertahankan untuk lingkup stub deterministik saja; label ini bukan klaim belajar, generalisasi, atau kualitas model. Bukti: pra-registrasi nyata, receipt `ALL PASS`, hash cocok, dan `test_learnharness_v1.py` lulus.
 - **Domino:** tidak ada
 - **Relasi:** pra-registrasi `reports/PREREG_LEARNHARNES_V1_2026-10-25.md`; guard `msaf/tests/test_learnharness_v1.py`.
 - **Perintah verifikasi:** `python -m msaf.learnharness_v1`; `python -m pytest msaf/tests/test_learnharness_v1.py -q`; `python -m pytest msaf/tests/test_fence_registry.py -q`.
@@ -2242,6 +2244,7 @@ sha256LF 821312e2fd86e4126f3b02652ffa52bdbafaa0b32e1bc88fcf62f41d5e96adbf msaf/t
 - **Batas:** Hanya 5 kurva pilot dengan konduktor prima/komposit kecil; |Ш| diasumsikan 1 (bukan dihitung); bukan bukti BSD umum; bukan 2-descent penuh (formula pra-reg memakai L(E,1)/Ω langsung dari LMFDB); tidak ada klaim untuk kurva rank > 0 atau konduktor besar.
 - **Status:** CERTIFIED
 - **Catatan restorasi 2026-10-27:** Heading `T-2026-0049` dipulihkan setelah commit `d56242c` menggantinya dengan `A-2026-0049`; badan dan klaim BSD v2 tidak berubah.
+- **Catatan keputusan 2026-10-27:** Status `CERTIFIED` dipertahankan atas keputusan delegasi pemilik. Pelanggaran prereg 2026-10-25 (commit `19fb2ec` mencampur pra-registrasi dan kode; tanggal `2026-10-30` adalah tanggal target) dicatat sebagai pengecualian proses, bukan cacat artefak. Bukti: receipt `all_pass: true` untuk 5 kurva, setiap kurva `match: true`, hash sertifikat cocok, dan `test_bsd_v2.py` lulus 2/2. Klaim tetap finit dan tidak berubah.
 - **Domino:** BSD (rank-0 finit)
 - **Relasi:** Ganti BSD Q1 v1 (A-2026-0028 INCONCLUSIVE); pra-registrasi reports/PREREG_Q1_BSD_V2_2026-10-30.md.
 - **Perintah verifikasi:** python -m msaf.bsd_v2; python -m pytest msaf/tests/test_bsd_v2.py -q; python -m pytest msaf/tests/test_fence_registry.py -q.

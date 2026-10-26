@@ -98,7 +98,8 @@ cd lean && lake build
 Suite CI default menjalankan `python -m pytest msaf -q -m "not slow"`. Kampanye
 figure-eight r5/r6 ditandai `slow` dan hanya berjalan di workflow `Slow tests`
 (terjadwal/manual). Jangan mengklaim CI hijau sebelum job `python-tests` selesai
-sukses, dan jangan mengklaim r5/r6 hijau tanpa hasil workflow `Slow tests`.
+sukses. Klaim r5/r6 mensyaratkan `python-tests` hijau **dan** `Slow tests` hijau
+pada commit yang sama; r5 tetap `FAILED` dan tidak boleh disebut "green".
 Untuk hasil Lean/SMT, jalankan skill `anti-circularity` sebelum menulis
 "verified".
 
