@@ -215,3 +215,23 @@ artefak finit yang dapat diperiksa mesin, dengan batas yang ditulis eksplisit.
 ---
 
 Ditulis 2026-10-25 sebagai indeks status program.
+
+---
+
+## 8. Addendum 2026-10-26
+
+Tabel §4.1 adalah snapshot 2026-10-25. Sejak itu:
+
+- Target lake `lean/Stage_2_Tail_Bound.lean` dan
+  `lean/Stage_3_Eigenvalue_Locking.lean` (berbeda dari salinan prompt-arsip
+  di `reports/RH_SCAFFOLD_NOTES/`) diganti dengan konstanta tail archimedean
+  nyata `c=13` (`C=169/42`, `α=3261/2`, `K=814`) dan dua record `λ_min`
+  tersertifikasi (`dim 321`, `dim 257`).
+- `reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean` sekarang
+  membuktikan `test_function_l2_containment` dari hipotesis polynomial decay,
+  bukan predikat placeholder `TestFunctionInL2 := True`.
+- Registry `T-2026-0050` diperbarui; provenance dan batas klaim ada di
+  `reports/GW_TAIL_CONSTANTS_2026-10-26.md`.
+
+Ini tetap **bukan** bukti RH. `α=3261/2` adalah indeks truncation
+archimedean, bukan eksponen decay polinomial.

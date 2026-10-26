@@ -2163,51 +2163,76 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   sha256LF 10815f86ffba65e2640f8eba5d03aacd18c43c836ae30d4190dd059719b12179 msaf/bsd_v2.py
   ```
 
-### T-2026-0050 — RH scaffold: Stage 2 tail bound, Stage 3 eigenvalue locking, Stage 4 L² containment
+### T-2026-0050 — RH scaffold Stage 2–4: konstanta tail archimedean GW nyata, λ_min tersertifikasi, dan L² containment
 
 - **Jenis:** T
 - **Pernyataan:** Tiga modul Lean scaffold RH diselesaikan dan dikompilasi
-  dengan `lake build` (3240 jobs, exit 0). `lean/Stage_2_Tail_Bound.lean`
-  mendefinisikan `TailBound N` (`C`, `α`, `0 ≤ C`, `1/2 < α`) dan membuktikan
-  `tail_bound_nonneg`; disertakan contoh konkret `N = 100`, `C = 5`, `α = 1`,
-  `lam_min = 0.1` beserta lemma `example_tail_bound_lt_eigenvalue`.
-  `lean/Stage_3_Eigenvalue_Locking.lean` mendefinisikan `EigenvalueLock N`
-  dengan field `lam_min`, `lam_min_pos`, dan `bound_from_tail`
-  (`∃ tb : TailBound N, tb.C / N ^ tb.α ≤ lam_min`), lalu membuktikan
-  `eigenvalue_min_positive` dan memberikan contoh `example_EigenvalueLock`
-  untuk `N = 100`. `reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean`
+  dengan `lake build` (3242 jobs, exit 0). `lean/Stage_2_Tail_Bound.lean`
+  mengganti contoh sintetis (`N = 100`, `C = 5`, `α = 1`, `lam_min = 0.1`)
+  dengan konstanta nyata dari `_geom_sums` di
+  `source_arb_ldlt_certify.py` (checkout eksternal `oracle-toe/GUINAND_WEIL`):
+  untuk `c = 13`, presisi 6000 bit, loop truncation berhenti di `K = 814`,
+  sehingga `C = 4/(1 - 13^(-2)) = 169/42` dan
+  `α = 2K + 5/2 = 3261/2`; sisa geometrik `C/13^α ≈ 2.0893e-1816` dibuktikan
+  lebih kecil dari dua batas bawah `λ_min` yang tercatat (citra float64 dari
+  lower endpoint Arb), yaitu
+  `(c=13, N=160, dim=321, λ_min_lo = 3.123458832662237e-59)` dan
+  `(c=13, N=128, dim=257, λ_min_lo = 3.2990200597971055e-59)`.
+  `lean/Stage_3_Eigenvalue_Locking.lean` mendefinisikan record
+  `EigenvalueLock c N` dengan field `dim`, `dim_eq : dim = 2N+1`,
+  `lam_min`, `lam_min_pos`, dan `bound_from_tail`; dua record nyata diisi
+  (`gw_eigenvalue_lock`, `gw_eigenvalue_lock_257`).
+  `reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean` tetap
   mendefinisikan `MSAFTestFunctionSpace`, `PolynomialDecay`, dan
   `TestFunctionInL2`, serta membuktikan `test_function_l2_containment`:
-  polinomial decay `|f x| ≤ C/x` (x ≥ 1) mengakibatkan `f²` terintegralkan
+  polynomial decay `|f x| ≤ C/x` (x ≥ 1) mengakibatkan `f²` terintegralkan
   pada `(0, ∞)`. Pembuktian memecah domain di `1`, memakai kekompakan
   `[0,1]` untuk bagian kiri dan dominasi `(C/x)² = C²·x⁻²` (dengan
   `integrableOn_Ioi_rpow_of_lt` untuk eksponen `-2 < -1`) untuk bagian kanan.
-- **Batas:** Ini adalah **scaffold formal**, bukan bukti RH. Konstanta
-  `C = 5`, `α = 1`, `N = 100`, `lam_min = 0.1` adalah contoh aritmetika
-  sintetis, **bukan** keluaran perhitungan Guinand–Weil atau data zeta.
-  Teorema umum `tail_bound_lt_eigenvalue` masih menerima ketaksamaan
-  `C/N^α < lam_min` sebagai hipotesis; ia belum membuktikan ketaksamaan itu
-  dari matriks Guinand–Weil. Stage 4 hanya membuktikan containment L² dari
-  hipotesis polynomial decay; tidak menyentuh spektrum zeta, hipotesis RH,
-  atau klaim analitik lanjutan. Tidak ada klaim `sorry`/`admit`/`axiom`.
+- **Batas:** **Bukan bukti RH.** `C` dan `α` di Stage 2 adalah koefisien
+  **sisa deret geometrik archimedean**, bukan bound tail polinomial dalam
+  konduktor: `α = 1630.5` adalah indeks truncation, bukan decay exponent.
+  Implementasi tidak menyediakan `C/c^α` polinomial; skrip
+  `msaf/lambda_min_eig_ladder.py` menolak memfit eksponen, dan tangga c=13
+  menunjukkan slope yang melandai (bukan hukum pangkat konstan). Jadi tidak
+  ada `C`, `α` polinomial nyata yang dapat dikutip tanpa fabrikasi.
+  `λ_min` adalah batas bawah yang dicatat dari run Arb eksternal
+  (`all_exclude_zero = true`), bukan hasil Lean mendiagonalisasi matriks.
+  Nilai desimal yang dipakai Lean adalah citra float64 dari lower endpoint
+  Arb; margin `rem` terhadap nilai itu ~1750 orde, jauh melebihi galat
+  pembulatan float64 (~1e-16 relatif), tetapi sertifikat tetap enclosure Arb,
+  bukan digit desimal Lean.
+  Perbandingan `rem < λ_min` adalah syarat konsistensi skalar, bukan kontrol
+  penuh error entry matriks; propagasi ball penuh ditangani Arb di dalam run.
+  Stage 4 hanya membuktikan containment L² dari hipotesis polynomial decay;
+  tidak menyentuh spektrum zeta, Weil positivity, atau hipotesis RH. Tidak ada
+  `sorry`/`admit`/`axiom`. Catatan historis: versi sintetis sebelumnya
+  (`N=100`, `C=5`, `α=1`, `lam_min=0.1`) ada di commit `08ae970` dan telah
+  diganti; baris sertifikat lama tidak dipertahankan karena berkasnya berubah.
 - **Status:** CERTIFIED
 - **Domino:** tidak ada (formal scaffold; bukan domino RH)
-- **Relasi:** melanjutkan entri scaffold RH sebelumnya; berkas baru
-  `lean/Stage_2_Tail_Bound.lean`, `lean/Stage_3_Eigenvalue_Locking.lean`;
-  berkas diperbarui `reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean`;
-  target lake baru `Stage_2_Tail_Bound` dan `Stage_3_Eigenvalue_Locking`.
+- **Relasi:** menggantikan konstanta sintetis pada T-2026-0050 versi commit
+  `08ae970`; memakai rung dim 321 dari T-2026-0002 dan rung dim 257 dari
+  `reports/lambda_min_eig_ladder_big.json`; laporan provenance baru
+  `reports/GW_TAIL_CONSTANTS_2026-10-26.md`; berkas Lean Stage 4 dan lakefile
+  tidak berubah.
 - **Perintah verifikasi:** `lake build` di `lean/` (exit 0);
   `lake env lean ../reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean`
-  (exit 0); `python scripts/gate.py check lean/Stage_2_Tail_Bound.lean
-  lean/Stage_3_Eigenvalue_Locking.lean
-  reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean`
-  (PASS, FAIL=0 NOT_RUN=0 SKIP=0); `python -m pytest
+  (exit 0); `python C:/Users/usER/.config/opencode/skills/anti-circularity/scripts/gate.py
+  check lean/Stage_2_Tail_Bound.lean lean/Stage_3_Eigenvalue_Locking.lean
+  reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean` (PASS,
+  FAIL=0 NOT_RUN=0 SKIP=0); `python -m pytest
   msaf/tests/test_fence_registry.py -q`.
 - **Sertifikat:**
 
   ```text
-  sha256LF 8e2cf67a973ba657379b98db78c32f350ac77f830a105c40ef7f4177b26d275d lean/Stage_2_Tail_Bound.lean
-  sha256LF 571f600a45cb90daa95fcfd4526247e64d323f1b50e2d3e7ddf3edffa64054df lean/Stage_3_Eigenvalue_Locking.lean
+  sha256LF 2149a89242c3fc010a84d5796c6b4412746a07e6f8c6f8a3ccb917104941f71d lean/Stage_2_Tail_Bound.lean
+  sha256LF 551e7e31f73de57ef2c8ee0c9c84fbd7da93295fbde8e6946b5f42db5916155f lean/Stage_3_Eigenvalue_Locking.lean
   sha256LF 5786929a607aa73bc2395481af8f3cb848fff79d3bfff82536b5be88b69a7d61 reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean
   sha256LF cbe01538ea67cb3372e13500735a113d2413072962418f9dae1cf8fdc29b22df lean/lakefile.toml
+  sha256LF afcb7d811408fab1b5aac08c2e4d3b8515bb8db768d65e887518ba2d2ca6fa4f reports/GW_TAIL_CONSTANTS_2026-10-26.md
+  sha256LF e92e05ef8d37b10bb3e39c65e7537e23c8e3a426da548028a0a560126b60b696 reports/lambda_min_eig_ladder_dim321.json
+  sha256LF 84152da16f02125e85563184053ba958786efed65de68a0d48bfc5f741fdfc84 reports/lambda_min_eig_ladder_big.json
+  sha256LF 0ae3747dc9d486b589e23bf380ae740a3d5b7c825a1bbae1eb974a345bcc35e7 reports/GW_LADDER_DIM321_2026-10-17.md
+  sha256LF a54bd9befdb9e386b1f542427af81c86dd3719befdc0ed2ecc956c99ebc7f263 reports/GW_RADIUS_REGISTRY_CORRECTION_2026-10-17.md
   ```

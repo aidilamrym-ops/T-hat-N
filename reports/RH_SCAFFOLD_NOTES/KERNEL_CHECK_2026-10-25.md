@@ -60,3 +60,20 @@ nama modul Mathlib 4.33.1 sudah berubah.
   bukti containment L².
 - Tidak ada klaim RH, tidak ada klaim analytic continuation, tidak ada klaim
   spektrum, dan tidak ada entri registry baru.
+
+## 6. Addendum 2026-10-26
+
+Tabel §2 adalah snapshot 2026-10-25 dan **tidak** berlaku untuk berkas
+`lean/Stage_2_Tail_Bound.lean`, `lean/Stage_3_Eigenvalue_Locking.lean`, dan
+`reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean` yang sekarang.
+Ketiganya sudah diperbarui:
+
+- Stage 2/3 (`lean/`) memakai konstanta tail archimedean nyata `c=13`,
+  `C=169/42`, `α=3261/2`, `K=814`, dan dua `λ_min` tersertifikasi
+  (`3.123458832662237e-59` dim 321; `3.2990200597971055e-59` dim 257).
+- Stage 4 (`reports/RH_SCAFFOLD_NOTES/`) membuktikan
+  `test_function_l2_containment` dari polynomial decay, bukan placeholder
+  `TestFunctionInL2 := True`.
+
+Registry `T-2026-0050` diperbarui; rincian dan batas klaim ada di
+`reports/GW_TAIL_CONSTANTS_2026-10-26.md`. Ini masih **bukan** bukti RH.

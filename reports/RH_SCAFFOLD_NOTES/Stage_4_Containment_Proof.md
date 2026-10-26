@@ -38,3 +38,9 @@ Execute the #print axioms audit command immediately after compilation. The outpu
 - Import migration: `Topology.Algebra.Module` → `Topology.Algebra.Module.Basic`; `MeasureTheory.Measure.Lebesgue` → `MeasureTheory.Measure.Lebesgue.Basic`.
 
 ---
+
+> **Catatan 2026-10-26.** Dokumen ini adalah arsip prompt 2026-10-25.
+> Berkas Lean `Stage_4_Containment_Proof.lean` di folder yang sama sudah
+> ditulis ulang dan sekarang membuktikan `test_function_l2_containment`
+> (bukan `TestFunctionInL2 := True`). Status implementasi saat ini ada di
+> `reports/GW_TAIL_CONSTANTS_2026-10-26.md` dan registry `T-2026-0050`.
