@@ -42,3 +42,18 @@ This step must strictly honor the zero-fudging prohibition. If any pivot ball or
 - Import migration: `Analysis.InnerProductSpace.QuadraticForm` → `LinearAlgebra.QuadraticForm.Basic`; the identifier `λ` was renamed to `lam` because `λ` is reserved for lambda syntax in Lean 4.
 
 ---
+
+> **Catatan 2026-10-26.** Dokumen ini adalah **arsip prompt** 2026-10-25.
+> Berkas Lean di folder yang sama adalah placeholder dan **bukan**
+> implementasi aktif. Implementasi aktif ada di
+> `lean/Stage_3_Eigenvalue_Locking.lean`: record data untuk dua run Arb
+> (`dim=321` dan `dim=257`).
+>
+> Induksi dimensi di prompt tidak valid sebagaimana ditulis. Cauchy
+> interlacing memberi `lambda_min(A_{N+1}) <= lambda_min(A_N)`, sehingga
+> positif-definit `A_N` tidak merambat naik ke `A_{N+1}`. Record aktif
+> **tidak** membuktikan induksi, tidak membuktikan positif-definit untuk
+> semua N, dan tidak membuktikan spektrum zeta.
+>
+> Rincian koreksi: `reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md`.
+> Ini bukan bukti RH.

@@ -79,20 +79,24 @@ prioritas.
 
 ### 4.1 RH scaffold (`reports/RH_SCAFFOLD_NOTES/`)
 
-| Stage | Berkas Lean | Receipt | Status jujur |
-|---|---|---|---|
-| 1 | `Stage_1_Formalization_Test_Function_Space.lean` | `Stage_1_..._receipt.json` | Scaffold definisi `MSAFTestFunctionSpace` dan `continuous_quadratic_form`; **kernel-checked PASS**, belum ada bukti analitik penuh |
-| 2 | `Stage_2_Derivation_Analytic_Tail_Bound.lean` | `Stage_2_..._receipt.json` | Scaffold bound non-negatif; **kernel-checked PASS**, **bukan** derivasi tail Archimedean penuh |
-| 3 | `Stage_3_Eigenvalue_Locking_Dimension_Induction.lean` | `Stage_3_..._receipt.json` | Scaffold predikat locking; **kernel-checked PASS**, **bukan** induksi dimensi penuh |
-| 4 | `Stage_4_Containment_Proof.lean` | `Stage_4_..._receipt.json` | Scaffold predikat containment; **kernel-checked PASS**, **bukan** bukti L² penuh |
+**Koreksi 2026-10-26.** Tabel di bawah adalah snapshot 2026-10-25. Sejak
+`08ae970`/`9d13787`, implementasi aktif Stage 2/3 ada di `lean/`, bukan di
+folder arsip prompt. Lihat
+`reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md`.
 
-Semua berkas Lean bebas `sorry`/`admit`/`unsafe`/`axiom`, dan keempatnya
-sekarang **lulus kernel check** dengan Lean 4.33.1 / Mathlib `0df444a360`
-(perintah `lake env lean`, receipt mencatat hasil PASS). Namun isinya masih
-definisi dan lemma trivial: Stage 2 bukan derivasi tail Archimedean, Stage 3
-bukan induksi dimensi, Stage 4 memakai predikat placeholder `True`. Jangan
-menyebutnya "bukti RH" atau "bukti analytic tail bound". Ini hanya kerangka
-kerja yang sudah dikompilasi, bukan bukti analitik.
+| Stage | Arsip prompt | Implementasi aktif | Status jujur |
+|---|---|---|---|
+| 1 | `Stage_1_Formalization_Test_Function_Space.lean` | sama | definisi `MSAFTestFunctionSpace` dan `continuous_quadratic_form`; **kernel-checked PASS**, belum ada bukti analitik penuh |
+| 2 | `Stage_2_Derivation_Analytic_Tail_Bound.lean` (placeholder) | `lean/Stage_2_Tail_Bound.lean` | konstanta truncation archimedean GW nyata (`c=13`, `C=169/42`, `alpha=3261/2`, `K=814`) dan ketaksamaan skalar; **bukan** derivasi tail analitik, **bukan** `C/n` atau `C/n^2` |
+| 3 | `Stage_3_Eigenvalue_Locking_Dimension_Induction.lean` (placeholder) | `lean/Stage_3_Eigenvalue_Locking.lean` | record data untuk dua run Arb (`dim=321`, `dim=257`); **bukan** induksi dimensi, dan induksi naik memang tidak valid karena Cauchy interlacing |
+| 4 | `Stage_4_Containment_Proof.lean` | sama (sudah ditulis ulang) | `test_function_l2_containment` dari polynomial decay; **bukan** containment spektrum zeta |
+
+Semua berkas Lean bebas `sorry`/`admit`/`unsafe`/`axiom`, dan modul aktif
+**lulus kernel check** dengan Lean 4.33.1 / Mathlib `0df444a360`. Namun isinya
+tetap terbatas: Stage 2 bukan derivasi tail Archimedean, Stage 3 bukan induksi
+dimensi, Stage 4 hanya containment L² dari hipotesis polynomial decay. Jangan
+menyebutnya "bukti RH" atau "bukti analytic tail bound". Ini hanya artefak
+finit yang sudah dikompilasi, bukan bukti analitik.
 
 Log lengkap: `reports/RH_SCAFFOLD_NOTES/KERNEL_CHECK_2026-10-25.md` (perintah
 kernel, SHA-256LF, axiom footprint, dan anti-circularity gate PASS).
@@ -159,13 +163,18 @@ kernel, SHA-256LF, axiom footprint, dan anti-circularity gate PASS).
 
 ## 5. Registry (ringkas)
 
-- Entri **T** (teorema finit): `T-2026-0001`, `T-2026-0002`, `T-2026-0043`.
+- Entri **T** (teorema finit): `T-2026-0001`, `T-2026-0002`, `T-2026-0043`,
+  `T-2026-0049` (BSD Q1 v2), `T-2026-0050` (RH scaffold Stage 2–4).
 - Entri **F** (pagar): `F-2026-0001`, `F-2026-0002`.
-- Entri **A** (audit/verdict): `A-2026-0001` … `A-2026-0040` (dengan `A-2026-0031` tidak ada), `A-2026-0043`, dan `A-2026-0045`.
+- Entri **A** (audit/verdict): `A-2026-0001` … `A-2026-0040` (dengan
+  `A-2026-0031` tidak ada), `A-2026-0043`, `A-2026-0045` (Q2 v2),
+  `A-2026-0046` (Q2 v3), `A-2026-0047` (r6), dan `A-2026-0048` (Q2 v4).
 - `A-2026-0041` dan `A-2026-0042` **tidak ada** (r2/r3 gagal/inconclusive).
 - `A-2026-0044` **tidak ada** (r5 FAILED).
-- Entri terbaru figure-eight: `T-2026-0043` (r4) dan `A-2026-0043` (audit K6 r4).
-- Entri terbaru twin prime: `A-2026-0045` (Q2 v2, N=10^7).
+- Entri terbaru figure-eight: `T-2026-0043` (r4), `A-2026-0043` (audit K6
+  r4), dan `A-2026-0047` (r6).
+- Entri terbaru twin prime: `A-2026-0048` (Q2 v4, N=10^10); sebelumnya
+  `A-2026-0046` (v3, N=10^9) dan `A-2026-0045` (v2, N=10^7).
 
 ---
 

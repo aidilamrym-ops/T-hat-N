@@ -77,3 +77,29 @@ Ketiganya sudah diperbarui:
 
 Registry `T-2026-0050` diperbarui; rincian dan batas klaim ada di
 `reports/GW_TAIL_CONSTANTS_2026-10-26.md`. Ini masih **bukan** bukti RH.
+
+## 7. Axiom audit modul aktif — 2026-10-26
+
+Perintah: berkas sementara di `lean/` yang mengimpor kedua modul, dijalankan
+dengan `lake env lean`. Keluaran lengkap:
+
+```text
+'tail_bound_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'gw_dim_eq' depends on axioms: [propext]
+'gw_lambda_min_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'gw_tail_bound_lt_of_gt_ten_pow_sixty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'gw_tail_bound_lt_lambda_min' depends on axioms: [propext, Classical.choice, Quot.sound]
+'gw_dim_257_eq' depends on axioms: [propext]
+'gw_lambda_min_257_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'gw_tail_bound_lt_lambda_min_257' depends on axioms: [propext, Classical.choice, Quot.sound]
+'eigenvalue_min_positive' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
+Tidak ada `sorryAx`, tidak ada aksioma proyek. `Stage_4_Containment_Proof.lean`
+juga lulus `lake env lean`; teoremanya `test_function_l2_containment`.
+
+Catatan: tabel §2 di atas **tetap** hanya berlaku untuk berkas arsip
+`Stage_2_Derivation_Analytic_Tail_Bound.lean` dan
+`Stage_3_Eigenvalue_Locking_Dimension_Induction.lean`. Modul aktif adalah
+`lean/Stage_2_Tail_Bound.lean` dan `lean/Stage_3_Eigenvalue_Locking.lean`.
+Rincian lingkup: `STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md`.

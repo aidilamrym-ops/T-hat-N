@@ -1099,7 +1099,7 @@ mengikuti laporan L4).
   sha256LF 8cd30d7bc3372d8d408ff2db6830dbae666f504feadf1bd5e5951a1810c51551 harness/run_anti_circularity_gate.py
   sha256LF 6e5c97a9d780e54a54968ca06a4d453236f65b45f881fbc6234902ef53ed9aab reports/anti_circularity_gate_2026-10-20.log
   sha256LF 8de7bc3659d670976be47b31da1d38cc2fb25495d40ae9fbc101773506726f5c reports/ANTI_CIRCULARITY_GATE_RUN_2026-10-20.md
-  sha256LF 0ce3083e283289cd784304f787164e4230b7944993352a1885dbb2010f637ccf msaf/tests/test_anti_circularity_gate.py
+  sha256LF 75eec8ed8f09bcff853122d69ece37459e4669469bcd138edc5352a353c2b43a msaf/tests/test_anti_circularity_gate.py
   sha256LF 5b3b263b6796016536653a4511124d9d4b5b81d47798d3580412eef89c86c0e9 lean/ComplexMoore.lean
   sha256LF e92f77e931a2db7c0c783f05688df17f999b72c2114954431296134fed7bca0b lean/NavierStokesCore.lean
   sha256LF 25d4bf7ae743b4b53673f120987c9e3daff2b2043ce7c79a92d5d535c863da49 lean/NewtonExistence.lean
@@ -2045,7 +2045,7 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   \\	ext
   sha256LF 8eddc2bb17647d452e15325397e852e224e1af028f055fa4fe41de94af939ec6 msaf/figure_eight_r3.py
   sha256LF e34e2303ecc17fa591aa00c4449cebae6a3f5e7db88c147d173d4414b916e2ac msaf/figure_eight_r4.py
-  sha256LF c91d96a0805853d424f0b49a6efc8d895951188ba8f6557499a117e09537e279 msaf/tests/test_figure_eight_r4.py
+  sha256LF f7b1165380eb2fba740fd2c012745fee79a4027d22cf0eb19761fe0fb3cced0a msaf/tests/test_figure_eight_r4.py
   sha256LF 14cf5c9fbaff6b2e6e67617fe724e1fc01ec18fe2e4323c51e5531256bcb21c5 reports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md
   sha256LF 6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9 reports/figure_eight_r3_2026-10-23.json
   sha256LF 8b6088c27f79129f8d28109a75efe2f888406b9d7e6d884c9cf7ab95cf611086 reports/figure_eight_r4_2026-10-23.json
@@ -2216,6 +2216,13 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   `reports/lambda_min_eig_ladder_big.json`; laporan provenance baru
   `reports/GW_TAIL_CONSTANTS_2026-10-26.md`; berkas Lean Stage 4 dan lakefile
   tidak berubah.
+- **Catatan 2026-10-26 (P0):** koreksi lingkup Stage 2/3 ada di
+  `reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md`.
+  Stage 2 adalah konstanta truncation archimedean + ketaksamaan skalar, bukan
+  derivasi `C/n` atau `C/n^2`; Stage 3 adalah record data, bukan induksi
+  dimensi. Baris sertifikat versi `08ae970` dapat dipulihkan dari git history
+  (`8e2cf67a…` Stage 2, `571f600a…` Stage 3); baris saat ini adalah versi
+  `9d13787`.
 - **Perintah verifikasi:** `lake build` di `lean/` (exit 0);
   `lake env lean ../reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean`
   (exit 0); `python C:/Users/usER/.config/opencode/skills/anti-circularity/scripts/gate.py

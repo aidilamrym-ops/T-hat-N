@@ -5,6 +5,9 @@ __pycache__/
 lean/.lake/
 .DS_Store
 Thumbs.db
+# Accidental compiler/console dumps committed on 2026-10-25 (removed in P0)
+/error.txt
+/lean/error.txt
 
 # Coq build artifacts (sources, script and frozen logs stay tracked)
 formal_bridge/*.vo

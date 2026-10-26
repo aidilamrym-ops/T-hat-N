@@ -62,8 +62,20 @@ def test_base_receipt_hash():
         data = f.read()
     assert hashlib.sha256(data).hexdigest() == EXPECTED_BASE_RECEIPT_SHA
 
-def test_campaign():
-    payload = r5.run_campaign()
+@pytest.fixture(scope="module")
+def campaign():
+    """Run the expensive campaign once for both campaign tests."""
+    return r5.run_campaign()
+
+
+# Sealed r5 verdict: M3 and M8 are non-discriminative, so they are the only
+# rows expected to fail. The old test asserted all rows pass, which would
+# have silently upgraded a FAILED campaign to a pass.
+_EXPECTED_FAILED = {"M3", "M8"}
+
+
+def test_campaign(campaign):
+    payload = campaign
     # receipt file exists
     assert RECEIPT.exists(), "receipt not written"
     # compare receipt hash
@@ -74,7 +86,11 @@ def test_campaign():
     base = payload["base"]
     for key in ("schema", "receipt", "receipt_sha256lf", "module", "module_sha256lf", "prereg_sha256lf", "all_pass"):
         assert key in base
-    # check all mutations present and pass
+    # The sealed campaign is honestly FAILED; no A-2026-0044 entry exists.
+    assert payload["all_pass"] is False
+    assert payload["summary"] == "FAILED"
+    assert payload["registry"] is None
+    # check all mutations present, with exactly M3/M8 non-discriminative
     rows = payload["k6"]["rows"]
     assert len(rows) == len(EXPECTED_MUTATIONS)
     rows_by_id = {row["id"]: row for row in rows}
@@ -83,7 +99,7 @@ def test_campaign():
         assert row is not None, f"missing row {exp['id']}"
         assert row["parameter"] == exp["parameter"]
         assert row["expected"] == exp["expected"]
-        assert row["passed"] is True
+        assert row["passed"] is (exp["id"] not in _EXPECTED_FAILED)
 
 def test_ast_float_forbid():
     # ensure original source contains no float literals or calls
@@ -91,9 +107,9 @@ def test_ast_float_forbid():
     hits = r5.r3._ast_hits(source)
     assert hits == []
 
-def test_registry_entry():
+def test_registry_entry(campaign):
     # only added if all_pass true
-    payload = r5.run_campaign()
+    payload = campaign
     if payload["all_pass"]:
         assert payload["registry"] == r5.REGISTRY_ID
     else:

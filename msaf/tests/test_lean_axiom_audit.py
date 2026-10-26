@@ -164,9 +164,18 @@ def test_every_declaration_uses_standard_axioms_only(tmp_path: Path):
         if have_oleans:
             parts = [f"import {stem}\n" for stem, _, _ in jobs]
             for _stem, ns, names in jobs:
-                parts.append(f"namespace {ns}\n")
-                parts.extend(f"#print axioms {ns}.{n}\n" for n in names)
-                parts.append(f"end {ns}\n")
+                if ns:
+                    parts.append(f"namespace {ns}\n")
+                    parts.extend(f"#print axioms {ns}.{n}\n" for n in names)
+                    parts.append(f"end {ns}\n")
+                else:
+                    # Stage_2_Tail_Bound.lean and
+                    # Stage_3_Eigenvalue_Locking.lean are deliberately
+                    # namespace-free. Emitting `namespace ` with an empty
+                    # name made the generated audit file unparseable, so a
+                    # green build still failed the audit. Reference the
+                    # top-level names directly instead.
+                    parts.extend(f"#print axioms {n}\n" for n in names)
         else:
             parts = []
             for path in sources:
@@ -175,9 +184,13 @@ def test_every_declaration_uses_standard_axioms_only(tmp_path: Path):
                 if not names:
                     continue
                 ns = _namespace(text)
-                parts.append(text + f"\n\nnamespace {ns}\n")
-                parts.extend(f"#print axioms {n}\n" for n in names)
-                parts.append(f"end {ns}\n")
+                if ns:
+                    parts.append(text + f"\n\nnamespace {ns}\n")
+                    parts.extend(f"#print axioms {n}\n" for n in names)
+                    parts.append(f"end {ns}\n")
+                else:
+                    parts.append(text + "\n\n")
+                    parts.extend(f"#print axioms {n}\n" for n in names)
         audit.write_text("".join(parts), encoding="utf-8")
         res = subprocess.run(
             "lake env lean " + audit.name,

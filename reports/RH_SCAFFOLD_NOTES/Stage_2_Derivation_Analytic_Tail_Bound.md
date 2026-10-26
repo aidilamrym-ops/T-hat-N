@@ -44,3 +44,19 @@ Ensure no floating-point arithmetic is introduced into the tail bound equation. 
 - Import migration: `MeasureTheory.Measure.Lebesgue` → `MeasureTheory.Measure.Lebesgue.Basic`.
 
 ---
+
+> **Catatan 2026-10-26.** Dokumen ini adalah **arsip prompt** 2026-10-25.
+> Berkas Lean di folder yang sama adalah placeholder dan **bukan**
+> implementasi aktif. Implementasi aktif ada di
+> `lean/Stage_2_Tail_Bound.lean`: konstanta truncation archimedean GW nyata
+> (`c=13`, `C=169/42`, `alpha=3261/2`, `K=814`) dan ketaksamaan skalar
+> terhadap dua citra desimal `lambda_min`.
+>
+> Prompt di atas meminta `|XC(n)| <= C_arch/n` dan tail
+> `C_arch L^2/(pi N)`. Keduanya tidak konsisten: tail harmonik divergen.
+> Target asimtotik yang benar adalah `|XC(n)| <= C/n^2`; pengukuran
+> mendukungnya, tetapi derivasi analitiknya **belum** dibuktikan dan
+> merupakan pekerjaan P2.
+>
+> Rincian koreksi: `reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md`.
+> Ini bukan bukti RH dan bukan derivasi tail analitik.

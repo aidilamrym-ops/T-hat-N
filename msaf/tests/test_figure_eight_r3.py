@@ -320,8 +320,9 @@ def test_no_r3_registry_entry() -> None:
     registry = (ROOT / "reports" / "FENCE_REGISTRY.md").read_text(
         encoding="utf-8"
     )
-    assert "A-2026-0041" not in registry
-    assert "A-2026-0042" not in registry
+    # A historical note may mention the id; only a real entry heading counts.
+    assert "### A-2026-0041" not in registry
+    assert "### A-2026-0042" not in registry
 
 
 def test_report_records_inconclusive_verdict() -> None:
