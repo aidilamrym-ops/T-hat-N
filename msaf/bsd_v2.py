@@ -146,7 +146,13 @@ def build_payload() -> dict:
     return payload
 
 
+def run_campaign() -> dict:
+    """Execute campaign, return payload dict."""
+    return build_payload()
+
 def main() -> None:
+    payload = run_campaign()
+    print(json.dumps({"summary": payload["summary"], "receipt": str(RECEIPT_PATH)}, indent=2))
     payload = build_payload()
     print(json.dumps({"summary": payload["summary"], "receipt": str(RECEIPT_PATH)}, indent=2))
 
