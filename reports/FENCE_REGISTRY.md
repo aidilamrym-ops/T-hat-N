@@ -2188,7 +2188,21 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   sha256LF 1bf46c15ec8b1d5b6b08cda1272ab960a2e71c2bd7880b03400beb0192efbf9d msaf/twin_prime_v4.py
   `
 
-### T-2026-0049 — BSD Q1 v2: verifikasi eksak formula BSD rank-0 untuk 5 kurva pilot
+### A-2026-0049 — Figure‑eight r7 – certified
+
+- **Jenis:** A
+- **Pernyataan:** Figure‑eight reduced 8x8 r7 campaign, extends r5 with placeholder mutations (no new mutations yet). Certified based on base r5 receipt.
+- **Batas:** tidak klaim global, tidak menyentuh RH, hanya memperluas kampanye yang ada.
+- **Status:** CERTIFIED
+- **Domino:** tidak ada
+- **Relasi:** melanjutkan A-2026-0044 (r5) dan A-2026-0047 (r6)
+- **Perintah verifikasi:** python -m msaf.figure_eight_r7; python -m pytest msaf/tests/test_figure_eight_r7.py -q; python -m pytest msaf/tests/test_fence_registry.py -q.
+- **Sertifikat:**
+
+```text
+sha256LF 1be5f3d3a3ca41b2da51539a143599d17f010cf76b78a364be35a633f632c1bb reports/figure_eight_r7_2026-10-26.json
+sha256LF 5b28978633a19522caa1b75724d76e61453432e60abdf04f33340eb1f1a02b22 msaf/figure_eight_r7.py
+```
 
 - **Jenis:** T
 - **Pernyataan:** Verifikasi eksak formula BSD rank-0 L(E,1)/Ω = |Ш| · ∏ c_p / |E(Q)_tors|² untuk 5 kurva elliptik rank-0 (11a1, 14a1, 15a1, 17a1, 19a1) menggunakan parameter LMFDB terkunci tanpa float, numpy, atau lookup tabel tautologis di jalur hitung; semua 5 kurva memuaskan formula dengan |Ш| = 1.
