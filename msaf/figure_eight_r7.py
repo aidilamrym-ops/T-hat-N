@@ -17,7 +17,7 @@ RECEIPT_PATH = ROOT / "reports" / "figure_eight_r7_2026-10-26.json"
 REPORT_PATH = ROOT / "reports" / "FIGURE_EIGHT_R7_2026-10-26.md"
 
 SCHEMA = "msaf.figure_eight_r7.v1"
-REGISTRY_ID = "A-2026-00??"  # placeholder, add real ID after verification
+REGISTRY_ID = "A-2026-0049"  # placeholder, add real ID after verification
 
 def run_campaign() -> dict:
     """Execute base r5 campaign, then apply future r7 mutations (none yet)."""
