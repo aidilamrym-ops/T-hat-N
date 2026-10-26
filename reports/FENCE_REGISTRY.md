@@ -2189,12 +2189,13 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   sha256LF 1bf46c15ec8b1d5b6b08cda1272ab960a2e71c2bd7880b03400beb0192efbf9d msaf/twin_prime_v4.py
   `
 
-### A-2026-0049 — Figure‑eight r7 – certified
+### A-2026-0049 — Figure-eight r7: RETRACTED (stub)
 
 - **Jenis:** A
 - **Pernyataan:** Figure‑eight reduced 8x8 r7 campaign, extends r5 with placeholder mutations (no new mutations yet). Certified based on base r5 receipt.
 - **Batas:** tidak klaim global, tidak menyentuh RH, hanya memperluas kampanye yang ada.
-- **Status:** CERTIFIED
+- **Status:** RETRACTED
+- **Catatan retraksi 2026-10-27:** Pemilik menyetujui retraksi. Receipt r7 berisi `result: {}`, report masih placeholder, modul hanya memanggil r5, dan `msaf/tests/test_figure_eight_r7.py` tidak ada. Tidak ada klaim r7; artefak dipertahankan sebagai bukti stub.
 - **Domino:** tidak ada
 - **Relasi:** melanjutkan A-2026-0044 (r5) dan A-2026-0047 (r6)
 - **Perintah verifikasi:** python -m msaf.figure_eight_r7; python -m pytest msaf/tests/test_figure_eight_r7.py -q; python -m pytest msaf/tests/test_fence_registry.py -q.
@@ -2223,10 +2224,13 @@ sha256LF 1cbdfb200368cc6591febfacfc07726903b0a4871787225b08abcb3a191e3563 msaf/l
 sha256LF 821312e2fd86e4126f3b02652ffa52bdbafaa0b32e1bc88fcf62f41d5e96adbf msaf/tests/test_learnharness_v1.py
 ```
 
+### T-2026-0049 — BSD Q1 v2: verifikasi eksak formula BSD rank-0 untuk 5 kurva pilot
+
 - **Jenis:** T
 - **Pernyataan:** Verifikasi eksak formula BSD rank-0 L(E,1)/Ω = |Ш| · ∏ c_p / |E(Q)_tors|² untuk 5 kurva elliptik rank-0 (11a1, 14a1, 15a1, 17a1, 19a1) menggunakan parameter LMFDB terkunci tanpa float, numpy, atau lookup tabel tautologis di jalur hitung; semua 5 kurva memuaskan formula dengan |Ш| = 1.
 - **Batas:** Hanya 5 kurva pilot dengan konduktor prima/komposit kecil; |Ш| diasumsikan 1 (bukan dihitung); bukan bukti BSD umum; bukan 2-descent penuh (formula pra-reg memakai L(E,1)/Ω langsung dari LMFDB); tidak ada klaim untuk kurva rank > 0 atau konduktor besar.
 - **Status:** CERTIFIED
+- **Catatan restorasi 2026-10-27:** Heading `T-2026-0049` dipulihkan setelah commit `d56242c` menggantinya dengan `A-2026-0049`; badan dan klaim BSD v2 tidak berubah.
 - **Domino:** BSD (rank-0 finit)
 - **Relasi:** Ganti BSD Q1 v1 (A-2026-0028 INCONCLUSIVE); pra-registrasi reports/PREREG_Q1_BSD_V2_2026-10-30.md.
 - **Perintah verifikasi:** python -m msaf.bsd_v2; python -m pytest msaf/tests/test_bsd_v2.py -q; python -m pytest msaf/tests/test_fence_registry.py -q.
@@ -2236,16 +2240,19 @@ sha256LF 821312e2fd86e4126f3b02652ffa52bdbafaa0b32e1bc88fcf62f41d5e96adbf msaf/t
   sha256LF 8ffc1b4822abcce9c8da1e34cc9fd338223b4415b8c7280633708587160552b6 reports/PREREG_Q1_BSD_V2_2026-10-30.md
   sha256LF 5a0da3bd2c1a6ab2b6cf8ec717e7fbfca910f35507d99f8e3f7b505de89bb20e reports/bsd_v2_2026-10-30.json
   sha256LF e83fe1506518d5e5da4f8b412c394706092125276d4b821b12057459296bbff4 msaf/bsd_v2.py
+  ```
 
-### A-2026-0051 — BSD Q1 extension v3: placeholder stub
+### A-2026-0051 — BSD Q1 extension v3: placeholder stub (RECON)
+
 - **Jenis:** A
-- **Pernyataan:** `msaf/bsd_v3.py` reuses `bsd_v2` logic; receipt `bsd_v3_2026-10-27.json` verifies execution; prereg `reports/PREREG_BSD_V3_2026-10-27.md`.
-- **Batas:** stub, no new claims.
-- **Status:** CERTIFIED (pending CI)
+- **Pernyataan:** `msaf/bsd_v3.py` hanya membungkus `bsd_v2`; receipt `reports/bsd_v3_2026-10-27.json` mencatat hasil bsd_v2 yang sama (5 kurva, all_pass). Berkas `reports/PREREG_BSD_V3_2026-10-27.md` bukan pra-registrasi yang sah. Tidak ada klaim baru.
+- **Batas:** stub/recon; tidak ada data atau kurva baru; bukan sertifikasi BSD v3.
+- **Status:** RECON
+- **Catatan koreksi 2026-10-27:** Pemilik menyetujui reklasifikasi dari `CERTIFIED (pending CI)` menjadi RECON. `PREREG_BSD_V3_2026-10-27.md` berisi kode pytest dan hash placeholder; `msaf/bsd_v3.py` hanya membungkus `bsd_v2`. Receipt dipertahankan sebagai bukti stub; tidak ada klaim baru.
 - **Domino:** tidak ada
-- **Relasi:** melanjutkan `A-2026-0048` (BSD Q1 v2)
-- **Perintah verifikasi:** `python -m msaf.bsd_v3`; `python -m pytest msaf/tests/test_bsd_v3.py -q`; `python -m pytest msaf/tests/test_fence_registry.py -q`.
-- **Sertifikat:**
+- **Relasi:** melanjutkan `T-2026-0049` (BSD Q1 v2); bukan `A-2026-0048` (twin prime v4).
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_bsd_v3.py -q`; `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **Sertifikat (bukti stub, bukan sertifikasi):**
 
 ```text
 sha256LF c0d66e7f5bebb43326f87dde0c192060025830ba31a6133a10a573ec15215d0e reports/PREREG_BSD_V3_2026-10-27.md
@@ -2253,7 +2260,6 @@ sha256LF cb22a1d80540beea5a482cac06d0dae05b846b428419ec94c07e1c7447a2cd4f report
 sha256LF 24d03d59e4e1721ee9b2026234189e26504ffd9f5f1b7066025218fcae1c6da0 msaf/bsd_v3.py
 sha256LF 9938164acef542bd039f4610e99005a177eb466490359bf9ef323a321e5a24e4 msaf/tests/test_bsd_v3.py
 ```
-  ```
 
 ### T-2026-0050 — RH scaffold Stage 2–4: konstanta tail archimedean GW nyata, λ_min tersertifikasi, dan L² containment
 
