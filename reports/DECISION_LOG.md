@@ -185,14 +185,41 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   catatan keputusan; `brain.md` §10.3 menandai r7 RETRACTED dan BSD v3 RECON.
   Tidak ada artefak ber-`sha256LF` yang dihapus; `A-2026-0052` tidak berubah.
 
+## 2026-10-27 — Konsolidasi MCP T2N: `t2n_core` + `t2n_viz`
+
+- **Keputusan pemilik:** dua server t2n final — `t2n_core` (repokeeper +
+  archivist + science + scribe + watchtower, 30 tool) dan `t2n_viz`
+  (illumina + materials, 7 tool). Dua server `shp_*` tidak disentuh, sehingga
+  total target 4 server aktif.
+- **Bug yang diperbaiki:** `mcp/t2n/illumina.py` gagal diimpor karena definisi
+  `render_html_dashboard` hilang; badannya tertinggal setelah `return` di
+  `render_materials_dashboard`. Fungsi dipulihkan sebagai tool publik, dan
+  jalur materials memakai impor malas.
+- **Artefak:** `mcp/t2n_core.py`, `mcp/t2n_viz.py`, shim
+  `mcp/t2n_combined.py`, `opencode.jsonc` (2 entri), guard
+  `msaf/tests/test_mcp_servers.py`.
+- **Verifikasi:** `python -m pytest msaf/tests/test_mcp_servers.py -q` →
+  7 passed; smoke produksi menunjukkan `t2n_core` 30 tool dan `t2n_viz`
+  7 tool dengan `repo_root`/`write_roots` benar. Gate minimum 21 passed.
+- **Commit:** pra-registrasi `91818bc`; implementasi `7412eff`.
+- **Proses:** seluruh 10 proses t2n berhenti saat `opencode.jsonc` di-reload;
+  6 proses `shp_*` (3 batch) tetap berjalan. Duplikasi shp tidak diubah
+  karena batas "jangan sentuh `shp_*`".
+- **Batas:** ini perbaikan infrastruktur, bukan klaim ilmiah. Tidak ada klaim
+  RH/abc/BSD/figure-eight/Lean/Coq/fisika; `materials.mp_query` tetap butuh
+  jaringan dan tidak diuji.
+
 ## Keputusan yang masih menunggu pemilik
 
 1. Status sertifikasi `T-2026-0049` dan `A-2026-0048` sehubungan dengan
    pelanggaran prereg 2026-10-25. `A-2026-0047` sudah diputuskan pada
    2026-10-26 (CERTIFIED).
-2. Entri registry Learn-harness v1: pra-registrasi memakai `A-2026-0050`
-   (masih kosong), tetapi belum ada entri atau sertifikat ledger; klaim
-   README belum dapat diverifikasi. `T-2026-0050` adalah ID berbeda.
+2. Entri Registry Learn-harness v1: `A-2026-0050` kini ada di registry dengan
+   status CERTIFIED untuk stub deterministik. Keputusan yang tersisa adalah
+   apakah CERTIFIED layak untuk stub, atau perlu direklasifikasi seperti
+   `A-2026-0051`; `T-2026-0050` adalah ID berbeda.
 3. Pemisahan uji r5 yang mahal dari suite default agar CI tidak memakan
    sekitar dua jam.
+4. Pembersihan 6 proses `shp_*` (3 batch) yang masih berjalan; memerlukan
+   persetujuan karena `shp_*` berada di luar lingkup yang boleh disentuh.
 

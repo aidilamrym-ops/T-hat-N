@@ -249,7 +249,7 @@ Snapshot ini dibekukan pada 27 Okt 03:08 WIB; status terkini ada di §10.3.
 | BSD v3 | **RECON (stub)** | `A-2026-0051` | Reklasifikasi 2026-10-27; prereg tidak sah; receipt stub di-track; bukan sertifikasi |
 | Learn-harness v1 | STUB (jujur) | `A-2026-0050` | Stub deterministik; bukan ML nyata |
 | Q3 abc C=10^7 | DONE/CERTIFIED | `A-2026-0052`, `reports/abc_census_v3_10000000.json` | 17 triple, max_gap 40640; v2 100-smooth superseded; jangan rerun N sama tanpa upgrade contract |
-| MCP consolidation | PENDING | `mcp/t2n_combined.py` | Belum mandiri; belum terdaftar; 16 proses |
+| MCP consolidation | DONE (aktif setelah restart) | `mcp/t2n_core.py`, `mcp/t2n_viz.py`, `opencode.jsonc` | 2 server t2n: 30 + 7 tool; guard 7 test; shp tidak disentuh |
 
 ### 10.4 Protokol anti-loop (mengikat)
 
@@ -286,8 +286,10 @@ Snapshot ini dibekukan pada 27 Okt 03:08 WIB; status terkini ada di §10.3.
 - **B1 — DONE:** dossier `reports/REGISTRY_CORRECTION_DOSSIER_2026-10-27.md`;
   keputusan pemilik 2026-10-27: r7 RETRACTED, `T-2026-0049` dipulihkan,
   BSD v3 RECON. Guard registry lulus.
-- **C1 — MCP:** matikan batch duplikat 02:01/04:01 setelah verifikasi; daftarkan
-  `t2n_combined` + satu core; jangan hapus modul sumber sebelum combined mandiri.
+- **C1 — DONE:** `t2n_core` (5 role server, 30 tool) + `t2n_viz`
+  (illumina + materials, 7 tool); guard `msaf/tests/test_mcp_servers.py`
+  lulus 7/7. Proses t2n lama berhenti saat `opencode.jsonc` di-reload;
+  aktivasi penuh menunggu restart opencode. `shp_*` tidak disentuh.
 - **D1 — rekonsiliasi:** `DECISION_LOG` (`A-2026-0050`), dua file untracked,
   `TARGET_STATUS` §6.
 
@@ -322,4 +324,7 @@ Snapshot ini dibekukan pada 27 Okt 03:08 WIB; status terkini ada di §10.3.
   stub `A-2026-0051`; bukan sertifikasi.
 - `DECISION_LOG` masih menyebut `A-2026-0050` kosong, padahal registry sudah
   punya entri CERTIFIED.
-- 16 proses MCP = double-run; `t2n_illumina` 0 proses.
+- 16 proses MCP = double-run; `t2n_illumina` 0 proses. **Diselesaikan
+  2026-10-27:** t2n dikonsolidasi ke `t2n_core` + `t2n_viz`; 10 proses t2n
+  berhenti saat config di-reload. 6 proses `shp_*` (3 batch) tetap berjalan
+  dan tidak disentuh.
