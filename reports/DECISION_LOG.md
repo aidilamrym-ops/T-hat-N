@@ -232,6 +232,12 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
 - **Batas:** "CI hijau" kini berarti suite cepat. r5/r6 hanya dibuktikan oleh
   workflow `Slow tests`; jangan menyebut r5/r6 hijau tanpa hasil workflow itu.
   Tidak ada asersi, ambang, receipt, atau verdict yang dihapus/diubah.
+- **Koreksi 2026-10-27:** angka `timeout-minutes: 60` yang disebut di atas
+  adalah milik job `lean-kernel`, bukan `python-tests`; job `python-tests`
+  tidak memiliki timeout. Alasan pemisahan yang terukur adalah run P2
+  `40261066426` yang menghabiskan 202,5 menit pada `python-tests`, dan run
+  `40401144645` yang berjalan 57+ menit tanpa selesai. Keputusan desain tidak
+  berubah; tidak ada kode/CI yang diubah oleh koreksi ini.
 
 ## 2026-10-27 — Tiga keputusan delegasi: status sertifikasi dan gerbang klaim r5/r6
 

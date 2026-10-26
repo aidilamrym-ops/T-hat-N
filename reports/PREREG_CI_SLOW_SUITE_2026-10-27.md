@@ -106,3 +106,13 @@ Bagian 1–7 di atas tetap terkunci; amendemen ini aditif.
 - **Konsekuensi klaim:** klaim r5/r6 mensyaratkan `python-tests` hijau **dan**
   `Slow tests` hijau pada commit yang sama; `Slow tests` kini ikut
   membuktikan segel receipt.
+
+## 9. Koreksi 2026-10-27 — atribusi timeout
+
+Bagian 1 butir 1 dan bagian 4 salah atribusi. `timeout-minutes: 60` adalah
+milik job `lean-kernel`; `timeout-minutes: 45` milik `coq-kernel`;
+job `python-tests` **tidak** memiliki `timeout-minutes`. Alasan pemisahan yang
+benar adalah durasi terukur: run P2 `40261066426` menghabiskan **202,5 menit**
+pada `python-tests`, dan run `40401144645` berjalan 57+ menit tanpa selesai.
+Keputusan desain (marker `slow`, CI default `-m "not slow"`, workflow lambat
+terpisah) tidak berubah. Tidak ada kode atau CI yang diubah oleh koreksi ini.
