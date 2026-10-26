@@ -2129,6 +2129,48 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   sha256LF 0519911cbc2453314011c30141d999653119bf0a183aaeda76174a72d9fb7081 reports/TWIN_PRIME_V3_2026-10-25.md
   ```
 
+### A-2026-0047 — Figure-eight reduced 8x8 r6: K6 diskriminatif M1-M10, ALL PASS
+
+- **Jenis:** T
+- **Pernyataan:** Kampanye figure-eight T2-r6 untuk orbit periodik
+  figure-eight reduced 8x8 di dalam box lokal B (R_B = 1e-30), modulo gauge
+  (q1y = 1/5, I_xy = 0), mereproduksi base K1-K5 r3 secara byte-identik
+  (modul `msaf/figure_eight_r3.py` dan receipt r3 diverifikasi ulang) dan
+  menjalankan matriks mutasi K6 M1-M10 yang seluruh sepuluh barisnya
+  diskriminatif serta `passed: true`. Receipt kanonik
+  `reports/figure_eight_r6_2026-10-25.json` mencatat `all_pass: true` dan
+  `summary: ALL PASS`; verdict ALL PASS.
+- **Batas:** Hanya keberadaan dan keunikan lokal di dalam box B, kondisional
+  pada base K1-K5 dan K6 M1-M10. Bukan klaim global, stabilitas, spektrum,
+  chaos, ergodisitas, KAM, PDE, fisika, prioritas, Lean/Coq, atau RH. Tidak
+  ada laporan formal terpisah; receipt JSON, pra-registrasi, modul, dan test
+  adalah sertifikatnya.
+- **Status:** CERTIFIED
+- **Domino:** figure-eight reduced 8x8 (fondasi trek T2b; stabilitas tetap
+  memerlukan pra-registrasi sendiri).
+- **Relasi:** Melanjutkan basis r3 (`reports/figure_eight_r3_2026-10-23.json`,
+  `6b0b71e9...`) dan menggantikan target r5 yang INCONCLUSIVE; pra-registrasi
+  `reports/PREREG_FIGURE_EIGHT_R6_2026-10-25.md` (hash `92b687f5...`).
+  Commit `ad34cbc` menyebut `A-2026-0047` tetapi tidak menambahkan entri
+  ledger; entri ini ditambahkan 2026-10-26 atas konfirmasi pemilik.
+  ID `A-2026-0047` dipertahankan sesuai receipt/pra-registrasi; `Jenis: T`
+  karena ini sertifikasi finit, bukan audit klaim pihak ketiga.
+  Catatan proses: pra-registrasi r6 di-commit bersama kode pada `ad34cbc`
+  (temuan audit §T6); catatan itu dipertahankan, sertifikasi berlaku atas
+  keputusan pemilik.
+- **Perintah verifikasi:** python -m pytest msaf/tests/test_figure_eight_r6.py -q;
+  python -m pytest msaf/tests/test_fence_registry.py -q.
+- **Sertifikat:**
+
+  ```text
+  sha256LF e4beaefeb859bd3da760e097582527759c5a1132efdf8a5b1ef0e9528025ab88 msaf/figure_eight_r6.py
+  sha256LF e7c7f6e0457ade2e5a6373ad48b5cfc826326b2ab6e4773a43de1d019a2b5e81 msaf/tests/test_figure_eight_r6.py
+  sha256LF 8eddc2bb17647d452e15325397e852e224e1af028f055fa4fe41de94af939ec6 msaf/figure_eight_r3.py
+  sha256LF 92b687f5ee6237fd01a0b43374c91cce4ba72898f32bfd3f655925a61e591b6b reports/PREREG_FIGURE_EIGHT_R6_2026-10-25.md
+  sha256LF 6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9 reports/figure_eight_r3_2026-10-23.json
+  sha256LF f6109ea1b9d81ebe970a0a50628ab300c19a1f4e431b4fae741d57a76be3fbe9 reports/figure_eight_r6_2026-10-25.json
+  ```
+
 ### A-2026-0048 — Sensus Twin-prime Q2 v4: 10^10 pasangan (p, p + 2)
 
 - **Jenis:** A

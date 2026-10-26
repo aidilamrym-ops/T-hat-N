@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "authority_epoch": "2026-10-26",
+  "baseline": {
+    "p0_commit": "5fea118",
+    "p1_prereg_commit": "34ee072",
+    "p1_commit": "b7b5f2e",
+    "p2_prereg_commit": "fc33084",
+    "p2_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
+    "p2_tag": "p2-green-0b0a32c",
+    "p2_ci_run": 40261066426,
+    "p2_ci_result": "success",
+    "r6_commit": "ad34cbc",
+    "r6_registry": "A-2026-0047",
+    "r6_receipt": "reports/figure_eight_r6_2026-10-25.json"
+  },
+  "authority_precedence": [
+    "CURRENT_AUTHORITY.md",
+    "AGENTS.md",
+    "reports/DECISION_LOG.md",
+    "reports/FENCE_REGISTRY.md"
+  ],
+  "certified_claims": [
+    {
+      "id": "A-2026-0047",
+      "registry": "reports/FENCE_REGISTRY.md",
+      "receipt": "reports/figure_eight_r6_2026-10-25.json",
+      "status": "CERTIFIED",
+      "confirmed": "2026-10-26",
+      "note": "Owner-confirmed r6 ALL PASS; ledger entry added to close the ad34cbc gap."
+    }
+  ],
+  "active": {
+    "agents": {
+      "path": "AGENTS.md",
+      "sha256lf": "a5bef3027ed3d684425e0303a4f51ecf791c54b6f2051dd03fed55b8bbdb94c7"
+    },
+    "current_authority": {
+      "path": "CURRENT_AUTHORITY.md",
+      "sha256lf": "ab5215ccae978e8fcfca88f65f0a024cf60346cd6ab59ecfe619abdcc648a455"
+    },
+    "decision_log": {
+      "path": "reports/DECISION_LOG.md",
+      "sha256lf": "1245102e84033fcdb1f1c6ffa03e8ceafadd1d7d0d48f8ab2c8568cc661f544e"
+    },
+    "archive_tombstones": {
+      "path": "reports/ARCHIVE_TOMBSTONES.md",
+      "sha256lf": "f4419fdd476a95614a84359f809f9b0f0d0bfa6ea043d9677c33a19e83551d8c"
+    }
+  },
+  "superseded": [
+    {
+      "path": "reports/HANDOFF.md",
+      "state": "stub-pending",
+      "replacement": "CURRENT_AUTHORITY.md",
+      "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
+      "note": "Log sesi 2026-10-15..24; jangan dipakai sebagai instruksi aktif."
+    },
+    {
+      "path": "reports/RH_SCAFFOLD_NOTES/Stage_2_Derivation_Analytic_Tail_Bound.md",
+      "state": "tombstone-pending",
+      "replacement": "lean/Stage_2_Tail_Bound.lean",
+      "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
+      "note": "Prompt placeholder; target C/n salah. Implementasi aktif ada di lean/."
+    },
+    {
+      "path": "reports/RH_SCAFFOLD_NOTES/Stage_3_Eigenvalue_Locking_Dimension_Induction.md",
+      "state": "tombstone-pending",
+      "replacement": "lean/Stage_3_Eigenvalue_Locking.lean",
+      "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
+      "note": "Prompt placeholder; induksi naik tidak valid karena Cauchy interlacing."
+    },
+    {
+      "path": "reports/RH_SCAFFOLD_NOTES/README_custody.md",
+      "state": "stub-pending",
+      "replacement": "reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md",
+      "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
+      "note": "Custody note 2026-10-23; instruksi Stage 2/3 di dalamnya sudah basi."
+    },
+    {
+      "path": "reports/RH_SCAFFOLD_NOTES/append_status.py",
+      "state": "tombstone-pending",
+      "replacement": "reports/RH_SCAFFOLD_NOTES/KERNEL_CHECK_2026-10-25.md",
+      "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
+      "note": "Skrip satu-kali hardcoded dan rusak; tidak dirujuk apa pun."
+    }
+  ],
+  "historical_artifacts": [
+    {
+      "path": "reports/RH_SCAFFOLD_NOTES/Stage_2_Derivation_Analytic_Tail_Bound.lean",
+      "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
+      "note": "Pernah lulus kernel; simpan sebagai artefak historis."
+    },
+    {
+      "path": "reports/RH_SCAFFOLD_NOTES/Stage_3_Eigenvalue_Locking_Dimension_Induction.lean",
+      "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
+      "note": "Pernah lulus kernel; simpan sebagai artefak historis."
+    },
+    {
+      "path": "reports/RH_SCAFFOLD_NOTES/Stage_2_Derivation_Analytic_Tail_Bound_receipt.json",
+      "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
+      "note": "Receipt kernel-check historis; bukan instruksi aktif."
+    },
+    {
+      "path": "reports/RH_SCAFFOLD_NOTES/Stage_3_Eigenvalue_Locking_Dimension_Induction_receipt.json",
+      "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
+      "note": "Receipt kernel-check historis; bukan instruksi aktif."
+    }
+  ],
+  "protected": [
+    {
+      "path": "reports/TARGET_STATUS_2026-10-25.md",
+      "reason": "Status beku; sha256LF tercatat di registry T-2026-0052."
+    },
+    {
+      "path": "reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean",
+      "reason": "Hash tercatat di registry T-2026-0050; sudah ditulis ulang, bukan superseded."
+    },
+    {
+      "path": "reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md",
+      "reason": "Dokumen koreksi lingkup Stage 2/3 yang otoritatif."
+    },
+    {
+      "path": "reports/figure_eight_r6_2026-10-25.json",
+      "reason": "Sertifikat A-2026-0047; jangan hapus atau ubah tanpa memperbarui registry."
+    }
+  ]
+}
