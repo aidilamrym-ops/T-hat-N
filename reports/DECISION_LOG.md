@@ -164,6 +164,27 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   `reports/abc_census_v2_10000000.json` sebagai bukti supersession, bukan
   sertifikat.
 
+## 2026-10-27 — Koreksi registry: r7, BSD v2, BSD v3
+
+- **Keputusan pemilik:**
+  - `A-2026-0049` (r7) di-retract menjadi `RETRACTED`: receipt `result: {}`,
+    report placeholder, modul hanya memanggil r5, dan
+    `msaf/tests/test_figure_eight_r7.py` tidak ada.
+  - `T-2026-0049` (BSD v2) dipulihkan sebagai heading di atas badan yatim;
+    klaim 5 kurva pilot tidak berubah.
+  - `A-2026-0051` (BSD v3) direklasifikasi dari `CERTIFIED (pending CI)` ke
+    `RECON`: `PREREG_BSD_V3_2026-10-27.md` bukan pra-registrasi sah dan
+    `msaf/bsd_v3.py` hanya membungkus `bsd_v2`. Receipt stub dipertahankan
+    sebagai bukti; relasi dikoreksi ke `T-2026-0049`.
+- **Alasan:** status registry sebelumnya tidak cocok dengan artefak; r7 tidak
+  punya receipt/test r7, BSD v3 tidak punya prereg sah, dan badan BSD v2
+  kehilangan heading akibat `d56242c`.
+- **Commit:** `6fb3e17` (patch registry dan dossier); receipt stub BSD v3
+  di-track pada `c4d2ee1`.
+- **Dampak:** `reports/REGISTRY_CORRECTION_DOSSIER_2026-10-27.md` menjadi
+  catatan keputusan; `brain.md` §10.3 menandai r7 RETRACTED dan BSD v3 RECON.
+  Tidak ada artefak ber-`sha256LF` yang dihapus; `A-2026-0052` tidak berubah.
+
 ## Keputusan yang masih menunggu pemilik
 
 1. Status sertifikasi `T-2026-0049` dan `A-2026-0048` sehubungan dengan

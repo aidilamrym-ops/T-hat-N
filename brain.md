@@ -244,8 +244,9 @@ Snapshot ini dibekukan pada 27 Okt 03:08 WIB; status terkini ada di §10.3.
 | Figure-eight r6 | DONE/CERTIFIED | `A-2026-0047` | K6 M1–M10 |
 | abc C=100k | DONE/CERTIFIED | `A-2026-0032` | 6 triple, max_gap 6825 |
 | Coq bridge L2/L5 | DONE/CERTIFIED | `A-2026-0011`–`0014` | — |
-| r7 | **STUB** | `A-2026-0049` | Receipt `result: {}`; laporan placeholder; jangan dianggap selesai |
-| BSD v3 | **STUB/CI FAILED** | `A-2026-0051` | `python-tests` FAILED; status "pending CI" tidak sah |
+| r7 | **RETRACTED (stub)** | `A-2026-0049` | Retraksi pemilik 2026-10-27; receipt kosong, test tidak ada; artefak disimpan |
+| BSD v2 | DONE/CERTIFIED | `T-2026-0049` | 5 kurva pilot; heading dipulihkan 2026-10-27 |
+| BSD v3 | **RECON (stub)** | `A-2026-0051` | Reklasifikasi 2026-10-27; prereg tidak sah; receipt stub di-track; bukan sertifikasi |
 | Learn-harness v1 | STUB (jujur) | `A-2026-0050` | Stub deterministik; bukan ML nyata |
 | Q3 abc C=10^7 | DONE/CERTIFIED | `A-2026-0052`, `reports/abc_census_v3_10000000.json` | 17 triple, max_gap 40640; v2 100-smooth superseded; jangan rerun N sama tanpa upgrade contract |
 | MCP consolidation | PENDING | `mcp/t2n_combined.py` | Belum mandiri; belum terdaftar; 16 proses |
@@ -282,9 +283,9 @@ Snapshot ini dibekukan pada 27 Okt 03:08 WIB; status terkini ada di §10.3.
 - **A1 — DONE:** Q3 v2 (12 triple, 100-smooth) dikunci lalu superseded oleh
   Q3 v3 (17 triple, low-rad exhaustive). Prereg v3 `aed8e63c...`; registry
   `A-2026-0052`; receipt `reports/abc_census_v3_10000000.json`.
-- **B1 — koreksi registry:** siapkan dossier koreksi (bukan edit diam-diam)
-  untuk r7, BSD v3, dan `T-2026-0049`; minta keputusan pemilik; tambahkan entri
-  koreksi + guard test.
+- **B1 — DONE:** dossier `reports/REGISTRY_CORRECTION_DOSSIER_2026-10-27.md`;
+  keputusan pemilik 2026-10-27: r7 RETRACTED, `T-2026-0049` dipulihkan,
+  BSD v3 RECON. Guard registry lulus.
 - **C1 — MCP:** matikan batch duplikat 02:01/04:01 setelah verifikasi; daftarkan
   `t2n_combined` + satu core; jangan hapus modul sumber sebelum combined mandiri.
 - **D1 — rekonsiliasi:** `DECISION_LOG` (`A-2026-0050`), dua file untracked,
@@ -295,7 +296,9 @@ Snapshot ini dibekukan pada 27 Okt 03:08 WIB; status terkini ada di §10.3.
 1. Status `T-2026-0049` dan `A-2026-0048` terkait pelanggaran prereg 2026-10-25.
 2. Pemisahan uji r5 mahal dari CI default (~2 jam).
 3. Pilihan core MCP keempat: `t2n_watchtower` atau `t2n_scribe`.
-4. Sikap terhadap r7 dan BSD v3: retraksi, reklasifikasi, atau lengkapi artefak.
+4. **Selesai 2026-10-27:** r7 di-retract (`A-2026-0049`) dan BSD v3
+   direklasifikasi RECON (`A-2026-0051`); kelengkapan artefak tetap pekerjaan
+   terpisah.
 5. **Selesai 2026-10-27:** run `abc_census` PID 15272 dihentikan dan
    dinyatakan eksploratori/invalid; digantikan Q3 v3 (`A-2026-0052`).
 
@@ -303,18 +306,20 @@ Snapshot ini dibekukan pada 27 Okt 03:08 WIB; status terkini ada di §10.3.
 
 - Commit `d56242c` mengganti heading `### T-2026-0049 — BSD Q1 v2` dengan
   `### A-2026-0049 — Figure-eight r7`, sehingga badan entri BSD v2 menjadi
-  yatim (tanpa ID).
+  yatim (tanpa ID). Dipulihkan 2026-10-27: heading `T-2026-0049` dikembalikan
+  dan code fence ditutup.
 - `A-2026-0051` menulis "melanjutkan `A-2026-0048` (BSD Q1 v2)", padahal
-  `A-2026-0048` adalah twin prime v4.
+  `A-2026-0048` adalah twin prime v4. Dikoreksi 2026-10-27: relasi diubah ke
+  `T-2026-0049`.
 - `reports/PREREG_BSD_V3_2026-10-27.md` berisi kode pytest + hash placeholder,
-  bukan pra-registrasi.
+  bukan pra-registrasi. Status `A-2026-0051` direklasifikasi RECON 2026-10-27.
 - `reports/PREREG_Q3_ABC_CENSUS_2026-10-27.md` (placeholder) sudah dihapus
   2026-10-27; diganti `reports/PREREG_Q3_ABC_CENSUS_V3_2026-10-27.md`
   (sha256LF `aed8e63c...`).
 - `reports/figure_eight_r7_2026-10-26.json` = `{"schema": ..., "result": {}}`;
-  laporan r7 masih placeholder.
-- `reports/bsd_v3_2026-10-27.json` untracked meskipun hash-nya tercatat di
-  registry.
+  laporan r7 masih placeholder. `A-2026-0049` di-retract 2026-10-27.
+- `reports/bsd_v3_2026-10-27.json` sudah di-track 2026-10-27 sebagai bukti
+  stub `A-2026-0051`; bukan sertifikasi.
 - `DECISION_LOG` masih menyebut `A-2026-0050` kosong, padahal registry sudah
   punya entri CERTIFIED.
 - 16 proses MCP = double-run; `t2n_illumina` 0 proses.
