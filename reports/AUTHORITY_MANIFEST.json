@@ -37,52 +37,52 @@
     },
     "current_authority": {
       "path": "CURRENT_AUTHORITY.md",
-      "sha256lf": "ab5215ccae978e8fcfca88f65f0a024cf60346cd6ab59ecfe619abdcc648a455"
+      "sha256lf": "0a1d2777280d218f08d8560dad3b6f8605c31305b83adb9fa40c4a39865a4c65"
     },
     "decision_log": {
       "path": "reports/DECISION_LOG.md",
-      "sha256lf": "efdd9a4b38024e5f8f05812ec7bc9e48a80e58946f0c3bc3201ccb0ec5e14e0e"
+      "sha256lf": "50eca6b86e189eb3525e93293ee9b4e36d8e7169f7beaf60062730fe928f8a90"
     },
     "archive_tombstones": {
       "path": "reports/ARCHIVE_TOMBSTONES.md",
-      "sha256lf": "f4419fdd476a95614a84359f809f9b0f0d0bfa6ea043d9677c33a19e83551d8c"
+      "sha256lf": "92d47338c4df703e63dcd81947ca25603698dc38751c10307d446415d8d717f6"
     }
   },
   "superseded": [
     {
       "path": "reports/HANDOFF.md",
-      "state": "stub-pending",
+      "state": "stubbed",
       "replacement": "CURRENT_AUTHORITY.md",
-      "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
-      "note": "Log sesi 2026-10-15..24; jangan dipakai sebagai instruksi aktif."
+      "recovery_commit": "995576c~1",
+      "note": "Log sesi 2026-10-15..24; jangan dipakai sebagai instruksi aktif. Stub dieksekusi di 995576c."
     },
     {
       "path": "reports/RH_SCAFFOLD_NOTES/Stage_2_Derivation_Analytic_Tail_Bound.md",
-      "state": "tombstone-pending",
+      "state": "tombstoned",
       "replacement": "lean/Stage_2_Tail_Bound.lean",
-      "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
-      "note": "Prompt placeholder; target C/n salah. Implementasi aktif ada di lean/."
+      "recovery_commit": "995576c~1",
+      "note": "Prompt placeholder; target C/n salah. Implementasi aktif ada di lean/. Eksekusi di 995576c."
     },
     {
       "path": "reports/RH_SCAFFOLD_NOTES/Stage_3_Eigenvalue_Locking_Dimension_Induction.md",
-      "state": "tombstone-pending",
+      "state": "tombstoned",
       "replacement": "lean/Stage_3_Eigenvalue_Locking.lean",
-      "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
-      "note": "Prompt placeholder; induksi naik tidak valid karena Cauchy interlacing."
+      "recovery_commit": "995576c~1",
+      "note": "Prompt placeholder; induksi naik tidak valid karena Cauchy interlacing. Eksekusi di 995576c."
     },
     {
       "path": "reports/RH_SCAFFOLD_NOTES/README_custody.md",
-      "state": "stub-pending",
+      "state": "stubbed",
       "replacement": "reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md",
-      "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
-      "note": "Custody note 2026-10-23; instruksi Stage 2/3 di dalamnya sudah basi."
+      "recovery_commit": "995576c~1",
+      "note": "Custody note 2026-10-23; instruksi Stage 2/3 di dalamnya sudah basi. Stub dieksekusi di 995576c."
     },
     {
       "path": "reports/RH_SCAFFOLD_NOTES/append_status.py",
-      "state": "tombstone-pending",
+      "state": "tombstoned",
       "replacement": "reports/RH_SCAFFOLD_NOTES/KERNEL_CHECK_2026-10-25.md",
-      "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
-      "note": "Skrip satu-kali hardcoded dan rusak; tidak dirujuk apa pun."
+      "recovery_commit": "995576c~1",
+      "note": "Skrip satu-kali hardcoded dan rusak; tidak dirujuk apa pun. Eksekusi di 995576c."
     }
   ],
   "historical_artifacts": [

@@ -8,6 +8,12 @@ entri ledger ditambahkan untuk menutup celah `ad34cbc`).
 **Menggantikan:** `reports/HANDOFF.md` sebagai sumber tugas aktif; target
 `C/n`; induksi Stage 3; pembacaan placeholder Stage 2/3 sebagai implementasi.
 
+**Pembaruan 2026-10-27 (D1 dikoreksi/D2):** ledger tombstone
+(`reports/ARCHIVE_TOMBSTONES.md`) disinkronkan dengan eksekusi `995576c`,
+termasuk guard `msaf/tests/test_authority_manifest.py`; status
+`T-2026-0049`, `A-2026-0048`, `A-2026-0049`, dan `A-2026-0050` telah dibawa
+keputusan pemilik 2026-10-27 (rincian di §5 dan `reports/DECISION_LOG.md`).
+
 ## 1. Klaim aktif
 
 | ID | Klaim | Artefak utama | Batas |
@@ -113,16 +119,17 @@ ikut diperbarui; jangan membacanya sebagai daftar tugas aktif.
 | Teks beku | Keadaan sekarang | Otoritas |
 |---|---|---|
 | §6.4 menyebut r6 opsional | `reports/figure_eight_r6_2026-10-25.json` berisi `ALL PASS`; entri registry `A-2026-0047` ditambahkan 2026-10-26 atas konfirmasi pemilik | `FENCE_REGISTRY` `A-2026-0047`; commit `ad34cbc` |
-| §6.5 menyebut verifikasi identitas BSD belum dimulai | `T-2026-0049` (BSD Q1 v2) berstatus `CERTIFIED` untuk 5 kurva pilot | Registry; timing pra-registrasi masih menunggu keputusan pemilik (audit §T6) |
-| §6.6 menyebut target twin prime N=10^9 belum dikerjakan | `A-2026-0046` (N=10^9) dan `A-2026-0048` (N=10^10) berstatus `CERTIFIED` | Registry; timing pra-registrasi v4 masih menunggu keputusan pemilik (audit §T6) |
-| `README.md` baris 26-27 menyebut r6 `A-2026-0047` dan Learn-harness `A-2026-0050` | r6 benar setelah entri registry ditambahkan. Learn-harness **belum punya entri registry**; ID `A-2026-0050` yang disebut README/prereg masih kosong (yang ada `T-2026-0050`, ID berbeda) | Jangan sitasi Learn-harness sebagai CERTIFIED sampai entri registry dibuat |
+| §6.5 menyebut verifikasi identitas BSD belum dimulai | `T-2026-0049` (BSD Q1 v2) berstatus `CERTIFIED` untuk 5 kurva pilot | Registry; timing pra-registrasi ditetapkan sebagai pengecualian proses oleh pemilik 2026-10-27 (`DECISION_LOG` D1) |
+| §6.6 menyebut target twin prime N=10^9 belum dikerjakan | `A-2026-0046` (N=10^9) dan `A-2026-0048` (N=10^10) berstatus `CERTIFIED` | Registry; timing pra-registrasi v4 ditetapkan sebagai pengecualian proses oleh pemilik 2026-10-27 (`DECISION_LOG` D1) |
+| `README.md` baris 26-27 menyebut r6 `A-2026-0047` dan Learn-harness `A-2026-0050` | r6 benar; entri `A-2026-0050` kini ada di `FENCE_REGISTRY.md`, `CERTIFIED` terbatas pada **stub deterministik** (`DECISION_LOG` D2, 2026-10-27) | `README.md` baris 26 juga menyebut r7 `CERTIFIED` — koreksi: r7 adalah `A-2026-0049` `RETRACTED`; README diselaraskan per 2026-10-27 |
 
-Jangan menaikkan atau menurunkan status `T-2026-0049`, `A-2026-0047`, atau
-`A-2026-0048` secara diam-diam. `A-2026-0047` sekarang ada di registry dan
-berstatus CERTIFIED; `T-2026-0049` dan `A-2026-0048` masih menunggu keputusan
-pemilik. Klaim Learn-harness di README belum punya entri registry dan tidak
-boleh diperlakukan sebagai sertifikat, meskipun ID `A-2026-0050` masih
-tersedia.
+Jangan menaikkan atau menurunkan status `T-2026-0049`, `A-2026-0047`,
+`A-2026-0048`, `A-2026-0049`, atau `A-2026-0050` secara diam-diam. Status
+resmi per 2026-10-27: `T-2026-0049` dan `A-2026-0048` `CERTIFIED` dengan
+pengecualian proses tercatat; `A-2026-0047` `CERTIFIED`; `A-2026-0049`
+(r7) `RETRACTED`; `A-2026-0050` `CERTIFIED` hanya untuk perilaku stub
+deterministik (bukan klaim belajar/ML). Perubahan lanjut hanya lewat entri
+`reports/DECISION_LOG.md` bertanggal, disusul sinkronisasi dokumen ini.
 
 ## 6. Rujukan
 

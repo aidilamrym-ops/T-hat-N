@@ -1,9 +1,10 @@
 # Archive Tombstones
 
-Catatan berkas yang dihapus, diganti stub, atau dinyatakan historis. File ini
-dibuat pada fase authority layer yang **aditif**: belum ada tombstone yang
-dieksekusi. Penghapusan dan penggantian stub menunggu persetujuan pemilik
-yang tercatat di `reports/DECISION_LOG.md`.
+Catatan berkas yang dihapus, diganti stub, atau dinyatakan historis. Lapisan
+authority ini dibuat dengan prinsip **aditif**: eksekusi tombstone hanya
+berlaku setelah persetujuan pemilik yang tercatat di
+`reports/DECISION_LOG.md`, dan entri yang telah dieksekusi dicatat pada bagian
+"Tombstone yang sudah dieksekusi" di bawah.
 
 ## Skema
 
@@ -22,8 +23,20 @@ Aturan:
 
 ## Tombstone yang sudah dieksekusi
 
-Belum ada tombstone yang dieksekusi. Eksekusi dijadwalkan pada commit Phase 2,
-setelah authority layer Phase 1 masuk `main` dan CI-nya hijau.
+| Path | Status | Pengganti | Recovery | Tanggal | Keputusan |
+|---|---|---|---|---|---|
+| `reports/RH_SCAFFOLD_NOTES/Stage_2_Derivation_Analytic_Tail_Bound.md` | `tombstoned` | `lean/Stage_2_Tail_Bound.lean`; `reports/GW_TAIL_CONSTANTS_2026-10-26.md`; `reports/ANALYTIC_TAIL_BOUND_2026-10-26.md` | `git show 995576c~1:reports/RH_SCAFFOLD_NOTES/Stage_2_Derivation_Analytic_Tail_Bound.md` | 2026-10-26 | `995576c` (Phase 2), atas persetujuan pemilik pada tabel "Kandidat yang disetujui pemilik (2026-10-26)" |
+| `reports/RH_SCAFFOLD_NOTES/Stage_3_Eigenvalue_Locking_Dimension_Induction.md` | `tombstoned` | `lean/Stage_3_Eigenvalue_Locking.lean`; `reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md` | `git show 995576c~1:reports/RH_SCAFFOLD_NOTES/Stage_3_Eigenvalue_Locking_Dimension_Induction.md` | 2026-10-26 | `995576c` (Phase 2), atas persetujuan pemilik (tabel kandidat 2026-10-26) |
+| `reports/RH_SCAFFOLD_NOTES/append_status.py` | `tombstoned` | Tidak ada; status historis ada di `reports/RH_SCAFFOLD_NOTES/KERNEL_CHECK_2026-10-25.md` | `git show 995576c~1:reports/RH_SCAFFOLD_NOTES/append_status.py` | 2026-10-26 | `995576c` (Phase 2), atas persetujuan pemilik (tabel kandidat 2026-10-26) |
+| `reports/HANDOFF.md` | `stubbed` | `CURRENT_AUTHORITY.md`; `reports/DECISION_LOG.md`; file ini | `git show 995576c~1:reports/HANDOFF.md` (log sesi lengkap) | 2026-10-26 | `995576c` (Phase 2), atas persetujuan pemilik (tabel kandidat 2026-10-26) |
+| `reports/RH_SCAFFOLD_NOTES/README_custody.md` | `stubbed` | `reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md` | `git show 995576c~1:reports/RH_SCAFFOLD_NOTES/README_custody.md` (versi pra-stub) | 2026-10-26 | `995576c` (Phase 2), atas persetujuan pemilik (tabel kandidat 2026-10-26) |
+
+Catatan sinkronisasi 2026-10-27 (D1): guard
+`msaf/tests/test_authority_manifest.py` tidak lagi mengunci pernyataan
+"belum ada tombstone yang dieksekusi"; ia memverifikasi bahwa tabel di atas
+ada dan menyebut commit eksekusi `995576c`. State di
+`reports/AUTHORITY_MANIFEST.json` untuk kelima path ini selaras dengan disk
+(`tombstoned` / `stubbed`).
 
 ## Kandidat yang disetujui pemilik (2026-10-26)
 

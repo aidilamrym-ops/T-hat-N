@@ -32,6 +32,7 @@ ALLOWED_SUPERSEDED_STATES = {
     "stub-pending",
     "tombstone-pending",
     "tombstoned",
+    "stubbed",
 }
 
 
@@ -133,8 +134,18 @@ def test_authority_documents_keep_scope_limits() -> None:
 
     tombstones = (ROOT / "reports" / "ARCHIVE_TOMBSTONES.md").read_text(
         encoding="utf-8")
-    assert "Belum ada tombstone yang dieksekusi." in tombstones, (
-        "tombstone ledger must state that no removal has been executed")
+    # D1 (2026-10-27): tombstone sudah dieksekusi pada commit 995576c, sehingga
+    # ledger wajib mencantumkannya dan tidak lagi boleh berklaim "belum ada
+    # tombstone yang dieksekusi". Lihat entri DECISION_LOG bertanggal sama.
+    assert "Belum ada tombstone yang dieksekusi." not in tombstones, (
+        "tombstone ledger still claims that no removal was executed; "
+        "sync it with reports/ARCHIVE_TOMBSTONES.md and DECISION_LOG")
+    executed = tombstones.partition("## Tombstone yang sudah dieksekusi")[2]
+    executed = executed.partition("## Kandidat yang disetujui pemilik")[0]
+    assert "995576c" in executed, (
+        "executed tombstone rows must cite the execution commit 995576c")
+    assert "tombstoned" in executed and "stubbed" in executed, (
+        "executed tombstone rows must cover tombstoned and stubbed entries")
 
 
 def test_r6_registry_gap_is_closed() -> None:

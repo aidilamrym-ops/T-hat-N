@@ -296,6 +296,46 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
 - **Batas:** hash payload Arb penuh tidak di-pin karena string interval Arb
   tidak stabil lintas platform.
 
+## 2026-10-27 — Sinkronisasi lapisan otoritas: ledger tombstone, guard, manifest, CURRENT_AUTHORITY
+
+- **Dasar:** pemilik menyetujui eksekusi paket koreksi hasil audit read-only
+  2026-10-27 ("kerjakan dan saya setuju"). Audit menemukan hash `sha256LF`
+  0 drift dan 0 sertifikat hilang; temuan utamanya justru lapisan otoritas
+  yang stale, ledger tombstone yang mengunci pernyataan palsu, dan cacat
+  tampilan/teks registry. Paket yang dieksekusi entri ini: **D1 (tombstone)**
+  dan **D2 ("otoritas")**. D3 (registry), D4 (Stage), D6 (housekeeping)
+  menyusul pada entri/commit terpisah.
+- **Perubahan D1:**
+  `reports/ARCHIVE_TOMBSTONES.md` — bagian "Tombstone yang sudah dieksekusi"
+  kini memuat tabel 5 baris (3 `tombstoned`: Stage 2 MD, Stage 3 MD,
+  `append_status.py`; 2 `stubbed`: `HANDOFF.md`, `README_custody.md`),
+  recovery `git show 995576c~1:<path>` (semuanya terverifikasi ada di komit
+  itu, reachable dari `main`). Kalimat "Belum ada tombstone yang dieksekusi."
+  dihapus karena tidak benar sejak `995576c`.
+- **Perubahan guard:** `msaf/tests/test_authority_manifest.py` tidak lagi
+  mengunci pernyataan palsu itu. Guard baru menolak ledger yang masih
+  berklaim "belum ada"; memverifikasi bahwa tabel eksekusi ada, menyebut
+  commit `995576c`, dan mencakup `tombstoned`+`stubbed`. State `stubbed`
+  ditambahkan ke `ALLOWED_SUPERSEDED_STATES`.
+- **Perubahan manifest:** `reports/AUTHORITY_MANIFEST.json` — lima entri
+  `superseded` diselaraskan dengan disk (`tombstoned`/`stubbed`,
+  `recovery_commit: 995576c~1`); hash aktif semua dokumen otoritas diperbarui
+  pada commit yang sama.
+- **Perubahan D2:** `CURRENT_AUTHORITY.md` §5 dan header diperbarui: status
+  D1/D2 delegasi 2026-10-27 (`T-2026-0049`, `A-2026-0048` CERTIFIED dengan
+  pengecualian proses; r7 `A-2026-0049` RETRACTED; `A-2026-0050` CERTIFIED
+  terbatas stub deterministik) tertulis eksplisit, sehingga dokumen ini lebih
+  tinggi tidak lagi bertentangan dengan `DECISION_LOG`.
+- **Batas:** tidak ada baris `sha256LF` registry, receipt, kode matematika,
+  atau verdict yang berubah; tidak ada status registry dinaikkan/diturunkan.
+- **Risiko tercatat (bukan keputusan terbuka):** workflow `Slow tests`
+  belum pernah menjalankan r6 di `main`; klaim r6 tetap berbasis keputusan
+  pemilik 2026-10-26 + receipt, dan gerbang D3 (2026-10-27) menuntut run
+  `Slow tests` hijau untuk pembuktian lanjutan.
+- **Verifikasi lokal saat entri ini ditulis:** 14 passed pada
+  `test_authority_manifest`, `test_fence_registry`, `test_lean_axiom_audit`,
+  `test_anti_circularity_gate`.
+
 ## Keputusan yang masih menunggu pemilik
 
 Tiga pertanyaan delegasi 2026-10-27 sudah diputuskan di atas (D1–D3). Tidak
