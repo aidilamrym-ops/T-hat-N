@@ -41,11 +41,11 @@
     },
     "decision_log": {
       "path": "reports/DECISION_LOG.md",
-      "sha256lf": "abfd690b2e5ae70b0e0505a2c5b26a0d08429eef7abde3322897ce4c60909251"
+      "sha256lf": "5872e3faae94175b3df5e5e8a3edb07a26370051b8d5642da43be99c010603d4"
     },
     "archive_tombstones": {
       "path": "reports/ARCHIVE_TOMBSTONES.md",
-      "sha256lf": "d8c1b69e7db4f99b7fdfd24e4a493b60ab0658093155b1266707c263edf03c45"
+      "sha256lf": "77e62490f5e88a9404361bdf26967a6cbfa16058386ffd8fe204055d685a8c1e"
     }
   },
   "superseded": [
@@ -83,6 +83,76 @@
       "replacement": "reports/RH_SCAFFOLD_NOTES/KERNEL_CHECK_2026-10-25.md",
       "recovery_commit": "995576c~1",
       "note": "Skrip satu-kali hardcoded dan rusak; tidak dirujuk apa pun. Eksekusi di 995576c."
+    },
+    {
+      "path": "msaf/lmbig.txt",
+      "state": "tombstoned",
+      "replacement": "reports/lambda_min_eig_ladder_big.json",
+      "recovery_commit": "feee3ce",
+      "note": "Dump konsol ladder dim 257; data ada di JSON."
+    },
+    {
+      "path": "msaf/lmb3000.txt",
+      "state": "tombstoned",
+      "replacement": "reports/lambda_min_ladder_p3000.json",
+      "recovery_commit": "f56f25f",
+      "note": "Dump konsol ladder prec 3000; data ada di JSON."
+    },
+    {
+      "path": "msaf/ladder9000.txt",
+      "state": "tombstoned",
+      "replacement": "reports/lambda_min_eig_ladder_9000.json",
+      "recovery_commit": "f56f25f",
+      "note": "Dump konsol ladder prec 9000; data ada di JSON."
+    },
+    {
+      "path": "msaf/ladders6000.txt",
+      "state": "tombstoned",
+      "replacement": "reports/lambda_min_eig_ladder.json",
+      "recovery_commit": "f56f25f",
+      "note": "Dump konsol ladder prec 6000; data ada di JSON."
+    },
+    {
+      "path": "reports/TAW_clean_worktree_suite.txt",
+      "state": "tombstoned",
+      "replacement": "Tidak ada; output workspace TAW-clean, bukan artefak repo ini",
+      "recovery_commit": "ffd79f4",
+      "note": "Output suite workspace lain; tidak dirujuk."
+    },
+    {
+      "path": "reports/c4_s20261005_stderr.log",
+      "state": "tombstoned",
+      "replacement": "reports/c4_s20261005_stdout.log",
+      "recovery_commit": "19fe938",
+      "note": "Berkas stderr nol byte; stdout memuat DONE exit=0."
+    },
+    {
+      "path": "reports/c4_s20261006_stderr.log",
+      "state": "tombstoned",
+      "replacement": "reports/c4_s20261006_stdout.log",
+      "recovery_commit": "19fe938",
+      "note": "Berkas stderr nol byte; stdout memuat DONE exit=0."
+    },
+    {
+      "path": "reports/c4_s20261007_stderr.log",
+      "state": "tombstoned",
+      "replacement": "reports/c4_s20261007_stdout.log",
+      "recovery_commit": "19fe938",
+      "note": "Berkas stderr nol byte; stdout memuat DONE exit=0."
+    },
+    {
+      "path": "reports/c4_s20261008_stderr.log",
+      "state": "tombstoned",
+      "replacement": "reports/c4_s20261008_stdout.log",
+      "recovery_commit": "19fe938",
+      "note": "Berkas stderr nol byte; stdout memuat DONE exit=0."
+    },
+    {
+      "path": "reports/c4_s20261009_stderr.log",
+      "state": "tombstoned",
+      "replacement": "reports/c4_s20261009_stdout.log",
+      "recovery_commit": "19fe938",
+      "note": "Berkas stderr nol byte; stdout memuat DONE exit=0."
     }
   ],
   "historical_artifacts": [

@@ -30,6 +30,25 @@ Aturan:
 | `reports/RH_SCAFFOLD_NOTES/append_status.py` | `tombstoned` | Tidak ada; status historis ada di `reports/RH_SCAFFOLD_NOTES/KERNEL_CHECK_2026-10-25.md` | `git show 995576c~1:reports/RH_SCAFFOLD_NOTES/append_status.py` | 2026-10-26 | `995576c` (Phase 2), atas persetujuan pemilik (tabel kandidat 2026-10-26) |
 | `reports/HANDOFF.md` | `stubbed` | `CURRENT_AUTHORITY.md`; `reports/DECISION_LOG.md`; file ini | `git show 995576c~1:reports/HANDOFF.md` (log sesi lengkap) | 2026-10-26 | `995576c` (Phase 2), atas persetujuan pemilik (tabel kandidat 2026-10-26) |
 | `reports/RH_SCAFFOLD_NOTES/README_custody.md` | `stubbed` | `reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md` | `git show 995576c~1:reports/RH_SCAFFOLD_NOTES/README_custody.md` (versi pra-stub) | 2026-10-26 | `995576c` (Phase 2), atas persetujuan pemilik (tabel kandidat 2026-10-26) |
+| `msaf/lmbig.txt` | `tombstoned` | `reports/lambda_min_eig_ladder_big.json` (data dim 257) | `git show feee3ce:msaf/lmbig.txt` | 2026-10-28 | Housekeeping 2026-10-28; dump konsol, tidak dirujuk, data ada di JSON |
+| `msaf/lmb3000.txt` | `tombstoned` | `reports/lambda_min_ladder_p3000.json` | `git show f56f25f:msaf/lmb3000.txt` | 2026-10-28 | Housekeeping 2026-10-28; dump konsol, tidak dirujuk, data ada di JSON |
+| `msaf/ladder9000.txt` | `tombstoned` | `reports/lambda_min_eig_ladder_9000.json`; `reports/gw_route_s_ladder_9000.json` | `git show f56f25f:msaf/ladder9000.txt` | 2026-10-28 | Housekeeping 2026-10-28; dump konsol, tidak dirujuk, data ada di JSON |
+| `msaf/ladders6000.txt` | `tombstoned` | `reports/lambda_min_eig_ladder.json` | `git show f56f25f:msaf/ladders6000.txt` | 2026-10-28 | Housekeeping 2026-10-28; dump konsol, tidak dirujuk, data ada di JSON |
+| `reports/TAW_clean_worktree_suite.txt` | `tombstoned` | Tidak ada; output workspace `TAW-clean`, bukan artefak repo ini | `git show ffd79f4:reports/TAW_clean_worktree_suite.txt` | 2026-10-28 | Housekeeping 2026-10-28; output suite workspace lain, tidak dirujuk |
+| `reports/c4_s20261005_stderr.log` | `tombstoned` | `reports/c4_s20261005_stdout.log` (baris DONE exit=0) | `git show 19fe938:reports/c4_s20261005_stderr.log` | 2026-10-28 | Housekeeping 2026-10-28; berkas nol byte, tidak memuat informasi |
+| `reports/c4_s20261006_stderr.log` | `tombstoned` | `reports/c4_s20261006_stdout.log` (baris DONE exit=0) | `git show 19fe938:reports/c4_s20261006_stderr.log` | 2026-10-28 | Housekeeping 2026-10-28; berkas nol byte, tidak memuat informasi |
+| `reports/c4_s20261007_stderr.log` | `tombstoned` | `reports/c4_s20261007_stdout.log` (baris DONE exit=0) | `git show 19fe938:reports/c4_s20261007_stderr.log` | 2026-10-28 | Housekeeping 2026-10-28; berkas nol byte, tidak memuat informasi |
+| `reports/c4_s20261008_stderr.log` | `tombstoned` | `reports/c4_s20261008_stdout.log` (baris DONE exit=0) | `git show 19fe938:reports/c4_s20261008_stderr.log` | 2026-10-28 | Housekeeping 2026-10-28; berkas nol byte, tidak memuat informasi |
+| `reports/c4_s20261009_stderr.log` | `tombstoned` | `reports/c4_s20261009_stdout.log` (baris DONE exit=0) | `git show 19fe938:reports/c4_s20261009_stderr.log` | 2026-10-28 | Housekeeping 2026-10-28; berkas nol byte, tidak memuat informasi |
+
+Catatan housekeeping 2026-10-28: sepuluh baris di atas adalah dump konsol
+dan berkas stderr nol byte yang tidak dirujuk oleh kode, test, workflow,
+atau baris `sha256LF`. Data numeriknya tetap ada di JSON/report yang
+tercatat; salinan karantina eksternal dan hash-nya disimpan di
+`C:\Users\usER\AppData\Local\Temp\opencode\quarantine_T-hat-N_2026-10-28\`.
+Berkas build Coq yang tidak di-track (`formal_bridge/*.vo`, `*.glob`,
+`*.vok`, `*.vos`, `.*.aux`) dihapus karena dapat dibangun ulang dari
+sumber `.v`; berkas bersertifikat tidak disentuh.
 
 Catatan sinkronisasi 2026-10-27 (D1): guard
 `msaf/tests/test_authority_manifest.py` tidak lagi mengunci pernyataan

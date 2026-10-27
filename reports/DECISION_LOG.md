@@ -475,6 +475,39 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   status, atau kode matematika berubah; conftest aditif; empat gerbang
   tetap dijalankan pada commit ini.
 
+## 2026-10-28 - Housekeeping: penyisihan dump konsol dan artefak build
+
+- **Dasar:** permintaan pemilik 2026-10-28 untuk membersihkan berkas yang
+  benar-benar tidak diperlukan; inventaris referensi read-only atas 761
+  berkas tracked dijalankan lebih dulu.
+- **Dihapus (tracked):** `msaf/lmbig.txt`, `msaf/lmb3000.txt`,
+  `msaf/ladder9000.txt`, `msaf/ladders6000.txt` (dump konsol ladder; data
+  ada di JSON `reports/lambda_min_*`), `reports/TAW_clean_worktree_suite.txt`
+  (output workspace `TAW-clean`, bukan artefak repo ini), dan lima
+  `reports/c4_s2026100*_stderr.log` nol byte.
+- **Dihapus (untracked/generated):** `formal_bridge/*.vo`, `*.glob`,
+  `*.vok`, `*.vos`, `.*.aux` (dapat dibangun ulang dari `.v`),
+  `__pycache__/`, `.pytest_cache/`, dan `joblog/`.
+- **Tidak disentuh:** semua berkas ber-`sha256LF`, `reports/` bersertifikat,
+  `mcp/out/` (ledger hash-chain), `audit_collatz` bulk evidence,
+  `msaf/learnharness/`, `lean/.lake/` (cache build 7.2 GB; dipertahankan
+  agar rebuild tidak mahal), dan seluruh log audit/attempt yang tercatat
+  sebagai bukti insiden.
+- **Verifikasi sebelum hapus:** `git grep` tidak menemukan referensi; tidak
+  ada baris `sha256LF`; tidak ada test/workflow yang membaca path tersebut;
+  salinan karantina eksternal dan `MANIFEST.sha256` disimpan di
+  `C:\Users\usER\AppData\Local\Temp\opencode\quarantine_T-hat-N_2026-10-28\`;
+  recovery commit `f56f25f`, `feee3ce`, `ffd79f4`, dan `19fe938` semuanya
+  reachable dari `main`.
+- **Registry/authority:** tidak ada entri registry yang diubah atau
+  dicabut; tombstone dicatat di `reports/ARCHIVE_TOMBSTONES.md`; hash
+  `DECISION_LOG.md` dan `ARCHIVE_TOMBSTONES.md` di
+  `reports/AUTHORITY_MANIFEST.json` diperbarui pada commit yang sama.
+- **Batas:** ini penyisihan artefak, bukan perubahan klaim matematika; tidak
+  ada verdict, receipt, kode Lean/Coq, atau test yang diubah. Status "CI
+  hijau" tetap menunggu job `python-tests` pada commit yang memuat
+  perubahan ini.
+
 ## Keputusan yang masih menunggu pemilik
 
 Tiga pertanyaan delegasi 2026-10-27 sudah diputuskan di atas (D1–D3). Tidak
