@@ -43,7 +43,7 @@ jobs:
       - name: Audit kernel declarations -- standard axioms only
         working-directory: .
         run: |
-          python -m pip install --disable-pip-version-check pytest
+          python -m pip install --disable-pip-version-check pytest python-flint
           python -m pytest msaf/tests/test_lean_axiom_audit.py::test_every_declaration_uses_standard_axioms_only -q
       # lean/spec_v2/XiAnalyticSpecV2.lean is the repaired abstract spec.
       # It is still conditional (eight axioms, opaque zeta/gamma), so it is
