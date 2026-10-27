@@ -18,11 +18,11 @@ is neutralised at the suite boundary).
 from __future__ import annotations
 
 import pytest
-from flint import ctx
+import flint
 
 
 @pytest.fixture(autouse=True)
 def arb_ctx_prec_guard():
-    saved = int(ctx.prec)
+    saved = int(flint.ctx.prec)
     yield
-    ctx.prec = saved
+    flint.ctx.prec = saved
