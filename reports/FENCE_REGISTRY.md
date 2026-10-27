@@ -1149,6 +1149,13 @@ mengikuti laporan L4).
   300`). Audit aksioma Lean per-deklarasi, sensor `spec`/`spec_v2`, dan job
   Coq tidak berubah. Sertifikat `ci.yml` diperbarui ke hash baru; klaim
   entri ini tidak berubah.
+- **Amandemen 2026-10-28:** job `python-tests` dan langkah audit
+  `lean-kernel` memasang `python-flint==0.9.0` sebelum menjalankan pytest;
+  `msaf/tests/conftest.py` memakai `import flint` lalu `flint.ctx` agar
+  fixture presisi tidak bergantung pada `from flint import ctx`. Perubahan
+  ini hanya memperbaiki dependensi CI; audit aksioma, sensor `spec`/
+  `spec_v2`, dan job Coq tidak berubah. Sertifikat `ci.yml` diperbarui ke
+  hash baru; klaim entri ini tidak berubah.
 - **Status:** CERTIFIED dengan scope tercatat
 - **Domino:** tidak ada (infrastruktur verifikasi; bukan domino)
 - **Relasi:** melanjutkan `A-2026-0015` tanpa mengubahnya; memakai
@@ -1160,7 +1167,7 @@ mengikuti laporan L4).
 - **Sertifikat:**
 
   ```text
-  sha256LF ce2fd7486fa9eb6dba37e9e6be6588a2acae03c3413e57ebb3de2f19de8641b7 .github/workflows/ci.yml
+  sha256LF 333ac717fa0c575c6af32f59e6c0e616e57379408fb4b5014c077303c478f08f .github/workflows/ci.yml
   sha256LF 231ce892f3976b5525e74d18720d85cfe5ada9fcfd2688941467e9c98d144ab7 msaf/tests/test_ci_verification_paths.py
   sha256LF 3339a51d290c9d47cd3dd8dbd34cbcc8d0fbcca9622aa3fe9254cd724afc9df4 reports/CI_HARDENING_2026-10-20.md
   ```
