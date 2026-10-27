@@ -121,3 +121,16 @@ r7 kosong, jadi tidak ada artefak r7 yang bisa disertifikasi.
 Dossier ini tidak menyatakan r7, BSD v2, atau BSD v3 sebagai bukti baru. Ia
 hanya mencatat bahwa status registry saat ini tidak cocok dengan artefak.
 Tidak ada klaim RH/GRH, faktorisasi, RSA/ECC, Anderson, atau fisika.
+
+## 7. Resolusi (2026-10-27)
+
+Ditambahkan pada paket D6 (housekeeping, persetujuan pemilik). Ketiga
+masukan dossier sudah dieksekusi di `reports/FENCE_REGISTRY.md` oleh commit
+`6fb3e17` ("Correct registry status for r7, BSD v2, and BSD v3"):
+- `A-2026-0049` (r7): heading kini
+  "Figure-eight r7: RETRACTED (stub)", `Status: RETRACTED` — opsi A.
+- `T-2026-0049` (BSD v2): heading yang dirusak `d56242c` dipulihkan,
+  `Status: CERTIFIED`.
+- `A-2026-0051` (BSD v3): heading dan `Status: RECON` (placeholder stub).
+Bagian 1–6 di atas tetap dibaca sebagai state ketika dossier ditulis
+(DRAFT); bagian 7 mencatat resolusinya.

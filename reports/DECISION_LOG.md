@@ -427,6 +427,54 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   pembaca manusia yang meneruskan instruksi prompt tetap bertanggung jawab
   membaca header.
 
+## 2026-10-27 — Housekeeping D6: README, dossier resolusi, banner review, guard presisi tes
+
+- **Dasar:** paket koreksi hasil audit read-only 2026-10-27 (persetujuan
+  pemilik); penutup dari seri D1–D4. Entri lain di hari yang sama mencatat
+  D1/D2 (sinkronisasi otoritas), D3 (reparasi registry), D4 (penanda
+  historis scaffold). Risiko residual D5 dicatat pada entri D1/D2 dan
+  gerbang D3: workflow `Slow tests` belum pernah dijalankan untuk r6 di
+  `main` — bukan keputusan terbuka; pemilik memicu workflow bila ingin
+  pembuktian tambahan.
+- **README.md:** angka tes stale `(489 tests)` pada baris badge CI dihapus;
+  klaim baris status r7 dari `CERTIFIED` dikoreksi ke `RETRACTED stub` —
+  sesuai `FENCE_REGISTRY.md` `A-2026-0049` hasil commit `6fb3e17`. Klaim
+  Learn-harness `A-2026-0050` tidak diubah (sudah benar: "now verified with
+  registry entry").
+- **Dossier `REGISTRY_CORRECTION_DOSSIER_2026-10-27.md`:** bagian §7
+  "Resolusi (2026-10-27)" ditambahkan (aditif): ketiga masukan dossier
+  dieksekusi oleh commit `6fb3e17` — r7 `RETRACTED` (opsi A),
+  `T-2026-0049` heading dipulihkan + `CERTIFIED` (heading dirusak
+  `d56242c`), `A-2026-0051` heading dan `Status: RECON`. Bagian 1–6 tetap
+  state DRAFT ketika dossier ditulis.
+- **`WEEKLY_REVIEW_2026-10-20_27.md`:** banner SNAPSHOT HISTORIS di atas
+  dokumen (angka snapshot, bukan status kini; sumber status aktif
+  `CURRENT_AUTHORITY.md` + `DECISION_LOG` + registry).
+- **`NONFINITE_DEFECT.md` §3 + `msaf/tests/conftest.py`:** dikoreksi klaim
+  lama "empat modul ... di level modul" — verifikasi manual menunjukkan
+  keenam `ctx.prec = 256` berada di dalam fungsi (indent 4, saat tes
+  berjalan, tanpa pemulihan), sehingga kelas kebocoran lintas-modul tetap
+  nyata. Perbaikan direalisasi Sebagai fixture autouse
+  `arb_ctx_prec_guard` yang menyimpan `ctx.prec` di awal tes dan
+  memulihkan nilai yang sama di akhirnya; enam tulisan tidak dihapus karena
+  menghapusnya membuat hasil bergantung urutan eksekusi (ambient presisi
+  tidak lagi terdefinisi), sedangkan guard menjaga nilai eksplisit tanpa
+  menyentuh badan enam modul test. `conftest.py` tidak men-set atau
+  menurunkan presisi apa pun.
+- **Validasi empiris:** subset 10 modul flint (test_msaf, test_xi_identities,
+  test_sbp_correspondence, test_convergence_order, test_moore_premises,
+  test_tail_decay, test_periodic_bridge, test_bridge, test_ulam_spectral,
+  test_navier_interpolation) = 186 passed baik sebelum maupun sesudah
+  conftest ditambahkan. Verdict untuk suite utuh adalah job CI
+  `python-tests` pada commit ini; tidak ada klaim "CI hijau" sebelum job
+  itu selesai.
+- **Penyisihan:** berkas kerja sementara dari paket koreksi (helper
+  tombstone dan semua `.bak`) dihapus dari working tree; semuanya
+  untracked, bukan artefak, tidak pernah ikut commit.
+- **Jaminan:** tidak ada baris `sha256LF` registry, receipt, verdict,
+  status, atau kode matematika berubah; conftest aditif; empat gerbang
+  tetap dijalankan pada commit ini.
+
 ## Keputusan yang masih menunggu pemilik
 
 Tiga pertanyaan delegasi 2026-10-27 sudah diputuskan di atas (D1–D3). Tidak

@@ -1,5 +1,12 @@
 # Review Kerja 7 Hari — 20–27 Oktober 2026
 
+> **STATUS: SNAPSHOT HISTORIS (D6, 2026-10-27).** Dokumen ini review
+> arsip untuk rentang 20–27 Oktober; angka di dalamnya (jumlah commit,
+> status CI, file untracked) adalah keadaan pada saat snapshot, bukan
+> status kini, dan tidak diperbarui. Sumber status aktif:
+> `CURRENT_AUTHORITY.md` beserta `reports/DECISION_LOG.md` dan
+> `reports/FENCE_REGISTRY.md`.
+
 **Snapshot:** 27 Okt 2026, 04:33 WIB (UTC+8)
 **Rentang commit:** 20 Okt 00:20 → 27 Okt 03:08 WIB
 **Sumber:** 139 commit, `FENCE_REGISTRY.md`, `DECISION_LOG.md`, receipt,

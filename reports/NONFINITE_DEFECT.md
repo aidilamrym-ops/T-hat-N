@@ -167,6 +167,21 @@ benar adalah satu `conftest.py` dengan fixture presisi yang dipakai
 semua modul; sengaja TIDAK dikerjakan di commit ini karena menyentuh
 empat modul lain tanpa perlu, dan cukup dicatat sebagai OPEN.
 
+Koreksi 2026-10-27 (D6): verifikasi manual membantah deskripsi "di level
+modul". Keenam lokasi di atas berada di dalam fungsi (indent 4, dijalankan
+saat tes berjalan, bukan saat modul diimpor) dan tidak memulihkan presisi,
+sehingga kelas kebocoran lintas-modul yang disebut tetap nyata.
+Perbaikan direalisasi SEBAGAI `msaf/tests/conftest.py`: fixture autouse
+`arb_ctx_prec_guard` menyimpan `ctx.prec` di awal setiap tes dan
+memulihkan nilai yang sama di akhirnya, sehingga tulisan presisi yang
+acau di satu tes tidak lagi mengubah lingkungan yang dilihat tes lain —
+tanpa menyentuh badan enam modul test. Enam tulisan persisi tidak dihapus:
+menghapusnya akan membuat hasil bergantung urutan eksekusi (ambient presisi
+tidak lagi teridentifikasi), sedangkan guard menjaga nilainya eksplisit.
+Validasi empiris saat diterapkan: subset 10 modul flint (186 test) hijau
+sebelum dan sesudah conftest ditambahkan; verdict untuk suite utuh adalah
+job CI `python-tests` pada commit ini.
+
 ---
 
 ## 4. Urutan trek: koreksi terhadap rencana sebelumnya
