@@ -336,6 +336,61 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   `test_authority_manifest`, `test_fence_registry`, `test_lean_axiom_audit`,
   `test_anti_circularity_gate`.
 
+## 2026-10-27 — Reparasi teks registry (D3): fence, marker, inline, relasi, catatan skema
+
+- **Dasar:** paket koreksi hasil audit read-only 2026-10-27 disetujui pemilik.
+  Audit menemukan 0 drift `sha256LF`; seluruh temuan bersifat teks, bukan
+  sertifikat. Eksekusi dalam dua pass: pass utama (skrip sementara
+  `repair_registry.py`) lalu pass penyelesaian (`finish_d3.py`) setelah
+  verifikasi byte-level; keduanya memakai asersi preimage per baris dan
+  menolak menulis bila tidak cocok.
+- **Mekanisme korupsi (dicek terhadap blob kelahiran entri, commit
+  `7c13788`):** backtick diikuti huruf/digit yang juga karakter escape Python
+  (`a b f r t e 1-7`) dimakan oleh sebuah pass escape: urutan `\a`→0x07 dst.
+  juga menelan tetangganya — contoh: kata `all_pass` pada kalimat K6 lahir
+  sebagai byte 0x5C+0x07+`ll_pass`; nama `run_base()` lahir sebagai
+  `un_base()` tanpa huruf `r`. Backslash tak-dikenal kadang bertahan
+  (contoh: `...md\ di-commit`). Peta pemulihan: chr 7→a, 6→6, 8→b, 12→f,
+  13→r, 1→1, TAB→t, backslash→backtick.
+- **Pass 1 (registry `reports/FENCE_REGISTRY.md`):** 10 fence-open dan 10
+  fence-close korup; 8 marker `**Sertifikat:'` dikembalikan ke
+  `**Sertifikat:**`; 14 baris prosa dengan control char dikembalikan ke
+  konten aslinya; 5 jalur `eports/` dikembalikan ke `reports/`. Relasi logika:
+  pada entri r6, "target r5 yang INCONCLUSIVE" dikoreksi ke "FAILED" (N1,
+  sesuai verdict tersegel r5); pada entri r7, "melanjutkan A-2026-0044 (r5)"
+  diperjelas bahwa r5 tidak membuka entri registry dan slot `A-2026-0044`
+  sengaja kosong (N2). Ditambah: catatan duplikat di bawah `T-2026-0043`
+  (sertifikasi kanonik r4 = `A-2026-0043`; entri dianggap penjelasan ulang,
+  tidak dihapus) dan bullet skema tentang prefix `A-` pada entri `0032..0047`
+  yang pada masanya dipakai sebagai label slot urutan, bukan tipe audit;
+  `Jenis:` di badan entri lama adalah verdict otoritatif, entri baru wajib
+  prefix = `Jenis` (N4).
+- **Pass 2 (penyelesaian, temuan verifikasi byte-level):** pasangan fence
+  `T-2026-0043` yang terlewat dipulihkan (open `` `\text `` → `` ```text ``
+  dan close `` ` `` → `` ``` ``); backtick pembuka yang dimakan direkonstruksi
+  pada 7 lokasi: pra-registrasi Navier diskrit; kedua jalur
+  `reports/FIGURE_EIGHT_R3_2026-10-23.md`/`PREREG_FIGURE_EIGHT_R4` pada
+  `T-2026-0043`; jalur r3 dan hash `6b0b71e9...df829c9` pada
+  `A-2026-0043`; `un_base()` → `` `run_base()` `` (nama fungsi diverifikasi
+  terhadap ketiga modul); commit `3a21eb`; `` `18 passed, 1 failed` ``; dan
+  `` `19 passed` `` (angka sesuai laporan r4 §9, final 19 passed). Backtick
+  penutup hilang direkonstruksi pada `test_base_campaign_reproduces_sealed_receipt`
+  (spasi ganda menjadi `` ` `` + satu spasi) dan spasi ganda
+  `.md  (INCON` menjadi `.md` + backtick + satu spasi.`
+- **Jaminan:** 433 baris sertifikat `sha256LF` terverifikasi byte-identik
+  baik terhadap `HEAD 6fa6646` maupun state pra-reparasi; 0 control char
+  tersisa; hanya 2 backslash sah (path Windows di L229 dan L1095); 59
+  pasangan fence seimbang tanpa fence liar; seluruh baris yang direparasi
+  berjumlah backtick genap. Tidak ada hash, verdict, status, angka tes
+  (18/19), atau nama fungsi yang ditulis ulang melebihi pemulihan bentuk
+  aslinya; perubahan diinterpretasikan per baris.
+- **Verifikasi:** 14 passed (keempat gerbang: authority-manifest,
+  fence-registry, lean-axiom-audit, anti-circularity-gate).
+- **Batas:** perbaikan bersifat teks/backtick pemulihan, bukan perubahan
+  matematika, hash, atau verdict; registry tidak mendapat entri baru; guard
+  hanya memeriksa heading/STATUS/cert-line/hash — inspeksi manual per baris
+  tetap dilakukan karena teks prosa di luar jangkauan guard.
+
 ## Keputusan yang masih menunggu pemilik
 
 Tiga pertanyaan delegasi 2026-10-27 sudah diputuskan di atas (D1–D3). Tidak

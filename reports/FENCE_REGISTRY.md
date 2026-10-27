@@ -15,6 +15,7 @@ mengikuti laporan L4).
   hasil negatif tersertifikasi ("tidak ada X dalam rentang/kelas Y");
   `R` = refutasi (counterexample eksplisit + sertifikat mungil);
   `A` = verdict audit atas klaim pihak ketiga.
+- **Catatan tipe (2026-10-27):** pada entri `A-2026-0032`..`0040`, `A-2026-0043`, dan `A-2026-0045`..`0047`, prefix ID `A` tidak konsisten dengan `Jenis: T`. Saat itu `A-` dipakai sebagai label slot urutan, bukan assertion audit. Nilai `Jenis:` di badan entri lama adalah verdict otoritatif; prefix JANGAN dibaca sebagai tipe audit. Entri baru wajib prefix = `Jenis`.
 - **Pernyataan:** satu kalimat, kuantor eksplisit.
 - **Batas:** yang TIDAK diklaim (selalu diisi).
 - **Sertifikat:** berkas + sha + perintah verifikasi. Baris sertifikat
@@ -1817,15 +1818,15 @@ mengikuti laporan L4).
 - **Relasi:** Q3 dari reports/DAFTAR_MASALAH_KERJA.md; laporan reports/ABC_CENSUS_2026-10-21.md (akan dibuat); pra-registrasi reports/PREREG_Q3_ABC_CENSUS_2026-10-21.md.
 - **Perintah verifikasi:** python -m msaf.abc_census --N 100000; python -m pytest msaf/tests/test_abc_census.py -q; python audit_quantum/freeze.py --verify.
 - **Catatan 2026-10-27:** Dua baris sertifikat `msaf/abc_census.py` dan `msaf/tests/test_abc_census.py` diperbarui ke hash v3 karena modul dinaikkan ke sensus low-rad lengkap (Q3 v3, `A-2026-0052`). Klaim entri ini tidak berubah: C=100.000 tetap 6 triple dengan max_gap=6825, dan gate v3 mereproduksi daftar triple yang sama persis.
-- **Sertifikat:'
+- **Sertifikat:**
 
-  \\	ext
+  ```text
   sha256LF d3834fc91fd238cd8e27c76e07fa47eabd113d1a07ea21002c2a42105d28a293 msaf/abc_census.py
   sha256LF 1628c60a26dde17082a1fbb66b5dc8158c97d647e94059c75fe4cc338916dd2e msaf/tests/test_abc_census.py
   sha256LF 50c57a25056f84f5c2adf8f1ec883369eaf35fea0ce8f2f489e43748c56f0cf4 reports/PREREG_Q3_ABC_CENSUS_2026-10-21.md
   sha256LF 276c4dc095f28d901c9aaa56b25c10e0802d6b158a2ed63d16e28a7a1ae8a06f reports/abc_census.json
   sha256LF 00420dfe9af16dfd0b9f7b965131dabd95f8d8ae67350f1fc2aade80d121efea reports/ABC_CENSUS_2026-10-21.md
-  \
+  ```
 
 
 ### A-2026-0033 — Ekstensi RH T=100: winding cross-lock + ukur-dinding-dulu (dim 201/301)
@@ -1837,14 +1838,14 @@ mengikuti laporan L4).
 - **Domino:** RH (spektral, Route S extension)
 - **Relasi:** Q4 dari reports/DAFTAR_MASALAH_KERJA.md; pra-registrasi reports/PREREG_Q4_RH_EXTENSION_2026-10-21.md; melanjutkan Route S ladder c=100 (dim 201/301 tersegel).
 - **Perintah verifikasi:** python -m msaf.gw_rh_extension --N 100 --prec 6000 --dps 50; python -m pytest msaf/tests/test_gw_rh_extension.py -q; python audit_quantum/freeze.py --verify.
-- **Sertifikat:'
+- **Sertifikat:**
 
-  \\	ext
+  ```text
   sha256LF 3787e685402057c540493e4e65f5d00bc22561dc06c1bad782954e9933043ccc msaf/gw_rh_extension.py
   sha256LF 3659675fb1393a383e09b003e50619ab8615ab07ed2b833a269e4c38abf3bc23 msaf/tests/test_gw_rh_extension.py
   sha256LF ccf9c01f468d6525222780c094f2d2fcdd62ae35d30cb1b06a17a7c01b75f20c reports/rh_extension.json
   sha256LF d85519fdd88ca7467a39bdb873a032c26e8bd6376f189593027732312d0df17d reports/RH_EXTENSION_2026-10-21.md
-  \
+  ```
 
 
 ### A-2026-0034 — Ekstensi RH Lanjutan T ∈ {100,200,300,400,500}: winding cross-lock + ukur-dinding-dulu (dim 201/301)
@@ -1856,14 +1857,14 @@ mengikuti laporan L4).
 - **Domino:** RH (spektral, Route S extension lanjutan)
 - **Relasi:** Q4-Extended dari reports/DAFTAR_MASALAH_KERJA.md; melanjutkan A-2026-0033 (T=100); pra-registrasi reports/PREREG_Q4_RH_EXTENSION_EXTENDED_2026-10-21.md.
 - **Perintah verifikasi:** python -m msaf.gw_rh_extension_extended --T-values 100,200,300,400,500 --N 100 --prec 6000 --dps 50; python -m pytest msaf/tests/test_gw_rh_extension_extended.py -q; python audit_quantum/freeze.py --verify.
-- **Sertifikat:'
+- **Sertifikat:**
 
-  \\	ext
+  ```text
   sha256LF cb937248ccaea6830657e9a2e40fd92b3edd4c233aa511fd8c4f90478c028121 msaf/gw_rh_extension_extended.py
   sha256LF cb7c8dbcd7903dcc150695050c3f4bd2b190628c2b6fdb8e8bdca9240c39b8b3 msaf/tests/test_gw_rh_extension_extended.py
   sha256LF 4a41e4811ca0f4c6f3ac0fea9f1399ee434d05e3b91985eea42344191747c498 reports/rh_extension_extended.json
   sha256LF bf48536077711ac101ea8bbe66681c4f0139cafe0c19bff0a3a399bed2bfe738 reports/RH_EXTENSION_EXTENDED_2026-10-21.md
-  \
+  ```
 
 
 ### A-2026-0035 — Riemann G2/G3: analisis asimtotik lambda_min + bukti winding cross-lock
@@ -1875,14 +1876,14 @@ mengikuti laporan L4).
 - **Domino:** RH (spektral, G2/G3)
 - **Relasi:** melanjutkan A-2026-0033 (T=100) dan A-2026-0034 (T<=500); pra-registrasi reports/PREREG_RIEMANN_G2G3_2026-10-21.md.
 - **Perintah verifikasi:** python -m msaf.riemann_g2g3; python -m pytest msaf/tests/test_riemann_g2g3.py -q; python audit_quantum/freeze.py --verify.
-- **Sertifikat:'
+- **Sertifikat:**
 
-  \\	ext
+  ```text
   sha256LF e48a9ebbe627a7898143b665a4ac5d4dd8f0741791f39e4f09a83c2d53d102b5 msaf/riemann_g2g3.py
   sha256LF 2793ffdb983aa467330849c5eb3aa5a4cbcef771647272fe32cf26ef211ddf68 msaf/tests/test_riemann_g2g3.py
   sha256LF 9651442b36b947540844d93ba3d76cd1215a4afcaec1cd3f69d09095dbc27ea6 reports/riemann_g2g3.json
   sha256LF f305f4faf32492272c0d4c256feb0339ab986c13be0b3ee34b241d35f1307254 reports/RIEMANN_G2G3_2026-10-21.md
-  \
+  ```
 
 
 ### A-2026-0036 — Hodge Picard Bound: bound Picard dari CH a_11 pada smooth quartic F_3
@@ -1894,15 +1895,15 @@ mengikuti laporan L4).
 - **Domino:** Hodge (Picard bound)
 - **Relasi:** melanjutkan A-2026-0033 (CH a_11 F_3); pra-registrasi reports/PREREG_HODGE_PICARD_CH_2026-10-21.md; artefak tersegel HODGE_CLOSURE.md, HODGE_CH_SPEC.md.
 - **Perintah verifikasi:** python -m msaf.hodge_picard --primes 3 --surfaces 1; python -m pytest msaf/tests/test_hodge_picard.py -q; python audit_quantum/freeze.py --verify.
-- **Sertifikat:'
+- **Sertifikat:**
 
-  \\	ext
+  ```text
   sha256LF c28c518a41827d6729198cc39391bf4bf4323966747b9ec456120141dc2d9638 msaf/hodge_picard.py
   sha256LF 037d33eab091dcec14a6168c7f8d79b68261b53e98bcca0d90d7a605d4599036 msaf/tests/test_hodge_picard.py
   sha256LF ee63a109c717b8f277ba9287ecd22c5fd2f093c5058fb5b12c666c330c1f40e7 reports/PREREG_HODGE_PICARD_CH_2026-10-21.md
   sha256LF 6f188cc6038acae2e89c00847febcad1a977671042fbb18c0c3ffb69203f4c72 reports/hodge_picard.json
   sha256LF 621b94a8045cea62ef976ba01413e6cc7b1dbe79abf57b9654a430d2f8f1f0ad reports/HODGE_PICARD_2026-10-21.md
-  \
+  ```
 
 
 ### A-2026-0037 — Hodge Picard Bound Ekstensi F_5, F_7: bound Picard teoretis (tidak informatif)
@@ -1914,15 +1915,15 @@ mengikuti laporan L4).
 - **Domino:** Hodge (Picard bound)
 - **Relasi:** melanjutkan A-2026-0036 (F_3); pra-registrasi reports/PREREG_HODGE_PICARD_EXTENDED_2026-10-21.md.
 - **Perintah verifikasi:** python -m msaf.hodge_picard_extended --primes 5,7; python -m pytest msaf/tests/test_hodge_picard_extended.py -q; python audit_quantum/freeze.py --verify.
-- **Sertifikat:'
+- **Sertifikat:**
 
-  \\	ext
+  ```text
   sha256LF f40de3bff101c566cc219973272621039e0dde2c1ab8c65b99556fd23d5aec0c msaf/hodge_picard_extended.py
   sha256LF 47432127396c32bd6e523216f72a54c80eeac243132153861dd4a6391720922c msaf/tests/test_hodge_picard_extended.py
   sha256LF ab636a07038fb010faa345603c40d29a87189ca309285c8f2a3fce34d91d1f48 reports/PREREG_HODGE_PICARD_EXTENDED_2026-10-21.md
   sha256LF a3586bb8fbd8e435ad633903f679f862f7ee0365f10411dc757203660c3d589d reports/hodge_picard_extended.json
   sha256LF 0d32ad6c597513729f6538e87443b9b1b09637d3ea1fc8ddaefe4c0cf6d075e7 reports/HODGE_PICARD_EXTENDED_2026-10-21.md
-  \
+  ```
 
 
 ### A-2026-0038 — Navier-Stokes Kernel Diskrit Tercek Lean (60 lemmas/theorems)
@@ -1933,16 +1934,16 @@ mengikuti laporan L4).
 - **Status:** CERTIFIED
 - **Domino:** Navier-Stokes (kernel diskrit)
 - **Relasi:** melanjutkan msaf/navier_stokes/fluid_lattice.py (Python/Arb tersegel); pra-registrasi 
-eports/PREREG_NAVIER_STOKES_DISCRETE_2026-10-21.md.
+`reports/PREREG_NAVIER_STOKES_DISCRETE_2026-10-21.md`.
 - **Perintah verifikasi:** cd lean; lake build; python -m pytest msaf/tests/test_navier_interpolation.py -q; python audit_quantum/freeze.py --verify.
-- **Sertifikat:'
+- **Sertifikat:**
 
-  \\	ext
+  ```text
   sha256LF e92f77e931a2db7c0c783f05688df17f999b72c2114954431296134fed7bca0b lean/NavierStokesCore.lean
   sha256LF 19c1232ebb85687aab833e603020c50453890667a37eabbcb3f2318f6158b75b msaf/tests/test_navier_interpolation.py
   sha256LF d3446cebc5aaf4fd2afeebc7088792a3e2557eca3fffaa9431d9412d4a671333 reports/PREREG_NAVIER_STOKES_DISCRETE_2026-10-21.md
   sha256LF <computed_hash> reports/NAVIER_STOKES_DISCRETE_2026-10-21.md
-  \
+  ```
 
 
 ### A-2026-0039 — Navier-Stokes Regularitas Diskrit: LPS-D, BKM-D, Spektrum, Struktur Fungsi
@@ -1954,16 +1955,16 @@ eports/PREREG_NAVIER_STOKES_DISCRETE_2026-10-21.md.
 - **Domino:** Navier-Stokes (regularitas diskrit)
 - **Relasi:** melanjutkan A-2026-0038 (kernel diskrit 3D); pra-registrasi reports/PREREG_NAVIER_STOKES_REGULARITY_2026-10-21.md.
 - **Perintah verifikasi:** python -m msaf.navier_stokes.regularity --n 4 --steps 20 --prec 384; python -m pytest msaf/tests/test_navier_stokes_regularity.py -q; python audit_quantum/freeze.py --verify.
-- **Sertifikat:'
+- **Sertifikat:**
 
-  \\	ext
+  ```text
   sha256LF 2193f41dd4fffa6e922a7bb95c388b0482dc6f6a96e848cb6af0ca07ca66b1e3 msaf/navier_stokes/fluid_lattice.py
   sha256LF 11d114d7cc8b6f7b9dfaef9e1d8fbcbf681520dbcbcb8b4f7ce92f7c92ecbf68 msaf/navier_stokes/regularity.py
   sha256LF a2e608670e783bd9b4724b64c0a8e0d8ecaf898684ec83fd99f8f099c4e51d49 msaf/tests/test_navier_stokes_regularity.py
   sha256LF cb95093882cde16ffce6b09a20863e3e43bd385d146313504b6b1439733bdc1d reports/PREREG_NAVIER_STOKES_REGULARITY_2026-10-21.md
   sha256LF 1b53f4e4a092fcdaeecfeebcd5a2bdccf38793cc34d7909e401b842723c870c5 reports/navier_stokes_regularity.json
   sha256LF d2c819a294f54bc51efde3fd434f1ad0fce14978ce65140b84fe262a8802113c reports/NAVIER_STOKES_REGULARITY_2026-10-21.md
-  \
+  ```
 
 ### A-2026-0040 — Integrator ODE Tervalidasi: Propagasi Blok Bertanda (T1b)
 
@@ -1985,6 +1986,7 @@ eports/PREREG_NAVIER_STOKES_DISCRETE_2026-10-21.md.
   ```
 
 ### T-2026-0043 — Orbit Figure-Eight Periodik Tervalidasi (Reduced 8x8, T2-r4)
+- **Catatan koreksi 2026-10-27 (D3):** entri ini duplikat klaim r4; sertifikasi kanonik r4 adalah `A-2026-0043` (modul, pra-registrasi, dan receipt sama). Entri tidak dihapus; berstatus CERTIFIED dan dianggap penjelasan ulang dari sertifikasi yang sama.
 
 - **Jenis:** T
 - **Pernyataan:** Orbit periodik figure-eight masalah tiga-benda massa sama rata di bidang pada periode eksak T0 = 6.32600304 tersertifikasi ada dan **lokal unik** di dalam box B radius R_B = 1e-18 di sekitar titik Newton xh, dengan gauge q1y = 1/5 dan I_xy = 0. Sertifikat terkomposisi dari: (i) base T2-r3 K1-K5 (Hessian path-box, QUAD_STEP, DR_MAX, Krawczyk, koreografi) lulus penuh dengan receipt byte-identik; (ii) K6 r4 matriks M1-M9 semuanya diskriminatif dan gagal sebagaimana mestinya (M1: sisa Taylor dipompa → K2 abort; M2: periode +1/10 → K3/K5 fail; M3: receipt tamper → hash mismatch; M4: float injection → AST hit; M5: TUBE_CAP=1e-30 → K2 fail; M6: KAPPA_MAX=1e-12 → K3 kappa fail; M7: GAUSS_DET_MIN=1e3 → K4 det fail; M8: CHOREO_TOL=1e-30 → K5 fail; M9: GAUSS_COND_MAX=1e3 → K4 cond fail). Dua kampanye r4 penuh identik byte (SHA-256LF 8b6088c27f79129f8d28109a75efe2f888406b9d7e6d884c9cf7ab95cf611086).
@@ -1992,12 +1994,12 @@ eports/PREREG_NAVIER_STOKES_DISCRETE_2026-10-21.md.
 - **Status:** CERTIFIED
 - **Domino:** Three-Body (orbita periodik lokal tervalidasi; prasyarat Daftar-B 16)
 - **Relasi:** melanjutkan T2-r3 
-eports/FIGURE_EIGHT_R3_2026-10-23.md (INCONCLUSIVE karena K6/M5 non-diskriminatif); pra-registrasi 
-eports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md (SHA-256LF 14cf5c9fbaff6b2e6e67617fe724e1fc01ec18fe2e4323c51e5531256bcb21c5).
+`reports/FIGURE_EIGHT_R3_2026-10-23.md` (INCONCLUSIVE karena K6/M5 non-diskriminatif); pra-registrasi 
+`reports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md` (SHA-256LF 14cf5c9fbaff6b2e6e67617fe724e1fc01ec18fe2e4323c51e5531256bcb21c5).
 - **Perintah verifikasi:** python -m pytest msaf/tests/test_figure_eight_r4.py -q; python -m pytest msaf/tests -q; python audit_quantum/freeze.py --verify.
 - **Sertifikat:**
 
-  `	ext
+  ```text
   sha256LF 8b6088c27f79129f8d28109a75efe2f888406b9d7e6d884c9cf7ab95cf611086 reports/figure_eight_r4_2026-10-23.json
   sha256LF 14cf5c9fbaff6b2e6e67617fe724e1fc01ec18fe2e4323c51e5531256bcb21c5 reports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md
   sha256LF 6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9 reports/figure_eight_r3_2026-10-23.json
@@ -2005,7 +2007,7 @@ eports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md (SHA-256LF 14cf5c9fbaff6b2e6e67617fe
   sha256LF 8eddc2bb17647d452e15325397e852e224e1af028f055fa4fe41de94af939ec6 msaf/figure_eight_r3.py
   sha256LF c1d9b5d60036a5f0772f7e3f1b8c78969efaa7146a713c762531ddce346251b9 msaf/ode_validated.py
   sha256LF 42d196a51c5ae45e3b87b8c1e36319abfeb93df776b3c2317e812f7c2c0b5b97 msaf/ode_validated_block.py
-  `
+  ```
 
 Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang sama; entri tidak pernah dihapus (perubahan = status/relasi/catatan).
 
@@ -2013,18 +2015,18 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
 
 - **Jenis:** T
 - **Pernyataan:** Keberadaan dan keunikan lokal orbit periodik figure-eight
-  reduced 8x8 di dalam box lokal \B\, modulo gauge (\q1y = 1/5\, \I_xy = 0\),
+  reduced 8x8 di dalam box lokal `B`, modulo gauge (`q1y = 1/5`, `I_xy = 0`),
   berbasis base K1-K5 r3 yang direproduksi byte-per-byte dari receipt tersegel
-  (hash-cek internal un_base()\), ditambah matriks mutasi K6 diskriminatif
+  (hash-cek internal `run_base()`), ditambah matriks mutasi K6 diskriminatif
   M1-M9 yang seluruh 9 barisnya dijalankan dan semuanya gagal sebagaimana
-  mestinya (M1-M2, M5-M9 \must_fail: true\ terverifikasi; M3/M4 deteksi
+  mestinya (M1-M2, M5-M9 `must_fail: true` terverifikasi; M3/M4 deteksi
   tamper/AST). Dua kampanye r4 penuh identik byte-per-byte; verdict ALL PASS
-  hanya bila base K1-K5 PASS dan K6 \ll_pass\ (pra-registrasi §5).
+  hanya bila base K1-K5 PASS dan K6 `all_pass` (pra-registrasi §5).
 
 - **Batas:** bukan klaim global, stabilitas, spektrum, chaos, ergodisitas, KAM,
   PDE, RH, fisika, prioritas, Lean/Coq, atau penyelesaian umum three-body;
   r3 tetap berstatus INCONCLUSIVE (K6/M5 lama non-diskriminatif) dan tidak
-  diamendemen; \A-2026-0041\ dan \A-2026-0042\ tetap tidak ada (dikosongkan
+  diamendemen; `A-2026-0041` dan `A-2026-0042` tetap tidak ada (dikosongkan
   sesuai keputusan pra-registrasi r4).
 
 - **Status:** CERTIFIED
@@ -2032,24 +2034,24 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   falsifier K6 diskriminatif (fondasi trek lanjutan: stabilitas T2b memerlukan
   pra-registrasi sendiri).
 
-- **Relasi:** melanjutkan r3 eports/FIGURE_EIGHT_R3_2026-10-23.md  (INCONCLUSIVE; base receipt b0b71e9...df829c9\ diimpor utuh dan
+- **Relasi:** melanjutkan r3 `reports/FIGURE_EIGHT_R3_2026-10-23.md` (INCONCLUSIVE; base receipt `6b0b71e9...df829c9` diimpor utuh dan
   diverifikasi ulang); pra-registrasi r4
-  eports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md\ di-commit sebelum kode di
-  3a21eb\. Catatan integritas: guard test r4 memuat dua kesalahan lapis-tes
+  `reports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md` di-commit sebelum kode di
+  `3a21eb`. Catatan integritas: guard test r4 memuat dua kesalahan lapis-tes
   yang ditemukan pada run pra-fiks dan difiks satu baris masing-masing sebelum
-  run final: (a) comparator \	est_base_campaign_reproduces_sealed_receipt  membaca receipt r4 alih-alih receipt base r3 (run 13:43); (b) signature
-  \	est_k6_m1_remainder_factor\ mendeklarasikan fixture \ase_campaign\ tetapi
-  badan memakai \ull_campaign\ tanpa injeksi (run 15:32 dan run \-v\ 15:55;
-  keduanya 8 passed, 1 failed\). Kedua kegagalan tidak mengubah matematika:
-  base K1-K5 dan seluruh baris K6 (termasuk \	est_k6_all_rows_pass\ dan
-  \	est_full_campaign_verdict\) PASS pada run tersebut. Run final pasca-fiks
-  hijau 9 passed\ (angka di laporan §9).
+  run final: (a) comparator `test_base_campaign_reproduces_sealed_receipt` membaca receipt r4 alih-alih receipt base r3 (run 13:43); (b) signature
+  `test_k6_m1_remainder_factor` mendeklarasikan fixture `base_campaign` tetapi
+  badan memakai `full_campaign` tanpa injeksi (run 15:32 dan run `-v` 15:55;
+  keduanya `18 passed, 1 failed`). Kedua kegagalan tidak mengubah matematika:
+  base K1-K5 dan seluruh baris K6 (termasuk `test_k6_all_rows_pass` dan
+  `test_full_campaign_verdict`) PASS pada run tersebut. Run final pasca-fiks
+  hijau `19 passed` (angka di laporan §9).
 
 - **Perintah verifikasi:** python -m pytest msaf/tests/test_figure_eight_r4.py -q;
   python -m pytest msaf/tests -q; python audit_quantum/freeze.py --verify.
 
 - **Sertifikat:**
-  \\	ext
+  ```text
   sha256LF 8eddc2bb17647d452e15325397e852e224e1af028f055fa4fe41de94af939ec6 msaf/figure_eight_r3.py
   sha256LF e34e2303ecc17fa591aa00c4449cebae6a3f5e7db88c147d173d4414b916e2ac msaf/figure_eight_r4.py
   sha256LF f7b1165380eb2fba740fd2c012745fee79a4027d22cf0eb19761fe0fb3cced0a msaf/tests/test_figure_eight_r4.py
@@ -2057,7 +2059,7 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
   sha256LF 6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9 reports/figure_eight_r3_2026-10-23.json
   sha256LF 8b6088c27f79129f8d28109a75efe2f888406b9d7e6d884c9cf7ab95cf611086 reports/figure_eight_r4_2026-10-23.json
   sha256LF 1ff4c78c8c878346ad42294a15db094301c69b0352464edfeabde680fa2b783c reports/FIGURE_EIGHT_R4_2026-10-23.md
-  \
+  ```
 
 ### A-2026-0045 - Sensus twin prime Q2 v2: dua sieve independen sepakat hingga N=10^7
 
@@ -2161,7 +2163,7 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
 - **Domino:** figure-eight reduced 8x8 (fondasi trek T2b; stabilitas tetap
   memerlukan pra-registrasi sendiri).
 - **Relasi:** Melanjutkan basis r3 (`reports/figure_eight_r3_2026-10-23.json`,
-  `6b0b71e9...`) dan menggantikan target r5 yang INCONCLUSIVE; pra-registrasi
+  `6b0b71e9...`) dan menggantikan target r5 yang FAILED; pra-registrasi
   `reports/PREREG_FIGURE_EIGHT_R6_2026-10-25.md` (hash `92b687f5...`).
   Commit `ad34cbc` menyebut `A-2026-0047` tetapi tidak menambahkan entri
   ledger; entri ini ditambahkan 2026-10-26 atas konfirmasi pemilik.
@@ -2195,11 +2197,11 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
 - **Perintah verifikasi:** python -m msaf.twin_prime_v4 menghasilkan receipt di reports/twin_prime_v4_2026-10-30.json; guard CI memeriksa sha.
 - **Sertifikat:**
 
-  `	ext
+  ```text
   sha256LF 40ffe8771e47fa2511f11ac0b5beaf380300d59bc206984f6575cdb9ae4e0fa6 reports/PREREG_Q2_TWIN_PRIME_V4_2026-10-30.md
   sha256LF e297046c654821ce2cb86c084dc5ce5cd57b7da0ab62fecbf08c48eadac2dd32 reports/twin_prime_v4_2026-10-30.json
   sha256LF 1bf46c15ec8b1d5b6b08cda1272ab960a2e71c2bd7880b03400beb0192efbf9d msaf/twin_prime_v4.py
-  `
+  ```
 
 ### A-2026-0049 — Figure-eight r7: RETRACTED (stub)
 
@@ -2209,7 +2211,7 @@ Selesai — 33 entri per 2026-10-23. Entri berikutnya menyusul dengan skema yang
 - **Status:** RETRACTED
 - **Catatan retraksi 2026-10-27:** Pemilik menyetujui retraksi. Receipt r7 berisi `result: {}`, report masih placeholder, modul hanya memanggil r5, dan `msaf/tests/test_figure_eight_r7.py` tidak ada. Tidak ada klaim r7; artefak dipertahankan sebagai bukti stub.
 - **Domino:** tidak ada
-- **Relasi:** melanjutkan A-2026-0044 (r5) dan A-2026-0047 (r6)
+- **Relasi:** melanjutkan r5 yang FAILED (r5 tidak membuka entri registry; slot `A-2026-0044` sengaja kosong) dan A-2026-0047 (r6)
 - **Perintah verifikasi:** python -m msaf.figure_eight_r7; python -m pytest msaf/tests/test_figure_eight_r7.py -q; python -m pytest msaf/tests/test_fence_registry.py -q.
 - **Sertifikat:**
 
