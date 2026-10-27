@@ -82,3 +82,15 @@ menghapus berkas lain di luar daftar.
 | `reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean` | Hash-nya ada di registry `T-2026-0050`; sudah ditulis ulang, bukan superseded |
 | `reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md` | Dokumen koreksi otoritatif untuk Stage 2/3 |
 | `reports/TARGET_STATUS_2026-10-25.md` | Status beku; hash-nya tercatat di registry `T-2026-0052` |
+
+## Penanda historis paket koreksi (D4, 2026-10-27)
+
+| Path | Status | Pengganti | Recovery | Tanggal | Keputusan |
+|---|---|---|---|---|---|
+| `reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof_receipt.json` | `historical` | `reports/RH_SCAFFOLD_NOTES/KERNEL_CHECK_2026-10-25.md`; `.lean` Stage 4 tetap tersegel sebagai artefak (`T-2026-0050`) | `git show a55fe79:reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof_receipt.json` (byte identik dengan berkas saat ini, sha256LF tidak berubah) | 2026-10-27 | Paket koreksi D4 2026-10-27 atas persetujuan pemilik; ditandai via ledger, byte berkas tidak diubah |
+
+Catatan D4: header peringatan historis ditambahkan (aditif) pada bagian atas
+`Stage_1_Formalization_Test_Function_Space.md`,
+`Stage_4_Containment_Proof.md`, dan docstring
+`generate_receipts.py` (jangan dieksekusi). Byte receipt dan kode skrip
+tidak diubah.

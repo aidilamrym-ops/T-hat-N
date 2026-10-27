@@ -1,5 +1,12 @@
 """Regenerate RH scaffold receipts deterministically.
 
+STATUS (D4, 2026-10-27): HISTORIS - JANGAN DIEKSEKUSI. Skrip ini generator
+receipt scaffold Stage 1-4 masa lalu; receipt di folder ini adalah catatan
+kernel-check historis (Stage 4 receipt byte-identik dengan commit a55fe79).
+Implementasi aktif ada di lean/ dan msaf/; menjalankan ulang skrip ini tanpa
+pra-registrasi dan keputusan pemilik yang tercatat di reports/DECISION_LOG.md
+tidak sah. (Peringatan ini aditif; badan skrip tidak diubah.)
+
 Each receipt records the LF-normalised SHA-256 of the Lean source, the
 toolchain used for the kernel check, and the exact command.  No timestamps
 are recorded, so receipts are byte-stable across runs.

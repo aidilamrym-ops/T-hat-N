@@ -391,6 +391,42 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   hanya memeriksa heading/STATUS/cert-line/hash — inspeksi manual per baris
   tetap dilakukan karena teks prosa di luar jangkauan guard.
 
+## 2026-10-27 — Penanda historis scaffold RH (D4)
+
+- **Dasar:** paket koreksi hasil audit read-only 2026-10-27 (persetujuan
+  pemilik). Temuan D4: arsip `reports/RH_SCAFFOLD_NOTES/` berisi prompt
+  "SYSTEM PROMPT" superseded yang tampak sebagai instruksi aktif — risiko
+  resurrect — dan `generate_receipts.py` bisa dipakai diam-diam untuk
+  meregenerasi receipt masa lalu tanpa otorisasi.
+- **Perubahan (semuanya aditif):**
+  - Header peringatan historis ditambahkan di atas
+    `Stage_1_Formalization_Test_Function_Space.md` dan
+    `Stage_4_Containment_Proof.md`: status HISTORIS, jangan dieksekusi
+    sebagai tugas baru; rujukan aturan `AGENTS.md` dan koreksi lingkup
+    Stage 2/3; Stage 4 diberi catatan khusus bahwa frasa "formal Riemann
+    Hypothesis claim" pada prompt adalah bacaan salah (lingkup P2 hanya
+    diagonal `XC`), dan `Stage_4_Containment_Proof.lean` tetap tersegel
+    `T-2026-0050` (jangan edit/hapus).
+  - Docstring `generate_receipts.py` diberi peringatan HISTORIS—JANGAN
+    DIEKSEKUSI tanpa pra-registrasi dan keputusan pemilik; badan kode tidak
+    diubah dan skrip tidak dijalankan.
+  - Byte file receipt tidak disentuh karena beberapa receipt
+    SHA-256LF-nya dipakai referensi; penanda historis masuk via ledger:
+    `reports/ARCHIVE_TOMBSTONES.md` mendapat bagian "Penanda historis paket
+    koreksi (D4, 2026-10-27)" (status `historical`) dan
+    `reports/AUTHORITY_MANIFEST.json` mendapat entri
+    `historical_artifacts` untuk
+    `Stage_4_Containment_Proof_receipt.json` (`recovery_commit a55fe79`;
+    byte-verifikasi: isi identik dengan versi di `a55fe79`).
+- **Jaminan:** tidak ada baris `sha256LF` registry, byte receipt, verdict,
+  atau kode matematika berubah; `.lean` Stage 1–4 tidak disentuh; guard
+  registry dan manifest tetap lulus.
+- **Verifikasi:** 14 passed pada keempat gerbang (authority-manifest,
+  fence-registry, lean-axiom-audit, anti-circularity-gate).
+- **Batas:** penanda hidup di dokumen prose/ledger, bukan di file artifact;
+  pembaca manusia yang meneruskan instruksi prompt tetap bertanggung jawab
+  membaca header.
+
 ## Keputusan yang masih menunggu pemilik
 
 Tiga pertanyaan delegasi 2026-10-27 sudah diputuskan di atas (D1–D3). Tidak

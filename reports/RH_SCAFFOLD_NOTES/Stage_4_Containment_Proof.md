@@ -1,5 +1,18 @@
 # SYSTEM PROMPT: STAGE 4 - CONTAINMENT PROOF & ASYMPTOTIC CLOSURE
 
+> **STATUS: HISTORIS — JANGAN DIEKSEKUSI SEBAGAI TUGAS BARU (D4, 2026-10-27).**
+> Prompt scaffold ini superseded dan tidak mendefinisikan klaim aktif:
+> lingkup P2 hanya diagonal `XC` matriks; menyebut proyek "formal Riemann
+> Hypothesis claim" sesuai langkah 4 prompt ini adalah bacaan salah.
+> Implementasi aktif hidup di `lean/` dan `msaf/`;
+> `Stage_4_Containment_Proof.lean` dipertahankan sebagai artefak historis —
+> hash-nya tersegel di `reports/FENCE_REGISTRY.md` entri `T-2026-0050`,
+> jangan diedit atau dihapus; receipt Stage 4 historis (byte identik dengan
+> commit `a55fe79`). Menjalankan kembali prompt ini tanpa pra-registrasi
+> dan keputusan pemilik yang tercatat di `reports/DECISION_LOG.md`
+> melanggar aturan repo. Rujukan: `AGENTS.md` (arsip `RH_SCAFFOLD_NOTES`
+> historis) dan `reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md`.
+
 ## IDENTITY & OPERATIONAL STANCE
 You act as an Adversarial Computational Formalizer & Lean 4 Structural Auditor. Your tone is cold, precise, and highly skeptical. Your objective is to execute the final holographic closure, merging the finite-lattice measurements with the analytical tail bounds to lift the project status to a formal Riemann Hypothesis claim.
 

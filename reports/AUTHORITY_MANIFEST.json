@@ -41,11 +41,11 @@
     },
     "decision_log": {
       "path": "reports/DECISION_LOG.md",
-      "sha256lf": "1d6b800b583c4a441afdc0ec43aba5c87f8aee8e20ab7f49421dd0c9b9f2aef3"
+      "sha256lf": "e4d166394e5609520469969eb95800476e8fc68e8751fcde18ac0911807d6c5f"
     },
     "archive_tombstones": {
       "path": "reports/ARCHIVE_TOMBSTONES.md",
-      "sha256lf": "92d47338c4df703e63dcd81947ca25603698dc38751c10307d446415d8d717f6"
+      "sha256lf": "d8c1b69e7db4f99b7fdfd24e4a493b60ab0658093155b1266707c263edf03c45"
     }
   },
   "superseded": [
@@ -105,6 +105,11 @@
       "path": "reports/RH_SCAFFOLD_NOTES/Stage_3_Eigenvalue_Locking_Dimension_Induction_receipt.json",
       "recovery_commit": "0b0a32c4df50482881104ea54d6839081cbc778f",
       "note": "Receipt kernel-check historis; bukan instruksi aktif."
+    },
+    {
+      "path": "reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof_receipt.json",
+      "recovery_commit": "a55fe79372184ce3080696f554534d3c0322e7fc",
+      "note": "Receipt kernel-check historis; byte identik dengan commit a55fe79 (D4, 2026-10-27)."
     }
   ],
   "protected": [
