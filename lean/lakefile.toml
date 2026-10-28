@@ -7,6 +7,10 @@ name = "mathlib"
 scope = "leanprover-community"
 rev = "v4.33.1"
 
+[[require]]
+name = "ChronoFramework"
+path = "../ChronoGeometric_Framework"
+
 [[lean_lib]]
 name = "NavierStokesCore"
 

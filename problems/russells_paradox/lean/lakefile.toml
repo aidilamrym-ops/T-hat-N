@@ -1,0 +1,6 @@
+name = "russell_paradox"
+version = "0.1.0"
+lean_version = "4.33.1"
+
+[dependencies]
+mathlib = { git = "https://github.com/leanprover-community/mathlib4", rev = "master" }
