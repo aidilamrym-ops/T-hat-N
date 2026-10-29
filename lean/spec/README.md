@@ -1,4 +1,4 @@
-# Historical Lean spec -- do not use as a sound basis
+﻿# Historical Lean spec -- do not use as a sound basis
 
 `XiAnalyticSpec.lean` is pinned as history by registry `A-2026-0015`.
 It is **inconsistent**: its global axiom `xiReal_sub_one` plus the
@@ -13,3 +13,5 @@ That file still treats `zetaReal`/`gammaReal` as opaque symbols and is
 **not** a proof about the actual zeta and Gamma functions; it only keeps
 the conditional derivation internally consistent and blocks the old
 contradiction.
+
+

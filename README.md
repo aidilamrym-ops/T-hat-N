@@ -1,4 +1,4 @@
-# Rigorous Ball Arithmetic for Zeta, L-Function, and Weil Spectra
+﻿# Rigorous Ball Arithmetic for Zeta, L-Function, and Weil Spectra
 
 *T-hat-N - Matrix-constraint Spectral Analysis Framework (MSAF): one rigid
 computational kernel, every reported number an interval enclosure.*
@@ -14,7 +14,7 @@ equality: only by containment.
 
 - **CI:** [![CI](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml) - `python -m pytest msaf -q` plus the Lean kernel build; every push must stay green
 - **Permanent archive:** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338271.svg)](https://doi.org/10.5281/zenodo.23338271) (concept DOI, all versions; latest version v1.41.0-alpha: https://doi.org/10.5281/zenodo.23445149)
-- **Sealed releases:** [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha); final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
+- **Sealed releases:** [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) Â· [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha); final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
 - **License:** MIT - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
@@ -23,8 +23,8 @@ Display equations below are versioned local SVG assets under
 installation, so the archive stays self-contained forever.
 
 **Status (2026-10-18) - H1 floor-amendment closed (stages A + B + C).** The
-- Figure‑eight campaign now includes **r6** (CERTIFIED, entry `A‑2026‑0047`) and **r7** (RETRACTED stub, entry `A‑2026‑0049`).
-- Learn‑harness v1 stub certified (entry `A‑2026‑0050`), now verified with registry entry.
+- Figureâ€‘eight campaign now includes **r6** (CERTIFIED, entry `Aâ€‘2026â€‘0047`) and **r7** (RETRACTED stub, entry `Aâ€‘2026â€‘0049`).
+- Learnâ€‘harnessâ€¯v1 stub certified (entryâ€¯`Aâ€‘2026â€‘0050`), nowÂ verifiedÂ withÂ registryÂ entry.
 statistical floor of the Section 6 campaign was lifted from 2000 to 20000
 surrogates on the pre-registered 18-cell grid (A), the single cell that
 clears the floor was re-measured with a five-seed robustness array (B), and
@@ -54,7 +54,7 @@ points; asymptotic direction open). The consolidated LaTeX export
 ([`exports/research_paper.tex`](exports/research_paper.tex)) transcribes the
 sealed results and the process-defect register; it adds no new claims.
 
-**Audit registry (2026-10-18 → 2026-10-19).** The repository also carries
+**Audit registry (2026-10-18 â†’ 2026-10-19).** The repository also carries
 pre-registered audits of pinned external releases, recorded in
 [`reports/FENCE_REGISTRY.md`](reports/FENCE_REGISTRY.md) and guarded by
 `msaf/tests/test_fence_registry.py` (every `sha256LF` certificate line
@@ -70,94 +70,94 @@ S4/P weld discrepancy documented as-is); and `A-2026-0004`, the Replay Record
 series entry `RR-2026-01` (spec
 [`reports/REPLAY_RECORD_SPEC.md`](reports/REPLAY_RECORD_SPEC.md), record
 [`reports/AUDIT_ECDSA_REPORT_2026-10-19.md`](reports/AUDIT_ECDSA_REPORT_2026-10-19.md))
-— a reproduction of the published (t, n) -> ECDSA seed mapping (Anthropic
+â€” a reproduction of the published (t, n) -> ECDSA seed mapping (Anthropic
 page, 2026-10-16: 14/14 published rows matched; B-163 remains an open
 residue; the anti-circularity gate is attached as TOOL NOT RUN); and
 `A-2026-0005`, the second Replay Record series entry `RR-2026-02` (spec
 [`reports/REPLAY_CERT_SPEC_V0.2_QUANTUM.md`](reports/REPLAY_CERT_SPEC_V0.2_QUANTUM.md),
 prereg [`reports/AUDIT_QUANTUM_PREREG_2026-10-19.md`](reports/AUDIT_QUANTUM_PREREG_2026-10-19.md),
 dashboard [`reports/gw_quantum_diagnostic_v1.html`](reports/gw_quantum_diagnostic_v1.html))
-— a pre-registered campaign of the SIMULATED-entropy kernel at dims
+â€” a pre-registered campaign of the SIMULATED-entropy kernel at dims
 201/301/401 (simulated entropy stream from the OS CSPRNG; no physical
 claim): 12/12 coordinates certified by two independent exact engines,
 all three statistical dimension verdicts RESOLVED, campaign exit 0;
-ledger head `e7bda4e1…`; and
+ledger head `e7bda4e1â€¦`; and
 `A-2026-0006`, the two-space bridge kit: `msaf/bridge.py` plus the protocol
 [`reports/BRIDGE_PROTOCOL_2026-10-19.md`](reports/BRIDGE_PROTOCOL_2026-10-19.md)
-— bounded certificates promoted across an explicit named tail bridge
+â€” bounded certificates promoted across an explicit named tail bridge
 ([B]/[J]/[U]), with certified demos for zeta(2) and two integral tails (a
 tooling entry, no external claim); and
 `A-2026-0007`, the periodic-box bridge study
 ([`reports/PERIODIC_BRIDGE_STUDY_2026-10-19.md`](reports/PERIODIC_BRIDGE_STUDY_2026-10-19.md))
-— the bounded side certified at N=16..64 by an independent exact mode sum
+â€” the bounded side certified at N=16..64 by an independent exact mode sum
 cross-checked against the sealed solver, with the free-space bridge left
 explicitly OPEN (the tested statistic is shown not to be a bridge); and
 `A-2026-0008`, the first Coq pilot
 ([`reports/COQ_BRIDGE_PILOT_2026-10-19.md`](reports/COQ_BRIDGE_PILOT_2026-10-19.md))
-— the finite algebraic core of the geometric tail lemma machine-checked
+â€” the finite algebraic core of the geometric tail lemma machine-checked
 by `coqc` and re-checked by `coqchk` with no project axioms, while the
 analytic limit step remains explicitly OPEN; and
 `A-2026-0009`, the analytic closure for the geometric bridge
 ([`reports/COQ_BRIDGE_LIMIT_2026-10-19.md`](reports/COQ_BRIDGE_LIMIT_2026-10-19.md))
-— the epsilon-N limit (`Un_cv`) proved in Coq for the geometric case
+â€” the epsilon-N limit (`Un_cv`) proved in Coq for the geometric case
 only, with the periodic-box `[J]` still explicitly OPEN; and
 `A-2026-0010`, the p-series L2 package for integer exponent
 ([`reports/COQ_BRIDGE_L2_2026-10-19.md`](reports/COQ_BRIDGE_L2_2026-10-19.md))
-— two-sided tail bounds and the epsilon-N limit proved in Coq for
-`p = k+1 ≥ 2` only, with the real-exponent case and the periodic-box `[J]`
+â€” two-sided tail bounds and the epsilon-N limit proved in Coq for
+`p = k+1 â‰¥ 2` only, with the real-exponent case and the periodic-box `[J]`
 still explicitly OPEN, and one additional stdlib axiom (`sig_not_dec`,
 completeness of R) recorded as an audit deviation; and
 `A-2026-0011`, the conditional two-axiom companion
 ([`reports/COQ_BRIDGE_L2_BOUNDS_2026-10-20.md`](reports/COQ_BRIDGE_L2_BOUNDS_2026-10-20.md))
-— with the tail limit's existence taken as a hypothesis, the same
+â€” with the tail limit's existence taken as a hypothesis, the same
 two-sided bounds are proved in Coq from exactly the two shared stdlib
 axioms, isolating `sig_not_dec` to the existence step (still integer
-`p = k+1 ≥ 2` only, periodic-box `[J]` still explicitly OPEN); and
+`p = k+1 â‰¥ 2` only, periodic-box `[J]` still explicitly OPEN); and
 `A-2026-0012`, the L5 finite-core pilot
 ([`reports/COQ_BRIDGE_L5_FINITE_2026-10-20.md`](reports/COQ_BRIDGE_L5_FINITE_2026-10-20.md))
-— the finite Riemann-integral comparison for `f_k(x)=x^{-(k+1)}`
-(`k ≥ 1`) proved in Coq for `[N, N+M]` only, with the infinite
+â€” the finite Riemann-integral comparison for `f_k(x)=x^{-(k+1)}`
+(`k â‰¥ 1`) proved in Coq for `[N, N+M]` only, with the infinite
 integral/limit step, general `f`, real exponents and periodic-box `[J]`
 still explicitly OPEN, and a four-axiom stdlib trusted base recorded as
 an audit deviation; and
 `A-2026-0013`, the conditional L5 limit step
 ([`reports/COQ_BRIDGE_L5_LIMIT_2026-10-20.md`](reports/COQ_BRIDGE_L5_LIMIT_2026-10-20.md))
-— the same integral–series comparison taken to the limit with the three
+â€” the same integralâ€“series comparison taken to the limit with the three
 `Un_cv` limits as hypotheses, the four-axiom stdlib trusted base unchanged,
 and existence of the limits left to Paket 9; and
 `A-2026-0014`, the unconditional L5 pilot for `f_k`
 ([`reports/COQ_BRIDGE_L5_INFINITE_2026-10-20.md`](reports/COQ_BRIDGE_L5_INFINITE_2026-10-20.md))
-— all three limits proved to exist and the two-sided comparison closed for
-`f_k(x)=x^{-(k+1)}` (`k ≥ 1`, `N ≥ 1`) only, with the four-axiom stdlib
+â€” all three limits proved to exist and the two-sided comparison closed for
+`f_k(x)=x^{-(k+1)}` (`k â‰¥ 1`, `N â‰¥ 1`) only, with the four-axiom stdlib
 trusted base unchanged, while general `f`, real exponents, L3/L4 and the
 periodic-box `[J]` remain explicitly OPEN; and
 `A-2026-0015`, the scoped anti-circularity gate run
 ([`reports/ANTI_CIRCULARITY_GATE_RUN_2026-10-20.md`](reports/ANTI_CIRCULARITY_GATE_RUN_2026-10-20.md))
-— the external gate now receives the four Lean kernel sources and returns
+â€” the external gate now receives the four Lean kernel sources and returns
 PASS (0 placeholders), with `lean/spec/` explicitly OUT OF SCOPE (9 declared
 axioms) and no SMT input; and `A-2026-0016`, the CI verification hardening
 ([`reports/CI_HARDENING_2026-10-20.md`](reports/CI_HARDENING_2026-10-20.md))
-— the per-declaration Lean axiom audit now runs in the `lean-kernel` job and
+â€” the per-declaration Lean axiom audit now runs in the `lean-kernel` job and
 a digest-pinned Coq 8.20.1 job rechecks Paket 8/9 with `coqc`/`coqchk`; and
 `A-2026-0017`, the repaired abstract spec V2
 ([`reports/XI_SPEC_V2_2026-10-20.md`](reports/XI_SPEC_V2_2026-10-20.md))
-— the historical endpoint contradiction removed (`xiReal` guarded at `x = 1`,
+â€” the historical endpoint contradiction removed (`xiReal` guarded at `x = 1`,
 `xiReal_sub_one` restricted to `x < 0`, false `zetaReal_neg` dropped; 8
 axioms), still conditional and not a proof about the actual xi function; and
 `A-2026-0018`, the faithful V3 spec
 ([`reports/XI_SPEC_V3_2026-10-20.md`](reports/XI_SPEC_V3_2026-10-20.md))
-— xi defined from Mathlib's `completedRiemannZeta`, the functional equation
+â€” xi defined from Mathlib's `completedRiemannZeta`, the functional equation
 proved, zero project axioms, with the midpoint sign `hmid` kept as an explicit
 hypothesis (later discharged by V4/V5); not a proof of RH; and
 `A-2026-0019`, the unconditional V4
 ([`reports/PREREG_XI_UNCONDITIONAL_2026-10-20.md`](reports/PREREG_XI_UNCONDITIONAL_2026-10-20.md))
-— `hmid` proved from the half-kernel Mellin representation and the eta
+â€” `hmid` proved from the half-kernel Mellin representation and the eta
 identity; and `A-2026-0020`, the V6 finite-lattice bridge
 ([`reports/PREREG_FINITE_LATTICE_BRIDGE_2026-10-20.md`](reports/PREREG_FINITE_LATTICE_BRIDGE_2026-10-20.md))
-— T1–T3 and the one-term certificate K1 for `completedCosZeta (1/2)` with an
+â€” T1â€“T3 and the one-term certificate K1 for `completedCosZeta (1/2)` with an
 explicit tail error; and `A-2026-0021`, the V5 glue
 ([`reports/PREREG_XI_POS_UNCONDITIONAL_2026-10-20.md`](reports/PREREG_XI_POS_UNCONDITIONAL_2026-10-20.md))
-— unconditional `xi_pos_on_reals_unconditional` by applying V3 to V4's
+â€” unconditional `xi_pos_on_reals_unconditional` by applying V3 to V4's
 `hmid`. The Coq packages' Coq-kernel status is unchanged.
 Every verdict is a bounded assessment under the scope limits recorded there, not a
 defect claim on any third party's work.
@@ -360,7 +360,7 @@ exactly, its premise H = n does not survive measurement. The pixel map is:
 
 <p align="center"><img src="docs/math/pixel.svg" alt="k_m = floor(gamma_m / 2pi log_2(N_steps)) mod N_steps"></p>
 
-### 2.4 Lean Xi chain (V3–V6): statements, formulas, and derivations
+### 2.4 Lean Xi chain (V3â€“V6): statements, formulas, and derivations
 
 The four sealed Lean packages form one chain from the real-axis completed xi
 to the finite-lattice half-kernel.  The scope is deliberately narrow: they
@@ -375,12 +375,12 @@ separate instrument and is not used here.
 defines the real part of the completed xi with removable endpoints guarded:
 
 ```lean
-noncomputable def xiReal (x : ℝ) : ℝ :=
-  if x = 0 ∨ x = 1 then 1 / 2
-  else (1 / 2 : ℝ) * x * (x - 1) * (completedRiemannZeta (x : ℂ)).re
+noncomputable def xiReal (x : â„) : â„ :=
+  if x = 0 âˆ¨ x = 1 then 1 / 2
+  else (1 / 2 : â„) * x * (x - 1) * (completedRiemannZeta (x : â„‚)).re
 ```
 
-For `x ≠ 0, 1` this is `Re[ (1/2) x (x-1) completedRiemannZeta(x) ]`.
+For `x â‰  0, 1` this is `Re[ (1/2) x (x-1) completedRiemannZeta(x) ]`.
 The functional equation
 
 ```text
@@ -394,9 +394,9 @@ theorem keeps the remaining midpoint sign as an explicit hypothesis:
 
 ```lean
 theorem xi_pos_on_reals
-    (hmid : ∀ x : ℝ, 0 < x → x < 1 →
-      (completedRiemannZeta (x : ℂ)).re < 0)
-    (x : ℝ) : 0 < xiReal x
+    (hmid : âˆ€ x : â„, 0 < x â†’ x < 1 â†’
+      (completedRiemannZeta (x : â„‚)).re < 0)
+    (x : â„) : 0 < xiReal x
 ```
 
 Derivation of the branch split:
@@ -418,8 +418,8 @@ master theorem, not a global axiom.
 proves the midpoint sign unconditionally:
 
 ```lean
-theorem hmid : ∀ x : ℝ, 0 < x → x < 1 →
-    (completedRiemannZeta (x : ℂ)).re < 0
+theorem hmid : âˆ€ x : â„, 0 < x â†’ x < 1 â†’
+    (completedRiemannZeta (x : â„‚)).re < 0
 ```
 
 The derivation proceeds through the half-kernel
@@ -446,7 +446,7 @@ F(t) = cosKernel(1/2, t) - 1
 4. **Remove the Gamma factor.**  Since
    `completedCosZeta(1/2, s) = GammaR(s) * cosZeta(1/2, s)` and `GammaR(x)>0`
    for `x>0`, also `cosZeta(1/2, x) < 0`.
-5. **Eta identity.**  On `s ≠ 1`,
+5. **Eta identity.**  On `s â‰  1`,
    ```text
    cosZeta(1/2, s) = (2^(1-s) - 1) * riemannZeta(s),
    ```
@@ -466,13 +466,13 @@ V4 has no project axioms and no `sorry`; its footprint is again exactly
 closes the V3 hypothesis with the V4 theorem:
 
 ```lean
-theorem xi_pos_on_reals_unconditional (x : ℝ) :
+theorem xi_pos_on_reals_unconditional (x : â„) :
     0 < XiAnalyticFaithful.xiReal x :=
   XiAnalyticFaithful.xi_pos_on_reals hmid x
 ```
 
 `hmid` is V4's root-namespace theorem (not `XiUnconditional.hmid`).  V5 adds
-no new analytic content: it is the one-step composition V3 ∘ V4.  Its
+no new analytic content: it is the one-step composition V3 âˆ˜ V4.  Its
 footprint is exactly `[propext, Classical.choice, Quot.sound]`.
 
 #### V6: finite-lattice bridge for `completedCosZeta (1/2)`
@@ -495,22 +495,22 @@ The four certified statements are:
 
 ```lean
 theorem abs_kHalf_sub_lattice_le
-    (t : ℝ) (ht : 0 < t) (N : ℕ) :
-    |kHalf t - latticeSum N t| ≤ latticeTerm t N
+    (t : â„) (ht : 0 < t) (N : â„•) :
+    |kHalf t - latticeSum N t| â‰¤ latticeTerm t N
 
 theorem completedCosZeta_half_lattice_error
-    (x : ℝ) (hx : 0 < x) (N : ℕ) :
-    ‖completedCosZeta ((1 / 2 : ℝ) : UnitAddCircle) (x : ℂ) -
-      (latticeValue N x : ℂ)‖ ≤ latticeError N x
+    (x : â„) (hx : 0 < x) (N : â„•) :
+    â€–completedCosZeta ((1 / 2 : â„) : UnitAddCircle) (x : â„‚) -
+      (latticeValue N x : â„‚)â€– â‰¤ latticeError N x
 
 theorem completedCosZeta_half_neg_of_lattice_certificate
-    (x : ℝ) (hx : 0 < x) (N : ℕ)
+    (x : â„) (hx : 0 < x) (N : â„•)
     (hcert : latticeValue N x + latticeError N x < 0) :
-    (completedCosZeta ((1 / 2 : ℝ) : UnitAddCircle) (x : ℂ)).re < 0
+    (completedCosZeta ((1 / 2 : â„) : UnitAddCircle) (x : â„‚)).re < 0
 
 theorem completedCosZeta_half_neg_of_first_term
-    (x : ℝ) (hx : 0 < x) :
-    (completedCosZeta ((1 / 2 : ℝ) : UnitAddCircle) (x : ℂ)).re < 0
+    (x : â„) (hx : 0 < x) :
+    (completedCosZeta ((1 / 2 : â„) : UnitAddCircle) (x : â„‚)).re < 0
 ```
 
 Derivation:
@@ -555,10 +555,10 @@ in [`reports/FENCE_REGISTRY.md`](reports/FENCE_REGISTRY.md).  The V5
 pre-registration is
 [`reports/PREREG_XI_POS_UNCONDITIONAL_2026-10-20.md`](reports/PREREG_XI_POS_UNCONDITIONAL_2026-10-20.md).
 
-### 2.5 Exact finite permutation certificate for `Z_N^×` (blueprint item 2)
+### 2.5 Exact finite permutation certificate for `Z_N^Ã—` (blueprint item 2)
 
-For `N = 15` and `N = 21`, with `a = 2`, let `U|x⟩ = |a x mod N⟩` on the
-sorted unit group `X_N = (Z/NZ)^×`.  The package certifies, over
+For `N = 15` and `N = 21`, with `a = 2`, let `U|xâŸ© = |a x mod NâŸ©` on the
+sorted unit group `X_N = (Z/NZ)^Ã—`.  The package certifies, over
 `fmpq_mat`/`fmpq_poly` and without floating point:
 
 ```text
@@ -568,12 +568,12 @@ N=21: dim 12, M=6,  two 6-cycles, charpoly = x^12 - 2x^6 + 1,
       minpoly = x^6 - 1
 ```
 
-For both instances `UᵀU = I`, `U^M = I`, no smaller positive power is the
+For both instances `Uáµ€U = I`, `U^M = I`, no smaller positive power is the
 identity, and the exact cyclotomic factorisation of the characteristic
 polynomial places the eigenvalue multiset on the `M`-th roots of unity.
 The exact cyclic shift `H` does **not** commute with `U`; both commutators are
 `NONZERO` and are recorded as finite observations, not hidden.  The control
-`H = U + Uᵀ` commutes but is tautological.
+`H = U + Uáµ€` commutes but is tautological.
 
 This is a toy finite certificate, not a factorisation algorithm and not a
 claim about RSA/ECC security or the Riemann hypothesis.  Details:
@@ -898,10 +898,10 @@ propext + Classical.choice + Quot.sound only).
 | Work queue (20 problems) | disposition + ordered queue + rules: [`reports/DAFTAR_MASALAH_KERJA.md`](reports/DAFTAR_MASALAH_KERJA.md) |
 | Frobenius-degeneracy gate | exponent-divisibility check, char-2 witness locked |
 | F_{2^n} traces | t_1..t_3 locked; O(2^3n) wall mapped, Jacobi upgrade pending |
-| Moore box (Lean, Banach) | Newton map + Lipschitz < 1 ⟹ exactly one zero (standard axioms) |
-| Moore test (Lean) | inclusion + clean enclosure ⟹ exactly one zero (trichotomy+MVT) |
-| Moore test (Lean) | inclusion + clean enclosure ⟹ zero exists (trichotomy+MVT); uniqueness companion |
-| Moore uniqueness (Lean, Rolle/MVT) | clean derivative enclosure ⟹ at most one zero per box |
+| Moore box (Lean, Banach) | Newton map + Lipschitz < 1 âŸ¹ exactly one zero (standard axioms) |
+| Moore test (Lean) | inclusion + clean enclosure âŸ¹ exactly one zero (trichotomy+MVT) |
+| Moore test (Lean) | inclusion + clean enclosure âŸ¹ zero exists (trichotomy+MVT); uniqueness companion |
+| Moore uniqueness (Lean, Rolle/MVT) | clean derivative enclosure âŸ¹ at most one zero per box |
 | Moore-MVT (Lean) | Lipschitz derived from derivative bound; subtype-scoped theorem |
 | Brouwer-Icc (Lean) | continuous self-map of interval has fixed point (IVT) |
 | RH certified count, [10, 24.5] x [0.49, 0.51] | exactly 2 (strict Newton isolation + full exclusion) |
@@ -1033,7 +1033,7 @@ verdict.
 Every enclosure excludes zero (`all_exclude_zero = true`). The float
 registry of this artifact records radius 0.0 and imaginary leak 0.0; the
 certified content is the exclusion of zero, not the float field. Correction
-(measured 2026-10-17): both 0.0 entries are float64 registry artifacts —
+(measured 2026-10-17): both 0.0 entries are float64 registry artifacts â€”
 the true enclosure radii and the imaginary leaks are nonzero but below the
 float64 floor (re-measured at dims 17/33: radii 4.73e-1792 / 5.37e-1788,
 `is_exact() = False`; max leak 1.97e-1792 / 7.06e-1789, zero exact
@@ -1467,7 +1467,7 @@ T2-r4 closes the figure-eight reduced 8x8 three-body problem with a **discrimina
 
 - **Type**: T (certified formal finite-class theorem)
 - **Status**: CERTIFIED (19/19 guard passed, freeze verify OK)
-- **Registry**: `A-2026-0043` — latest entry at `reports/FENCE_REGISTRY.md` (2026-10-23)
+- **Registry**: `A-2026-0043` â€” latest entry at `reports/FENCE_REGISTRY.md` (2026-10-23)
 - **Domino**: Three-Body (locally validated periodic orbit; Daftar-B gate 16 prerequisite)
 - **Relation**: continues `reports/FIGURE_EIGHT_R3_2026-10-23.md` (INCONCLUSIVE because old K6/M5 was non-discriminative); preregistration `reports/PREREG_FIGURE_EIGHT_R4_2026-10-23.md` (SHA-256LF `14cf5c9f...`).
 
@@ -1477,17 +1477,17 @@ All 9 K6 rows tested and **failed as required** (M1-M2, M5-M9 `must_fail: true` 
 
 | Mutation | Parameter | Gate that must fail | Actual result | Passed |
 |---|---|---|---|---|
-| M1 | `REMAINDER_FACTOR=10^70` | K2 abort step 2 (Picard) | K2 FAILED, error loading "aborted at step 2" and "Picard enclosure failed" | ✅ |
-| M2 | `T0 -> T0 + 1/10` | K3 FAILED + Krawczyk; K5 FAILED | K3 FAILED, Krawczyk present, K5 FAILED | ✅ |
-| M3 | 1 byte receipt modified | SHA-256 changed | SHA before ≠ SHA after | ✅ |
-| M4 | inject `1.5` / `float(x)` | AST scan hit | AST hit for literal and call; source clean | ✅ |
-| M5 | `TUBE_CAP=10^-30` | K2 `widths_ok=False` | K2 FAILED, `widths_ok=False` | ✅ |
-| M6 | `KAPPA_MAX=10^-12` | K3 `kappa_ok=False` | K3 FAILED, `kappa_ok=False` | ✅ |
-| M7 | `GAUSS_DET_MIN=10^3` | K4 `det_ok=False` | K4 FAILED, `det_ok=False` | ✅ |
-| M8 | `CHOREO_TOL=10^-30` | K5 FAILED | K5 FAILED | ✅ |
-| M9 | `GAUSS_COND_MAX=10^3` | K4 `cond_ok=False` | K4 FAILED, `cond_ok=False` | ✅ |
+| M1 | `REMAINDER_FACTOR=10^70` | K2 abort step 2 (Picard) | K2 FAILED, error loading "aborted at step 2" and "Picard enclosure failed" | âœ… |
+| M2 | `T0 -> T0 + 1/10` | K3 FAILED + Krawczyk; K5 FAILED | K3 FAILED, Krawczyk present, K5 FAILED | âœ… |
+| M3 | 1 byte receipt modified | SHA-256 changed | SHA before â‰  SHA after | âœ… |
+| M4 | inject `1.5` / `float(x)` | AST scan hit | AST hit for literal and call; source clean | âœ… |
+| M5 | `TUBE_CAP=10^-30` | K2 `widths_ok=False` | K2 FAILED, `widths_ok=False` | âœ… |
+| M6 | `KAPPA_MAX=10^-12` | K3 `kappa_ok=False` | K3 FAILED, `kappa_ok=False` | âœ… |
+| M7 | `GAUSS_DET_MIN=10^3` | K4 `det_ok=False` | K4 FAILED, `det_ok=False` | âœ… |
+| M8 | `CHOREO_TOL=10^-30` | K5 FAILED | K5 FAILED | âœ… |
+| M9 | `GAUSS_COND_MAX=10^3` | K4 `cond_ok=False` | K4 FAILED, `cond_ok=False` | âœ… |
 
-**All 9 K6 rows `passed: true`.** K6 `all_pass: true` → r4 `all_pass: true` → `summary: "ALL PASS"` → `registry: "A-2026-0043"`.
+**All 9 K6 rows `passed: true`.** K6 `all_pass: true` â†’ r4 `all_pass: true` â†’ `summary: "ALL PASS"` â†’ `registry: "A-2026-0043"`.
 
 ### 8.3 Verification
 
@@ -1516,23 +1516,23 @@ Final execution results:
 - If registry `A-2026-0044` is desired: open trek r5 with new preregistration **before code**, truly discriminative K6, without retroactively changing r4.
 - R4 closed as **ALL PASS** with registry `A-2026-0043`.
 
-### 8.6 T2-r5 status (2026-10-24) — FAILED, no registry (honest interim record)
+### 8.6 T2-r5 status (2026-10-24) â€” FAILED, no registry (honest interim record)
 
-r5 was opened exactly as §8.5 item 1 prescribes: preregistration locked at commit `fad7dc7` (`reports/PREREG_FIGURE_EIGHT_R5_2026-10-23.md`, target registry `A-2026-0044`) **before code** (`bb3fe56`, `msaf/figure_eight_r5.py`), with the tighter box `R_B = 1e-30` and a new K6 matrix M1-M10.
+r5 was opened exactly as Â§8.5 item 1 prescribes: preregistration locked at commit `fad7dc7` (`reports/PREREG_FIGURE_EIGHT_R5_2026-10-23.md`, target registry `A-2026-0044`) **before code** (`bb3fe56`, `msaf/figure_eight_r5.py`), with the tighter box `R_B = 1e-30` and a new K6 matrix M1-M10.
 
-Status sealed (2026-10-24): the honest receipt `reports/figure_eight_r5_2026-10-23.json` (SHA-256LF `1932be97...`) and the formal report `reports/FIGURE_EIGHT_R5_2026-10-23.md` are committed (also see HANDOFF `reports/HANDOFF.md` §2.0bo; the guard pass-2 byte-check completed byte-identical — the worktree receipt matches the committed hash with an empty `git diff`; pytest `1 failed, 5 passed` with the single expected failure at the honest M3 row; ledger event `r5_pass2_bytecheck`):
+Status sealed (2026-10-24): the honest receipt `reports/figure_eight_r5_2026-10-23.json` (SHA-256LF `1932be97...`) and the formal report `reports/FIGURE_EIGHT_R5_2026-10-23.md` are committed (also see HANDOFF `reports/HANDOFF.md` Â§2.0bo; the guard pass-2 byte-check completed byte-identical â€” the worktree receipt matches the committed hash with an empty `git diff`; pytest `1 failed, 5 passed` with the single expected failure at the honest M3 row; ledger event `r5_pass2_bytecheck`):
 
-- **Base K1-K5 (sealed r3 certificate, byte-reproduced): PASS** — K1, K2, K3, K4, K5 all true.
-- **K6 matrix M1-M10: FAILED** — two rows do not discriminate:
-  - **M3** (`C = 1/3`): expected the gauge gate K1 to fail; K1 still passes → non-discriminative.
-  - **M8** (`GAUSS_COND_MAX=10^6`): expected K4 `cond_ok=False`; the measured condition ≈ 2.96e4 stays far below the mutated cap → non-discriminative.
+- **Base K1-K5 (sealed r3 certificate, byte-reproduced): PASS** â€” K1, K2, K3, K4, K5 all true.
+- **K6 matrix M1-M10: FAILED** â€” two rows do not discriminate:
+  - **M3** (`C = 1/3`): expected the gauge gate K1 to fail; K1 still passes â†’ non-discriminative.
+  - **M8** (`GAUSS_COND_MAX=10^6`): expected K4 `cond_ok=False`; the measured condition â‰ˆ 2.96e4 stays far below the mutated cap â†’ non-discriminative.
   - M6/M7 logged as INCONCLUSIVE under the module rules and are not pass-blocking.
-- Verdict: `all_pass = false`, `summary = FAILED`, `registry = null` → **`A-2026-0044` is NOT created**; r4 (`A-2026-0043`) is untouched and remains the certified claim.
+- Verdict: `all_pass = false`, `summary = FAILED`, `registry = null` â†’ **`A-2026-0044` is NOT created**; r4 (`A-2026-0043`) is untouched and remains the certified claim.
 
 Infra repairs shipped inside the r5 window (no mathematical content changed):
 
 - `msaf/hodge/gauss_exact.py`: fixed an IndentationError shipped in `4e282c9` (the p=3/even-n `raise` was not indented, breaking the module import); the stray column-0 `# TODO` was folded back into the original refusal comment. The guard now refuses loudly exactly as documented, with `NotImplementedError` naming the `F_{p^2}` remedy.
-- `msaf/tests/test_hodge_fermat_k3.py`: realigned to the precise refusal and **a new `p=7`/even-n case keeps the generic Davenport-Hasse `RuntimeError` branch covered** — no coverage was lost.
+- `msaf/tests/test_hodge_fermat_k3.py`: realigned to the precise refusal and **a new `p=7`/even-n case keeps the generic Davenport-Hasse `RuntimeError` branch covered** â€” no coverage was lost.
 - `msaf/prime_integration.py`: qualified `prime_bridge` imports to `msaf.prime_bridge.*` (bare top-level names made collection fail from the repository root).
 
 ---
@@ -1647,15 +1647,15 @@ MIT - see [LICENSE](LICENSE).
 
 ---
 
-## SECTION 9: T2N MCP SUITE — ROADMAP FASE UNTUK PENGGUNA BARU
+## SECTION 9: T2N MCP SUITE â€” ROADMAP FASE UNTUK PENGGUNA BARU
 
-Suite enam server MCP milik repo ini ("T2N") berjalan di atas satu inti
+Suite enam server MCP milik repo ini ("T2N") berjalan in atas satu inti
 protokol bersama (`mcp/t2n/core/`): stdio JSON-RPC newline-delimited,
 Python 3.14 stdlib saja, tulis SEMUA hanya ke `mcp/out/` (zona tunggal;
-`reports/` tersegel), dan kegagalan alat tidak pernah mematikan server.
+`reports/` tersegel), and kegagalan alat no pernah mematikan server.
 
-Server terdaftar di `opencode.jsonc` proyek (`mcp.servers.<nama>`,
-bentuk V2). Verifikasi koneksi (harap 8 ✓ — 6 milik repo + 2 global
+Server terdaftar in `opencode.jsonc` proyek (`mcp.servers.<nama>`,
+bentuk V2). Verifikasi koneksi (harap 8 âœ“ â€” 6 milik repo + 2 global
 Anda):
 
 ```sh
@@ -1668,51 +1668,53 @@ opencode mcp list
 |---|---|---|---|
 | `t2n_repokeeper` | `repo_status`, `hash_artifact`, `receipt_verify`, `pytest_run`, `registry_state`, `handoff_queue` | F1 | **HIDUP** (`9649c10`) |
 | `t2n_archivist` | `corpus_search`, `doc_outline`, `registry_lookup`, `summarize_receipt`, `timeline`, `read_slice` | F1 | **HIDUP** (`9649c10`) |
-| `t2n_scribe` | `ledger_append`, `ledger_tail`, `audit_state`, `area_claim`/`area_release` (TTL, pelepasan paksa tercatat di ledger), `areas_list`, `resume_brief`, `handoff_draft` | F2 | **HIDUP** (F2) |
-| `t2n_watchtower` | `guarded_run` (log streaming yang tetap tertulis), `watch`, `reap`, `reap_all_stale`, `run_history` — verifikasi identitas pid + tanda tangan pembuatan proses | F2 | **HIDUP** (F2) |
-| `t2n_science` | `iv_eval` (interval dengan pembulatan-ke-luar, AST-whitelist tanpa `eval`), `frac_compare` (rasional eksak `Fraction`), `ast_float_scan` (pemindai literal `float`/`float()`/`eval`-`exec`) | F3 | **HIDUP** (F3) |
+| `t2n_scribe` | `ledger_append`, `ledger_tail`, `audit_state`, `area_claim`/`area_release` (TTL, pelepasan paksa tercatat in ledger), `areas_list`, `resume_brief`, `handoff_draft` | F2 | **HIDUP** (F2) |
+| `t2n_watchtower` | `guarded_run` (log streaming which tetap tertulis), `watch`, `reap`, `reap_all_stale`, `run_history` â€” verifikasi identitas pid + tanda tangan pembuatan proses | F2 | **HIDUP** (F2) |
+| `t2n_science` | `iv_eval` (interval with pembulatan-ke-luar, AST-whitelist tanpa `eval`), `frac_compare` (rasional eksak `Fraction`), `ast_float_scan` (pemindai literal `float`/`float()`/`eval`-`exec`) | F3 | **HIDUP** (F3) |
 | `t2n_illumina` | render SVG/HTML (gate-tree, dependency map, orbit) | F5 | **HIDUP** (F5) |
 
-Fase **P1** (penyegelan jujur r5 + pendokumentasian) selesai di
-commit `a41b9be`. Setiap fase berakhir **satu commit di `main`
-+ push** — putusan owner 2026-10-24 — sehingga pengguna melacak
+Fase **P1** (penyegelan jujur r5 + pendokumentasian) selesai in
+commit `a41b9be`. Setiap fase berakhir **satu commit in `main`
++ push** â€” putusan owner 2026-10-24 â€” sehingga pengguna melacak
 kemajuan lewat `git log --oneline` secara langsung.
 
-### 9.2 Urutan eksekusi untuk pengguna lain (disiplin tetap ditegakkan)
+### 9.2 Urutan eksekusi for pengguna lain (disiplin tetap ditegakkan)
 
-1. `git clone` repo → `cd` root → jalankan OpenCode di root itu
+1. `git clone` repo â†’ `cd` root â†’ jalankan OpenCode in root itu
    (config `opencode.jsonc` ikut ter-commit, jadi semua `t2n_*`
    langsung terdaftar; bila interpreter Python 3.14 Anda bukan
-   `C:\Python314`, sesuaikan jalur `command` di `opencode.jsonc`).
-2. `opencode mcp list` → pastikan semua `t2n_*` ✓ connected.
+   `C:\Python314`, sesuaikan jalur `command` in `opencode.jsonc`).
+2. `opencode mcp list` â†’ pastikan semua `t2n_*` âœ“ connected.
 3. **Verifikasi dulu, jangan percaya**:
    - `receipt_verify` SEMUA receipt `reports/*.json` sebelum
      mengutip apapun (anti-pemalsuan; insiden 2026-10-24 nyata),
    - `registry_state` sebelum membahas id (id tertinggi =
      maksimum numerik; `A-2026-0044` masih kosong),
-   - `pytest_run` hanya menerima target di `msaf/tests/`.
+   - `pytest_run` hanya menerima target in `msaf/tests/`.
 4. Baru kerja fase berikutnya: **F4** `illumina` (SVG/HTML ke
-   `mcp/out/`) → F5 graf pengetahuan + hook data LearnHarness
+   `mcp/out/`) â†’ F5 graf pengetahuan + hook data LearnHarness
    (`LEARNHARNESS_DATA_ROOT` dibaca read-only sesuai etos
-   SKILL.md-nya). F2 (`scribe` + `watchtower`) dan F3
-   (`science`) sudah hidup (tabel di atas).
-5. Semua keluaran tulis suite mendarat di `mcp/out/`
-   (`ledger/`, `runs/`, `handoff/`, `adversarial/`) — di-ignore
-   git; owner dapat commit artefak yang dianggap penting secara manual.
-6. Pemburuan cacat hanya lewat **matriks serangan yang
-   di-prereg** dengan budget ≤2 siklus per perbaikan (anti
+   SKILL.md-nya). F2 (`scribe` + `watchtower`) and F3
+   (`science`) already hidup (tabel in atas).
+5. Semua keluaran tulis suite mendarat in `mcp/out/`
+   (`ledger/`, `runs/`, `handoff/`, `adversarial/`) â€” in-ignore
+   git; owner dapat commit artefak which dianggap penting secara manual.
+6. Pemburuan cacat hanya lewat **matriks serangan which
+   in-prereg** with budget â‰¤2 siklus per perbaikan (anti
    loop-tanpa-ujung); temuan baru masuk matriks kampanye
-   berikutnya, dan setiap siklus terekam di ledger
+   berikutnya, and setiap siklus terekam in ledger
    `mcp/out/ledger/t2n_ledger_v1.jsonl`.
 
 ### 9.3 Batas
 
-- Suite T2N **tidak membuat klaim matematis baru**; ia
+- Suite T2N **no membuat klaim matematis baru**; ia
   instrumen integritas & produktivitas. Klaim ilmiah tetap
-  berada di registry `reports/FENCE_REGISTRY.md` dengan
+  berada in registry `reports/FENCE_REGISTRY.md` with
   protokol prereg-sebelum-kode.
-- Jalur mutlak di `opencode.jsonc` (`C:\Python314\python.exe`,
+- Jalur mutlak in `opencode.jsonc` (`C:\Python314\python.exe`,
   `D:\Opencode AI Agent\...`) menyimpan lokal-mesin; pengguna
-  lain harus menyesuaikannya (satu-satunya bagian yang tidak
-  portabel di setup ini).
+  lain harus menyesuaikannya (satu-satunya section which no
+  portabel in setup ini).
+
+
 

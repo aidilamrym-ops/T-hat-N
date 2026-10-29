@@ -331,3 +331,5 @@ def test_report_records_inconclusive_verdict() -> None:
     text = REPORT.read_text(encoding="utf-8")
     assert "INCONCLUSIVE" in text
     assert "non-diskriminatif" in text or "non-discriminative" in text
+
+

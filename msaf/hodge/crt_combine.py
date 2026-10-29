@@ -124,3 +124,5 @@ def oracle_check(recovered: dict[int, int], known: dict[int, int]) -> dict:
     if mismatches:
         return {"verdict": "ORACLE-FAIL", "mismatches": mismatches}
     return {"verdict": "ORACLE-HOLD", "mismatches": []}
+
+

@@ -225,3 +225,4 @@ def _env_with_lean_path() -> dict:
     env = dict(os.environ)
     env["LEAN_PATH"] = str(BUILD_LIB) + os.pathsep + env.get("LEAN_PATH", "")
     return env
+

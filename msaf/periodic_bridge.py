@@ -131,3 +131,5 @@ def probe(n: int, length: str | int | arb = "1") -> Probe:
             "at this box size"
         )
     return Probe(n, v1, v2, v4, denominator, (v1 - v2) / denominator)
+
+

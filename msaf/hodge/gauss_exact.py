@@ -302,3 +302,4 @@ def fermat_quartic_projective_exact(n: int, p: int) -> dict:
         "affine": affine,
         "projective": (affine - 1) // (q - 1),
     }
+

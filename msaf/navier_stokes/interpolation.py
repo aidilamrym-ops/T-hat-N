@@ -51,10 +51,10 @@ def refine_grid_cells(lattice: FluidLattice, factor: int = 2) -> FluidLattice:
         for j in range(lattice.n):
             for l in range(lattice.n):
                 parent = lattice.cell(i, j, l)
-                for di in range(factor):
-                    for dj in range(factor):
-                        for dl in range(factor):
-                            fine.u[fine._idx(i * factor + di, j * factor + dj, l * factor + dl)] = parent
+                for ii in range(factor):
+                    for djj in range(factor):
+                        for dll in range(factor):
+                            fine.u[fine._idx(i * factor + ii, j * factor + djj, l * factor + dll)] = parent
     fine.ticks = lattice.ticks
     return fine
 
@@ -77,10 +77,10 @@ def coarsen(fine: FluidLattice, factor: int = 2) -> FluidLattice:
         for j in range(n_c):
             for l in range(n_c):
                 hull0 = hull1 = hull2 = None
-                for di in range(factor):
-                    for dj in range(factor):
-                        for dl in range(factor):
-                            c = fine.cell(i * factor + di, j * factor + dj, l * factor + dl)
+                for ii in range(factor):
+                    for djj in range(factor):
+                        for dll in range(factor):
+                            c = fine.cell(i * factor + ii, j * factor + djj, l * factor + dll)
                             hull0 = c[0] if hull0 is None else hull0.union(c[0])
                             hull1 = c[1] if hull1 is None else hull1.union(c[1])
                             hull2 = c[2] if hull2 is None else hull2.union(c[2])
@@ -100,3 +100,5 @@ def interpolation_error_bound(dx: arb, strain_rate_bound: arb) -> arb:
     if isinstance(dx, float) or isinstance(strain_rate_bound, float):
         raise TypeError("float64 leakage refused in error bound")
     return strain_rate_bound * dx
+
+

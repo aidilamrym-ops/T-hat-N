@@ -62,3 +62,4 @@ T_SPECTRAL: Final[arb] = arb("8e62")
 def relative_width(x: arb) -> arb:
     """Relative interval width of a ball, i.e. its relative uncertainty."""
     return (x.upper() - x.lower()) / x.mid()
+

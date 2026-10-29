@@ -1,4 +1,4 @@
-## Refined grid (A) -- 20000 surrogates per ensemble, seed 20260927
+﻿## Refined grid (A) -- 20000 surrogates per ensemble, seed 20260927
 
 Target cells (pre-registered, spec section 2): C1 = 201|T|0.3, C2 = 301|T|0.3, C3 = 401|T|0.3, C4 = 301|T|0.5. For these four cells the refined values SUPERSEDE the sealed values; sealed columns remain visible, never edited.
 
@@ -38,4 +38,6 @@ Pooled: 5877/100000 (p_hat = 5.87700e-02), CP95 [5.73201e-02, 6.02456e-02]; homo
 Frozen decision tree classification: **NOT STABLE (homogeneity rejected at alpha = 0.01; dispersion-dominated)**
 
 C4 flagged resolution-sensitive per frozen spec section 4; the verdict grid recomputation still uses the canonical 20000 value (number of record).
+
+
 

@@ -79,3 +79,4 @@ def test_artifact_grows_as_offline_run_progresses():
     assert have[: len(LOCKED)] == sorted(LOCKED), "locked prefix broken"
     extra = [k for k in have if k > max(LOCKED)]
     print(f"offline degrees present beyond the locked ones: {extra}")
+

@@ -217,7 +217,7 @@ def w02_zeta(c: int, N: int, prec: int) -> arb_mat:
 
 
 def totient(n: int) -> int:
-    """Euler's totient function φ(n)."""
+    """Euler's totient function Ï†(n)."""
     result = n
     p = 2
     temp = n
@@ -297,10 +297,10 @@ def candidate_block(
     # Build W02 (pole block): zero for non-principal, scaled for principal
     dim = 2 * N + 1
     if is_principal:
-        # For principal character modulo q, residue = φ(q)/q
+        # For principal character modulo q, residue = Ï†(q)/q
         residue = arb(totient(modulus)) / arb(modulus)
         W02 = w02_zeta(c, N, prec)
-        # Scale by residue φ(q)/q
+        # Scale by residue Ï†(q)/q
         for i in range(dim):
             for j in range(i, dim):
                 W02[i, j] = W02[j, i] = W02[i, j] * residue
@@ -574,3 +574,5 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+

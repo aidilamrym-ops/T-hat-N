@@ -318,3 +318,5 @@ def test_no_r2_registry_entry() -> None:
     )
     # A historical note may mention the id; only a real entry heading counts.
     assert "### A-2026-0041" not in registry
+
+

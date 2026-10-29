@@ -1,7 +1,7 @@
-"""RH Extension Extended — Konduktor T > 100 (winding cross-lock + measure-wall-first).
+"""RH Extension Extended â€” Konduktor T > 100 (winding cross-lock + measure-wall-first).
 
 This module extends the base RH Extension (T=100) to higher conductors
-T ∈ {200, 300, 400, 500} using the same 4-step locked algorithm.
+T âˆˆ {200, 300, 400, 500} using the same 4-step locked algorithm.
 
 Reuses the core machinery from gw_rh_extension.py.
 """
@@ -88,7 +88,7 @@ class RHExtensionCampaignResult:
 def _chebyshev_wall_estimate(T: int, N: int, prec: int = 53) -> RHWallResult:
     """Step 1: Measure wall using Chebyshev trace formula.
     
-    Estimates a safe positive lower bound for minimum eigenvalue λ_min.
+    Estimates a safe positive lower bound for minimum eigenvalue Î»_min.
     For higher conductors, the wall estimate decreases (matrices become
     less diagonally dominant), but must remain positive.
     """
@@ -151,7 +151,7 @@ def _compute_winding_numbers(T: int, N: int) -> Tuple[int, int, int]:
 def _verify_winding_cross_lock(T: int, N: int) -> WindingCrossLockResult:
     """Step 2: Verify winding cross-lock condition.
     
-    Condition: |winding(W_p) - winding(W_R) - winding(W_02)| ≤ 1
+    Condition: |winding(W_p) - winding(W_R) - winding(W_02)| â‰¤ 1
     """
     winding_w02, winding_wr, winding_wp = _compute_winding_numbers(T, N)
     
@@ -172,7 +172,7 @@ def _known_lambda_min(T: int, N: int) -> float:
     """Known lambda_min values from sealed Route S ladder computations.
     
     For T > 100, we extrapolate based on the pattern:
-    - T=100: λ_min ~ 2.4e-191 (dim 201), 6.6e-248 (dim 301)
+    - T=100: Î»_min ~ 2.4e-191 (dim 201), 6.6e-248 (dim 301)
     - Higher T: slightly smaller gaps (more character factors)
     """
     base_201 = 2.4366351145008994e-191
@@ -406,7 +406,7 @@ def main() -> None:
     print(f"Total time: {result.runtime_total:.2f}s")
     
     for T, r in result.results.items():
-        print(f"  T={T}: {r.overall_verdict} (λ_min={r.spectral_a.lambda_min:.2e})")
+        print(f"  T={T}: {r.overall_verdict} (Î»_min={r.spectral_a.lambda_min:.2e})")
     
     # Write receipt
     receipt = {
@@ -470,3 +470,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

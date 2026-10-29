@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """t2n_illumina -- lightweight visualizer (F5/F6).
 
-Provides SVG and HTML renderers for T‑hat‑N artefacts. No external deps;
-stdlib only. Writes confined to `mcp/out/illumina/` via the write‑root
+Provides SVG and HTML renderers for Tâ€‘hatâ€‘N artefacts. No external deps;
+stdlib only. Writes confined to `mcp/out/illumina/` via the writeâ€‘root
 allowlist.
 """
 import sys
@@ -126,7 +126,7 @@ def render_orbit_svg(params: dict) -> dict:
             "svg": ET.tostring(svg, encoding="unicode")}
 
 # ---------------------------------------------------------------------
-# Materials dashboard – combines crystal and phase diagram SVGs
+# Materials dashboard â€“ combines crystal and phase diagram SVGs
 def render_materials_dashboard(params: dict) -> dict:
     """Render HTML dashboard with crystal structure and phase diagram.
 
@@ -286,8 +286,10 @@ HANDLERS = {
     "render_html_dashboard": render_html_dashboard,
 }
 
-DESCRIPTION = ("T‑hat‑N illumina (F5/F6): SVG and HTML renderers – dashboard, receipt label, dependency map, and orbit plot. "
-               "Stateless, stdlib only, writes to write‑root allowlist.")
+DESCRIPTION = ("Tâ€‘hatâ€‘N illumina (F5/F6): SVG and HTML renderers â€“ dashboard, receipt label, dependency map, and orbit plot. "
+               "Stateless, stdlib only, writes to writeâ€‘root allowlist.")
 
 if __name__ == "__main__":
     serve_generic("t2n_illumina", DESCRIPTION, TOOL_DEFS, HANDLERS)
+
+

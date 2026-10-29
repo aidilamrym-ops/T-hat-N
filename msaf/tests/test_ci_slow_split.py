@@ -53,3 +53,5 @@ def test_slow_workflow_verifies_sealed_receipts_first():
     assert campaign in text, "slow workflow must still run the campaigns"
     assert text.index(seal) < text.index(campaign), (
         "sealed-receipt check must run before the expensive campaigns")
+
+

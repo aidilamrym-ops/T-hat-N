@@ -158,3 +158,5 @@ def generate_fluid_state_3d_render(
     fig.savefig(output_path, dpi=300)
     plt.close(fig)
     return output_path
+
+

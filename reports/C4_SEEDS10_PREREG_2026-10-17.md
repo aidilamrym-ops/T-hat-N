@@ -1,4 +1,4 @@
-# C4 robustness array extension -- pre-registration (S5 -> S10)
+﻿# C4 robustness array extension -- pre-registration (S5 -> S10)
 
 Date: 2026-10-17 (local). Status: **PRE-REGISTERED BEFORE ANY DRAW.** This
 document, the extraction tool it names, and their tests are committed and
@@ -121,3 +121,5 @@ history (add-commit of this file) and the launcher log
   hours total.
 
 Declared by the analysis session on 2026-10-17, before launch.
+
+

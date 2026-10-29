@@ -1,4 +1,4 @@
-"""Guard for the T2-r6 reduced 8x8 figure‑eight campaign.
+"""Guard for the T2-r6 reduced 8x8 figureâ€‘eight campaign.
 
 Ensures discriminative K6 mutations per PREREG_FIGURE_EIGHT_R6_2026-10-25.md.
 """
@@ -17,7 +17,7 @@ BASE_PREREG = ROOT / "reports" / "PREREG_FIGURE_EIGHT_R3_2026-10-23.md"
 BASE_RECEIPT = ROOT / "reports" / "figure_eight_r3_2026-10-23.json"
 RECEIPT = ROOT / "reports" / "figure_eight_r6_2026-10-25.json"
 
-# Expected hashes (pre‑computed)
+# Expected hashes (preâ€‘computed)
 EXPECTED_PREREG_SHA = "92b687f5ee6237fd01a0b43374c91cce4ba72898f32bfd3f655925a61e591b6b"
 EXPECTED_BASE_MODULE_SHA = "8eddc2bb17647d452e15325397e852e224e1af028f055fa4fe41de94af939ec6"
 EXPECTED_BASE_RECEIPT_SHA = "6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9"
@@ -92,3 +92,5 @@ def test_registry_entry(campaign):
         assert payload["registry"] == r6.REGISTRY_ID
     else:
         assert payload["registry"] is None
+
+

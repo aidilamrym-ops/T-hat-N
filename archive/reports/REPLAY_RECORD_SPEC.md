@@ -1,4 +1,4 @@
-# Replay Record — Specification v0.1 (FROZEN)
+﻿# Replay Record â€” Specification v0.1 (FROZEN)
 
 Status: FROZEN 2026-10-19 in this repository. This is the working spec for the
 Replay Record series; changes require a version bump with a dated note. Nothing
@@ -8,7 +8,7 @@ owner's term "Replay Record"; one instance is a *record*, id `RR-<year>-<seq>`.)
 
 Purpose (one paragraph): a *Replay Record* turns a public claim into a record
 that a third party can independently replay, byte-for-byte, and reach the same
-verdict — including honest records of failure, resource exhaustion, and
+verdict â€” including honest records of failure, resource exhaustion, and
 tool-unavailability. It is a packaging discipline for claims we already audit
 in this programme: pre-registered protocol, as-is log, certificate lines,
 gates, explicit non-claims.
@@ -40,7 +40,7 @@ recorded, never converted into a verdict.
 - **Registry**: canonical hash ledger (fence registry) with a CI guard that
   re-verifies every certificate line.
 
-## 3. Design principles (P1–P8)
+## 3. Design principles (P1â€“P8)
 
 - P1 Pre-registration: no audit command before the protocol is committed;
   caps and criteria frozen; no parameter changes after results. Any change =
@@ -63,48 +63,48 @@ recorded, never converted into a verdict.
 
 ## 4. Record anatomy (fields)
 
-1. `id` — `RR-<year>-<seq>` + `registry_ref` (fence-registry entry).
-2. `title` — short, searchable (repo style).
-3. `claim` — verbatim quote(s), source(s) with pins (commit hash / URL + fetch
+1. `id` â€” `RR-<year>-<seq>` + `registry_ref` (fence-registry entry).
+2. `title` â€” short, searchable (repo style).
+3. `claim` â€” verbatim quote(s), source(s) with pins (commit hash / URL + fetch
    date + capture hash).
-4. `class` — one of: `proof-rebuild`, `data-replay`, `claim-reproduction`,
+4. `class` â€” one of: `proof-rebuild`, `data-replay`, `claim-reproduction`,
    `source-snapshot`, `weld-pin` (extensible; v0.1 lists only used classes).
-5. `prerequisites` — toolchain (name + version; e.g., "Coq 8.20.1 vanilla, NO
+5. `prerequisites` â€” toolchain (name + version; e.g., "Coq 8.20.1 vanilla, NO
    coq-native"), host minima *measured* (cores, RAM, swap), OS notes.
-6. `resource_class` — light (<1 min) / standard (≤1 h) / heavy (≤14 h) /
+6. `resource_class` â€” light (<1 min) / standard (â‰¤1 h) / heavy (â‰¤14 h) /
    extreme (multi-attempt, caps + deadline + supervision). Measured, not guessed.
-7. `protocol` — frozen ordered commands, caps, dev-only vs audit boundary,
+7. `protocol` â€” frozen ordered commands, caps, dev-only vs audit boundary,
    freeze commit hash.
-8. `expected_artifacts` — list + how to recompute each (sha256LF / sha256).
-9. `decision_rules` — enumerated criteria → labels (see §5).
-10. `as_is_log` — pointer + hash of the append-only transcript; supervision
+8. `expected_artifacts` â€” list + how to recompute each (sha256LF / sha256).
+9. `decision_rules` â€” enumerated criteria â†’ labels (see Â§5).
+10. `as_is_log` â€” pointer + hash of the append-only transcript; supervision
     notes; normalization events.
-11. `failure_ledger` — attempts table (n, window, exit, cause, evidence line
+11. `failure_ledger` â€” attempts table (n, window, exit, cause, evidence line
     numbers); interruptions; OOM kills; environment fixes (recorded BEFORE
     retry, with commit id).
-12. `gate_outputs` — verbatim (e.g., anti-circularity: PASS / FAIL /
+12. `gate_outputs` â€” verbatim (e.g., anti-circularity: PASS / FAIL /
     TOOL-NOT-RUN with exit codes).
-13. `certificate_lines` — the sha256LF block (registry convention).
-14. `non_claims` — out-of-scope list; NOT-RUN items with reasons; unresolved
-    residues (unexplained leftovers) — kept as open items, never as claims.
-15. `record_provenance` — dates, roles (human + agent), repo commit adding the
+13. `certificate_lines` â€” the sha256LF block (registry convention).
+14. `non_claims` â€” out-of-scope list; NOT-RUN items with reasons; unresolved
+    residues (unexplained leftovers) â€” kept as open items, never as claims.
+15. `record_provenance` â€” dates, roles (human + agent), repo commit adding the
     record, CI run id; strict rule: frozen reports are never edited; the
     registry/record update is the record.
-16. `replay_guide` — how a third party replays (expected diffs, e.g.,
+16. `replay_guide` â€” how a third party replays (expected diffs, e.g.,
     `Generated:` timestamp lines; known non-determinism).
 
 ## 5. Label set and verdict rules (v0.1)
 
-- `MATCH` — observation meets the frozen criterion (verbatim).
-- `MISMATCH` — reproducible disagreement with the claim.
-- `PARTIAL` — some items matched; each item enumerated; no aggregate claim.
-- `NOT-RUN` — excluded by decision, recorded before execution.
-- `TOOL-NOT-RUN` — a gate/tool could not run; never counted as success.
-- `UNRESOLVED-BUDGET` — caps/deadline exceeded before completion; recorded as-is.
+- `MATCH` â€” observation meets the frozen criterion (verbatim).
+- `MISMATCH` â€” reproducible disagreement with the claim.
+- `PARTIAL` â€” some items matched; each item enumerated; no aggregate claim.
+- `NOT-RUN` â€” excluded by decision, recorded before execution.
+- `TOOL-NOT-RUN` â€” a gate/tool could not run; never counted as success.
+- `UNRESOLVED-BUDGET` â€” caps/deadline exceeded before completion; recorded as-is.
 
 Rules: (a) labels are per-item, not aggregate; (b) gates may only downgrade;
 (c) every label cites evidence (log lines + hashes); (d) discrepancy protocol:
-on anything unexpected → stop, record, dated decision BEFORE proceeding.
+on anything unexpected â†’ stop, record, dated decision BEFORE proceeding.
 
 ## 6. Process (six steps)
 
@@ -114,17 +114,17 @@ on anything unexpected → stop, record, dated decision BEFORE proceeding.
 3. Evidence: extract verbatim blocks; compute certificates AFTER the log stops
    growing (hash drift otherwise).
 4. Gates: run gate(s); record verdicts (downgrade-only); reconcile labels.
-5. Record: write the record (§4); extend registry; run guard test; commit;
-   CI green; publish snapshot (optional DOI) per §10.
+5. Record: write the record (Â§4); extend registry; run guard test; commit;
+   CI green; publish snapshot (optional DOI) per Â§10.
 6. Publish/index (optional for v0.1): update index; announce with non-claims
    attached, not buried.
 
 ## 7. Gates and guards
 
 - Anti-circularity gate (three executable checks: placeholder scan,
-  comment-only-claim detection, SMT-LIB2 circularity audit) → PASS / FAIL /
+  comment-only-claim detection, SMT-LIB2 circularity audit) â†’ PASS / FAIL /
   TOOL-NOT-RUN; output verbatim; downgrade-only.
-- Registry guard: CI re-verifies every certificate line (sha256LF) — a broken
+- Registry guard: CI re-verifies every certificate line (sha256LF) â€” a broken
   certificate fails the build.
 - Optional v0.2: rubric machine-checked with SMT (e.g., label exclusivity,
   "no verdict without evidence"). Scope caveat: this checks the *logic of the
@@ -132,15 +132,15 @@ on anything unexpected → stop, record, dated decision BEFORE proceeding.
 
 ## 8. Case-study anchors (programme history)
 
-- **BB5R** — proof-rebuild (extreme; COMPLETED 2026-10-18). 2-core laptop,
+- **BB5R** â€” proof-rebuild (extreme; COMPLETED 2026-10-18). 2-core laptop,
   vanilla Coq 8.20.1, no coq-native; attempts ledger incl. kernel OOM kill
   (make: Error 137) and -j2 mitigation; phase R attempt 5 finished with 50/50
   .vo and `Print Assumptions` checked; registry A-2026-0002.
-- **COLLATZ-P2** — data-replay + weld-pin (heavy; COMPLETED 2026-10-19).
+- **COLLATZ-P2** â€” data-replay + weld-pin (heavy; COMPLETED 2026-10-19).
   Pre-registered at commit `bbbe9ae` BEFORE any audit command; independent
   engines P/Q/C; batteries from frozen captures; execution gated on BB5R
   completion + owner signal; report + registry A-2026-0003.
-- **ECDSA-V1** — claim-reproduction (light; IN FLIGHT). Independently
+- **ECDSA-V1** â€” claim-reproduction (light; IN FLIGHT). Independently
   reimplement the 1990s C `lrand48`/`srand48` from specification (not running
   the claimant's code), reproduce published curve seeds from given timestamps
   + indices; record residues (unexplained seed, unexplained base points,
@@ -190,18 +190,18 @@ Components exist in adjacent practice: artifact evaluation / badging
 (conferences), reproducible builds (distro ecosystems), software-supply-chain
 provenance (SLSA-style attestations), pre-registration and registered reports
 (psychology/medicine), and replication packages in empirical science. The
-components are NOT novel. The intended delta — to our knowledge, pending a
-documented novelty scan if this becomes a claim — is the bundle applied to
+components are NOT novel. The intended delta â€” to our knowledge, pending a
+documented novelty scan if this becomes a claim â€” is the bundle applied to
 *famous computational claims*: as-is failure ledgers + measured resource
 telemetry + byte-exact normalization with CI-enforced certificates +
 downgrade-only gates + explicit non-claims, all public. Any "first / never
 done" phrasing must pass its own scan or not be used.
 
-## Appendix A — Template skeleton
+## Appendix A â€” Template skeleton
 
 ```markdown
 # RR-<year>-<seq>: <title>
-- claim: "<verbatim>" — source <pin/url, fetched YYYY-MM-DD, capture sha256LF ...>
+- claim: "<verbatim>" â€” source <pin/url, fetched YYYY-MM-DD, capture sha256LF ...>
 - class: <...>  |  resource_class: <...>
 - prereg commit: <hash>  |  record commit: <hash>  |  CI: <run id>
 ## Prerequisites
@@ -216,7 +216,7 @@ done" phrasing must pass its own scan or not be used.
 ## Replay guide
 ```
 
-## Appendix B — Telemetry annex (template)
+## Appendix B â€” Telemetry annex (template)
 
 | target | wall time | peak RSS | cores | exit | notes |
 |---|---|---|---|---|---|
@@ -224,4 +224,6 @@ done" phrasing must pass its own scan or not be used.
 
 Host: CPU model, cores, RAM/swap, OS, toolchain versions. Measured during the
 run (e.g., from `time` output and process monitors); used for reproducibility
-planning by third parties. Mandatory for heavy/extreme class if §10.7 adopted.
+planning by third parties. Mandatory for heavy/extreme class if Â§10.7 adopted.
+
+

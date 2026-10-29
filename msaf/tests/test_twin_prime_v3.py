@@ -114,3 +114,5 @@ def _is_prime(value: int) -> bool:
             return False
         divisor += 2
     return True
+
+

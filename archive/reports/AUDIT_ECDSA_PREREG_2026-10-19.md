@@ -1,6 +1,6 @@
-# Audit V1 — ECDSA curve seeds: reproduction of the published (t, n) -> seed mapping
+﻿# Audit V1 â€” ECDSA curve seeds: reproduction of the published (t, n) -> seed mapping
 
-## Replay Record RR-2026-01 — PRE-REGISTRATION (FROZEN)
+## Replay Record RR-2026-01 â€” PRE-REGISTRATION (FROZEN)
 
 - Frozen: 2026-10-19 (this file + the frozen engines/tools/captures are committed
   together BEFORE the first audit command; git history is the ordering proof).
@@ -8,7 +8,7 @@
 - Record format: `reports/REPLAY_RECORD_SPEC.md` v0.1 (frozen, same commit).
   Record id: **RR-2026-01**. Registry entry planned: **A-2026-0004** (post-execution).
 - Claim source: Anthropic, "Claude reveals ECDSA curve origins" (2026-10-16),
-  https://www.anthropic.com/research/ecdsa-curve-origins — captured 2026-10-19
+  https://www.anthropic.com/research/ecdsa-curve-origins â€” captured 2026-10-19
   01:24:11 UTC; html sha256LF `266554ce...8781d`, txt sha256LF `35dfbdd8...77be`
   (full pins in section 2 / `audit_ecdsa/PINS.sha256`). Quotes below are byte-exact
   from the capture .txt (line numbers cited; the capture renders the page's curly
@@ -18,8 +18,8 @@
 
 Key statements (line refs into `audit_ecdsa/captures/claim_anthropic_ecdsa_curve_origins.txt`):
 
-- C1 (lines 29–30): "None of them were the results of any hash algorithm at all,
-  but rather the output of the C library’s lrand48 random-number generator, seeded
+- C1 (lines 29â€“30): "None of them were the results of any hash algorithm at all,
+  but rather the output of the C libraryâ€™s lrand48 random-number generator, seeded
   with a Unix timestamp!"
 - C2 (line 31): "The algorithm used would sample bytes from the random number
   generator (RNG) initialized by a Unix timestamp (t) for some number of iterations
@@ -37,7 +37,7 @@ Key statements (line refs into `audit_ecdsa/captures/claim_anthropic_ecdsa_curve
   have halved the clock."
 - Residue (line 60): "There is also one seed we were unable to recover. The fifth
   binary seed, B-163, fits nothing Claude has tried and remains unexplained."
-- Context only (lines 25–26, NOT tested here): the 2015 Solinas quote about a
+- Context only (lines 25â€“26, NOT tested here): the 2015 Solinas quote about a
   humorous passphrase ("Give Bob and Jerry a raise" / "Bob and Jerry rule").
 - Also noted, NOT tested here (line 57): skipped candidates (e.g., P-256 candidate
   876 "gives a prime-order curve of the right size"); we do not analyze curve
@@ -63,7 +63,7 @@ capture, and records the claim's own printed seed strings as cross-check):
 | R12 | B-283 | 1998-04-17 15:27:44 | 32 |
 | R13 | B-409 | 1998-04-17 15:30:18 | 60 |
 | R14 | B-571 | 1998-04-17 15:32:08 | 73 |
-| R15 | B-163 | (none published; residue) | — |
+| R15 | B-163 | (none published; residue) | â€” |
 
 Comparison values (the target seeds) come ONLY from the captured standard
 documents/implementation (see SOURCES.md); the claim's printed strings are never
@@ -107,11 +107,11 @@ Captures (17 files under `audit_ecdsa/captures/`): transitively pinned by
 `seeds_manifest.json` ("captures" block: size + raw + LF sha256 per file) and
 mirrored human-readably in `SOURCES.md`. PDFs are byte-pinned raw and committed
 unconverted (`.gitattributes`: `audit_ecdsa/**/*.pdf binary`; they contain CRLF
-byte pairs, so raw sha256 != sha256LF — both values recorded).
+byte pairs, so raw sha256 != sha256LF â€” both values recorded).
 
 Machine-checkable companion: `audit_ecdsa/PINS.sha256` (raw sha256 for every
-package file including captures; generated after this prereg — it contains this
-file's sha256 — and verified with `sha256sum -c` at freeze; re-verified at
+package file including captures; generated after this prereg â€” it contains this
+file's sha256 â€” and verified with `sha256sum -c` at freeze; re-verified at
 execution start; any mismatch = STOP).
 
 Engines are built at execution from the pinned sources; the source pins above are
@@ -128,7 +128,7 @@ from PowerShell only. Log wrapper for every step:
 
     bash -lc 'set -o pipefail; cd "/mnt/d/Opencode AI Agent" && <COMMANDS> 2>&1 | tee -a reports/AUDIT_ECDSA_LOG_2026-10-19.log'
 
-Step 0 — pin check + build (log):
+Step 0 â€” pin check + build (log):
 
     sha256sum -c audit_ecdsa/PINS.sha256
     mkdir -p audit_ecdsa/exec_2026-10-19
@@ -139,17 +139,17 @@ Step 0 — pin check + build (log):
 Stop condition: any pin mismatch or nonzero `sha256sum -c` => STOP (no fixes; a
 change would be a new version).
 
-I1 — engine self-tests (mechanistic; synthetic vectors):
+I1 â€” engine self-tests (mechanistic; synthetic vectors):
 
     nice -n 19 python3 audit_ecdsa/selftest_v1.py --e1 audit_ecdsa/exec_2026-10-19/e1 --e1w audit_ecdsa/exec_2026-10-19/e1w --e2 audit_ecdsa/engine_e2.py --json audit_ecdsa/exec_2026-10-19/i1_selftest.json
 
    A) draws E1==E1w (7 seeds x 250); B) draws E2==E1; C) range 31-bit;
    D) cand/scan equality + semantics (2 formats x 3 t x 3 n = 18 cases x 2
    checks = 36 subchecks; mutated no-match target brute-force verified).
-   Criterion: exit 0, "SELFTEST: ALL OK", JSON `all_ok: true`. Else STOP —
+   Criterion: exit 0, "SELFTEST: ALL OK", JSON `all_ok: true`. Else STOP â€”
    engines stay frozen; no substitution, no edits (that would itself be a finding).
 
-I2 — prime rows (R01–R10): regenerate seed at candidate n and compare to the
+I2 â€” prime rows (R01â€“R10): regenerate seed at candidate n and compare to the
 source-captured standard seed:
 
     nice -n 19 python3 audit_ecdsa/run_v1.py i2 --manifest audit_ecdsa/seeds_manifest.json --e1 audit_ecdsa/exec_2026-10-19/e1 --e2 audit_ecdsa/engine_e2.py --out audit_ecdsa/exec_2026-10-19/i2_prime.json
@@ -162,7 +162,7 @@ source-captured standard seed:
    first-reappearance index via scan (expected n), and claim-string cross-check
    (e1_cand == claim_hex; expected equal for all 14 published rows).
 
-I3 — binary rows (R11–R14): same protocol; per candidate: 5 successive states,
+I3 â€” binary rows (R11â€“R14): same protocol; per candidate: 5 successive states,
    each contributing (state >> 17) = lrand48() formatted %08X (32-bit word
    slots), concatenated (40 hex); engine arg = floor(t_epoch / 2) ("halved
    clock"); B-163 has no published (t, n)
@@ -172,7 +172,7 @@ I3 — binary rows (R11–R14): same protocol; per candidate: 5 successive state
 
 Criterion: as I2.
 
-I4 — word-structure statistic (C3): for the 10 NIST seeds (5 P + 5 B, incl.
+I4 â€” word-structure statistic (C3): for the 10 NIST seeds (5 P + 5 B, incl.
    B-163 from sources), count seeds whose five 32-bit words all have top bit 0;
    recompute P(X >= 4), X ~ Binomial(10, 2^-5), exact rational:
 
@@ -182,7 +182,7 @@ I4 — word-structure statistic (C3): for the 10 NIST seeds (5 P + 5 B, incl.
    during dev, section 6: P(X>=4) = 48446969237/281474976710656 ~= 1.7215e-4;
    1/P = 281474976710656/48446969237 ~= 5809.96.)
 
-I5 — timestamp arithmetic (C4):
+I5 â€” timestamp arithmetic (C4):
 
     nice -n 19 python3 audit_ecdsa/run_v1.py i5 --manifest audit_ecdsa/seeds_manifest.json --out audit_ecdsa/exec_2026-10-19/i5_timestamps.json
 
@@ -191,7 +191,7 @@ I5 — timestamp arithmetic (C4):
    days; (d) prime rows' t span May 1997..April 1998. Criterion: all four (each
    recorded verbatim; exact intermediate values in JSON).
 
-I6 — sources + packaging:
+I6 â€” sources + packaging:
 
     nice -n 19 python3 audit_ecdsa/run_v1.py i6 --manifest audit_ecdsa/seeds_manifest.json --out audit_ecdsa/exec_2026-10-19/i6_sources.json
 
@@ -200,7 +200,7 @@ I6 — sources + packaging:
    the frozen captures is byte-identical to the pinned manifest (determinism /
    packaging check).
 
-I7 — record: hash the exec artifacts, run the anti-circularity gate (expected:
+I7 â€” record: hash the exec artifacts, run the anti-circularity gate (expected:
    the Lean/SMT checks have no targets in scope -> TOOL-NOT-RUN, recorded
    verbatim; NEVER counted as success), write the record `RR-2026-01`
    (reports/AUDIT_ECDSA_REPORT_2026-10-19.md), extend the fence registry
@@ -246,7 +246,7 @@ Overrun is recorded as-is (no retries in the same run).
   n=2320, B-233 n=155) matched on both engines; synthetic i2/i3 path tests and
   real-manifest I4/I5/I6 dry runs passed (values in section 7 pre-derive from
   these).
-- The claimant's public page — INCLUDING its reproduction code block — was read
+- The claimant's public page â€” INCLUDING its reproduction code block â€” was read
   by the agent during research (2026-10-18). Engines were nonetheless written
   from the POSIX/glibc specification of srand48/lrand48; independence rests on:
   (a) two engines agreeing; (b) both welded to the actual glibc lrand48 (E1w)
@@ -258,9 +258,9 @@ Overrun is recorded as-is (no retries in the same run).
 
 ## 7. Expected outcomes (pre-registered)
 
-- I1: ALL OK (A–D; D = 36 subchecks).
-- I2: 10/10 MATCH (R01–R10); no claim cross-check mismatches; first-at-n true.
-- I3: 4/4 MATCH (R11–R14).
+- I1: ALL OK (Aâ€“D; D = 36 subchecks).
+- I2: 10/10 MATCH (R01â€“R10); no claim cross-check mismatches; first-at-n true.
+- I3: 4/4 MATCH (R11â€“R14).
 - I4: count = 4; 1/P ~= 5809.96 (within +/-1% of 5,810) -> MATCH.
 - I5: all four subchecks true (halved 1984-02-23; doubled 1998-04-17; interval
   14 days + 2h32m11s, floor 14; prime span 1997-05-15..1998-04-03).
@@ -285,7 +285,7 @@ a result, not a failure of the process.
   break, new attack, or weakness in the ECDSA curves.").
 - NOT testing base points of any curve (claim's FreeLIP findings out of scope).
 - NOT testing skipped candidates / curve-selection criteria.
-- NOT testing B-163's derivation (residue; the claim failed too) — I4 only uses
+- NOT testing B-163's derivation (residue; the claim failed too) â€” I4 only uses
   its published 160-bit string as a statistic input.
 - NOT verifying that "the NSA actually ran lrand48": we reproduce the mapping
   from the frozen model; no archival program was obtained or run.
@@ -313,3 +313,5 @@ a result, not a failure of the process.
 
 Note: this prereg cannot cite its own commit hash (it is created by the commit
 it announces). The record (RR-2026-01) will cite the freeze commit hash.
+
+

@@ -174,3 +174,5 @@ def test_v6_axiom_footprint_is_standard_only() -> None:
     # Riemann zeta, and no zero-location claim may appear.
     assert "completedCosZeta" in out
     assert "sorryAx" not in out
+
+

@@ -1,4 +1,4 @@
-# Hodge Program Closure (measured, v1.34.0-alpha)
+﻿# Hodge Program Closure (measured, v1.34.0-alpha)
 
 This document closes the Hodge/Picard branch of the program with the
 numbers actually measured by the code. It is a status record, not a
@@ -78,3 +78,4 @@ different counting scheme. Not shipped half-verified.
   354294 uniquely isolated; CRT combiner (M > 2B), oracle gate HOLD,
   leave-one-out rehearsal (10/10 PASS), circle test PASS.**
 - Informative bound (< 20) requires a low-rank K3 plus that method.
+

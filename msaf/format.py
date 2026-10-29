@@ -31,3 +31,4 @@ def relwidth(x: arb, digits: int = 8) -> str:
     if x.mid().is_zero():
         return "0"
     return ((x.upper() - x.lower()) / x.mid()).str(digits, radius=True)
+

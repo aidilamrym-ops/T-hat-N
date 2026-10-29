@@ -1,12 +1,12 @@
-# MSAF Project Memory (brain.md)
+﻿# MSAF Project Memory (brain.md)
 
 Living work history for the Matrix-constraint Spectral Analysis Framework
 project. Read this file first when opening a new session. Updated every time
 the project state changes. Language of this file: Indonesian (project memory,
 not code).
 
-Last updated: 2026-10-27 — review 7 hari 20–27 Okt 2026 + protokol anti-loop
-(§10). Previous: 2026-10-13 — adversarial self-audit done (blind spots L31–L35,
+Last updated: 2026-10-27 â€” review 7 hari 20â€“27 Okt 2026 + protokol anti-loop
+(Â§10). Previous: 2026-10-13 â€” adversarial self-audit done (blind spots L31â€“L35,
 one UNSOUND: L33 one-sided widening, fixed + verified). 67 tests green, both
 ledgers V(L)=True, final seal=True, artifacts workspace-local.
 
@@ -39,101 +39,101 @@ ledgers V(L)=True, final seal=True, artifacts workspace-local.
 | File | Status |
 |---|---|
 | `Matrix-constraint Spectral Analysis Framework (MSAF).md` | Manuscript, 6 sections. Axioms source. |
-| `Kompilasi Rumus, Turunan, dan Penjelasan Simbol.md` | Symbol reference. |
+| `Kompilasi Rumus, Turunan, and Penjelasan Simbol.md` | Symbol reference. |
 | `system_prompt_opencode.md` | Agent contract. |
 | `instruksi_pertama_opencode.md` | Task 1: `msaf_core_lattice.py` (4 functions). DONE. |
 | `instruksi_lanjutan_newton_arb.md` | Task 2: Newton-xi blueprint. DONE (with 7 API fixes + 2 substantive corrections). |
 | `msaf_execution_manual.md` | 7-day Terminus plan (Day 1-2 / 3-4 / 5-7). Intake 2026-10-13. |
-| `msaf_terminus_phase1.md` | Newton-xi class blueprint. Superseded by `msaf/zeta_inversion.py` (blueprint has API errors, see §7). |
+| `msaf_terminus_phase1.md` | Newton-xi class blueprint. Superseded by `msaf/zeta_inversion.py` (blueprint has API errors, see Â§7). |
 | `msaf_terminus_phase2.md` | Visualizer blueprint. Implemented as `msaf/visualizer.py` with rigid projection (no float/numpy in computation). |
 | `msaf_terminus_phase3.md` | Final-audit blueprint. Implemented as `msaf/final_audit.py` reusing `Ledger` + Arb capacity check. |
 
 ## 4. Kernel architecture (all English, all Arb, 0 non-ASCII)
 
-- `msaf_core_lattice.py` — `initialize_precision`, `generate_shift_operator(n)`,
+- `msaf_core_lattice.py` â€” `initialize_precision`, `generate_shift_operator(n)`,
   `quantized_von_mangoldt(k)`, `verify_commutation(h,t)` + `verify_truncation`,
   `verify_unitarity`, `von_mangoldt_log_kernel`, `is_circulant`.
-- `msaf/precision.py` — lock-once precision, mutator audit, `log2/exp2/log_base`.
-- `msaf/constants.py` — `ELL_P`, `D_OBS`, `N_STEPS`, `DECAY_B/A`, `ZETA_SIGMA`
+- `msaf/precision.py` â€” lock-once precision, mutator audit, `log2/exp2/log_base`.
+- `msaf/constants.py` â€” `ELL_P`, `D_OBS`, `N_STEPS`, `DECAY_B/A`, `ZETA_SIGMA`
   (POSTULATE, not derived), `T_SPECTRAL`.
-- `msaf/grid.py` — exact `fmpq` decimal parser, `floor(N_steps)`, bit length, storage bound.
-- `msaf/certify.py` — `contains_zero` (Arb), `contains_zero_complex` (Acb),
+- `msaf/grid.py` â€” exact `fmpq` decimal parser, `floor(N_steps)`, bit length, storage bound.
+- `msaf/certify.py` â€” `contains_zero` (Arb), `contains_zero_complex` (Acb),
   matrix certificates, reports.
-- `msaf/operators.py` — `CyclicShift` (permutation, O(n)), `CirculantHamiltonian`
+- `msaf/operators.py` â€” `CyclicShift` (permutation, O(n)), `CirculantHamiltonian`
   (symbol c), materialisation cap 4096, structural `[H,T]=0` theorem.
-- `msaf/guinand.py` — Weil matrix + DFT spectrum (`multiple=True` not needed;
+- `msaf/guinand.py` â€” Weil matrix + DFT spectrum (`multiple=True` not needed;
   structural DFT used), Shannon entropy.
-- `msaf/budget.py` — dual-path `n_crit`: manuscript `H:=n` vs measured
-  `H:=0.5+0.5·log2(2(n-1))`.
-- `msaf/zeta_inversion.py` — rigorous interval Newton on xi via `acb_series`
+- `msaf/budget.py` â€” dual-path `n_crit`: manuscript `H:=n` vs measured
+  `H:=0.5+0.5Â·log2(2(n-1))`.
+- `msaf/zeta_inversion.py` â€” rigorous interval Newton on xi via `acb_series`
   Taylor + analytic tail bound; `ball()` helper; `locate_zero`,
   `certify_sigma_one_half` (always `global_claim_supported=False`),
   `certify_zero_exclusion`.
-- `msaf/evolution.py` — symbol-mutation campaign + `RootPullGenome` campaign
+- `msaf/evolution.py` â€” symbol-mutation campaign + `RootPullGenome` campaign
   (certified zeros, REVERT state), SHA-256 hash-chained `Ledger`, `replay()`.
   CLI: `python -m msaf.evolution --replay LEDGER`.
-- `msaf/visualizer.py` — rigid pixel projection
-  `k = floor(gamma/(2π)·log2(N_steps)) mod N_steps` in pure Arb/integer;
+- `msaf/visualizer.py` â€” rigid pixel projection
+  `k = floor(gamma/(2Ï€)Â·log2(N_steps)) mod N_steps` in pure Arb/integer;
   JSON report + optional PNG (integers only cross the render boundary).
-- `msaf/final_audit.py` — chain verify + replay + Arb holographic capacity
+- `msaf/final_audit.py` â€” chain verify + replay + Arb holographic capacity
   check. No float, no numpy.
-- `msaf/audit.py` — CLI report, 10 sections. Ledger/reports default under
+- `msaf/audit.py` â€” CLI report, 10 sections. Ledger/reports default under
   workspace (`ledger/`, `reports/`).
-- `msaf/AUDIT.md` — landmine register L1–L25 (Part I kernel, Part II Newton
-  directive). `msaf/tests/test_msaf.py` — regression suite.
+- `msaf/AUDIT.md` â€” landmine register L1â€“L25 (Part I kernel, Part II Newton
+  directive). `msaf/tests/test_msaf.py` â€” regression suite.
 
 ## 5. Measured results (do not re-derive, cite them)
 
 - `N_steps = 5.44468544329815837306650e+61`, never integer; `log2 = 206` bit;
-  storage lower bound `6.8e60` byte. `N×N` materialisation structurally impossible.
+  storage lower bound `6.8e60` byte. `NÃ—N` materialisation structurally impossible.
 - `[H,T]` n=16 @256bit: PASS-BY-ENCLOSURE, half-width ~2.4e-77.
-  `T^dag·T−I`, `T^n−I`: exact zero (rational 0/1 entries).
-- `[H,T]=0` is an algebraic TAUTOLOGY for every circulant H → verdict TRIVIAL,
+  `T^dagÂ·Tâˆ’I`, `T^nâˆ’I`: exact zero (rational 0/1 entries).
+- `[H,T]=0` is an algebraic TAUTOLOGY for every circulant H â†’ verdict TRIVIAL,
   `carries_information=False`. Constrain nothing about zeta zeros (L11).
-- Weil spectrum: `λ_0 = n−1`, `λ_k = −1`; `min|λ| = 1` exactly. NO exponential
-  decay → `B≈0.115` has no measured source in-framework (L8).
-- `n_crit(H:=n) = 1.8e31 ± 3.2e29` (manuscript arithmetic reproduces exactly;
-  premise `H≡n` is the problem) vs `n_crit(measured) = 3.16e60` (29 orders gap).
-- `|λ|=1e-59` at `n=1181.33`; relative demand at n=800 is 142 bit. Precision
+- Weil spectrum: `Î»_0 = nâˆ’1`, `Î»_k = âˆ’1`; `min|Î»| = 1` exactly. NO exponential
+  decay â†’ `Bâ‰ˆ0.115` has no measured source in-framework (L8).
+- `n_crit(H:=n) = 1.8e31 Â± 3.2e29` (manuscript arithmetic reproduces exactly;
+  premise `Hâ‰¡n` is the problem) vs `n_crit(measured) = 3.16e60` (29 orders gap).
+- `|Î»|=1e-59` at `n=1181.33`; relative demand at n=800 is 142 bit. Precision
   demand, not absolute underflow (L9).
-- `σ=0.5` is IMPOSED, not derived (L12). Circulant+Hermitian ⇒ real eigenvalues
-  ⇒ only conjugate pairing. `ZETA_SIGMA` documented as postulate.
-- `E_trunc≡0` measurably false: `ℓ_P·e^(−N)` has positive lower endpoint,
+- `Ïƒ=0.5` is IMPOSED, not derived (L12). Circulant+Hermitian â‡’ real eigenvalues
+  â‡’ only conjugate pairing. `ZETA_SIGMA` documented as postulate.
+- `E_truncâ‰¡0` measurably false: `â„“_PÂ·e^(âˆ’N)` has positive lower endpoint,
   rel. radius 3.09e-7 in Arb; float64 gives 0.0 on identical input (L13).
-- Newton-xi: ρ₁/ρ₂/ρ₃ ZERO-LOCALIZED, `Re = 0.5 ± (7.5e-71 / 8.7e-78 / 4.7e-71)`,
-  γ agrees with `acb.zeta_zero` < 1e-24. Exclusion at t=30.5: True.
+- Newton-xi: Ïâ‚/Ïâ‚‚/Ïâ‚ƒ ZERO-LOCALIZED, `Re = 0.5 Â± (7.5e-71 / 8.7e-78 / 4.7e-71)`,
+  Î³ agrees with `acb.zeta_zero` < 1e-24. Exclusion at t=30.5: True.
   `global_claim_supported = False` on ALL paths. `acb.zeta_zero` presupposes the
-  critical line → valid for γ cross-check only, never σ evidence (L23).
+  critical line â†’ valid for Î³ cross-check only, never Ïƒ evidence (L23).
 - Root-pull: SEED(zero#1) + PROMOTEs, chain intact, replay=True.
 - Evolution: promotions with monotone incumbent, chain intact, replay=True.
 
 ## 6. Landmine index (full text in msaf/AUDIT.md)
 
-L1 `arb(x,y)`=radius · L2 containment direction · L3 commutator never exact-zero ·
-L4 `log/exp` take no args · L5 `flint.arb` not importable submodule ·
-L6 `N_steps` non-integer · L7 `log(Λ_d+δ)` NaN → `log(1+Λ_d)` repair ·
-L8 no Weil decay · L9 underflow=precision demand · L10 repeated-eigenvalue `eig`
-failure · L11 `[H,T]` tautology gate · L12 σ imposed · L13 `E_trunc` false ·
-L14 overlapping-ball `>=` stall → `_is_provably_worse` · L15 `log2(0)`→fitness cap +
-refuse non-finite · L16 `arb` vs `acb` 2nd-arg semantics · L17 `complex_rad`→Acb ·
-L18 `s.real` is value not radius · L19 rectangular-Acb containment → circular
-criterion · L20 `arb<arb` overlap · L21 `return 0` at s=0/1 fabricates roots ·
-L22 `VERIFIED_BY_CONFORMANCE` verifies nothing → separation metric ·
-L23 `zeta_zero` presupposes line · L24 float literals bake binary64 error →
-decimal strings · L25 converge at precision floor.
+L1 `arb(x,y)`=radius Â· L2 containment direction Â· L3 commutator never exact-zero Â·
+L4 `log/exp` take no args Â· L5 `flint.arb` not importable submodule Â·
+L6 `N_steps` non-integer Â· L7 `log(Î›_d+Î´)` NaN â†’ `log(1+Î›_d)` repair Â·
+L8 no Weil decay Â· L9 underflow=precision demand Â· L10 repeated-eigenvalue `eig`
+failure Â· L11 `[H,T]` tautology gate Â· L12 Ïƒ imposed Â· L13 `E_trunc` false Â·
+L14 overlapping-ball `>=` stall â†’ `_is_provably_worse` Â· L15 `log2(0)`â†’fitness cap +
+refuse non-finite Â· L16 `arb` vs `acb` 2nd-arg semantics Â· L17 `complex_rad`â†’Acb Â·
+L18 `s.real` is value not radius Â· L19 rectangular-Acb containment â†’ circular
+criterion Â· L20 `arb<arb` overlap Â· L21 `return 0` at s=0/1 fabricates roots Â·
+L22 `VERIFIED_BY_CONFORMANCE` verifies nothing â†’ separation metric Â·
+L23 `zeta_zero` presupposes line Â· L24 float literals bake binary64 error â†’
+decimal strings Â· L25 converge at precision floor.
 
-## 7. Blueprint deviations (directive → implementation, all measured)
+## 7. Blueprint deviations (directive â†’ implementation, all measured)
 
 Newton phase (`instruksi_lanjutan_newton_arb.md` / `msaf_terminus_phase1.md`):
-`acb(2,prec)`→point not ball · `pi.pow` nonexistent → `exp(logπ·(−s/2))` ·
-`acb.pi(prec)`→`acb.pi()` · `ldexp` nonexistent · `real()` method→property ·
-finite-difference derivative NOT rigorous → `acb_series` Taylor + tail bound ·
-`s=0/1→0` fabricates roots → regular evaluation (ξ=1/2) · conformance criterion
-replaced by certified offset · series refuses `Re≥1` · floor-convergence rule.
-Phase 2: `float()/np.log2/np.floor/sys.maxsize` in computation → pure Arb +
+`acb(2,prec)`â†’point not ball Â· `pi.pow` nonexistent â†’ `exp(logÏ€Â·(âˆ’s/2))` Â·
+`acb.pi(prec)`â†’`acb.pi()` Â· `ldexp` nonexistent Â· `real()` methodâ†’property Â·
+finite-difference derivative NOT rigorous â†’ `acb_series` Taylor + tail bound Â·
+`s=0/1â†’0` fabricates roots â†’ regular evaluation (Î¾=1/2) Â· conformance criterion
+replaced by certified offset Â· series refuses `Reâ‰¥1` Â· floor-convergence rule.
+Phase 2: `float()/np.log2/np.floor/sys.maxsize` in computation â†’ pure Arb +
 `fmpz` modular projection; matplotlib renders integer coordinates only.
-Phase 3: `float` entropy + `"0"*64` genesis + recomputed-hash chain → reuse
-`Ledger`/`replay` + Arb capacity `H(n)·b(n) ≤ N_steps`; genesis stays `GENESIS`
+Phase 3: `float` entropy + `"0"*64` genesis + recomputed-hash chain â†’ reuse
+`Ledger`/`replay` + Arb capacity `H(n)Â·b(n) â‰¤ N_steps`; genesis stays `GENESIS`
 (existing ledgers must keep verifying).
 
 ## 8. Workspace policy (binding since 2026-10-13)
@@ -145,21 +145,21 @@ Phase 3: `float` entropy + `"0"*64` genesis + recomputed-hash chain → reuse
   `BootLoops-ai/`, `Dream-RSI-main/`, `hexagon_mhv_symbol_weight_18/`,
   `rea-work/`, `z3_judge.wasm`, `.pytest_cache/`, all `__pycache__/`.
 - Ledger default: `ledger/msaf_ledger.jsonl`; root-pull: `ledger/rootpull.jsonl`.
-  Radii serialised as decimal STRINGS (never JSON numbers → float64 → fake 0.0).
+  Radii serialised as decimal STRINGS (never JSON numbers â†’ float64 â†’ fake 0.0).
 - Resume commands:
   `python -m pytest msaf -q`
   `python -m msaf.audit --prec 256 --evolve 6 --root-pull 3`
   `python -m msaf.evolution --replay ledger/msaf_ledger.jsonl`
-  ASCII scan: `Select-String -Pattern '[^\x00-\x7F]' msaf/*.py` → must be empty.
+  ASCII scan: `Select-String -Pattern '[^\x00-\x7F]' msaf/*.py` â†’ must be empty.
 
 ## 9. Terminus status
 
-Day 1–2 inversion + ledger lock: DONE (`zeta_inversion.py`, root-pull + REVERT).
-Day 3–4 pixel projection + visualizer: DONE (`visualizer.py`, rigid + PNG;
-pixels 461…/686…/816… for ρ₁/ρ₂/ρ₃).
-Day 5–7 replay + stress + seal: DONE (`final_audit.py`, `--replay` CLI,
-holographic check vs `n_crit≈3.16e60` measured path; seal=True).
-Landmines L26–L30 recorded (Phase 2/3 blueprint float chain + mid-file guard).
+Day 1â€“2 inversion + ledger lock: DONE (`zeta_inversion.py`, root-pull + REVERT).
+Day 3â€“4 pixel projection + visualizer: DONE (`visualizer.py`, rigid + PNG;
+pixels 461â€¦/686â€¦/816â€¦ for Ïâ‚/Ïâ‚‚/Ïâ‚ƒ).
+Day 5â€“7 replay + stress + seal: DONE (`final_audit.py`, `--replay` CLI,
+holographic check vs `n_critâ‰ˆ3.16e60` measured path; seal=True).
+Landmines L26â€“L30 recorded (Phase 2/3 blueprint float chain + mid-file guard).
 Suite: 71 tests green. Artifacts: `ledger/msaf_ledger.jsonl`,
 `ledger/rootpull.jsonl`, `reports/spectral_density.{json,png}`.
 Blind-spot repairs are value-preserving: same verdicts, same seal, tighter tails;
@@ -192,148 +192,150 @@ in memory only; remote verified credential-free afterwards.
 README refresh 2026-10-13 (commit `a1c48ac`, local): full re-audit showed
 zero numeric drift, table extended to 16 rows (ledger seal rows), ASCII
 re-verified at 0 non-ASCII. Pending push (needs researcher auth).
-Next (only if researcher orders): replace postulated γ_m DFT definition with
+Next (only if researcher orders): replace postulated Î³_m DFT definition with
 Newton-derived spectrum module (`zetazeros.py`); multi-precision stress sweep
 (128/256/512/1024 bit) as campaign matrix.
 
 ---
 
-## 10. 2026-10-27 — Review 7 hari (20–27 Okt 2026) + protokol anti-loop
+## 10. 2026-10-27 â€” Review 7 hari (20â€“27 Okt 2026) + protokol anti-loop
 
 **Laporan lengkap:** `reports/WEEKLY_REVIEW_2026-10-20_27.md`.
 
 ### 10.1 Snapshot
 
-Snapshot ini dibekukan pada 27 Okt 03:08 WIB; status terkini ada di §10.3.
+Snapshot ini dibekukan on 27 Okt 03:08 WIB; status terkini ada in Â§10.3.
 
-- **139 commit** dalam rentang 20 Okt 00:20 – 27 Okt 03:08 WIB.
+- **139 commit** dalam rentang 20 Okt 00:20 â€“ 27 Okt 03:08 WIB.
 - Commit per hari: 20=29, 21=42, 22=6, 23=10, 24=11, 25=24, 26=16, 27=1.
 - Registry: **41 heading baru** (37 `A` + 4 `T`); ID terakhir `A-2026-0051`,
   `T-2026-0052`.
-- `git status`: 2 file untracked — `reports/PREREG_Q3_ABC_CENSUS_2026-10-27.md`
-  dan `reports/bsd_v3_2026-10-27.json`.
+- `git status`: 2 file untracked â€” `reports/PREREG_Q3_ABC_CENSUS_2026-10-27.md`
+  and `reports/bsd_v3_2026-10-27.json`.
 - 1 komputasi aktif: `abc_census` C=10^7 (PID 15272, mulai 03:35:35, ~58 menit,
   CPU ~3.367,8 s, RAM ~382 MB, belum ada file output).
 - **16 proses Python MCP**: 2x `t2n_archivist`/`repokeeper`/`science`/`scribe`/
   `watchtower`, 0x `t2n_illumina`, 3x `shp_asymmetric_wager`, 3x `shp_bridge`.
   Ini double-run nyata, bukan wrapper+child.
 - CI `ad1fd91`: `lean-kernel` + `coq-kernel` success; `python-tests` masih
-  berjalan — belum boleh disebut hijau.
+  berjalan â€” belum boleh disebut hijau.
 - CI `0e8b623` (BSD v3): `python-tests` **FAILED**.
 
 ### 10.2 Hasil per hari (ringkas)
 
 | Tanggal | Fokus | Hasil utama |
 |---|---|---|
-| 20 Okt | Coq bridge + Xi spec + audit | `A-2026-0011`–`0023`; anti-circularity gate PASS; Xi V3/V4/V5/V6; CI hijau |
+| 20 Okt | Coq bridge + Xi spec + audit | `A-2026-0011`â€“`0023`; anti-circularity gate PASS; Xi V3/V4/V5/V6; CI hijau |
 | 21 Okt | Gelombang sertifikat lintas domain | Ulam `0024`; GW `0025/0026`; block `0027` INCONCLUSIVE; BSD pilot; abc C=100k `0032`; RH ext `0033/0034`; Riemann `0035`; Hodge `0036/0037`; NS `0038/0039`; ODE T1 FAILED; T1b prereg |
 | 22 Okt | T1b + T2 figure-eight | T1b ALL PASS `A-2026-0040`; r1/r2 FAILED (K3/K2); `DAFTAR_MASALAH_KERJA.md` |
 | 23 Okt | r3/r4 | r3 INCONCLUSIVE; r4 CERTIFIED `A-2026-0043`; r5 prereg |
-| 24 Okt | MCP F0–F6 + r5 | core/repokeeper/archivist/scribe/watchtower/science live; r5 FAILED disegel; F4/F5/F6 illumina |
+| 24 Okt | MCP F0â€“F6 + r5 | core/repokeeper/archivist/scribe/watchtower/science live; r5 FAILED disegel; F4/F5/F6 illumina |
 | 25 Okt | Twin prime + r6 + RH scaffold | v2 N=10^7 `0045`; v3 N=10^9 `0046`; v4 N=10^10 `0048`; r6 `0047`; RH scaffold; F7c |
 | 26 Okt | P0/P1/P2 + authority | P0 `5fea118`; P1 `b7b5f2e` `T-2026-0051`; P2 `0b0a32c` `T-2026-0052`; CI 40261066426 hijau; tag `p2-green-0b0a32c`; authority layer; r7 stub `A-2026-0049`; Learn-harness `A-2026-0050`; BSD v3 stub `A-2026-0051` |
 | 27 Okt | BSD v2 fix + Q3 v3 | `ad1fd91`; Q3 v2 (12 triple) superseded; Q3 v3 17 triple `A-2026-0052`; gate 6/6825; validasi 11/6825 |
 
-### 10.3 Status ledger — jangan diulang tanpa upgrade contract
+### 10.3 Status ledger â€” jangan diulang tanpa upgrade contract
 
 | Item | Status | Artefak | Aturan |
 |---|---|---|---|
 | P1 entry-error envelope | DONE/CERTIFIED | `b7b5f2e`, `T-2026-0051` | Kondisional `A.PosDef`; jangan klaim positivity matriks |
 | P2 analytic XC tail | DONE/CERTIFIED | `0b0a32c`, `T-2026-0052` | Diagonal XC saja; bukan RH |
-| Twin prime v2/v3/v4 | DONE/CERTIFIED | `A-2026-0045/0046/0048` | v4: pengecualian proses tercatat; jangan rerun N yang sama tanpa tujuan baru |
-| Figure-eight r6 | DONE/CERTIFIED | `A-2026-0047` | K6 M1–M10 |
+| Twin prime v2/v3/v4 | DONE/CERTIFIED | `A-2026-0045/0046/0048` | v4: pengecualian proses tercatat; jangan rerun N which sama tanpa tujuan baru |
+| Figure-eight r6 | DONE/CERTIFIED | `A-2026-0047` | K6 M1â€“M10 |
 | abc C=100k | DONE/CERTIFIED | `A-2026-0032` | 6 triple, max_gap 6825 |
-| Coq bridge L2/L5 | DONE/CERTIFIED | `A-2026-0011`–`0014` | — |
-| r7 | **RETRACTED (stub)** | `A-2026-0049` | Retraksi pemilik 2026-10-27; receipt kosong, test tidak ada; artefak disimpan |
+| Coq bridge L2/L5 | DONE/CERTIFIED | `A-2026-0011`â€“`0014` | â€” |
+| r7 | **RETRACTED (stub)** | `A-2026-0049` | Retraksi pemilik 2026-10-27; receipt kosong, test no ada; artefak disimpan |
 | BSD v2 | DONE/CERTIFIED | `T-2026-0049` | 5 kurva pilot; heading dipulihkan; pengecualian proses tercatat |
-| BSD v3 | **RECON (stub)** | `A-2026-0051` | Reklasifikasi 2026-10-27; prereg tidak sah; receipt stub di-track; bukan sertifikasi |
-| Learn-harness v1 | CERTIFIED (stub deterministik) | `A-2026-0050` | Bukan klaim ML; label hanya untuk perilaku stub |
+| BSD v3 | **RECON (stub)** | `A-2026-0051` | Reklasifikasi 2026-10-27; prereg no sah; receipt stub in-track; bukan sertifikasi |
+| Learn-harness v1 | CERTIFIED (stub deterministik) | `A-2026-0050` | Bukan klaim ML; label hanya for perilaku stub |
 | Q3 abc C=10^7 | DONE/CERTIFIED | `A-2026-0052`, `reports/abc_census_v3_10000000.json` | 17 triple, max_gap 40640; v2 100-smooth superseded; jangan rerun N sama tanpa upgrade contract |
-| MCP consolidation | DONE (aktif setelah restart) | `mcp/t2n_core.py`, `mcp/t2n_viz.py`, `opencode.jsonc` | 2 server t2n: 30 + 7 tool; guard 7 test; shp tidak disentuh |
-| CI slow split | DONE (kode + guard segel); VERIFY CI | `pytest.ini`, `.github/workflows/slow-tests.yml` | 4 uji kampanye dipisah; suite cepat 786 uji; `Slow tests` memverifikasi registry sebelum kampanye |
+| MCP consolidation | DONE (aktif setelah restart) | `mcp/t2n_core.py`, `mcp/t2n_viz.py`, `opencode.jsonc` | 2 server t2n: 30 + 7 tool; guard 7 test; shp no disentuh |
+| CI slow split | DONE (kode + guard segel); VERIFY CI | `pytest.ini`, `.github/workflows/slow-tests.yml` | 4 uji kampanye dipisah; suite cepat 786 uji; `Slow tests` verifying registry sebelum kampanye |
 
 ### 10.4 Protokol anti-loop (mengikat)
 
-1. **Baca brain.md dulu.** Sebelum menyentuh kode/registry, cek status item di
-   §10.3.
+1. **Baca brain.md dulu.** Sebelum menyentuh kode/registry, cek status item in
+   Â§10.3.
 2. **Satu status eksplisit:** `DONE`, `STUB`, `PENDING`, `BLOCKED`, `RUNNING`.
-   Tidak ada status "sudah pernah dikerjakan" tanpa artefak.
-3. **DONE tidak boleh diulang** kecuali memenuhi *upgrade contract*:
-   - ada bukti/requirement baru yang spesifik;
-   - ada acceptance criteria yang terukur;
+   Tidak ada status "already pernah dikerjakan" tanpa artefak.
+3. **DONE no boleh diulang** kecuali memenuhi *upgrade contract*:
+   - ada bukti/requirement baru which spesifik;
+   - ada acceptance criteria which terukur;
    - ada delta artefak (N lebih besar, bound lebih kuat, bug fix, receipt baru);
-   - untuk item CERTIFIED, ada persetujuan pemilik dan entri koreksi aditif.
-4. **STUB tidak boleh diklaim DONE.** Stub hanya naik status jika artefak nyata
+   - for item CERTIFIED, ada persetujuan pemilik and entri koreksi aditif.
+4. **STUB no boleh diklaim DONE.** Stub hanya naik status jika artefak nyata
    menggantikan placeholder.
-5. **PENDING** dilanjutkan dari *next step* yang tercatat, bukan dari awal.
-6. **BLOCKED** wajib mencatat blocker + keputusan pemilik yang dibutuhkan.
-7. **Loop detector:** jika item yang sama dikerjakan 3 kali tanpa perubahan
-   status/artefak, hentikan dan eskalasi ke pemilik.
+5. **PENDING** dilanjutkan dari *next step* which tercatat, bukan dari awal.
+6. **BLOCKED** wajib mencatat blocker + keputusan pemilik which dibutuhkan.
+7. **Loop detector:** jika item which sama dikerjakan 3 kali tanpa perubahan
+   status/artefak, hentikan and eskalasi ke pemilik.
 8. **Modular forward:** setiap pekerjaan harus menghasilkan modul/receipt/test
-   yang bisa dipakai ulang. Jangan membuat implementasi paralel kecuali untuk
-   verifikasi independen (dan beri label).
+   which bisa dipakai ulang. Jangan membuat implementasi paralel kecuali for
+   verifikasi independen (and beri label).
 9. **Prereg sebelum kode; satu commit satu tujuan; jangan rewrite entri
    CERTIFIED; jangan hapus artefak ber-sha256LF.**
-10. **Kelompokkan pekerjaan per track** (A/B/C) dan selesaikan satu track
-    sebelum pindah, kecuali ada blocker yang butuh keputusan pemilik.
+10. **Kelompokkan pekerjaan per track** (A/B/C) and selesaikan satu track
+    sebelum pindah, kecuali ada blocker which butuh keputusan pemilik.
 
 ### 10.5 Work queue (next)
 
-- **A0 — DONE:** run PID 15272 dihentikan dan dinyatakan eksploratori/invalid;
-  hasilnya tidak menjadi klaim.
-- **A1 — DONE:** Q3 v2 (12 triple, 100-smooth) dikunci lalu superseded oleh
+- **A0 â€” DONE:** run PID 15272 dihentikan and dinyatakan eksploratori/invalid;
+  hasilnya no menjadi klaim.
+- **A1 â€” DONE:** Q3 v2 (12 triple, 100-smooth) dikunci lalu superseded oleh
   Q3 v3 (17 triple, low-rad exhaustive). Prereg v3 `aed8e63c...`; registry
   `A-2026-0052`; receipt `reports/abc_census_v3_10000000.json`.
-- **B1 — DONE:** dossier `reports/REGISTRY_CORRECTION_DOSSIER_2026-10-27.md`;
+- **B1 â€” DONE:** dossier `reports/REGISTRY_CORRECTION_DOSSIER_2026-10-27.md`;
   keputusan pemilik 2026-10-27: r7 RETRACTED, `T-2026-0049` dipulihkan,
   BSD v3 RECON. Guard registry lulus.
-- **C1 — DONE:** `t2n_core` (5 role server, 30 tool) + `t2n_viz`
+- **C1 â€” DONE:** `t2n_core` (5 role server, 30 tool) + `t2n_viz`
   (illumina + materials, 7 tool); guard `msaf/tests/test_mcp_servers.py`
-  lulus 7/7. Proses t2n lama berhenti saat `opencode.jsonc` di-reload;
-  aktivasi penuh menunggu restart opencode. `shp_*` tidak disentuh.
-- **D1 — rekonsiliasi:** `DECISION_LOG` (`A-2026-0050`), dua file untracked,
-  `TARGET_STATUS` §6.
-- **D2 — DONE 2026-10-27:** tiga keputusan delegasi (D1–D3) ditulis ke
-  `reports/DECISION_LOG.md`; registry diberi catatan aditif; gerbang klaim
-  r5/r6 dikunci di `AGENTS.md`; `Slow tests` memverifikasi segel receipt
+  lulus 7/7. Proses t2n lama berhenti saat `opencode.jsonc` in-reload;
+  aktivasi penuh menunggu restart opencode. `shp_*` no disentuh.
+- **D1 â€” rekonsiliasi:** `DECISION_LOG` (`A-2026-0050`), dua file untracked,
+  `TARGET_STATUS` Â§6.
+- **D2 â€” DONE 2026-10-27:** tiga keputusan delegasi (D1â€“D3) ditulis ke
+  `reports/DECISION_LOG.md`; registry diberi note aditif; gerbang klaim
+  r5/r6 dikunci in `AGENTS.md`; `Slow tests` verifying segel receipt
   sebelum kampanye.
 
-### 10.6 Keputusan pemilik yang masih terbuka
+### 10.6 Keputusan pemilik which masih terbuka
 
-1. **Selesai 2026-10-27:** `T-2026-0049` dan `A-2026-0048` tetap
-   `CERTIFIED` dengan pengecualian proses tercatat (preseden r6).
+1. **Selesai 2026-10-27:** `T-2026-0049` and `A-2026-0048` tetap
+   `CERTIFIED` with pengecualian proses tercatat (preseden r6).
 2. **Selesai 2026-10-27:** r5/r6 dipisah ke workflow `Slow tests`; klaim
-   mensyaratkan `python-tests` hijau dan `Slow tests` hijau pada commit yang
+   mensyaratkan `python-tests` hijau and `Slow tests` hijau on commit which
    sama; r5 tetap `FAILED`.
 3. **Selesai 2026-10-27:** pemilik memutuskan MCP final 2 server t2n
-   (`t2n_core` + `t2n_viz`); `watchtower`/`scribe` tidak dipakai.
-4. **Selesai 2026-10-27:** r7 di-retract (`A-2026-0049`) dan BSD v3
+   (`t2n_core` + `t2n_viz`); `watchtower`/`scribe` no dipakai.
+4. **Selesai 2026-10-27:** r7 in-retract (`A-2026-0049`) and BSD v3
    direklasifikasi RECON (`A-2026-0051`); kelengkapan artefak tetap pekerjaan
    terpisah.
-5. **Selesai 2026-10-27:** run `abc_census` PID 15272 dihentikan dan
+5. **Selesai 2026-10-27:** run `abc_census` PID 15272 dihentikan and
    dinyatakan eksploratori/invalid; digantikan Q3 v3 (`A-2026-0052`).
 
-### 10.7 Catatan integritas yang tidak boleh hilang
+### 10.7 Catatan integritas which no boleh hilang
 
-- Commit `d56242c` mengganti heading `### T-2026-0049 — BSD Q1 v2` dengan
-  `### A-2026-0049 — Figure-eight r7`, sehingga badan entri BSD v2 menjadi
+- Commit `d56242c` mengganti heading `### T-2026-0049 â€” BSD Q1 v2` with
+  `### A-2026-0049 â€” Figure-eight r7`, sehingga badan entri BSD v2 menjadi
   yatim (tanpa ID). Dipulihkan 2026-10-27: heading `T-2026-0049` dikembalikan
-  dan code fence ditutup.
+  and code fence ditutup.
 - `A-2026-0051` menulis "melanjutkan `A-2026-0048` (BSD Q1 v2)", padahal
   `A-2026-0048` adalah twin prime v4. Dikoreksi 2026-10-27: relasi diubah ke
   `T-2026-0049`.
 - `reports/PREREG_BSD_V3_2026-10-27.md` berisi kode pytest + hash placeholder,
   bukan pra-registrasi. Status `A-2026-0051` direklasifikasi RECON 2026-10-27.
-- `reports/PREREG_Q3_ABC_CENSUS_2026-10-27.md` (placeholder) sudah dihapus
+- `reports/PREREG_Q3_ABC_CENSUS_2026-10-27.md` (placeholder) already dihapus
   2026-10-27; diganti `reports/PREREG_Q3_ABC_CENSUS_V3_2026-10-27.md`
   (sha256LF `aed8e63c...`).
 - `reports/figure_eight_r7_2026-10-26.json` = `{"schema": ..., "result": {}}`;
-  laporan r7 masih placeholder. `A-2026-0049` di-retract 2026-10-27.
-- `reports/bsd_v3_2026-10-27.json` sudah di-track 2026-10-27 sebagai bukti
+  report r7 masih placeholder. `A-2026-0049` in-retract 2026-10-27.
+- `reports/bsd_v3_2026-10-27.json` already in-track 2026-10-27 sebagai bukti
   stub `A-2026-0051`; bukan sertifikasi.
-- `DECISION_LOG` masih menyebut `A-2026-0050` kosong, padahal registry sudah
+- `DECISION_LOG` masih menyebut `A-2026-0050` kosong, padahal registry already
   punya entri CERTIFIED.
 - 16 proses MCP = double-run; `t2n_illumina` 0 proses. **Diselesaikan
   2026-10-27:** t2n dikonsolidasi ke `t2n_core` + `t2n_viz`; 10 proses t2n
-  berhenti saat config di-reload. 6 proses `shp_*` (3 batch) tetap berjalan
-  dan tidak disentuh.
+  berhenti saat config in-reload. 6 proses `shp_*` (3 batch) tetap berjalan
+  and no disentuh.
+
+

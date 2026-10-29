@@ -1,4 +1,4 @@
-PERIODIC-BOX BRIDGE STUDY -- bounded side only ([B]); [J] OPEN
+﻿PERIODIC-BOX BRIDGE STUDY -- bounded side only ([B]); [J] OPEN
 arb precision: 256
 model: sealed 7-point periodic Laplacian T^3_N, dx = 1/N, zero-mean gauge
 statistic: q(N) = (v1 - v2) / (v2 - v4), v_r = phi_N(r,0,0)
@@ -23,3 +23,5 @@ naive ratios at N=16 (NOT bridge-valid: gauge + image background):
 sealed record (test_tail_decay.py, N=16): q = 1.9519; far-field < 2% (0.61%)
 band rule: shells 1,2,4 require r=4 << N/2 (N >= 16 here)
 no rate claimed; no limit value claimed; continuum limit NOT taken
+
+

@@ -1,4 +1,4 @@
-# MSAF Framework Extension: Five Core Experimental Problem Blueprint
+﻿# MSAF Framework Extension: Five Core Experimental Problem Blueprint
 
 This planning document outlines the mathematical blueprints, raw matrix data structures, and kernel alignments for five experimental problems proposed for testing and verification within the **Matrix-constraint Spectral Analysis Framework (MSAF)**. All implementations must adhere strictly to the **Finite Information Lattice** paradigm and the **Dual-Engine Discipline** (Engine A: Arb 6000-bit / Engine B: mpmath dps 50) using rigorous ball arithmetic.
 
@@ -7,7 +7,7 @@ This planning document outlines the mathematical blueprints, raw matrix data str
 ## 1. Truncated Guinand-Weil Block for Non-Primitive Dirichlet L-Functions (\(\chi_{q,n}\))
 
 ### 1.1 Problem Description
-Extension of the existing MSAF primitive Dirichlet kernel (\(\chi_{4,3}\)) to handle non-primitive characters \(\chi_{q,n}\) induced by a modulus \(q\). Non-primitive characters introduce specific structural anomalies—specifically zero-vanishing traits at integers sharing common prime factors with the conductor—which tests the robustness of the critical line lock (\(\sigma = 0.5\)) under explicit Archimedean and non-Archimedean matrix perturbations.
+Extension of the existing MSAF primitive Dirichlet kernel (\(\chi_{4,3}\)) to handle non-primitive characters \(\chi_{q,n}\) induced by a modulus \(q\). Non-primitive characters introduce specific structural anomaliesâ€”specifically zero-vanishing traits at integers sharing common prime factors with the conductorâ€”which tests the robustness of the critical line lock (\(\sigma = 0.5\)) under explicit Archimedean and non-Archimedean matrix perturbations.
 
 ### 1.2 Raw Matrix Structure
 The campaign object is a cutoff-free truncated Guinand-Weil block matrix \(\tau\) of dimension \(dim = 2N+1\):
@@ -80,3 +80,5 @@ Computation of the discrete spectral enclosures for the Frobenius-Perron transfe
 ### 5.3 MSAF Kernel Alignment
 *   **Route A2 Root-Pull:** Non-symmetric eigensolvers (`arb_mat.eig`) pull the chaotic spectral frequencies. 
 *   **Newton Enclosure & Resolution Alarm:** The system forces the Newton root-isolation engine to contract the eigenvalue widths down to target tolerances (\(\le 1\times 10^{-25}\)) over \(60\) iterations. If the chaotic pivot-orbit amplification causes the derivative interval width to explode past safety envelopes, it triggers a `ResolutionAlarm` jump, testing the framework's adaptive precision ramp up to 1024-bit caps.
+
+

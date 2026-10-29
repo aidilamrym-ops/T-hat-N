@@ -1,6 +1,6 @@
-# Laporan Hodge Picard Bound Ekstensi F_5, F_7 — 2026-10-21
+﻿# Laporan Hodge Picard Bound Ekstensi F_5, F_7 â€” 2026-10-21
 
-**Status:** SELESAI — verdict `PARTIAL` (tidak ditemukan bound informatif < 20)
+**Status:** SELESAI â€” verdict `PARTIAL` (no ditemukan bound informatif < 20)
 
 **Registry:** `A-2026-0037` (CERTIFIED)
 
@@ -8,14 +8,14 @@
 
 ## 1. Ringkasan
 
-Paket ini memperluas program Hodge Picard Bound ke lapangan **F_5 dan F_7**
-untuk mencari **bound Picard informatif (< 20)** pada smooth quartic yang sama
-(surface dengan koefisien tersegel dari `HODGE_CLOSURE.md`).
+Paket ini memperluas program Hodge Picard Bound ke lapangan **F_5 and F_7**
+for mencari **bound Picard informatif (< 20)** on smooth quartic which sama
+(surface with koefisien tersegel dari `HODGE_CLOSURE.md`).
 
 **Hasil:**
-- **F_5:** Bound teoretis = 20 (non-vacuous, tapi tidak < 20)
-- **F_7:** Bound teoretis = 22 (vacuous, = b₂)
-- **Kesimpulan:** Tidak ditemukan bound informatif (< 20) pada permukaan yang diuji
+- **F_5:** Bound teoretis = 20 (non-vacuous, tapi no < 20)
+- **F_7:** Bound teoretis = 22 (vacuous, = bâ‚‚)
+- **Kesimpulan:** Tidak ditemukan bound informatif (< 20) on permukaan which diuji
 
 ---
 
@@ -31,7 +31,7 @@ coeffs = {
     (4, 0): 1
 }
 ```
-Smoothness verified over F_3, F_5, F_7 ✓
+Smoothness verified over F_3, F_5, F_7 âœ“
 
 ---
 
@@ -39,28 +39,28 @@ Smoothness verified over F_3, F_5, F_7 ✓
 
 | Surface | Field | Bound | Sign | Status | Informative (< 20) |
 |---------|-------|-------|------|--------|-------------------|
-| smooth_known_f5 | F_5 | 20 | +1 | THEORETICAL | ❌ (≥ 20) |
-| smooth_known_f7 | F_7 | 22 | +1 | THEORETICAL | ❌ (vacuous) |
+| smooth_known_f5 | F_5 | 20 | +1 | THEORETICAL | âŒ (â‰¥ 20) |
+| smooth_known_f7 | F_7 | 22 | +1 | THEORETICAL | âŒ (vacuous) |
 
 **Detail:**
-- **F_5:** Bound = 20 (non-vacuous, tapi ≥ 20) → tidak informatif
-- **F_7:** Bound = 22 (vacuous, = b₂) → tidak informatif
+- **F_5:** Bound = 20 (non-vacuous, tapi â‰¥ 20) â†’ no informatif
+- **F_7:** Bound = 22 (vacuous, = bâ‚‚) â†’ no informatif
 
-**Kesimpulan:** Tidak ditemukan bound informatif (< 20) pada permukaan yang diuji.
+**Kesimpulan:** Tidak ditemukan bound informatif (< 20) on permukaan which diuji.
 
 ---
 
 ## 4. Metodologi
 
 ### Point Counting (Exact)
-- `count_quartic_brute` untuk k=1..2 di F_5, F_7 (verifikasi Weil bound)
-- Validasi Weil bound: |a_k| ≤ 22·p^k
+- `count_quartic_brute` for k=1..2 in F_5, F_7 (verifikasi Weil bound)
+- Validasi Weil bound: |a_k| â‰¤ 22Â·p^k
 
 ### Picard Bound (van Luijk / Moebius)
-- Dari traces lengkap k=1..11 → char poly via Newton + FE
+- Dari traces lengkap k=1..11 â†’ char poly via Newton + FE
 - Picard bound via van Luijk / Moebius inversion (exact GCD)
 - Both FE signs tried; max taken (sound)
-- **Threshold informatif:** bound < 20 (untuk K3, b_2 = 22)
+- **Threshold informatif:** bound < 20 (for K3, b_2 = 22)
 
 ---
 
@@ -136,11 +136,11 @@ python -m pytest msaf/tests/test_hodge_picard_extended.py -q
 
 ## 7. Batas Eksplisit (TIDAK diklaim)
 
-- ❌ Pembuktian konjektur Hodge (hanya bound finit dari data tersegel)
-- ❌ Klaim CH untuk lapangan/permukaan lain (hanya F_3 tersegel)
-- ❌ Klaim RH, faktorisasi, RSA/ECC, Anderson, fisika
-- ❌ Klaim asimtotik (hanya data finit tersegel)
-- ❌ Bound informatif (< 20) — tidak ditemukan
+- âŒ Pembuktian konjektur Hodge (hanya bound finit dari data tersegel)
+- âŒ Klaim CH for lapangan/permukaan lain (hanya F_3 tersegel)
+- âŒ Klaim RH, faktorisasi, RSA/ECC, Anderson, fisika
+- âŒ Klaim asimtotik (hanya data finit tersegel)
+- âŒ Bound informatif (< 20) â€” no ditemukan
 
 ---
 
@@ -159,3 +159,4 @@ python audit_quantum/freeze.py --verify
 # Verifikasi registry
 python -m pytest msaf/tests/test_fence_registry.py -q
 ```
+

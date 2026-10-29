@@ -78,3 +78,5 @@ def test_input_gates():
         crt([1.0], [5])  # type: ignore[list-item]
     with pytest.raises(TypeError):
         recover_integer([0], [5], 2.0)  # type: ignore[arg-type]
+
+

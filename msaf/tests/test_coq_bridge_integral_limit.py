@@ -322,3 +322,5 @@ def test_guard_rejects_mutations():
         r"^Require Import IntegralComparison\.\n", "", source, count=1, flags=re.M
     )
     assert _imports_violation(_strip_comments(no_dep)) is not None
+
+

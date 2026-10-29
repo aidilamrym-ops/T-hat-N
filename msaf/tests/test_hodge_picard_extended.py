@@ -204,3 +204,4 @@ def test_core_has_no_numpy() -> None:
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
+

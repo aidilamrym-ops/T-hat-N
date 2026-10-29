@@ -142,3 +142,5 @@ def test_reflection_branch_is_exercised():
     # with Re > 1/2 must take the other branch and still be right.
     assert evaluate_xi(pt("0.9", "14.134725")).is_finite()
     assert evaluate_xi(pt("0.1", "14.134725")).is_finite()
+
+

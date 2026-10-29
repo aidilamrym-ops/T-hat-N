@@ -304,3 +304,5 @@ def assemble(
         else "NOT CERTIFIED: tail width exceeds budget (increase cutoff or relax eps)"
     )
     return BridgeCertificate(label, bounded, tail_lo, tail_hi, eps, certified, verdict)
+
+

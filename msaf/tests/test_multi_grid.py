@@ -53,3 +53,5 @@ def test_hodge_lattice_initialization():
     assert str(h.pairing_value(k, k)) == "53/4"
     with pytest.raises(TypeError):
         h.add_cycle((0.5, 0.0, 0.0))  # type: ignore[arg-type]
+
+

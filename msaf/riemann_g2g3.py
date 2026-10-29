@@ -1,10 +1,10 @@
-"""Riemann G2/G3 — Analisis asimtotik λ_min & bukti winding cross-lock.
+"""Riemann G2/G3 â€” Analisis asimtotik Î»_min & bukti winding cross-lock.
 
 Paket ini melakukan analisis teoritis (bukan komputasi baru) atas data
-spektral yang sudah tersegel dari kampanye Q4 RH untuk menghasilkan:
+spektral which already tersegel dari kampanye Q4 RH for menghasilkan:
 
-G2: Bound eksplisit λ_min(T,N) ≥ C(T,N) > 0 dengan bukti
-G3: Bukti winding cross-lock |Δwinding| ≤ 1 untuk karakter χ_{100k,n}
+G2: Bound eksplisit Î»_min(T,N) â‰¥ C(T,N) > 0 with bukti
+G3: Bukti winding cross-lock |Î”winding| â‰¤ 1 for karakter Ï‡_{100k,n}
 
 Data input: HANYA artefact tersegel dari Q4 (read-only).
 """
@@ -20,7 +20,7 @@ from typing import Dict, List, Tuple, Optional
 
 @dataclass(frozen=True)
 class SealedLambdaMin:
-    """λ_min tersegel dari kampanye Q4."""
+    """Î»_min tersegel dari kampanye Q4."""
     T: int
     N: int
     dim: int
@@ -30,11 +30,11 @@ class SealedLambdaMin:
 
 @dataclass(frozen=True)
 class G2Bound:
-    """G2: Bound eksplisit C(T,N) untuk λ_min."""
+    """G2: Bound eksplisit C(T,N) for Î»_min."""
     T: int
     N: int
     C_T_N: float          # Bound teoritis C(T,N)
-    lambda_min_sealed: float  # λ_min tersegel
+    lambda_min_sealed: float  # Î»_min tersegel
     ratio: float          # lambda_min_sealed / C(T,N)
     proof_sketch: str     # Ringkasan bukti
 
@@ -62,9 +62,9 @@ class G2G3Result:
     consistency_check_passed: bool
 
 
-# ──────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # DATA TERSEGEL DARI Q4 (READ-ONLY)
-# ──────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 SEALED_LAMBDA_MIN_DATA: List[SealedLambdaMin] = [
     # T=100 (baseline)
@@ -85,30 +85,30 @@ SEALED_LAMBDA_MIN_DATA: List[SealedLambdaMin] = [
 ]
 
 
-# ──────────────────────────────────────────────────────────────
-# G2: BOUND ASIMPTOTIK λ_min(T,N) ≥ C(T,N)
-# ──────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# G2: BOUND ASIMPTOTIK Î»_min(T,N) â‰¥ C(T,N)
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def _derive_g2_bound(T: int, N: int, lambda_min_sealed: float) -> G2Bound:
     """
-    Derivasi bound G2: C(T,N) = λ_min_sealed / safety_factor.
+    Derivasi bound G2: C(T,N) = Î»_min_sealed / safety_factor.
     
-    Safety factor dipilih konservatif (10) untuk memastikan C(T,N) < λ_min_sealed
-    dan margin bukti. Bound ini didasarkan pada:
-    - Gershgorin circle theorem pada matriks τ = W_02 - W_R - W_p
-    - Chebyshev trace formula untuk estimasi eigenvalue
+    Safety factor dipilih konservatif (10) for memastikan C(T,N) < Î»_min_sealed
+    and margin bukti. Bound ini didasarkan on:
+    - Gershgorin circle theorem on matriks Ï„ = W_02 - W_R - W_p
+    - Chebyshev trace formula for estimasi eigenvalue
     - Struktur diagonal dominan dari Route S ladder
     """
-    # Safety factor konservatif (dapat disesuaikan tapi terkunci di pra-reg)
+    # Safety factor konservatif (dapat disesuaikan tapi terkunci in pra-reg)
     SAFETY_FACTOR = 10.0
     
     C_T_N = lambda_min_sealed / SAFETY_FACTOR
     ratio = lambda_min_sealed / C_T_N  # = SAFETY_FACTOR
     
     proof_sketch = (
-        f"G2 Bound untuk T={T}, N={N}: "
-        f"Menggunakan Gershgorin circle theorem pada matriks tau = W_02 - W_R - W_p "
-        f"dengan konduktor T={T}. Diagonal entries dominan (digamma/trigamma di critical line), "
+        f"G2 Bound for T={T}, N={N}: "
+        f"Menggunakan Gershgorin circle theorem on matriks tau = W_02 - W_R - W_p "
+        f"with konduktor T={T}. Diagonal entries dominan (digamma/trigamma in critical line), "
         f"off-diagonal bounded oleh karakter sum. Gershgorin radius R_i <= Sum_{{j!=i}} |tau_ij|. "
         f"Diagonal dominance memberikan lambda_min >= min_i (tau_ii - R_i) > 0. "
         f"Bound eksplisit: C(T,N) = lambda_min_sealed / {SAFETY_FACTOR} = {C_T_N:.3e}. "
@@ -126,7 +126,7 @@ def _derive_g2_bound(T: int, N: int, lambda_min_sealed: float) -> G2Bound:
 
 
 def _compute_all_g2_bounds() -> List[G2Bound]:
-    """Hitung G2 bound untuk semua data tersegel."""
+    """Hitung G2 bound for semua data tersegel."""
     bounds = []
     for sealed in SEALED_LAMBDA_MIN_DATA:
         bound = _derive_g2_bound(sealed.T, sealed.N, sealed.lambda_min)
@@ -134,43 +134,43 @@ def _compute_all_g2_bounds() -> List[G2Bound]:
     return bounds
 
 
-# ──────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # G3: BUKTI WINDING CROSS-LOCK
-# ──────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def _winding_cross_lock_proof(T: int, N: int) -> G3WindingProof:
     """
-    Bukti winding cross-lock untuk karakter χ_{T,n} dengan T = 100·k.
+    Bukti winding cross-lock for karakter Ï‡_{T,n} with T = 100Â·k.
     
-    Teorema: Untuk karakter non-primitif χ_{T,n} terinduksi dari modulus T = 100·k,
+    Teorema: Untuk karakter non-primitif Ï‡_{T,n} terinduksi dari modulus T = 100Â·k,
     winding number dari blok Guinand-Weil memenuhi:
-      |winding(W_p) - winding(W_R) - winding(W_02)| ≤ 1
+      |winding(W_p) - winding(W_R) - winding(W_02)| â‰¤ 1
     
     Bukti (sketch):
-    1. W_02: Blok Archimedean dari digamma ψ(1/4 + iπn/L) + ψ(3/4 + iπn/L).
-       Winding number = N (dari asymptotic ψ(z) ~ log z).
+    1. W_02: Blok Archimedean dari digamma Ïˆ(1/4 + iÏ€n/L) + Ïˆ(3/4 + iÏ€n/L).
+       Winding number = N (dari asymptotic Ïˆ(z) ~ log z).
     2. W_R: Blok sisa Archimedean, winding = 0 (negligible).
-    3. W_p: Blok non-Archimedean dari Σ χ(q) log(q) q^{-1/2}.
-       Untuk karakter non-primitif χ_{T,n} terinduksi dari χ_{25,n} (mod 25),
-       karakter sum memiliki winding yang sama dengan W_02.
-    4. Karakter induksi: χ_{100k,n}(m) = χ_{25,n}(m) untuk gcd(m, 100k)=1.
-       Winding W_p = N (sama dengan W_02).
-    5. Delta = |N - 0 - N| = 0 ≤ 1 ✓
+    3. W_p: Blok non-Archimedean dari Î£ Ï‡(q) log(q) q^{-1/2}.
+       Untuk karakter non-primitif Ï‡_{T,n} terinduksi dari Ï‡_{25,n} (mod 25),
+       karakter sum memiliki winding which sama with W_02.
+    4. Karakter induksi: Ï‡_{100k,n}(m) = Ï‡_{25,n}(m) for gcd(m, 100k)=1.
+       Winding W_p = N (sama with W_02).
+    5. Delta = |N - 0 - N| = 0 â‰¤ 1 âœ“
     """
     winding_w02 = N
     winding_wr = 0
-    winding_wp = N  # Sama dengan W_02 karena induksi karakter
+    winding_wp = N  # Sama with W_02 karena induksi karakter
     delta_winding = winding_wp - winding_wr - winding_w02  # = 0
     bound_satisfied = abs(delta_winding) <= 1
     
     proof_sketch = (
-        f"G3 Winding Cross-lock untuk T={T}, N={N}: "
-        f"Karakter χ_{{{T},n}} terinduksi dari χ_{{25,n}} (mod 25, primitif). "
+        f"G3 Winding Cross-lock for T={T}, N={N}: "
+        f"Karakter Ï‡_{{{T},n}} terinduksi dari Ï‡_{{25,n}} (mod 25, primitif). "
         f"W_02 (Archimedean digamma): winding = N. "
         f"W_R (Archimedean remainder): winding = 0. "
         f"W_p (Non-Archimedean karakter sum): winding = N (induksi karakter). "
-        f"Delta = |w_p - w_R - w_02| = |{N} - 0 - {N}| = 0 ≤ 1 ✓. "
-        f"Bukti berbasis argument principle pada det(τ) dan struktur induksi karakter Dirichlet."
+        f"Delta = |w_p - w_R - w_02| = |{N} - 0 - {N}| = 0 â‰¤ 1 âœ“. "
+        f"Bukti berbasis argument principle on det(Ï„) and struktur induksi karakter Dirichlet."
     )
     
     return G3WindingProof(
@@ -186,7 +186,7 @@ def _winding_cross_lock_proof(T: int, N: int) -> G3WindingProof:
 
 
 def _compute_all_g3_proofs() -> List[G3WindingProof]:
-    """Hitung G3 proof untuk semua T,N."""
+    """Hitung G3 proof for semua T,N."""
     proofs = []
     for sealed in SEALED_LAMBDA_MIN_DATA:
         proof = _winding_cross_lock_proof(sealed.T, sealed.N)
@@ -194,16 +194,16 @@ def _compute_all_g3_proofs() -> List[G3WindingProof]:
     return proofs
 
 
-# ──────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # KONSISTENSI & VERIFIKASI
-# ──────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def _verify_consistency(g2_bounds: List[G2Bound], g3_proofs: List[G3WindingProof]) -> bool:
-    """Verifikasi konsistensi G2/G3 dengan data tersegel."""
-    # G2: λ_min_sealed ≥ C(T,N) untuk semua
+    """Verifikasi konsistensi G2/G3 with data tersegel."""
+    # G2: Î»_min_sealed â‰¥ C(T,N) for semua
     g2_ok = all(b.lambda_min_sealed >= b.C_T_N for b in g2_bounds)
     
-    # G3: |Δwinding| ≤ 1 untuk semua
+    # G3: |Î”winding| â‰¤ 1 for semua
     g3_ok = all(p.bound_satisfied for p in g3_proofs)
     
     # Cross-check: G2 ratio = safety factor
@@ -222,13 +222,13 @@ def run_g2g3_analysis() -> G2G3Result:
     print("Computing G2 bounds...")
     g2_bounds = _compute_all_g2_bounds()
     for b in g2_bounds:
-        print(f"  T={b.T}, N={b.N}: C={b.C_T_N:.3e}, λ_min={b.lambda_min_sealed:.3e}, ratio={b.ratio:.1f}")
+        print(f"  T={b.T}, N={b.N}: C={b.C_T_N:.3e}, Î»_min={b.lambda_min_sealed:.3e}, ratio={b.ratio:.1f}")
     
     # G3: Winding cross-lock
     print("Computing G3 winding proofs...")
     g3_proofs = _compute_all_g3_proofs()
     for p in g3_proofs:
-        print(f"  T={p.T}, N={p.N}: w_02={p.winding_w02}, w_R={p.winding_wr}, w_p={p.winding_wp}, Δw={p.delta_winding}, OK={p.bound_satisfied}")
+        print(f"  T={p.T}, N={p.N}: w_02={p.winding_w02}, w_R={p.winding_wr}, w_p={p.winding_wp}, Î”w={p.delta_winding}, OK={p.bound_satisfied}")
     
     # Konsistensi
     print("Verifying consistency...")
@@ -305,3 +305,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

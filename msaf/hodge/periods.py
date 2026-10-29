@@ -62,3 +62,5 @@ def elliptic_periods(
         "j_of_tau": tau.modular_j(),
         "lambda_of_tau": tau.modular_lambda(),
     }
+
+

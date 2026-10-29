@@ -97,3 +97,4 @@ def test_report_is_honest():
     text = fermat_k3_report(5)["text"]
     assert "no statement about" in text
     assert "Picard rank upper bound (van Luijk): 20" in text
+

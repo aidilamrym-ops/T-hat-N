@@ -1,4 +1,4 @@
-# Captured sources (frozen snapshots)
+﻿# Captured sources (frozen snapshots)
 
 These files are byte-frozen read-only snapshots collected for the P2 audit
 (`reports/AUDIT_COLLATZ_PREREG_2026-10-19.md`). They are reference captures,
@@ -35,3 +35,5 @@ evidence; the formal re-fetch and comparison is item S1/S2 at execution):
 - Context-only captures not committed here: `ericr.nl` delay-records page
   (HTTPS endpoint failed certificate verification at recon; not part of the
   frozen set) and one scratch HTML variant used during freeze-time checking.
+
+

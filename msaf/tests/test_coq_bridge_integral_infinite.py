@@ -398,3 +398,5 @@ def test_guard_rejects_mutations():
     # 18. The explicit convergence criterion removed.
     no_crit = source.replace("Un_cv_crit", "ConvergenceCriterion")
     assert _missing_required(_strip_comments(no_crit)) != []
+
+

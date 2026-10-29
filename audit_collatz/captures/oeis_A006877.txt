@@ -1,4 +1,4 @@
-# A006877 b-file using data from http://www.ericr.nl/wondrous/delrecs.html as of 2024-08-06
+﻿# A006877 b-file using data from http://www.ericr.nl/wondrous/delrecs.html as of 2024-08-06
 1 1
 2 2
 3 3
@@ -147,3 +147,5 @@
 146 9781262575275081247
 147 13041683433700108329
 148 14727207461063895711
+
+

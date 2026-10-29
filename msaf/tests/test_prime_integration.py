@@ -7,3 +7,5 @@ def test_prime_conjecture_small():
     assert isinstance(cert, dict)
     for key in ("schema", "statement", "confidence", "bound"):
         assert key in cert
+
+

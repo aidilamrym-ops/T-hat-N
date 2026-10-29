@@ -288,7 +288,7 @@ def test_full_loop_incompressibility_preservation():
     Shear u=(f(j),-0.25,0.1) is discretely divergence-free: 10 sequential
     evolve_full_ns_step("1e-43","1.0") keep (a) divergence TRUE, (b) energy
     bounded < 1.0, (c) float inputs rejected. Restoring projection
-    (Δp=(rho/dt)div u*) clears divergence by construction: a rotation
+    (Î”p=(rho/dt)div u*) clears divergence by construction: a rotation
     field (nonzero tr(G^2)) now completes 10 steps alarm-free with
     divergence TRUE throughout (384-bit working precision; 256-bit run
     instead demonstrates the guard: tripwire fires, escalation raises
@@ -465,3 +465,5 @@ def test_visualization_3d_render_output():
     finally:
         if os.path.isfile(out):
             os.remove(out)
+
+

@@ -1,4 +1,4 @@
-      Withdrawn NIST Technical Series Publication
+﻿      Withdrawn NIST Technical Series Publication
 
                                            Warning Notice
 
@@ -105,7 +105,7 @@ may be generated on both stored and transmitted data.
 Signature generation uses a private key to generate a digital signature; signature verification uses
 a public key that corresponds to, but is not the same as, the private key. Each signatory
 possesses a private and public key pair. Public keys may be known by the public; private keys
-are kept secret. Anyone can verify the signature by employing the signatory’s public key. Only
+are kept secret. Anyone can verify the signature by employing the signatoryâ€™s public key. Only
 the user that possesses the private key can perform signature generation.
 A hash function is used in the signature generation process to obtain a condensed version of the
 data to be signed; the condensed version of the data is often called a message digest. The
@@ -114,7 +114,7 @@ hash functions to be used are specified in the Secure Hash Standard (SHS), FIPS 
 approved digital signature algorithms shall be used with an appropriate hash function that is
 specified in the SHS.
 The digital signature is provided to the intended verifier along with the signed data. The
-verifying entity verifies the signature by using the claimed signatory’s public key and the same
+verifying entity verifies the signature by using the claimed signatoryâ€™s public key and the same
 hash function that was used to generate the signature. Similar procedures may be used to
 generate and verify signatures for both stored and transmitted data.
 4. Approving Authority: Secretary of Commerce.
@@ -161,7 +161,7 @@ export regulations is available at: http://www.bis.doc.gov.
                                                  ii
 12. Implementation Schedule: This Standard becomes effective immediately upon
 approval by the Secretary of Commerce. A transition strategy for validating algorithms
-and cryptographic modules will be posted on NIST’s Web page at
+and cryptographic modules will be posted on NISTâ€™s Web page at
 http://csrc.nist.gov/groups/STM/cmvp/index.html under Notices. The transition plan
 addresses the transition by Federal agencies from modules tested and validated for
 compliance to previous versions of this Standard to modules tested and validated for
@@ -191,7 +191,7 @@ is intended as the reference.
       Use of Cryptographic Algorithms and Key Lengths.
    l. IEEE Std. 1363-2000, Standard Specifications for Public Key Cryptography.
 15. Qualifications: The security of a digital signature system is dependent on maintaining the
-secrecy of the signatory’s private keys. Signatories shall, therefore, guard against the disclosure
+secrecy of the signatoryâ€™s private keys. Signatories shall, therefore, guard against the disclosure
 of their private keys. While it is the intent of this Standard to specify general security
 requirements for generating digital signatures, conformance to this Standard does not assure that
 
@@ -391,17 +391,17 @@ Assurance of              Confidence that an entity possesses a private key and 
 possession                keying material.
 Assurance of public       Confidence that the public key is arithmetically correct.
 key validity
-Bit string                An ordered sequence of 0’s and 1’s. The leftmost bit is the most
+Bit string                An ordered sequence of 0â€™s and 1â€™s. The leftmost bit is the most
                           significant bit of the string. The rightmost bit is the least significant bit
                           of the string.
 Certificate               A set of data that uniquely identifies a key pair and an owner that is
-                          authorized to use the key pair. The certificate contains the owner’s
+                          authorized to use the key pair. The certificate contains the ownerâ€™s
                           public key and possibly other information, and is digitally signed by a
                           Certification Authority (i.e., a trusted party), thereby binding the
                           public key to the owner.
 Certification Authority   The entity in a Public Key Infrastructure (PKI) that is responsible for
 (CA)                      issuing certificates and exacting compliance with a PKI policy.
-Claimed signatory         From the verifier’s perspective, the claimed signatory is the entity that
+Claimed signatory         From the verifierâ€™s perspective, the claimed signatory is the entity that
                           purportedly generated a digital signature.
 Digital signature         The result of a cryptographic transformation of data that, when
                           properly implemented, provides a mechanism for verifying origin
@@ -416,7 +416,7 @@ Domain parameters         Parameters used with cryptographic algorithms that are
 
                                                  2
 Entity               An individual (person), organization, device or process. Used
-                     interchangeably with “party”.
+                     interchangeably with â€œpartyâ€.
 Equivalent process   Two processes are equivalent if, when the same values are input to
                      each process (either as input parameters or as values made available
                      during the process or both), the same output is produced.
@@ -427,7 +427,7 @@ Hash function        A function that maps a bit string of arbitrary length to a 
                            maps to any new pre-specified output, and
                        2. (Collision resistant) It is computationally infeasible to find any
                            two distinct inputs that map to the same output.
-Hash value           See “message digest”.
+Hash value           See â€œmessage digestâ€.
 Intended signatory   An entity that intends to generate digital signatures in the future.
 Key                  A parameter used in conjunction with a cryptographic algorithm that
                      determines its operation. Examples applicable to this Standard
@@ -435,10 +435,10 @@ Key                  A parameter used in conjunction with a cryptographic algori
                        1. The computation of a digital signature from data, and
                        2. The verification of a digital signature.
 Key pair             A public key and its corresponding private key.
-Message              The data that is signed. Also known as “signed data” during the
+Message              The data that is signed. Also known as â€œsigned dataâ€ during the
                      signature verification and validation process.
 Message digest       The result of applying a hash function to a message. Also known as
-                     “hash value”.
+                     â€œhash valueâ€.
 Non-repudiation      A service that is used to provide assurance of the integrity and origin
                      of data in such a way that the integrity and origin can be verified and
                      validated by a third party as having originated from a specific entity in
@@ -446,7 +446,7 @@ Non-repudiation      A service that is used to provide assurance of the integrit
 Owner                A key pair owner is the entity that is authorized to use the private key
                      of a key pair.
 Party                An individual (person), organization, device or process. Used
-                     interchangeably with “entity”.
+                     interchangeably with â€œentityâ€.
 Per-message secret   A secret random number that is generated prior to the generation of
 number               each digital signature.
 
@@ -470,8 +470,8 @@ Provable prime         An integer that is either constructed to be prime or is c
 Pseudorandom           A process or data produced by a process is said to be pseudorandom
                        when the outcome is deterministic, yet also effectively random as long
                        as the internal action of the process is hidden from observation. For
-                       cryptographic purposes, “effectively” means “within the limits of the
-                       intended security strength.”
+                       cryptographic purposes, â€œeffectivelyâ€ means â€œwithin the limits of the
+                       intended security strength.â€
 Public key             A cryptographic key that is used with an asymmetric (public key)
                        cryptographic algorithm and is associated with a private key. The
                        public key is associated with an owner and may be made public. In the
@@ -498,11 +498,11 @@ Signature generation   The process of using a digital signature algorithm and a 
 Signature verification   The process of using a digital signature algorithm and a public key to
                          verify a digital signature on data.
 Signed data              The data or message upon which a digital signature has been
-                         computed. Also, see “message”.
+                         computed. Also, see â€œmessageâ€.
 Subscriber               An entity that has applied for and received a certificate from a
                          Certificate Authority.
 Trusted third party      An entity other than the owner and verifier that is trusted by the owner
-(TTP)                    or the verifier or both. Sometimes shortened to “trusted party”.
+(TTP)                    or the verifier or both. Sometimes shortened to â€œtrusted partyâ€.
 Verifier                 The entity that verifies the authenticity of a digital signature using the
                          public key.
 
@@ -527,9 +527,9 @@ TTP                      Trusted Third Party.
 
                                                 5
 2.3       Mathematical Symbols
-a mod n                  The unique remainder r, 0 ≤ r ≤ (n – 1), when integer a is divided by
+a mod n                  The unique remainder r, 0 â‰¤ r â‰¤ (n â€“ 1), when integer a is divided by
                          the positive integer n. For example, 23 mod 7 = 2.
-b ≡ a mod n              There exists an integer k such that b – a = kn; equivalently, a mod n
+b â‰¡ a mod n              There exists an integer k such that b â€“ a = kn; equivalently, a mod n
                          = b mod n.
 counter                  The counter value that results from the domain parameter generation
                          process when the domain parameter seed is used to generate DSA
@@ -551,7 +551,7 @@ L                        For DSA, the length of the parameter p in bits.
 (L, N)                   The associated pair of length parameters for a DSA key pair, where L
                          is the length of p, and N is the length of q.
 LCM (a, b)               The least common multiple of the integers a and b.
-len (a)                  The length of a in bits; the integer L, where 2L-1 ≤ a < 2L.
+len (a)                  The length of a in bits; the integer L, where 2L-1 â‰¤ a < 2L.
 M                        The message that is signed using the digital signature algorithm.
 m                        For ECDSA, the degree of the finite field GF2m .
 
@@ -575,7 +575,7 @@ p         1. For DSA, one of the DSA domain parameters; a prime number
              operations of GF(p).
           2. For RSA, a prime factor of the modulus n.
 q         1. For DSA, one of the DSA domain parameters; a prime factor of
-             p – 1.
+             p â€“ 1.
           2. For RSA, a prime factor of the modulus n.
 Q         An ECDSA public key.
 r         One component of a DSA or ECDSA digital signature. See the
@@ -589,27 +589,27 @@ SHAx(M)   The result when M is the input to the SHA-x hash function, where
           SHA-x is specified in FIPS 180.
 x         The DSA private key.
 y         The DSA public key.
-⊕         Bitwise logical “exclusive-or” on bit strings of the same length; for
+âŠ•         Bitwise logical â€œexclusive-orâ€ on bit strings of the same length; for
           corresponding bits of each bit string, the result is determined as
-          follows: 0 ⊕ 0 = 0, 0 ⊕ 1 = 1, 1 ⊕ 0 = 1, or 1 ⊕ 1 = 0.
-          Example:    01101 ⊕ 11010 = 10111
+          follows: 0 âŠ• 0 = 0, 0 âŠ• 1 = 1, 1 âŠ• 0 = 1, or 1 âŠ• 1 = 0.
+          Example:    01101 âŠ• 11010 = 10111
 +         Addition.
 
 
                               7
-∗             Multiplication.
+âˆ—             Multiplication.
 /             Division.
 a || b        The concatenation of two strings a and b. Either a and b are both bit
               strings, or both are byte strings.
-a           The ceiling of a: the smallest integer that is greater than or equal to
-              a. For example, 5 = 5, 5.3 = 6, and –2.1 = –2.
-a           The floor of a; the largest integer that is less than or equal to a. For
-              example, 5 = 5, 5.3 = 5, and -2.1. = -3.
-|a|           The absolute value of a; |a| is – a if a < 0; otherwise, it is simply a.
-              For example, |2| = 2, and |–2| = 2.
+ï£®aï£¹           The ceiling of a: the smallest integer that is greater than or equal to
+              a. For example, ï£®5ï£¹ = 5, ï£®5.3ï£¹ = 6, and ï£®â€“2.1ï£¹ = â€“2.
+ï£°aï£»           The floor of a; the largest integer that is less than or equal to a. For
+              example, ï£°5ï£» = 5, ï£°5.3ï£» = 5, and ï£°-2.1ï£». = -3.
+|a|           The absolute value of a; |a| is â€“ a if a < 0; otherwise, it is simply a.
+              For example, |2| = 2, and |â€“2| = 2.
 [a, b]        The interval of integers between and including a and b. For example,
               [1, 4] consists of the integers 1, 2, 3 and 4.
-{, a, b, …}   Used to indicate optional information.
+{, a, b, â€¦}   Used to indicate optional information.
 0x            The prefix to a bit string that is represented in hexadecimal characters.
 
 
@@ -660,7 +660,7 @@ claiming to be the key pair owner and using the private key to generate fraudule
 
                                                  9
 private key must remain secret. The approved digital signature algorithms are designed to
-prevent an adversary who does not know the signatory’s private key from generating the same
+prevent an adversary who does not know the signatoryâ€™s private key from generating the same
 signature as the signatory on a different message. In other words, signatures are designed so that
 they cannot be forged. A number of alternative terms are used in this Standard to refer to the
 signatory or key pair owner. An entity that intends to generate digital signatures in the future
@@ -676,7 +676,7 @@ function. Both the original message and the digital signature are made available
 A verifier requires assurance that the public key to be used to verify a signature belongs to the
 entity that claims to have generated a digital signature (i.e., the claimed signatory). That is, a
 verifier requires assurance that the signatory is the actual owner of the public/private key pair
-used to generate and verify a digital signature. A binding of an owner’s identity and the owner’s
+used to generate and verify a digital signature. A binding of an ownerâ€™s identity and the ownerâ€™s
 public key shall be effected in order to provide this assurance.
 A verifier also requires assurance that the key pair owner actually possesses the private key
 associated with the public key, and that the public key is a mathematically correct key.
@@ -691,9 +691,9 @@ reasons why such assurances are required.
       possession of a mathematically consistent key pair can sign a message and claim that the
       signatory was the President of the United States. If a verifier does not require assurance
       that the President is actually the owner of the public key that is used to mathematically
-      verify the message’s signature, then successful signature verification provides assurance
+      verify the messageâ€™s signature, then successful signature verification provides assurance
       that the message has not been altered since it was signed, but does not provide assurance
-      that the message came from the President (i.e., the verifier has assurance of the data’s
+      that the message came from the President (i.e., the verifier has assurance of the dataâ€™s
       integrity, but source authentication is lacking).
    2. If the public key used to verify a signature is not mathematically valid, the arguments
       used to establish the cryptographic strength of the signature algorithm may not apply.
@@ -703,7 +703,7 @@ reasons why such assurances are required.
          The owner may not be the only party who can generate signatures that can be verified
          with that public key.
       3. If a public key infrastructure cannot provide assurance to a verifier that the owner of a
-         key pair has demonstrated knowledge of a private key that corresponds to the owner’s
+         key pair has demonstrated knowledge of a private key that corresponds to the ownerâ€™s
          public key, then it may be possible for an unscrupulous entity to have their identity (or an
          assumed identity) bound to a public key that is (or has been) used by another party. The
          unscrupulous entity may then claim
@@ -775,8 +775,8 @@ A digital signature verifier requires assurance of the identity of the signatory
 environment in which digital signatures are generated and verified, the key pair owner (i.e., the
 intended signatory) may register the public key and establish proof of identity with a mutually
 trusted party. For example, a certification authority (CA) could sign credentials containing an
-owner’s public key and identity to form a certificate after being provided with proof of the
-owner’s identity. Systems for certifying
+ownerâ€™s public key and identity to form a certificate after being provided with proof of the
+ownerâ€™s identity. Systems for certifying
 credentials and distributing certificates are
                                                                        Generate a Message Digest
 beyond the scope of this Standard. Other means
@@ -827,7 +827,7 @@ with this Standard. If the verification process fails, no inference can be made 
 data is correct, only that in using the specified public key and the specified signature format, the
 digital signature cannot be verified for that data.
 Before accepting the verified digital signature as valid, the verifier shall have (1) assurance of
-the signatory’s claimed identity, (2) assurance of the validity of the domain parameters (for DSA
+the signatoryâ€™s claimed identity, (2) assurance of the validity of the domain parameters (for DSA
 and ECDSA), (3) assurance of the validity of the public key, and (4) assurance that the claimed
 signatory actually possessed the private key that was used to generate the digital signature at the
 time that the signature was generated. Methods for the verifier to obtain these assurances are
@@ -835,13 +835,13 @@ provided in SP 800-89. Note that assurance of domain parameter validity may have
 obtained during initial setup (see Section 3.1).
 If the verification and assurance processes are successful, the digital signature and signed data
 shall be considered valid. However, if a verification or assurance process fails, the digital
-signature should be considered invalid. An organization’s policy shall govern the action to be
+signature should be considered invalid. An organizationâ€™s policy shall govern the action to be
 taken for an invalid digital signature. Such policy is outside the scope of this Standard.
 
                                                  13
         Actions                                        Assurances
     Get the Claimed                           Obtain Assurance of the Claimed
-  Signatory’s Identifier                            Signatory’s Identity
+  Signatoryâ€™s Identifier                            Signatoryâ€™s Identity
 
 
 
@@ -852,7 +852,7 @@ Parameters and Public Key                           Parameter Validity
 
                                               Obtain Assurance of the Validity
 Generate a Message Digest
-                                                of the Owner’s Public Key
+                                                of the Ownerâ€™s Public Key
 
 
 
@@ -879,17 +879,17 @@ message secret number k, data to be signed, and a hash function. A digital signa
 using the same domain parameters, a public key y that is mathematically associated with the
 private key x used to generate the digital signature, data to be verified, and the same hash
 function that was used during signature generation. These parameters are defined as follows:
-      p   a prime modulus, where 2L–1 < p < 2L, and L is the bit length of p. Values for L are
+      p   a prime modulus, where 2Lâ€“1 < p < 2L, and L is the bit length of p. Values for L are
           provided in Section 4.2.
-      q    a prime divisor of (p – 1), where 2N–1 < q < 2 N, and N is the bit length of q. Values for N
+      q    a prime divisor of (p â€“ 1), where 2Nâ€“1 < q < 2 N, and N is the bit length of q. Values for N
           are provided in Section 4.2.
       g   a generator of a subgroup of order q in the multiplicative group of GF(p), such that 1 < g
           < p.
       x   the private key that must remain secret; x is a randomly or pseudorandomly generated
-          integer, such that 0 < x < q, i.e., x is in the range [1, q–1].
+          integer, such that 0 < x < q, i.e., x is in the range [1, qâ€“1].
       y   the public key, where y = gx mod p.
       k   a secret number that is unique to each message; k is a randomly or pseudorandomly
-          generated integer, such that 0 < k < q, i.e., k is in the range [1, q–1].
+          generated integer, such that 0 < k < q, i.e., k is in the range [1, qâ€“1].
 
 4.2       Selection of Parameter Sizes and Hash Functions for DSA
 This Standard specifies the following choices for the pair L and N (the bit lengths of p and q,
@@ -992,7 +992,7 @@ Appendix B.1.
                                                 17
 4.4.2 Key Pair Management
 Guidance on the protection of key pairs is provided in SP 800-57. The secure use of digital
-signatures depends on the management of an entity’s digital signature key pair as follows:
+signatures depends on the management of an entityâ€™s digital signature key pair as follows:
       1. The validity of the domain parameters shall be assured prior to the generation of the key
          pair, or the verification and validation of a digital signature (see Section 3).
       2. Each key pair shall be associated with the domain parameters under which the key pair
@@ -1024,14 +1024,14 @@ signatures depends on the management of an entity’s digital signature key pair
 A new secret random number k shall be generated prior to the generation of each digital
 signature for use during the signature generation process. This secret number shall be protected
 from unauthorized disclosure and modification.
-k −1 is the multiplicative inverse of k with respect to multiplication modulo q; i.e., 0 < k −1 < q
+k âˆ’1 is the multiplicative inverse of k with respect to multiplication modulo q; i.e., 0 < k âˆ’1 < q
 
 
                                                   18
-and 1 = ( k −1 k) mod q. This inverse is required for the signature generation process (see Section
-4.6). A technique is provided in Appendix C.1 for deriving k −1 from k.
-k and k −1 may be pre-computed, since knowledge of the message to be signed is not required for
-the computations. When k and k −1 are pre-computed, their confidentiality and integrity shall be
+and 1 = ( k âˆ’1 k) mod q. This inverse is required for the signature generation process (see Section
+4.6). A technique is provided in Appendix C.1 for deriving k âˆ’1 from k.
+k and k âˆ’1 may be pre-computed, since knowledge of the message to be signed is not required for
+the computations. When k and k âˆ’1 are pre-computed, their confidentiality and integrity shall be
 protected.
 Methods for the generation of the per-message secret number are provided in Appendix B.2.
 
@@ -1044,7 +1044,7 @@ The signature of a message M consists of the pair of numbers r and s that is com
 to the following equations:
        r = (gk mod p) mod q.
        z = the leftmost min(N, outlen) bits of Hash(M).
-       s = ( k −1 (z + xr)) mod q.
+       s = ( k âˆ’1 (z + xr)) mod q.
 When computing s, the string z obtained from Hash(M) shall be converted to an integer. The
 conversion rule is provided in Appendix C.2.
 
@@ -1061,7 +1061,7 @@ The signature (r, s) may be transmitted along with the message to the verifier.
 
 4.7    DSA Signature Verification and Validation
 Signature verification may be performed by any party (i.e., the signatory, the intended recipient
-or any other party) using the signatory’s public key. A signatory may wish to verify that the
+or any other party) using the signatoryâ€™s public key. A signatory may wish to verify that the
 computed signature is correct, perhaps before sending the signed message to the intended
 
 
@@ -1070,30 +1070,30 @@ computed signature is correct, perhaps before sending the signed message to the 
 recipient. The intended recipient (or any other party) verifies the signature to determine its
 authenticity.
 Prior to verifying the signature of a signed message, the domain parameters, and the claimed
-signatory’s public key and identity shall be made available to the verifier in an authenticated
+signatoryâ€™s public key and identity shall be made available to the verifier in an authenticated
 manner. The public key may, for example, be obtained in the form of a certificate signed by a
 trusted entity (e.g., a CA) or in a face-to-face meeting with the public key owner.
-Let M ′, r′, and s′ be the received versions of M, r, and s, respectively; let y be the public key of
+Let M â€², râ€², and sâ€² be the received versions of M, r, and s, respectively; let y be the public key of
 the claimed signatory; and let N be the bit length of q. Also, let min(N, outlen) denote the
 minimum of the positive integers N and outlen, where outlen is the bit length of the hash
 function output block.
 The signature verification process is as follows:
-   1. The verifier shall check that 0 < r′ < q and 0 < s′ < q; if either condition is violated, the
+   1. The verifier shall check that 0 < râ€² < q and 0 < sâ€² < q; if either condition is violated, the
       signature shall be rejected as invalid.
    2. If the two conditions in step 1 are satisfied, the verifier computes the following:
-       w = (s′)–1 mod q.
-       z = the leftmost min(N, outlen) bits of Hash(M′ ).
+       w = (sâ€²)â€“1 mod q.
+       z = the leftmost min(N, outlen) bits of Hash(Mâ€² ).
        u1 = (zw) mod q.
-       u2 = ((r′)w) mod q.
+       u2 = ((râ€²)w) mod q.
        v = (((g)u1 (y)u2) mod p) mod q.
-       A technique is provided in Appendix C.1 for deriving (s′ )–1 (i.e., the multiplicative
-       inverse of s′ mod q).
-       The string z obtained from Hash(M′) shall be converted to an integer. The conversion
+       A technique is provided in Appendix C.1 for deriving (sâ€² )â€“1 (i.e., the multiplicative
+       inverse of sâ€² mod q).
+       The string z obtained from Hash(Mâ€²) shall be converted to an integer. The conversion
        rule is provided in Appendix C.2.
-   3. If v = r′, then the signature is verified. For a proof that v = r′ when M′ = M, r′ = r, and s′
+   3. If v = râ€², then the signature is verified. For a proof that v = râ€² when Mâ€² = M, râ€² = r, and sâ€²
       = s, see Appendix E.
-   4. If v does not equal r′, then the message or the signature may have been modified, there
-      may have been an error in the signatory’s generation process, or an imposter (who did not
+   4. If v does not equal râ€², then the message or the signature may have been modified, there
+      may have been an error in the signatoryâ€™s generation process, or an imposter (who did not
       know the private key associated with the public key of the claimed signatory) may have
       attempted to forge the signature. The signature shall be considered invalid. No inference
       can be made as to whether the data is valid, only that when using the public key to verify
@@ -1104,7 +1104,7 @@ The signature verification process is as follows:
 
 
                                                  20
-An organization’s policy may govern the action to be taken for invalid digital signatures. Such
+An organizationâ€™s policy may govern the action to be taken for invalid digital signatures. Such
 policy is outside the scope of this Standard. Guidance about determining the timeliness of
 digitally signed messages is addressed in SP 800-102, Recommendation for Digital Signature
 Timeliness.
@@ -1164,7 +1164,7 @@ provided by the hash function.
 Federal Government entities other than CAs should use only the first two choices (i.e., nlen =
 1024 or 2048) during the timeframes indicated in SP 800-57. A CA should use a modulus whose
 length nlen is equal to or greater than the moduli used by its subscribers. For example, if the
-subscribers are using nlen = 2048, then the CA should use nlen ≥ 2048. SP 800-57 provides
+subscribers are using nlen = 2048, then the CA should use nlen â‰¥ 2048. SP 800-57 provides
 further information about the selection of the bit length of n. Possible exceptions to this rule
 include cross certification between CAs, certifying keys for purposes other than digital
 signatures and transitioning from one key size or algorithm to another.
@@ -1180,9 +1180,9 @@ Standard, then the seed shall be kept secret and shall be protected. The strengt
 protection shall be (at least) equivalent to the protection required for the associated private key.
 
 5.2    Key Pair Management
-The secure use of digital signatures depends on the management of an entity’s digital signature
+The secure use of digital signatures depends on the management of an entityâ€™s digital signature
 key pair. Key pair management requirements for RSA are provided in Section 4.4.2,
-requirements 4 – 11. Note that the first three requirements in Section 4.4.2, which address the
+requirements 4 â€“ 11. Note that the first three requirements in Section 4.4.2, which address the
 relationship between domain parameters and key pairs, are not applicable to RSA.
 
 5.3    Assurances
@@ -1208,12 +1208,12 @@ public signature verification exponent e is odd, the digital signature algorithm
 known as RSA; when the public signature verification exponent e is even, the digital signature
 algorithm is commonly known as Rabin-Williams. This Standard (i.e., FIPS 186-4) adopts the
 use of RSA, but does not adopt the use of Rabin-Williams.
-During signature verification, the extraction of the hash value H(M)′ from the data structure IR′
+During signature verification, the extraction of the hash value H(M)â€² from the data structure IRâ€²
 shall be accomplished by either:
-      •   Selecting the hashlen bytes of the data structure IR′ that immediately precedes the two
+      â€¢   Selecting the hashlen bytes of the data structure IRâ€² that immediately precedes the two
           bytes of trailer information, where hashlen is the length in bytes of the hash function
           used, regardless of the length of the padding, or
-      •   If the hash value H(M)′ is selected by its location with respect to the last byte of padding
+      â€¢   If the hash value H(M)â€² is selected by its location with respect to the last byte of padding
           (i.e., 0xBA), including a check that the hash value is followed by only two bytes
           containing the expected trailer value.
 ANS X9.31 contains an annex on random number generation. However, implementations of
@@ -1236,17 +1236,17 @@ imposed beyond those specified in PKCS #1 v2.1.
     (c) Only two prime factors p and q shall be used to form the modulus n.
     (d) Random numbers shall be generated using an approved random bit generator.
     (e) For RSASSA-PSS:
-            •    If nlen = 1024 bits (i.e., 128 bytes), and the output length of the approved hash
+            â€¢    If nlen = 1024 bits (i.e., 128 bytes), and the output length of the approved hash
                  function output block is 512 bits (i.e., 64 bytes), then the length (in bytes) of the
-                 salt (sLen) shall satisfy 0 ≤ sLen ≤ hLen – 2,
-            •    Otherwise, the length (in bytes) of the salt (sLen) shall satisfy 0 ≤ sLen ≤ hLen,
+                 salt (sLen) shall satisfy 0 â‰¤ sLen â‰¤ hLen â€“ 2,
+            â€¢    Otherwise, the length (in bytes) of the salt (sLen) shall satisfy 0 â‰¤ sLen â‰¤ hLen,
         where hLen is the length of the hash function output block (in bytes).
     (f) For RSASSA-PKCS-v1.5, when the hash value is recovered from the encoded message
         EM during the verification of the digital signature 1, the extraction of the hash value shall
         be accomplished by either:
-        •   Selecting the rightmost (least significant) bits of EM, based on the size of the hash
+        â€¢   Selecting the rightmost (least significant) bits of EM, based on the size of the hash
             function used, regardless of the length of the padding, or
-        •   If the hash value is selected by its location with respect to the last byte of padding,
+        â€¢   If the hash value is selected by its location with respect to the last byte of padding,
             including a check that the hash value is located in the rightmost (least significant)
             bytes of EM (i.e., no other information follows the hash value in the encoded
             message).
@@ -1259,7 +1259,7 @@ available: version 1.5, version 2.0 and version 2.1. This Standard references on
 
 1
  PKCS #1, v2.1 provides two methods for comparing the hash values: by comparing the encoded messages EM and
-EM′, and by extracting the hash value from the decoding of the encoded message (see the Note in PKCS #1, v2.1).
+EMâ€², and by extracting the hash value from the decoding of the encoded message (see the Note in PKCS #1, v2.1).
 Step (f) above applies to the latter case.
 
 
@@ -1308,7 +1308,7 @@ for the cofactor h.
                                     224 - 255                  214
                                     256 - 383                  216
                                     384 - 511                  224
-                                      ≥ 512                    232
+                                      â‰¥ 512                    232
 
 
 ECDSA is defined for two arithmetic fields: the finite field GFp and the finite field GF2m . For
@@ -1386,7 +1386,7 @@ domain_parameter_seed}, G, n, h). Methods for the generation of d and Q are prov
 Appendix B.4.
 
 6.2.2 Key Pair Management
-The secure use of digital signatures depends on the management of an entity’s digital signature
+The secure use of digital signatures depends on the management of an entityâ€™s digital signature
 key pair as specified in Section 4.4.2.
 
 6.3      Secret Number Generation
@@ -1394,11 +1394,11 @@ A new secret random number k shall be generated prior to the generation of each 
 signature for use during the signature generation process. This secret number shall be protected
 from unauthorized disclosure and modification. Methods for the generation of the per-message
 secret number are provided in Appendix B.5.
- k −1 is the multiplicative inverse of k with respect to multiplication modulo n; i.e., 0 < k −1 < n
-and 1 = ( k −1 k) mod n. This inverse is required for the signature generation process. A technique
-is provided in Appendix C.1 for deriving k −1 from k.
-k and k −1 may be pre-computed, since knowledge of the message to be signed is not required for
-the computations. When k and k −1 are pre-computed, their confidentiality and integrity shall be
+ k âˆ’1 is the multiplicative inverse of k with respect to multiplication modulo n; i.e., 0 < k âˆ’1 < n
+and 1 = ( k âˆ’1 k) mod n. This inverse is required for the signature generation process. A technique
+is provided in Appendix C.1 for deriving k âˆ’1 from k.
+k and k âˆ’1 may be pre-computed, since knowledge of the message to be signed is not required for
+the computations. When k and k âˆ’1 are pre-computed, their confidentiality and integrity shall be
 protected.
 
 6.4      ECDSA Digital Signature Generation and Verification
@@ -1468,11 +1468,11 @@ provided in Appendix A.1.1.2 and is based on the use of an approved hash functio
 shall be used for generating probable primes. The validation process for this method is provided
 in Appendix A.1.1.3.
 The probabilistic methods use a hash function and an arbitrary seed (domain_parameter_seed).
-Arbitrary seeds could be anything, e.g., a user’s favorite number or a random or pseudorandom
+Arbitrary seeds could be anything, e.g., a userâ€™s favorite number or a random or pseudorandom
 number output by an approved random number generator. The domain_parameter_seed
 determines a sequence of candidates for p and q in the required intervals that are then tested for
 primality using a probabilistic primality test (see Appendix C.3). The test determines that the
-candidate is either not a prime (i.e., it is a composite integer) or is “probably a prime” (i.e., there
+candidate is either not a prime (i.e., it is a composite integer) or is â€œprobably a primeâ€ (i.e., there
 is a very small probability that a composite integer will be declared to be a prime). p and q shall
 be the first candidate set that passes the primality tests. Note that the domain_parameter_seed
 
@@ -1495,31 +1495,31 @@ equivalent shall be used to validate p and q for this method.
        1. status                       The status returned from the validation procedure, where
                                        status is either VALID or INVALID.
    Process:
-       1. If (len (p) ≠ 1024) or (len (q) ≠ 160), then return INVALID.
+       1. If (len (p) â‰  1024) or (len (q) â‰  160), then return INVALID.
        2. If (counter > 4095), then return INVALID.
        3. seedlen = len (domain_parameter_seed).
        4. If (seedlen < 160), then return INVALID.
-       5. computed_q = SHA1(domain_parameter_seed) ⊕ SHA1((domain_parameter_seed +
+       5. computed_q = SHA1(domain_parameter_seed) âŠ• SHA1((domain_parameter_seed +
           1) mod 2seedlen).
        6. Set the first and last bits of computed_q equal to 1 (i.e., the 159th and 0th bits).
        7. Test whether or not computed_q is prime as specified in Appendix C.3. If
-          (computed_q ≠ q) or (computed_q is not prime), then return INVALID.
+          (computed_q â‰  q) or (computed_q is not prime), then return INVALID.
        8. offset = 2.
        9. For i = 0 to counter do
             9.1    For j = 0 to 6 do
                    V j = SHA1((domain_parameter_seed + offset + j) mod 2seedlen).
-            9.2    W = V 0 + (V 1 ∗ 2160) + (V 2 ∗ 2320) + (V 3 ∗ 2480) + (V 4 ∗ 2640) + (V 5 ∗ 2800) +
+            9.2    W = V 0 + (V 1 âˆ— 2160) + (V 2 âˆ— 2320) + (V 3 âˆ— 2480) + (V 4 âˆ— 2640) + (V 5 âˆ— 2800) +
 
                                                   32
-                   ((V 6 mod 263) ∗ 2960).
-            9.3    X = W + 21023.             Comment: 0 ≤ W < 2L–1.
+                   ((V 6 mod 263) âˆ— 2960).
+            9.3    X = W + 21023.             Comment: 0 â‰¤ W < 2Lâ€“1.
             9.4    c = X mod 2q.
-            9.5    computed_p = X – (c – 1). Comment: computed_p ≡ 1 (mod 2q).
+            9.5    computed_p = X â€“ (c â€“ 1). Comment: computed_p â‰¡ 1 (mod 2q).
             9.6    If (computed_p < 21023), then go to step 9.8.
             9.7    Test whether or not computed_p is prime as specified in Appendix C.3. If
                    computed_p is determined to be prime, then go to step 10.
             9.8    offset = offset + 7.
-       10. If ((i ≠ counter) or (computed_p ≠ p) or (computed_p is not prime)), then return
+       10. If ((i â‰  counter) or (computed_p â‰  p) or (computed_p is not prime)), then return
            INVALID.
        11. Return VALID.
 A.1.1.2 Generation of the Probable Primes p and q Using an Approved Hash Function
@@ -1558,23 +1558,23 @@ Process:
    1. Check that the (L, N) pair is in the list of acceptable (L, N pairs) (see Section 4.2). If
       the pair is not in the list, then return INVALID.
    2. If (seedlen < N), then return INVALID.
-   3. n = L ⁄ outlen – 1.
-   4. b = L – 1 – (n ∗ outlen).
+   3. n = ï£®L â„ outlenï£¹ â€“ 1.
+   4. b = L â€“ 1 â€“ (n âˆ— outlen).
    5. Get an arbitrary sequence of seedlen bits as the domain_parameter_seed.
-   6. U = Hash (domain_parameter_seed) mod 2N–1.
-   7. q = 2N–1 + U + 1 – ( U mod 2).
+   6. U = Hash (domain_parameter_seed) mod 2Nâ€“1.
+   7. q = 2Nâ€“1 + U + 1 â€“ ( U mod 2).
    8. Test whether or not q is prime as specified in Appendix C.3.
    9. If q is not a prime, then go to step 5.
    10. offset = 1.
-   11. For counter = 0 to (4L – 1) do
+   11. For counter = 0 to (4L â€“ 1) do
        11.1    For j = 0 to n do
                V j = Hash ((domain_parameter_seed + offset + j) mod 2seedlen).
 
-       11.2    W = V 0 + (V 1 ∗ 2outlen) + … + (V n–1 ∗ 2(n–1) ∗ outlen) + ((V n mod 2b) ∗ 2n ∗ outlen).
-       11.3    X = W + 2L–1.                  Comment: 0 ≤ W < 2L–1; hence, 2L–1 ≤ X < 2L.
+       11.2    W = V 0 + (V 1 âˆ— 2outlen) + â€¦ + (V nâ€“1 âˆ— 2(nâ€“1) âˆ— outlen) + ((V n mod 2b) âˆ— 2n âˆ— outlen).
+       11.3    X = W + 2Lâ€“1.                  Comment: 0 â‰¤ W < 2Lâ€“1; hence, 2Lâ€“1 â‰¤ X < 2L.
        11.4    c = X mod 2q.
-       11.5    p = X – (c – 1).               Comment: p ≡ 1 (mod 2q).
-                        L–1
+       11.5    p = X â€“ (c â€“ 1).               Comment: p â‰¡ 1 (mod 2q).
+                        Lâ€“1
        11.6    If (p < 2      ), then go to step 11.9.
        11.7    Test whether or not p is prime as specified in Appendix C.3.
        11.8    If p is determined to be prime, then return VALID and the values of p, q and
@@ -1607,33 +1607,33 @@ The following process or its equivalent shall be used to validate p and q for th
    2. N = len (q).
    3. Check that the (L, N) pair is in the list of acceptable (L, N) pairs (see Section 4.2). If the
       pair is not in the list, return INVALID.
-   4. If (counter > (4L – 1)), then return INVALID.
+   4. If (counter > (4L â€“ 1)), then return INVALID.
    5. seedlen = len (domain_parameter_seed).
    6. If (seedlen < N), then return INVALID.
-   7. U = Hash(domain_parameter_seed) mod 2N–1.
-   8. computed_q = 2N–1 + U + 1 – ( U mod 2).
-   9. Test whether or not computed_q is prime as specified in Appendix C.3. If (computed_q ≠
+   7. U = Hash(domain_parameter_seed) mod 2Nâ€“1.
+   8. computed_q = 2Nâ€“1 + U + 1 â€“ ( U mod 2).
+   9. Test whether or not computed_q is prime as specified in Appendix C.3. If (computed_q â‰ 
       q) or (computed_q is not prime), then return INVALID.
 
 
 
                                                    35
-   10. n = L ⁄ outlen – 1.
-   11. b = L – 1 – (n ∗ outlen).
+   10. n = ï£®L â„ outlenï£¹ â€“ 1.
+   11. b = L â€“ 1 â€“ (n âˆ— outlen).
    12. offset = 1.
    13. For i = 0 to counter do
        13.1 For j = 0 to n do
              V j = Hash((domain_parameter_seed + offset + j) mod 2seedlen).
 
-       13.2 W = V 0 + (V 1 ∗ 2outlen) + … + (V n–1 ∗ 2(n–1) ∗ outlen) + ((V n mod 2b) ∗ 2n ∗ outlen).
-       13.3 X = W + 2L–1.
+       13.2 W = V 0 + (V 1 âˆ— 2outlen) + â€¦ + (V nâ€“1 âˆ— 2(nâ€“1) âˆ— outlen) + ((V n mod 2b) âˆ— 2n âˆ— outlen).
+       13.3 X = W + 2Lâ€“1.
        13.4 c = X mod 2q.
-       13.5 computed_p = X – (c – 1).
-       13.6 If (computed_p < 2L–1), then go to step 13.9
+       13.5 computed_p = X â€“ (c â€“ 1).
+       13.6 If (computed_p < 2Lâ€“1), then go to step 13.9
        13.7 Test whether or not computed_p is prime as specified in Appendix C.3.
        13.8 If computed_p is determined to be a prime, then go to step 14.
        13.9 offset = offset + n + 1.
-   14. If ((i ≠ counter) or (computed_p ≠ p) or (computed_p is not a prime)), then return
+   14. If ((i â‰  counter) or (computed_p â‰  p) or (computed_p is not a prime)), then return
        INVALID.
    15. Return VALID.
 
@@ -1642,14 +1642,14 @@ Primes can be generated so that they are guaranteed to be prime. The following a
 generating p and q uses an approved hash function and an arbitrary seed (firstseed) to construct p
 and q in the required intervals. The security strength of the hash function shall be equal to or
 greater than the security strength associated with the (L, N) pair.
-Arbitrary seeds can be anything, e.g., a user’s favorite number or a random or pseudorandom
+Arbitrary seeds can be anything, e.g., a userâ€™s favorite number or a random or pseudorandom
 number that is output from a random number generator. Note that the firstseed must be unique to
 produce a unique set of domain parameters. Candidate primes are tested for primality using a
 deterministic primality test that proves whether or not the candidate is prime. The resulting p and
 q are guaranteed to be primes.
 A.1.2.1 Construction of the Primes p and q Using the Shawe-Taylor Algorithm
 For each set of domain parameters generated, an arbitrary initial seed (firstseed) of at least
-seedlen bits shall be determined, where seedlen shall be ≥ N.
+seedlen bits shall be determined, where seedlen shall be â‰¥ N.
 The generation process returns a set of integers p and q that are guaranteed to be prime. For
 
 
@@ -1670,7 +1670,7 @@ The following process or its equivalent shall be used to generate firstseed for 
 method.
    Input:
        1. N                    The length of q in bits.
-       2. seedlen              The length of firstseed, where seedlen ≥ N.
+       2. seedlen              The length of firstseed, where seedlen â‰¥ N.
    Output:
        1. status               The status returned from the generation procedure, where status is
                                either SUCCESS or FAILURE. If FAILURE is returned, then
@@ -1682,7 +1682,7 @@ method.
        2. Check that N is in the list of acceptable (L, N) pairs (see Section 4.2). If not, then
           return FAILURE.
        3. If (seedlen < N), then return FAILURE.
-       4. While firstseed < 2N–1.
+       4. While firstseed < 2Nâ€“1.
             Get an arbitrary sequence of seedlen bits as firstseed.
        5. Return SUCCESS and the value of firstseed.
 Note: This routine could be incorporated into the beginning of the constructive prime generation
@@ -1722,36 +1722,36 @@ method.
        2. Using N as the length and firstseed as the input_seed, use the random prime
           generation routine in Appendix C.6 to obtain q, qseed and qgen_counter. If
           FAILURE is returned, then return FAILURE.
-       3. Using L / 2 + 1 as the length and qseed as the input_seed, use the random prime
+       3. Using ï£®L / 2 + 1ï£¹ as the length and qseed as the input_seed, use the random prime
           routine in Appendix C.6 to obtain p 0 , pseed, and pgen_counter. If FAILURE is
           returned, then return FAILURE.
 
 
                                                  38
-4. iterations = L / outlen –1.
+4. iterations = ï£®L / outlenï£¹ â€“1.
 5. old_counter = pgen_counter.
                                                     Comment: Generate a (pseudo) random x in
-                                                    the interval [2L−1, 2L].
+                                                    the interval [2Lâˆ’1, 2L].
 6. x = 0.
 7. For i = 0 to iterations do
-    x = x + (Hash(pseed + i) ∗ 2 i * outlen).
+    x = x + (Hash(pseed + i) âˆ— 2 i * outlen).
 8. pseed = pseed + iterations + 1.
-9. x = 2L−1 + (x mod 2L–1).
+9. x = 2Lâˆ’1 + (x mod 2Lâ€“1).
                                                     Comment: Generate p, a candidate for the
-                                                    prime, in the interval [2L−1, 2L].
-10. t = x / (2q p 0 ).
-11. If (2tq p 0 + 1) > 2L, then t = 2L−1 / (2q p 0 ).
+                                                    prime, in the interval [2Lâˆ’1, 2L].
+10. t = ï£®x / (2q p 0 )ï£¹.
+11. If (2tq p 0 + 1) > 2L, then t = ï£®2Lâˆ’1 / (2q p 0 )ï£¹.
 12. p = 2tq p 0 + 1.
 13. pgen_counter = pgen_counter + 1.
                                                     Comment: Test p for primality; choose an
-                                                    integer a in the interval [2, p–2].
+                                                    integer a in the interval [2, pâ€“2].
 14. a = 0
 15. For i = 0 to iterations do
-    a = a + (Hash(pseed + i) ∗ 2 i * outlen).
+    a = a + (Hash(pseed + i) âˆ— 2 i * outlen).
 16. pseed = pseed + iterations + 1.
-17. a = 2 + (a mod (p–3)).
+17. a = 2 + (a mod (pâ€“3)).
 18. z = a2tq mod p.
-19. If ((1 = GCD(z–1, p) ) and ( 1 = z p0 mod p )), then return SUCCESS and the values
+19. If ((1 = GCD(zâ€“1, p) ) and ( 1 = z p0 mod p )), then return SUCCESS and the values
     of p, q and (optionally) pseed, qseed, pgen_counter, and qgen_counter.
 20. If (pgen_counter > (4L + old_counter)), then return FAILURE.
 21. t = t + 1.
@@ -1789,23 +1789,23 @@ method.
        3. Check that the (L, N) pair is in the list of acceptable (L, N) pairs (see Section 4.2). If
           the pair is not in the list, then return FAILURE.
 
-       4. If (firstseed < 2N–1), then return FAILURE.
+       4. If (firstseed < 2Nâ€“1), then return FAILURE.
 
-       5. If (2N ≤ q), then return FAILURE).
+       5. If (2N â‰¤ q), then return FAILURE).
 
-       6. If (2L ≤ p), then return FAILURE.
+       6. If (2L â‰¤ p), then return FAILURE.
 
-       7. If ((p – 1) mod q ≠ 0), then return FAILURE.
+       7. If ((p â€“ 1) mod q â‰  0), then return FAILURE.
 
        8. Using L, N and firstseed, perform the constructive prime generation procedure in
           Appendix A.1.2.1.2 to obtain p_val, q_val, pseed_val, qseed_val, pgen_counter_val,
-          and qgen_counter_val. If FAILURE is returned, or if (q_val ≠ q) or (qseed_val ≠
+          and qgen_counter_val. If FAILURE is returned, or if (q_val â‰  q) or (qseed_val â‰ 
 
 
 
                                                  40
-            qseed) or (qgen_counter_val ≠ qgen_counter) or (p_val ≠ p) or (pseed_val ≠ pseed)
-            or (pgen_counter_val ≠ pgen_counter), then return FAILURE.
+            qseed) or (qgen_counter_val â‰  qgen_counter) or (p_val â‰  p) or (pseed_val â‰  pseed)
+            or (pgen_counter_val â‰  pgen_counter), then return FAILURE.
 
        9. Return SUCCESS.
 
@@ -1815,9 +1815,9 @@ The generator g depends on the values of p and q. Two methods for determining th
 are provided; one of these methods shall be used. The first method, discussed in Appendix
 A.2.1, may be used when complete validation of the generator g is not required; it is
 recommended that this method be used only when the party generating g is trusted to not
-deliberately generate a g that has a potentially exploitable relationship to another generator g′.
+deliberately generate a g that has a potentially exploitable relationship to another generator gâ€².
 For example, it must be hard to determine an exponential relationship between the generators
-such that g = (g′)x mod p for a known value of x. (Note: Read (g′)x as g prime to the x.)
+such that g = (gâ€²)x mod p for a known value of x. (Note: Read (gâ€²)x as g prime to the x.)
 Appendix A.2.2 provides a method for partial validation when the method of generation in
 Appendix A.2.1 is used. The second method for generating g, discussed in Appendix A.2.3, shall
 be used when validation of the generator g is required; the method for the validation of a
@@ -1834,8 +1834,8 @@ The following process or its equivalent shall be used to generate the generator 
    Output:
        1. g           The requested value of g.
    Process:
-       1. e = (p – 1)/q.
-       2. Set h = any integer satisfying 1 < h < ( p – 1), such that h differs from any value
+       1. e = (p â€“ 1)/q.
+       2. Set h = any integer satisfying 1 < h < ( p â€“ 1), such that h differs from any value
           previously tried. Note that h could be obtained from a random number generator or
           from a counter that changes after each use.
        3. g = he mod p.
@@ -1857,10 +1857,10 @@ required:
        1. status      The status returned from the generation routine, where status is either
                       PARTIALLY VALID or INVALID.
    Process:
-       1. Verify that 2 ≤ g ≤ (p–1). If not true, return INVALID.
+       1. Verify that 2 â‰¤ g â‰¤ (pâ€“1). If not true, return INVALID.
        2. If (gq = 1 mod p), then return PARTIALLY VALID.
        3. Return INVALID.
-The non-existence of a potentially exploitable relationship of g to another generator g′ (that is
+The non-existence of a potentially exploitable relationship of g to another generator gâ€² (that is
 known to the entity that generated g, but may not be known by other entities) cannot be checked.
 In this sense, the correct generation of g cannot be completely validated.
 
@@ -1897,7 +1897,7 @@ process or its equivalent shall be used to generate the generator g.
                                                  been provided (see above).
        1. If (index is incorrect), then return INVALID.
        2. N = len(q).
-       3. e = (p – 1)/q.
+       3. e = (p â€“ 1)/q.
        4. count = 0.
        5. count = count + 1.
                                                  Comment: Check that count does not wrap around
@@ -1905,8 +1905,8 @@ process or its equivalent shall be used to generate the generator g.
        6. If (count = 0), then return INVALID.
                                                  Comment: the length of the
                                                  domain_parameter_seed has already been checked.
-                                                 “ggen” is the bit string 0x6767656E.
-       7. U = domain_parameter_seed || “ggen” || index || count.
+                                                 â€œggenâ€ is the bit string 0x6767656E.
+       7. U = domain_parameter_seed || â€œggenâ€ || index || count.
        8. W = Hash(U).
        9. g = We mod p.
        10. If (g < 2), then go to step 5.        Comment: If a generator has not been found.
@@ -1948,20 +1948,20 @@ The following process or its equivalent shall be used to validate the generator 
                                         Comment: Check that a valid value of the index has been
                                         provided (see above).
        1. If (index is incorrect), then return INVALID.
-       2. Verify that 2 ≤ g ≤ (p–1). If not true, return INVALID.
-       3. If (gq ≠ 1 mod p), then return INVALID.
+       2. Verify that 2 â‰¤ g â‰¤ (pâ€“1). If not true, return INVALID.
+       3. If (gq â‰  1 mod p), then return INVALID.
 
 
                                                 44
 4. N = len(q).
-5. e = (p – 1)/q.
+5. e = (p â€“ 1)/q.
 6. count = 0.
 7. count = count + 1.
                                     Comment: Check that count does not wrap around
                                     to 0.
 8. If (count = 0), then return INVALID.
-                                    Comment: “ggen” is the bit string 0x6767656E.
-9. U = domain_parameter_seed || “ggen” || index || count.
+                                    Comment: â€œggenâ€ is the bit string 0x6767656E.
+9. U = domain_parameter_seed || â€œggenâ€ || index || count.
 10. W = Hash(U).
 11. computed_g = We mod p.
 12. If (computed_g < 2), then go to step 7. Comment: If a generator has not been found.
@@ -2014,7 +2014,7 @@ The following process or its equivalent may be used to generate an FFC key pair.
                       the generation process, invalid values for x and y should be returned, as
                       represented by Invalid_x and Invalid_y in the following specification. x
                       and y are returned as integers. The generated private key x is in the range
-                      [1, q–1], and the public key is in the range [1, p–1].
+                      [1, qâ€“1], and the public key is in the range [1, pâ€“1].
    Process:
        1. N = len(q); L = len(p).
                                              Comment: Check that the (L, N) pair is specified in
@@ -2027,8 +2027,8 @@ The following process or its equivalent may be used to generate an FFC key pair.
           requested_security_strength or more. If an ERROR indication is returned, then
           return an ERROR indication, Invalid_x, and Invalid_y.
        5. Convert returned_bits to the (non-negative) integer c (see Appendix C.2.1).
-       6. x = (c mod (q–1)) + 1.             Comment: 0 ≤ c mod (q–1) ≤ q–2 and implies that
-                                             1 ≤ x ≤ q–1.
+       6. x = (c mod (qâ€“1)) + 1.             Comment: 0 â‰¤ c mod (qâ€“1) â‰¤ qâ€“2 and implies that
+                                             1 â‰¤ x â‰¤ qâ€“1.
        7. y = gx mod p.
        8. Return SUCCESS, x, and y.
 
@@ -2051,7 +2051,7 @@ The following process or its equivalent may be used to generate an FFC key pair.
                        the generation process, invalid values for x and y should be returned, as
                        represented by Invalid_x and Invalid_y in the following specification. x
                        and y are returned as integers. The generated private key x is in the range
-                       [1, q–1], and the public key is in the range [1, p–1].
+                       [1, qâ€“1], and the public key is in the range [1, pâ€“1].
    Process:
        1. N = len(q); L = len(p).
                                               Comment: Check that the (L, N) pair is specified in
@@ -2064,7 +2064,7 @@ The following process or its equivalent may be used to generate an FFC key pair.
           requested_security_strength or more. If an ERROR indication is returned, then
           return an ERROR indication, Invalid_x, and Invalid_y.
        5. Convert returned_bits to the (non-negative) integer c (see Appendix C.2.1).
-       6. If (c > q–2), then go to step 4.
+       6. If (c > qâ€“2), then go to step 4.
        7. x = c + 1.
        8. y = gx mod p.
        9. Return SUCCESS, x, and y.
@@ -2090,10 +2090,10 @@ The following process or its equivalent may be used to generate a per-message se
    Output:
        1. status         The status returned from the secret number generation process. The status
                          will indicate SUCCESS or an ERROR.
-       2.   (k, k −1 )   The per-message secret number k and its mod q inverse, k −1 . If an error is
-                         encountered during the generation process, invalid values for k and k −1
+       2.   (k, k âˆ’1 )   The per-message secret number k and its mod q inverse, k âˆ’1 . If an error is
+                         encountered during the generation process, invalid values for k and k âˆ’1
                          should be returned, as represented by Invalid_k and Invalid_k_inverse in
-                         the following specification. k and k −1 are in the range [1, q–1].
+                         the following specification. k and k âˆ’1 are in the range [1, qâ€“1].
    Process:
        1. N = len(q); L = len(p).
                                                 Comment: Check that the (L, N) pair is specified in
@@ -2106,9 +2106,9 @@ The following process or its equivalent may be used to generate a per-message se
           requested_security_strength or more. If an ERROR indication is returned, then
           return an ERROR indication, Invalid_k, and Invalid_k_inverse.
        5. Convert returned_bits to the (non-negative) integer c (see Appendix C.2.1).
-       6. k = (c mod (q–1)) + 1.
-       7. (status, k–1) = inverse (k, q).
-       8. Return status, k, and k −1 .
+       6. k = (c mod (qâ€“1)) + 1.
+       7. (status, kâ€“1) = inverse (k, q).
+       8. Return status, k, and k âˆ’1 .
 
 B.2.2 Per-Message Secret Number Generation by Testing Candidates
 In this method, a random number is obtained and tested to determine that it will produce a value
@@ -2123,10 +2123,10 @@ process is iterated until an acceptable value of k is obtained.
   Output:
        1. status         The status returned from the secret number generation process. The status
                          will indicate SUCCESS or an ERROR.
-       2.   (k, k −1 )   The per-message secret number k and its inverse, k −1 . If an error is
+       2.   (k, k âˆ’1 )   The per-message secret number k and its inverse, k âˆ’1 . If an error is
                          encountered during the generation process, invalid values for k and
-                          k −1 should be returned, as represented by Invalid_k and Invalid_k_inverse
-                         in the following specification. k and k −1 are in the range [1, q–1].
+                          k âˆ’1 should be returned, as represented by Invalid_k and Invalid_k_inverse
+                         in the following specification. k and k âˆ’1 are in the range [1, qâ€“1].
    Process:
        1. N = len(q); L = len(p).
                                                Comment: Check that the (L, N) pair is specified in
@@ -2139,10 +2139,10 @@ process is iterated until an acceptable value of k is obtained.
           requested_security_strength or more. If an ERROR indication is returned, then
           return an ERROR indication, Invalid_k, and Invalid_k_inverse.
        5. Convert returned_bits to the (non-negative) integer c (see Appendix C.2.1).
-       6. If (c > q–2), then go to step 4.
+       6. If (c > qâ€“2), then go to step 4.
        7. k = c + 1.
-       8. (status, k −1 ) = inverse(k, q).
-       9. Return status, k, and k −1 .
+       8. (status, k âˆ’1 ) = inverse(k, q).
+       9. Return status, k, and k âˆ’1 .
 
 B.3    IFC Key Pair Generation
 
@@ -2164,10 +2164,10 @@ secrecy of these primes and the private exponent d. The primes p and q shall be 
          primes (see Appendices B.3.4, B.3.5, or B.3.6).
     B. Both p and q are randomly generated prime numbers that satisfy the following additional
        conditions (Primes with Conditions):
-                   •    (p–1) has a prime factor p 1
-                   •   (p+1) has a prime factor p 2
-                   •   (q–1) has a prime factor q 1
-                   •   (q+1) has a prime factor q 2
+                   â€¢    (pâ€“1) has a prime factor p 1
+                   â€¢   (p+1) has a prime factor p 2
+                   â€¢   (qâ€“1) has a prime factor q 1
+                   â€¢   (q+1) has a prime factor q 2
          where p 1 , p 2 , q 1 and q 2 are called auxiliary primes of p and q.
          Using this method, one of the following cases shall apply:
               1. The primes p 1 , p 2 , q 1 , q 2 , p and q shall all be provable primes (see Appendix
@@ -2187,8 +2187,8 @@ secrecy of these primes and the private exponent d. The primes p and q shall be 
 
 
 3
-  For the probable primes p and q: len(p1) + len(p2) < len(p) – log2(len(p)) – 6; similarly for len(q1) + len(q2) and
-len(q). For the provable primes p and q: len(p1) + len(p2) < len(p)/2 – log2(len(p)) – 7; similarly for len(q1) + len(q2)
+  For the probable primes p and q: len(p1) + len(p2) < len(p) â€“ log2(len(p)) â€“ 6; similarly for len(q1) + len(q2) and
+len(q). For the provable primes p and q: len(p1) + len(p2) < len(p)/2 â€“ log2(len(p)) â€“ 7; similarly for len(q1) + len(q2)
 
 
                                                            51
@@ -2221,7 +2221,7 @@ In addition, all IFC keys shall meet the following criteria in order to conform 
              Note that the value of e may be any value that meets constraint 1(b), i.e., e may be
              either a fixed value or a random value.
      2. The primes p and q shall be selected with the following constraints:
-             (a) (p–1) and (q–1) shall be relatively prime to the public exponent e.
+             (a) (pâ€“1) and (qâ€“1) shall be relatively prime to the public exponent e.
              (b) The private prime factor p shall be selected randomly and shall satisfy
 
 
@@ -2231,19 +2231,19 @@ and len(q). In each case, len(p) = len(q) = nlen/2.
 
 
                                                            52
-                 ( 2 )(2(nlen / 2) – 1) ≤ p ≤ (2nlen / 2– 1), where nlen is the appropriate length for the
+                 ( 2 )(2(nlen / 2) â€“ 1) â‰¤ p â‰¤ (2nlen / 2â€“ 1), where nlen is the appropriate length for the
                  desired security_strength.
             (c) The private prime factor q shall be selected randomly and shall satisfy
-                ( 2 )(2(nlen / 2) – 1) ≤ q ≤ (2nlen / 2– 1), where nlen is the appropriate length for the
+                ( 2 )(2(nlen / 2) â€“ 1) â‰¤ q â‰¤ (2nlen / 2â€“ 1), where nlen is the appropriate length for the
                 desired security_strength.
-            (d) |p – q| > 2(nlen / 2) – 100.
+            (d) |p â€“ q| > 2(nlen / 2) â€“ 100.
    3. The private signature exponent d shall be selected with the following constraints after the
       generation of p and q:
             (a) The exponent d shall be a positive integer value such that
-                2nlen/ 2 < d < LCM(p–1, q–1), and
-            (b) d = e–1 mod (LCM(p–1, q–1)).
-                 That is, the inequality in (a) holds, and 1 ≡ (ed) (mod LCM(p–1, q–1)).
-         In the extremely rare event that d ≤ 2nlen / 2, then new values for p, q and d shall be
+                2nlen/ 2 < d < LCM(pâ€“1, qâ€“1), and
+            (b) d = eâ€“1 mod (LCM(pâ€“1, qâ€“1)).
+                 That is, the inequality in (a) holds, and 1 â‰¡ (ed) (mod LCM(pâ€“1, qâ€“1)).
+         In the extremely rare event that d â‰¤ 2nlen / 2, then new values for p, q and d shall be
          determined. A different value of e may be used, although this is not required.
 Any hash function used during the generation of the key pair shall be approved (i.e., specified in
 FIPS 180).
@@ -2286,10 +2286,10 @@ Output:
    p and q      The private prime factors of n.
 Process:
    1. If nlen is neither 2048 nor 3072, then return (FAILURE, 0, 0).
-   2. If ((e ≤ 216) OR (e ≥ 2256) OR (e is not odd)), then return (FAILURE, 0, 0).
+   2. If ((e â‰¤ 216) OR (e â‰¥ 2256) OR (e is not odd)), then return (FAILURE, 0, 0).
    3. Set the value of security_strength in accordance with the value of nlen, as specified in SP
       800-57, Part 1.
-   4. If (len(seed) ≠ 2 * security_strength), then return (FAILURE, 0, 0).
+   4. If (len(seed) â‰  2 * security_strength), then return (FAILURE, 0, 0).
    5. working_seed = seed.
    6. Generate p:
          6.1   Using L = nlen/2, N 1 = 1, N 2 = 1, first_seed = working_seed and e, use the provable
@@ -2306,7 +2306,7 @@ Process:
                prime construction method in Appendix C.10 to obtain q and qseed. If FAILURE
                is returned, then return (FAILURE, 0, 0).
          7.2   working_seed = qseed.
-   8. If ( |p – q| ≤ 2nlen/2 – 100), then go to step 7.
+   8. If ( |p â€“ q| â‰¤ 2nlen/2 â€“ 100), then go to step 7.
    9. Zeroize the internally generated seeds:
          9.1 pseed = 0;
          9.2 qseed = 0;
@@ -2328,7 +2328,7 @@ Output:
                  returned as p and q.
 Process:
    1. If nlen is neither 2048 nor 3072, return (FAILURE, 0, 0).
-   2. If ((e ≤ 216) OR (e ≥ 2256) OR (e is not odd)), then return (FAILURE, 0, 0).
+   2. If ((e â‰¤ 216) OR (e â‰¥ 2256) OR (e is not odd)), then return (FAILURE, 0, 0).
    3. Set the value of security_strength in accordance with the value of nlen, as specified in SP
       800-57, Part 1.
    4. Generate p:
@@ -2337,26 +2337,26 @@ Process:
                                                     55
         4.2   Obtain a string p of (nlen/2) bits from an RBG that supports the security_strength.
         4.3   If (p is not odd), then p = p + 1.
-        4.4   If ((p < ( 2 )(2(nlen / 2) – 1)), then go to step 4.2.
-        4.5   If (GCD(p−1, e) = 1), then
+        4.4   If ((p < ( 2 )(2(nlen / 2) â€“ 1)), then go to step 4.2.
+        4.5   If (GCD(pâˆ’1, e) = 1), then
                  4.5.1 Test p for primality as specified in Appendix C.3, using an appropriate
                        value from Table C-2 or C-3 in Appendix C.3 as the number of iterations.
                  4.5.2 If p is PROBABLY PRIME, then go to step 5.
         4.6   i= i + 1.
-        4.7   If (i ≥ 5(nlen/2)), then return (FAILURE, 0, 0)
+        4.7   If (i â‰¥ 5(nlen/2)), then return (FAILURE, 0, 0)
               Else go to step 4.2.
     5. Generate q:
         5.1   i = 0.
         5.2   Obtain a string q of (nlen/2) bits from an RBG that supports the security_strength
         5.3   If (q is not odd), then q = q + 1.
-        5.4   If (|p – q| ≤ 2nlen/2 – 100), then go to step 5.2.
-        5.5   If ((q < ( 2 )(2(nlen / 2) – 1)), then go to step 5.2.
-        5.6   If (GCD(q−1, e) = 1) then
+        5.4   If (|p â€“ q| â‰¤ 2nlen/2 â€“ 100), then go to step 5.2.
+        5.5   If ((q < ( 2 )(2(nlen / 2) â€“ 1)), then go to step 5.2.
+        5.6   If (GCD(qâˆ’1, e) = 1) then
                  5.6.1 Test q for primality as specified in Appendix C.3, using an appropriate
                        value from Table C-2 or C-3 in Appendix C.3 as the number of iterations.
                  5.6.2 If q is PROBABLY PRIME, then return (SUCCESS, p, q).
         5.7   i = i + 1.
-        5.8   If (i ≥ 5(nlen/2)), then return (FAILURE, 0, 0)
+        5.8   If (i â‰¥ 5(nlen/2)), then return (FAILURE, 0, 0)
               Else go to step 5.2.
 
 B.3.4 Generation of Provable Primes with Conditions Based on Auxiliary
@@ -2384,10 +2384,10 @@ Output:
     p and q      The private prime factors of n.
 Process:
     1. If nlen is neither 1024, 2048, nor 3072, then return (FAILURE, 0, 0).
-    2. If ((e ≤ 216) OR (e ≥ 2256) OR (e is not odd)), then return (FAILURE, 0, 0).
+    2. If ((e â‰¤ 216) OR (e â‰¥ 2256) OR (e is not odd)), then return (FAILURE, 0, 0).
     3. Set the value of security_strength in accordance with the value of nlen, as specified in SP
        800-57, Part 1.
-    4. If (len(seed) ≠ 2 * security_strength), then return (FAILURE, 0, 0).
+    4. If (len(seed) â‰  2 * security_strength), then return (FAILURE, 0, 0).
     5. working_seed = seed.
     6. Generate p:
          6.1 Using L = nlen/2, N 1 = bitlen 1 , N 2 = bitlen 2 , firstseed = working_seed and e, use the
@@ -2399,7 +2399,7 @@ Process:
               the provable prime construction method in Appendix C.10 to obtain q, q 1 , q 2 and
               qseed. If FAILURE is returned, return (FAILURE, 0, 0).
          7.2 working_seed = qseed.
-    8. If ( |p – q| ≤ 2nlen/2 – 100), then go to step 7.
+    8. If ( |p â€“ q| â‰¤ 2nlen/2 â€“ 100), then go to step 7.
     9. Zeroize the internally generated seeds:
          9.1 pseed = 0.
 
@@ -2432,10 +2432,10 @@ and q.
          p and q      The private prime factors of n.
     Process:
          1. If nlen is neither 1024, 2048, nor 3072, then return (FAILURE, 0, 0).
-         2. If ((e ≤ 216) OR (e ≥ 2256) OR (e is not odd)), then return (FAILURE, 0, 0).
+         2. If ((e â‰¤ 216) OR (e â‰¥ 2256) OR (e is not odd)), then return (FAILURE, 0, 0).
          3. Set the value of security_strength in accordance with the value of nlen, as specified in
             SP 800-57, Part 1.
-         4. If (len(seed) ≠ 2 * security_strength), then return (FAILURE, 0, 0).
+         4. If (len(seed) â‰  2 * security_strength), then return (FAILURE, 0, 0).
                                                       Comment: Generate four primes p 1 , p 2 , q 1 and q 2
                                                       that are provably prime.
 
@@ -2462,7 +2462,7 @@ and q.
     6.3   Generate a prime q using the routine in Appendix C.9 with inputs of q 1 , q 2 ,
           nlen, e and security_strength, also obtaining X q . If FAILURE is returned,
           return (FAILURE, 0, 0).
-7. If ((|p – q| ≤ 2nlen/2 –100) OR (|X p – X q | ≤ 2nlen/2 – 100)), then go to step 6.
+7. If ((|p â€“ q| â‰¤ 2nlen/2 â€“100) OR (|X p â€“ X q | â‰¤ 2nlen/2 â€“ 100)), then go to step 6.
 8. Zeroize the internally generated that are not returned:
     8.1   X p = 0.
     8.2   X q = 0.
@@ -2499,7 +2499,7 @@ The following process or its equivalent shall be used to generate p and q:
         p and q          The private prime factors of n.
     Process:
         1. If nlen is neither 1024, 2048, nor 3072, then return (FAILURE, 0, 0).
-        2. If ((e ≤ 216) OR (e ≥ 2256) OR (e is not odd)), then return (FAILURE, 0, 0).
+        2. If ((e â‰¤ 216) OR (e â‰¥ 2256) OR (e is not odd)), then return (FAILURE, 0, 0).
         3. Set the value of security_strength in accordance with the value of nlen, as specified in
            SP 800-57, Part 1.
         4. Generate p:
@@ -2529,7 +2529,7 @@ The following process or its equivalent shall be used to generate p and q:
            5.3   Generate a prime q using the routine in Appendix C.9 with inputs of q 1 , q 2 ,
                  nlen, e and security_ strength, also obtaining X q . If FAILURE is returned,
                  return (FAILURE, 0, 0).
-       6. If ((|X p – X q | ≤ 2nlen/2 –100) OR (|p – q| ≤ 2nlen/2 – 100))), then go to step 5.
+       6. If ((|X p â€“ X q | â‰¤ 2nlen/2 â€“100) OR (|p â€“ q| â‰¤ 2nlen/2 â€“ 100))), then go to step 5.
        7. Zeroize the internally generated values that are not returned:
            7.1   X p = 0.
            7.2   X q = 0.
@@ -2571,7 +2571,7 @@ The following process or its equivalent may be used to generate an ECC key pair.
                         the generation process, invalid values for d and Q should be returned, as
                         represented by Invalid_d and Invalid_Q in the following specification. d is
                         an integer, and Q is an elliptic curve point. The generated private key d is
-                        in the range [1, n–1].
+                        in the range [1, nâ€“1].
    Process:
        1. N = len(n).
                                               Comment: Check that N is included in Table 1 of
@@ -2583,7 +2583,7 @@ The following process or its equivalent may be used to generate an ECC key pair.
           requested_security_strength or more. If an ERROR indication is returned, then
           return an ERROR indication, Invalid_d, and Invalid_Q.
        5. Convert returned_bits to the (non-negative) integer c (see Appendix C.2.1).
-       6. d = (c mod (n–1)) + 1.
+       6. d = (c mod (nâ€“1)) + 1.
 
 
                                                  62
@@ -2606,7 +2606,7 @@ The following process or its equivalent may be used to generate an ECC key pair.
                         the generation process, invalid values for d and Q should be returned, as
                         represented by Invalid_d and Invalid_Q in the following specification. d is
                         an integer, and Q is an elliptic curve point. The generated private key d is
-                        in the range [1, n–1].
+                        in the range [1, nâ€“1].
    Process:
        1. N = len(n).
                                               Comment: Check that N is included in Table 1 of
@@ -2618,7 +2618,7 @@ The following process or its equivalent may be used to generate an ECC key pair.
           requested_security_strength or more. If an ERROR indication is returned, then
           return an ERROR indication, Invalid_d, and Invalid_Q.
        5. Convert returned_bits to the (non-negative) integer c (see Appendix C.2.1).
-       6. If (c > n–2), then go to step 4.
+       6. If (c > nâ€“2), then go to step 4.
        7. d = c + 1.
 
 
@@ -2647,10 +2647,10 @@ The following process or its equivalent may be used to generate a per-message se
    Output:
        1. status         The status returned from the key pair generation procedure. The status will
                          indicate SUCCESS or an ERROR.
-       2.   (k, k −1 )   The generated secret number k and its inverse k–1. If an error is
+       2.   (k, k âˆ’1 )   The generated secret number k and its inverse kâ€“1. If an error is
                          encountered during the generation process, invalid values for k and
-                          k −1 should be returned, as represented by Invalid_k and Invalid_k_inverse
-                         in the following specification. k and k −1 are integers in the range [1, n–1].
+                          k âˆ’1 should be returned, as represented by Invalid_k and Invalid_k_inverse
+                         in the following specification. k and k âˆ’1 are integers in the range [1, nâ€“1].
    Process:
        1. N = len(n).
                                                 Comment: Check that N is included in Table 1 of
@@ -2666,9 +2666,9 @@ The following process or its equivalent may be used to generate a per-message se
           requested_security_strength or more. If an ERROR indication is returned, then
           return an ERROR indication, Invalid_k, and Invalid_k_inverse.
        5. Convert returned_bits to the non-negative integer c (see Appendix C.2.1).
-       6. k = (c mod (n–1)) + 1.
-       7. (status, k −1 ) = inverse(k, n).
-       8. Return status, k, and k −1 .
+       6. k = (c mod (nâ€“1)) + 1.
+       7. (status, k âˆ’1 ) = inverse(k, n).
+       8. Return status, k, and k âˆ’1 .
 
 B.5.2 Per-Message Secret Number Generation by Testing Candidates
 In this method, a random number is obtained and tested to determine that it will produce a value
@@ -2682,10 +2682,10 @@ The following process or its equivalent may b used to generate a per-message sec
    Output:
        1. status         The status returned from the key pair generation procedure. The status will
                          indicate SUCCESS or an ERROR.
-       2.   (k, k −1 )   The generated secret number k and its inverse k–1. If an error is
-                         encountered during the generation process, invalid values for k and k −1
+       2.   (k, k âˆ’1 )   The generated secret number k and its inverse kâ€“1. If an error is
+                         encountered during the generation process, invalid values for k and k âˆ’1
                          should be returned, as represented by Invalid_k and Invalid_k_inverse in
-                         the following specification. k and k −1 are integers in the range [1, n–1].
+                         the following specification. k and k âˆ’1 are integers in the range [1, nâ€“1].
    Process:
        1. N = len(n).
                                                 Comment: Check that N is included in Table 1 of
@@ -2702,10 +2702,10 @@ The following process or its equivalent may b used to generate a per-message sec
    requested_security_strength or more. If an ERROR indication is returned, then
    return an ERROR indication, Invalid_k, and Invalid_k_inverse.
 5. Convert returned_bits to the (non-negative) integer c (see Appendix C.2.1).
-6. If (c > n–2), then go to step 4.
+6. If (c > nâ€“2), then go to step 4.
 7. k = c + 1.
-8. (status, k–1) = inverse(k, n).
-9. Return status, k, and k −1 .
+8. (status, kâ€“1) = inverse(k, n).
+9. Return status, k, and k âˆ’1 .
 
 
 
@@ -2731,7 +2731,7 @@ constructing provable primes for RSA (see Appendix B.3.2.2 and B.3.4).
 
 C.1    Computation of the Inverse Value
 This algorithm or an algorithm that produces an equivalent result shall be used to compute the
-multiplicative inverse z–1 mod a, where 0 < z < a, 0 < z–1 < a, and a is a prime number. In this
+multiplicative inverse zâ€“1 mod a, where 0 < z < a, 0 < zâ€“1 < a, and a is a prime number. In this
 Standard, z is either k or s, and a is either q or n.
    Input:
        1. z                    The value to be inverted mod a (i.e., either k or s).
@@ -2739,42 +2739,42 @@ Standard, z is either k or s, and a is either q or n.
    Output:
        1. status               The status returned from this function, where the status is either
                                SUCCESS or ERROR.
-       2. z–1                  The multiplicative inverse of z mod a, if it exists.
+       2. zâ€“1                  The multiplicative inverse of z mod a, if it exists.
    Process:
        1. Verify that a and z are positive integers such that z < a; if not, return an ERROR
           indication.
        2. Set i = a, j = z, y 2 = 0, and y 1 = 1.
-       3. quotient =  i/j.
+       3. quotient = ï£° i/jï£».
 
                                                     67
-       4. remainder = i –( j * quotient).
-       5. y = y 2 –(y 1 * quotient).
+       4. remainder = i â€“( j * quotient).
+       5. y = y 2 â€“(y 1 * quotient).
        6. Set i = j, j = remainder, y 2 = y 1 , and y 1 = y.
        7. If (j > 0), then go to step 3.
-       8. If (i ≠ 1), then return an ERROR indication.
+       8. If (i â‰  1), then return an ERROR indication.
        9. Return SUCCESS and y 2 mod a.
 
 C.2    Conversion Between Bit Strings and Integers
 
 C.2.1 Conversion of a Bit String to an Integer
 
-An n-long sequence of bits { x 1 , …, xn } is converted to an integer by the rule
+An n-long sequence of bits { x 1 , â€¦, xn } is converted to an integer by the rule
 
-                 { x 1 , … , x n } → (x 1 ∗ 2                         ) + … + (n 1 ∗ 2) + x n .
-                                              n–1               n–2
-                                                    ) + (x 2 ∗ 2
+                 { x 1 , â€¦ , x n } â†’ (x 1 âˆ— 2                         ) + â€¦ + (n 1 âˆ— 2) + x n .
+                                              nâ€“1               nâ€“2
+                                                    ) + (x 2 âˆ— 2
 Note that the first bit of a sequence corresponds to the most significant bit of the corresponding
 integer, and the last bit corresponds to the least significant bit.
    Input:
 
-       1. b 1 , b 2 , … , b n    The bit string to be converted.
+       1. b 1 , b 2 , â€¦ , b n    The bit string to be converted.
    Output:
        1. C                   The requested integer representation of the bit string.
    Process:
 
-       1. Let (b 1 , b 2 , … , b n ) be the bits of b from leftmost to rightmost.
+       1. Let (b 1 , b 2 , â€¦ , b n ) be the bits of b from leftmost to rightmost.
                   n
-       2. C = ∑ 2( n−i ) bi
+       2. C = âˆ‘ 2( nâˆ’i ) bi
                  i =1
 
        3. Return C.
@@ -2782,31 +2782,31 @@ In this Standard, the binary length of an integer C is defined as the smallest i
 < 2n .
 
 C.2.2 Conversion of an Integer to a Bit String
-An integer x in the range 0 ≤ x < 2n may be converted to an n-long sequence of bits by using its
+An integer x in the range 0 â‰¤ x < 2n may be converted to an n-long sequence of bits by using its
 binary expansion as shown below:
 
 
 
                                                        68
-               x = (x 1 ∗ 2n–1) + (x 2 ∗ 2n–2) + … + (x n–1 ∗ 2) + x n → {x 1 , … , x n }
+               x = (x 1 âˆ— 2nâ€“1) + (x 2 âˆ— 2nâ€“2) + â€¦ + (x nâ€“1 âˆ— 2) + x n â†’ {x 1 , â€¦ , x n }
 Note that the first bit of a sequence corresponds to the most significant bit of the corresponding
 integer, and the last bit corresponds to the least significant bit.
    Input:
        1. C                      The non-negative integer to be converted.
    Output:
 
-       1. b 1 , b 2 , …, b n The bit string representation of the integer C.
+       1. b 1 , b 2 , â€¦, b n The bit string representation of the integer C.
    Process:
 
-       1. Let (b 1 , b 2 , …, b n ) represent the bit string, where b i = 0 or 1, and b 1 is the most
+       1. Let (b 1 , b 2 , â€¦, b n ) represent the bit string, where b i = 0 or 1, and b 1 is the most
           significant bit, while b n is the least significant bit.
        2. For any integer n that satisfies C < 2n, the bits b i shall satisfy:
                            n
-                    C = ∑ 2 ( n −i ) bi
+                    C = âˆ‘ 2 ( n âˆ’i ) bi
                           i =1
 
 
-       3. Return b 1 , b 2 , …, b n .
+       3. Return b 1 , b 2 , â€¦, b n .
 In this Standard, the binary length of the integer C is defined as the smallest integer n that
 satisfies C < 2n.
 
@@ -2846,23 +2846,23 @@ Table C.1. Minimum number of Miller-Rabin iterations for DSA
                                                                    by One Lucas test
          p: 1024 bits                                                      For p: 3
         q: 160 bits                       For p and q: 40
-     Error probability = 2 −80                                             For q: 19
+     Error probability = 2 âˆ’80                                             For q: 19
 
          p: 2048 bits
                                                                            For p: 3
          q: 224 bits                      For p and q: 56
                                                                            For q: 24
-     Error probability = 2 −112
+     Error probability = 2 âˆ’112
          p: 2048 bits
                                                                            For p: 3
          q: 256 bits                      For p and q: 56
                                                                            For q: 27
-     Error probability = 2 −112
+     Error probability = 2 âˆ’112
          p: 3072 bits
                                                                            For p: 2
          q: 256 bits                      For p and q: 64
                                                                            For q: 27
-         Error probability = 2 −128
+         Error probability = 2 âˆ’128
 
 
 
@@ -2873,17 +2873,17 @@ RSA Digital Signatures
                Parameters                                     M-R Tests Only
       p1 , p 2 , q1 and q 2 > 100 bits                   For p1 , p 2 , q1 and q 2 : 28
              p and q: 512 bits                                  For p and q: 5
-        Error probability = 2 −80
+        Error probability = 2 âˆ’80
       p1 , p 2 , q1 and q 2 > 140 bits                   For p1 , p 2 , q1 and q 2 : 38
             p and q: 1024 bits                                  For p and q: 5
-        Error probability = 2 −112
+        Error probability = 2 âˆ’112
       p1 , p 2 , q1 and q 2 > 170 bits                  For p1 , p 2 , q1 and, q 2 : 41
             p and q: 1536 bits                                  For p and q: 4
-        Error probability = 2 –128
+        Error probability = 2 â€“128
 
 
 Table C.3. Minimum number of rounds of M-R testing when generating primes for use in
-RSA Digital Signatures using an error probability of 2–100
+RSA Digital Signatures using an error probability of 2â€“100
                Parameters                                     M-R Tests Only
       p1 , p 2 , q1 and q 2 > 100 bits                   For p1 , p 2 , q1 and q 2 : 38
                p and q: 512                                     For p and q: 7
@@ -2908,18 +2908,18 @@ Let RBG be an approved random bit generator.
        1. status              The status returned from the validation procedure, where status is
                               either PROBABLY PRIME or COMPOSITE.
    Process:
-       1. Let a be the largest integer such that 2a divides w−1.
-       2. m = (w−1) / 2a.
+       1. Let a be the largest integer such that 2a divides wâˆ’1.
+       2. m = (wâˆ’1) / 2a.
        3. wlen = len (w).
        4. For i = 1 to iterations do
           4.1   Obtain a string b of wlen bits from an RBG.
-                                              Comment: Ensure that 1 < b < w−1.
-          4.2   If ((b ≤ 1) or (b ≥ w−1)), then go to step 4.1.
+                                              Comment: Ensure that 1 < b < wâˆ’1.
+          4.2   If ((b â‰¤ 1) or (b â‰¥ wâˆ’1)), then go to step 4.1.
           4.3   z = bm mod w.
-          4.4   If ((z = 1) or (z = w − 1)), then go to step 4.7.
-          4.5   For j = 1 to a − 1 do.
+          4.4   If ((z = 1) or (z = w âˆ’ 1)), then go to step 4.7.
+          4.5   For j = 1 to a âˆ’ 1 do.
                 4.5.1   z = z2 mod w.
-                4.5.2   If (z = w−1), then go to step 4.7.
+                4.5.2   If (z = wâˆ’1), then go to step 4.7.
                 4.5.3   If (z = 1), then go to step 4.6.
           4.6 Return COMPOSITE.
           4.7 Continue.                               Comment: Increment i for the do-loop in
@@ -2947,32 +2947,32 @@ Output:
 
 
 Process:
-   1. Let a be the largest integer such that 2a divides w–1.
-   2. m = (w–1) / 2a.
+   1. Let a be the largest integer such that 2a divides wâ€“1.
+   2. m = (wâ€“1) / 2a.
    3. wlen = len (w).
    4. For i = 1 to iterations do
       4.1   Obtain a string b of wlen bits from an RBG.
-                                             Comment: Ensure that 1 < b < w–1.
-      4.2   If ((b ≤ 1) or (b ≥ w–1)), then go to step 4.1.
+                                             Comment: Ensure that 1 < b < wâ€“1.
+      4.2   If ((b â‰¤ 1) or (b â‰¥ wâ€“1)), then go to step 4.1.
       4.3   g = GCD(b, w).
       4.4   If (g > 1), then return PROVABLY COMPOSITE WITH FACTOR and the
             value of g.
       4.5   z = bm mod w.
-      4.6   If ((z = 1) or (z = w – 1)), then go to step 4.15.
-      4.7 For j = 1 to a – 1 do.
-            4.7.1    x = z.                  Comment: x ≠ 1 and x ≠ w–1.
+      4.6   If ((z = 1) or (z = w â€“ 1)), then go to step 4.15.
+      4.7 For j = 1 to a â€“ 1 do.
+            4.7.1    x = z.                  Comment: x â‰  1 and x â‰  wâ€“1.
             4.7.2    z = x2 mod w.
-            4.7.3    If (z = w–1), then go to step 4.15.
+            4.7.3    If (z = wâ€“1), then go to step 4.15.
             4.7.4    If (z = 1), then go to step 4.12.
-      4.8   x = z.                           Comment: x = b(w–1)/2 mod w and x ≠ w–1.
+      4.8   x = z.                           Comment: x = b(wâ€“1)/2 mod w and x â‰  wâ€“1.
       4.9   z = x2 mod w.
       4.10 If (z = 1), then go to step 4.12.
-      4.11 x = z.                            Comment: x = b(w–1) mod w and x ≠ 1.
+      4.11 x = z.                            Comment: x = b(wâ€“1) mod w and x â‰  1.
 
 
 
                                                73
-            4.12 g = GCD(x–1, w).
+            4.12 g = GCD(xâ€“1, w).
             4.13 If (g > 1), then return PROVABLY COMPOSITE WITH FACTOR and the
                  value of g.
             4.14 Return PROVABLY COMPOSITE AND NOT A POWER OF A PRIME.
@@ -2989,17 +2989,17 @@ The following process or its equivalent shall be used as the Lucas test.
    Process:
        1. Test whether C is a perfect square (see Appendix C.4). If so, return (COMPOSITE).
 
-       2. Find the first D in the sequence {5, –7, 9, –11, 13, –15, 17, …} for which the Jacobi
+       2. Find the first D in the sequence {5, â€“7, 9, â€“11, 13, â€“15, 17, â€¦} for which the Jacobi
                       ()
-          symbol CD = –1. See Appendix C.5 for an approved method to compute the Jacobi
+          symbol CD = â€“1. See Appendix C.5 for an approved method to compute the Jacobi
                            ()
             Symbol. If CD = 0 for any D in the sequence, return (COMPOSITE).
 
        3. K = C+1.
 
-       4. Let K r K r – 1 … K 0 be the binary expansion of K, with K r = 1.
+       4. Let K r K r â€“ 1 â€¦ K 0 be the binary expansion of K, with K r = 1.
        5. Set U r = 1 and V r = 1.
-       6. For i = r–1 to 0, do
+       6. For i = râ€“1 to 0, do
             6.1 U temp = U i+1 V i+1 mod C.
                             Vi +1 2 + DU i +1 2
             6.2 V temp =                        mod C.
@@ -3021,7 +3021,7 @@ The following process or its equivalent shall be used as the Lucas test.
          7. If (U 0 = 0), then return (PROBABLY PRIME). Otherwise, return (COMPOSITE).
 Steps 6.2, 6.3.1 and 6.3.2 contain expressions of the form A/2 mod C, where A is an integer, and
 C is an odd integer. If A/2 is not an integer (i.e., A is odd), then A/2 mod C may be calculated as
-(A+C)/2 mod C. Alternatively, A/2 mod C = A·(C+1)/2 mod C, for any integer A, without regard
+(A+C)/2 mod C. Alternatively, A/2 mod C = AÂ·(C+1)/2 mod C, for any integer A, without regard
 to A being odd or even.
 
 C.4      Checking for a Perfect Square
@@ -3032,15 +3032,15 @@ Input:
 Output:
    status Where status is either PERFECT SQUARE or NOT A PERFECT SQUARE.
 Process:
-   1. Set n, such that 2n > C ≥ 2(n−1).
-   2. m = n/2.
+   1. Set n, such that 2n > C â‰¥ 2(nâˆ’1).
+   2. m = ï£®n/2ï£¹.
    3. i = 0.
-   4. Select X 0, such that 2m > X 0 ≥ 2(m−1).
+   4. Select X 0, such that 2m > X 0 â‰¥ 2(mâˆ’1).
    5. Repeat
              5.1   i = i + 1.
-             5.2   X i = ((X i–1 )2 + C)/(2X i–1 ).
+             5.2   X i = ((X iâ€“1 )2 + C)/(2X iâ€“1 ).
          Until (X i )2 < 2m + C.
-   6. If C =  X i  2, then
+   6. If C = ï£° X i ï£» 2, then
              status = PERFECT SQUARE.
          Else
              status = NOT A PERFECT SQUARE.
@@ -3048,33 +3048,33 @@ Process:
                                                             75
    7. Return status.
 Notes:
-   1. By starting with X 0 > (1/2) Sqrt(C), X 0 − Sqrt(C)is guaranteed to be less than X 0 .
-      This inequality is maintained in step 5; i.e., X i − Sqrt(C)< X i for all i.
-   2. For i ≥ 1, 0 ≤ X i − Sqrt(C) = (X i–1 − Sqrt(C))2 / (2 X i–1 ) < X 0 /2i .
-         In particular, 0 ≤ X m − Sqrt(C) < 1. If Sqrt(C) were an integer, then it would
+   1. By starting with X 0 > (1/2) Sqrt(C), ï£´X 0 âˆ’ Sqrt(C)ï£´is guaranteed to be less than X 0 .
+      This inequality is maintained in step 5; i.e., ï£´X i âˆ’ Sqrt(C)ï£´< X i for all i.
+   2. For i â‰¥ 1, 0 â‰¤ X i âˆ’ Sqrt(C) = (X iâ€“1 âˆ’ Sqrt(C))2 / (2 X iâ€“1 ) < X 0 /2i .
+         In particular, 0 â‰¤ X m âˆ’ Sqrt(C) < 1. If Sqrt(C) were an integer, then it would
          be equal to the floor of X m .
-   3. In general, the inequality X i − Sqrt(C) < 1 will occur for values of i that are much less
-      than m. To detect this, the fact that 2(m−1) ≤ Sqrt(C) < X i for all i ≥ 1 can be used,
-             X i − Sqrt(C) = ((X i )2 − C)/( X i + Sqrt(C))
-                     ≤ ((X i )2 − C)/( 2 Sqrt(C))
-                     ≤ ((X i )2 − C)/(2m)
+   3. In general, the inequality X i âˆ’ Sqrt(C) < 1 will occur for values of i that are much less
+      than m. To detect this, the fact that 2(mâˆ’1) â‰¤ Sqrt(C) < X i for all i â‰¥ 1 can be used,
+             X i âˆ’ Sqrt(C) = ((X i )2 âˆ’ C)/( X i + Sqrt(C))
+                     â‰¤ ((X i )2 âˆ’ C)/( 2 Sqrt(C))
+                     â‰¤ ((X i )2 âˆ’ C)/(2m)
 
-         Thus, the condition (X i )2 < 2m + C implies that X i − Sqrt(C) < 1.
+         Thus, the condition (X i )2 < 2m + C implies that X i âˆ’ Sqrt(C) < 1.
 
 C.5      Jacobi Symbol Algorithm
-                                        a
-This routine computes the Jacobi symbol   .
-                                        n
+                                        ï£«aï£¶
+This routine computes the Jacobi symbol ï£¬ ï£· .
+                                        ï£­nï£¸
 Jacobi( ):
    Input:
-         a       Any integer. For this Standard, the initial value is in the sequence {5, –7, 9, –11,
-                 13, –15, 17, …}, as determined by Appendix C.3.3.
+         a       Any integer. For this Standard, the initial value is in the sequence {5, â€“7, 9, â€“11,
+                 13, â€“15, 17, â€¦}, as determined by Appendix C.3.3.
          n       Any integer. For this Standard, the initial value is the candidate being tested, as
                  determined by Appendix C.3.3.
    Output:
          result The calculated Jacobi symbol.
    Process:
-         1. a = a mod n.                            Comment: a will be in the range 0 ≤ a < n.
+         1. a = a mod n.                            Comment: a will be in the range 0 â‰¤ a < n.
          2. If a = 1, or n = 1, then return (1).
          3. If a = 0, then return (0).
                                               e
@@ -3083,9 +3083,9 @@ Jacobi( ):
 
                                                       76
        5. If e is even, then s = 1.
-             Else if ((n ≡ 1 (mod 8)) or (n ≡ 7 (mod 8))), then s = 1.
-             Else if ((n ≡ 3 (mod 8)) or (n ≡ 5 (mod 8)), then s = –1.
-       6. If ((n ≡ 3 (mod 4)) and (a 1 ≡ 3 (mod 4))), then s = –s.
+             Else if ((n â‰¡ 1 (mod 8)) or (n â‰¡ 7 (mod 8))), then s = 1.
+             Else if ((n â‰¡ 3 (mod 8)) or (n â‰¡ 5 (mod 8)), then s = â€“1.
+       6. If ((n â‰¡ 3 (mod 4)) and (a 1 â‰¡ 3 (mod 4))), then s = â€“s.
        7. n 1 = n mod a 1 .
        8. Return (s * Jacobi (n 1 , a 1 )).         Comment: Call this routine recursively.
 Example: Compute the Jacobi symbol for a = 5 and n = 3439601197:
@@ -3100,13 +3100,13 @@ Example: Compute the Jacobi symbol for a = 5 and n = 3439601197:
        7.1     n is not 1, and a is not 1, so proceed to Step 7.2.
        7.2     a is not 0, so proceed to Step 7.3.
        7.3     2 = 21 * 1, so e = 1, and a 1 = 1.
-       7.4     e is odd, and n ≡ 5 (mod 8), so set s = –1.
+       7.4     e is odd, and n â‰¡ 5 (mod 8), so set s = â€“1.
        7.5     n is not 3 mod 4, and a 1 is not 3 mod 4, so proceed to step 7.6.
        7.6     n 1 = 0 = n mod 1.
-       7.7     Return (–1 * Jacobi(0, 1) = –1). This calls Jacobi recursively. Compute the Jacobi
+       7.7     Return (â€“1 * Jacobi(0, 1) = â€“1). This calls Jacobi recursively. Compute the Jacobi
                symbol for a = 0 and n = 1:
                7.7.1   n = 1, so return 1.
-Thus, Jacobi (0,1) = 1, so Jacobi (2,5) = –1*(1) = –1, and Jacobi (5, 3439601197) = 1* (–1) = –1.
+Thus, Jacobi (0,1) = 1, so Jacobi (2,5) = â€“1*(1) = â€“1, and Jacobi (5, 3439601197) = 1* (â€“1) = â€“1.
 
 C.6    Shawe-Taylor Random_Prime Routine
 This routine is recursive and may be used to construct a provable prime number using a hash
@@ -3137,14 +3137,14 @@ ST_Random_Prime ( ):
                                      prime.
    Process:
        1. If (length < 2), then return (FAILURE, 0, 0 {, 0}).
-       2. If (length ≥ 33), then go to step 14.
+       2. If (length â‰¥ 33), then go to step 14.
        3. prime_seed = input_seed.
        4. prime_gen_counter = 0.
                                                         Comment: Generate a pseudorandom integer
                                                         c of length bits.
-       5. c = Hash(prime_seed) ⊕ Hash(prime_seed + 1).
-       6. c = 2length – 1 + (c mod 2length – 1).
-       7. c = (2 ∗ c / 2 ) + 1.
+       5. c = Hash(prime_seed) âŠ• Hash(prime_seed + 1).
+       6. c = 2length â€“ 1 + (c mod 2length â€“ 1).
+       7. c = (2 âˆ— ï£°c / 2ï£» ) + 1.
                                                                Comment: Set prime to the least odd
                                                                integer greater than or equal to c.
        8. prime_gen_counter = prime_gen_counter + 1.
@@ -3159,42 +3159,42 @@ ST_Random_Prime ( ):
 11. If (c is a prime number), then
     11.1     prime = c.
     11.2     Return (SUCCESS, prime, prime_seed {, prime_gen_counter}).
-12. If (prime_gen_counter > (4 ∗ length)), then return (FAILURE, 0, 0 {, 0}).
+12. If (prime_gen_counter > (4 âˆ— length)), then return (FAILURE, 0, 0 {, 0}).
 13. Go to step 5.
-14. (status, c 0 , prime_seed, prime_gen_counter) = (ST_Random_Prime (( length / 2
+14. (status, c 0 , prime_seed, prime_gen_counter) = (ST_Random_Prime (( ï£®length / 2ï£¹
     + 1), input_seed).
 15. If FAILURE is returned, return (FAILURE, 0, 0 {, 0}).
-16. iterations = length / outlen – 1.
+16. iterations = ï£®length / outlenï£¹ â€“ 1.
 17. old_counter = prime_gen_counter.
                                                        Comment: Generate a pseudorandom integer
-                                                       x in the interval [2length – 1, 2length].
+                                                       x in the interval [2length â€“ 1, 2length].
 18. x = 0.
 19. For i = 0 to iterations do
-    x = x + (Hash(prime_seed + i) ∗ 2i × outlen).
+    x = x + (Hash(prime_seed + i) âˆ— 2i Ã— outlen).
 20. prime_seed = prime_seed + iterations + 1.
-21. x = 2length – 1 + (x mod 2length – 1).
+21. x = 2length â€“ 1 + (x mod 2length â€“ 1).
                                                        Comment: Generate a candidate prime c in
-                                                       the interval [2length – 1, 2length].
-22. t = x / (2c 0 ).
-23. If (2tc 0 + 1 > 2length), then t = 2length – 1 / (2c 0 ).
+                                                       the interval [2length â€“ 1, 2length].
+22. t = ï£®x / (2c 0 )ï£¹.
+23. If (2tc 0 + 1 > 2length), then t = ï£®2length â€“ 1 / (2c 0 )ï£¹.
 24. c = 2tc 0 + 1.
 25. prime_gen_counter = prime_gen_counter + 1.
                                                        Comment: Test the candidate prime c for
                                                        primality; first pick an integer a between 2
-                                                       and c – 2.
+                                                       and c â€“ 2.
 26. a = 0.
 27. For i = 0 to iterations do
-    a = a + (Hash(prime_seed + i) ∗ 2 i * outlen).
+    a = a + (Hash(prime_seed + i) âˆ— 2 i * outlen).
 
 
                                                  79
        28. prime_seed = prime_seed + iterations + 1.
-       29. a = 2 + (a mod (c – 3)).
+       29. a = 2 + (a mod (c â€“ 3)).
        30. z = a2t mod c.
-       31. If ((1 = GCD(z – 1, c)) and (1 = z c0 mod c)), then
+       31. If ((1 = GCD(z â€“ 1, c)) and (1 = z c0 mod c)), then
            31.1    prime = c.
            31.2    Return (SUCCESS, prime, prime_seed {, prime_gen_counter}).
-       32. If (prime_gen_counter ≥ ((4 ∗ length) + old_counter)), then return (FAILURE, 0, 0
+       32. If (prime_gen_counter â‰¥ ((4 âˆ— length) + old_counter)), then return (FAILURE, 0, 0
            {, 0}).
        33. t = t + 1.
        34. Go to step 23.
@@ -3213,7 +3213,7 @@ To prove that c is prime:
 
 C.8    Sieve Procedure
 
-A sieve procedure is described as follows: Given a sequence of integers Y 0 , Y 0 + 1, … , Y 0 + J, a
+A sieve procedure is described as follows: Given a sequence of integers Y 0 , Y 0 + 1, â€¦ , Y 0 + J, a
 sieve will identify the integers in the sequence that are divisible by primes up to some selected
 limit.
 Note that the definitions of the mathematical symbols in this process (e.g., h, L, M, p) are
@@ -3228,7 +3228,7 @@ would be anywhere from 103 to 105.
                                                  80
    1. Compute S j =Y 0 mod p j for all p j in the factor base.
    2. Initialize an array of length J + 1 to zero.
-   3. Starting at Y 0 – S j + p j , let every p j th element of the array be set to 1. Do this for the
+   3. Starting at Y 0 â€“ S j + p j , let every p j th element of the array be set to 1. Do this for the
       entire length of the array and for every j.
    4. When finished, every location in the array that has the value 1 is divisible by some small
       prime, and is therefore a composite.
@@ -3240,19 +3240,19 @@ The amount of work for this procedure is approximately M log log L, where M is t
 the sieve interval; this is a very efficient procedure for removing composite candidates for
 primality testing. If L = 105, the sieve will remove about 96% of all composites.
 In some cases, rather than having a set of consecutive integers to sieve, the set of integers to be
-tested consists of integers lying in an arithmetic progression Y 0 , Y 0 + h, Y 0 + 2h, …, Y 0 + Jh,
+tested consists of integers lying in an arithmetic progression Y 0 , Y 0 + h, Y 0 + 2h, â€¦, Y 0 + Jh,
 where h is large and not divisible by any primes in the factor base.
    1. Select a factor base and initialize an array of length J + 1 to 0.
    2. Compute S j =Y 0 mod p j for all p j in the factor base.
-   3. Compute T j = h mod p j and r = – S j T j – 1 mod p j .
+   3. Compute T j = h mod p j and r = â€“ S j T j â€“ 1 mod p j .
    4. Starting at Y 0 + r, let every p j th element of the array be set to 1. Do this for the entire
       length of the array and for every j. Note that the position Y 0 + r in the array actually
       denotes the number Y 0 + rh.
    5. When finished, every location in the array that has the value 1 is divisible by some small
       prime and is therefore composite.
-Note: The prime “2” takes the longest amount of time (M/2) to sieve, since it touches the most
+Note: The prime â€œ2â€ takes the longest amount of time (M/2) to sieve, since it touches the most
 locations in the sieve array. An easy optimization is to combine the initialization of the sieve
-array with the sieving of the prime “2”. It is also possible to sieve the prime “3” during
+array with the sieving of the prime â€œ2â€. It is also possible to sieve the prime â€œ3â€ during
 initialization. These optimizations can save about 1/3 of the total sieve time.
 
 C.9    Compute a Probable Prime Factor Based on Auxiliary Primes
@@ -3260,7 +3260,7 @@ This routine constructs a probable prime (a candidate for p or q) using two auxi
 numbers and the Chinese Remainder Theorem (CRT).
    Input:
        r 1 and r 2              Two odd prime numbers satisfying
-                                log 2 (r 1 r 2 ) ≤ (nlen/2) – log 2 (nlen/2) – 6.
+                                log 2 (r 1 r 2 ) â‰¤ (nlen/2) â€“ log 2 (nlen/2) â€“ 6.
 
 
                                                      81
@@ -3276,22 +3276,22 @@ Output:
    X                          The random number used during the generation of the
                               private_prime_factor.
 Process:
-   1. If (GCD(2r 1 , r 2 ) ≠ 1), then return (FAILURE, 0, 0).
-   2. R = ((r 2 –1 mod 2r 1 ) * r 2 ) – (((2r 1 )–1 mod r 2 ) * 2r 1 ).
-                                                 Comment: Apply the CRT, so that R ≡ 1 (mod 2r 1 )
-                                                 and R ≡ –1 (mod r 2 ).
+   1. If (GCD(2r 1 , r 2 ) â‰  1), then return (FAILURE, 0, 0).
+   2. R = ((r 2 â€“1 mod 2r 1 ) * r 2 ) â€“ (((2r 1 )â€“1 mod r 2 ) * 2r 1 ).
+                                                 Comment: Apply the CRT, so that R â‰¡ 1 (mod 2r 1 )
+                                                 and R â‰¡ â€“1 (mod r 2 ).
    3. Generate a random number X using an approved random number generator that
                                                            ( )(           )    (
-      supports the security_ strength, such that 2 2 nlen / 2−1 ≤ X ≤ 2 nlen / 2 − 1 .   )
-   4. Y = X + ((R – X) mod 2r 1 r 2 ).           Comment: Y is the first odd integer ≥ X, such that r 1
-                                                 is a prime factor of Y–1, and r 2 is a prime factor of
+      supports the security_ strength, such that 2 2 nlen / 2âˆ’1 â‰¤ X â‰¤ 2 nlen / 2 âˆ’ 1 .   )
+   4. Y = X + ((R â€“ X) mod 2r 1 r 2 ).           Comment: Y is the first odd integer â‰¥ X, such that r 1
+                                                 is a prime factor of Yâ€“1, and r 2 is a prime factor of
                                                  Y+1.
                                                  Comment: Determine the requested prime number
                                                  by constructing candidates from a sequence and
                                                  performing primality tests.
    5. i = 0.
-   6. If (Y ≥ 2nlen/2), then go to step 3.
-   7. If (GCD(Y–1, e) = 1), then
+   6. If (Y â‰¥ 2nlen/2), then go to step 3.
+   7. If (GCD(Yâ€“1, e) = 1), then
        7.1     Check the primality of Y as specified in Appendix C.3. If PROBABLY PRIME
                is not returned, go to step 8.
        7.2     private_prime_factor = Y.
@@ -3300,7 +3300,7 @@ Process:
 
 
                                                     82
-       9. If (i ≥ 5(nlen/2)), then return (FAILURE, 0, 0).
+       9. If (i â‰¥ 5(nlen/2)), then return (FAILURE, 0, 0).
        10. Y = Y + (2r 1 r 2 ).
        11. Go to step 6.
 
@@ -3310,15 +3310,15 @@ The following process (or its equivalent) shall be used to generate an L-bit pro
 candidate for one of the prime factors of an RSA modulus). Note that the use of p in this
 specification is used generically; both RSA prime factors p and q may be generated using this
 method.
-If a so-called “strong prime” is required, this process can generate primes p 1 and p 2 (of specified
-bit-lengths N 1 and N 2 ) that divide p−1 and p+1, respectively. The resulting prime p will satisfy
+If a so-called â€œstrong primeâ€ is required, this process can generate primes p 1 and p 2 (of specified
+bit-lengths N 1 and N 2 ) that divide pâˆ’1 and p+1, respectively. The resulting prime p will satisfy
 the conditions traditionally required of a strong prime, provided that the requested bit-lengths for
 p 1 and p 2 have appropriate sizes.
-Regardless of the bit-lengths selected for p 1 and p 2 , the quantity p−1 will have a prime divisor p 0
+Regardless of the bit-lengths selected for p 1 and p 2 , the quantity pâˆ’1 will have a prime divisor p 0
 whose bit-length is slightly more than half that of p. In addition, the quantity
-p 0 −1 will have a prime divisor whose bit-length is slightly more than half that of p 0 .
-This algorithm requires that N 1 + N 2 ≤ L – L/2 – 4. Values for N 1 and N 2 should be chosen
-such that N 1 + N 2 ≤ (L/2) – log 2 (L) – 7, to ensure that the algorithm can generate as many as 5L
+p 0 âˆ’1 will have a prime divisor whose bit-length is slightly more than half that of p 0 .
+This algorithm requires that N 1 + N 2 â‰¤ L â€“ ï£®L/2ï£¹ â€“ 4. Values for N 1 and N 2 should be chosen
+such that N 1 + N 2 â‰¤ (L/2) â€“ log 2 (L) â€“ 7, to ensure that the algorithm can generate as many as 5L
 distinct candidates for p.
 Let Hash be the selected hash function to be used, and let outlen be the bit length of the hash
 function output block.
@@ -3328,12 +3328,12 @@ Provable_Prime_Construction():
                                   acceptable values for L= nlen/2 are computed as specified in
                                   Appendix B.3.1, criteria 2(b) and (c), with nlen assuming a value
                                   specified in Table B.1.
-       2. N 1                     A positive integer equal to the requested bit-length for p 1 . If N 1 ≥
+       2. N 1                     A positive integer equal to the requested bit-length for p 1 . If N 1 â‰¥
                                   2, then p 1 is an odd prime of N 1 bits; otherwise, p 1 = 1. Acceptable
-                                  values for N 1 ≥ 2 are provided in Table B.1
-       3. N 2                     A positive integer equal to the requested bit-length for p 2 . If N 2 ≥
+                                  values for N 1 â‰¥ 2 are provided in Table B.1
+       3. N 2                     A positive integer equal to the requested bit-length for p 2 . If N 2 â‰¥
                                   2, then p 2 is an odd prime of N 2 bits; otherwise, p 2 = 1.
-                                  Acceptable values for N 2 ≥ 2 are provided in Table B.1
+                                  Acceptable values for N 2 â‰¥ 2 are provided in Table B.1
        4. firstseed               A bit string equal to the first seed to be used.
 
 
@@ -3344,7 +3344,7 @@ Output:
                             either SUCCESS or FAILURE. If FAILURE is returned, then
                             zeros are returned as the other output values.
    2. p, p 1 , p 2          The required prime p, along with p 1 and p 2 having the property
-                            that p 1 divides p−1 and p 2 divides p+1.
+                            that p 1 divides pâˆ’1 and p 2 divides p+1.
    3. pseed                 A seed determined during generation.
 
 
@@ -3355,59 +3355,59 @@ Process:
    2. If N 1 = 1, then
        2.1 p 1 = 1.
        2.2 p 2 seed = firstseed.
-   3. If N 1 ≥ 2, then
+   3. If N 1 â‰¥ 2, then
        3.1 Using N 1 as the length and firstseed as the input_seed, use the random prime
             generation routine in Appendix C.6 to obtain p 1 and p 2 seed.
        3.2 If FAILURE is returned, then return (FAILURE, 0, 0, 0, 0).
    4. If N 2 = 1, then
        4.1 p 2 = 1.
        4.2 p 0 seed = p 2 seed.
-   5. If N 2 ≥ 2, then
+   5. If N 2 â‰¥ 2, then
        5.1 Using N 2 as the length and p 2 seed as the input_seed, use the random prime
             generation routine in Appendix C.6 to obtain p 2 and p 0 seed.
        5.2 If FAILURE is returned, then return (FAILURE, 0, 0, 0, 0).
-   6. Using L / 2 + 1 as the length and p 0 seed as the input_seed, use the random prime
+   6. Using ï£®L / 2ï£¹ + 1 as the length and p 0 seed as the input_seed, use the random prime
       generation routine in Appendix C.6 to obtain p 0 and pseed. If FAILURE is returned,
       then return (FAILURE, 0, 0, 0, 0).
                                            Comment: Generate a (strong) prime p in the
-                                           interval [( 2 )(2L−1), 2L −1].
+                                           interval [( 2 )(2Lâˆ’1), 2L âˆ’1].
 
                                              84
-7. iterations = L / outlen −1.
+7. iterations = ï£®L / outlenï£¹ âˆ’1.
 8. pgen_counter = 0.
                                                Comment: Generate pseudo-random x in the
-                                               interval [( 2 )(2L−1)−1, 2L −1].
+                                               interval [( 2 )(2Lâˆ’1)âˆ’1, 2L âˆ’1].
 9. x = 0.
 10. For i = 0 to iterations do
-         x = x + (Hash(pseed + i))∗ 2 i * outlen.
+         x = x + (Hash(pseed + i))âˆ— 2 i * outlen.
 11. pseed = pseed + iterations + 1.
-12. x = ( 2 )(2L−1) + ( x mod (2L − ( 2 )(2L−1) ) ).
+12. x = ï£°( 2 )(2Lâˆ’1)ï£» + ( x mod (2L âˆ’ ï£°( 2 )(2Lâˆ’1)ï£» ) ).
                                                Comment: Generate a candidate for the prime p.
-13. If (GCD(p 0 p 1 , p 2 ) ≠ 1), then return (FAILURE, 0, 0, 0, 0).
-14. Compute y in the interval [1, p 2 ] such that 0 = ( y p 0 p 1 –1) mod p 2 .
-15. t = ((2 y p 0 p 1 ) + x)/(2 p 0 p 1 p 2 ).
-16. If ((2(t p 2 − y) p 0 p 1 + 1) > 2L), then
-         t = ( (2 y p 0 p 1 ) + ( 2 )(2L−1) ) / (2 p 0 p 1 p 2 ).
+13. If (GCD(p 0 p 1 , p 2 ) â‰  1), then return (FAILURE, 0, 0, 0, 0).
+14. Compute y in the interval [1, p 2 ] such that 0 = ( y p 0 p 1 â€“1) mod p 2 .
+15. t = ï£®((2 y p 0 p 1 ) + x)/(2 p 0 p 1 p 2 )ï£¹.
+16. If ((2(t p 2 âˆ’ y) p 0 p 1 + 1) > 2L), then
+         t = ï£®( (2 y p 0 p 1 ) + ï£°( 2 )(2Lâˆ’1)ï£» ) / (2 p 0 p 1 p 2 )ï£¹.
                                                Comment: p satisfies
-                                                 0 = ( p–1) mod (2p 0 p 1 ) and
+                                                 0 = ( pâ€“1) mod (2p 0 p 1 ) and
                                                  0 = ( p+1) mod p 2 .
-17. p = 2(t p 2 − y) p 0 p 1 + 1.
+17. p = 2(t p 2 âˆ’ y) p 0 p 1 + 1.
 18. pgen_counter = pgen_counter + 1.
-19. If (GCD(p–1, e) = 1), then
-                                               Comment: Choose an integer a in the interval [2, p–
+19. If (GCD(pâ€“1, e) = 1), then
+                                               Comment: Choose an integer a in the interval [2, pâ€“
                                                2].
     19.1      a=0
     19.2      For i = 0 to iterations do
-                a = a + (Hash(pseed + i))∗ 2 i * outlen.
+                a = a + (Hash(pseed + i))âˆ— 2 i * outlen.
     19.3      pseed = pseed + iterations + 1.
-    19.4      a = 2 + (a mod (p–3)).
+    19.4      a = 2 + (a mod (pâ€“3)).
                                                Comment: Test p for primality:
-    19.5       z = a2(t p2 − y) p1 mod p.
+    19.5       z = a2(t p2 âˆ’ y) p1 mod p.
 
                                                    85
-    19.6      If ((1 = GCD(z–1, p)) and (1 = (z p0 mod p)), then return (SUCCESS, p, p 1 ,
+    19.6      If ((1 = GCD(zâ€“1, p)) and (1 = (z p0 mod p)), then return (SUCCESS, p, p 1 ,
            p 2 , pseed).
-20. If (pgen_counter ≥ 5L), then return (FAILURE, 0, 0, 0, 0).
+20. If (pgen_counter â‰¥ 5L), then return (FAILURE, 0, 0, 0, 0).
 21. t = t + 1.
 22. Go to step 16.
 
@@ -3436,10 +3436,10 @@ All of the curves given below have cofactors 1, 2, or 4. As a result, the privat
 for a curve are approximately the same length.
 D.1.1.2 Choice of Underlying Fields
 For each key length, two kinds of fields are provided.
-   •   A prime field is the field GF(p), which contains a prime number p of elements. The
+   â€¢   A prime field is the field GF(p), which contains a prime number p of elements. The
        elements of this field are the integers modulo p, and the field arithmetic is implemented
        in terms of the arithmetic of integers modulo p.
-   •   A binary field is the field GF(2m), which contains 2m elements for some m (called the
+   â€¢   A binary field is the field GF(2m), which contains 2m elements for some m (called the
        degree of the field). The elements of this field are the bit strings of length m, and the field
        arithmetic is implemented in terms of operations on the bits.
 The security strengths for five ranges of the bit length of n is provided in SP 800-57. For the
@@ -3456,35 +3456,35 @@ expansion of the integer p. Column 3 provides the value of m for the curves over
                                                  87
 Table D-1: Bit Lengths of the Underlying Fields of the Recommended Curves
         Bit Length of n                  Prime Field                            Binary Field
-          161 – 223                      len(p) = 192                               m = 163
-          224 – 255                      len(p) = 224                               m = 233
-          256 – 383                      len(p) = 256                               m = 283
-          384 – 511                      len(p) = 384                               m = 409
-             ≥ 512                       len(p) = 521                               m = 571
+          161 â€“ 223                      len(p) = 192                               m = 163
+          224 â€“ 255                      len(p) = 224                               m = 233
+          256 â€“ 383                      len(p) = 256                               m = 283
+          384 â€“ 511                      len(p) = 384                               m = 409
+             â‰¥ 512                       len(p) = 521                               m = 571
 
 
 D.1.1.3 Choice of Basis for Binary Fields
 To describe the arithmetic of a binary field, it is first necessary to specify how a bit string is to be
 interpreted. This is referred to as choosing a basis for the field. There are two common types of
 bases: a polynomial basis and a normal basis.
-    •    A polynomial basis is specified by an irreducible polynomial modulo 2, called the field
-         polynomial. The bit string (a m–1 … a 2 a 1 a 0 ) is taken to represent the polynomial
+    â€¢    A polynomial basis is specified by an irreducible polynomial modulo 2, called the field
+         polynomial. The bit string (a mâ€“1 â€¦ a 2 a 1 a 0 ) is taken to represent the polynomial
 
-                                    a m–1 t m–1 + …+ a 2 t2 + a 1 t + a 0
+                                    a mâ€“1 t mâ€“1 + â€¦+ a 2 t2 + a 1 t + a 0
          over GF(2). The field arithmetic is implemented as polynomial arithmetic modulo p(t),
          where p(t) is the field polynomial.
-    •    A normal basis is specified by an element θ of a particular kind. The bit string (a 0 a 1 a 2
-         … a m–1 ) is taken to represent the element
+    â€¢    A normal basis is specified by an element Î¸ of a particular kind. The bit string (a 0 a 1 a 2
+         â€¦ a mâ€“1 ) is taken to represent the element
 
-                              a 0 θ + a 1 θ 2 + a 2 θ 2 + … + a m–1 θ 2
-                                                   2                      m–1
+                              a 0 Î¸ + a 1 Î¸ 2 + a 2 Î¸ 2 + â€¦ + a mâ€“1 Î¸ 2
+                                                   2                      mâ€“1
                                                                                 .
          Normal basis field arithmetic is not easy to describe or efficient to implement in general,
          except for a special class called Type T low-complexity normal bases. For a given field
          degree m, the choice of T specifies the basis and the field arithmetic (see Appendix D.3).
 There are many polynomial bases and normal bases from which to choose. The following
 procedures are commonly used to select a basis representation.
-    •    Polynomial Basis: If an irreducible trinomial tm + tk + 1 exists over GF (2), then the field
+    â€¢    Polynomial Basis: If an irreducible trinomial tm + tk + 1 exists over GF (2), then the field
          polynomial p(t) is chosen to be the irreducible trinomial with the lowest-degree middle
          term tk . If no irreducible trinomial exists, then a pentanomial t m + t a + t b + t c + 1 is
          selected. The particular pentanomial chosen has the following properties: the second term
@@ -3494,20 +3494,20 @@ procedures are commonly used to select a basis representation.
 
 
                                                    88
-       •   Normal Basis: Choose the Type T low-complexity normal basis with the smallest T.
+       â€¢   Normal Basis: Choose the Type T low-complexity normal basis with the smallest T.
 For each binary field, the parameters are given for the above basis representations.
 D.1.1.4 Choice of Curves
 Two kinds of curves are given:
-       •   Pseudo-random curves are those whose coefficients are generated from the output of a
+       â€¢   Pseudo-random curves are those whose coefficients are generated from the output of a
            seeded cryptographic hash function. If the domain parameter seed value is given along
            with the coefficients, it can be easily verified that the coefficients were generated by that
            method.
-       •   Special curves are those whose coefficients and underlying field have been selected to
+       â€¢   Special curves are those whose coefficients and underlying field have been selected to
            optimize the efficiency of the elliptic curve operations.
 For each curve size range, the following curves are given:
-       → A pseudo-random curve over GF(p).
-       → A pseudo-random curve over GF(2m).
-       → A special curve over GF(2m) called a Koblitz curve or anomalous binary curve.
+       â†’ A pseudo-random curve over GF(p).
+       â†’ A pseudo-random curve over GF(2m).
+       â†’ A special curve over GF(2m) called a Koblitz curve or anomalous binary curve.
 The pseudo-random curves were generated as specified in ANS X9.62 using SHA-1.
 D.1.1.5 Choice of Base Points
 Any point of order n can serve as the base point. Each curve is supplied with a sample base
@@ -3516,23 +3516,23 @@ separation of networks. See ANS X9.62 or IEEE Standard 1363-2000.
 
 D.1.2 Curves over Prime Fields
 For each prime p, a pseudo-random curve
-                                            E : y2 ≡ x3 – 3x +b (mod p)
+                                            E : y2 â‰¡ x3 â€“ 3x +b (mod p)
 of prime order n is listed 4. (Thus, for these curves, the cofactor is always h = 1.) The following
 parameters are given:
-       •   The prime modulus p
-       •   The order n
-       •   The 160-bit input seed SEED to the SHA-1 based algorithm (i.e., the domain parameter
+       â€¢   The prime modulus p
+       â€¢   The order n
+       â€¢   The 160-bit input seed SEED to the SHA-1 based algorithm (i.e., the domain parameter
            seed)
-       •   The output c of the SHA-1 based algorithm
+       â€¢   The output c of the SHA-1 based algorithm
 
 4
-    The selection a ≡ -3 for the coefficient of x was made for reasons of efficiency; see IEEE Std 1363-2000.
+    The selection a â‰¡ -3 for the coefficient of x was made for reasons of efficiency; see IEEE Std 1363-2000.
 
 
                                                            89
-     •   The coefficient b (satisfying b2 c ≡ –27 (mod p))
-     •   The base point x coordinate G x
-     •   The base point y coordinate G y
+     â€¢   The coefficient b (satisfying b2 c â‰¡ â€“27 (mod p))
+     â€¢   The base point x coordinate G x
+     â€¢   The base point y coordinate G y
 The integers p and n are given in decimal form; bit strings and field elements are given in
 hexadecimal.
 D.1.2.1 Curve P-192
@@ -3634,25 +3634,25 @@ kinds of curves, are given in terms of both the polynomial and normal basis repr
 discussed in Appendix D.1.1.3.
 For each m, the following parameters are given:
 Field Representation:
-   •   The normal basis type T
-   •   The field polynomial (a trinomial or pentanomial)
+   â€¢   The normal basis type T
+   â€¢   The field polynomial (a trinomial or pentanomial)
 Koblitz Curve:
-   •   The coefficient a
-   •   The base point order n
-   •   The base point x coordinate G x
-   •   The base point y coordinate G y
+   â€¢   The coefficient a
+   â€¢   The base point order n
+   â€¢   The base point x coordinate G x
+   â€¢   The base point y coordinate G y
 Pseudo-random curve:
-   •   The base point order n
+   â€¢   The base point order n
 Pseudo-random curve (Polynomial Basis representation):
-   •   The coefficient b
-   •   The base point x coordinate G x
-   •   The base point y coordinate G y
+   â€¢   The coefficient b
+   â€¢   The base point x coordinate G x
+   â€¢   The base point y coordinate G y
 Pseudo-random curve (Normal Basis representation):
-   •   The 160-bit input seed SEED to the SHA-1 based algorithm (i.e., the domain parameter
+   â€¢   The 160-bit input seed SEED to the SHA-1 based algorithm (i.e., the domain parameter
        seed)
-   •   The coefficient b (i.e., the output of the SHA-1 based algorithm)
-   •   The base point x coordinate G x
-   •   The base point y coordinate G y
+   â€¢   The coefficient b (i.e., the output of the SHA-1 based algorithm)
+   â€¢   The base point x coordinate G x
+   â€¢   The base point y coordinate G y
 Integers (such as T, m, and n) are given in decimal form; bit strings and field elements are given
 in hexadecimal.
 D.1.3.1 Degree 163 Binary Field
@@ -3951,8 +3951,8 @@ a few copies of m.
 The prime modulus p for each of the five example curves is a generalized Mersenne number.
 
 D.2.1 Curve P-192
-The modulus for this curve is p = 2 192 – 2 64 – 1. Every integer A less than p2 can be written as
-                    A = A5 ⋅ 2 320 + A4 ⋅ 2 256 + A3 ⋅ 2192 + A2 ⋅ 2128 + A1 ⋅ 2 64 + A0 ,
+The modulus for this curve is p = 2 192 â€“ 2 64 â€“ 1. Every integer A less than p2 can be written as
+                    A = A5 â‹… 2 320 + A4 â‹… 2 256 + A3 â‹… 2192 + A2 â‹… 2128 + A1 â‹… 2 64 + A0 ,
 where each A i is a 64-bit integer. As a concatenation of 64-bit words, this can be denoted by
                                      A = (A 5 || A 4 || A 3 || A 2 || A 0 ).
 The expression for B is
@@ -3967,14 +3967,14 @@ The expression for B is
     S 3 = (A 5 || A 5 || A 5 ).
 
 D.2.2 Curve P-224
-The modulus for this curve is p = 2 224 − 2 96 + 1. Every integer A less than p2 can be written as:
-     A = A13 ⋅ 2 416 + A12 ⋅ 2384 + A11 ⋅ 2352 + A10 ⋅ 2320 + A9 ⋅ 2 288 + A8 ⋅ 2 256 + A7 ⋅ 2 224 + A6 ⋅ 2192 +
-     A5 ⋅ 2160 + A4 ⋅ 2128 + A3 ⋅ 296 + A2 ⋅ 2 64 + A1 ⋅ 232 + A0 ,
+The modulus for this curve is p = 2 224 âˆ’ 2 96 + 1. Every integer A less than p2ï€  can be written as:
+     A = A13 â‹… 2 416 + A12 â‹… 2384 + A11 â‹… 2352 + A10 â‹… 2320 + A9 â‹… 2 288 + A8 â‹… 2 256 + A7 â‹… 2 224 + A6 â‹… 2192 +
+     A5 â‹… 2160 + A4 â‹… 2128 + A3 â‹… 296 + A2 â‹… 2 64 + A1 â‹… 232 + A0 ,
 where each A i is a 32-bit integer. As a concatenation of 32-bit words, this can be denoted by:
 
-                                             A = ( A 13 || A 12 || … || A 0 ).
+                                             A = ( A 13 || A 12 || â€¦ || A 0 ).
 The expression for B is:
-                                        B = T + S 1 + S 2 – D 1 – D 2 mod p,
+                                        B = T + S 1 + S 2 â€“ D 1 â€“ D 2 mod p,
 where the 224-bit terms are given by:
    T =      ( A 6 || A 5 || A 4 || A 3 || A 2 || A 1 || A 0 )
    S1 =     ( A 10 || A 9 || A 8 || A 7 || 0 || 0 || 0 )
@@ -3983,39 +3983,39 @@ where the 224-bit terms are given by:
    D2 =     ( 0 || 0 || 0 || 0 || A 13 || A 12 || A 11 ).
 
 D.2.3 Curve P-256
-The modulus for this curve is p = 2256 – 2224 + 2192 + 296 – 1. Every integer A less than p2 can be
+The modulus for this curve is p = 2256 â€“ 2224 + 2192 + 296 â€“ 1. Every integer A less than p2 can be
 written as:
-     A = A15 ⋅ 2 480 + A14 ⋅ 2 448 + A13 ⋅ 2 416 + A12 ⋅ 2384 + A11 ⋅ 2352 + A10 ⋅ 2320 + A9 ⋅ 2 288 + A8 ⋅ 2 256 +
-     A7 ⋅ 2 224 + A6 ⋅ 2192 + A5 ⋅ 2160 + A4 ⋅ 2128 + A3 ⋅ 296 + A2 ⋅ 2 64 + A1 ⋅ 232 + A0 ,
+     A = A15 â‹… 2 480 + A14 â‹… 2 448 + A13 â‹… 2 416 + A12 â‹… 2384 + A11 â‹… 2352 + A10 â‹… 2320 + A9 â‹… 2 288 + A8 â‹… 2 256 +
+     A7 â‹… 2 224 + A6 â‹… 2192 + A5 â‹… 2160 + A4 â‹… 2128 + A3 â‹… 296 + A2 â‹… 2 64 + A1 â‹… 232 + A0 ,
 where each A i is a 32-bit integer. As a concatenation of 32-bit words, this can be denoted by
-                                              A = (A 15 || A 14 || ⋅ ⋅ ⋅ || A 0 ).
+                                              A = (A 15 || A 14 || â‹… â‹… â‹… || A 0 ).
 The expression for B is:
 
 
                                                                 102
-                         B = T + 2S 1 + 2S 2 + S 3 + S 4 – D 1 – D 2 – D 3 – D 4 mod p,
+                         B = T + 2S 1 + 2S 2 + S 3 + S 4 â€“ D 1 â€“ D 2 â€“ D 3 â€“ D 4 mod p,
 where the 256-bit terms are given by:
 
-   T = ( A 7 || A 6 || A 5  || A 4 || A 3 || A 2 || A 1 || A 0 )
-   S 1 = ( A 15 || A 14  || A 13 || A 12 || A 11 || 0 || 0 || 0 )
-   S 2 = ( 0 || A 15 || A 14  || A 13 || A 12 || 0 || 0 || 0 )
-   S 3 = ( A 15 || A 14  || 0 || 0 || 0 || A 10 || A 9 || A 8 )
+   T = ( A 7 || A 6 || A 5 ï€  || A 4 || A 3 || A 2 || A 1 || A 0 )
+   S 1 = ( A 15 || A 14 ï€  || A 13 || A 12 || A 11 || 0 || 0 || 0 )
+   S 2 = ( 0 || A 15 || A 14 ï€  || A 13 || A 12 || 0 || 0 || 0 )
+   S 3 = ( A 15 || A 14 ï€  || 0 || 0 || 0 || A 10 || A 9 || A 8 )
    S 4 = ( A 8 || A 13 || A 15 || A 14 || A 13 || A 11 || A 10 || A 9 )
    D 1 = ( A 10 || A 8 || 0 || 0 || 0 || A 13 || A 12 || A 11 )
-   D 2 = ( A 11 || A 9 || 0 || 0 || A 15 || A 14 || A 13 || A 12  )
-   D 3 = ( A 12  || 0 || A 10 || A 9 || A 8 || A 15 || A 14 || A 13 )
+   D 2 = ( A 11 || A 9 || 0 || 0 || A 15 || A 14 || A 13 || A 12 ï€  )
+   D 3 = ( A 12 ï€  || 0 || A 10 || A 9 || A 8 || A 15 || A 14 || A 13 )
    D 4 = ( A 13 || 0 || A 11 || A 10 || A 9 || 0 || A 15 || A 14 )
 
 D.2.4 Curve P-384
-The modulus for this curve is p = 2 384 – 2 128 – 2 96 + 2 32 – 1. Every integer A less than p2 can
+The modulus for this curve is p = 2 384 â€“ 2 128 â€“ 2 96 + 2 32 â€“ 1. Every integer A less than p2 can
 be written as:
-    A = A23 ⋅ 2 736 + A22 ⋅ 2 704 + A21 ⋅ 2 672 + A20 ⋅ 2 640 + A19 ⋅ 2 608 + A18 ⋅ 2576 + A17 ⋅ 2544 + A16 ⋅ 2512 +
-    A15 ⋅ 2 480 + A14 ⋅ 2 448 + A13 ⋅ 2 416 + A12 ⋅ 2384 + A11 ⋅ 2352 + A10 ⋅ 2320 + A9 ⋅ 2 288 + A8 ⋅ 2 256 +
-    A7 ⋅ 2 224 + A6 ⋅ 2192 + A5 ⋅ 2160 + A4 ⋅ 2128 + A3 ⋅ 296 + A2 ⋅ 2 64 + A1 ⋅ 232 + A0 ,
+    A = A23 â‹… 2 736 + A22 â‹… 2 704 + A21 â‹… 2 672 + A20 â‹… 2 640 + A19 â‹… 2 608 + A18 â‹… 2576 + A17 â‹… 2544 + A16 â‹… 2512 +
+    A15 â‹… 2 480 + A14 â‹… 2 448 + A13 â‹… 2 416 + A12 â‹… 2384 + A11 â‹… 2352 + A10 â‹… 2320 + A9 â‹… 2 288 + A8 â‹… 2 256 +
+    A7 â‹… 2 224 + A6 â‹… 2192 + A5 â‹… 2160 + A4 â‹… 2128 + A3 â‹… 296 + A2 â‹… 2 64 + A1 â‹… 232 + A0 ,
 where each A i is a 32-bit integer. As a concatenation of 32-bit words, this can be denoted by
-                                               A = (A 23 || A 22 || ⋅ ⋅ ⋅ || A 0 ).
+                                               A = (A 23 || A 22 || â‹… â‹… â‹… || A 0 ).
 The expression for B is:
-                       B = T + 2S 1 + S 2 + S 3 + S 4 + S 5 + S 6 – D 1 – D 2 – D 3 mod p,
+                       B = T + 2S 1 + S 2 + S 3 + S 4 + S 5 + S 6 â€“ D 1 â€“ D 2 â€“ D 3 mod p,
 where the 384-bit terms are given by:
    T =       (A 11 || A 10 || A 9 || A 8 || A 7 || A 6 || A 5 || A 4 || A 3 || A 2 || A 1 || A 0 )
    S1 =      ( 0 || 0 || 0 || 0 || 0 || A 23 || A 22 || A 21 || 0 || 0 || 0 || 0 )
@@ -4033,8 +4033,8 @@ where the 384-bit terms are given by:
        D3 =     ( 0 || 0 || 0 || 0 || 0 || 0 || 0 || A 23 || A 23 || 0 || 0 || 0 ).
 
 D.2.5 Curve P-521
-The modulus for this curve is p = 2 521 – 1. Every integer A less than p2 can be written
-                                                       A = A 1 ⋅ 2521 + A 0 ,
+The modulus for this curve is p = 2 521 â€“ 1. Every integer A less than p2 can be written
+                                                       A = A 1 â‹… 2521 + A 0 ,
 where each A i is a 521-bit integer. As a concatenation of 521-bit words, this can be denoted by
                                                           A = (A 1 || A 0 ).
 
@@ -4046,17 +4046,17 @@ D.3        Normal Bases
 The elements of GF(2m) are expressed in terms of the type T normal basis 5 B for GF(2m), for
 some T. Each element has a unique representation as a bit string:
 
-                                                       ( a 0 a 1 … a m–1 ).
+                                                       ( a 0 a 1 â€¦ a mâ€“1 ).
 The arithmetic operations are performed as follows.
 Addition: addition of two elements is implemented by bit-wise addition modulo 2. Thus, for
 example,
                                           (1100111) + (1010010) = (0110101).
 Squaring: if
 
-                                                    α = ( a 0 a 1 … a m–1 )
+                                                    Î± = ( a 0 a 1 â€¦ a mâ€“1 )
 then
 
-                                                α2 = (a m–1 a 0 a 1 … a m–2 ).
+                                                Î±2 = (a mâ€“1 a 0 a 1 â€¦ a mâ€“2 ).
 Multiplication: to perform multiplication, a function F(u,v) is constructed on inputs
 
 
@@ -4065,40 +4065,40 @@ Multiplication: to perform multiplication, a function F(u,v) is constructed on i
 
 
                                                                  104
-                       u = ( u 0 u 1 … u m–1 )           and         v = ( v 0 v 1 … v m–1 )
+                       u = ( u 0 u 1 â€¦ u mâ€“1 )           and         v = ( v 0 v 1 â€¦ v mâ€“1 )
 as follows.
-   1. Set p ← Tm + 1.
+   1. Set p â† Tm + 1.
    2. Let u be an integer having order T modulo p.
 
-   3. Compute the sequence F (1), F (2), … ,F (p–1) as follows:
-       3.1    Set w← 1.
-       3.2    For j from 0 to T–1 do
-              3.2.1    Set n ← w.
-              3.2.2    For i = 0 to m–1 do
-                       3.2.2.1   Set F(n) ← i.
-                       3.2.2.2   Set n ← 2n mod p.
-              3.2.3    Set w ← uw mod p.
+   3. Compute the sequence F (1), F (2), â€¦ ,F (pâ€“1) as follows:
+       3.1    Set wâ† 1.
+       3.2    For j from 0 to Tâ€“1 do
+              3.2.1    Set n â† w.
+              3.2.2    For i = 0 to mâ€“1 do
+                       3.2.2.1   Set F(n) â† i.
+                       3.2.2.2   Set n â† 2n mod p.
+              3.2.3    Set w â† uw mod p.
    4. Output the formula:
-                                                       p −2
-                                       F (u , v) := ∑ u F ( k +1) v F ( p − k ) .
+                                                       p âˆ’2
+                                       F (u , v) := âˆ‘ u F ( k +1) v F ( p âˆ’ k ) .
                                                        k =1
 
 This computation need only be performed once per basis.
 Given the function F for B, the product
 
-                      ( c 0 c 1 … c m–1 ) = ( a 0 a 1 … a m–1 ) * ( b 0 b 1 … b m–1 )
+                      ( c 0 c 1 â€¦ c mâ€“1 ) = ( a 0 a 1 â€¦ a mâ€“1 ) * ( b 0 b 1 â€¦ b mâ€“1 )
 is computed as follows:
 
-   1. Set ( u 0 u 1 … u m–1 ) ← ( a 0 a 1 . . . a m–1 ).
+   1. Set ( u 0 u 1 â€¦ u mâ€“1 ) â† ( a 0 a 1 . . . a mâ€“1 ).
 
-   2. Set ( v 0 v 1 … v m–1 ) ← ( b 0 b 1 . . . b m–1 ).
-   3. For k = 0 to m – 1 do
+   2. Set ( v 0 v 1 â€¦ v mâ€“1 ) â† ( b 0 b 1 . . . b mâ€“1 ).
+   3. For k = 0 to m â€“ 1 do
        3.1    Compute
                                  c k = F(u, v).
-       3.2    Set u ← LeftShift (u) and v ← LeftShift (v), where LeftShift denotes the circular
+       3.2    Set u â† LeftShift (u) and v â† LeftShift (v), where LeftShift denotes the circular
               left shift operation.
 
-   4. Output c = ( c 0 c 1 … c m–1 ).
+   4. Output c = ( c 0 c 1 â€¦ c mâ€“1 ).
 
 
                                                         105
@@ -4119,110 +4119,110 @@ Thus, if
 then
                                c 0 = F ( (1 0 1 0 1 1 1), (1 1 0 0 0 0 1) ) = 1,
                                c 1 = F ( (0 1 0 1 1 1 1), (1 0 0 0 0 1 1) ) = 0,
-                                                         
+                                                         ï
                                c 6 = F ( (1 1 0 1 0 1 1), (1 1 1 0 0 0 0) ) = 1,
 so that c = ab = (1 0 1 1 0 0 1).
 
 D.4     Scalar Multiplication on Koblitz Curves
 This section describes a particularly efficient method of computing the scalar multiple nP on the
 Koblitz curve E a over GF(2m).
-The operation τ is defined by:
-                                               τ (x, y) = (x2, y2).
-When the normal basis representation is used, then the operation τ is implemented by performing
+The operation Ï„ is defined by:
+                                               Ï„ (x, y) = (x2, y2).
+When the normal basis representation is used, then the operation Ï„ is implemented by performing
 right circular shifts on the bit strings representing x and y.
 Given m and a, define the following parameters:
-   •    C is some integer greater than 5.
+   â€¢    C is some integer greater than 5.
 
 
                                                        106
-   •   µ = (–1)1–a.
-   •   For i = 0 and i = 1, define the sequence s i (m) by:
-                                      s i (0) = 0, s i (1) = 1 – i,
-                            s i (m) = µ • s i (m – 1) – 2 s i (m – 2) + (–1)i
-   •   Define the sequence V(m)
-                                        V(0) = 2, V(1) = µ
-                                 V(m) = µ • v(m –1) – 2V(m – 2).
+   â€¢   Âµ = (â€“1)1â€“a.
+   â€¢   For i = 0 and i = 1, define the sequence s i (m) by:
+                                      s i (0) = 0, s i (1) = 1 â€“ i,
+                            s i (m) = Âµ â€¢ s i (m â€“ 1) â€“ 2 s i (m â€“ 2) + (â€“1)i
+   â€¢   Define the sequence V(m)
+                                        V(0) = 2, V(1) = Âµ
+                                 V(m) = Âµ â€¢ v(m â€“1) â€“ 2V(m â€“ 2).
 For the example curves, the quantities s i (m) and V(m) are as follows.
 Curve K-163:
    s 0 (163) = 2579386439110731650419537
-   s 1 (163) = –755360064476226375461594
-   V(163) = –4845466632539410776804317
+   s 1 (163) = â€“755360064476226375461594
+   V(163) = â€“4845466632539410776804317
 Curve K-233:
-   s 0 (233) = –27859711741434429761757834964435883
-   s 1 (233) = –44192136247082304936052160908934886
-   V(233) = –137381546011108235394987299651366779
+   s 0 (233) = â€“27859711741434429761757834964435883
+   s 1 (233) = â€“44192136247082304936052160908934886
+   V(233) = â€“137381546011108235394987299651366779
 Curve K-283:
-   s 0 (283) = –665981532109049041108795536001591469280025
+   s 0 (283) = â€“665981532109049041108795536001591469280025
    s 1 (283) = 1155860054909136775192281072591609913945968
    V(283) = 7777244870872830999287791970962823977569917
 Curve K-409:
-   s 0 (409) = –18307510456002382137810317198756461378590542487556869338419259
-   s 1 (409) = –8893048526138304097196653241844212679626566100996606444816790
+   s 0 (409) = â€“18307510456002382137810317198756461378590542487556869338419259
+   s 1 (409) = â€“8893048526138304097196653241844212679626566100996606444816790
    V(409)=     10457288737315625927447685387048320737638796957687575791173829
 Curve K-571:
-   s 0 (571) = –3737319446876463692429385892476115567147293964596131024123406420\
+   s 0 (571) = â€“3737319446876463692429385892476115567147293964596131024123406420\
                235241916729983261305
-   s 1 (571) = –3191857706446416099583814595948959674131968912148564658610565117\
+   s 1 (571) = â€“3191857706446416099583814595948959674131968912148564658610565117\
                58982848515832612248752
 
 
                                                   107
-   V(571)=       –1483809269816914138996191402970514903645425741804939362329123395\
+   V(571)=       â€“1483809269816914138996191402970514903645425741804939362329123395\
                  34208516828973111459843
 The following algorithm computes the scalar multiple nP on the Koblitz curve E a over GF(2m).
-The average number of elliptic additions and subtractions is at most ∼ 1 + (m/3), and is at most ∼
-m/3 with probability at least 1 – 25–C.
+The average number of elliptic additions and subtractions is at most âˆ¼ 1 + (m/3), and is at most âˆ¼
+m/3 with probability at least 1 â€“ 25â€“C.
    1. For i = 0 to 1 do
-       1.1     n′ ←  n / 2a–C + (m–9) / 2.
-       1.2     g′ ← s i (m) · n′.
-       1.3     h′ ←  g′ / 2m .
-       1.4     j′ ← V(m) · h′.
-       1.5     l′ ← Round((g′ + j′) / 2(m+5) / 2).
-       1.6     λ i ← l′ / 2C.
-       1.7     f i ← Round(λ i ).
-       1.8     η i ← λ i – f i. .
-       1.9     h i ← 0.
-   2. η ← 2 η 0 + µ η 1 .
-   3. If (η ≥ 1),
+       1.1     nâ€² â† ï£° n / 2aâ€“C + (mâ€“9) / 2ï£».
+       1.2     gâ€² â† s i (m) Â· nâ€².
+       1.3     hâ€² â† ï£° gâ€² / 2m ï£».
+       1.4     jâ€² â† V(m) Â· hâ€².
+       1.5     lâ€² â† Round((gâ€² + jâ€²) / 2(m+5) / 2).
+       1.6     Î» i â† lâ€² / 2C.
+       1.7     f i â† Round(Î» i ).
+       1.8     Î· i â† Î» i â€“ f i. .
+       1.9     h i â† 0.
+   2. Î· â† 2 Î· 0 + Âµ Î· 1 .
+   3. If (Î· â‰¥ 1),
        then
-             if (η o – 3 µη 1 < –1)
-                 then set h 1 ← µ
-                 else set h 0 ← 1.
+             if (Î· o â€“ 3 ÂµÎ· 1 < â€“1)
+                 then set h 1 â† Âµ
+                 else set h 0 â† 1.
        else
-             if (η 0 + 4 µ η 1 ≥ 2)
-                 then set h 1 ← µ.
-   4. If (η < –1)
+             if (Î· 0 + 4 Âµ Î· 1 â‰¥ 2)
+                 then set h 1 â† Âµ.
+   4. If (Î· < â€“1)
                     then
-             if (η 0 – 3 µ η 1 ≥ 1)
-                 then set h 1 ← – µ
-                 else set h 0 ← –1.
+             if (Î· 0 â€“ 3 Âµ Î· 1 â‰¥ 1)
+                 then set h 1 â† â€“ Âµ
+                 else set h 0 â† â€“1.
 
 
                                                      108
        else
-            if (η 0 + 4 µ η 1 < –2)
-                then set h 1 ← – µ.
-   5. q 0 ← f 0 + h 0 .
-   6. q 1 ← f 1 + h 1 .
-   7. r 0 ← n – (s 0 + µ s 1 ) q 0 – 2s 1 q 1 .
-   8. r 1 ← s 1 q 0 – s 0 q 1 .
-   9. Set Q ← O.
-   10. P 0 ← P.
-   11. While ((r 0 ≠ 0) or (r 1 ≠ 0))
+            if (Î· 0 + 4 Âµ Î· 1 < â€“2)
+                then set h 1 â† â€“ Âµ.
+   5. q 0 â† f 0 + h 0 .
+   6. q 1 â† f 1 + h 1 .
+   7. r 0 â† n â€“ (s 0 + Âµ s 1 ) q 0 â€“ 2s 1 q 1 .
+   8. r 1 â† s 1 q 0 â€“ s 0 q 1 .
+   9. Set Q â† O.
+   10. P 0 â† P.
+   11. While ((r 0 â‰  0) or (r 1 â‰  0))
        11.1 If (r 0 odd), then
-              11.1.1 set u ← 2 – (r 0 – 2 r 1 mod 4).
-              11.1.2 set r 0 ← r 0 – u.
-              11.1.3 if (u = 1), then set Q ← Q + P 0 .
-              11.1.4 if (u = –1), then set Q ← Q – P 0 .
-       11.2 Set P 0 ← τP 0 .
-       11.3 Set (r 0 , r 1 ) ← (r 1 + µr 0 /2, – r 0 /2).
+              11.1.1 set u â† 2 â€“ (r 0 â€“ 2 r 1 mod 4).
+              11.1.2 set r 0 â† r 0 â€“ u.
+              11.1.3 if (u = 1), then set Q â† Q + P 0 .
+              11.1.4 if (u = â€“1), then set Q â† Q â€“ P 0 .
+       11.2 Set P 0 â† Ï„P 0 .
+       11.3 Set (r 0 , r 1 ) â† (r 1 + Âµr 0 /2, â€“ r 0 /2).
                    Endwhile
    12. Output Q.
 
 D.5     Generation of Pseudo-Random Curves (Prime Case)
 Let l be the bit length of p, and define
-                                              v =  ( l – 1) /160
-                                                  w = l – 160v – 1.
+                                              v = ï£° ( l â€“ 1) /160ï£»
+                                                  w = l â€“ 160v â€“ 1.
    1. Choose an arbitrary 160-bit string s as the domain parameter seed.
    2. Compute h = SHA-1(s).
    3. Let h 0 be the bit string obtained by taking the w rightmost bits of h.
@@ -4235,13 +4235,13 @@ Let l be the bit length of p, and define
                     (z + i) mod (2 160).
        5.2 Compute h i = SHA-1(s i ).
 
-   6. Let h be the bit string obtained by the concatenation of h 0 , h 1 , … , h v as follows:
+   6. Let h be the bit string obtained by the concatenation of h 0 , h 1 , â€¦ , h v as follows:
 
-                                           h = h 0 || h 1 || … || h v .
+                                           h = h 0 || h 1 || â€¦ || h v .
    7. Let c be the integer whose binary expansion is given by the bit string h.
-   8. If ((c = 0 or 4c + 27 ≡ 0 (mod p))), then go to Step 1.
-   9. Choose integers a, b ∈GF(p) such that
-                                             c b2 ≡ a3 (mod p).
+   8. If ((c = 0 or 4c + 27 â‰¡ 0 (mod p))), then go to Step 1.
+   9. Choose integers a, b âˆˆGF(p) such that
+                                             c b2 â‰¡ a3 (mod p).
        (The simplest choice is a = c and b = c. However, one may want to choose differently for
        performance reasons.)
    10. Check that the elliptic curve E over GF(p) given by y 2 = x3 + ax + b has suitable order. If
@@ -4251,8 +4251,8 @@ D.6    Verification of Curve Pseudo-Randomness (Prime Case)
 Given the 160-bit domain parameter seed value s, verify that the coefficient b was obtained from
 s via the cryptographic hash function SHA-1 as follows.
 Let l be the bit length of p, and define
-                                           v =  ( l – 1) /160
-                                           w = l – 160v – 1.
+                                           v = ï£° ( l â€“ 1) /160ï£»
+                                           w = l â€“ 160v â€“ 1.
    1. Compute h = SHA-1(s).
    2. Let h 0 be the bit string obtained by taking the w rightmost bits of h.
    3. Let z be the integer whose binary expansion is given by the 160-bit string s.
@@ -4261,19 +4261,19 @@ Let l be the bit length of p, and define
                   (z + i) mod (2160 ).
        4.2 Compute h i = SHA-1(s i ).
 
-   5. Let h be the bit string obtained by the concatenation of h 0 , h 1 , … , h v as follows:
+   5. Let h be the bit string obtained by the concatenation of h 0 , h 1 , â€¦ , h v as follows:
 
-                                           h = h 0 || h 1 || … || h v .
+                                           h = h 0 || h 1 || â€¦ || h v .
 
 
                                                     110
    6. Let c be the integer whose binary expansion is given by the bit string h.
-   7. Verify that b2 c ≡ –27 (mod p).
+   7. Verify that b2 c â‰¡ â€“27 (mod p).
 
 D.7      Generation of Pseudo-Random Curves (Binary Case)
 Let:
-                                           v =  (m – 1) /B
-                                              w = m – Bv.
+                                           v = ï£° (m â€“ 1) /Bï£»
+                                              w = m â€“ Bv.
    1. Choose an arbitrary 160-bit string s as the domain parameter seed.
    2. Compute h = SHA-1(s).
    3. Let h 0 be the bit string obtained by taking the w rightmost bits of h.
@@ -4283,9 +4283,9 @@ Let:
              (z + i) mod (2160 ).
          5.2 Compute h i = SHA-1(s i ).
 
-   6. Let h be the bit string obtained by the concatenation of h 0 , h 1 , … , h v as follows:
+   6. Let h be the bit string obtained by the concatenation of h 0 , h 1 , â€¦ , h v as follows:
 
-                                          h = h 0 || h 1 || … || h v .
+                                          h = h 0 || h 1 || â€¦ || h v .
    7. Let b be the element of GF(2m) which binary expansion is given by the bit string h.
    8. Choose an element a of GF(2m).
    9. Check that the elliptic curve E over GF(2m) given by y2 + xy = x3 + ax2 + b has suitable
@@ -4295,8 +4295,8 @@ D.8      Verification of Curve Pseudo-Randomness (Binary Case)
 Given the 160-bit domain parameter seed value s, verify that the coefficient b was obtained from
 s via the cryptographic hash function SHA-1 as follows.
 Define
-                                          v =  (m – 1) /160
-                                             w= m – 160v
+                                          v = ï£° (m â€“ 1) /160ï£»
+                                             w= m â€“ 160v
    1. Compute h = SHA-1(s).
    2. Let h 0 be the bit string obtained by taking the w rightmost bits of h.
 
@@ -4306,18 +4306,18 @@ Define
        4.1 Define the 160-bit string s i to be binary expansion of the integer (z + i) mod (2160 ).
        4.2 Compute h i = SHA-1(s i ).
 
-   5. Let h be the bit string obtained by the concatenation of h 0 , h 1 , … , h v as follows:
+   5. Let h be the bit string obtained by the concatenation of h 0 , h 1 , â€¦ , h v as follows:
 
-                                        h = h 0 || h 1 || … || h v .
+                                        h = h 0 || h 1 || â€¦ || h v .
    6. Let c be the element of GF(2m ) which is represented by the bit string h.
    7. Verify that c = b.
 
 D.9    Polynomial Basis to Normal Basis Conversion
-Suppose that α is an element of the field GF(2m). Let p be the bit string representing α with
-respect to a given polynomial basis. It is desired to compute n, the bit string representing α with
+Suppose that Î± is an element of the field GF(2m). Let p be the bit string representing Î± with
+respect to a given polynomial basis. It is desired to compute n, the bit string representing Î± with
 respect to a given normal basis. This is done via the matrix computation
-                                              p Γ = n,
-where Γ is an m-by-m matrix with entries in GF(2). The matrix Γ, which depends only on the
+                                              p Î“ = n,
+where Î“ is an m-by-m matrix with entries in GF(2). The matrix Î“, which depends only on the
 bases, can be computed easily given its second-to-last row. The second-to-last row for each
 conversion is given the below.
 Degree 163:
@@ -4338,22 +4338,22 @@ Degree 571:
 
 
                                                  112
-Given the second-to-last row r of Γ, the rest of the matrix is computed as follows. Let β be the
+Given the second-to-last row r of Î“, the rest of the matrix is computed as follows. Let Î² be the
 element of GF(2m) whose representation with respect to the normal basis is r. Then the rows of
-Γ, from top to bottom, are the bit strings representing the elements
+Î“, from top to bottom, are the bit strings representing the elements
 
-                                     β m–1, β m–2, …, β 2, β, 1
+                                     Î² mâ€“1, Î² mâ€“2, â€¦, Î² 2, Î², 1
 with respect to the normal basis. (Note that the element 1 is represented by the all-1 bit string.)
 Alternatively, the matrix is the inverse of the matrix described in Appendix D.10.
 More details of these computations can be found in Annex A.7 of the IEEE Standard 1363-2000
 standard.
 
 D.10 Normal Basis to Polynomial Basis Conversion
-Suppose that α is an element of the field GF(2m). Let n be the bit string representing α with
-respect to a given normal basis. It is desired to compute p, the bit string representing α with
+Suppose that Î± is an element of the field GF(2m). Let n be the bit string representing Î± with
+respect to a given normal basis. It is desired to compute p, the bit string representing Î± with
 respect to a given polynomial basis. This is done via the matrix computation
-                                              n Γ = p,
-where Γ is an m-by-m matrix with entries in GF(2). The matrix Γ, which depends only on the
+                                              n Î“ = p,
+where Î“ is an m-by-m matrix with entries in GF(2). The matrix Î“, which depends only on the
 bases, can be computed easily given its top row. The top row for each conversion is given
 below.
 Degree 163:
@@ -4376,12 +4376,12 @@ eb4ca5cf 3c3044bd 4372232f 2c1a27c4
 
 
                                                 113
-Given the top row r of Γ, the rest of the matrix is computed as follows. Let β be the element of
-GF(2 m) whose representation with respect to the polynomial basis is r. Then the rows of Γ, from
+Given the top row r of Î“, the rest of the matrix is computed as follows. Let Î² be the element of
+GF(2 m) whose representation with respect to the polynomial basis is r. Then the rows of Î“, from
 top to bottom, are the bit strings representing the elements
 
-                                        β, β 2 , β 2 , … , β 2
-                                                  2              m–1
+                                        Î², Î² 2 , Î² 2 , â€¦ , Î² 2
+                                                  2              mâ€“1
 
 
 with respect to the polynomial basis.
@@ -4395,18 +4395,18 @@ standard.
                                                   114
                       Appendix E: A Proof that v = r in the DSA
                                              (Informative)
-The purpose of this appendix is to show that if M′ = M, r′ = r and s′ = s in the signature
-verification, then v = r′. Let Hash be an approved hash function. The following result is needed.
-   Lemma: Let p and q be primes such that q divides (p – 1), let h be a positive integer less
-                                 (p–1)/q
+The purpose of this appendix is to show that if Mâ€² = M, râ€² = r and sâ€² = s in the signature
+verification, then v = râ€². Let Hash be an approved hash function. The following result is needed.
+   Lemma: Let p and q be primes such that q divides (p â€“ 1), let h be a positive integer less
+                                 (pâ€“1)/q
           than p, and let g = (h         mod p). Then (gq mod p) = 1, and if (m mod q) = (n
                            m               n
           mod q ), then (g mod p) = (g mod p).
    Proof:
-               gqmod p = (h(p–1) / q mod p)q mod p
-                          = h(p – 1) mod p
+               gqmod p = (h(pâ€“1) / q mod p)q mod p
+                          = h(p â€“ 1) mod p
                           =1
-by Fermat’s Little Theorem. Now let (m mod q) = (n mod q), i.e., m = (n + kq) for some integer
+by Fermatâ€™s Little Theorem. Now let (m mod q) = (n mod q), i.e., m = (n + kq) for some integer
 k. Then
                gm mod p = gn + kq mod p
                            = (gn gkq) mod p
@@ -4414,11 +4414,11 @@ k. Then
                            = gn mod p,
                since (gq mod p) = 1.
 Proof of the main result:
-   Theorem: If M′ = M, r′ = r, and s′ = s in the signature verification, then v = r′.
+   Theorem: If Mâ€² = M, râ€² = r, and sâ€² = s in the signature verification, then v = râ€².
    Proof:
-               w = (s′)–1 mod q = s–1 mod q
-               u1 = ((Hash(M ′))w) mod q = ((Hash(M))w) mod q
-               u2 = ((r′)w) mod q = (rw) mod q.
+               w = (sâ€²)â€“1 mod q = sâ€“1 mod q
+               u1 = ((Hash(M â€²))w) mod q = ((Hash(M))w) mod q
+               u2 = ((râ€²)w) mod q = (rw) mod q.
                x
    Now y = (g mod p), so that by the lemma,
                v = ((gu1 yu2) mod p) mod q
@@ -4429,9 +4429,9 @@ Proof of the main result:
 
                                                    115
 Also:
-          s = (k–1 (Hash(M) + xr)) mod q.
+          s = (kâ€“1 (Hash(M) + xr)) mod q.
 Hence:
-          w = (k (Hash(M) + xr)–1) mod q
+          w = (k (Hash(M) + xr)â€“1) mod q
           (Hash(M) + xr)w mod q = k mod q.
 Thus, by the lemma:
           v = (gk mod p) mod q = r
@@ -4462,26 +4462,26 @@ Using [1], it is possible to compute an upper bound for p k ,t as a function of 
 an upper bound can be computed for t as a function of k and p target , the maximum allowed
 probability of accidentally generating a composite number. The following is an algorithm for
 computing t:
-      1. For t = 1, 2 … –log 2 (p target )/2
+      1. For t = 1, 2 â€¦ ï£®â€“log 2 (p target )/2ï£¹
 
-                                      
-          1.1 For M = 3, 4 … 2 k − 1 − 1                                    (1)
+                                      ï£°
+          1.1 For M = 3, 4 â€¦ 2 k âˆ’ 1 âˆ’ 1          ï£»                          (1)
 
                1.1.1   Compute p k ,t as in (2).
 
-               1.1.2   If p k,t ≤ p target
+               1.1.2   If p k,t â‰¤ p target
                        1.1.2.1        Accept t.
                        1.1.2.2        Stop.
 In (1), k is the bit length of the candidate primes and (2) is as follows:
-                                                                                                  
-                                               8(π 2 − 6) k − 2 M m − ( m −1)t m           1       .
-pk ,t = 2.00743 ⋅ ln(2) ⋅ k ⋅ 2 2−kk − 2 − Mt
-                                              +           2 ∑2                 ∑                         (2)
-                                                   3           m =3
-                                                                                        ( k −1)  
-                                                                                j = 2  j + j 
-                                                                                   2          
-                                                                                                   
+                                 ï£®                                                                 ï£¹
+                                ï£¯               8(Ï€ 2 âˆ’ 6) k âˆ’ 2 M m âˆ’ ( m âˆ’1)t m           1      ï£º .
+pk ,t = 2.00743 â‹… ln(2) â‹… k â‹… 2 2âˆ’kk âˆ’ 2 âˆ’ Mt
+                                              +           2 âˆ‘2                 âˆ‘                         (2)
+                                ï£¯                   3           m =3
+                                                                                       ï£« ( k âˆ’1) ï£¶ ï£º
+                                                                                j = 2 ï£¬ï£¬ j + j ï£·ï£·
+                                ï£¯ï£°                                                   2ï£­          ï£¸ï£º
+                                                                                                   ï£»
 
 
 
@@ -4510,20 +4510,20 @@ below) and subject candidate primes to additional rounds of M-R testing.
 One approach for strategy (B) would be to adopt the viewpoint of the majority of system users,
 who have no part in generating the (supposed) prime, but who must rely upon its primality for
 their security. Such parties may be concerned that the candidates for M-R testing have been
-selected in a fashion that deviates significantly from the uniform distribution – which was
+selected in a fashion that deviates significantly from the uniform distribution â€“ which was
 assumed when determining t according to (1) and (2) in Appendix F.1. In cases where the
 selection process could be unusually biased in some way, it is important to minimize the
 probability that a composite number will survive testing. It can be shown that for any k-bit odd
 composite number (regardless of how it was selected), the probability that it will pass t rounds of
-M-R testing with randomly chosen bases is less than 4 − t (although this is not a particularly tight
-bound). Selecting t such that 4–t ≤ p target is equivalent to choosing t ≥ −log 2 (p target )/2. To ensure
+M-R testing with randomly chosen bases is less than 4 âˆ’ t (although this is not a particularly tight
+bound). Selecting t such that 4â€“t â‰¤ p target is equivalent to choosing t â‰¥ âˆ’log 2 (p target )/2. To ensure
 that a composite number has a probability no greater than p target of surviving the M-R tests, the
-number of rounds can be set at t = –log 2 (p target )/2. Even if the method of selecting candidates
+number of rounds can be set at t = ï£®â€“log 2 (p target )/2ï£¹. Even if the method of selecting candidates
 were so biased that it offered nothing but composite numbers for testing, it is reasonable to
 expect that it would take at least 1/ p target attempts (which is greater than 4t ) before a composite
 number would slip through the t-round M-R testing process.
 WARNING: As the discussion above illustrates, care must be taken when using the phrase
-“error probability” in connection with the recommended number of rounds of M-R testing. The
+â€œerror probabilityâ€ in connection with the recommended number of rounds of M-R testing. The
 probability that a composite number survives t rounds of Miller-Rabin testing is not the same as
 
 
@@ -4532,25 +4532,25 @@ probability that a composite number survives t rounds of Miller-Rabin testing is
 composite. Ordinarily, the latter probability is the one that should be of most interest to a party
 responsible for generating primes, while the former may be more important to a party
 responsible for validating the primality of a number generated by someone else. However, for
-sufficiently large k (e.g., k ≥ 51), it can be shown that p k,t ≤ 4–t under the same assumptions
+sufficiently large k (e.g., k â‰¥ 51), it can be shown that p k,t â‰¤ 4â€“t under the same assumptions
 concerning the selection of candidates as those made to obtain formula (2) in Appendix F.1 (see
-[1].) In such cases, t = –log 2 (p target )/2 rounds of Miller-Rabin testing can be used both in
+[1].) In such cases, t = ï£®â€“log 2 (p target )/2ï£¹ rounds of Miller-Rabin testing can be used both in
 generating and validating primes, with p target serving as an upper bound on both the probability
 that the generation process yields a composite number and the probability that a composite
 number would survive an attempt to validate its primality.
 Table C.1 in Appendix C.3 identifies the minimum values for t when generating the primes p and
 q for DSA using either strategy (A) or (B) above. To obtain the t values shown in the column
-titled “M-R Tests Only”, the conservative strategy (B) was followed; those t values are sufficient
-to validate the primality of p and q. The t values shown in the column titled “M-R Tests when
-followed by One Lucas Test” result from following strategy (A) using computations (1) and (2)
+titled â€œM-R Tests Onlyâ€, the conservative strategy (B) was followed; those t values are sufficient
+to validate the primality of p and q. The t values shown in the column titled â€œM-R Tests when
+followed by One Lucas Testâ€ result from following strategy (A) using computations (1) and (2)
 in Appendix F.1.
 
 F.3     Generating Primes for RSA Signatures
 When generating primes for the RSA signature algorithm, it is still very important to reduce the
 probability of errors in the M-R testing procedure. However, since the (probable) primes are
-used to generate a user’s key pair, if a composite number survives the testing process, the
+used to generate a userâ€™s key pair, if a composite number survives the testing process, the
 consequences of the error may be less dramatic than in the case of generating DSA domain
-parameters; only one user’s transactions are affected, rather than a domain of users. Furthermore,
+parameters; only one userâ€™s transactions are affected, rather than a domain of users. Furthermore,
 if the p or q value generated for some user is composite, the problem will not be undiscovered
 for long, since it is almost certain that signatures generated by that user will not be verifiable.
 Therefore, when generating the RSA primes p and q, it is sufficient to use the number of rounds
@@ -4562,8 +4562,8 @@ The lengths for p and q that are recommended for use in RSA signature algorithms
 and 1536 bits; recall that n = pq, so the corresponding lengths for n are 1024, 2048 and 3072 bits,
 respectively. As currently specified in SP 800-57, Part 1, these lengths correspond to security
 strengths of 80, 112 and 128 bits, respectively. Hence, it makes sense to match the number of
-rounds of Miller-Rabin testing to the target error probability values of 2–80, 2–112, and 2–128. A
-probability of 2–100 is included for all prime lengths, since this probability has often been used in
+rounds of Miller-Rabin testing to the target error probability values of 2â€“80, 2â€“112, and 2â€“128. A
+probability of 2â€“100 is included for all prime lengths, since this probability has often been used in
 the past and may be acceptable for many applications.
 When generating the RSA primes p and q with conditions, it is sufficient to use the value t
 derived from (1) and (2) as the minimum number of M-R tests to be performed when generating
@@ -4575,9 +4575,9 @@ numbers. In the extremely unlikely event that one of the numbers p 1 , p 2 , q 1
 there is still a high probability that the corresponding RSA prime (p or q) will satisfy the
 requisite conditions.
 The sizes of p1 , p 2 , q1 , and q 2 were chosen to ensure that, for an adversary with significant but
-not overwhelming resources, Lenstra’s elliptic curve factoring method [2] (against which there is
+not overwhelming resources, Lenstraâ€™s elliptic curve factoring method [2] (against which there is
 no protection beyond choosing large p and q) is a more effective factoring algorithm than either
-the Pollard P–1 method [2], the Williams P+1 method [3] or various cycling methods [2]. For an
+the Pollard Pâ€“1 method [2], the Williams P+1 method [3] or various cycling methods [2]. For an
 adversary with overwhelming resources, the best all-purpose factoring algorithm is assumed to
 be the General Number Field Sieve [2].
 Tables C.2 and C.3 in Appendix C.3 specify the minimum number of rounds of M-R testing
@@ -4589,15 +4589,15 @@ when generating primes to be used in the construction of RSA signature key pairs
                                                     120
                                Appendix G: References
 
-[1] I. Damgard, P. Landrock, and C. Pomerance, C. “Average Case Error Estimates for the
-    Strong Probable Prime Test,” Mathematics of Computation, v. 61, No, 203, pp. 177-194,
+[1] I. Damgard, P. Landrock, and C. Pomerance, C. â€œAverage Case Error Estimates for the
+    Strong Probable Prime Test,â€ Mathematics of Computation, v. 61, No, 203, pp. 177-194,
     1993.
 [2] A.J Menezes, P.C. Oorschot, and S.A. Vanstone. Handbook of Applied Cryptography. CRC
     Press, 1996.
-[3] H.C. Williams. “A p+1 Method of factoring”. Math. Comp. 39, 225-234, 1982.
+[3] H.C. Williams. â€œA p+1 Method of factoringâ€. Math. Comp. 39, 225-234, 1982.
 [4] D.E. Knuth, The Art of Computer Programming, Vol. 2, 3rd Ed., Addison-Wesley, 1998,
     Algorithm P, page 395.
-[5] R. Baillie and S.S. Wagstaff Jr., Mathematics of Computation, V. 35 (1980), pages 1391 –
+[5] R. Baillie and S.S. Wagstaff Jr., Mathematics of Computation, V. 35 (1980), pages 1391 â€“
     1417.
 
 
@@ -4605,3 +4605,4 @@ when generating primes to be used in the construction of RSA signature key pairs
 
                                              121
 
+

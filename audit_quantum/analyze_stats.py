@@ -122,7 +122,7 @@ def main() -> None:
         "",
         "## Bin counts (expected 1250 per bin)",
         "",
-        "| File | " + " | ".join(f"b{i}" for i in range(BINS)) + " | χ² | tail z≥3.5 |",
+        "| File | " + " | ".join(f"b{i}" for i in range(BINS)) + " | Ï‡Â² | tail zâ‰¥3.5 |",
         "|---|" + "---|" * BINS + "---|---|",
     ]
     for row in results:
@@ -134,7 +134,7 @@ def main() -> None:
         "",
         "## Verdict",
         "",
-        "| File | Samples | Mean | Std | χ² | Window | Passed |",
+        "| File | Samples | Mean | Std | Ï‡Â² | Window | Passed |",
         "|---|---:|---:|---:|---:|---|---|",
     ]
     for row in results:
@@ -161,3 +161,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+

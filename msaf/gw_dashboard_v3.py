@@ -186,7 +186,7 @@ def build_panel1(c13: list, c100: list, badge: str) -> str:
         'seri Montgomery c=100 (lambda_min per resolusi, terukur)</text>'
         % (px(mid[0]) - 40, py(math.log10(mid[1])) - 16, C100, FONT))
     add('<text x="%.1f" y="%.1f" font-size="12" fill="#7a7f8a" style="%s">'
-        'dua irisan berbeda c -- digambar terpisah, tidak pernah digabung '
+        'dua irisan berbeda c -- digambar terpisah, no pernah digabung '
         '(across-c bukan apel-samel)</text>' % (px(150), py(-6.0), FONT))
     # badge
     add('<rect x="%.1f" y="%.1f" width="%.1f" height="34" rx="8" fill="#e7f6ec" '
@@ -320,15 +320,15 @@ def build_html(c13: list, c100: list, logs: dict, dims: list, badge: str,
     n_cells = len(dims) * 6
     pg_max = max(float(v["pGUE"]) for d in dims for v in logs[d]["s2"].values())
     if n_floor == n_cells:
-        floor_note = ("di lantai 2000 surrogat artinya chi^2_obs melebihi chi^2 SEMUA "
-                      "realisasi GUE matched-N di setiap titik kisi")
+        floor_note = ("in lantai 2000 surrogat artinya chi^2_obs melebihi chi^2 SEMUA "
+                      "realisasi GUE matched-N in setiap titik kisi")
     else:
-        floor_note = ("nilai di luar lantai tetap berada di bawah ambang 0,05: rejeksi tidak "
-                      "seragam sempurna, tetapi tidak ada titik kisi mana pun yang mencapai "
+        floor_note = ("nilai in luar lantai tetap berada in bawah ambang 0,05: rejeksi no "
+                      "seragam sempurna, tetapi no ada titik kisi mana pun which mencapai "
                       "konsistensi")
-    verdict = ("<b>Verdict dari artefak:</b> p_GUE = 0,0000 di %d/%d sel (3 resolusi &times; "
-               "6 titik); maksimum p_GUE seluruh kisi = %s &mdash; %s. Deviasi <b>tidak "
-               "menyusut</b> menuju RMT-GUE pada rentang 201&ndash;401. chi^2 mentah <b>tidak "
+    verdict = ("<b>Verdict dari artefak:</b> p_GUE = 0,0000 in %d/%d sel (3 resolusi &times; "
+               "6 titik); maksimum p_GUE seluruh kisi = %s &mdash; %s. Deviasi <b>no "
+               "menyusut</b> menuju RMT-GUE on rentang 201&ndash;401. chi^2 mentah <b>no "
                "comparable lintas-N</b> (pasangan &prop; N&sup2;/2): baris ber-N lebih besar "
                "secara mentah karena jumlah pasangan, bukan bukti &quot;deviasi membesar&quot;."
                % (n_floor, n_cells, ("%.4f" % pg_max).replace(".", ","), floor_note))
@@ -387,9 +387,9 @@ td.hh{color:#6b7280;font-family:ui-monospace,Consolas,monospace;text-align:right
 <body><div class="wrap">
 <h1>Guinand-Weil -- dashboard diagnostik resolusi (v3)</h1>
 <p class="subtle">Statis, tanpa JavaScript, tanpa CDN. Semua angka diekstrak mesin dari
-artefak kanonik oleh <code>msaf/gw_dashboard_v3.py</code>; hash sumber di footer.
+artefak kanonik oleh <code>msaf/gw_dashboard_v3.py</code>; hash source in footer.
 Basis: dim 401 (baseline run2), dim 201 (resolusi kedua), dim 301 (NEW).
-Koreksi batas: baris memakai resolusi TERUKUR (201/301/401).</p>
+Koreksi limit: baris memakai resolusi TERUKUR (201/301/401).</p>
 
 <div class="panel">
 <h2>Panel 1 &mdash; lambda_min: model eksponensial terbantah vs seri c=100</h2>
@@ -397,7 +397,7 @@ Koreksi batas: baris memakai resolusi TERUKUR (201/301/401).</p>
 <p class="note">Garis merah putus-putus = model <b>A&middot;e<sup>&minus;Bn</sup></b>
 (dari dua titik pertama c=13) -- terbantah oleh titik ke-3/4 (lereng melemah
 &minus;1,72 &rarr; &minus;1,05 &rarr; &minus;0,34). Seri c=100 (belah ketupat):
-%s. Dua irisan <b>tidak digabung</b>; plateau c=13 belum terkonfirmasi.</p>
+%s. Dua irisan <b>no digabung</b>; plateau c=13 belum terkonfirmasi.</p>
 </div>
 
 <div class="panel">
@@ -415,20 +415,20 @@ Koreksi batas: baris memakai resolusi TERUKUR (201/301/401).</p>
 <div class="panel">
 <h2>Panel 3 &mdash; gradien S1: r_bar chart T vs chart L terhadap referensi matched-N</h2>
 %s
-<p class="note">Chart T tetap di dalam pita RMT-GUE di ketiga resolusi; chart L tetap
-di luar ketiganya -- chart-dependence bertahan, verdict S1 tetap INCONCLUSIVE
-(tidak memilih chart yang menguntungkan).</p>
+<p class="note">Chart T tetap in dalam pita RMT-GUE in ketiga resolusi; chart L tetap
+in luar ketiganya -- chart-dependence bertahan, verdict S1 tetap INCONCLUSIVE
+(no memilih chart which menguntungkan).</p>
 </div>
 
 <div class="panel">
-<h2>Provenance &amp; batas</h2>
+<h2>Provenance &amp; limit</h2>
 <table class="hash">%s</table>
-<p class="scope"><b>Batasan literal:</b> ini statistik dari matriks finit yang
+<p class="scope"><b>Batasan literal:</b> ini statistik dari matriks finit which
 dibangun; BUKAN teorema Montgomery, BUKAN bukti RH/Weil-positivity/penghitungan
 prima. 2000 surrogat N-matched per ensemble, seed 20260927. Instrumen:
 <code>gw_montgomery.py</code> kanonik (read-only), python 3.14 + numpy 2.5.2 +
 scipy 1.18.0 + mpmath + python-flint. Rendering byte-stabil: tanpa timestamp,
-tanpa acak -- rerun menghasilkan berkas identik.</p>
+tanpa acak -- rerun menghasilkan file identik.</p>
 </div>
 </div></body></html>
 """ % (FONT, build_panel1(c13, c100, badge), c100_desc, header_g, rows,
@@ -520,3 +520,5 @@ def main(argv: list) -> int:
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv))
+
+

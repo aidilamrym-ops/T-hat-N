@@ -20,3 +20,5 @@ def test_no_float_or_numpy_in_bsd_v2() -> None:
     source = (ROOT / "msaf" / "bsd_v2.py").read_text(encoding="utf-8")
     assert "numpy" not in source
     assert "float" not in source
+
+

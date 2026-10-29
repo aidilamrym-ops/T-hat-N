@@ -1,4 +1,4 @@
-# Sertifikat diagnostik RBM Anderson untuk estimator S1/S2 — 2026-10-20
+﻿# Sertifikat diagnostik RBM Anderson for estimator S1/S2 â€” 2026-10-20
 
 **Status:** `PASS` (CI run `39451466416`, commit `d629823`, conclusion
 `success`). **Paket:** item 4 dari
@@ -6,27 +6,27 @@
 **Pra-registrasi:** [`reports/PREREG_RBM_ANDERSON_2026-10-20.md`](PREREG_RBM_ANDERSON_2026-10-20.md)
 (`sha256LF 62c9940a831a43e70376077d58972c49c7ef686e20751900be681606a595a014`).
 
-## 1. Ringkasan hasil
+## 1. Ringkasan result
 
-Kampanye finite `D = 201` dengan tiga bandwidth `b = 1, 10, 120`, 64 matriks
-per titik, null reference 2000 spectra GUE/Poisson dan 64 spectra kalibrasi
-independen, memberi verdict **`PASS`** untuk kriteria yang dikunci:
+Kampanye finite `D = 201` with tiga bandwidth `b = 1, 10, 120`, 64 matriks
+per titik, null reference 2000 spectra GUE/Poisson and 64 spectra kalibrasi
+independen, memberi verdict **`PASS`** for kriteria which dikunci:
 
 - kalibrasi null S1: **4/4** label benar;
-- kalibrasi null S2: **12/12** sel label benar dan `p_own >= 0.05`;
-- RBM S1: monotonik di kedua chart, `b=1` berlabel `POISSON`, `b=120`
+- kalibrasi null S2: **12/12** sel label benar and `p_own >= 0.05`;
+- RBM S1: monotonik in kedua chart, `b=1` berlabel `POISSON`, `b=120`
   berlabel `GUE`;
-- RBM S2: `b=1` berlabel `POISSON` di **6/6** sel, `b=120` berlabel `GUE`
-  di **6/6** sel;
+- RBM S2: `b=1` berlabel `POISSON` in **6/6** sel, `b=120` berlabel `GUE`
+  in **6/6** sel;
 - integritas: tiga spot-check Arb lulus, deviasi eigenvalue maksimum
-  `6.22e-14`, semua bagian imajiner memuat nol.
+  `6.22e-14`, semua section imajiner memuat nol.
 
 Verdict ini berarti **estimator S1/S2 dapat membedakan fase RBM secara
-relatif pada konfigurasi ini**. Ia bukan klaim bahwa RBM `b=1` adalah proses
-Poisson eksak, bahwa RBM `b=10` adalah GUE, atau bahwa transisi Anderson fisik
-telah dibuktikan. Lihat §8 untuk batas dan nuansa p-value.
+relatif on konfigurasi ini**. Ia bukan klaim bahwa RBM `b=1` adalah proses
+Poisson eksak, bahwa RBM `b=10` adalah GUE, or bahwa transisi Anderson fisik
+telah dibuktikan. Lihat Â§8 for limit and nuansa p-value.
 
-## 2. Konfigurasi dan ensemble
+## 2. Konfigurasi and ensemble
 
 | Parameter | Nilai |
 |---|---:|
@@ -36,22 +36,22 @@ telah dibuktikan. Lihat §8 untuk batas dan nuansa p-value.
 | Null reference GUE/Poisson | 2000 masing-masing |
 | Null calibration GUE/Poisson | 64 masing-masing |
 | Bootstrap | 2000 |
-| `σ_u` | 0.3, 0.5, 1.0 |
+| `Ïƒ_u` | 0.3, 0.5, 1.0 |
 | Chart | T (primary), L (secondary) |
-| `σ_e` | 0.5 |
+| `Ïƒ_e` | 0.5 |
 | Grid S2 | 20 bin, `u=0.25..9.75` |
 | Seed master | `2430500035454946990` (`0x21badee7a7ddceae`) |
 
 Matriks dibangun dari integer 16-bit `re, im` menjadi
-`A_ij = (re_ij + i im_ij)/32768` pada band `|i-j| <= b`, lalu
-`A ← (A + A†)/2`. Entri float64 tepat sama dengan rasional exact karena
+`A_ij = (re_ij + i im_ij)/32768` on band `|i-j| <= b`, lalu
+`A â† (A + Aâ€ )/2`. Entri float64 tepat sama with rasional exact karena
 penyebutnya pangkat dua. Untuk null GUE dipakai `b = D-1`; null Poisson
-memakai cumulative exponential spacings. Chart yang dipakai:
+memakai cumulative exponential spacings. Chart which dipakai:
 
 ```text
-s = 1 - min(λ)
-x_L = λ + s        (minimum 1)
-x_T = ln(λ + s)    (minimum 0)
+s = 1 - min(Î»)
+x_L = Î» + s        (minimum 1)
+x_T = ln(Î» + s)    (minimum 0)
 ```
 
 ## 3. Kalibrasi null
@@ -71,11 +71,11 @@ Poisson `L` mean `0.386112`, sd `0.022850`.
 
 ### 3.2 S2
 
-Dua belas sel kalibrasi (2 null × 3 `σ_u` × 2 chart) semuanya berlabel benar
-dan `p_own >= 0.05`. Ringkasan rentang p: GUE `p_GUE` 1410–1932/2000;
-Poisson `p_Pois` 1087–1619/2000. Tidak ada sel yang gagal kalibrasi.
+Dua belas sel kalibrasi (2 null Ã— 3 `Ïƒ_u` Ã— 2 chart) semuanya berlabel benar
+and `p_own >= 0.05`. Ringkasan rentang p: GUE `p_GUE` 1410â€“1932/2000;
+Poisson `p_Pois` 1087â€“1619/2000. Tidak ada sel which gagal kalibrasi.
 
-## 4. RBM — S1
+## 4. RBM â€” S1
 
 | b | chart | mean | sd | z_GUE | z_Pois | p_GUE | p_Pois | label |
 |---:|---|---:|---:|---:|---:|---:|---:|---|
@@ -89,21 +89,21 @@ Poisson `p_Pois` 1087–1619/2000. Tidak ada sel yang gagal kalibrasi.
 `z_GUE`/`z_Pois` adalah jarak mean RBM ke mean reference dalam unit SD
 reference (bukan standard error mean). `p_GUE`/`p_Pois` adalah p dua sisi dari
 bootstrap mean berukuran 64. Kemonotonan `r_bar(1) < r_bar(10) < r_bar(120)`
-terpenuhi di kedua chart dengan selisih minimum terkecil `0.0657` (jauh di atas
+terpenuhi in kedua chart with selisih minimum terkecil `0.0657` (jauh in atas
 ambang pra-registrasi `0.01`).
 
 Catatan penting: titik `b=1` lebih dekat ke Poisson secara relatif, tetapi p
-dua sisinya kecil (`3–5/2000`) karena mean `0.3946` masih bergeser `+0.0086`
+dua sisinya kecil (`3â€“5/2000`) karena mean `0.3946` masih bergeser `+0.0086`
 dari reference Poisson `0.3860`; jadi ini adalah **near-Poisson finite-size**,
-bukan Poisson eksak. Titik `b=10` berada di antara kedua null dan tidak
-seragam secara statistik; labelnya hanya menyatakan jarak ternormalisasi yang
+bukan Poisson eksak. Titik `b=10` berada in antara kedua null and no
+seragam secara statistik; labelnya hanya menyatakan jarak ternormalisasi which
 lebih dekat ke GUE.
 
-## 5. RBM — S2
+## 5. RBM â€” S2
 
 `p_GUE = P[chi2_GUE_boot >= chi2_obs]` (upper tail).
 `p_Pois = P[chi2_Pois_boot <= chi2_obs]` (lower tail, sesuai konvensi
-pra-registrasi/README). Karena itu `p_Pois` yang mendekati 1 berarti jarak ke
+pra-registrasi/README). Karena itu `p_Pois` which mendekati 1 berarti jarak ke
 rata-rata Poisson **lebih besar** dari biasanya, bukan p-value konsistensi
 dua sisi. Label fase memakai jarak chi-square ternormalisasi terhadap
 rerata bootstrap masing-masing null.
@@ -131,15 +131,15 @@ rerata bootstrap masing-masing null.
 
 Interpretasi terpisah dari label:
 
-- `b=1`: S2 sangat jauh dari GUE (`p_GUE=0`) dan jauh lebih dekat ke Poisson;
-  tetapi `chi2_Pois` 51.7–73.3 masih di atas rentang tipikal Poisson, sehingga
+- `b=1`: S2 sangat jauh dari GUE (`p_GUE=0`) and jauh lebih dekat ke Poisson;
+  tetapi `chi2_Pois` 51.7â€“73.3 masih in atas rentang tipikal Poisson, sehingga
   ini tetap **near-Poisson finite-size**, bukan kecocokan Poisson sempurna.
-- `b=10`: kedua tail p di lantai (`p_GUE=0`, `p_Pois=2000/2000`); titik ini
-  adalah regime antara, dan label `GUE` hanya berarti jarak ternormalisasi
+- `b=10`: kedua tail p in lantai (`p_GUE=0`, `p_Pois=2000/2000`); titik ini
+  adalah regime antara, and label `GUE` hanya berarti jarak ternormalisasi
   lebih dekat ke GUE daripada Poisson.
-- `b=120`: `p_GUE` 530–1926/2000 (semua `>= 0.05`) dan `p_Pois=2000/2000`,
-  konsisten dengan fase delokalisasi yang jauh dari Poisson dan tidak dapat
-ditolak dari GUE pada sel-sel ini.
+- `b=120`: `p_GUE` 530â€“1926/2000 (semua `>= 0.05`) and `p_Pois=2000/2000`,
+  konsisten with fase delokalisasi which jauh dari Poisson and no dapat
+ditolak dari GUE on sel-sel ini.
 
 ## 6. Integritas
 
@@ -149,9 +149,9 @@ ditolak dari GUE pada sel-sel ini.
 | 10 | `b7fe37c0dbd4406018be6caa6c909bb9ebb2637dd9627d29708bf13f6c823175` | `2.309e-14` | ya | ya |
 | 120 | `926d3cc4ee5fbed407816d8a633ae195785b09cf6b97f45a9494f49e1dc4af71` | `6.217e-14` | ya | ya |
 
-Spot-check memakai `acb_mat.eig` pada presisi 128 bit dari entri rasional
-exact; float64 hanya dipakai untuk membandingkan midpoint. Ini bukan
-sertifikasi interval untuk seluruh statistik S1/S2.
+Spot-check memakai `acb_mat.eig` on presisi 128 bit dari entri rasional
+exact; float64 hanya dipakai for membandingkan midpoint. Ini bukan
+sertifikasi interval for seluruh statistik S1/S2.
 
 ## 7. Verdict
 
@@ -166,24 +166,24 @@ sertifikasi interval untuk seluruh statistik S1/S2.
 
 ## 8. Batas eksplisit
 
-- Satu dimensi `D=201`; tidak ada ekstrapolasi thermodynamic limit.
+- Satu dimensi `D=201`; no ada ekstrapolasi thermodynamic limit.
 - Tiga bandwidth; bukan kurva fase kontinu.
 - Statistik S1/S2 adalah lapisan float64 setelah entri exact; hanya
-  spot-check matriks yang memakai Arb.
+  spot-check matriks which memakai Arb.
 - Label fase adalah **jarak relatif** ke null; bukan bukti kesamaan
-  distribusi. Khususnya `b=1` bukan Poisson eksak dan `b=10` bukan GUE eksak.
-- Tidak ada klaim transisi Anderson fisik, universalitas RMT, atau fisika.
-- Tidak ada klaim kriptografi, faktorisasi, RSA/ECC, RH, lokasi nol, atau
-  `σ=1/2`.
-- `PASS` di sini adalah validasi estimator pada konfigurasi ini, bukan
-  peer review atau klaim eksternal.
+  distribusi. Khususnya `b=1` bukan Poisson eksak and `b=10` bukan GUE eksak.
+- Tidak ada klaim transisi Anderson fisik, universalitas RMT, or fisika.
+- Tidak ada klaim kriptografi, faktorisasi, RSA/ECC, RH, lokasi nol, or
+  `Ïƒ=1/2`.
+- `PASS` in sini adalah validasi estimator on konfigurasi ini, bukan
+  peer review or klaim eksternal.
 
-## 9. Artefak dan verifikasi
+## 9. Artefak and verifikasi
 
-- Modul: `msaf/rbm_anderson.py` — `sha256LF ea3cce26480d06b55269865e1e18cde86e2c60510abc31159d9400695e6d73f8`
-- Guard: `msaf/tests/test_rbm_anderson.py` — `sha256LF 5105bc429bbc1dda2a6abfd1f91039edd4423463ef981636cb0f125d162f68ba`
-- Prereg: `reports/PREREG_RBM_ANDERSON_2026-10-20.md` — `sha256LF 62c9940a831a43e70376077d58972c49c7ef686e20751900be681606a595a014`
-- Receipt: `reports/rbm_anderson_2026-10-20.json` — `sha256LF 4ff31e634f6250174aad30c12354f152fd8919d195b9d0883844c0f7c66c3257`
+- Modul: `msaf/rbm_anderson.py` â€” `sha256LF ea3cce26480d06b55269865e1e18cde86e2c60510abc31159d9400695e6d73f8`
+- Guard: `msaf/tests/test_rbm_anderson.py` â€” `sha256LF 5105bc429bbc1dda2a6abfd1f91039edd4423463ef981636cb0f125d162f68ba`
+- Prereg: `reports/PREREG_RBM_ANDERSON_2026-10-20.md` â€” `sha256LF 62c9940a831a43e70376077d58972c49c7ef686e20751900be681606a595a014`
+- Receipt: `reports/rbm_anderson_2026-10-20.json` â€” `sha256LF 4ff31e634f6250174aad30c12354f152fd8919d195b9d0883844c0f7c66c3257`
 - Receipt canonical hash: `3744cbe92546256f8cb9c25c0dabb16a98921838ebfa026c07c60e5c4892bca3`
 - Runtime kampanye penuh lokal: **153.74 s** (termasuk tiga spot-check Arb).
 - Guard baru: **9 tests**, lulus `1.97 s`.
@@ -203,11 +203,13 @@ python -m pytest msaf -q
 python audit_quantum/freeze.py --verify
 ```
 
-## 10. Hubungan dengan item 2
+## 10. Hubungan with item 2
 
-Item 2 (`A-2026-0022`) adalah sertifikat exact untuk permutation `Z_N^×`.
-Item 4 ini adalah benchmark statistik finite untuk estimator S1/S2; tidak ada
-dependensi logis dari item 2, dan tidak ada klaim baru tentang `Z_N^×`,
-RSA/ECC, atau period-finding. Keduanya hanya berbagi disiplin pra-registrasi,
-receipt deterministik, dan pemisahan tegas antara inti exact dan lapisan
+Item 2 (`A-2026-0022`) adalah sertifikat exact for permutation `Z_N^Ã—`.
+Item 4 ini adalah benchmark statistik finite for estimator S1/S2; no ada
+dependensi logis dari item 2, and no ada klaim baru tentang `Z_N^Ã—`,
+RSA/ECC, or period-finding. Keduanya hanya berbagi disiplin pra-registrasi,
+receipt deterministik, and pemisahan tegas antara inti exact and lapisan
 diagnostik.
+
+

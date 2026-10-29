@@ -50,3 +50,5 @@ def test_v4_committed_html_matches_generator():
     assert v4.OUT.exists()
     ctx = v4.collect()
     assert v4.OUT.read_text(encoding="utf-8") == v4.render(ctx)
+
+

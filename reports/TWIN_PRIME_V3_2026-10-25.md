@@ -1,11 +1,11 @@
-# Sensus twin prime Q2 v3 — N = 10^9: CERTIFIED (fragmen finit)
+﻿# Sensus twin prime Q2 v3 â€” N = 10^9: CERTIFIED (fragmen finit)
 
-**Status formal: CERTIFIED untuk fragmen finit `N = 10^9`.**
+**Status formal: CERTIFIED for fragmen finit `N = 10^9`.**
 Registry: **`A-2026-0046`**. Verdict internal: `all_pass=true`, `summary=ALL PASS`,
-C1–C4 terpenuhi.
+C1â€“C4 terpenuhi.
 
-Entri ini **tidak** mengubah `A-2026-0045` (Q2 v2, `N = 10^7`, tetap CERTIFIED)
-dan **tidak** mengubah `A-2026-0029` (`N = 100.000`, tetap `INCONCLUSIVE`).
+Entri ini **no** mengubah `A-2026-0045` (Q2 v2, `N = 10^7`, tetap CERTIFIED)
+and **no** mengubah `A-2026-0029` (`N = 100.000`, tetap `INCONCLUSIVE`).
 
 | Item | Nilai |
 |---|---|
@@ -23,11 +23,11 @@ dan **tidak** mengubah `A-2026-0029` (`N = 100.000`, tetap `INCONCLUSIVE`).
 | Runtime run kedua | 83,47 detik |
 | Determinisme | dua run penuh menghasilkan receipt byte-identik |
 
-## 1. Pertanyaan dan jawaban
+## 1. Pertanyaan and answer
 
-Berapa banyak pasangan twin prime `(p, p + 2)` dengan `p <= 10^9`, dan apakah
-dua implementasi sieve independen menghasilkan daftar pasangan yang identik
-integer-per-integer pada seluruh rentang?
+Berapa banyak pasangan twin prime `(p, p + 2)` with `p <= 10^9`, and apakah
+dua implementasi sieve independen menghasilkan daftar pasangan which identik
+integer-per-integer on seluruh rentang?
 
 Jawaban sensus:
 
@@ -41,7 +41,7 @@ Jawaban sensus:
 | Mismatch element-wise | 0 | 0 |
 
 Ini adalah sensus finit. Hasilnya **bukan** bukti konjektur twin prime, bukan
-klaim asimtotik, dan tidak berlaku untuk `N > 10^9`.
+klaim asimtotik, and no berlaku for `N > 10^9`.
 
 ## 2. Konfigurasi terkunci
 
@@ -51,37 +51,37 @@ klaim asimtotik, dan tidak berlaku untuk `N > 10^9`.
 | Batas bilangan prima basis | `31_623` |
 | Blok sieve B | `2^24 = 16_777_216` |
 | Aritmetika | integer Python eksak; tanpa float; tanpa numpy |
-| Pasangan | `(p, p + 2)` dengan `p` prima dan `p + 2` prima, `p <= N` |
+| Pasangan | `(p, p + 2)` with `p` prima and `p + 2` prima, `p <= N` |
 | Checkpoint | `10^6`, `10^7`, `10^8`, `10^9` |
 | Digest pasangan | SHA-256 atas record 16 byte big-endian: `p.to_bytes(8, "big") + (p + 2).to_bytes(8, "big")`, berurutan naik |
 | Definisi `max_gap` | maksimum `p_{i+1} - p_i` atas pasangan berurutan, bukan selisih ujung pasangan |
 
-Catatan aritmetika batas basis: `isqrt(1_000_000_002) = 31.622`, bukan
-`31.623`. Pra-registrasi menulis `31.623`; nilai itu yang dikunci dan dipakai.
-Karena `31.623 = 3 × 10.541` komposit, daftar prima basis tidak berubah dan
-batas `31.623` adalah superset aman dari `31.622`. Perbedaan satu langkah ini
-tidak memengaruhi C1–C4 atau hasil sensus.
+Catatan aritmetika limit basis: `isqrt(1_000_000_002) = 31.622`, bukan
+`31.623`. Pra-registrasi menulis `31.623`; nilai itu which dikunci and dipakai.
+Karena `31.623 = 3 Ã— 10.541` komposit, daftar prima basis no berubah and
+limit `31.623` adalah superset aman dari `31.622`. Perbedaan satu step ini
+no memengaruhi C1â€“C4 or result sensus.
 
 ## 3. Dua implementasi independen
 
-**Sieve A — Eratosthenes penuh.** `bytearray` untuk `0 .. N + 2`, tandai
+**Sieve A â€” Eratosthenes penuh.** `bytearray` for `0 .. N + 2`, tandai
 kelipatan setiap prima sampai `isqrt(N + 2)`, lalu pindai hanya bilangan ganjil.
 Untuk mempercepat ekstraksi, 1 MiB byte flag ganjil dikemas menjadi integer,
-di-AND dengan versi tergeser satu posisi, lalu byte hasilnya dipindai dengan
-`find`. Operasi ini eksak: setiap byte flag bernilai 0 atau 1, sehingga AND
-integer tidak dapat menghasilkan carry.
+in-AND with versi tergeser satu posisi, lalu byte hasilnya dipindai with
+`find`. Operasi ini eksak: setiap byte flag bernilai 0 or 1, sehingga AND
+integer no dapat menghasilkan carry.
 
-**Sieve B — segmented Eratosthenes.** Daftar prima basis sampai `31.623`
+**Sieve B â€” segmented Eratosthenes.** Daftar prima basis sampai `31.623`
 dihitung oleh fungsi sederhana terpisah. Setiap blok `[low, high]` berukuran
-`2^24` membangun segmen `[low, high + 2]`, menandai kelipatan prima basis, dan
-memindai `p` ganjil di `[low, high]`. Blok berikutnya mulai di `high + 1`.
-Karena segmen mencakup `high + 2`, pasangan yang dimulai di ujung blok tetap
-diputuskan di blok yang sama; tidak ada pasangan yang terlewat atau terhitung
+`2^24` membangun segmen `[low, high + 2]`, menandai kelipatan prima basis, and
+memindai `p` ganjil in `[low, high]`. Blok berikutnya mulai in `high + 1`.
+Karena segmen mencakup `high + 2`, pasangan which dimulai in ujung blok tetap
+diputuskan in blok which sama; no ada pasangan which terlewat or terhitung
 dua kali.
 
 Keduanya menghasilkan pasangan dalam urutan naik. Perbandingan memakai
-`zip_longest`, sehingga perbedaan panjang stream dan perbedaan isi pada posisi
-mana pun terdeteksi. `count` saja tidak dipakai sebagai pengganti perbandingan
+`zip_longest`, sehingga perbedaan panjang stream and perbedaan isi on posisi
+mana pun terdeteksi. `count` saja no dipakai sebagai pengganti perbandingan
 element-wise.
 
 ## 4. Checkpoint referensi
@@ -93,26 +93,26 @@ element-wise.
 | `10^8` | 440.312 | 440.312 | 440.312 | ya |
 | `10^9` | 3.424.506 | 3.424.506 | 3.424.506 | ya |
 
-Checkpoint `10^9` sama dengan count total pada kedua sieve. Nilai referensi
-adalah pemeriksaan tambahan; kesepakatan penuh A/B dan digest tetap menjadi
+Checkpoint `10^9` sama with count total on kedua sieve. Nilai referensi
+adalah pemeriksaan tambahan; kesepakatan penuh A/B and digest tetap menjadi
 kriteria utama.
 
-## 5. Kriteria C1–C4
+## 5. Kriteria C1â€“C4
 
 | Kriteria | Isi | Hasil |
 |---|---|---|
-| C1 | Dua sieve independen, aritmetika eksak, tanpa float/numpy/v2 di jalur sensus | **PASS** — AST guard menolak import numpy/v2 dan pemakaian `float`; A memakai bytearray penuh, B memakai segmented sieve dan basis prima terpisah |
-| C2 | Kesepakatan penuh | **PASS** — count, max_gap, first, last, digest sama; 0 mismatch element-wise; panjang stream sama |
-| C3 | Checkpoint referensi | **PASS** — keempat checkpoint cocok pada kedua sieve; `10^9` sama dengan count total |
-| C4 | Determinisme receipt | **PASS** — JSON kanonik, tanpa timestamp/runtime/path absolut; dua run penuh byte-identik dengan SHA-256 `61e6731b…5ab70` |
+| C1 | Dua sieve independen, aritmetika eksak, tanpa float/numpy/v2 in jalur sensus | **PASS** â€” AST guard menolak import numpy/v2 and pemakaian `float`; A memakai bytearray penuh, B memakai segmented sieve and basis prima terpisah |
+| C2 | Kesepakatan penuh | **PASS** â€” count, max_gap, first, last, digest sama; 0 mismatch element-wise; panjang stream sama |
+| C3 | Checkpoint referensi | **PASS** â€” keempat checkpoint cocok on kedua sieve; `10^9` sama with count total |
+| C4 | Determinisme receipt | **PASS** â€” JSON kanonik, tanpa timestamp/runtime/path absolut; dua run penuh byte-identik with SHA-256 `61e6731bâ€¦5ab70` |
 
-Receipt juga mencatat `module_sha256lf` dan `prereg_sha256lf`. Hash
-pra-registrasi di receipt sama dengan hash berkas terkunci di atas.
+Receipt juga mencatat `module_sha256lf` and `prereg_sha256lf`. Hash
+pra-registrasi in receipt sama with hash file terkunci in atas.
 
 ## 6. Determinisme dua run
 
 Dua eksekusi penuh `python msaf/twin_prime_v3.py` berturut-turut menghasilkan
-output ringkas yang sama dan receipt dengan SHA-256 yang sama:
+output ringkas which sama and receipt with SHA-256 which sama:
 
 ```text
 61e6731b012a90282ffecc29a9da070db8ee5247279ab45b812bea3c7245ab70
@@ -120,8 +120,8 @@ output ringkas yang sama dan receipt dengan SHA-256 yang sama:
 
 Run kedua memerlukan 83,47 detik. Peak memori teoretis didominasi sieve A:
 bytearray penuh sekitar 1 GB ditambah salinan flag ganjil sekitar 0,5 GB;
-sieve B hanya menyimpan satu blok sekitar 16,7 MB. Tidak ada timestamp atau
-nama mesin di receipt, sehingga byte receipt tidak bergantung pada waktu.
+sieve B hanya menyimpan satu blok sekitar 16,7 MB. Tidak ada timestamp or
+nama mesin in receipt, sehingga byte receipt no bergantung on waktu.
 
 ## 7. Perintah verifikasi
 
@@ -132,7 +132,7 @@ python -m pytest msaf/tests/test_twin_prime_v2.py msaf/tests/test_fence_registry
 python audit_quantum/freeze.py --verify
 ```
 
-Hasil guard pada 2026-10-25:
+Hasil guard on 2026-10-25:
 
 - `msaf/tests/test_twin_prime_v3.py`: 8 passed.
 - Gabungan v3 + v2 + fence registry: 12 passed.
@@ -141,13 +141,15 @@ Hasil guard pada 2026-10-25:
 ## 8. Batas klaim
 
 - Hanya sensus finit hingga `N = 10^9`.
-- Bukan bukti konjektur twin prime; tidak ada klaim asimtotik, distribusi,
-  kerapatan, atau perilaku untuk `N > 10^9`.
-- Tidak ada klaim RH/GRH, faktorisasi, RSA/ECC, Anderson, fisika, atau
+- Bukan bukti konjektur twin prime; no ada klaim asimtotik, distribusi,
+  kerapatan, or perilaku for `N > 10^9`.
+- Tidak ada klaim RH/GRH, faktorisasi, RSA/ECC, Anderson, fisika, or
   prioritas.
-- `A-2026-0045` (v2, `N = 10^7`) tetap menjadi klaim certified yang terpisah;
-  v3 tidak menggantikannya. `A-2026-0029` (`N = 100.000`) tetap
+- `A-2026-0045` (v2, `N = 10^7`) tetap menjadi klaim certified which terpisah;
+  v3 no menggantikannya. `A-2026-0029` (`N = 100.000`) tetap
   `INCONCLUSIVE`.
-- Angka `count` dan `max_gap` adalah hasil dua sieve repo ini; checkpoint
-  referensi adalah data eksternal yang dipakai sebagai pembanding, bukan
+- Angka `count` and `max_gap` adalah result dua sieve repo ini; checkpoint
+  referensi adalah data eksternal which dipakai sebagai pembanding, bukan
   sertifikat baru.
+
+

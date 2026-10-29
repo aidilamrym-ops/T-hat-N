@@ -1,4 +1,4 @@
-# GitHub Release -- v1.40.0-alpha-final-certified-delivery
+﻿# GitHub Release -- v1.40.0-alpha-final-certified-delivery
 
 TEMPLATE for the GitHub Release of the EXISTING annotated tag. Do NOT
 create a new tag. Status 2026-10-16: PUBLISHED via `gh` (release page
@@ -89,3 +89,5 @@ open: structural signature of the lattice versus a finite-size effect.
     python msaf/gw_resolution_delta.py --write   # section-5 generator consistency
     python msaf/gw_dashboard_v3.py --write       # byte-replay of the dashboard
     python -m pytest msaf -q                     # 311 passed
+
+

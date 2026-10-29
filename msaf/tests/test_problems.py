@@ -16,3 +16,5 @@ def test_problem_lean():
         result = subprocess.run(["lake", "build"], cwd=str(lean_dir), capture_output=True, text=True)
         assert result.returncode == 0, f"{lean_dir} build fail: {result.stderr}"
 
+
+

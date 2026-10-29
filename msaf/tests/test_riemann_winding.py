@@ -53,3 +53,5 @@ def test_winding_float_rejection():
         winding_number("13.9", "14.4", max_depth=8.0)  # type: ignore[arg-type]
     with pytest.raises(ValueError):
         winding_number("14.4", "13.9")
+
+

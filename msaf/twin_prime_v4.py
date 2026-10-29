@@ -1,4 +1,4 @@
-"""Twin‑prime census v4: exact deterministic count for N = 10^10.
+"""Twinâ€‘prime census v4: exact deterministic count for N = 10^10.
 
 Implements the locked v4 scope from
 ``reports/PREREG_Q2_TWIN_PRIME_V4_2026-10-30.md``.
@@ -180,3 +180,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+

@@ -1,4 +1,4 @@
-# P2 audit — execution report (Collatz convergence-verification record; Barina project)
+﻿# P2 audit â€” execution report (Collatz convergence-verification record; Barina project)
 
 Date: 2026-10-19. Registry: `A-2026-0003` (extension committed separately).
 Pre-registration: `reports/AUDIT_COLLATZ_PREREG_2026-10-19.md`
@@ -12,44 +12,44 @@ Transcript: `reports/AUDIT_COLLATZ_LOG_2026-10-19.log`
 Status: **EXECUTED**. All items S/W/E/H/P ran to completion inside the frozen
 caps. Outcomes: S3 required one protocol rerun after a transient network
 failure; S4/P produced a persistent difference against its frozen expectation
-that is recorded as a **DISCREPANCY** and explained in-budget (§6.2). No
+that is recorded as a **DISCREPANCY** and explained in-budget (Â§6.2). No
 parameters were changed. T stayed NOT-RUN by owner decision. The E1 sweep
 completed in 4 m 37 s of its 3.5 h wall.
 
-## 1. Scope — what was and was not checked
+## 1. Scope â€” what was and was not checked
 
 This is the bounded, pre-registered replay of a published computation record
-(C1/C1p/C2, §1 of the pre-registration). Everything below is finite and
+(C1/C1p/C2, Â§1 of the pre-registration). Everything below is finite and
 bounded: page/archive captures, a 162-file snapshot comparison, battery
 replays of 98 + 97 + 148 published rows, a 25/14-fragment transcription
 check, an exhaustive drop-check for odd n < 2^34, and a record prefix below
 2^24. It is *not* a check of the target claim C1 (convergence verified below
-≈ 2^71.02 — not reachable on this host), not a proof or disproof of the
+â‰ˆ 2^71.02 â€” not reachable on this host), not a proof or disproof of the
 Collatz conjecture, and not peer review. No Lean/Coq/SMT artifact exists in
-this audit; no such claim is made (§9 of the pre-registration).
+this audit; no such claim is made (Â§9 of the pre-registration).
 
 ## 2. Provenance and ordering
 
 - The pre-registration and its frozen set were committed as `bbbe9ae` and
   pushed before any audit command; its CI run `39154348599` was green
-  (`gh run view 39154348599` → success, headSha `bbbe9ae`).
+  (`gh run view 39154348599` â†’ success, headSha `bbbe9ae`).
 - Preflight at execution start (log block `PREFLIGHT`): working tree clean
   (`STATUS_PORCELAIN: []`); HEAD = `9d9c358798ab4859dd024759bedd8b90cc4aac6c`;
-  `git merge-base --is-ancestor bbbe9ae HEAD` → exit 0;
-  `git diff --quiet bbbe9ae HEAD -- <prereg>` → exit 0 (frozen file
+  `git merge-base --is-ancestor bbbe9ae HEAD` â†’ exit 0;
+  `git diff --quiet bbbe9ae HEAD -- <prereg>` â†’ exit 0 (frozen file
   unchanged); `git ls-remote origin main` = HEAD; CI run `39181863147` for
   `9d9c358` green (python-tests + lean-kernel); Windows git
   `2.53.0.windows.3`.
 - The log's open block records date/host/HEAD, the sha256LF of all 11 frozen
-  §2(b)/(c) files — every value matched the pre-registration — and the sha256
-  of the prereg file `d9c334e2…` (equal to the frozen value).
+  Â§2(b)/(c) files â€” every value matched the pre-registration â€” and the sha256
+  of the prereg file `d9c334e2â€¦` (equal to the frozen value).
 - All commands ran sequentially ("satu dulu") under `nice -n 19`; every block
   is delimited in the log by `--- <ts> | <name> ---`, `CMD:`, the complete
   output, `EXIT:`; the log had a single writer at a time (`tee -a`).
 - The runner scripts were kept outside the repo during execution
   (`%TEMP%\opencode\p2exec\`) and were committed **unmodified** afterwards to
   `audit_collatz/p2_runners/`; byte-identity was verified with `cmp` for all
-  eight files before the copy (hashes in §8).
+  eight files before the copy (hashes in Â§8).
 
 ## 3. Host, tools, invocation notes
 
@@ -60,9 +60,9 @@ this audit; no such claim is made (§9 of the pre-registration).
   Windows-form `-o` targets, because the frozen commands name `curl.exe`.
   Commands as executed are in the log.
 - `git` was the Windows binary (`C:\Program Files\Git\cmd\git.exe`) invoked via
-  interop for S3 — repo Git was never run from WSL, per standing rule.
+  interop for S3 â€” repo Git was never run from WSL, per standing rule.
 - E1's hard wall was implemented exactly as pre-registered:
-  `timeout -s INT 12600 …` (SIGINT at 3.5 h; exit 124 would have been recorded
+  `timeout -s INT 12600 â€¦` (SIGINT at 3.5 h; exit 124 would have been recorded
   as-is). It was not triggered.
 - The `w1`/`w2`/`e3` engines print their full result JSON to stdout; the
   transcript therefore contains those JSONs in-line.
@@ -71,40 +71,40 @@ this audit; no such claim is made (§9 of the pre-registration).
 
 | Item | Start | Next block | Wall | Frozen cap |
 |---|---|---|---|---|
-| open | 00:46:40 | — | — | setup ≤ 1 h |
-| preflight | 00:46:41 | — | — | — |
-| S1 | 00:46:53 | 00:47:08 | 15 s | S ≤ 0.5 h |
+| open | 00:46:40 | â€” | â€” | setup â‰¤ 1 h |
+| preflight | 00:46:41 | â€” | â€” | â€” |
+| S1 | 00:46:53 | 00:47:08 | 15 s | S â‰¤ 0.5 h |
 | S2 | 00:47:08 | 00:47:12 | 4 s | |
-| S3 attempt 1 | 00:47:12 | 00:47:51 (failed) | 39 s | §9 rerun-once |
+| S3 attempt 1 | 00:47:12 | 00:47:51 (failed) | 39 s | Â§9 rerun-once |
 | S3 rerun | 00:47:51 | 00:48:00 | 9 s | |
-| S4/P | 00:48:00 | 00:48:04 | 4 s | P/S4 ≤ 30 m |
-| H1+H2 | 00:48:04 | 00:48:05 | 1 s | H ≤ 20 m |
+| S4/P | 00:48:00 | 00:48:04 | 4 s | P/S4 â‰¤ 30 m |
+| H1+H2 | 00:48:04 | 00:48:05 | 1 s | H â‰¤ 20 m |
 | S5 | 00:48:05 | 00:49:38 | 93 s | |
-| S4 discrepancy rerun | 00:49:38 | 00:49:39 | 1 s | §9 |
-| S4 investigation | 00:49:39 | 00:49:53 | 14 s | §9 (in budget) |
-| W1a/W1b | 00:49:53 | 00:51:21 | 88 s | W ≤ 1 h |
+| S4 discrepancy rerun | 00:49:38 | 00:49:39 | 1 s | Â§9 |
+| S4 investigation | 00:49:39 | 00:49:53 | 14 s | Â§9 (in budget) |
+| W1a/W1b | 00:49:53 | 00:51:21 | 88 s | W â‰¤ 1 h |
 | W1 criteria | 00:51:21 | 00:51:21 | < 1 s | |
 | W2 | 00:51:21 | 00:52:02 | 41 s | |
-| W criteria | 00:52:02 | — | < 1 s | |
-| E setup (gcc build) | 00:52:15 | 00:52:16 | 1 s | setup ≤ 1 h |
-| E2 | 00:52:16 | 00:52:37 | 21 s | E ≤ 4 h |
+| W criteria | 00:52:02 | â€” | < 1 s | |
+| E setup (gcc build) | 00:52:15 | 00:52:16 | 1 s | setup â‰¤ 1 h |
+| E2 | 00:52:16 | 00:52:37 | 21 s | E â‰¤ 4 h |
 | E3 | 00:52:37 | 00:55:16 | 2 m 39 s | |
 | E1 | 00:55:16 | 00:59:52.8 | 4 m 36.8 s | wall 3.5 h |
 | log frozen | 00:59:52.99 | | | |
 
-- Setup span (log open 00:46:40 → C build done 00:52:16): 5 m 36 s ≤ 1 h.
-- S window 00:46:53 → 00:49:38 (S5 end; 00:49:53 including the S4
-  investigation): 2 m 45 s / 3 m 00 s ≤ 30 m.
-- W: 2 m 09 s ≤ 1 h. H: 1 s ≤ 20 m. P/S4: 4 s + 15 s ≤ 30 m.
-- E: 00:52:15 → 00:59:52.8 = 7 m 37.8 s ≤ 4 h; E1 alone 4 m 36.8 s against
+- Setup span (log open 00:46:40 â†’ C build done 00:52:16): 5 m 36 s â‰¤ 1 h.
+- S window 00:46:53 â†’ 00:49:38 (S5 end; 00:49:53 including the S4
+  investigation): 2 m 45 s / 3 m 00 s â‰¤ 30 m.
+- W: 2 m 09 s â‰¤ 1 h. H: 1 s â‰¤ 20 m. P/S4: 4 s + 15 s â‰¤ 30 m.
+- E: 00:52:15 â†’ 00:59:52.8 = 7 m 37.8 s â‰¤ 4 h; E1 alone 4 m 36.8 s against
   the 3.5 h hard wall.
-- Total first command → last write: 00:46:53 → 00:59:52.99 = 12 m 59.99 s
-  (≈ 13 m) ≤ 6 h.
+- Total first command â†’ last write: 00:46:53 â†’ 00:59:52.99 = 12 m 59.99 s
+  (â‰ˆ 13 m) â‰¤ 6 h.
 - No overruns; no `UNRESOLVED-BUDGET` entries.
 
 ## 5. Outcomes and the frozen maximum labels
 
-The labels below are quoted verbatim from §10 of the pre-registration; the
+The labels below are quoted verbatim from Â§10 of the pre-registration; the
 observed values follow each quote.
 
 ### S (sources)
@@ -115,15 +115,15 @@ observed values follow each quote.
 > Generated line only; the frozen quoted fragments were located verbatim;
 > this is a snapshot, not a verdict."
 
-Observed: S1 — `curl.exe` HTTP 200 ×3 (path-records, news, main); `cmp` 0 for
+Observed: S1 â€” `curl.exe` HTTP 200 Ã—3 (path-records, news, main); `cmp` 0 for
 `site_path_records.html` and `site_news.html`; `site_main.html` normalized on
-both sides with `sed -E 's/Generated: [^<]*/Generated: X/'` → `cmp` 0.
-S2 — HTTP 200 ×4 and `cmp` 0 ×4 (A006884, A006885, A006877, A006878). The six
-expected-stable captures (2 site + 4 OEIS) matched byte-for-byte. S3 rerun —
+both sides with `sed -E 's/Generated: [^<]*/Generated: X/'` â†’ `cmp` 0.
+S2 â€” HTTP 200 Ã—4 and `cmp` 0 Ã—4 (A006884, A006885, A006877, A006878). The six
+expected-stable captures (2 site + 4 OEIS) matched byte-for-byte. S3 rerun â€”
 HEAD `e98d0294a7ff77e783907e307a80e83b92f4a164`, tree
 `b290c47a7f3b4be37f1992e7ccd5bae2dafefa2f`. Fragments: H1 25/25, H2 14/14
 (below). Caveat: S3's first attempt failed on a transient network error and
-the recorded rerun succeeded (§6.1).
+the recorded rerun succeeded (Â§6.1).
 
 ### W (published record replays)
 
@@ -134,15 +134,15 @@ the recorded rerun succeeded (§6.1).
 > engines' result JSONs were deep-equal and re-run-stable. Finite
 > arithmetic check; not peer review; not a proof of the conjecture."
 
-Observed: W1 — `path_checked = 98`, `std_checked = 97`, `mismatch_path = []`,
-`mismatch_std = []`, `cap_hits = []` (both engines). W2 — `checked = 148`,
+Observed: W1 â€” `path_checked = 98`, `std_checked = 97`, `mismatch_path = []`,
+`mismatch_std = []`, `cap_hits = []` (both engines). W2 â€” `checked = 148`,
 `mismatches = []`, `cap_hits = []` (both engines). Every row carries
 `ok`/`ok_std: true`; no trajectory hit the 10^6 step cap (empty `cap_hits`),
 i.e. each simulation reached 1. Deep-equal `compare` printed MATCH three
-times per item (P r1↔r2, Q r1↔r2, P↔Q). Monotonicity (strictly increasing
+times per item (P r1â†”r2, Q r1â†”r2, Pâ†”Q). Monotonicity (strictly increasing
 n and t(n) in all four lists) is asserted by the frozen
 `build_batteries.py` and recorded in the S5 build report
-(`battery_build_report.txt`, sha256LF `10be3c18…`, §8). Artifact hashes: §8.
+(`battery_build_report.txt`, sha256LF `10be3c18â€¦`, Â§8). Artifact hashes: Â§8.
 
 ### E (bounded exhaustive drop-check)
 
@@ -151,24 +151,24 @@ n and t(n) in all four lists) is asserted by the frozen
 > of 10^6; the independently written Python engine reproduced the identical
 > 2^24 digest (drop metrics), and the recomputed record prefix below 2^24
 > matched the published table (38 rows) between both engines. Bounded
-> replay; no claim for any n ≥ 2^34."
+> replay; no claim for any n â‰¥ 2^34."
 
-Observed: C engine (binary sha256 `46d419ad…`, gcc 15.2.0) —
-`odd_checked = 8589934591` (= 2^33 − 1; the enumerated domain is odd n with
-3 ≤ n < 2^34 — n = 1 is the trivial 1↔2 cycle and never goes below itself,
+Observed: C engine (binary sha256 `46d419adâ€¦`, gcc 15.2.0) â€”
+`odd_checked = 8589934591` (= 2^33 âˆ’ 1; the enumerated domain is odd n with
+3 â‰¤ n < 2^34 â€” n = 1 is the trivial 1â†”2 cycle and never goes below itself,
 the same domain convention as the E2 cross-check), `cap_hits = []` (no n
 reached the 10^6 step cap), `max_steps_to_drop = 547` at
-`argmax = 12235060455`, `sum_drop = "54594891213685909421"` (Σ over the
-checked odd n of the first value below n under the shortcut map). E2 —
+`argmax = 12235060455`, `sum_drop = "54594891213685909421"` (Î£ over the
+checked odd n of the first value below n under the shortcut map). E2 â€”
 Python reproduced the identical 2^24 digest (`odd_checked = 8388607`,
 `max_steps_to_drop = 287`, `argmax = 13421671`,
-`sum_drop = "52066189353824"`, `cap_hits = []`) → `compare-prefix` MATCH;
+`sum_drop = "52066189353824"`, `cap_hits = []`) â†’ `compare-prefix` MATCH;
 the `prefix24` block inside `c_drop34.json` is identical to the
-`c_drop24.json` result block → `compare-prefix` MATCH (informational check). E3 —
+`c_drop24.json` result block â†’ `compare-prefix` MATCH (informational check). E3 â€”
 Python `record_count = 38`, `prefix_compare.match = true` with
 `battery_rows_in_range = 38`; C `records 24` `record_count = 38`;
-`compare-fields … records record_count` MATCH; `check-prefix` MATCH
-(38 entries). Timing: §4.
+`compare-fields â€¦ records record_count` MATCH; `check-prefix` MATCH
+(38 entries). Timing: Â§4.
 
 ### H (transcription of quoted fragments)
 
@@ -176,8 +176,8 @@ Python `record_count = 38`, `prefix_compare.match = true` with
 > and in the clone at the pinned commit; this is a transcription match
 > only."
 
-Observed: H1 — `claims: 25 rows, 0 miss` (exit 0) against the fresh
-captures. H2 — `claims: 14 rows, 0 miss` (exit 0) against the clone at the
+Observed: H1 â€” `claims: 25 rows, 0 miss` (exit 0) against the fresh
+captures. H2 â€” `claims: 14 rows, 0 miss` (exit 0) against the clone at the
 pin.
 
 ### P/S4 (archive vs clone)
@@ -186,21 +186,21 @@ pin.
 > file-by-file; differences are listed verbatim."
 
 Observed: `identical = 147`, `changed = []`, `only_in_tarball = []`,
-`only_in_clone = 15` (all 15 paths listed in §6.2). The frozen expectation
+`only_in_clone = 15` (all 15 paths listed in Â§6.2). The frozen expectation
 was `only_in_clone = []`, `identical = 162`; the difference is a recorded
-DISCREPANCY with a documented mechanism (§6.2) — no content drift in any
+DISCREPANCY with a documented mechanism (Â§6.2) â€” no content drift in any
 compared regular file.
 
 ### T (excluded)
 
-> "NOT-RUN — excluded from v1 scope by the owner decision recorded in this
+> "NOT-RUN â€” excluded from v1 scope by the owner decision recorded in this
 > file."
 
 Observed: NOT-RUN (no command executed for T).
 
-## 6. Findings and discrepancy records (§9 outcomes)
+## 6. Findings and discrepancy records (Â§9 outcomes)
 
-### 6.1 S3 — transient network failure, one protocol rerun
+### 6.1 S3 â€” transient network failure, one protocol rerun
 
 First attempt (block `00:47:12Z`) died mid-transfer:
 
@@ -215,18 +215,18 @@ EXIT: 128
 
 Git removed the partial clone itself, so the subsequent `checkout` and
 `rev-parse` commands in the same block failed with
-`cannot change to '…': No such file or directory` (full block in the log
-under the `00:47:12Z` header). Per §9 the exact command block was rerun once
+`cannot change to 'â€¦': No such file or directory` (full block in the log
+under the `00:47:12Z` header). Per Â§9 the exact command block was rerun once
 (`00:47:51Z`) and succeeded: clone exit 0, `HEAD is now at e98d029 port
-5008`, HEAD `e98d0294…`, tree `b290c47a…`. Recorded as-is; no parameters
+5008`, HEAD `e98d0294â€¦`, tree `b290c47aâ€¦`. Recorded as-is; no parameters
 changed. This was an environment/network failure, not a mismatch of audit
 results.
 
-### 6.2 S4/P — persistent difference against the frozen expectation
+### 6.2 S4/P â€” persistent difference against the frozen expectation
 
-- Frozen expectation (prereg §4): `only_in_tarball []`,
+- Frozen expectation (prereg Â§4): `only_in_tarball []`,
   `only_in_clone []`, `changed []`, `identical 162`.
-- Observed (block `00:48:00Z`; reproduced by the §9 rerun at `00:49:38Z`,
+- Observed (block `00:48:00Z`; reproduced by the Â§9 rerun at `00:49:38Z`,
   identical): `identical = 147`, `changed = []`,
   `only_in_tarball = []`, `file_counts = {tarball: 147, clone: 162}`,
   `only_in_clone = 15`:
@@ -238,14 +238,14 @@ results.
   `src/server/wideint.h`, `src/steps/compat.h`,
   `src/steps/wideint.h`, `src/worker/compat.h`,
   `src/worker/wideint.h`.
-- In-budget investigation (`00:49:39Z`–`00:49:53Z`), all recorded in the log:
+- In-budget investigation (`00:49:39Z`â€“`00:49:53Z`), all recorded in the log:
   1. the tarball stores those 15 paths as **symlink members**
-     (`lrwxrwxrwx … -> ../common/compat.h` etc.;
+     (`lrwxrwxrwx â€¦ -> ../common/compat.h` etc.;
      `src/gpuworker/kernel.cl -> kernel32.cl`), while
      `src/common/compat.h` and `src/common/wideint.h` are regular members
      (964 B / 876 B);
   2. the clone's index holds exactly **15 mode-120000 entries** at the same
-     15 paths (`git ls-tree -r HEAD | grep -c '^120000'` → `15`);
+     15 paths (`git ls-tree -r HEAD | grep -c '^120000'` â†’ `15`);
   3. symlink counts on both sides: `15` (tar `grep -c '^l'`) = `15`
      (ls-tree);
   4. the materialized files' content equals the link target:
@@ -263,22 +263,22 @@ results.
 - Disposition: the frozen expectation `0/162` was a derivation error at
   freeze time (it did not account for symlink members and the Windows
   checkout policy). It is recorded as a DISCREPANCY as-is; the exact command
-  was rerun once per §9 with the identical result; `weld-tar` was **not**
+  was rerun once per Â§9 with the identical result; `weld-tar` was **not**
   modified (frozen tool from the BB5 package, hash in `A-2026-0002` and
   re-listed in `A-2026-0003`); no parameters changed. The listing above is
   the difference verbatim, as required by the P/S4 label.
 
-### 6.3 W1 criteria extraction — tooling note (transparency)
+### 6.3 W1 criteria extraction â€” tooling note (transparency)
 
 The first extraction attempt (`00:51:21Z`) read the five criteria fields at
 the top level of the W1 JSONs and printed `MISSING` (the fields live under
 `result`); the corrected extraction was appended at `00:52:02Z` and is the
-one reported in §5. Both blocks are kept in the log as-is. No audit value
+one reported in Â§5. Both blocks are kept in the log as-is. No audit value
 depends on the first block.
 
 ## 7. Anti-circularity gate (attached verbatim; can only downgrade)
 
-Per prereg §9 the gate was run at report time over the audit artifact tree
+Per prereg Â§9 the gate was run at report time over the audit artifact tree
 (`audit_collatz/`). Output attached verbatim:
 
 ```
@@ -310,7 +310,7 @@ re-verifies each one).
 |---|---|
 | `reports/AUDIT_COLLATZ_LOG_2026-10-19.log` | `ccf178d070c26e19a8c88af5e34a6d1fbffae743c189b0d8277a96b2b1714e4b` |
 
-**Result artifacts (`audit_collatz/exec_2026-10-19/…`)**
+**Result artifacts (`audit_collatz/exec_2026-10-19/â€¦`)**
 
 | artifact | sha256LF |
 |---|---|
@@ -330,7 +330,7 @@ re-verifies each one).
 | `weld.json` | `5ca7703e2884e9a0b3a4d28b14251232a2ed570e8df04a11be44016d801b37e6` |
 | `refetch/battery_build_report.txt` | `10be3c18bbbf61377225972f5b4cb20313d0f3c5ea2e3cd8d2ea9b55335e80ce` |
 
-**Runner scripts (`audit_collatz/p2_runners/…`; used from `%TEMP%` and
+**Runner scripts (`audit_collatz/p2_runners/â€¦`; used from `%TEMP%` and
 committed unmodified, `cmp`-verified)**
 
 | artifact | sha256LF |
@@ -361,9 +361,9 @@ committed unmodified, `cmp`-verified)**
 
 ## 9. Non-claims and limits
 
-- No statement about the Collatz conjecture, and none for any n ≥ 2^34; the
-  target claim C1 (≈ 2^71.02) was not reproduced — it is out of reach on this
-  host (recon §5), and T is NOT-RUN by owner decision.
+- No statement about the Collatz conjecture, and none for any n â‰¥ 2^34; the
+  target claim C1 (â‰ˆ 2^71.02) was not reproduced â€” it is out of reach on this
+  host (recon Â§5), and T is NOT-RUN by owner decision.
 - C1p/C2 contents were not audited beyond the frozen quoted fragments H1/H2;
   H is a transcription match only.
 - The S outcomes describe the state of the named pages at capture time and of
@@ -391,8 +391,10 @@ committed unmodified, `cmp`-verified)**
 - 2026-10-19: first version, written after the log was frozen (last write
   `00:59:52.99Z`). Values are quoted from the log and from post-freeze hash
   runs; nothing was recomputed or edited after the fact.
-- Non-modifications: no existing file was edited; the §2 frozen files were
+- Non-modifications: no existing file was edited; the Â§2 frozen files were
   never overwritten (S5 wrote to `exec_2026-10-19/batteries_re/` and compared
   with `cmp`); third-party artifacts were read-only; the runner scripts were
   added to the repo unmodified after execution (`cmp`-verified). `weld-tar`
   and all frozen engines/tools were left untouched (hashes verified at open).
+
+

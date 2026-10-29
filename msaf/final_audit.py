@@ -166,3 +166,5 @@ def run_final_audit(
     return FinalAudit(
         ledgers=ledger_verdicts, capacities=capacity_verdicts, sealed=sealed
     )
+
+

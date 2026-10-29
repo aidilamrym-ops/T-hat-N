@@ -1,4 +1,4 @@
-"""T2-r6: figure‑eight campaign with discriminative K6 mutations.
+"""T2-r6: figureâ€‘eight campaign with discriminative K6 mutations.
 
 Adds gauge mutation M3 (C = 1/3) already present in r5 and tighter Gauss condition
 M8 (GAUSS_COND_MAX = 20_000) to ensure K4 failure.
@@ -82,9 +82,9 @@ def run_base() -> dict:
     actual_module = t1.sha256lf(Path(r3.__file__))
     if actual_module != BASE_MODULE_SHA:
         raise RuntimeError(f"base r3 module hash mismatch: {actual_module}")
-    # Ensure base passed K1‑K5
+    # Ensure base passed K1â€‘K5
     if not bool(base.get("all_pass")):
-        raise RuntimeError("base r3 campaign did not pass K1‑K5")
+        raise RuntimeError("base r3 campaign did not pass K1â€‘K5")
     return base
 
 
@@ -348,3 +348,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+

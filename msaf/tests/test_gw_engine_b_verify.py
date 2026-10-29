@@ -172,3 +172,5 @@ def test_compare_bins_10ulp_semantics():
     cvB3 = [mpf_of_float(1.0) + mpf_of_float(1e-3)] * N_BINS
     recs3 = compare_bins(cvB3, cvA, "cv")
     assert not any(r["within_frozen_or"] for r in recs3)
+
+

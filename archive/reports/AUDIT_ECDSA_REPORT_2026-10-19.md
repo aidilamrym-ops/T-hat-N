@@ -1,27 +1,27 @@
-# RR-2026-01: ECDSA curve seeds — reproduction of the published (t, n) -> seed mapping
+﻿# RR-2026-01: ECDSA curve seeds â€” reproduction of the published (t, n) -> seed mapping
 
 - **id / registry_ref:** `RR-2026-01` / `A-2026-0004` (`reports/FENCE_REGISTRY.md`)
 - **class:** `claim-reproduction`
-- **resource_class:** light — measured execution wall 8 s (2026-10-19T02:00:15Z →
-  02:00:23Z); frozen cap 60 min (prereg §5).
+- **resource_class:** light â€” measured execution wall 8 s (2026-10-19T02:00:15Z â†’
+  02:00:23Z); frozen cap 60 min (prereg Â§5).
 - **status:** COMPLETE. Per-item labels (no aggregate claim): I1 OK;
   I2 `10/10 MATCH`; I3 `4/4 MATCH`; I4 `MATCH`; I5 `MATCH`; I6 `MATCH`.
   Gate: `TOOL NOT RUN` (never counted as success).
 - **frozen prereg:** `reports/AUDIT_ECDSA_PREREG_2026-10-19.md` (sha256LF
-  `660e3cc6…3d89`), freeze commit `3026d12` pushed before the first audit
+  `660e3cc6â€¦3d89`), freeze commit `3026d12` pushed before the first audit
   command; record spec: `reports/REPLAY_RECORD_SPEC.md` v0.1.
 
 ## Claim
 
 Source: Anthropic, "Claude reveals ECDSA curve origins" (2026-10-16),
-https://www.anthropic.com/research/ecdsa-curve-origins — fetched 2026-10-19
+https://www.anthropic.com/research/ecdsa-curve-origins â€” fetched 2026-10-19
 01:24:11Z. Captures: `audit_ecdsa/captures/claim_anthropic_ecdsa_curve_origins.html`
-(sha256LF `266554ce…8781d`) and `…_curve_origins.txt` (sha256LF
-`35dfbdd8…77be`); quotes are byte-exact from the `.txt`, line numbers cited.
+(sha256LF `266554ceâ€¦8781d`) and `â€¦_curve_origins.txt` (sha256LF
+`35dfbdd8â€¦77be`); quotes are byte-exact from the `.txt`, line numbers cited.
 
-- **C1 (lines 29–30):** "In under half an hour, Claude discovered the origins of
+- **C1 (lines 29â€“30):** "In under half an hour, Claude discovered the origins of
   the NIST P-192, P-224, P-256, P-384, and P-521 seeds. None of them were the
-  results of any hash algorithm at all, but rather the output of the C library’s
+  results of any hash algorithm at all, but rather the output of the C libraryâ€™s
   lrand48 random-number generator, seeded with a Unix timestamp!"
 - **C2 (line 31):** "The algorithm used would sample bytes from the random
   number generator (RNG) initialized by a Unix timestamp (t) for some number of
@@ -36,7 +36,7 @@ https://www.anthropic.com/research/ecdsa-curve-origins — fetched 2026-10-19
   X9.62 standard all had the same pattern: lrand48() >> 23."
 - **C4 (line 43):** "However, for the ten prime-curve seeds, every srand48
   initialization was a Unix timestamp representing a date between May 1997 and
-  April 1998. … The four binary-curve initializations read as February 1984.
+  April 1998. â€¦ The four binary-curve initializations read as February 1984.
   With the timestamps doubled, they map to April 17, 1998, two weeks after the
   P-224 run. So, the program may have halved the clock."
 - **Residue (line 60):** "There is also one seed we were unable to recover. The
@@ -59,17 +59,17 @@ and records the claim's own printed seed strings as a cross-check only.
   `15.2.0-16ubuntu1` (`gcc -O2 -std=gnu11`); Python `3.14.4`; `nice`/`sha256sum`
   uutils coreutils `0.8.0`. Windows side (capture/git): curl `8.13.0`, git
   `2.53.0.windows.3`.
-- **Host minima** (measured): 4 vCPU, 9 882 MB RAM, 3 072 MB swap — a single
+- **Host minima** (measured): 4 vCPU, 9 882 MB RAM, 3 072 MB swap â€” a single
   WSL2 VM on the owner's laptop (kept on); light-load discipline (`nice -n 19`),
   no parallel heavy tasks during the run.
 - **Frozen package:** 29 files under `audit_ecdsa/` + 2 report files, pinned raw
-  in `audit_ecdsa/PINS.sha256` (sha256LF `f64d66f5…56f7`, 3 021 B);
-  `sha256sum -c` → 29/29 OK at execution start (log lines 4–33).
+  in `audit_ecdsa/PINS.sha256` (sha256LF `f64d66f5â€¦56f7`, 3 021 B);
+  `sha256sum -c` â†’ 29/29 OK at execution start (log lines 4â€“33).
 
 ## Protocol (frozen)
 
 - Freeze commit `3026d12cf6c25f72b48137f7c9bf646439886f59` ("V1 freeze package
-  RR-2026-01…") was pushed BEFORE the first audit command; CI run `39187596038`
+  RR-2026-01â€¦") was pushed BEFORE the first audit command; CI run `39187596038`
   green (python-tests + lean-kernel); `origin/main == HEAD`. Execution ran on
   exactly this commit; no parameter changes before or after.
 - Engine model (POSIX/glibc spec; two independent engines + glibc weld):
@@ -78,53 +78,53 @@ and records the claim's own printed seed strings as a cross-check only.
     `(state >> 40)` (i.e., `lrand48() >> 23`, one byte) formatted `%02X`.
   - Binary rows: candidate n = 5 successive states, each contributing
     `(state >> 17)` (`lrand48()`) formatted `%08X`; engine arg = `floor(t/2)`.
-- Commands: exactly prereg §3 (`step 0` pin check + build; I1 selftest; I2–I6
+- Commands: exactly prereg Â§3 (`step 0` pin check + build; I1 selftest; I2â€“I6
   `run_v1.py` items); all output appended to the log via `tee -a` in one logged
   session; runner archived as `audit_ecdsa/exec_2026-10-19/v1_exec_steps.sh`
-  (sha256LF `a7b20f21…9227f`).
+  (sha256LF `a7b20f21â€¦9227f`).
 - Dev-only vs audit boundary: development validation (KAT on 3 published rows,
-  synthetic path tests) happened pre-freeze and is disclosed in prereg §6;
+  synthetic path tests) happened pre-freeze and is disclosed in prereg Â§6;
   every value cited below comes from the single audit session.
 
 ## Expected artifacts
 
 | artifact | how to recompute | sha256LF (raw = LF; full in Certificates) |
 |---|---|---|
-| `audit_ecdsa/exec_2026-10-19/e1` | `gcc -O2 -std=gnu11` from `engine_e1.c` | `5188ed4eb174…d457` |
-| `audit_ecdsa/exec_2026-10-19/e1w` | `gcc -O2 -std=gnu11` from `engine_e1w.c` | `0fcb720ed9bc…b77a` |
-| `…/i1_selftest.json` | `selftest_v1.py --e1 … --e1w … --e2 … --json` | `80cc0d2c9d0c…4327` |
-| `…/i2_prime.json` | `run_v1.py i2 --manifest … --e1 … --e2 …` | `22ed4fa09a30…7aac` |
-| `…/i3_binary.json` | `run_v1.py i3 --manifest … --e1 … --e2 …` | `247f9e511d0e…1823` |
-| `…/i4_wordstats.json` | `run_v1.py i4 --manifest …` | `1139975b4a0c…ef2d` |
-| `…/i5_timestamps.json` | `run_v1.py i5 --manifest …` | `e1756ee8b5d1…6698` |
-| `…/i6_sources.json` | `run_v1.py i6 --manifest …` | `da0eccfd38f3…e9b3` |
-| `…/v1_exec_steps.sh` | runner archive (as-run) | `a7b20f214dec…227f` |
-| `reports/AUDIT_ECDSA_LOG_2026-10-19.log` | as-is transcript | `07e7a6dcc05a…f8b5` |
+| `audit_ecdsa/exec_2026-10-19/e1` | `gcc -O2 -std=gnu11` from `engine_e1.c` | `5188ed4eb174â€¦d457` |
+| `audit_ecdsa/exec_2026-10-19/e1w` | `gcc -O2 -std=gnu11` from `engine_e1w.c` | `0fcb720ed9bcâ€¦b77a` |
+| `â€¦/i1_selftest.json` | `selftest_v1.py --e1 â€¦ --e1w â€¦ --e2 â€¦ --json` | `80cc0d2c9d0câ€¦4327` |
+| `â€¦/i2_prime.json` | `run_v1.py i2 --manifest â€¦ --e1 â€¦ --e2 â€¦` | `22ed4fa09a30â€¦7aac` |
+| `â€¦/i3_binary.json` | `run_v1.py i3 --manifest â€¦ --e1 â€¦ --e2 â€¦` | `247f9e511d0eâ€¦1823` |
+| `â€¦/i4_wordstats.json` | `run_v1.py i4 --manifest â€¦` | `1139975b4a0câ€¦ef2d` |
+| `â€¦/i5_timestamps.json` | `run_v1.py i5 --manifest â€¦` | `e1756ee8b5d1â€¦6698` |
+| `â€¦/i6_sources.json` | `run_v1.py i6 --manifest â€¦` | `da0eccfd38f3â€¦e9b3` |
+| `â€¦/v1_exec_steps.sh` | runner archive (as-run) | `a7b20f214decâ€¦227f` |
+| `reports/AUDIT_ECDSA_LOG_2026-10-19.log` | as-is transcript | `07e7a6dcc05aâ€¦f8b5` |
 
 Frozen inputs are pinned by `PINS.sha256` (verified with `-c`); the full
 41-line certificate set is in registry `A-2026-0004`.
 
 ## Decision rules
 
-As frozen (prereg §3, §8): I1 exit 0 + `SELFTEST: ALL OK` + JSON `all_ok:true`;
+As frozen (prereg Â§3, Â§8): I1 exit 0 + `SELFTEST: ALL OK` + JSON `all_ok:true`;
 I2/I3 per-row `MATCH` iff `e1_cand == e2_cand == std_hex` (claim cross-check and
 first-reappearance-at-n recorded as separate fields); I4 `count == 4` AND `1/P`
-within ±1 % of the claim's 5,810; I5 all four subchecks; I6 min sources ≥ 2 +
+within Â±1 % of the claim's 5,810; I5 all four subchecks; I6 min sources â‰¥ 2 +
 all agree + manifest rebuild byte-identical. Discrepancy protocol: stop, record
 as-is, dated decision before any proceed. Labels are per item; gates may only
 downgrade; every label cites log lines + hashes.
 
 ## Results (as-is, per item)
 
-**I1 — engine selftests (mechanistic; synthetic vectors; log lines 39–46).**
+**I1 â€” engine selftests (mechanistic; synthetic vectors; log lines 39â€“46).**
 `[A] draws E1 == E1w (7 seeds x 250): OK`; `[B] draws E2 == E1 (same vectors):
 OK`; `[C] draws range <= 0x7FFFFFFF: OK`; `[D] cand/scan equality + semantics
 (36 subchecks): OK`; `SELFTEST: ALL OK`; `rc=0`; JSON `all_ok: true`. Label: OK
 (not a claim item).
 
-**I2 — prime rows R01–R10 (log lines 47–50).** Verbatim summary:
+**I2 â€” prime rows R01â€“R10 (log lines 47â€“50).** Verbatim summary:
 `{"item": "I2", "summary": {"all_match_std": true, "claim_crosscheck_mismatches": [], "n_match": 10, "n_mismatch": 0, "n_rows": 10, "rows_first_reappearance_not_at_n": []}}`
-— label `10/10 MATCH`. For every row: `e1_cand == e2_cand == std_hex ==
+â€” label `10/10 MATCH`. For every row: `e1_cand == e2_cand == std_hex ==
 claim_hex`, and the first reappearance index (scan) equals n on both engines.
 
 src legend: X = `captures/x962-1998-draft`, N = neuromancer (5 pages),
@@ -144,9 +144,9 @@ BC = `bc_SECNamedCurves.java`.
 | R09 | P-384 | 1997-08-30 14:50:08 | 872952608 | 2688 | A335926AA319A27A1D00896A6773A4827ACDAC73 | F4,F2,S2,BC |
 | R10 | P-224 | 1998-04-03 12:52:07 | 891607927 | 7026 | BD71344799D5C7FCDC45B59FA3B9AB8F6A948BC5 | F4,F2,S2,BC |
 
-**I3 — binary rows R11–R14 (log lines 51–54).** Verbatim summary:
+**I3 â€” binary rows R11â€“R14 (log lines 51â€“54).** Verbatim summary:
 `{"item": "I3", "summary": {"all_match_std": true, "claim_crosscheck_mismatches": [], "n_match": 4, "n_mismatch": 0, "n_rows": 4, "rows_first_reappearance_not_at_n": []}}`
-— label `4/4 MATCH`. Engine arg = `floor(t_epoch / 2)` (the claim's "halved
+â€” label `4/4 MATCH`. Engine arg = `floor(t_epoch / 2)` (the claim's "halved
 clock"); `e1_cand == e2_cand == std_hex == claim_hex`; scan = n on both engines.
 
 | id | curve | t (claim, UTC) | t_epoch | arg | n | seed reproduced | src |
@@ -156,28 +156,28 @@ clock"); `e1_cand == e2_cand == std_hex == claim_hex`; scan = n on both engines.
 | R13 | B-409 | 1998-04-17 15:30:18 | 892827018 | 446413509 | 60 | 4099B5A457F9D69F79213D094C4BCD4D4262210B | F4,F2,S2,BC |
 | R14 | B-571 | 1998-04-17 15:32:08 | 892827128 | 446413564 | 73 | 2AA058F73A0E33AB486B0F610410C53A7F132310 | F4,F2,S2,BC |
 
-**B-163 (R15):** no published (t, n) — NOT reproduced (residue; the claim,
+**B-163 (R15):** no published (t, n) â€” NOT reproduced (residue; the claim,
 line 60, agrees it was not recovered). Its published 160-bit seed
 `85E25BFE5C86226CDB12016F7553F9D0E693A268` is used only as an I4 statistic
 input.
 
-**I4 — C3 word statistic (log lines 55–58).** Verbatim:
+**I4 â€” C3 word statistic (log lines 55â€“58).** Verbatim:
 `{"count_all_top_bits_zero": 4, "item": "I4", "label": "MATCH", "subchecks": {"count_ok": true, "probability_within_tolerance": true}}`.
 Count = 4: B-233, B-283, B-409, B-571 (top-bit words `00000` each); the other
 six: P-192 `01111`, P-521 `10101`, P-256 `11001`, P-384 `11000`, P-224 `11110`,
-B-163 `10101`. Exact: P(X≥4) = `48446969237/281474976710656`; 1/P =
+B-163 `10101`. Exact: P(Xâ‰¥4) = `48446969237/281474976710656`; 1/P =
 `281474976710656/48446969237` = `5809.960481401744` vs the claim's 5,810
-(relative deviation 6.8e-6 = 0.00068 % ≪ 1 %). Label: MATCH.
+(relative deviation 6.8e-6 = 0.00068 % â‰ª 1 %). Label: MATCH.
 
-**I5 — C4 timestamps (log lines 59–62).** Verbatim:
+**I5 â€” C4 timestamps (log lines 59â€“62).** Verbatim:
 `{"item": "I5", "label": "MATCH", "subchecks": {"doubled_dates_1998_04_17": true, "halved_dates_feb1984": true, "interval_b233_p224_floor_days_14": true, "prime_range_may1997_apr1998": true}}`.
 Details: halved seed args read as `1984-02-23` for all four binary rows
-(19:42:09 / 19:43:52 / 19:45:09 / 19:46:04 — February 1984 ✓); doubled dates →
-`1998-04-17` (4/4); B-233 − P-224 = `1218731 s` = 14 d + 2 h 32 m 11 s (floor
-14 = "two weeks" ✓); prime t range `1997-05-15 … 1998-04-03` (May 1997–April
-1998 ✓).
+(19:42:09 / 19:43:52 / 19:45:09 / 19:46:04 â€” February 1984 âœ“); doubled dates â†’
+`1998-04-17` (4/4); B-233 âˆ’ P-224 = `1218731 s` = 14 d + 2 h 32 m 11 s (floor
+14 = "two weeks" âœ“); prime t range `1997-05-15 â€¦ 1998-04-03` (May 1997â€“April
+1998 âœ“).
 
-**I6 — sources + packaging (log lines 63–66).** Verbatim:
+**I6 â€” sources + packaging (log lines 63â€“66).** Verbatim:
 `{"item": "I6", "label": "MATCH", "subchecks": {"min_sources_ge_2": true, "rebuild_from_captures_identical": true, "sources_all_agree_with_manifest": true}}`.
 Source multiplicity: 2 per v-curve row (X9.62 draft + neuromancer DB), 4 per
 NIST/binary row (FIPS 186-4 + FIPS 186-2 change-1 + SEC2 v2 + BouncyCastle);
@@ -186,7 +186,7 @@ byte-identical (determinism/packaging check).
 
 ## As-is log (pointer + sha256LF)
 
-`reports/AUDIT_ECDSA_LOG_2026-10-19.log` — sha256LF
+`reports/AUDIT_ECDSA_LOG_2026-10-19.log` â€” sha256LF
 `07e7a6dcc05a7c90a25847deea696aaf2ba1cde9ef0ad2acc24e690e0c1ff8b5` (5 350 B, 76
 lines). Single writer (`tee -a`); opened `2026-10-19T02:00:15Z`, closed
 `02:00:23Z`; no appends after closure; no interruptions; no normalization
@@ -196,7 +196,7 @@ events.
 
 None. Single attempt; every step `rc=0`; no interruptions, OOM kills, or
 environment fixes; zero deviations from the pre-registered expected values
-(prereg §7). Recorded as-is: nothing to record.
+(prereg Â§7). Recorded as-is: nothing to record.
 
 ## Gate outputs (verbatim)
 
@@ -215,7 +215,7 @@ ANTI-CIRCULARITY GATE [check]
 GATE-EXIT=2
 ```
 
-Exit 2 = `TOOL NOT RUN` — never counted as success. No Lean/SMT artifacts are in
+Exit 2 = `TOOL NOT RUN` â€” never counted as success. No Lean/SMT artifacts are in
 this record's scope; no "machine-verified" wording is used for any result in
 this record; every label rests on the log lines + hashes above.
 
@@ -236,8 +236,8 @@ sha256LF da0eccfd38f319d2dde559de7559e49d8578d3ca61bfe7c8a5de275b1368e9b3 audit_
 sha256LF a7b20f214dec09531b0d23f6d728a6f324a0c384a212a12544c3065c9919227f audit_ecdsa/exec_2026-10-19/v1_exec_steps.sh
 ```
 
-Frozen inputs: `audit_ecdsa/PINS.sha256` sha256LF `f64d66f5…56f7` (29/29 via
-`sha256sum -c`); prereg `660e3cc6…3d89`; spec `669db7ab…8805`. The full
+Frozen inputs: `audit_ecdsa/PINS.sha256` sha256LF `f64d66f5â€¦56f7` (29/29 via
+`sha256sum -c`); prereg `660e3cc6â€¦3d89`; spec `669db7abâ€¦8805`. The full
 41-line certificate set (spec + prereg + log + this report + 11 frozen package
 files + 17 captures + 9 execution artifacts) is in registry `A-2026-0004`;
 guard `msaf/tests/test_fence_registry.py` re-verifies every line in CI.
@@ -246,7 +246,7 @@ guard `msaf/tests/test_fence_registry.py` re-verifies every line in CI.
 
 - Not a statement about ECDSA security; not a break/attack/weakness analysis
   (the claim page says so itself, line 34).
-- Not proof that the NSA actually ran lrand48 — no archival program was obtained
+- Not proof that the NSA actually ran lrand48 â€” no archival program was obtained
   or executed; the model match reproduces the published mapping, not a recovered
   artifact. The claim's own caveats (lines 42/59: the 1-in-65,536 state
   alignment is weak evidence on its own; the number of runs is invisible) stand.
@@ -262,14 +262,14 @@ guard `msaf/tests/test_fence_registry.py` re-verifies every line in CI.
   seed values), Crypto++ `eccrypto.cpp` (no seed fields), `sawes.net`
   (unreachable); the `saweis.net` page is context only.
 - B-163's (t, n): NOT-RUN by construction (not published).
-- Does not state or deny RH or P≠NP.
+- Does not state or deny RH or Pâ‰ NP.
 
 ## Record provenance
 
-- 2026-10-19 01:24–01:30Z: captures frozen (17 files; `SOURCES.md` records
+- 2026-10-19 01:24â€“01:30Z: captures frozen (17 files; `SOURCES.md` records
   origins/hashes/fetch times); 01:56Z: freeze commit `3026d12` pushed
   (CI `39187596038` green).
-- 02:00:15Z–02:00:23Z: audit execution on `3026d12` (agent session; owner GO
+- 02:00:15Zâ€“02:00:23Z: audit execution on `3026d12` (agent session; owner GO
   2026-10-19; laptop kept on; light load only).
 - This report + execution artifacts + log are committed in the commit carrying
   this file; registry entry `A-2026-0004` + seal row in the following commit.
@@ -279,18 +279,20 @@ guard `msaf/tests/test_fence_registry.py` re-verifies every line in CI.
 
 ## Replay guide
 
-1. Clone at the record commit: `sha256sum -c audit_ecdsa/PINS.sha256` → expect
+1. Clone at the record commit: `sha256sum -c audit_ecdsa/PINS.sha256` â†’ expect
    29/29 `OK` (raw sha256 by design; the two PDFs' LF-normalised hashes differ
    and are recorded separately in `SOURCES.md`).
 2. Build: `gcc -O2 -std=gnu11 -o e1 audit_ecdsa/engine_e1.c` and
    `gcc -O2 -std=gnu11 -o e1w audit_ecdsa/engine_e1w.c`.
 3. Run `audit_ecdsa/exec_2026-10-19/v1_exec_steps.sh` (WSL/bash; adjust the
-   repo path at its top if your checkout differs) — or the exact commands from
-   prereg §3 directly.
+   repo path at its top if your checkout differs) â€” or the exact commands from
+   prereg Â§3 directly.
 4. Expected diffs on replay: log timestamps + host line, and `e1`/`e1w` hashes
    if the toolchain differs (binaries are build artifacts, not pinned). All 8
    JSON outputs are expected byte-identical (deterministic; no timestamps
-   inside). If any JSON differs, the affected item is MISMATCH — report it,
+   inside). If any JSON differs, the affected item is MISMATCH â€” report it,
    do not paper over it.
 5. Guard: `python -m pytest msaf/tests/test_fence_registry.py -q` (green; the
    registry re-verifies every certificate line in this record).
+
+

@@ -49,8 +49,8 @@ def test_v4_has_no_project_axioms_and_no_escape_tokens() -> None:
 
     # hmid is unconditional: a closed theorem, not a parameter.
     assert re.search(
-        r"^theorem hmid : ∀ x : ℝ, 0 < x → x < 1 → "
-        r"\(completedRiemannZeta \(x : ℂ\)\)\.re < 0",
+        r"^theorem hmid : âˆ€ x : â„, 0 < x â†’ x < 1 â†’ "
+        r"\(completedRiemannZeta \(x : â„‚\)\)\.re < 0",
         stripped,
         re.M,
     ), "hmid must be the unconditional closed theorem"
@@ -131,3 +131,5 @@ def test_v4_axiom_footprint_is_standard_only() -> None:
     assert "hmid" in out
     assert "completedRiemannZeta" in out
     assert "sorryAx" not in out
+
+

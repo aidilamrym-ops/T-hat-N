@@ -11,3 +11,5 @@ def test_bsd_v3_placeholder() -> None:
     payload = bsd.run_campaign()
     assert isinstance(payload, dict)
     assert payload["summary"] == "ALL PASS"
+
+

@@ -93,3 +93,5 @@ def test_a_nan_wide_ball_cannot_impersonate_a_containment():
     wide = arb("1e10") + arb("nan")
     assert contains_zero(wide) is False
     assert certify("wide", wide).finite is False
+
+

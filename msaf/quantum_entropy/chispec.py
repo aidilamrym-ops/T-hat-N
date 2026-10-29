@@ -104,3 +104,5 @@ def chi2_exact(counts: list, expected: list, kept: list):
 def exceedances(zs, z_star: str = Z_STAR) -> int:
     zt = float(z_star)
     return sum(1 for z in zs if z >= zt)
+
+

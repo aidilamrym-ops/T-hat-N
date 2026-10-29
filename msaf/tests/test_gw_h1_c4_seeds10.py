@@ -85,3 +85,5 @@ def test_committed_artifact_equals_fresh_extraction():
     assert _tolerant_equal(committed["extension"], fresh["extension"])
     assert committed["preregistration"]["doc"] == fresh["preregistration"]["doc"]
     assert committed["base"]["reparse_crosscheck"]["all_match"] is True
+
+

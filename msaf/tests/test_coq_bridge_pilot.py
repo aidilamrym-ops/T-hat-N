@@ -130,3 +130,5 @@ def test_frozen_kernel_check_reports_success():
         assert re.search(r"^\s+%s$" % re.escape(name), log, re.M), (
             "receipt does not list %s as kernel-checked" % name
         )
+
+

@@ -2,7 +2,7 @@
 
 This module extends the BSD verification to:
 - Higher conductor curves (up to conductor 1000)
-- Rank 1 curves with L'(E,1)/Ω computation
+- Rank 1 curves with L'(E,1)/Î© computation
 - Regulator computation for rank > 0
 - Full BSD formula for rank 0 and rank 1
 """
@@ -31,7 +31,7 @@ from .bsd_full import (
 
 # Extended curve database with exact invariants from LMFDB/Cremona
 EXTENDED_CURVES = {
-    # Rank 0 curves (conductor ≤ 100)
+    # Rank 0 curves (conductor â‰¤ 100)
     "11a1": {"rank": 0, "torsion": 5, "tamagawa": 5, "sha": 1, "L1_omega": (1, 5), "regulator": 1.0},
     "14a1": {"rank": 0, "torsion": 6, "tamagawa": 6, "sha": 1, "L1_omega": (1, 3), "regulator": 1.0},
     "15a1": {"rank": 0, "torsion": 4, "tamagawa": 4, "sha": 1, "L1_omega": (1, 4), "regulator": 1.0},
@@ -148,16 +148,16 @@ def get_curve_rank(label: str) -> int:
     return EXTENDED_CURVES[label]["rank"]
 
 def get_curve_L1_omega(label: str) -> Optional[Fraction]:
-    """Get L(E,1)/Ω for rank 0, or L'(E,1)/Ω for rank 1."""
+    """Get L(E,1)/Î© for rank 0, or L'(E,1)/Î© for rank 1."""
     data = EXTENDED_CURVES[label]
     if data["rank"] == 0:
         return Fraction(*data["L1_omega"])
     elif data["rank"] == 1:
-        return None  # L(E,1)/Ω = 0 for rank 1
+        return None  # L(E,1)/Î© = 0 for rank 1
     return None
 
 def get_curve_L1_prime_omega(label: str) -> Optional[Fraction]:
-    """Get L'(E,1)/Ω for rank 1 curves."""
+    """Get L'(E,1)/Î© for rank 1 curves."""
     data = EXTENDED_CURVES[label]
     if data["rank"] == 1:
         return Fraction(*data["L1_prime_omega"])
@@ -177,3 +177,4 @@ def get_all_labels(max_conductor: int = 100) -> list[str]:
             if cond <= max_conductor:
                 labels.append(label)
     return sorted(labels)
+

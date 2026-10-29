@@ -132,3 +132,5 @@ def is_frobenius_degenerate(
             if e % p != 0:
                 return False
     return True
+
+

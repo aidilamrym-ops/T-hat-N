@@ -1,4 +1,4 @@
-# Preconditions for BSD v3 – same as v2, no new data
+﻿# Preconditions for BSD v3 â€“ same as v2, no new data
 
 from __future__ import annotations
 
@@ -13,4 +13,6 @@ def test_bsd_v3_placeholder() -> None:
     payload = bsd.run_campaign()
     # The stub just forwards v2 result; ensure it runs without error.
     assert isinstance(payload, dict)
-    # No hash check here – registry entry will verify later.
+    # No hash check here â€“ registry entry will verify later.
+
+

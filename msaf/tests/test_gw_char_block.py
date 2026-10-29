@@ -197,3 +197,5 @@ def test_core_has_no_float_or_numpy() -> None:
             imports.append(node.module or "")
             imports.extend(alias.name for alias in node.names)
     assert not any(name == "numpy" or name.startswith("numpy.") for name in imports)
+
+

@@ -158,3 +158,5 @@ def test_draft_file_checksum_guard() -> None:
     assert zd.file_matches_local("md5:" + md5, blob)
     assert not zd.file_matches_local("00" * 16, blob)
     assert not zd.file_matches_local("", blob)
+
+

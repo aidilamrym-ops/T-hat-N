@@ -32,3 +32,5 @@ global_claim_supported = False
 #: Every record, dashboard and log line produced by this package must carry
 #: this label: the entropy source is simulated, not a physical measurement.
 SIMULATED_LABEL = "SIMULATED"
+
+

@@ -72,3 +72,5 @@ def test_sbp_central_n8():
     res = _sbp_residual(lat, p)
     assert bool(res.contains(arb(0))) is True
     assert bool(res.rad() < arb("1e-70")) is True
+
+

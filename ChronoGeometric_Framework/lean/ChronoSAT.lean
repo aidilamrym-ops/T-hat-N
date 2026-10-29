@@ -43,6 +43,16 @@ def formulaToShape : Formula → Shape
     | Shape.space lst => Shape.space (clauseToShape c :: lst)
     | _ => Shape.space [clauseToShape c]  -- fallback, should not happen
 
+/-- Lemma: `formulaToShape` always produces `Shape.space`. -/
+theorem formulaToShape_is_space (f : Formula) :
+    ∃ lst, formulaToShape f = Shape.space lst := by
+  induction f with
+  | nil => exact ⟨[], rfl⟩
+  | cons c cs ih =>
+    rcases ih with ⟨lst, hrest⟩
+    exact ⟨clauseToShape c :: lst, by
+      rw [formulaToShape, hrest]⟩
+
 /-- Simulate a SAT problem as a ChronoState.
     The numeric value is set to zero (placeholder). -/
 def simulate_sat (f : Formula) : ChronoState :=
@@ -53,10 +63,10 @@ def simulate_sat (f : Formula) : ChronoState :=
 /-- Instant reduction theorem: applying `collapse_to_harmony` to any SAT simulation state
     instantly collapses the spatial component to a single point, preserving the numeric
     value and the time step. -/
-
 theorem sat_instant_reduction (f : Formula) :
     collapse_to_harmony (simulate_sat f) =
       { value := MyNat.zero,
         shape := Shape.point,
-        time  := Chronon.next Chronon.now } :=
-  rfl
+        time  := Chronon.next Chronon.now } := by
+  rcases formulaToShape_is_space f with ⟨lst, h⟩
+  simp [simulate_sat, h, collapse_to_harmony]

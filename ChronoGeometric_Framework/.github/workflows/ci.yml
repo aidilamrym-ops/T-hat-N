@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lean-build:
+    name: Lean build & tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Cache Mathlib build
+        uses: actions/cache@v4
+        with:
+          path: |
+            .lake
+            ~/.elan
+          key: lean-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}
+
+      - name: Fetch Mathlib olean cache
+        run: lake exe cache get
+
+      - name: Build all targets (incl. Test)
+        run: lake build
+
+      - name: Verify no sorry / admit / axiom in framework modules
+        run: |
+          set -e
+          for f in lean/NewArithmetic.lean lean/ChronoNat.lean lean/ChronoReduction.lean lean/ChronoBridge.lean lean/ChronoSAT.lean lean/ChronoRiemann.lean; do
+            if grep -nE '\bsorry\b|\badmit\b' "$f"; then
+              echo "::error file=$f::Found sorry/admit"
+              exit 1
+            fi
+          done
+          echo "No sorry/admit found in framework modules."
+
+  python-test:
+    name: Python tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest python-flint
+
+      - name: Run pytest
+        run: |
+          pytest python/ -v --tb=short

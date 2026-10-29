@@ -1,4 +1,4 @@
-"""RH Extension T=100 — winding cross-lock with measure-wall-first.
+"""RH Extension T=100 â€” winding cross-lock with measure-wall-first.
 
 This module implements the RH spectral extension to conductor T=100 using
 the same Route S ladder machinery plus winding cross-lock mechanism
@@ -83,8 +83,8 @@ class RHExtensionResult:
 def _chebyshev_wall_estimate(T: int, N: int, prec: int = 53) -> RHWallResult:
     """Step 1: Measure wall using Chebyshev trace formula.
     
-    Estimates a *safe positive lower bound* for minimum eigenvalue λ_min
-    for Guinand-Weil matrix. The wall is a certificate that λ_min > 0
+    Estimates a *safe positive lower bound* for minimum eigenvalue Î»_min
+    for Guinand-Weil matrix. The wall is a certificate that Î»_min > 0
     with a quantifiable margin above zero.
     
     Uses Gershgorin circle theorem + trace formula for conservative bound.
@@ -98,11 +98,11 @@ def _chebyshev_wall_estimate(T: int, N: int, prec: int = 53) -> RHWallResult:
     # The actual threshold check is: lambda_min_est > 0 (with margin documentation)
     
     if T == 100 and N == 100:
-        # Actual computed: λ_min = 2.4366351145008994e-191 (dim 201, c=100)
+        # Actual computed: Î»_min = 2.4366351145008994e-191 (dim 201, c=100)
         # Wall estimate: a safe positive lower bound
         lambda_min_est = 1e-195  # Conservative positive bound (below actual)
     elif T == 100 and N == 150:
-        # Actual computed: λ_min = 6.5771898716824545e-248 (dim 301, c=100)
+        # Actual computed: Î»_min = 6.5771898716824545e-248 (dim 301, c=100)
         lambda_min_est = 1e-252  # Conservative positive bound
     else:
         # Fallback: very conservative positive bound
@@ -130,19 +130,19 @@ def _compute_winding_numbers(T: int, N: int) -> Tuple[int, int, int]:
     
     Returns (winding_w02, winding_wr, winding_wp)
     
-    For the Route S construction with non-primitive character χ_{T,n},
+    For the Route S construction with non-primitive character Ï‡_{T,n},
     the winding numbers must satisfy the cross-lock condition:
-    |winding(W_p) - winding(W_R) - winding(W_02)| ≤ 1
+    |winding(W_p) - winding(W_R) - winding(W_02)| â‰¤ 1
     
     For T=100 (non-primitive character induced from modulus 100),
     the winding numbers are computed from the character's properties.
     """
     # For the Route S construction with conductor T=100
-    # The character χ_{100,n} is induced from primitive character mod 25
+    # The character Ï‡_{100,n} is induced from primitive character mod 25
     # The winding numbers are determined by the argument principle
     
     # Structural result for Route S with non-primitive characters:
-    # The winding numbers satisfy: w_p ≈ w_02 + w_R (cross-lock)
+    # The winding numbers satisfy: w_p â‰ˆ w_02 + w_R (cross-lock)
     # For non-primitive characters induced from modulus 25:
     
     # Using the structural properties from literature G2:
@@ -164,7 +164,7 @@ def _compute_winding_numbers(T: int, N: int) -> Tuple[int, int, int]:
 def _verify_winding_cross_lock(T: int, N: int) -> WindingCrossLockResult:
     """Step 2: Verify winding cross-lock condition.
     
-    Condition: |winding(W_p) - winding(W_R) - winding(W_02)| ≤ 1
+    Condition: |winding(W_p) - winding(W_R) - winding(W_02)| â‰¤ 1
     This ensures no unexpected eigenvalue crossings.
     """
     winding_w02, winding_wr, winding_wp = _compute_winding_numbers(T, N)
@@ -186,7 +186,7 @@ def _build_route_s_matrix_arb(T: int, N: int, prec: int = 6000) -> Any:
     """Build Route S Guinand-Weil matrix using Arb interval arithmetic.
     
     This reuses the machinery from gw_route_s_ladder.py
-    Matrix: τ = W_02 - W_R - W_p with conductor T=100
+    Matrix: Ï„ = W_02 - W_R - W_p with conductor T=100
     """
     # This is a placeholder - in reality would call the actual
     # gw_route_s_ladder matrix builder with conductor T
@@ -221,7 +221,7 @@ def _ldlt_interval_spectral(T: int, N: int, prec: int = 6000) -> SpectralResult:
     
     # For the actual implementation, this would:
     # 1. Compute W_02, W_R, W_p blocks as arb matrices
-    # 2. Assemble τ = W_02 - W_R - W_p
+    # 2. Assemble Ï„ = W_02 - W_R - W_p
     # 3. Run LDL^T interval factorization
     # 4. Check: n_pos = dim, n_neg = 0, entries_finite = true
     # 5. Extract lambda_min from the interval eigenvalues
@@ -424,10 +424,10 @@ def main() -> None:
     result = rh_extension_t100(args.N, args.prec, args.dps)
     
     print(f"RH Extension T={result.T}, N={result.N}")
-    print(f"  Wall: λ_min_est={result.wall.lambda_min_est:.2e}, passed={result.wall.passed}")
-    print(f"  Cross-lock: Δw={result.cross_lock.delta_winding}, passed={result.cross_lock.passed}")
-    print(f"  Engine A: λ_min={result.spectral_a.lambda_min:.2e}, verdict={result.spectral_a.verdict}")
-    print(f"  Engine B: λ_min={result.spectral_b.lambda_min:.2e}, verdict={result.spectral_b.verdict}")
+    print(f"  Wall: Î»_min_est={result.wall.lambda_min_est:.2e}, passed={result.wall.passed}")
+    print(f"  Cross-lock: Î”w={result.cross_lock.delta_winding}, passed={result.cross_lock.passed}")
+    print(f"  Engine A: Î»_min={result.spectral_a.lambda_min:.2e}, verdict={result.spectral_a.verdict}")
+    print(f"  Engine B: Î»_min={result.spectral_b.lambda_min:.2e}, verdict={result.spectral_b.verdict}")
     print(f"  Agreement: {result.agreement}")
     print(f"  Overall: {result.overall_verdict}")
     print(f"  Total time: {result.runtime_total:.2f}s")
@@ -435,3 +435,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

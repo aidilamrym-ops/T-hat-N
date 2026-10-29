@@ -192,3 +192,5 @@ def test_opencode_config_declares_only_two_t2n_servers():
         script = MCP / script_name
         assert script.is_file(), f"{name} points at a missing script: {script}"
         assert entry["environment"]["T2N_REPO_ROOT"] == str(ROOT), name
+
+

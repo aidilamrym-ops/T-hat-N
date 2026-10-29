@@ -1,20 +1,20 @@
-# AUDIT BB(5) — Phase R addendum: the rebuild completed (attempt 5)
+﻿# AUDIT BB(5) â€” Phase R addendum: the rebuild completed (attempt 5)
 
 Addendum to the Phase R item of the registered BB(5) audit. Companion to the
 frozen preregistration `reports/AUDIT_BB5_PREREG_2026-10-18.md`, the
 reconnaissance `reports/AUDIT_BB5_RECON_2026-10-18.md`, the frozen report
 `reports/AUDIT_BB5_REPORT_2026-10-18.md` (NOT modified) and the transcript
 `reports/audit_bb5_phaseR_2026-10-18.log` (frozen at its final line, the
-attempt-5 end block, quoted in §6). Written 2026-10-19 (UTC) after the
+attempt-5 end block, quoted in Â§6). Written 2026-10-19 (UTC) after the
 completion event. Registry entry: `A-2026-0002` (extended; this file is its
 own record, the frozen report surface is untouched).
 
 ## 1. Status
 
-- **Item R outcome: rebuild completed — attempt 5, `2026-10-19T00:31:14Z`.**
+- **Item R outcome: rebuild completed â€” attempt 5, `2026-10-19T00:31:14Z`.**
   All runner steps `EXIT: 0`; the artifact set is complete (50/50 `.vo`); `PHASER_COMPLETE`
-  marker set; the transcript's final line is the end block quoted in §6.
-- Result label (frozen formula, values filled in from §6): *"the proof was
+  marker set; the transcript's final line is the end block quoted in Â§6.
+- Result label (frozen formula, values filled in from Â§6): *"the proof was
   rebuilt with Coq 8.20.1 on this host; compilation exited 0; the
   end-of-build assumption print reads:"*
 
@@ -27,14 +27,14 @@ own record, the frozen report surface is untouched).
 
 - The 17 h backstop (deadline epoch `1792364575` = `2026-10-18T23:02:55Z`,
   never reset) was reached **during** attempt 5. It was recorded as-is at the
-  wall (`UNRESOLVED-BUDGET`; kill suppressed — pre-registered decision D-R5);
+  wall (`UNRESOLVED-BUDGET`; kill suppressed â€” pre-registered decision D-R5);
   the build continued undisturbed and completed 1 h 28 m 19 s after the wall.
   The overrun is recorded as-is (this file); no parameter was changed; no
   silent retry occurred (every attempt is recorded in the transcript before
   the next began; the precise `attempt N (resume) start` count is 4, no
   second start block).
 - No earlier attempt produced any audit result (setup abort; two environment
-  interruptions; one OOM kill — §4). Only attempt 5 reached compilation of
+  interruptions; one OOM kill â€” Â§4). Only attempt 5 reached compilation of
   `BB5_Theorem.v`.
 
 ## 2. Scope
@@ -51,7 +51,7 @@ own record, the frozen report surface is untouched).
   list, file counts, and byte-level hashes.
 - The Coq kernel is the checking authority for the output below. This
   addendum adds no verification of its own; the anti-circularity gate output
-  (§7) is `TOOL NOT RUN` and is attached as-is (it can only downgrade
+  (Â§7) is `TOOL NOT RUN` and is attached as-is (it can only downgrade
   wording, never upgrade it).
 
 ## 3. Environment (as recorded in the transcript)
@@ -59,9 +59,9 @@ own record, the frozen report surface is untouched).
 - Windows host + WSL2 Ubuntu; WSL 3.0.3.0, kernel
   `6.18.54.1-microsoft-standard-WSL2`; CPU Intel i7-6600U (2 cores /
   4 threads); 9.7 GiB RAM + 3 GiB swap in WSL.
-- opam switch `/root/.opam/4.14.2`; `coqc --version` (transcript L577–578;
-  repeated verbatim in each attempt's preflight, L1320–1321, L1401–1402,
-  L1540–1541):
+- opam switch `/root/.opam/4.14.2`; `coqc --version` (transcript L577â€“578;
+  repeated verbatim in each attempt's preflight, L1320â€“1321, L1401â€“1402,
+  L1540â€“1541):
 
   ```text
   The Coq Proof Assistant, version 8.20.1
@@ -71,24 +71,24 @@ own record, the frozen report surface is untouched).
 - `coq-native` disabled at configure time (vanilla, as pre-registered): the
   compiler emits `native_compute disabled at configure time; falling back to
   vm_compute` warnings throughout.
-- Build command (attempt 5): `cd …/CoqBB5/BB5 && time make -j2` — `-j2` is
+- Build command (attempt 5): `cd â€¦/CoqBB5/BB5 && time make -j2` â€” `-j2` is
   the OOM mitigation; the prereg cap "no `-j` > 4" was respected in every
-  attempt (attempts 2–4 used `-j4`).
+  attempt (attempts 2â€“4 used `-j4`).
 
 ## 4. Attempts ledger (all times UTC; date 2026-10-18 unless noted; line numbers = transcript)
 
 | # | window | outcome | point of stop / result | evidence |
 |---|--------|---------|------------------------|----------|
-| 1 (setup) | 06:02:55–06:09:32 | ABORT (toolchain install) | `opam pin add coq 8.20.1` EXIT 10: `libgmp-dev` depext missing; opam refuses non-interactive apt; Coq not installed; no audit step ran | L62, L471; decision recorded L474 |
-| 2 | 06:15:01–~07:12 | interrupted (environment) | WSL VM auto-stopped (idle) and killed the build; last `.vo` = `TNF_Root_4_5.vo` (07:12:35Z); died during `TNF_Root_4_6.v`; log ended without an end marker | L495; interruption note L1291 |
-| 3 | 08:23:51–09:27:36 | interrupted (environment) | Ubuntu instance terminated by WSL (known WSL 3.x class; journal shows orderly systemd shutdown); last `.vo` = `TNF_Root_4_6.vo` (09:21:01Z); 40/50 | L1299; interruption note L1371 |
-| 4 | 11:00:17–20:03:11 | OOM-kill + ABORT | kernel OOM-killed `coqc` on `TNF_Root_4_11.v` (15:08:59Z; `make` Error 137), `-j4` on 9.7 GiB; remaining jobs drained; ABORT written 20:03:11Z | L1383; interruption note L1453; ABORT L1516 |
-| 5 | 20:03:14–00:31:14 (Oct 19) | **COMPLETED** | 50/50 `.vo`; `BB5_Theorem.vo` present; all steps `EXIT: 0`; `PHASER_COMPLETE` | L1520; wall L1572; end L1645 |
+| 1 (setup) | 06:02:55â€“06:09:32 | ABORT (toolchain install) | `opam pin add coq 8.20.1` EXIT 10: `libgmp-dev` depext missing; opam refuses non-interactive apt; Coq not installed; no audit step ran | L62, L471; decision recorded L474 |
+| 2 | 06:15:01â€“~07:12 | interrupted (environment) | WSL VM auto-stopped (idle) and killed the build; last `.vo` = `TNF_Root_4_5.vo` (07:12:35Z); died during `TNF_Root_4_6.v`; log ended without an end marker | L495; interruption note L1291 |
+| 3 | 08:23:51â€“09:27:36 | interrupted (environment) | Ubuntu instance terminated by WSL (known WSL 3.x class; journal shows orderly systemd shutdown); last `.vo` = `TNF_Root_4_6.vo` (09:21:01Z); 40/50 | L1299; interruption note L1371 |
+| 4 | 11:00:17â€“20:03:11 | OOM-kill + ABORT | kernel OOM-killed `coqc` on `TNF_Root_4_11.v` (15:08:59Z; `make` Error 137), `-j4` on 9.7 GiB; remaining jobs drained; ABORT written 20:03:11Z | L1383; interruption note L1453; ABORT L1516 |
+| 5 | 20:03:14â€“00:31:14 (Oct 19) | **COMPLETED** | 50/50 `.vo`; `BB5_Theorem.vo` present; all steps `EXIT: 0`; `PHASER_COMPLETE` | L1520; wall L1572; end L1645 |
 
 Mitigations (each committed/recorded **before** the attempt it fixed; no audit
 result was ever seen before a retry, and no parameter was changed silently):
 
-- after attempt 2: `%USERPROFILE%\.wslconfig` → `vmIdleTimeout=86400000`
+- after attempt 2: `%USERPROFILE%\.wslconfig` â†’ `vmIdleTimeout=86400000`
   (24 h), verified with an idle test (VM survived without clients);
 - after attempt 3: Windows-side keepalive supervisor (PowerShell loop,
   ~10 s tick; each tick is a short WSL session: heartbeat, deadline backstop
@@ -101,14 +101,14 @@ result was ever seen before a retry, and no parameter was changed silently):
 - after attempt 4: `make -j2` (down from `-j4`).
 
 Cap accounting as recorded: setup used 6 m 37 s (attempt 1) + 8 m 05 s
-(attempt 2 pre-roll) of the ≤ 3 h cap. Build wall times: attempt 2 30 m 25 s
-(as recorded); attempt 3 63 m 44 s; attempt 4 11:00:17Z→20:03:11Z (OOM at
+(attempt 2 pre-roll) of the â‰¤ 3 h cap. Build wall times: attempt 2 30 m 25 s
+(as recorded); attempt 3 63 m 44 s; attempt 4 11:00:17Zâ†’20:03:11Z (OOM at
 15:08:59Z; the tail consists of draining the two standing jobs and writing
 the ABORT); attempt 5 4 h 28 m 00 s (`make` self-reported `real
 267m59.105s`). No single attempt exceeded the 14 h build cap; the cumulative
 wall time across the four partial attempts (including the attempt-4 drain
-tail) is ≈ 15 h 05 m — recorded here as-is. The terminal disposition applied
-was the pre-registered `UNRESOLVED-BUDGET` at the 17 h wall (§5); completion
+tail) is â‰ˆ 15 h 05 m â€” recorded here as-is. The terminal disposition applied
+was the pre-registered `UNRESOLVED-BUDGET` at the 17 h wall (Â§5); completion
 followed, and this file is the as-is record of that overrun.
 
 ## 5. Supervision efficacy (wall event, D-R5)
@@ -127,18 +127,18 @@ followed, and this file is the as-is record of that overrun.
 
 - The tick that fired was v4.1 (sha256LF
   `6eda81a5fb7e2d2653edb3342faf1631fa4fe9816c9d3ef0a195d9b906643bb4`,
-  commit `0a97f2b`) — a **record-only** fix committed before the wall. The
+  commit `0a97f2b`) â€” a **record-only** fix committed before the wall. The
   pre-fix v4 kill path was defective: its `pkill -f` pattern matched only
   the wrapper shell (`make`/`coqc` run with relative paths), so a wall kill
   would have orphaned the build and the self-healing relaunch would have
-  re-started the same targets — a double compile of
+  re-started the same targets â€” a double compile of
   `TNF_Root_4_11/4_12` and an OOM risk on this host. The defect, the fix
   and the dated decision D-R5 (no kill at the wall; record
   `UNRESOLVED-BUDGET` as-is; no parameter change; a *new* `DAEMON_FAIL`
   would still stop for a fresh decision) were appended to the transcript at
   20:12Z (L1567), **before** the wall.
-- Observed effect: `TNF_Root_4_11.vo` finished at `23:19:39Z` — 17 minutes
-  **after** the wall — undamaged; after the run the tick exited on
+- Observed effect: `TNF_Root_4_11.vo` finished at `23:19:39Z` â€” 17 minutes
+  **after** the wall â€” undamaged; after the run the tick exited on
   `PHASER_COMPLETE`, loops stopped, and the heartbeat stopped at the
   completion timestamp (`/root/bb5r` listing; marker `PHASER_COMPLETE`
   present).
@@ -147,7 +147,7 @@ followed, and this file is the as-is record of that overrun.
 
 ## 6. Result blocks (verbatim; quoted from the frozen transcript)
 
-1. Attempt-5 start block (L1520–1521):
+1. Attempt-5 start block (L1520â€“1521):
 
    ```text
    === phase R attempt 5 (resume) start 2026-10-18T20:03:14Z ===
@@ -157,8 +157,8 @@ followed, and this file is the as-is record of that overrun.
    (the block records: resume count 44/50; `make -j2`; deadline epoch
    unchanged; tick v4 with a single-use `APPROVE_ATTEMPT5` token)
 
-2. End-of-build assumption print — the output of `Print Assumptions
-   BB5_value.` (last line of `BB5_Theorem.v`), L1606–1611:
+2. End-of-build assumption print â€” the output of `Print Assumptions
+   BB5_value.` (last line of `BB5_Theorem.v`), L1606â€“1611:
 
    ```text
    Finished transaction in 12.262 secs (11.972u,0.281s) (successful)
@@ -169,7 +169,7 @@ followed, and this file is the as-is record of that overrun.
    make[1]: Leaving directory '/root/bb5r/Coq-BB5-git/CoqBB5/BB5'
    ```
 
-3. Build duration (the runner's `time make -j2` step), L1613–1616:
+3. Build duration (the runner's `time make -j2` step), L1613â€“1616:
 
    ```text
    real	267m59.105s
@@ -178,7 +178,7 @@ followed, and this file is the as-is record of that overrun.
    EXIT: 0
    ```
 
-4. Final artifact checks (runner steps L1618–1644; each block `EXIT: 0`):
+4. Final artifact checks (runner steps L1618â€“1644; each block `EXIT: 0`):
 
    ```text
    CMD: find /root/bb5r/Coq-BB5-git/BusyCoq -name '*.vo' | wc -l
@@ -189,7 +189,7 @@ followed, and this file is the as-is record of that overrun.
    -rw-r--r-- 1 root root 6859 Oct 19 08:31 /root/bb5r/Coq-BB5-git/CoqBB5/BB5/BB5_Theorem.vo
    ```
 
-5. End block — the transcript's final line, L1645:
+5. End block â€” the transcript's final line, L1645:
 
    ```text
    === phase R attempt 5 (resume) end 2026-10-19T00:31:14Z (all steps exit 0 as recorded above; PHASER_COMPLETE set) ===
@@ -210,24 +210,24 @@ followed, and this file is the as-is record of that overrun.
     verdict: TOOL NOT RUN
   ```
 
-  exit code 2. Per prereg §8 this output is attached as-is; it certifies
+  exit code 2. Per prereg Â§8 this output is attached as-is; it certifies
   nothing here and can only downgrade wording.
 - Gate self-test, same session: `gate self-test: 13 cases, 0 failed`
   (including negative fixtures that must fail).
 
 ## 8. Comparison with the upstream claim
 
-- Upstream claim (pinned README, section "### Used Axiom"; recon L56–58):
+- Upstream claim (pinned README, section "### Used Axiom"; recon L56â€“58):
   *"As outputted at the end of the compilation, the proof only depends on
   Coq's standard library axiom functional_extensionality_dep"*.
-- Observed (§6 block 2): exactly one axiom in the
-  `Print Assumptions BB5_value.` output —
+- Observed (Â§6 block 2): exactly one axiom in the
+  `Print Assumptions BB5_value.` output â€”
   `FunctionalExtensionality.functional_extensionality_dep`, with the standard
   statement. **The claim matches the observed output** on this host, with
   vanilla Coq 8.20.1 and without `coq-native`.
 - Context: the upstream README notes ~3 h on 13 cores *without* native
   compute; this rebuild took 4 h 28 m wall on 2 physical cores with
-  `make -j2` — direction and magnitude consistent; no contradiction
+  `make -j2` â€” direction and magnitude consistent; no contradiction
   recorded.
 
 ## 9. Certificates (sha256LF)
@@ -235,7 +235,7 @@ followed, and this file is the as-is record of that overrun.
 Convention: `sha256LF` = SHA-256 over LF-normalized bytes, helper
 `audit_bb5/artifact_checks.py` (its own sha256LF is certified in
 `A-2026-0002`). Re-verify with
-`python audit_bb5/artifact_checks.py sha256lf <files…>`; registry guard:
+`python audit_bb5/artifact_checks.py sha256lf <filesâ€¦>`; registry guard:
 `python -m pytest msaf/tests/test_fence_registry.py -q`.
 
 ```text
@@ -253,7 +253,7 @@ sha256LF d1a312a1322a0515a1bb31059b86a256257fbba3f4905a5e863d698034a614ed audit_
 ```
 
 - The transcript's hash is over its **final** bytes (last line = end block,
-  §6 block 5); the transcript is not appended to after this addendum.
+  Â§6 block 5); the transcript is not appended to after this addendum.
 - The addendum's own sha256LF is recorded in registry `A-2026-0002`
   (self-reference not possible in this file).
 
@@ -265,10 +265,12 @@ sha256LF d1a312a1322a0515a1bb31059b86a256257fbba3f4905a5e863d698034a614ed audit_
   (`ccz181078/Coq-BB5`, DOI `10.5281/zenodo.17061968`).
 - The BB(5) = 47,176,870 statement itself remains the upstream artifact's
   claim; this addendum certifies only rebuild facts (exit codes, the axiom
-  list, file counts, hashes) — not peer review, not independent
+  list, file counts, hashes) â€” not peer review, not independent
   re-verification.
 - AI provenance disclosure: this audit (including this addendum) was
   executed by an AI analysis session under owner oversight; no human
   line-by-line review of the transcript happened or is claimed.
 
 Recorded by the analysis session, 2026-10-19 (UTC).
+
+

@@ -33,3 +33,5 @@ def test_inviscid_limit_linear_decay():
         assert 9.0 < hi / lo < 11.0  # display-only linearity vs theory 10.0
     with pytest.raises(ValueError):
         FluidLattice(4, "0", "1")
+
+

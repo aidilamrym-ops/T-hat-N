@@ -1,4 +1,4 @@
-# audit_p1 - L2 item 1: machine diff of the run sections, attempt 1 vs (fixed) run 2
+﻿# audit_p1 - L2 item 1: machine diff of the run sections, attempt 1 vs (fixed) run 2
 # attempt1: reports/audit_p1_l2_window_attempt1.log
 # run2    : reports/audit_p1_l2_window.log
 # purpose : verify that the display-label fix changed only the intended lines
@@ -16,3 +16,5 @@
  [PASS] W1a pi_lo < pi_hi
  [PASS] W1b pi bracket width < 1e-100 (exact rational comparison)
  [PASS] W1c 3 < pi_lo (basic sanity)
+
+

@@ -1,24 +1,24 @@
-# P2 audit — pre-registration (Collatz convergence-verification record; Barina project)
+﻿# P2 audit â€” pre-registration (Collatz convergence-verification record; Barina project)
 
 Date: 2026-10-19 (local). Status: **PRE-REGISTERED BEFORE ANY AUDIT
 EXECUTION.** At the time of this declaration no simulation of any target
 trajectory, no sweep, no engine-vs-battery comparison, and no source scan of
 the pinned tree has been executed for this audit. This file and the frozen
-engines/batteries listed in §2 are committed and pushed BEFORE the first
+engines/batteries listed in Â§2 are committed and pushed BEFORE the first
 audit command; the git commit time and the audit log's first entries record
 the ordering. Read-only reconnaissance that PRECEDED this file is documented
 in `reports/AUDIT_COLLATZ_RECON_2026-10-19.md`; that document is reference,
-not result. Pre-freeze development checks of the engines are listed in §12;
+not result. Pre-freeze development checks of the engines are listed in Â§12;
 they are not audit evidence.
 
 ## 1. Target and scope
 
 - Target claims (third party, as published):
   - **C1** (project-site record claim, live page): "The convergence of all
-    numbers below 2075 × 2^60 (≈ 2^71.02) has been verified." with project
-    log 2^68 (2020-05-07) → 2^69 (2021-12-10) → 2^70 (2023-07-09) →
-    1.5×2^70 (2023-11-03) → 2^71 (2025-01-15); news text 2^68.
-  - **C1p** (papers of record): Barina, J. Supercomput. 77:2681–2688 (2021),
+    numbers below 2075 Ã— 2^60 (â‰ˆ 2^71.02) has been verified." with project
+    log 2^68 (2020-05-07) â†’ 2^69 (2021-12-10) â†’ 2^70 (2023-07-09) â†’
+    1.5Ã—2^70 (2023-11-03) â†’ 2^71 (2025-01-15); news text 2^68.
+  - **C1p** (papers of record): Barina, J. Supercomput. 77:2681â€“2688 (2021),
     doi 10.1007/s11227-020-03368-x; Barina, J. Supercomput. 81:810 (2025),
     doi 10.1007/s11227-025-07337-0.
   - **C2** (records lists): the site path-records table ("known path records
@@ -27,7 +27,7 @@ they are not audit evidence.
     A006885 (97 terms); the delay records OEIS A006877 / A006878 (148
     terms).
 - Depots of record: pcbarina.fit.vutbr.cz pages (live; snapshot discipline
-  in §4/S1); OEIS b-files (pinned by capture + hash, §2); repository
+  in Â§4/S1); OEIS b-files (pinned by capture + hash, Â§2); repository
   github.com/xbarin02/collatz pinned at
   `e98d0294a7ff77e783907e307a80e83b92f4a164`.
 - What this audit checks: items S (source snapshots), W (records replay by
@@ -35,12 +35,12 @@ they are not audit evidence.
   claims), P (pin weld). Item **T** (compile and run the project's own
   worker) is EXCLUDED from v1 and recorded NOT-RUN (owner decision,
   2026-10-19): its audit value for C1/C2 is low relative to toolchain cost.
-- Out of scope (explicit): the Collatz conjecture itself — no claim either
-  way; any n ≥ 2^34 for the sweep; record-ness "for all m < n" beyond the
+- Out of scope (explicit): the Collatz conjecture itself â€” no claim either
+  way; any n â‰¥ 2^34 for the sweep; record-ness "for all m < n" beyond the
   published lists and internal monotonicity; performance claims (GPU
   speeds, work-unit timing); DOI landing pages and PDFs; arXiv:2602.10466;
   cycle-length bounds; the negative-number analogue; "verified" vocabulary
-  beyond the maximum labels in §10.
+  beyond the maximum labels in Â§10.
 
 ## 2. Frozen artifacts and hashes
 
@@ -48,7 +48,7 @@ Hash convention: sha256LF (LF-normalized), the repository registry
 convention. All frozen files below are LF-only, so sha256LF equals raw
 sha256.
 
-**(a) Captures** — `audit_collatz/captures/` (raw sha256; URLs and fetch
+**(a) Captures** â€” `audit_collatz/captures/` (raw sha256; URLs and fetch
 times in `captures/SOURCES.md`, sha256LF `d9220fbb...`):
 
 | file | sha256 |
@@ -61,7 +61,7 @@ times in `captures/SOURCES.md`, sha256LF `d9220fbb...`):
 | oeis_A006877.txt | 4bdd9c264ffb33f6252adad6716f8f0ad55c84687d4300a9bfbe646a1a81327f |
 | oeis_A006878.txt | 1aebb537ac7cbb0290e8614b8e58e879efa24843277c0c437a72672f965233ac |
 
-**(b) Batteries** — `audit_collatz/`:
+**(b) Batteries** â€” `audit_collatz/`:
 
 | file | rows | sha256LF |
 |---|---|---|
@@ -69,7 +69,7 @@ times in `captures/SOURCES.md`, sha256LF `d9220fbb...`):
 | battery_heights_std_a006885.tsv | 97 | 9f5bed262520a10bafb292d3f1cf689fc6914062ba70d24cb256e07db28cdbe0 |
 | battery_delay_records.tsv | 148 | 09a252407f6cc89e40499b341671014a8622d3c545d2b636b9ec8a1b45f85cf5 |
 
-**(c) Engines, tools, claims** — `audit_collatz/`:
+**(c) Engines, tools, claims** â€” `audit_collatz/`:
 
 | file | sha256LF |
 |---|---|
@@ -109,10 +109,10 @@ REUSED unmodified for `sha256lf` and `weld-tar`.
   via `tee`) and the directory `audit_collatz/exec_<YYYY-MM-DD>/` for every
   produced artifact (`$EXEC` below). First log entries: current date -u,
   host, `git rev-parse HEAD` (must equal the commit that pushed this file),
-  sha256LF of the §2(b)/(c) files, sha256 of this file. Commands run
+  sha256LF of the Â§2(b)/(c) files, sha256 of this file. Commands run
   sequentially ("satu dulu") with `nice -n 19`.
 
-## 4. Item S — sources (frozen commands and expectations)
+## 4. Item S â€” sources (frozen commands and expectations)
 
 S1 site re-fetch and byte-compare (`curl.exe` 8.13.0, run from Windows):
 ```
@@ -168,13 +168,13 @@ cmp "$EXEC/batteries_re/battery_delay_records.tsv"         audit_collatz/battery
 Expectation: byte-identical (given S1/S2); differences are upstream drift,
 recorded as-is.
 
-## 5. Items W — records replay (frozen commands and criteria)
+## 5. Items W â€” records replay (frozen commands and criteria)
 
 All commands from the repository root, `nice -n 19`, output to `$EXEC`,
 stdout/stderr to the log. Each engine is invoked twice on the same
 batteries; the two `result` subtrees must be deep-equal (determinism).
 
-W1a (`path`, shortcut t, 98 rows) / W1b (`std`, standard t, 97 rows) —
+W1a (`path`, shortcut t, 98 rows) / W1b (`std`, standard t, 97 rows) â€”
 one invocation covers both:
 ```
 python3 audit_collatz/collatz_engine_p.py w1 --path-battery audit_collatz/battery_path_records.tsv --std-battery audit_collatz/battery_heights_std_a006885.tsv --out "$EXEC/w1_p_r1.json"
@@ -196,7 +196,7 @@ Criteria (all required): every `compare` prints MATCH; in `w1_*_r1.json`:
 `mismatches == []`, `cap_hits == []`, `checked == 148`. Mismatch lists carry
 indexes; values stay in the JSONs.
 
-## 6. Items E — bounded sweep (frozen commands and criteria)
+## 6. Items E â€” bounded sweep (frozen commands and criteria)
 
 Setup (counts against the setup cap): 
 ```
@@ -233,7 +233,7 @@ python3 audit_collatz/collatz_tools.py check-prefix "$EXEC/c_rec24.json" audit_c
   interrupted, this block is recorded as not produced. No claim beyond the
   completed boundary.
 
-## 7. Items H — textual claims (frozen commands and criteria)
+## 7. Items H â€” textual claims (frozen commands and criteria)
 
 ```
 python3 audit_collatz/claims_check.py audit_collatz/claims_site.tsv "$EXEC/refetch"
@@ -244,9 +244,9 @@ H1 expectation: 25 rows, 0 miss (exit 0). H2 expectation: 14 rows, 0 miss
 
 ## 8. Caps and budget (frozen)
 
-- setup (log open, C build, directories) ≤ 1 h; S ≤ 0.5 h; W ≤ 1 h; H ≤ 20
-  min (inside the S/W envelope); P/S4 ≤ 30 min; E ≤ 4 h total (E2 and E3
-  first, then E1 with a hard wall of 3.5 h). Total ≤ 6 h.
+- setup (log open, C build, directories) â‰¤ 1 h; S â‰¤ 0.5 h; W â‰¤ 1 h; H â‰¤ 20
+  min (inside the S/W envelope); P/S4 â‰¤ 30 min; E â‰¤ 4 h total (E2 and E3
+  first, then E1 with a hard wall of 3.5 h). Total â‰¤ 6 h.
 - Overruns are recorded as-is (UNRESOLVED-BUDGET); parameters are never
   changed in response to results.
 - Load discipline: `nice -n 19` for everything; laptop otherwise idle; no
@@ -289,25 +289,25 @@ H1 expectation: 25 rows, 0 miss (exit 0). H2 expectation: 14 rows, 0 miss
   of 10^6; the independently written Python engine reproduced the identical
   2^24 digest (drop metrics), and the recomputed record prefix below 2^24
   matched the published table (38 rows) between both engines. Bounded
-  replay; no claim for any n ≥ 2^34."
+  replay; no claim for any n â‰¥ 2^34."
 - H: "the frozen quoted fragments were found verbatim in the captured pages
   and in the clone at the pinned commit; this is a transcription match
   only."
 - P/S4: "the GitHub archive at the pinned commit was compared to a fresh
   clone file-by-file; differences are listed verbatim."
-- T: "NOT-RUN — excluded from v1 scope by the owner decision recorded in
+- T: "NOT-RUN â€” excluded from v1 scope by the owner decision recorded in
   this file."
 
 ## 11. Execution order and gates (frozen)
 
 1. Preconditions: P1 item R finished; explicit owner signal; this file and
    the frozen set committed and pushed; CI green; `origin/main == HEAD`.
-2. Open the log; record the §3 first entries.
-3. S1 → S2 → S3 → S4/P → H1 + H2 → S5.
-4. W1a/W1b → W2.
-5. E2 → E3 → E1.
-6. Report (`reports/AUDIT_COLLATZ_REPORT_<date>.md`) with the §10 labels and
-   the §9 outcomes; then a registry extension (A-2026-0003) committed
+2. Open the log; record the Â§3 first entries.
+3. S1 â†’ S2 â†’ S3 â†’ S4/P â†’ H1 + H2 â†’ S5.
+4. W1a/W1b â†’ W2.
+5. E2 â†’ E3 â†’ E1.
+6. Report (`reports/AUDIT_COLLATZ_REPORT_<date>.md`) with the Â§10 labels and
+   the Â§9 outcomes; then a registry extension (A-2026-0003) committed
    separately.
 
 ## 12. Development checks performed before freeze (not audit evidence)
@@ -315,21 +315,21 @@ H1 expectation: 25 rows, 0 miss (exit 0). H2 expectation: 14 rows, 0 miss
 - Selftests at the frozen revisions: engine P 18 checks OK; engine Q 523
   checks OK; engine C 5 checks OK (`gcc -O2 -std=gnu11`).
 - Cross-language dev runs at bound 2^20 (dev-only scale, synthetic
-  batteries only): P `e2 --bound 1048576` vs C `drop 20` `prefix24` →
+  batteries only): P `e2 --bound 1048576` vs C `drop 20` `prefix24` â†’
   MATCH with identical values (`odd_checked = 524287`,
   `max_steps_to_drop = 183` at `argmax = 1027431`,
   `sum_drop = 203394374771`); P `e3 --bound 1048576` vs C `records 20` on
-  `records`/`record_count` → MATCH.
+  `records`/`record_count` â†’ MATCH.
 - Interface tests with synthetic batteries only: `compare-prefix`,
-  `compare-fields`, `check-prefix` MATCH; tampered synthetic → MISMATCH and
-  exit 1; P↔Q `compare` MATCH for synthetic `w1` and `w2`.
+  `compare-fields`, `check-prefix` MATCH; tampered synthetic â†’ MISMATCH and
+  exit 1; Pâ†”Q `compare` MATCH for synthetic `w1` and `w2`.
 - Claims dry runs: `claims_site.tsv` 25/25 FOUND against the captures;
   `claims_repo.tsv` 14/14 FOUND against the pin.
 - No engine ever read the frozen battery TSVs before this file (the first
   such read happens at execution); no target simulation beyond the dev
   bounds above; dev issues found and fixed before freeze (two hand-constant
   corrections in selftest tables; one key-access fix in `collatz_tools.py`);
-  the hashes in §2 are of the final frozen files.
+  the hashes in Â§2 are of the final frozen files.
 
 ## 13. Artifacts, non-modifications, registry
 
@@ -338,7 +338,7 @@ H1 expectation: 25 rows, 0 miss (exit 0). H2 expectation: 14 rows, 0 miss
   the report, then a registry entry (A-2026-0003) for the executed
   artifacts (sha256LF), committed separately.
 - Non-modifications: no existing file is edited; third-party artifacts are
-  read-only; the §2 frozen files are never overwritten; no secrets are
+  read-only; the Â§2 frozen files are never overwritten; no secrets are
   displayed; staging is per named file only.
 
 ## 14. Ordering proof
@@ -347,3 +347,5 @@ This file (with the engines, batteries, captures, and claims files) is
 committed and pushed BEFORE the first audit command; the audit log's first
 entries record `git rev-parse HEAD` (equal to this push) and the wall-clock
 time; CI must be green for the push and `origin/main == HEAD` must hold.
+
+

@@ -1,35 +1,35 @@
-# AMANDEMEN LANTAI H1 -- hasil terukur (2026-10-16)
+﻿# AMANDEMEN LANTAI H1 -- result terukur (2026-10-16)
 
 Otoritas: `reports/AMENDMENT_FLOOR_SPEC.md` (DIBEKUKAN; sha256
 `3c9958bee3021385b242b84b2ecda136e15f35d5682c16ff690713830efbb917`). Bagian (A) grid refined
-20000 surrogat dan (B) array robustness 5-seed: **SELESAI**. Bagian
-(C) engine B: sesi berikutnya (spec bagian 5; tidak pernah
+20000 surrogat and (B) array robustness 5-seed: **SELESAI**. Bagian
+(C) engine B: sesi berikutnya (spec section 5; no pernah
 verdict-bearing).
 
 Dokumen ini dihasilkan mesin oleh `msaf/gw_h1_report.py` dari
 `reports/gw_h1_floor_refine.json` + 7 log run + tabel extractor;
-tidak ada angka yang diketik ulang oleh manusia. Tabel di bagian 2
+no ada angka which diketik ulang oleh manusia. Tabel in section 2
 adalah keluaran extractor verbatim.
 
 ## 1. Yang dieksekusi
 
 - (A) 20000 surrogat per ensemble, dim 201/301/401, seed kanonik
   20260927 -> grid refined 18 sel; target pra-registrasi C1-C4
-  ditandai di tabel.
-- (B) Array 5-seed S5 pada C4 (dim 301, chart T, sigma_u 0.5): seed
+  marked in tabel.
+- (B) Array 5-seed S5 on C4 (dim 301, chart T, sigma_u 0.5): seed
   20260927 (kanonik; entri ini diambil dari run A dim 301 --
   komputasi identik, tanpa duplikasi) + seed 20261001..20261004
   (4 run baru).
 - Instrumen: `gw_montgomery.py` revisi `b0af0f519ae25f19178bc3eda4f288970cb49374` (2026-10-06),
   sha256 `072910f232b15768ba35e14d7cc6aaf4fe1ee174dc45b65429460f791196e1d5`, TIDAK dimodifikasi;
   hash on-disk == header ketujuh log. Injeksi seed via override
-  modul (instrumen tidak punya flag `--seed`). Hitungan eksak: spy
-  read-only `np.mean` (instrumen mencetak p pada %.4f; spec bagian
+  modul (instrumen no punya flag `--seed`). Hitungan eksak: spy
+  read-only `np.mean` (instrumen mencetak p on %.4f; spec section
   3 mempensiunkan string "0.0000").
 - Lingkungan: python 3.14.4 + numpy 2.5.2 + scipy 1.18.0;
   OPENBLAS_NUM_THREADS:1 OMP_NUM_THREADS:1 (recorded for the manifest). Catatan operasional: cap
   thread murni kinerja -- rerun capped mereproduksi log tersegel
-  persis (bagian 4).
+  persis (section 4).
 - Tujuh run (semua exit 0; 36/36 tangkapan eksak per run):
 
 | run | seed | samples | elapsed (s) | sha256 log |
@@ -86,50 +86,50 @@ Frozen decision tree classification: **NOT STABLE (homogeneity rejected at alpha
 
 C4 flagged resolution-sensitive per frozen spec section 4; the verdict grid recomputation still uses the canonical 20000 value (number of record).
 
-## 3. Kepatuhan format beku (spec bagian 3)
+## 3. Kepatuhan format beku (spec section 3)
 
 - "0.0000" pensiun; k=0 dilaporkan sebagai BOUND: p_GUE <
-  1.49775e-04 (rumus beku 1 - 0.05^(1/n), n = 20000), tidak pernah
+  1.49775e-04 (rumus beku 1 - 0.05^(1/n), n = 20000), no pernah
   sebagai nol terukur.
 - 17 dari 18 sel grid refined: k_GUE = 0/20000 (bound). Satu sel
   off-floor: C4 = 1262/20000 = 6.31000e-02.
-- Verdict refined dihitung ulang dari k eksak dengan aturan yang
-  TIDAK berubah; 18/18 cocok dengan verdict tercetak di log.
-- Validasi spy: 36/36 tangkapan per run; cocok dengan p tercetak
-  pada n=10, pada n=2000 (repro tersegel), dan pada sel positive-k
+- Verdict refined dihitung ulang dari k eksak with aturan which
+  TIDAK berubah; 18/18 cocok with verdict tercetak in log.
+- Validasi spy: 36/36 tangkapan per run; cocok with p tercetak
+  on n=10, on n=2000 (repro tersegel), and on sel positive-k
   n=20000 (1262/20000 <-> 0.0631; 960/20000 <-> 0.0480).
-- Nilai tersegel tetap terlihat di semua tempat (kolom sealed);
-  refined SUPERSEDE untuk C1-C4 dan dianotasi; dashboard tersegel
-  `reports/gw_diagnostic_v3.html` TIDAK disentuh (spec bagian 6.4).
+- Nilai tersegel tetap terlihat in semua tempat (kolom sealed);
+  refined SUPERSEDE for C1-C4 and dianotasi; dashboard tersegel
+  `reports/gw_diagnostic_v3.html` TIDAK disentuh (spec section 6.4).
 
 ## 4. Bukti reproduktibilitas (commit 993b0e8)
 
 - REPRO CHECK PASS: rerun dim 201 @ 2000 sampel (capped 1-thread)
-  mereproduksi log tersegel pada SEMUA field yang dibandingkan
+  mereproduksi log tersegel on SEMUA field which dibandingkan
   (chi2, p, verdict, S1/S2 final, r_bar) -- identik. Thread count
   bukan efek numerik.
 - Benchmark mesin ini: capped 1-thread ~2x lebih cepat dari default
   (eigvalsh n=301: 20.6 vs 39.6 ms) -- threading murni overhead.
-- Instrumen tidak berubah selama kampanye (sha256 on-disk ==
+- Instrumen no berubah selama kampanye (sha256 on-disk ==
   header semua run).
 
-## 5. Array robustness C4 -- klasifikasi beku (spec bagian 4)
+## 5. Array robustness C4 -- klasifikasi beku (spec section 4)
 
 - Pohon keputusan beku, urutan diterapkan: cabang 1. Klasifikasi:
   **NOT STABLE (homogeneity rejected at alpha = 0.01; dispersion-dominated)**.
 - Homogenitas Pearson chi2 = 107.9299 (df = 4), p = 2.01097e-22 --
-  ditolak pada alpha = 0.01.
+  ditolak on alpha = 0.01.
 - Angka of record: kanonik 20000 = 1262/20000 = 6.31000e-02; pooled
-  5-seed = 5877/100000 = 5.87700e-02. C4 ditandai
+  5-seed = 5877/100000 = 5.87700e-02. C4 marked
   resolution-sensitive; verdict grid tetap memakai nilai kanonik
   20000.
-- Ekspektasi pra-registrasi yang TERFALSIFIKASI (dicatat, tidak
-  dipatch): spec bagian 4 menyatakan "setiap cabang meninggalkan
-  C4 di bawah ambang verdict 0.05". Terukur: pooled p_hat = 5.87700e-02;
-  4 dari 5 seed >= 0.05 (yang di bawah: 20261001 = 4.80000e-02);
+- Ekspektasi pra-registrasi which TERFALSIFIKASI (dicatat, no
+  dipatch): spec section 4 menyatakan "setiap cabang meninggalkan
+  C4 in bawah ambang verdict 0.05". Terukur: pooled p_hat = 5.87700e-02;
+  4 dari 5 seed >= 0.05 (which in bawah: 20261001 = 4.80000e-02);
   verdict kanonik = NO DISCRIMINATION (bukan INCONSISTENT).
-- Batas interpretasi (beku): bahkan STABLE tidak menjadikan C4
-  "physical"; klasifikasi di sini NOT STABLE. Statistik dari
+- Batas interpretasi (beku): bahkan STABLE no menjadikan C4
+  "physical"; klasifikasi in sini NOT STABLE. Statistik dari
   matriks deterministik berhingga; bukan teorema Montgomery, bukan
   bukti RH.
 
@@ -152,16 +152,16 @@ C4 flagged resolution-sensitive per frozen spec section 4; the verdict grid reco
 
 ## 7. Catatan deviasi
 
-Tidak ada deviasi prosedural dari spec yang tercatat selama
-eksekusi ini. Dua catatan operasional direkam, bukan dipatch
-diam-diam: cap thread kinerja (bagian 1) dan reuse entri kanonik
-S5 dari run A dim 301 (bagian 1).
+Tidak ada deviasi prosedural dari spec which tercatat selama
+eksekusi ini. Dua note operasional direkam, bukan dipatch
+diam-diam: cap thread kinerja (section 1) and reuse entri kanonik
+S5 dari run A dim 301 (section 1).
 
 ## 8. Verifikasi independen engine B (S2 penuh) -- 2026-10-17
 
-- Harness `msaf/gw_engine_b_verify.py` (sha256 `485ab652...`; tidak
-  diubah pasca-peluncuran) menjalankan verifikasi independen bagian 5
-  spec pada skala penuh: 20000 sampel/ensemble, seed 20260927, dps 50,
+- Harness `msaf/gw_engine_b_verify.py` (sha256 `485ab652...`; no
+  diubah pasca-peluncuran) menjalankan verifikasi independen section 5
+  spec on skala penuh: 20000 sampel/ensemble, seed 20260927, dps 50,
   dim 201/301/401, GUE + Poisson, 18 sel.
 - Run penuh selesai 2026-10-17 00:51:30 lokal; exit code 0 (file keluar
   launcher: `STARTED 16/10/2026 22:20:26,63` / `EXITCODE=0`); total
@@ -180,18 +180,18 @@ S5 dari run A dim 301 (bagian 1).
 
 - Counts (verbatim dari log): `counts vs engine A: k_GUE 18/18 exact,
   k_Pois 18/18 exact, all four tails 18/18`.
-- Guard CI `msaf/tests/test_gw_engine_b_full_artifact.py` memverifikasi
+- Guard CI `msaf/tests/test_gw_engine_b_full_artifact.py` verifying
   ulang dari artefak tersegel: 18/18 sel identik (B == grid refined A ==
-  nilai A dalam artefak) untuk k_GUE dan k_Pois; semua flag `exact_*`
+  nilai A dalam artefak) for k_GUE and k_Pois; semua flag `exact_*`
   true; verdict + manifest + baris verdict log dicek verbatim.
-- B1 census: dim 201/301/401 -- SEMUA radius (n=201/301/401 per dim) di
-  bawah rentang float64 dan akan menjadi fake-zero di binary64
-  (justifikasi parsing desimal); G-M0 direproduksi (a-e true) di ketiga
+- B1 census: dim 201/301/401 -- SEMUA radius (n=201/301/401 per dim) in
+  bawah rentang float64 and akan menjadi fake-zero in binary64
+  (justifikasi parsing desimal); G-M0 direproduksi (a-e true) in ketiga
   dim.
 - B2a grid: 720 bin dibandingkan; frozen OR 666/720; cabang 10-ulp
   8/720; 9 sel chart-L `PASS_ENUMERATED_EDGE_CLUSTER` (6 bin cv
   OR-fail + 0 tgt per sel; 15-21 anggota terenumerasi per sel; flips 2;
-  semua tercakup aturan pra-deklarasi di
+  semua tercakup aturan pra-deklarasi in
   `reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md`).
 - chi2 (informasional): semua |chi2_B - chi2_A_printed| <= 1e-3
   (maksimum terukur dari artefak: 4.904769593849778e-05).
@@ -204,8 +204,10 @@ S5 dari run A dim 301 (bagian 1).
   log interupsi `6b83d9c09d394a82bdd64d978b5b8d39e9907e32f8ad537e8df48283c8e30253`.
 - Riwayat interupsi (append-only): R1 (terminasi eksternal 22:11 saat
   dim 401; log parsial disimpan verbatim) + R2 (restart lingkungan
-  setelah run selesai; tidak ada efek) --
+  setelah run selesai; no ada efek) --
   `reports/ENGINE_B_PILOT_FINDINGS_2026-10-16.md`.
 - Batas interpretasi (beku): sama seperti seluruh kampanye -- ini
-  reproduksi kriteria beku pada artefak numerik, bukan bukti RH dan
+  reproduksi kriteria beku on artefak numerik, bukan bukti RH and
   bukan teorema Montgomery.
+
+

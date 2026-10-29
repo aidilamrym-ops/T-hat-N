@@ -1,4 +1,4 @@
-# Coq: penutupan [J] analitik untuk jembatan geometrik (2026-10-19)
+﻿# Coq: penutupan [J] analitik for jembatan geometrik (2026-10-19)
 
 **Paket:** 5 (lanjutan Paket 4; pra-registrasi baru karena scope diperluas)
 **Berkas utama:** [`formal_bridge/GeometricLimit.v`](../formal_bridge/GeometricLimit.v)
@@ -11,35 +11,35 @@
 | Blok | Status | Isi |
 |---|---|---|
 | `[B]` | **CERTIFIED** (warisan `A-2026-0008`) | rumus jumlah parsial geometrik berhingga, eksak |
-| `[J]` | **CERTIFIED untuk kasus geometrik** | `Un_cv (fun n => geom_sum r n) (1/(1−r))`, ε-N |
-| `[U]` | **tercapai untuk kasus geometrik** | limit `1/(1−r)`; instance `r = 1/2` → `2` |
+| `[J]` | **CERTIFIED for kasus geometrik** | `Un_cv (fun n => geom_sum r n) (1/(1âˆ’r))`, Îµ-N |
+| `[U]` | **tercapai for kasus geometrik** | limit `1/(1âˆ’r)`; instance `r = 1/2` â†’ `2` |
 
-Pilot Paket 4 meninggalkan langkah limit OPEN. Paket 5 menutupnya **hanya
-untuk lemma geometrik L1**. Ini **bukan** penutupan `[J]` untuk studi
-periodic-box (`A-2026-0007`): objeknya berbeda dan `[J]` di sana tetap
-OPEN. Tidak ada klaim zeta/Weil/RH, P≠NP, atau fisik.
+Pilot Paket 4 meninggalkan step limit OPEN. Paket 5 menutupnya **hanya
+for lemma geometrik L1**. Ini **bukan** penutupan `[J]` for studi
+periodic-box (`A-2026-0007`): objeknya berbeda and `[J]` in sana tetap
+OPEN. Tidak ada klaim zeta/Weil/RH, Pâ‰ NP, or fisik.
 
 ## 2. Yang dibuktikan
 
 | # | Hasil | Pernyataan |
 |---|---|---|
-| 1 | `geom_dist_eq_tail` | `0 ≤ r → r < 1 → Rdist (geom_sum r n) (1/(1−r)) = geom_tail r n` |
-| 2 | `geom_sum_cv` | `0 ≤ r → r < 1 → Un_cv (fun n => geom_sum r n) (1/(1−r))` |
-| 3 | `geom_sum_cv_half` | `Un_cv (fun n => geom_sum (1/2) n) (1/(1−1/2))` |
-| 4 | `geom_half_limit_value` | `1/(1−1/2) = 2` |
-| 5 | `geom_half_dist_11` | `Rdist (geom_sum (1/2) 11) (1/(1−1/2)) = 1/1024` |
-| 6 | `geom_half_dist_11_lt` | `Rdist (geom_sum (1/2) 11) (1/(1−1/2)) < 1/100` |
+| 1 | `geom_dist_eq_tail` | `0 â‰¤ r â†’ r < 1 â†’ Rdist (geom_sum r n) (1/(1âˆ’r)) = geom_tail r n` |
+| 2 | `geom_sum_cv` | `0 â‰¤ r â†’ r < 1 â†’ Un_cv (fun n => geom_sum r n) (1/(1âˆ’r))` |
+| 3 | `geom_sum_cv_half` | `Un_cv (fun n => geom_sum (1/2) n) (1/(1âˆ’1/2))` |
+| 4 | `geom_half_limit_value` | `1/(1âˆ’1/2) = 2` |
+| 5 | `geom_half_dist_11` | `Rdist (geom_sum (1/2) 11) (1/(1âˆ’1/2)) = 1/1024` |
+| 6 | `geom_half_dist_11_lt` | `Rdist (geom_sum (1/2) 11) (1/(1âˆ’1/2)) < 1/100` |
 
-`Un_cv` adalah definisi konvergensi ε-N standar dari
-`Coq.Reals.Rseries` (dengan `Rdist`), bukan definisi buatan sendiri.
-`pow_lt_1_zero` (stdlib) mengubah suku ekor `r^n/(1−r)` menjadi saksi
-ε-N; tidak ada aksioma atau lemma proyek yang ditambahkan.
+`Un_cv` adalah definisi konvergensi Îµ-N standar dari
+`Coq.Reals.Rseries` (with `Rdist`), bukan definisi buatan sendiri.
+`pow_lt_1_zero` (stdlib) mengubah suku ekor `r^n/(1âˆ’r)` menjadi saksi
+Îµ-N; no ada aksioma or lemma proyek which ditambahkan.
 
 ## 3. Bukti eksekusi (verbatim)
 
-Direkam oleh `formal_bridge/check_limit.sh`: menyalin kedua berkas ke
-direktori sementara, mengompilasi `GeometricBridge.v` (beku, tanpa
-perubahan) lalu `GeometricLimit.v`, dan menjalankan `coqchk` sebagai
+Direkam oleh `formal_bridge/check_limit.sh`: menyalin kedua file ke
+directory sementara, mengompilasi `GeometricBridge.v` (beku, tanpa
+perubahan) lalu `GeometricLimit.v`, and menjalankan `coqchk` sebagai
 pemeriksa kernel independen. Capture dua kali, byte-identik.
 
 ```text
@@ -113,20 +113,20 @@ OK: imported bridge unchanged, limit module kernel-checked
 
 ## 4. Trusted base
 
-Sama seperti Paket 4: `Print Assumptions` untuk **6/6** hasil hanya
+Sama seperti Paket 4: `Print Assumptions` for **6/6** result hanya
 mencetak dua aksioma stdlib `Coq.Reals`:
 
 - `ClassicalDedekindReals.sig_forall_dec`
 - `FunctionalExtensionality.functional_extensionality_dep`
 
-Tidak ada `Axiom`/`Parameter`/`Admitted`/`admit`; `geom_sum` dan
-`geom_tail` **tidak** didefinisikan ulang di berkas ini — guard menolak
-redefinisi, sehingga bukti limit selalu memakai aljabar yang sudah
+Tidak ada `Axiom`/`Parameter`/`Admitted`/`admit`; `geom_sum` and
+`geom_tail` **no** didefinisikan ulang in file ini â€” guard menolak
+redefinisi, sehingga bukti limit selalu memakai aljabar which already
 disegel.
 
 ## 5. Anti-circularity gate: **TOOL NOT RUN** (bukan sukses)
 
-Gate skill dijalankan lagi pada direktori ini dan hasilnya verbatim:
+Gate skill dijalankan lagi on directory ini and hasilnya verbatim:
 
 ```text
 ------------------------------------------------------------------------------
@@ -136,14 +136,14 @@ ANTI-CIRCULARITY GATE [check]
   verdict: TOOL NOT RUN
 ```
 
-Exit code `2`. Gate itu hanya memindai `.lean`/`.smt2`; repo ini tidak
-punya Lean, jadi hasil ini **tidak dihitung sebagai sukses**. Bukti yang
-dipakai adalah bukti Coq-native di §3–§4, bukan gate tersebut.
+Exit code `2`. Gate itu hanya memindai `.lean`/`.smt2`; repo ini no
+punya Lean, jadi result ini **no dihitung sebagai sukses**. Bukti which
+dipakai adalah bukti Coq-native in Â§3â€“Â§4, bukan gate tersebut.
 
 ## 6. Uji negatif guard
 
 Guard `msaf/tests/test_coq_bridge_limit.py` diuji terhadap tujuh mutasi
-pada salinan sementara di luar repo; ketujuhnya tertangkap:
+on salinan sementara in luar repo; ketujuhnya tertangkap:
 
 ```text
 CAUGHT  placeholder Admitted
@@ -160,32 +160,34 @@ OK: all 7 mutations caught
 ## 7. Batas
 
 1. **Hanya lemma geometrik L1.** Lemma L2 (p-series), L3 (amplop
-   eksponensial), L4 (ekor Gaussian), dan L5 (perbandingan integral)
-   tidak diformalkan; masing-masing butuh pra-registrasi dan bukti sendiri.
-2. **Bukan periodic-box.** `[J]` studi `A-2026-0007` tetap OPEN; hasil ini
-   tidak boleh dipakai untuk mengklaim batas ekor citra periodik.
-3. **`Coq.Reals` aksiomatik.** Yang disertifikasi adalah tidak ada aksioma
+   eksponensial), L4 (ekor Gaussian), and L5 (perbandingan integral)
+   no diformalkan; masing-masing butuh pra-registrasi and bukti sendiri.
+2. **Bukan periodic-box.** `[J]` studi `A-2026-0007` tetap OPEN; result ini
+   no boleh dipakai for mengklaim limit ekor citra periodik.
+3. **`Coq.Reals` aksiomatik.** Yang disertifikasi adalah no ada aksioma
    proyek tambahan, bukan konsistensi ZFC/Coq.
-4. **CI tidak menjalankan Coq.** Runner tidak punya toolchain Coq; CI
+4. **CI no menjalankan Coq.** Runner no punya toolchain Coq; CI
    hanya menjalankan guard statis (isi, kelengkapan audit, receipt).
-   Kompilasi ulang adalah langkah lokal §8.
+   Kompilasi ulang adalah step lokal Â§8.
 5. **Bukan peer review**, bukan klaim eksternal.
 
 ## 8. Reproduksi
 
 ```bash
-# di WSL/Ubuntu dengan switch opam yang di-KEEP
+# in WSL/Ubuntu with switch opam which in-KEEP
 export PATH=/root/.opam/4.14.2/bin:$PATH
 cd formal_bridge
 bash check_limit.sh
 ```
 
 `check_limit.sh` gagal keras bila salah satu kompilasi gagal, `coqchk`
-gagal, atau ada hasil yang tidak muncul di keluaran pemeriksa kernel.
+gagal, or ada result which no muncul in keluaran pemeriksa kernel.
 
 ## 9. CI
 
 Guard statis: `python -m pytest msaf/tests/test_coq_bridge_limit.py -q`
-(4 uji). Registry `A-2026-0009` memuat sha256LF untuk sumber, skrip,
-receipt, guard, dan laporan ini. `GeometricBridge.v` dan sertifikatnya di
-`A-2026-0008` tidak berubah.
+(4 uji). Registry `A-2026-0009` memuat sha256LF for source, skrip,
+receipt, guard, and report ini. `GeometricBridge.v` and sertifikatnya in
+`A-2026-0008` no berubah.
+
+

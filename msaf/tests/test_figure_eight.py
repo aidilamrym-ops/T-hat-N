@@ -252,3 +252,5 @@ def test_m5_unsigned_sweep_fails_k3(monkeypatch: pytest.MonkeyPatch) -> None:
     assert k3["newton_ok"] is False
     assert k3["df_singular"] is True
     assert k3["krawczyk"] is None
+
+

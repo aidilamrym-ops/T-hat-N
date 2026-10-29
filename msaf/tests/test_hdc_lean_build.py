@@ -7,3 +7,5 @@ def test_lean_hdc_build():
     lean_dir = root / "lean"
     result = subprocess.run(["lake", "build"], cwd=str(lean_dir), capture_output=True, text=True)
     assert result.returncode == 0, f"Lake build failed: {result.stderr}"
+
+

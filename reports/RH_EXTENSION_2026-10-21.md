@@ -1,6 +1,6 @@
-# Laporan Ekstensi RH T=100 (Winding Cross-lock) — 2026-10-21
+﻿# Laporan Ekstensi RH T=100 (Winding Cross-lock) â€” 2026-10-21
 
-**Status:** SELESAI — verdict `ALL_PASS` untuk N=100 (dim 201) dan N=150 (dim 301)
+**Status:** SELESAI â€” verdict `ALL_PASS` for N=100 (dim 201) and N=150 (dim 301)
 
 **Registry:** `A-2026-0033` (CERTIFIED)
 
@@ -9,20 +9,20 @@
 ## 1. Ringkasan
 
 Ekstensi RH ke konduktor **T = 100** telah dieksekusi menggunakan mesin
-Route S ladder yang sama (yang sudah tersegel untuk c = 100 Montgomery
-construction), ditambah mekanisme **winding cross-lock** dan prosedur
+Route S ladder which sama (which already tersegel for c = 100 Montgomery
+construction), ditambah mekanisme **winding cross-lock** and prosedur
 **ukur-dinding-dulu** (measure wall first).
 
-Hasil untuk dua resolusi:
+Hasil for dua resolusi:
 
 | Resolusi | N | Dimensi | Wall | Cross-lock | Engine A | Engine B | Kesepakatan | Verdict |
 |---|---|---|---|---|---|---|---|---|
-| 1 | 100 | 201 | PASS | PASS | PASS | PASS | ✓ | ALL_PASS |
-| 2 | 150 | 301 | PASS | PASS | PASS | PASS | ✓ | ALL_PASS |
+| 1 | 100 | 201 | PASS | PASS | PASS | PASS | âœ“ | ALL_PASS |
+| 2 | 150 | 301 | PASS | PASS | PASS | PASS | âœ“ | ALL_PASS |
 
 **Detail eigenvalue minimum:**
-- N=100 (dim 201): λ_min = 2.4366351145008994 × 10⁻¹⁹¹ (Engine A & B sepakat)
-- N=150 (dim 301): λ_min = 6.5771898716824545 × 10⁻²⁴⁸ (Engine A & B sepakat)
+- N=100 (dim 201): Î»_min = 2.4366351145008994 Ã— 10â»Â¹â¹Â¹ (Engine A & B sepakat)
+- N=150 (dim 301): Î»_min = 6.5771898716824545 Ã— 10â»Â²â´â¸ (Engine A & B sepakat)
 
 ---
 
@@ -31,31 +31,31 @@ Hasil untuk dua resolusi:
 ### 2.1 Arsitektur 4 Langkah (Locked)
 
 **Langkah 1: Ukur Dinding (Wall Measurement)**
-- Rumus Chebyshev/Gershgorin untuk estimasi batas bawah eigenvalue
-- Threshold: λ_min_est > 0 (positive definiteness)
-- Hasil: PASS untuk kedua resolusi (margin > 0)
+- Rumus Chebyshev/Gershgorin for estimasi limit bawah eigenvalue
+- Threshold: Î»_min_est > 0 (positive definiteness)
+- Hasil: PASS for kedua resolusi (margin > 0)
 
 **Langkah 2: Winding Cross-lock**
-- Kondisi: |winding(W_p) - winding(W_R) - winding(W_02)| ≤ 1
-- Untuk karakter non-primitif χ_{100,n}: w_02 = N, w_R = 0, w_p = N
-- Delta winding = 0 untuk kedua resolusi
+- Kondisi: |winding(W_p) - winding(W_R) - winding(W_02)| â‰¤ 1
+- Untuk karakter non-primitif Ï‡_{100,n}: w_02 = N, w_R = 0, w_p = N
+- Delta winding = 0 for kedua resolusi
 - Hasil: PASS
 
 **Langkah 3: Engine A (Arb 6000-bit)**
-- LDL^T interval factorization pada matriks τ = W_02 - W_R - W_p
+- LDL^T interval factorization on matriks Ï„ = W_02 - W_R - W_p
 - Verifikasi: n_pos = dim, n_neg = 0, entries_finite = true
-- Sertifikat λ_min dengan interval rigor
+- Sertifikat Î»_min with interval rigor
 
 **Langkah 4: Engine B (mpmath dps 50)**
-- Implementasi independen untuk verifikasi
-- Kesepakatan: rel_tol ≤ 1e-12 pada λ_min
+- Implementasi independen for verifikasi
+- Kesepakatan: rel_tol â‰¤ 1e-12 on Î»_min
 - Hasil: Sepakat eksak
 
 ### 2.2 Karakter Non-Primitif T=100
 
-Konduktor T = 100 = 2²·5², karakter non-primitif χ_{100,n} terinduksi
+Konduktor T = 100 = 2Â²Â·5Â², karakter non-primitif Ï‡_{100,n} terinduksi
 dari karakter primitif modulus 25. Mekanisme winding cross-lock
-memastikan konsistensi antara blok Archimedean (W_02, W_R) dan
+memastikan konsistensi antara blok Archimedean (W_02, W_R) and
 non-Archimedean (W_p).
 
 ---
@@ -110,12 +110,12 @@ python -m pytest msaf/tests/test_gw_rh_extension.py -q
 
 ## 6. Batas Eksplisit (TIDAK diklaim)
 
-- ❌ Pembuktian RH (hanya ekstensi finit hingga T = 100)
-- ❌ Klaim σ = 1/2, lokasi nol zeta
-- ❌ Faktorisasi, RSA/ECC breaking
-- ❌ Anderson transition, fisika
-- ❌ Klaim asimtotik
-- ❌ Rerun kampanye H1/Engine B/Quantum yang tersegel
+- âŒ Pembuktian RH (hanya ekstensi finit hingga T = 100)
+- âŒ Klaim Ïƒ = 1/2, lokasi nol zeta
+- âŒ Faktorisasi, RSA/ECC breaking
+- âŒ Anderson transition, fisika
+- âŒ Klaim asimtotik
+- âŒ Rerun kampanye H1/Engine B/Quantum which tersegel
 
 ---
 
@@ -135,3 +135,4 @@ python audit_quantum/freeze.py --verify
 # Verifikasi registry
 python -m pytest msaf/tests/test_fence_registry.py -q
 ```
+

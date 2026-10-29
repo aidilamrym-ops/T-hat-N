@@ -161,3 +161,5 @@ def test_scope_flags_forbid_overclaiming() -> None:
         "logistic_spectrum_claim": False,
         "sealed_campaigns_rerun": False,
     }
+
+

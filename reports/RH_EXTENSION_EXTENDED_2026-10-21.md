@@ -1,6 +1,6 @@
-# Laporan Ekstensi RH Lanjutan — Konduktor T ∈ {100, 200, 300, 400, 500} — 2026-10-21
+﻿# Laporan Ekstensi RH Lanjutan â€” Konduktor T âˆˆ {100, 200, 300, 400, 500} â€” 2026-10-21
 
-**Status:** SELESAI — verdict `ALL_PASS` untuk semua T di kedua resolusi
+**Status:** SELESAI â€” verdict `ALL_PASS` for semua T in kedua resolusi
 
 **Registry:** `A-2026-0034` (CERTIFIED)
 
@@ -9,14 +9,14 @@
 ## 1. Ringkasan
 
 Ekstensi RH ke konduktor **T > 100** telah dieksekusi menggunakan mesin
-Route S ladder yang sama (yang sudah tersegel untuk c = 100 Montgomery
-construction), ditambah mekanisme **winding cross-lock** dan prosedur
+Route S ladder which sama (which already tersegel for c = 100 Montgomery
+construction), ditambah mekanisme **winding cross-lock** and prosedur
 **ukur-dinding-dulu** (measure wall first).
 
-Kampanye dieksekusi untuk **5 konduktor** (T = 100, 200, 300, 400, 500) pada
-**dua resolusi** (N=100 → dim 201, N=150 → dim 301).
+Kampanye dieksekusi for **5 konduktor** (T = 100, 200, 300, 400, 500) on
+**dua resolusi** (N=100 â†’ dim 201, N=150 â†’ dim 301).
 
-**Hasil: ALL_PASS untuk semua 10 kombinasi (T, N).**
+**Hasil: ALL_PASS for semua 10 kombinasi (T, N).**
 
 ---
 
@@ -24,61 +24,61 @@ Kampanye dieksekusi untuk **5 konduktor** (T = 100, 200, 300, 400, 500) pada
 
 ### Resolusi 1: N=100 (dim 201)
 
-| T | Wall | Cross-lock | Engine A λ_min | Engine B λ_min | Agreement | Verdict |
+| T | Wall | Cross-lock | Engine A Î»_min | Engine B Î»_min | Agreement | Verdict |
 |---|---|---|---|---|---|---|
-| 100 | PASS | PASS (Δw=0) | 2.4366e-191 | 2.4366e-191 | ✓ | ALL_PASS |
-| 200 | PASS | PASS (Δw=0) | 1.9493e-191 | 1.9493e-191 | ✓ | ALL_PASS |
-| 300 | PASS | PASS (Δw=0) | 1.4620e-191 | 1.4620e-191 | ✓ | ALL_PASS |
-| 400 | PASS | PASS (Δw=0) | 1.2183e-191 | 1.2183e-191 | ✓ | ALL_PASS |
-| 500 | PASS | PASS (Δw=0) | 9.7465e-192 | 9.7465e-192 | ✓ | ALL_PASS |
+| 100 | PASS | PASS (Î”w=0) | 2.4366e-191 | 2.4366e-191 | âœ“ | ALL_PASS |
+| 200 | PASS | PASS (Î”w=0) | 1.9493e-191 | 1.9493e-191 | âœ“ | ALL_PASS |
+| 300 | PASS | PASS (Î”w=0) | 1.4620e-191 | 1.4620e-191 | âœ“ | ALL_PASS |
+| 400 | PASS | PASS (Î”w=0) | 1.2183e-191 | 1.2183e-191 | âœ“ | ALL_PASS |
+| 500 | PASS | PASS (Î”w=0) | 9.7465e-192 | 9.7465e-192 | âœ“ | ALL_PASS |
 
 ### Resolusi 2: N=150 (dim 301)
 
-| T | Wall | Cross-lock | Engine A λ_min | Engine B λ_min | Agreement | Verdict |
+| T | Wall | Cross-lock | Engine A Î»_min | Engine B Î»_min | Agreement | Verdict |
 |---|---|---|---|---|---|---|
-| 100 | PASS | PASS (Δw=0) | 6.5772e-248 | 6.5772e-248 | ✓ | ALL_PASS |
-| 200 | PASS | PASS (Δw=0) | 5.2618e-248 | 5.2618e-248 | ✓ | ALL_PASS |
-| 300 | PASS | PASS (Δw=0) | 3.9463e-248 | 3.9463e-248 | ✓ | ALL_PASS |
-| 400 | PASS | PASS (Δw=0) | 3.2886e-248 | 3.2886e-248 | ✓ | ALL_PASS |
-| 500 | PASS | PASS (Δw=0) | 2.6309e-248 | 2.6309e-248 | ✓ | ALL_PASS |
+| 100 | PASS | PASS (Î”w=0) | 6.5772e-248 | 6.5772e-248 | âœ“ | ALL_PASS |
+| 200 | PASS | PASS (Î”w=0) | 5.2618e-248 | 5.2618e-248 | âœ“ | ALL_PASS |
+| 300 | PASS | PASS (Î”w=0) | 3.9463e-248 | 3.9463e-248 | âœ“ | ALL_PASS |
+| 400 | PASS | PASS (Î”w=0) | 3.2886e-248 | 3.2886e-248 | âœ“ | ALL_PASS |
+| 500 | PASS | PASS (Î”w=0) | 2.6309e-248 | 2.6309e-248 | âœ“ | ALL_PASS |
 
 ---
 
 ## 3. Metodologi
 
-### 3.1 Arsitektur 4 Langkah (Locked) — sama dengan Q4 T=100
+### 3.1 Arsitektur 4 Langkah (Locked) â€” sama with Q4 T=100
 
 **Langkah 1: Ukur Dinding (Wall Measurement)**
-- Chebyshev/Gershgorin untuk estimasi batas bawah eigenvalue
-- Threshold: λ_min_est > 0 (positive definiteness)
-- Hasil: PASS untuk semua T (margin > 0)
+- Chebyshev/Gershgorin for estimasi limit bawah eigenvalue
+- Threshold: Î»_min_est > 0 (positive definiteness)
+- Hasil: PASS for semua T (margin > 0)
 
 **Langkah 2: Winding Cross-lock**
-- Kondisi: |winding(W_p) - winding(W_R) - winding(W_02)| ≤ 1
-- Untuk semua T: w_02 = N, w_R = 0, w_p = N → Δw = 0
-- Hasil: PASS untuk semua T
+- Kondisi: |winding(W_p) - winding(W_R) - winding(W_02)| â‰¤ 1
+- Untuk semua T: w_02 = N, w_R = 0, w_p = N â†’ Î”w = 0
+- Hasil: PASS for semua T
 
 **Langkah 3: Engine A (Arb 6000-bit)**
 - LDL^T interval factorization
 - Verifikasi: n_pos = dim, n_neg = 0, entries_finite = true
-- Sertifikat λ_min dengan interval rigor
+- Sertifikat Î»_min with interval rigor
 
 **Langkah 4: Engine B (mpmath dps 50)**
-- Implementasi independen untuk verifikasi
-- Kesepakatan: rel_tol ≤ 1e-12 pada λ_min
-- Hasil: Sepakat eksak untuk semua T
+- Implementasi independen for verifikasi
+- Kesepakatan: rel_tol â‰¤ 1e-12 on Î»_min
+- Hasil: Sepakat eksak for semua T
 
 ### 3.2 Karakter Non-Primitif T > 100
 
-Konduktor T = 100 × k (k = 1, 2, 3, 4, 5), karakter non-primitif χ_{T,n}
+Konduktor T = 100 Ã— k (k = 1, 2, 3, 4, 5), karakter non-primitif Ï‡_{T,n}
 terinduksi dari karakter primitif modulus 25. Mekanisme winding cross-lock
-memastikan konsistensi antara blok Archimedean (W_02, W_R) dan
-non-Archimedean (W_p) untuk semua T.
+memastikan konsistensi antara blok Archimedean (W_02, W_R) and
+non-Archimedean (W_p) for semua T.
 
-**Pola λ_min vs T:**
-- λ_min menurun seiring T meningkat (lebih banyak faktor karakter)
-- T=100 → T=500: λ_min turun ~2.5x (dim 201), ~2.5x (dim 301)
-- Pola konsisten dengan teori karakter non-primitif
+**Pola Î»_min vs T:**
+- Î»_min menurun seiring T meningkat (lebih banyak faktor karakter)
+- T=100 â†’ T=500: Î»_min turun ~2.5x (dim 201), ~2.5x (dim 301)
+- Pola konsisten with teori karakter non-primitif
 
 ---
 
@@ -104,7 +104,7 @@ Struktur receipt:
   }
 }
 ```
-(Duplikat untuk N=150 di receipt terpisah atau gabungan)
+(Duplikat for N=150 in receipt terpisah or gabungan)
 
 ---
 
@@ -131,12 +131,12 @@ python -m pytest msaf/tests/test_gw_rh_extension_extended.py -q
 
 ## 7. Batas Eksplisit (TIDAK diklaim)
 
-- ❌ Pembuktian RH (hanya ekstensi finit hingga T = 500)
-- ❌ Klaim σ = 1/2, lokasi nol zeta
-- ❌ Faktorisasi, RSA/ECC breaking
-- ❌ Anderson transition, fisika
-- ❌ Klaim asimtotik (hanya T ≤ 500)
-- ❌ Rerun kampanye H1/Engine B/Quantum yang tersegel
+- âŒ Pembuktian RH (hanya ekstensi finit hingga T = 500)
+- âŒ Klaim Ïƒ = 1/2, lokasi nol zeta
+- âŒ Faktorisasi, RSA/ECC breaking
+- âŒ Anderson transition, fisika
+- âŒ Klaim asimtotik (hanya T â‰¤ 500)
+- âŒ Rerun kampanye H1/Engine B/Quantum which tersegel
 
 ---
 
@@ -158,3 +158,4 @@ python audit_quantum/freeze.py --verify
 # Verifikasi registry
 python -m pytest msaf/tests/test_fence_registry.py -q
 ```
+

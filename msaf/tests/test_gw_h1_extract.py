@@ -98,3 +98,5 @@ def test_parse_log_rerun_roundtrip():
     assert log["cells"]["T|0.3"]["chi2_obs"] == 14621.8788
     assert log["cells"]["T|0.3"]["k_gue"] == 0
     assert log["cells"]["T|0.5"]["chi2_obs"] == 2146.3923
+
+

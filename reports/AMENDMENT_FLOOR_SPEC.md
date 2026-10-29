@@ -1,4 +1,4 @@
-# AMENDMENT-FLOOR-SPEC -- pre-registration for the H1 floor refinement and the dual-engine verification
+﻿# AMENDMENT-FLOOR-SPEC -- pre-registration for the H1 floor refinement and the dual-engine verification
 
 FROZEN specification. No measurement described in this document has been
 executed at freeze time. Any edit after the first execution starts is
@@ -192,3 +192,5 @@ implementation used to verify engine A's arithmetic and I/O.
 - Editing after execution #1 starts is FORBIDDEN; revisions require a new
   dated amendment document.
 - As of freeze: no measurement described here has been executed.
+
+

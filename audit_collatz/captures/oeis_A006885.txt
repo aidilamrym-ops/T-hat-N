@@ -1,4 +1,4 @@
-# A006885 b-file, terms 1..84 from T. D. Noe, extended to n=97 using data from E. Rosendaal's 3x+1 Path Records by Hugo Pfoertner 2025-01-13
+﻿# A006885 b-file, terms 1..84 from T. D. Noe, extended to n=97 using data from E. Rosendaal's 3x+1 Path Records by Hugo Pfoertner 2025-01-13
 1 1
 2 2
 3 16
@@ -96,3 +96,5 @@
 95 146323898913724962892154638143488597621248
 96 177277029166395089012736925130207466469456
 97 788340337342148717335104033908060039028328
+
+

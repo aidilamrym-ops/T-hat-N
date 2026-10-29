@@ -1,4 +1,4 @@
-# MSAF Landmine Register
+﻿# MSAF Landmine Register
 
 Every item below is verified by execution on `python-flint 0.9.0` /
 `Python 3.14.4`. Nothing here is based on reading the manuscript.
@@ -475,3 +475,4 @@ The first draft contained `_admitted()`, a constructor bypass that skipped
 the admission gate for "already-described" specs. Removed before it ever
 shipped: any path around a gate invalidates every verdict the gate protects,
 including in tests.
+

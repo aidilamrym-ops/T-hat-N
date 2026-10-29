@@ -16,3 +16,5 @@ def test_z3_containment_first_zero():
     assert res["z3_verdict"] == "sat"
     assert res["contains_half"] is True
     assert "local enclosures only" in res["scope"]
+
+

@@ -71,7 +71,7 @@ def test_v2_has_eight_axioms_and_no_false_negative_axiom() -> None:
     assert len(lines) == 8, "V2 must declare exactly eight axioms, got %d" % len(lines)
     assert "zetaReal_neg" not in _strip_comments(text)
     assert "SPECIFICATION V2, NOT PROOF" in text
-    assert "x < 0 → xiReal (1 - x) = xiReal x" in text
+    assert "x < 0 â†’ xiReal (1 - x) = xiReal x" in text
     assert "if x = 1 then 1 / 2" in text
 
 
@@ -119,3 +119,5 @@ def test_v2_axiom_footprint_and_old_contradiction_is_blocked() -> None:
         "expected the old proof to be blocked by the x < 0 hypothesis, got:\n%s"
         % out_old[:2000]
     )
+
+

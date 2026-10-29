@@ -1,6 +1,6 @@
-# Laporan Navier-Stokes Regularitas Diskrit — 2026-10-21
+﻿# Laporan Navier-Stokes Regularitas Diskrit â€” 2026-10-21
 
-**Status:** SELESAI — verdict `ALL_PASS`
+**Status:** SELESAI â€” verdict `ALL_PASS`
 
 **Registry:** `A-2026-0039` (CERTIFIED)
 
@@ -8,15 +8,15 @@
 
 ## 1. Ringkasan
 
-Paket ini melakukan **analisis regularitas diskrit** pada kernel Navier-Stokes 3D
-yang sudah tersegel (`A-2026-0038`), meliputi:
+Paket ini melakukan **analisis regularitas diskrit** on kernel Navier-Stokes 3D
+which already tersegel (`A-2026-0038`), meliputi:
 
-1. **Ladyzhenskaya-Prodi-Serrin Diskrit (LPS-D):** Kriteria regularitas berbasis norma `ℓ^p_t ℓ^q_x`
+1. **Ladyzhenskaya-Prodi-Serrin Diskrit (LPS-D):** Kriteria regularitas berbasis norma `â„“^p_t â„“^q_x`
 2. **Beale-Kato-Majda Diskrit (BKM-D):** Kriteria blow-up berbasis vortisitas
 3. **Spektrum Energi:** Analisis hukum Kolmogorov `-5/3`
-4. **Struktur Fungsi:** `S_p(r) = ⟨|δu|^p⟩` dan eksponen `ζ_p`
+4. **Struktur Fungsi:** `S_p(r) = âŸ¨|Î´u|^pâŸ©` and eksponen `Î¶_p`
 
-**Hasil:** Semua kriteria terverifikasi pada simulasi Taylor-Green vortex 20 langkah, grid 4³.
+**Hasil:** Semua kriteria terverifikasi on simulasi Taylor-Green vortex 20 step, grid 4Â³.
 
 ---
 
@@ -26,7 +26,7 @@ yang sudah tersegel (`A-2026-0038`), meliputi:
 - `FluidLattice3D` (N=M=K=4, dx=DELTA_UNIV)
 - Adveksi T-hat 3D, Difusi 7-titik, Proyeksi 3D
 - Energi monotonik (`energy_monotonic_decay3D` tersegel)
-- Vortisitas diskrit `ω = ∇ × u` via `curl_at(i,j,k)`
+- Vortisitas diskrit `Ï‰ = âˆ‡ Ã— u` via `curl_at(i,j,k)`
 
 ---
 
@@ -34,10 +34,10 @@ yang sudah tersegel (`A-2026-0038`), meliputi:
 
 | Kriteria | Hasil | Detail |
 |---|---|---|
-| **LPS-D** | PASS | Norma `ℓ^p_t ℓ^q_x` terhitung, `2/p + 3/q = 1`, `q > 3` |
-| **BKM-D** | PASS | `∫ ‖ω‖_∞ dt < ∞` terverifikasi (akumulasi terbatas) |
+| **LPS-D** | PASS | Norma `â„“^p_t â„“^q_x` terhitung, `2/p + 3/q = 1`, `q > 3` |
+| **BKM-D** | PASS | `âˆ« â€–Ï‰â€–_âˆž dt < âˆž` terverifikasi (akumulasi terbatas) |
 | **Spektrum Energi** | PASS | `E(k)` dihitung, regresi log-log mendekati `-5/3` |
-| **Struktur Fungsi** | PASS | `S_p(r)` dihitung, eksponen `ζ_p` diekstraksi |
+| **Struktur Fungsi** | PASS | `S_p(r)` dihitung, eksponen `Î¶_p` diekstraksi |
 
 ---
 
@@ -45,23 +45,23 @@ yang sudah tersegel (`A-2026-0038`), meliputi:
 
 ### 3.1 Curl/Vortisitas Diskrit
 ```
-ω_x = ∂_y u_z - ∂_z u_y
-ω_y = ∂_z u_x - ∂_x u_z
-ω_z = ∂_x u_y - ∂_y u_x
+Ï‰_x = âˆ‚_y u_z - âˆ‚_z u_y
+Ï‰_y = âˆ‚_z u_x - âˆ‚_x u_z
+Ï‰_z = âˆ‚_x u_y - âˆ‚_y u_x
 ```
-Selisih tengah pada grid periodik, ball arithmetic.
+Selisih tengah on grid periodik, ball arithmetic.
 
 ### 3.2 LPS-D (Ladyzhenskaya-Prodi-Serrin Diskrit)
-Kriteria: `‖u‖_{ℓ^p_t ℓ^q_x} < ∞` dengan `2/p + 3/q = 1`, `q > 3`.
+Kriteria: `â€–uâ€–_{â„“^p_t â„“^q_x} < âˆž` with `2/p + 3/q = 1`, `q > 3`.
 
 ### 3.3 BKM-D (Beale-Kato-Majda Diskrit)
-Kriteria: `∑_t max_x |ω(x,t)| · dt < ∞` → tidak blow-up.
+Kriteria: `âˆ‘_t max_x |Ï‰(x,t)| Â· dt < âˆž` â†’ no blow-up.
 
 ### 3.4 Spektrum Energi
-`E(k) = 1/2 Σ_{|κ|=k} |û(κ)|²` via FFT diskrit (exact rational via acb).
+`E(k) = 1/2 Î£_{|Îº|=k} |Ã»(Îº)|Â²` via FFT diskrit (exact rational via acb).
 
 ### 3.5 Struktur Fungsi
-`S_p(r) = ⟨|u(x+r) - u(x)|^p⟩`, eksponen `ζ_p` dari regresi log-log.
+`S_p(r) = âŸ¨|u(x+r) - u(x)|^pâŸ©`, eksponen `Î¶_p` dari regresi log-log.
 
 ---
 
@@ -107,10 +107,10 @@ python -m pytest msaf/tests/test_navier_stokes_regularity.py -q
 
 ## 8. Batas Eksplisit (TIDAK diklaim)
 
-- ❌ Pembuktian regularitas PDE Navier-Stokes kontinu (hanya analisis diskrit)
-- ❌ Klaim blow-up/blow-down PDE kontinu
-- ❌ Klaim RH, faktorisasi, RSA/ECC, Anderson, fisika
-- ❌ Simulasi DNS penuh (hanya analisis pada kernel diskrit yang ada)
+- âŒ Pembuktian regularitas PDE Navier-Stokes kontinu (hanya analisis diskrit)
+- âŒ Klaim blow-up/blow-down PDE kontinu
+- âŒ Klaim RH, faktorisasi, RSA/ECC, Anderson, fisika
+- âŒ Simulasi DNS penuh (hanya analisis on kernel diskrit which ada)
 
 ---
 
@@ -129,3 +129,4 @@ python audit_quantum/freeze.py --verify
 # Verifikasi registry
 python -m pytest msaf/tests/test_fence_registry.py -q
 ```
+

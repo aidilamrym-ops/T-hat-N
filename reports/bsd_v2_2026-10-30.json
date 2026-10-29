@@ -57,8 +57,8 @@
       "torsion_order": 3
     }
   ],
-  "module_sha256lf": "e83fe1506518d5e5da4f8b412c394706092125276d4b821b12057459296bbff4",
-  "prereg_sha256lf": "8ffc1b4822abcce9c8da1e34cc9fd338223b4415b8c7280633708587160552b6",
+  "module_sha256lf": "6f099ec17498f7bdf0f5c600de961b4a346e9dda78a4ccd37ea37b5bbbdd679c",
+  "prereg_sha256lf": "4d32da643476f38895bbffd1ab4de40563cab5a6822c4a526a1450af32df4cc1",
   "schema": "msaf.bsd_v2.v1",
   "summary": "ALL PASS",
   "volatile_fields": []

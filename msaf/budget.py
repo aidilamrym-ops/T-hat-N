@@ -105,3 +105,4 @@ def measured_critical_dimension() -> CriticalDimension:
         else:
             high = mid
     return CriticalDimension("n_crit (H measured)", (low * high).sqrt())
+

@@ -57,3 +57,5 @@ def test_readme_references_diagrams_and_block() -> None:
     assert text.count(gw_readme.BEGIN) == 1
     assert text.count(gw_readme.END) == 1
     assert "#section-7-sealed-status-workflow-and-verification-chain" in text
+
+

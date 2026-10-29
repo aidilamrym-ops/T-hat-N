@@ -233,3 +233,5 @@ def test_non_finite_never_bridges() -> None:
     for bad in ("nan", "inf", "-inf"):
         with pytest.raises(ValueError):
             assemble("t", arb(1), arb(bad), arb("1e-9"))
+
+

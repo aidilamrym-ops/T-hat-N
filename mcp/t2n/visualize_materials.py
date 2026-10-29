@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Simple crystal structure SVG renderer (F7b) and phase‑diagram SVG renderer (F7c).
+"""Simple crystal structure SVG renderer (F7b) and phaseâ€‘diagram SVG renderer (F7c).
 
 Uses only stdlib. Crystal renderer expects pymatgen JSON structure.
-Phase‑diagram renderer expects thermo entries with ``composition`` and ``energy_above_hull``.
-Both output dark‑theme SVG strings.
+Phaseâ€‘diagram renderer expects thermo entries with ``composition`` and ``energy_above_hull``.
+Both output darkâ€‘theme SVG strings.
 """
 import math
 import xml.etree.ElementTree as ET
@@ -25,7 +25,7 @@ def render_crystal_svg(structure: Dict) -> str:
     ----------
     structure: dict
         Pymatgen JSON dict with keys ``lattice`` (matrix) and ``sites``.
-        ``lattice`` must contain ``matrix``: 3×3 list of floats.
+        ``lattice`` must contain ``matrix``: 3Ã—3 list of floats.
         ``sites`` list of dicts with ``abc`` fractional coords and ``species``.
     Returns
     -------
@@ -82,23 +82,23 @@ def render_crystal_svg(structure: Dict) -> str:
         ET.SubElement(svg, "circle", cx=str(cx), cy=str(cy), r=str(atom_radius))
     return ET.tostring(svg, encoding="unicode")
 
-# Phase‑diagram SVG renderer (F7c)
+# Phaseâ€‘diagram SVG renderer (F7c)
 def render_phase_diagram_svg(chemsys: str, entries: list[dict]) -> str:
-    """Render simple 2‑D phase diagram SVG for binary/ternary systems.
+    """Render simple 2â€‘D phase diagram SVG for binary/ternary systems.
 
     Parameters
     ----------
     chemsys: str
-        Elements dash‑separated, e.g. "Li-Fe-O".
+        Elements dashâ€‘separated, e.g. "Li-Fe-O".
     entries: list[dict]
         Thermo entries from ``search_phase_diagram``; each must contain
-        ``composition`` mapping element → amount and ``energy_above_hull``.
+        ``composition`` mapping element â†’ amount and ``energy_above_hull``.
 
     Returns
     -------
     str
-        SVG XML (dark theme). Points coloured by hull energy (0 eV → yellow,
-        higher → dark gray).
+        SVG XML (dark theme). Points coloured by hull energy (0â€¯eV â†’ yellow,
+        higher â†’ dark gray).
     """
     elements = chemsys.split('-')
     if len(elements) not in (2, 3):
@@ -155,3 +155,5 @@ def render_phase_diagram_svg(chemsys: str, entries: list[dict]) -> str:
     return ET.tostring(svg, encoding='unicode')
 
 # ponytail: upgrade to interactive D3 plot, legend, axis labels.
+
+

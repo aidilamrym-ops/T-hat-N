@@ -1,68 +1,68 @@
-# Koreksi terukur: klaim "radius tepat nol" / "Im bocor tepat nol" pada tangga Route A2 (c=13)
+﻿# Koreksi terukur: klaim "radius tepat nol" / "Im bocor tepat nol" on tangga Route A2 (c=13)
 
-Ditulis 2026-10-17. Status: **koreksi catatan terdokumentasi** — bukan hasil
-baru, bukan perubahan verdict. Tidak ada angka hasil tersegel yang berubah;
-tidak ada komputasi dimensi besar yang dijalankan ulang untuk koreksi ini
-(ukur ulang pada dim 17/33, c=13, 6000 bit — biaya detik).
+Ditulis 2026-10-17. Status: **koreksi note terdokumentasi** â€” bukan result
+baru, bukan perubahan verdict. Tidak ada angka result tersegel which berubah;
+no ada komputasi dimensi besar which dijalankan ulang for koreksi ini
+(ukur ulang on dim 17/33, c=13, 6000 bit â€” biaya detik).
 
-## 1. Klaim lama yang dikoreksi
+## 1. Klaim lama which dikoreksi
 
-1. `reports/THREE_TASKS_2026-10-15.md` §"Jalur yang benar: eigensolver
+1. `reports/THREE_TASKS_2026-10-15.md` Â§"Jalur which benar: eigensolver
    interval": *"Radius **tepat nol**: setiap eigenvalue terisolasi titik
-   pada presisi ini, dan tidak satu pun enclosure-nya memuat nol. Bocoran
+   on presisi ini, and no satu pun enclosure-nya memuat nol. Bocoran
    imajiner **tepat nol**, jadi 'semua real' diukur, bukan diasumsikan."*
-2. `reports/HANDOFF.md` §2.0b: *"radius **tepat nol**, Im bocor **tepat
-   nol**"*; dan bullet 9000-bit: *"radius tetap 0"*.
-3. `reports/THREE_TASKS_2026-10-15.md` §"9000 bit": *"radius tetap 0"*.
+2. `reports/HANDOFF.md` Â§2.0b: *"radius **tepat nol**, Im bocor **tepat
+   nol**"*; and bullet 9000-bit: *"radius tetap 0"*.
+3. `reports/THREE_TASKS_2026-10-15.md` Â§"9000 bit": *"radius tetap 0"*.
 4. Dashboard v5 (`reports/gw_diagnostic_v5.html`): caption Panel 1 *"with
-   radius exactly 0"*, catatan Panel 7 *"radius exactly 0"*, dan tooltip
+   radius exactly 0"*, note Panel 7 *"radius exactly 0"*, and tooltip
    grafik (warisan v4) *"enclosure radius = 0.0"*.
-5. Field JSON `lambda_min_rad` / `imag_leak_upper` = `0.0` pada
+5. Field JSON `lambda_min_rad` / `imag_leak_upper` = `0.0` on
    `reports/lambda_min_eig_ladder*.json`.
 
 ## 2. Yang diukur ulang (2026-10-17)
 
-Skrip: `msaf/gw_radius_registry_check.py` (c=13, 6000 bit, dim 17 dan 33;
-transkrip verbatim di §4 dan di `reports/gw_radius_diag_2026-10-17.log`).
+Skrip: `msaf/gw_radius_registry_check.py` (c=13, 6000 bit, dim 17 and 33;
+transkrip verbatim in Â§4 and in `reports/gw_radius_diag_2026-10-17.log`).
 
 * **Radius enclosure sejati BUKAN nol.** `float(lo.rad().abs_upper())`
-  mencatat 0.0 karena radius ~1e-1790 jauh di bawah lantai subnormal
-  float64 (~4,9e-324). Terukur: 4,73e-1792 (dim 17) dan 5,37e-1788
-  (dim 33); `is_exact() = False` — tidak ada enclosure yang berupa titik.
+  mencatat 0.0 karena radius ~1e-1790 jauh in bawah lantai subnormal
+  float64 (~4,9e-324). Terukur: 4,73e-1792 (dim 17) and 5,37e-1788
+  (dim 33); `is_exact() = False` â€” no ada enclosure which berupa titik.
 * **Kebocoran imajiner BUKAN nol.** `imag_leak_upper` adalah artefak
-  underflow yang sama; leak maksimum terukur 1,97e-1792 (dim 17) dan
-  7,06e-1789 (dim 33); 0/17 dan 0/33 bagian imajiner eksak nol.
+  underflow which sama; leak maksimum terukur 1,97e-1792 (dim 17) and
+  7,06e-1789 (dim 33); 0/17 and 0/33 section imajiner eksak nol.
 * **Realness tetap sah, tetapi sebagai sifat struktur (terukur), bukan
-  dari leak nol.** Matriks bola **simetris eksak** — uji eksak-dyadic
-  mid/rad: 0/289 dan 0/1089 entri berbeda (dim 17/33). Untuk matriks
+  dari leak nol.** Matriks bola **simetris eksak** â€” uji eksak-dyadic
+  mid/rad: 0/289 and 0/1089 entri berbeda (dim 17/33). Untuk matriks
   simetris, eigenvalue sejati real; leak imajiner solver adalah noise
-  pembulatan di level radius bola.
-* **Konten tersertifikasi tidak berubah:** `contains0(lo) = False` di
+  pembulatan in level radius bola.
+* **Konten tersertifikasi no berubah:** `contains0(lo) = False` in
   semua kasus; verdict ladder tetap "CERTIFIED, all eigenvalues strictly
-  positive"; eksklusi nol tetap yang disertifikasi, bukan field float.
-* **Jebakan tooling (dicatat):** `arb == arb` di python-flint menguji
-  kesamaan **eksak** saja — `(arb(1)/3) == (arb(1)/3)` mengembalikan
-  `False` untuk bola inexact. Uji simetri/kesamaan bola wajib lewat
-  midpoint/radius eksak; `A == A.T` yang `False` BUKAN bukti asimetri.
-* **Preseden kernel:** `msaf/evolution.py` (baris 335–338) sudah
-  mendokumentasikan kelas kesalahan yang sama — radius < 1e-308 yang
+  positive"; eksklusi nol tetap which disertifikasi, bukan field float.
+* **Jebakan tooling (dicatat):** `arb == arb` in python-flint menguji
+  kesamaan **eksak** saja â€” `(arb(1)/3) == (arb(1)/3)` mengembalikan
+  `False` for bola inexact. Uji simetri/kesamaan bola wajib lewat
+  midpoint/radius eksak; `A == A.T` which `False` BUKAN bukti asimetri.
+* **Preseden kernel:** `msaf/evolution.py` (baris 335â€“338) already
+  mendokumentasikan kelas kesalahan which sama â€” radius < 1e-308 which
   ditulis sebagai angka JSON binary64 "manufacturing an exact zero that
   the measurement never produced". JSON ladder jatuh ke jebakan itu;
   prosa kemudian membacanya sebagai "tepat nol".
 
-Untuk dim 65/129/257 (dan rung berikutnya): field 0.0 dijelaskan oleh
-mekanisme underflow yang sama (tidak diukur ulang — biaya; tidak ada klaim
+Untuk dim 65/129/257 (and rung berikutnya): field 0.0 dijelaskan oleh
+mekanisme underflow which sama (no diukur ulang â€” biaya; no ada klaim
 baru per-dimensi).
 
-## 3. Apa yang berubah setelah koreksi
+## 3. Apa which berubah setelah koreksi
 
-* Wording di HANDOFF, THREE_TASKS (catatan bertanggal; riwayat tidak
-  dihapus), README §6.3, dan dashboard v5 (caption + catatan + tooltip;
-  +1 patch deterministik → total 15).
-* Angka hasil, verdict, dan hash artefak hasil tidak berubah. Tidak ada
-  klaim baru tentang nilai λ_min itu sendiri.
+* Wording in HANDOFF, THREE_TASKS (note bertanggal; riwayat no
+  dihapus), README Â§6.3, and dashboard v5 (caption + note + tooltip;
+  +1 patch deterministik â†’ total 15).
+* Angka result, verdict, and hash artefak result no berubah. Tidak ada
+  klaim baru tentang nilai Î»_min itu sendiri.
 * `reports/gw_diagnostic_v4.html` tetap preserved byte-identik; tooltip
-  lamanya sengaja tidak diubah (snapshot tersegel — koreksi hidup di v5 +
+  lamanya sengaja no diubah (snapshot tersegel â€” koreksi hidup in v5 +
   dokumen ini).
 
 ## 4. Blok mesin verbatim
@@ -86,10 +86,12 @@ dim 33: n=33  float(rad)=0.0  is_exact(lo)=False  contains0(lo)=False
 
 ## 5. Berkas terkait
 
-* `msaf/gw_radius_registry_check.py` — skrip pengukuran ulang (dapat
-  dijalankan ulang; ASCII, aman untuk CI tanpa flint karena impor flint
-  ada di dalam `main()`).
-* `reports/gw_radius_diag_2026-10-17.log` — transkrip verbatim.
-* `msaf/evolution.py` baris 335–338 — preseden kelas kesalahan.
+* `msaf/gw_radius_registry_check.py` â€” skrip pengukuran ulang (dapat
+  dijalankan ulang; ASCII, aman for CI tanpa flint karena impor flint
+  ada in dalam `main()`).
+* `reports/gw_radius_diag_2026-10-17.log` â€” transkrip verbatim.
+* `msaf/evolution.py` baris 335â€“338 â€” preseden kelas kesalahan.
 * `reports/THREE_TASKS_2026-10-15.md`, `reports/HANDOFF.md`, `README.md`
-  §6.3, `reports/gw_diagnostic_v5.html` — lokasi koreksi.
+  Â§6.3, `reports/gw_diagnostic_v5.html` â€” lokasi koreksi.
+
+

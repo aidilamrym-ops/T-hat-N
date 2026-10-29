@@ -54,3 +54,5 @@ def test_frobenius_degeneracy_gate():
     assert is_frobenius_degenerate(fermat4, 5) is False
     assert is_frobenius_degenerate([[2, 0], [0, 2]], 2) is True
     assert is_frobenius_degenerate([[3, 0, 0], [0, 3, 0], [0, 0, 3]], 2) is False
+
+

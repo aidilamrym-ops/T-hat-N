@@ -1,17 +1,17 @@
-# Perturbasi blok zeta ad hoc dengan nilai karakter Dirichlet — 2026-10-21
+﻿# Perturbasi blok zeta ad hoc with nilai karakter Dirichlet â€” 2026-10-21
 
 **Status:** eksekusi `PASS`; verdict matematis **`AD HOC NEGATIVE`**.
-Verifikasi lokal; belum di-commit/di-push.
+Verifikasi lokal; belum in-commit/in-push.
 **Paket:** Opsi B dari
 [`reports/SCOPE_AUDIT_GW_NONPRIMITIVE_2026-10-21.md`](SCOPE_AUDIT_GW_NONPRIMITIVE_2026-10-21.md).
 **Pra-registrasi:**
 [`reports/PREREG_GW_CHAR_ADHOC_2026-10-21.md`](PREREG_GW_CHAR_ADHOC_2026-10-21.md)
 (`sha256LF 297b0c9bcce826f1b7b32d3b1d6d48dae6c10fd9aeb65aa485ddf83b8ca83976`).
 
-## 1. Ringkasan hasil
+## 1. Ringkasan result
 
-Paket ini menjalankan eksperimen **ad hoc** yang mengganti hanya `Wp` pada
-blok zeta dengan nilai karakter real:
+Paket ini menjalankan eksperimen **ad hoc** which mengganti hanya `Wp` on
+blok zeta with nilai karakter real:
 
 ```text
 tau_pert(chi) = W02_zeta - WR_zeta - Wp_chi.
@@ -20,18 +20,18 @@ tau_pert(chi) = W02_zeta - WR_zeta - Wp_chi.
 Hasil eksekusi:
 
 - kontrol builder lokal versus `source_arb_ldlt_certify` **MATCH**;
-- baseline zeta positif definit, inertia `(41,0)` pada kedua konfigurasi;
-- **semua** lift primitif dan karakter non-primitif memberi inertia yang
+- baseline zeta positif definit, inertia `(41,0)` on kedua konfigurasi;
+- **semua** lift primitif and karakter non-primitif memberi inertia which
   **bukan** `(41,0)`;
-- tidak ada pivot undetermined pada run yang dikunci;
-- receipt deterministik dan cocok dengan disk.
+- no ada pivot undetermined on run which dikunci;
+- receipt deterministik and cocok with disk.
 
-Karena sekurangnya satu matriks karakter tidak positif definit, verdict
-matematis adalah **`AD HOC NEGATIVE`**. Ini adalah hasil eksperimen yang
-sah, bukan kegagalan eksekusi, dan **bukan** klaim tentang positivity
+Karena sekurangnya satu matriks karakter no positif definit, verdict
+matematis adalah **`AD HOC NEGATIVE`**. Ini adalah result eksperimen which
+sah, bukan kegagalan eksekusi, and **bukan** klaim tentang positivity
 `L(s,chi)`.
 
-## 2. Definisi yang dikunci
+## 2. Definisi which dikunci
 
 ```text
 W02_zeta  = blok pole zeta (karakter-blind)
@@ -40,18 +40,18 @@ Wp_chi    = sum_{q_k=p^a<=c} log(p) q_k^{-1/2} chi(q_k) shape(q_k)
 tau_pert  = W02_zeta - WR_zeta - Wp_chi
 ```
 
-`chi(q_k)` exact `-1/0/+1`; `chi(q_k)=0` bila `p | q`. `W02` dan `WR`
-tetap milik zeta. Karena itu `tau_pert` **bukan** explicit formula untuk
-`L(s,chi)` dan bukan blok Guinand–Weil berkarakter.
+`chi(q_k)` exact `-1/0/+1`; `chi(q_k)=0` bila `p | q`. `W02` and `WR`
+tetap milik zeta. Karena itu `tau_pert` **bukan** explicit formula for
+`L(s,chi)` and bukan blok Guinandâ€“Weil berkarakter.
 
-## 3. Konfigurasi dan karakter
+## 3. Konfigurasi and karakter
 
 | Peran | `c` | `N` | `dim=2N+1` | `prec` |
 |---|---:|---:|---:|---:|
 | Primer | 100 | 20 | 41 | 600 bit |
 | Replikasi | 200 | 20 | 41 | 600 bit |
 
-Empat karakter non-primitif real yang dipakai:
+Empat karakter non-primitif real which dipakai:
 
 | Karakter | `q` | `q*` | lift | prime baru | aktivasi `q_k<=100` |
 |---|---:|---:|---|---|---:|
@@ -60,26 +60,26 @@ Empat karakter non-primitif real yang dipakai:
 | `chi_{15,4}` | 15 | 5 | `chi_{5,4}` | 3 | 4 |
 | `chi_{15,11}` | 15 | 3 | `chi_{3,2}` | 5 | 2 |
 
-Aktivasi adalah prime power `q_k <= 100` dengan `chi(q_k)=0` dan
-`chi*(q_k) != 0`. Jumlahnya berubah pada `c=200` karena lebih banyak prime
-power yang masuk.
+Aktivasi adalah prime power `q_k <= 100` with `chi(q_k)=0` and
+`chi*(q_k) != 0`. Jumlahnya berubah on `c=200` karena lebih banyak prime
+power which masuk.
 
 ## 4. Kontrol builder
 
 Builder lokal mereproduksi `tau_zeta` dari
-`source_arb_ldlt_certify.build_arb_tau` pada kedua konfigurasi:
+`source_arb_ldlt_certify.build_arb_tau` on kedua konfigurasi:
 
 | Konfigurasi | `max_abs(local-external)` | ambang `2^{-(prec-32)}` | status |
 |---|---:|---:|---|
 | `c=100,N=20,prec=600` | `3.58498038198500018907896109209e-176` | `1.03505270065976189609743348056e-171` | MATCH |
 | `c=200,N=20,prec=600` | `3.28428520783070607295398100467e-176` | `1.03505270065976189609743348056e-171` | MATCH |
 
-Kontrol ini memastikan bahwa perbedaan hasil karakter berasal dari
+Kontrol ini memastikan bahwa perbedaan result karakter berasal dari
 `Wp_chi`, bukan dari pergeseran builder zeta.
 
 ## 5. Inertia interval
 
-Inertia adalah pasangan `(n_+, n_-)` dari pivot LDL^T yang semuanya
+Inertia adalah pasangan `(n_+, n_-)` dari pivot LDL^T which semuanya
 terdefinisi. Baseline zeta:
 
 | Konfigurasi | `n_+` | `n_-` | status |
@@ -87,7 +87,7 @@ terdefinisi. Baseline zeta:
 | `c=100,N=20` | 41 | 0 | POSITIVE DEFINITE |
 | `c=200,N=20` | 41 | 0 | POSITIVE DEFINITE |
 
-Karakter non-primitif dan lift primitifnya:
+Karakter non-primitif and lift primitifnya:
 
 | Karakter | `c=100` primitif | `c=100` non-primitif | `c=200` primitif | `c=200` non-primitif |
 |---|---:|---:|---:|---:|
@@ -96,13 +96,13 @@ Karakter non-primitif dan lift primitifnya:
 | `chi_{15,4}` | `(19,22)` | `(20,21)` | `(15,26)` | `(19,22)` |
 | `chi_{15,11}` | `(16,25)` | `(19,22)` | `(13,28)` | `(21,20)` |
 
-Semua entri di atas adalah `NOT POSITIVE DEFINITE`; tidak ada
-`undetermined_pivot`. Perhatikan bahwa **lift primitif pun** tidak positif
-dengan `W02`/`WR` zeta. Ini memperkuat kesimpulan audit: yang gagal bukan
+Semua entri in atas adalah `NOT POSITIVE DEFINITE`; no ada
+`undetermined_pivot`. Perhatikan bahwa **lift primitif pun** no positif
+with `W02`/`WR` zeta. Ini memperkuat kesimpulan audit: which gagal bukan
 hanya nilai karakter non-primitif, tetapi kecocokan blok archimedean/pole
-zeta dengan karakter.
+zeta with karakter.
 
-`max_abs(Wp_nonprimitive - Wp_primitive)` pada `c=100`:
+`max_abs(Wp_nonprimitive - Wp_primitive)` on `c=100`:
 
 | Karakter | nilai |
 |---|---:|
@@ -118,8 +118,8 @@ zeta dengan karakter.
 | Kontrol builder lokal vs eksternal | MATCH (2/2) |
 | Baseline zeta `(dim,0)` | 2/2 |
 | Entri finite | 2/2 konfigurasi, semua matriks |
-| Pivot undetermined | tidak ada |
-| Aktivasi prime baru | nonempty untuk 4/4 karakter |
+| Pivot undetermined | no ada |
+| Aktivasi prime baru | nonempty for 4/4 karakter |
 | Determinisme receipt | PASS |
 | **Eksekusi** | **PASS** |
 | **Verdict matematis** | **AD HOC NEGATIVE** |
@@ -135,35 +135,35 @@ file sha256LF        f7cb0327fa0b9a559513b18dc4fda8e5d3ec5fbca8ee440698d0ba4dc18
 prereg sha256LF      297b0c9bcce826f1b7b32d3b1d6d48dae6c10fd9aeb65aa485ddf83b8ca83976
 ```
 
-## 7. Yang disertifikasi dan yang tidak
+## 7. Yang disertifikasi and which no
 
 Yang disertifikasi:
 
-1. Builder lokal mereproduksi matriks zeta eksternal pada dua konfigurasi.
-2. `Wp_chi` memakai nilai karakter exact dan nol tepat pada `p | q`.
+1. Builder lokal mereproduksi matriks zeta eksternal on dua konfigurasi.
+2. `Wp_chi` memakai nilai karakter exact and nol tepat on `p | q`.
 3. Inertia interval baseline zeta `(41,0)`.
 4. Inertia interval semua matriks karakter bukan `(41,0)`.
-5. Tidak ada pivot undetermined pada run yang dikunci.
-6. Receipt deterministik dan label `AD HOC` konsisten.
+5. Tidak ada pivot undetermined on run which dikunci.
+6. Receipt deterministik and label `AD HOC` konsisten.
 
-Yang **tidak** diklaim:
+Yang **no** diklaim:
 
-- bahwa `tau_pert` adalah blok Guinand–Weil untuk `L(s,chi)`;
-- bahwa `L(s,chi)` atau deret Dirichlet non-primitif tidak positif;
+- bahwa `tau_pert` adalah blok Guinandâ€“Weil for `L(s,chi)`;
+- bahwa `L(s,chi)` or deret Dirichlet non-primitif no positif;
 - lokasi nol, `sigma=1/2`, critical-line lock, RH/GRH;
 - global positivity/Weil positivity;
-- eigenvalue, magnitude, atau spectral gap dari inertia;
-- faktorisasi, RSA/ECC, Anderson, atau fisika.
+- eigenvalue, magnitude, or spectral gap dari inertia;
+- faktorisasi, RSA/ECC, Anderson, or fisika.
 
-`AD HOC NEGATIVE` berarti **matriks perturbasi zeta yang dikunci tidak
-positif definit**. Ia tidak boleh dikutip sebagai bukti tentang
+`AD HOC NEGATIVE` berarti **matriks perturbasi zeta which dikunci no
+positif definit**. Ia no boleh dikutip sebagai bukti tentang
 `L(s,chi)`.
 
-## 8. Artefak dan verifikasi
+## 8. Artefak and verifikasi
 
-- Modul: `msaf/gw_char_adhoc.py` —
+- Modul: `msaf/gw_char_adhoc.py` â€”
   `sha256LF b0e7b6a7e85ca7d9155276af5b904eb30bc9d39a745d1348380c7ab102f88713`
-- Guard: `msaf/tests/test_gw_char_adhoc.py` —
+- Guard: `msaf/tests/test_gw_char_adhoc.py` â€”
   `sha256LF 0f5850da81a86f2062f83412181e186133c0ac0ab8a4a33c69dc79b8c5910bf3`
 - Pra-registrasi:
   `sha256LF 297b0c9bcce826f1b7b32d3b1d6d48dae6c10fd9aeb65aa485ddf83b8ca83976`
@@ -181,19 +181,21 @@ python -m pytest msaf -q
 python audit_quantum/freeze.py --verify
 ```
 
-## 9. Hubungan dengan opsi C
+## 9. Hubungan with opsi C
 
-Hasil B menunjukkan bahwa mengganti `Wp` saja tidak cukup: bahkan lift
-primitif memberi matriks indefinite dengan `W02`/`WR` zeta. Opsi C karena
-itu harus menurunkan ulang blok pole/archimedean untuk karakter
+Hasil B menunjukkan bahwa mengganti `Wp` saja no cukup: bahkan lift
+primitif memberi matriks indefinite with `W02`/`WR` zeta. Opsi C karena
+itu harus menurunkan ulang blok pole/archimedean for karakter
 (`Gamma((s+a)/2)`, konduktor `q*`, pole principal) sebelum ada klaim
-Guinand–Weil yang bermakna. Tidak ada hasil B yang boleh dipakai untuk
+Guinandâ€“Weil which bermakna. Tidak ada result B which boleh dipakai for
 menaikkan verdict C.
 
 ## 10. Batas penutup
 
-`PASS` eksekusi berarti **dua konfigurasi ad hoc yang dikunci berjalan
-lengkap, deterministik, dan lolos kontrol builder**. Verdict matematisnya
+`PASS` eksekusi berarti **dua konfigurasi ad hoc which dikunci berjalan
+lengkap, deterministik, and lolos kontrol builder**. Verdict matematisnya
 adalah **`AD HOC NEGATIVE`**. Tidak ada klaim nol, critical-line, RH/GRH,
-global positivity, atau fisika. Tidak ada kampanye tersegel yang dijalankan
-ulang, dan tidak ada artefak beku yang diubah.
+global positivity, or fisika. Tidak ada kampanye tersegel which dijalankan
+ulang, and no ada artefak beku which diubah.
+
+

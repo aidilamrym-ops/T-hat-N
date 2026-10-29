@@ -136,3 +136,5 @@ def test_a11_input_gates():
         ramanujan_power_sums({1: 2}, 3.0, [1])  # type: ignore[arg-type]
     with pytest.raises(ValueError):
         ramanujan_power_sums({6: 3}, 3, [1])  # 3 is not a union of order-6 orbits
+
+

@@ -1,4 +1,4 @@
-# P1 audit — reconnaissance (BB(5) = 47,176,870, bbchallenge / Coq-BB5)
+﻿# P1 audit â€” reconnaissance (BB(5) = 47,176,870, bbchallenge / Coq-BB5)
 
 Date: 2026-10-18 (local). Status: **reference, not result.** Read-only
 fetches only. No simulation, no download-and-hash of targets, and no
@@ -13,7 +13,7 @@ expectations can be checked against pinned public sources.
   `github.com/ccz181078/Coq-BB5`, branch `main`, commit
   `9142e219229baf2245d3f70851947230ea28a318` (2025-09-20; commit
   signature verified by GitHub per API), tree
-  `616f07b54639263638a09dabde7312ca1b534b50`; 218 blobs, ≈ 853 KB.
+  `616f07b54639263638a09dabde7312ca1b534b50`; 218 blobs, â‰ˆ 853 KB.
 - S2. Archival release: Zenodo record `17061968` (concept `17061967`),
   DOI `10.5281/zenodo.17061968`, "Coq-BB5 release v1.0.0". File md5s
   pinned from the Zenodo API: `Coq-BB5-1.0.0.tar.gz` (616,415 B, md5
@@ -25,7 +25,7 @@ expectations can be checked against pinned public sources.
   ever to be formally verified".
 - S4. BusyBeaverWiki "BB(5)", oldid `9024` (2026-10-08), CC BY.
   (Rendered preview + MediaWiki API wikitext; `action=raw` was blocked
-  by an anti-bot interstitial — the API path was used instead.)
+  by an anti-bot interstitial â€” the API path was used instead.)
 - S5. BusyBeaverWiki "5-state busy beaver winner", oldid `4369`
   (2025-10-07), CC BY.
 - S6. BusyBeaverWiki "BB(2)", oldid `5358` (2025-12-04), CC BY.
@@ -36,15 +36,15 @@ expectations can be checked against pinned public sources.
 ## 2. Published values transcribed (frozen expectations)
 
 - Shift champion (S(5) witness): `1RB1LC_1RC1RB_1RD0LE_1LA1LD_1RZ0LA`
-  — "halts after 47176870 steps with 4098 ones" [S5; same string S4;
+  â€” "halts after 47176870 steps with 4098 ones" [S5; same string S4;
   S8: s = 47,176,870, sigma = 4098]. S5 shows the A..E transition
   table, clause-for-clause equal to the bbch string.
-- Ones champion (Σ(5) witness, second ones champion in TNF):
-  `1RB1RA_1LC1LB_1RA1LD_1RA1LE_1RZ0LC` — "runs for 11,798,826 steps"
+- Ones champion (Î£(5) witness, second ones champion in TNF):
+  `1RB1RA_1LC1LB_1RA1LD_1RA1LE_1RZ0LC` â€” "runs for 11,798,826 steps"
   [S4 champions section; S4 top-halters row 15: 11798826/4098; S8].
 - Battery ladder (Appendix A): historical machines and values from S4
-  timeline (shown there with "≥" prenotation; treated as the machines'
-  actual run lengths — the W protocol handles any mismatch as a
+  timeline (shown there with "â‰¥" prenotation; treated as the machines'
+  actual run lengths â€” the W protocol handles any mismatch as a
   discrepancy, not as a rationalization), S4 top-halters (exact 20-row
   list), S6 (2-state classic), S7 (BB(3) champion).
 - Winner-page trajectory segment times sum exactly to 47,176,870:
@@ -52,7 +52,7 @@ expectations can be checked against pinned public sources.
   +10861903+30196527+24576 = 47,176,870 (checked by hand; corroboration
   only; not an audit item).
 - BB(3) facts used for item E [S7]: S(3)=21; unique TNF shift champion
-  `1RB1RZ_1LB0RC_1LC1LA` (21 steps, 5 ones); Σ(3)=6.
+  `1RB1RZ_1LB0RC_1LC1LA` (21 steps, 5 ones); Î£(3)=6.
 - Coq-BB5 README claim relevant to item R: "outputted at the end of the
   compilation, the proof only depends on Coq's standard library axiom
   functional_extensionality_dep" (their claim; compared in R only).
@@ -61,34 +61,34 @@ expectations can be checked against pinned public sources.
 
 Path: `CoqBB5/BB5/BB5_Statement.v` (commit S1). Key transcribed fragments
 (small excerpts for audit commentary; the repository declares no
-license on GitHub — recorded as-is):
+license on GitHub â€” recorded as-is):
 
     Definition BB5 := 47176870%N.
 
     Definition BB5_value_statement :=
-      (forall tm n0, HaltsAtPlusOne Σ tm n0 (InitES Σ Σ0) -> n0 <= N.to_nat BB5) /\
-      (exists tm, HaltsAtPlusOne Σ tm (N.to_nat BB5) (InitES Σ Σ0)).
+      (forall tm n0, HaltsAtPlusOne Î£ tm n0 (InitES Î£ Î£0) -> n0 <= N.to_nat BB5) /\
+      (exists tm, HaltsAtPlusOne Î£ tm (N.to_nat BB5) (InitES Î£ Î£0)).
 
 The file's own comment states that `HaltsAt` is off by one compared to
-Radò's definition, "which is why we have to use `HaltsAtPlusOne` here
+RadÃ²'s definition, "which is why we have to use `HaltsAtPlusOne` here
 in order to prove BB(5) = 47176870 and not BB(5) = 47176869". The file
-defines `TM := St -> Σ -> option Trans` (partial transition function),
-states St0..St4, symbols Σ0/Σ1, directions Dneg/Dpos. `Hypothesis Σ:Set`
-and `Hypothesis Σ0:Σ` occur inside `Section TM` (section-local;
+defines `TM := St -> Î£ -> option Trans` (partial transition function),
+states St0..St4, symbols Î£0/Î£1, directions Dneg/Dpos. `Hypothesis Î£:Set`
+and `Hypothesis Î£0:Î£` occur inside `Section TM` (section-local;
 discharged into the definitions). The main theorem name is expected in
 `CoqBB5/BB5/BB5_Theorem.v` (to be confirmed in item R only).
 
 ## 4. Repository facts (from the tree listing at S1)
 
 - Top level: `README.md`, `BusyCoq/`, `CoqBB5/`. No license file; the
-  GitHub API reports no license — recorded, not a verdict.
+  GitHub API reports no license â€” recorded, not a verdict.
 - Per-result folders: `CoqBB5/BB{2,3,4,5}/`, `CoqBB5/BB2x{3,4}/`, each
   with `*_Statement.v`, `*_Theorem.v`, `Makefile`, `_CoqProject`,
   `*_Deciders_*.v` and decider folders; plus `CoqBB5/BB5/BB5_Extraction/`.
 - Build (README, S1): opam switch 4.14.2; opam install coq-native; pin
   coq 8.20.1; then `make` in `BusyCoq/` ("~8 min / 13 cores") and in
   `CoqBB5/BB5/` ("~45 min with coq-native; ~3 h without"). Our host has
-  4 logical cores; caps in pre-registration §9.
+  4 logical cores; caps in pre-registration Â§9.
 - README also: 13 sporadic machines (12 via the `BusyCoq/` snapshot
   pinned by them at `333695b79707189d49f5e560a55c3ab8dda1cdc6`;
   Skelet17 in-repo), hardcoded decider parameters for 8,032 machines,
@@ -108,7 +108,7 @@ discharged into the definitions). The main theorem name is expected in
   `c8379d1ff7fe5e7e0cc5674ade695cd6`): header `machine,status,decider`;
   3 state groups per machine; clauses `---` = undefined; deciders
   `LOOP1_params_21`, `NGRAM_CPS_IMPL2_params_1_1_100`, etc. Used by
-  item E (≈ 5,417 data rows; exact count at execution).
+  item E (â‰ˆ 5,417 data rows; exact count at execution).
 
 ## 6. Environment (verified 2026-10-18)
 
@@ -123,11 +123,11 @@ discharged into the definitions). The main theorem name is expected in
 No audit computation: no machine simulation; no clone of S1; no
 download of S2/S2-files or of the BB3 CSV; no hash computation of any
 target; no source scan. All such steps happen strictly after the
-pre-registration commit, per its §11.
+pre-registration commit, per its Â§11.
 
-## Appendix A — frozen fixture battery
+## Appendix A â€” frozen fixture battery
 
-Sources: W2=§1 S6; W3=§1 S7; W5=S4 timeline; W5t=S4 top-halters; Wc=S5;
+Sources: W2=Â§1 S6; W3=Â§1 S7; W5=S4 timeline; W5t=S4 top-halters; Wc=S5;
 M=S8.
 
     classic-2state  1RB1LB_1LA1RZ                                6         4        W2
@@ -146,7 +146,7 @@ M=S8.
     mb89-shift      1RB1LC_1RC1RB_1RD0LE_1LA1LD_1RZ0LA            47176870  4098     W5/W5t/Wc/M  PRIMARY
     bb3-champion    1RB1RZ_1LB0RC_1LC1LA                          21        5        W3
 
-## Appendix B — BB(5) top halters (S4 wikitext, verbatim; CC BY)
+## Appendix B â€” BB(5) top halters (S4 wikitext, verbatim; CC BY)
 
     1RB1LC_1RC1RB_1RD0LE_1LA1LD_1RZ0LA  Halt 47176870 4098
     1RB0LD_1LC1RD_1LA1LC_1RZ1RE_1RA0RB  Halt 23554764 4097
@@ -168,3 +168,5 @@ M=S8.
     1RB1RA_1LC1RD_1LA1LC_1RZ1RE_1LA0RB  Halt 11792696 4097
     1RB1RA_1LC1RD_1LA1LC_1RZ1RE_1RA0RB  Halt 11792682 4097
     1RB1RZ_1LC1RC_0RE0LD_1LC0LB_1RD1RA  Halt 2358064  1471
+
+

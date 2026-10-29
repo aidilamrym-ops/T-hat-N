@@ -19,7 +19,7 @@ PREREG = ROOT / "reports" / "PREREG_NAVIER_STOKES_REGULARITY_2026-10-21.md"
 
 
 def test_curl_at_zero_divergence():
-    """Test that ∇·ω = 0 for the vorticity field (discrete)."""
+    """Test that âˆ‡Â·Ï‰ = 0 for the vorticity field (discrete)."""
     from msaf.navier_stokes.fluid_lattice import FluidLattice
     
     lat = FluidLattice(4, "0.0001", "1")
@@ -72,7 +72,7 @@ def test_vorticity_on_rotation_field():
 
 
 def test_vorticity_divergence_zero():
-    """Test that ∇·ω = 0 holds discretely."""
+    """Test that âˆ‡Â·Ï‰ = 0 holds discretely."""
     from msaf.navier_stokes.fluid_lattice import FluidLattice
     
     lat = FluidLattice(4, "0.0001", "1")
@@ -250,3 +250,4 @@ def test_core_has_no_numpy() -> None:
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
+

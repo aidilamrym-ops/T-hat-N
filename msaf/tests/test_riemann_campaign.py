@@ -38,3 +38,5 @@ def test_exclusion_float_rejection():
         sweep_exclusion("15.0", "15.1", max_depth=2.0)  # type: ignore[arg-type]
     with pytest.raises(ValueError):
         exclusion_box("16.0", "15.0")
+
+

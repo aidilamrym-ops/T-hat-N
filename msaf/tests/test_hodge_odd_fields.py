@@ -45,3 +45,5 @@ def test_odd_field_input_gates():
         count_fermat_quartic_fpn(1, 2)
     with pytest.raises(ValueError):
         count_fermat_quartic_fpn(0, 3)
+
+

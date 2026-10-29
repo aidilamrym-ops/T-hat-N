@@ -1,4 +1,4 @@
-# ENGINE B PILOT FINDINGS -- 2026-10-16
+﻿# ENGINE B PILOT FINDINGS -- 2026-10-16
 
 Dated finding/deviation note (append-only). Engine B pilot v1 ran BEFORE the
 full verification; raw evidence: `reports/gw_engine_b_pilot_v1.log` and
@@ -99,3 +99,5 @@ verification process was running at that point, no artifact was affected,
 and no re-run is needed: the completed log + JSON are the results of
 record. Header re-records (unchanged): script sha256 `485ab652...`;
 instrument sha256 `072910f2...`.
+
+

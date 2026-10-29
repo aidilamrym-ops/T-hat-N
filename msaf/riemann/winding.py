@@ -435,3 +435,5 @@ def winding_number(
         "boxes_evaluated": evaluated,
         "stuck": [],
     }
+
+

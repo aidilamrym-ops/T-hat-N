@@ -236,3 +236,4 @@ def structural_commutation() -> str:
         "H = sum_j c_j T^j and T^a T^b = T^(a+b), therefore [H,T] = 0 "
         "as an algebraic identity, for any symbol c and any n"
     )
+

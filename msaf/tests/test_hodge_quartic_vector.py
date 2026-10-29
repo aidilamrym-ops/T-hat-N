@@ -102,3 +102,4 @@ def test_vector_input_gates():
         count_quartic_vector({}, 1, 3)
     with pytest.raises(TypeError):
         count_quartic_vector(FERMAT_SURFACE, 1.0, 3)  # type: ignore[arg-type]
+

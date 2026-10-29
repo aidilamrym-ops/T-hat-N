@@ -28,16 +28,16 @@ class LPSDResult:
     p: float  # time exponent
     q: float  # space exponent  
     norm_lp_lq: float  # ||u||_{l^p_t l^q_x}
-    passed: bool  # 2/p + 3/q = 1, q > 3, norm < ∞
+    passed: bool  # 2/p + 3/q = 1, q > 3, norm < âˆž
     details: str
 
 
 @dataclass(frozen=True)
 class BKMDResult:
     """Beale-Kato-Majda discrete result."""
-    max_vorticity_over_time: list[float]  # max |ω| per time step
-    integral_vorticity: float  # ∫ ||ω||_∞ dt
-    passed: bool  # ∫ ||ω||_∞ dt < ∞
+    max_vorticity_over_time: list[float]  # max |Ï‰| per time step
+    integral_vorticity: float  # âˆ« ||Ï‰||_âˆž dt
+    passed: bool  # âˆ« ||Ï‰||_âˆž dt < âˆž
     details: str
 
 
@@ -47,7 +47,7 @@ class EnergySpectrumResult:
     k_values: list[int]
     energy_k: list[float]  # E(k)
     kolmogorov_exponent: float  # fitted exponent from log-log regression
-    kolmogorov_constant: float  # C in E(k) = C ε^{2/3} k^{-5/3}
+    kolmogorov_constant: float  # C in E(k) = C Îµ^{2/3} k^{-5/3}
     inertial_range: Tuple[int, int]  # range of k where -5/3 law holds
     r_squared: float  # goodness of fit
     details: str
@@ -59,7 +59,7 @@ class StructureFunctionResult:
     p: int  # order of structure function
     r_values: list[int]  # separation distances
     sp_values: list[float]  # S_p(r)
-    zeta_p: float  # scaling exponent ζ_p
+    zeta_p: float  # scaling exponent Î¶_p
     r_squared: float
     details: str
 
@@ -113,8 +113,8 @@ def _compute_lpsd_norm(
 ) -> float:
     """Compute discrete LPS-D norm ||u||_{l^p_t l^q_x}.
     
-    ||u||_{l^p_t l^q_x} = (Σ_t (||u(t)||_{l^q_x})^p * dt)^{1/p}
-    where ||u(t)||_{l^q_x} = (Σ_x |u(x,t)|^q)^{1/q}
+    ||u||_{l^p_t l^q_x} = (Î£_t (||u(t)||_{l^q_x})^p * dt)^{1/p}
+    where ||u(t)||_{l^q_x} = (Î£_x |u(x,t)|^q)^{1/q}
     """
     pass
 
@@ -123,9 +123,9 @@ def _compute_bkm_integral(
     vorticity_history: list,  # list of vorticity fields over time
     dt: float
 ) -> float:
-    """Compute BKM integral ∫ ||ω||_∞ dt.
+    """Compute BKM integral âˆ« ||Ï‰||_âˆž dt.
     
-    Returns Σ_t max_{x} |ω(x,t)| * dt
+    Returns Î£_t max_{x} |Ï‰(x,t)| * dt
     """
     pass
 
@@ -244,3 +244,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

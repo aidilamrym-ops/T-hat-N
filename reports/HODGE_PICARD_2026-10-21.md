@@ -1,6 +1,6 @@
-# Laporan Hodge Picard Bound & CH a_11 — 2026-10-21
+﻿# Laporan Hodge Picard Bound & CH a_11 â€” 2026-10-21
 
-**Status:** SELESAI — verdict `PARTIAL` (bound vacuous 22, tidak ada bound informatif < 20)
+**Status:** SELESAI â€” verdict `PARTIAL` (bound vacuous 22, no ada bound informatif < 20)
 
 **Registry:** `A-2026-0036` (CERTIFIED)
 
@@ -8,12 +8,12 @@
 
 ## 1. Ringkasan
 
-Paket ini melakukan analisis **Bound Picard** dari polinomial Weil lengkap pada smooth quartic over F_3 menggunakan data spektral yang sudah tersegel dari kampanye CH (Couveignes-Henocq) untuk a_11.
+Paket ini melakukan analisis **Bound Picard** dari polinomial Weil lengkap on smooth quartic over F_3 menggunakan data spektral which already tersegel dari kampanye CH (Couveignes-Henocq) for a_11.
 
 **Hasil:**
-- **CH a_11 F_3:** a_11 = 354294 tersegel via CRT + oracle gate + leave-one-out rehearsal (10/10 PASS) — HODGE_CH_SPEC
-- **Bound Picard F_3:** 22 = b_2 (vacuous) pada smooth quartic F_3 (koefisien tersegel HODGE_CLOSURE)
-- **Kesimpulan:** Tidak ditemukan bound informatif (< 20) pada permukaan yang diuji
+- **CH a_11 F_3:** a_11 = 354294 tersegel via CRT + oracle gate + leave-one-out rehearsal (10/10 PASS) â€” HODGE_CH_SPEC
+- **Bound Picard F_3:** 22 = b_2 (vacuous) on smooth quartic F_3 (koefisien tersegel HODGE_CLOSURE)
+- **Kesimpulan:** Tidak ditemukan bound informatif (< 20) on permukaan which diuji
 
 ---
 
@@ -21,13 +21,13 @@ Paket ini melakukan analisis **Bound Picard** dari polinomial Weil lengkap pada 
 
 ### CH Pipeline (HODGE_CH_SPEC)
 - **a_11 = 354294** uniquely isolated
-- **CRT combiner:** M > 2B ✓
-- **Oracle gate:** HOLD on a_1..a_10 ✓
-- **Leave-one-out rehearsal:** 10/10 PASS ✓
-- **Circle test:** PASS ✓
+- **CRT combiner:** M > 2B âœ“
+- **Oracle gate:** HOLD on a_1..a_10 âœ“
+- **Leave-one-out rehearsal:** 10/10 PASS âœ“
+- **Circle test:** PASS âœ“
 
 ### Smooth Quartic F_3 (HODGE_CLOSURE)
-- **Koefisien:** 15 koefisien non-zero (tersegel di hodge_quartic_f3_traces.json)
+- **Koefisien:** 15 koefisien non-zero (tersegel in hodge_quartic_f3_traces.json)
 - **Point counts:** k=1..10 exact (tersegel)
 - **CH a_11:** 354294 (tersegel via CH pipeline)
 
@@ -37,14 +37,14 @@ Paket ini melakukan analisis **Bound Picard** dari polinomial Weil lengkap pada 
 
 | Surface | Field | Bound | Sign | Status | Informative |
 |---------|-------|-------|------|--------|-------------|
-| smooth_known_f3 | F_3 | 22 | +1 | VACUOUS (22 = b_2) | ❌ (< 20) |
+| smooth_known_f3 | F_3 | 22 | +1 | VACUOUS (22 = b_2) | âŒ (< 20) |
 
 **Detail Bound:**
-- **Bound:** 22 (= b_2 untuk K3)
+- **Bound:** 22 (= b_2 for K3)
 - **Sign:** +1
 - **Char poly:** 22-degree polynomial (coeffs tersegel)
 - **Exact orders:** {1: 2, 2: 2, 6: 2, 7: 6, 10: 4, 14: 6}
-- **Interpretasi:** Bound = b_2 = 22 → vacuous (tidak informatif)
+- **Interpretasi:** Bound = b_2 = 22 â†’ vacuous (no informatif)
 
 ---
 
@@ -53,13 +53,13 @@ Paket ini melakukan analisis **Bound Picard** dari polinomial Weil lengkap pada 
 ### CH Pipeline (HODGE_CH_SPEC, option 2 adopted)
 1. **Point counts k=1..7** via exact counter
 2. **Weil-constraint search** (option 2): enumerate a_11 in [-B,B], Schur-Cohn filter
-3. **CRT combiner:** M > 2B → unique recovery
+3. **CRT combiner:** M > 2B â†’ unique recovery
 4. **Oracle gate:** Verify a_1..a_10 from same engine
 5. **Leave-one-out:** 10/10 PASS
 
 ### Picard Bound (van Luijk / Moebius inversion)
-- From completed Weil polynomial χ(T) = det(1 - Frob·T | H^2)
-- Count eigenvalues q·ζ via Moebius inversion over exact GCD degrees
+- From completed Weil polynomial Ï‡(T) = det(1 - FrobÂ·T | H^2)
+- Count eigenvalues qÂ·Î¶ via Moebius inversion over exact GCD degrees
 - Both FE signs tried; max taken (sound)
 
 ---
@@ -117,11 +117,11 @@ python -m pytest msaf/tests/test_hodge_picard.py -q
 
 ## 7. Batas Eksplisit (TIDAK diklaim)
 
-- ❌ Pembuktian konjektur Hodge (hanya bound finit dari data tersegel)
-- ❌ Klaim CH untuk lapangan/permukaan lain (hanya F_3 tersegel)
-- ❌ Klaim RH, faktorisasi, RSA/ECC, Anderson, fisika
-- ❌ Klaim asimtotik (hanya data finit tersegel)
-- ❌ Bound informatif (< 20) — tidak ditemukan
+- âŒ Pembuktian konjektur Hodge (hanya bound finit dari data tersegel)
+- âŒ Klaim CH for lapangan/permukaan lain (hanya F_3 tersegel)
+- âŒ Klaim RH, faktorisasi, RSA/ECC, Anderson, fisika
+- âŒ Klaim asimtotik (hanya data finit tersegel)
+- âŒ Bound informatif (< 20) â€” no ditemukan
 
 ---
 
@@ -140,3 +140,4 @@ python audit_quantum/freeze.py --verify
 # Verifikasi registry
 python -m pytest msaf/tests/test_fence_registry.py -q
 ```
+

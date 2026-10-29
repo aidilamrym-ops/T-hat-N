@@ -21,7 +21,7 @@ def test_no_float_or_numpy() -> None:
     # Remove docstring/comments to avoid false positives
     import re
     code = re.sub(r'""".*?"""', '', source, flags=re.DOTALL)
-    # No float literals or calls – simple textual scan
+    # No float literals or calls â€“ simple textual scan
     assert "float" not in code
     # Decimal literals (e.g. 1.23) are also disallowed
     literals = re.findall(r"\b\d+\.\d+\b", code)
@@ -35,7 +35,9 @@ def test_receipt_hash_matches_file() -> None:
     assert receipt_path.is_file()
     raw = receipt_path.read_bytes()
     expected = hashlib.sha256(raw).hexdigest()
-    # re‑run main to generate receipt again and compare hash
+    # reâ€‘run main to generate receipt again and compare hash
     lh.main()
     new_raw = receipt_path.read_bytes()
     assert hashlib.sha256(new_raw).hexdigest() == expected
+
+

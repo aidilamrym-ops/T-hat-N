@@ -77,3 +77,5 @@ def test_v5_render_deterministic_and_clean():
 def test_v5_committed_html_matches_generator():
     assert v5.OUT.exists()
     assert v5.OUT.read_text(encoding="utf-8") == v5.build()
+
+

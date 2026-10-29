@@ -70,3 +70,5 @@ def test_counter_float_rejection():
         count_zeros(10.0, "25.0")  # type: ignore[arg-type]
     with pytest.raises(ValueError):
         count_zeros("25.0", "10.0")
+
+

@@ -44,7 +44,7 @@ class EllipticCurve:
     
     @property
     def discriminant(self) -> int:
-        """Δ = -b2^2*b8 - 8*b4^3 - 27*b6^2 + 9*b2*b4*b6"""
+        """Î” = -b2^2*b8 - 8*b4^3 - 27*b6^2 + 9*b2*b4*b6"""
         b2 = self.a1**2 + 4*self.a2
         b4 = 2*self.a4 + self.a1*self.a3
         b6 = self.a3**2 + 4*self.a6
@@ -222,11 +222,11 @@ def two_descent(curve: EllipticCurve) -> DescentData:
 
 
 # -----------------------------------------------------------------------------
-# Modular symbols for L(E,1)/Ω computation
+# Modular symbols for L(E,1)/Î© computation
 # -----------------------------------------------------------------------------
 
 def manin_symbols(N: int) -> list[tuple[int, int]]:
-    """Generate Manin symbols for Γ_0(N).
+    """Generate Manin symbols for Î“_0(N).
     
     Returns list of (c, d) with gcd(c, d, N) = 1, modulo the action.
     """
@@ -241,7 +241,7 @@ def manin_symbols(N: int) -> list[tuple[int, int]]:
 def modular_symbol_integral(E: EllipticCurve, N: int, k: int = 2) -> Fraction:
     """Compute modular symbol integral for L(E, 1) via Manin symbols.
     
-    Returns the rational number L(E, 1) / Ω_E as a Fraction.
+    Returns the rational number L(E, 1) / Î©_E as a Fraction.
     """
     # This is a simplified implementation
     # Full implementation uses Manin's continued fractions
@@ -261,7 +261,7 @@ def modular_symbol_integral(E: EllipticCurve, N: int, k: int = 2) -> Fraction:
 
 
 def modular_symbol_ec(E: EllipticCurve) -> Fraction:
-    """Compute L(E, 1) / Ω_E using modular symbols (exact rational).
+    """Compute L(E, 1) / Î©_E using modular symbols (exact rational).
     
     Uses the implementation based on Cremona's algorithms.
     """
@@ -269,7 +269,7 @@ def modular_symbol_ec(E: EllipticCurve) -> Fraction:
     for label in ["11a1", "14a1", "15a1", "17a1", "19a1"]:
         c = EllipticCurve.from_cremona_label(label)
         if c.discriminant == E.discriminant:
-            # Known exact values L(E,1)/Ω_E
+            # Known exact values L(E,1)/Î©_E
             values = {
                 "11a1": Fraction(1, 5),
                 "14a1": Fraction(1, 3),
@@ -283,7 +283,7 @@ def modular_symbol_ec(E: EllipticCurve) -> Fraction:
 
 
 def real_period(E: EllipticCurve) -> Fraction:
-    """Compute the real period Ω_E as an exact expression.
+    """Compute the real period Î©_E as an exact expression.
     
     For rank 0 curves, this is a rational multiple of the integral.
     """
@@ -316,15 +316,15 @@ class BSDVerification:
     conductor: int
     discriminant: int
     bsd_identity_holds: bool
-    bsd_lhs: Fraction  # L(E,1)/Ω
+    bsd_lhs: Fraction  # L(E,1)/Î©
     bsd_rhs: Fraction  # RHS of BSD formula
 
 
 def verify_bsd(curve: EllipticCurve) -> BSDVerification:
     """Verify the BSD formula for a rank-0 curve.
     
-    For rank 0: L(E,1)/Ω = |Ш| * (∏ c_p) * 2^{ω(N)-1} / |E(Q)_tors|^2
-    where ω(N) = number of distinct prime factors of the conductor.
+    For rank 0: L(E,1)/Î© = |Ð¨| * (âˆ c_p) * 2^{Ï‰(N)-1} / |E(Q)_tors|^2
+    where Ï‰(N) = number of distinct prime factors of the conductor.
     Regulator = 1 for rank 0.
     """
     label = None
@@ -353,8 +353,8 @@ def verify_bsd(curve: EllipticCurve) -> BSDVerification:
     L1_omega = inv["L1_omega"]
     
     # BSD formula for rank 0:
-    # L(E,1)/Ω = |Ш| * (∏ c_p) * 2^{ω(N)-1} / |E(Q)_tors|^2
-    # where ω(N) = number of distinct prime factors of the conductor N
+    # L(E,1)/Î© = |Ð¨| * (âˆ c_p) * 2^{Ï‰(N)-1} / |E(Q)_tors|^2
+    # where Ï‰(N) = number of distinct prime factors of the conductor N
     # The correct factor depends on the curve. Use known correct RHS values:
     rhs_map = {
         "11a1": Fraction(1, 5),   # 5*1/25 = 1/5
@@ -497,3 +497,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

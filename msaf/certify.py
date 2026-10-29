@@ -211,3 +211,4 @@ def certify_matrix(label: str, m: arb_mat) -> ZeroCertificate:
 
 def report(certificates: list[ZeroCertificate]) -> CertificateReport:
     return CertificateReport(precision_bits=ctx.prec, certificates=tuple(certificates))
+

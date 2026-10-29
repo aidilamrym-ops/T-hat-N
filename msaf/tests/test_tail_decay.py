@@ -40,3 +40,5 @@ def test_periodic_tail_structure():
     assert (max(far) - min(far)) / abs(v[0]) < 0.02
     for cell in p:
         assert bool(cell.rad() < arb("1e-70")) is True
+
+

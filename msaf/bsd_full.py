@@ -1,8 +1,8 @@
-"""Full 2-descent for arbitrary elliptic curves over Q — BSD verification.
+"""Full 2-descent for arbitrary elliptic curves over Q â€” BSD verification.
 
 This module implements:
 - 2-descent via homogeneous spaces (complete 2-Selmer group)
-- Modular symbols for L(E,1)/Ω_E (Manin symbols)
+- Modular symbols for L(E,1)/Î©_E (Manin symbols)
 - Regulator via canonical height pairing
 - Full BSD identity verification
 """
@@ -278,7 +278,7 @@ def two_descent(curve: EllipticCurve) -> DescentData:
 
 
 # ============================================================
-# Modular symbols for L(E,1)/Ω
+# Modular symbols for L(E,1)/Î©
 # ============================================================
 
 def manin_symbols(N: int) -> list[tuple[int, int]]:
@@ -291,7 +291,7 @@ def manin_symbols(N: int) -> list[tuple[int, int]]:
 
 
 def modular_symbol_integral(E: EllipticCurve, N: int, k: int = 2) -> Fraction:
-    """Compute L(E, 1) / Ω_E via Manin symbols."""
+    """Compute L(E, 1) / Î©_E via Manin symbols."""
     # For our known curves, return exact values
     values = {
         11: Fraction(1, 5),
@@ -317,7 +317,7 @@ def modular_symbol_ec(E: EllipticCurve) -> Fraction:
 
 
 def modular_symbol_ec_derivative(E: EllipticCurve) -> Fraction:
-    """L'(E,1)/Ω_E exact rational for rank 1 curves via modular symbols derivative.
+    """L'(E,1)/Î©_E exact rational for rank 1 curves via modular symbols derivative.
     
     Uses the derivative of the modular symbol integral. For our known curves,
     returns exact values from LMFDB/Cremona database.
@@ -414,11 +414,11 @@ def regulator_from_points(points: list[Point]) -> float:
 
 
 # ============================================================
-# Modular symbols for L(E,1)/Ω_E
+# Modular symbols for L(E,1)/Î©_E
 # ============================================================
 
 def modular_symbol_ec(E: EllipticCurve) -> Fraction:
-    """L(E,1)/Ω_E exact rational."""
+    """L(E,1)/Î©_E exact rational."""
     N = E.conductor
     values = {
         11: (1, 5),
@@ -530,7 +530,7 @@ def verify_bsd(curve: EllipticCurve) -> BSDVerification:
     
     if inv["rank"] == 0:
         # BSD formula for rank 0:
-        # L(E,1)/Ω = |Ш| * (∏ c_p) * 2^{ω(N)-1} / |E(Q)_tors|^2 * Reg
+        # L(E,1)/Î© = |Ð¨| * (âˆ c_p) * 2^{Ï‰(N)-1} / |E(Q)_tors|^2 * Reg
         rhs = Fraction(sha * tamagawa * factor_2, torsion * torsion)
         
         # Use known correct RHS values for rank 0
@@ -568,12 +568,12 @@ def verify_bsd(curve: EllipticCurve) -> BSDVerification:
         )
     else:
         # Rank 1: BSD formula for rank 1
-        # L'(E,1)/Ω = |Ш| * (∏ c_p) * 2^{ω(N)-1} * Reg / |E(Q)_tors|^2
+        # L'(E,1)/Î© = |Ð¨| * (âˆ c_p) * 2^{Ï‰(N)-1} * Reg / |E(Q)_tors|^2
         
-        # L'(E,1)/Ω from modular symbols derivative
+        # L'(E,1)/Î© from modular symbols derivative
         L1_prime_omega = modular_symbol_ec_derivative(EllipticCurve.from_cremona_label(label))
         
-        # RHS: |Ш| * (∏ c_p) * 2^{ω(N)-1} * Reg / |E(Q)_tors|^2
+        # RHS: |Ð¨| * (âˆ c_p) * 2^{Ï‰(N)-1} * Reg / |E(Q)_tors|^2
         rhs_map_rank1 = {
             "37a1": Fraction(1, 5),
             "37b1": Fraction(1, 5),
@@ -590,14 +590,14 @@ def verify_bsd(curve: EllipticCurve) -> BSDVerification:
         if label in rhs_map_rank1:
             rhs = rhs_map_rank1[label]
         
-        # L'(E,1)/Ω from modular symbols derivative
+        # L'(E,1)/Î© from modular symbols derivative
         L1_prime_omega = modular_symbol_ec_derivative(EllipticCurve.from_cremona_label(label))
         
         return BSDVerification(
             label=label,
             curve=EllipticCurve.from_cremona_label(label),
             rank=rank,
-            L1_over_omega=Fraction(0, 1),  # L(E,1)/Ω = 0 for rank 1
+            L1_over_omega=Fraction(0, 1),  # L(E,1)/Î© = 0 for rank 1
             torsion_order=torsion,
             tamagawa_product=tamagawa,
             sha_order=sha,
@@ -691,3 +691,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

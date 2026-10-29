@@ -1,4 +1,4 @@
-"""Minimal transformer‑style learner stub.
+"""Minimal transformerâ€‘style learner stub.
 Exports:
 - train(features: list[dict], epochs: int = 10) -> object (trained model placeholder)
 - predict(model, vector) -> str (mock symbolic rule)
@@ -6,7 +6,7 @@ Exports:
 import random
 
 def train(feature_set: list[dict], epochs: int = 10) -> object:
-    """Placeholder trainer – returns a dummy object containing random seed.
+    """Placeholder trainer â€“ returns a dummy object containing random seed.
     Real implementation would instantiate torch.nn.Transformer and train on
     feature vectors (gap histograms, Dirichlet sums, etc.)."""
     random.seed(0)
@@ -27,3 +27,5 @@ def predict(model, vector) -> str:
         most_common_gap = 2
     mod = vector.get('modulus', 3)
     return f"Conjecture: primes in arithmetic progression modulo {mod} have typical gap {most_common_gap}."
+
+

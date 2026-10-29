@@ -11,12 +11,22 @@ open ChronoState
     This creates a non‑trivial spatial structure that can be collapsed. -/
 
 def ZetaStep : MyNat → Shape
-| MyNat.zero => Shape.space []
-| MyNat.succ n =>
+  | MyNat.zero => Shape.space []
+  | MyNat.succ n =>
     let prev := ZetaStep n
     match prev with
     | Shape.space lst => Shape.space (Shape.point :: lst)
     | other => Shape.space [other]  -- fallback, should not occur
+
+/-- Lemma: `ZetaStep n` always produces `Shape.space`. -/
+theorem ZetaStep_is_space (n : MyNat) :
+    ∃ lst, ZetaStep n = Shape.space lst := by
+  induction n with
+  | zero => exact ⟨[], rfl⟩
+  | succ n ih =>
+    rcases ih with ⟨lst, h⟩
+    exact ⟨Shape.point :: lst, by
+      rw [ZetaStep, h]⟩
 
 /-- Bounded Harmony Theorem: for any natural `n`, when the ChronoState contains the
     spatial structure produced by `ZetaStep n` and the time is a successor (`Chronon.next`),
@@ -30,7 +40,7 @@ theorem chrono_boundary_harmony (n : MyNat) :
         time  := Chronon.next Chronon.now } =
       { value := n,
         shape := Shape.point,
-        time  := Chronon.next Chronon.now } :=
-  by
-    -- `collapse_to_harmony` matches on a `Shape.space` with `Chronon.next`, returning a point.
-    rfl
+        time  := Chronon.next Chronon.now } := by
+  rcases ZetaStep_is_space n with ⟨lst, h⟩
+  rw [h]
+  rfl

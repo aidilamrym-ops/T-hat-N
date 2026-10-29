@@ -58,3 +58,5 @@ def relative_width(lo: Fraction, hi: Fraction) -> Fraction:
             return Fraction(0)
         raise ResolutionAlarm("relative width undefined: interval straddles 0")
     return (hi - lo) / abs(mid)
+
+

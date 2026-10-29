@@ -17,7 +17,7 @@
       1
     ]
   ],
-  "prereg_sha256lf": "a443e3ab728d615e36ade81aa16d35c5ddedc08388af769e3b8a621c352be853",
+  "prereg_sha256lf": "f634c47f5d93c0d9ce60533db8b217af346290f46a148c763029d6b85ad657d5",
   "schema": "msaf.learnharness_v1.v1",
   "summary": "ALL PASS",
   "trained_samples": 4

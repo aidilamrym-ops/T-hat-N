@@ -126,3 +126,5 @@ def frobenius_traces(ns: list[int]) -> dict[int, int]:
         count = _count_fermat_quartic_f2n(n)
         out[n] = count - 1 - (2**n) ** 2
     return out
+
+

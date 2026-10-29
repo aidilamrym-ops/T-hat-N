@@ -1,4 +1,4 @@
-coqc:   /root/.opam/4.14.2/bin/coqc
+﻿coqc:   /root/.opam/4.14.2/bin/coqc
 coqchk: /root/.opam/4.14.2/bin/coqchk
 coqc GeometricBridge exit: 0
 coqc GeometricLimit exit: 0
@@ -64,3 +64,5 @@ FunctionalExtensionality.functional_extensionality_dep :
   forall (A : Type) (B : A -> Type) (f g : forall x : A, B x),
   (forall x : A, f x = g x) -> f = g
 OK: imported bridge unchanged, limit module kernel-checked
+
+

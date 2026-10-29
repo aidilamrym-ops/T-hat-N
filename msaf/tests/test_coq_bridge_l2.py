@@ -195,3 +195,5 @@ def test_guard_rejects_mutations():
         pass
     else:
         raise AssertionError("unterminated comment was not rejected")
+
+

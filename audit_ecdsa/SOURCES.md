@@ -1,8 +1,8 @@
-# V1 sources — audit_ecdsa/captures/ (frozen 2026-10-19)
+﻿# V1 sources â€” audit_ecdsa/captures/ (frozen 2026-10-19)
 
 Comparison values for every row are extracted ONLY from the captured files
 below (by `audit_ecdsa/build_manifest.py`); the claim's printed strings are a
-cross-check only. Fetch: 2026-10-19 01:24–01:30 UTC (curl 8.13.0, Windows).
+cross-check only. Fetch: 2026-10-19 01:24â€“01:30 UTC (curl 8.13.0, Windows).
 Derivation: `pdftotext` (poppler) 26.01.0 for PDF -> txt; `audit_ecdsa/tool_claim_text.py`
 for the claim html -> txt (byte-reproducible; verified with `cmp` during freeze
 prep). "sha256 raw" = as-fetched bytes; "sha256LF" = registry convention
@@ -60,7 +60,7 @@ value in a file must agree, else the build aborts):
   curve's holder block.
 - x962-1998-draft.txt: explicit frozen line anchors (above). NOTE: that file
   also contains example/test seeds for other constructs; only the anchored lines
-  are read (e.g., line 6769 is printed as `SEED= E8B40116 ...` — no space
+  are read (e.g., line 6769 is printed as `SEED= E8B40116 ...` â€” no space
   before `=`).
 - neuromancer pages: JSON `"seed": "<40 hex>"` (all occurrences must agree).
 
@@ -88,4 +88,6 @@ value in a file must agree, else the build aborts):
   (saweis.net, captured above) is context only.
 
 Pins: `seeds_manifest.json` "captures" block (raw + LF + size per file);
-prereg §2 pins this file and the manifest by sha256LF.
+prereg Â§2 pins this file and the manifest by sha256LF.
+
+

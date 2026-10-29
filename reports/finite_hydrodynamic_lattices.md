@@ -1,4 +1,4 @@
-# MATRIX-CONSTRAINT SPECTRAL ANALYSIS OF FINITE HYDRODYNAMIC LATTICES
+﻿# MATRIX-CONSTRAINT SPECTRAL ANALYSIS OF FINITE HYDRODYNAMIC LATTICES
 
 ## A Finitist Treatment of Discrete Poisson Projection on Bounded Grids
 
@@ -6,8 +6,8 @@
 
 This report records the formal verification metrics of the Modular Scale
 Arithmetic Framework (MSAF) operating over the T-hat-N cyclic advection
-lattice. Domain boundaries are anchored to physical observable cutoffs —
-the Planck length (l_P) and the universe diameter (D_obs) — removing the
+lattice. Domain boundaries are anchored to physical observable cutoffs â€”
+the Planck length (l_P) and the universe diameter (D_obs) â€” removing the
 actual-infinity continuum assumptions behind non-physical singularities
 in Navier-Stokes formulations. The Poisson projection matrix achieves
 absolute numeric convergence under dual-gate certification on frozen N=4
@@ -26,7 +26,7 @@ enforces a structural space-time regulator instead.
 `Delta_univ` is hereby defined as the **Geometrical Scale Factor**
 (dimensionless):
 
-    Delta_univ = l_P / D_obs = 1.616255e-35 / 8.8e26 ≈ 1.8366e-62
+    Delta_univ = l_P / D_obs = 1.616255e-35 / 8.8e26 â‰ˆ 1.8366e-62
 
 At runtime (`msaf/navier_stokes/fluid_lattice.py`), the smallest spatial
 pixel step is locked by the Planck **length**
@@ -52,7 +52,7 @@ an abstract singularity. Sign-unknowable states raise
   (`divergence_contains_zero_everywhere`).
 - Cyclic advection (`advect_step`): pure index permutation along +x with
   exact integer Planck-tick accounting. Measured: 32 full cycles conserve
-  kinetic-energy enclosure bit-identically (drift `[+/-2.81e-76] ∋ 0`).
+  kinetic-energy enclosure bit-identically (drift `[+/-2.81e-76] âˆ‹ 0`).
 - Numeric entry points reject `float` (`_reject_float`); zero-claims use
   ball containment only (cf. `msaf/certify.py`).
 
@@ -64,7 +64,7 @@ measured period-2 limit cycle with residual-midpoint shift plateauing at
 0.00375 (= 2x checkerboard amplitude) while radii stay bounded. Any
 midpoint-stability gate is unsatisfiable under plain Jacobi. The solver
 therefore uses damped Jacobi (`omega = 6/7` from exact integer balls,
-identical fixed point `6p = hood - dx²·src`, optimal contraction 5/7),
+identical fixed point `6p = hood - dxÂ²Â·src`, optimal contraction 5/7),
 preceded by a single-shot spectral-direct circulant inverse (separable
 unitary DFT from exact `cos_pi`/`sin_pi` balls, analytic eigenvalues,
 zero mode gauged to 0). Audit note: a sign-polarity defect in the
@@ -75,7 +75,7 @@ routes, spectral tighter).
 
 ### 1.4 The Spectral Pressure Inversion Kernel
 
-Dual-gate certification per polish sweep k (`R = Δp - src`):
+Dual-gate certification per polish sweep k (`R = Î”p - src`):
 
 - Gate A: `max(R.rad()) < arb(tolerance_str)`.
 - Gate B: `max|mid(R_k) - mid(R_{k-1})| < arb(tolerance_str)`.
@@ -87,9 +87,9 @@ Measured (`N = 4`, `prec = 256`, default `tolerance_str = "1e-73"`):
 | case | sweeps to dual PASS | pressure max half-width |
 |---|---|---|
 | uniform field | 1 | ~1e-156 (exact-zero balls) |
-| mild single-cell perturbation, tol 1e-75 | 1 | 4.97e-79 (`p111 = 2.509765625e-4 ± 4.84e-79`) |
+| mild single-cell perturbation, tol 1e-75 | 1 | 4.97e-79 (`p111 = 2.509765625e-4 Â± 4.84e-79`) |
 | zero-cell discontinuous source, default tol | 1 | 1.54e-78 |
-| absurd tol 1e-300 (below hardware floor ~1e-77) | `ResolutionAlarm` at sweep 2 | — |
+| absurd tol 1e-300 (below hardware floor ~1e-77) | `ResolutionAlarm` at sweep 2 | â€” |
 
 Canvas (`render_pressure_slice_ascii`, integer/string path only, 5
 levels `' ' . - + #`): uniform slice is all-spaces; perturbed layer 1
@@ -105,12 +105,12 @@ raises `ValueError`.
   concern the diagnostic Poisson projection on frozen fields. Any global
   regularity claim built on these artifacts would be circular.
 - R-NS-TOL (OPEN): the sustainable absolute floor scales with source
-  magnitude (`~|src|/dx² · N³ · 2^-256` per sweep); tolerance must be
+  magnitude (`~|src|/dxÂ² Â· NÂ³ Â· 2^-256` per sweep); tolerance must be
   chosen per source above the hardware floor. `1e-75` certifies mild
   sources; default `1e-73` covers discontinuous ones.
-- R-NS-SPEC (OPEN): `R³` decay tails, `nu -> 0` limit, `N = 128` dense
+- R-NS-SPEC (OPEN): `RÂ³` decay tails, `nu -> 0` limit, `N = 128` dense
   cap, and 3-grid convergence order remain unaddressed.
-- F-PAPER-01 (CLOSED): `Delta_univ` dictionary fixed by §1.1.
+- F-PAPER-01 (CLOSED): `Delta_univ` dictionary fixed by Â§1.1.
 - F-PAPER-02 (CLOSED): global-convergence overclaim replaced by the
   Poisson-projection sentence in the abstract above.
 
@@ -163,7 +163,7 @@ To validate the adaptive precision scaling mechanism, we simulated an extreme ro
 
 | Working precision | Step 3 max div half-width | Step 10 max div half-width | Adaptive jumps | Final divergence status |
 |-------------------|---------------------------|----------------------------|----------------|--------------------------|
-| 256-bit           | $[1.17\mathrm{e}{-72} \pm ...]$ (exceeds $1\mathrm{e}{-72}$) | — | 5 re-tightening attempts exhausted | `ResolutionAlarm` (guard trip) |
+| 256-bit           | $[1.17\mathrm{e}{-72} \pm ...]$ (exceeds $1\mathrm{e}{-72}$) | â€” | 5 re-tightening attempts exhausted | `ResolutionAlarm` (guard trip) |
 | 384-bit           | $[3.44\mathrm{e}{-111} \pm ...]$ | $[8.69\mathrm{e}{-100} \pm ...]$ | 0 | $\mathsf{divergence\_contains\_zero\_everywhere() = TRUE}$ |
 
 The 256-bit run demonstrates the metrological limit: the radius inflation triggers the adaptive ramp, which after five 128-bit increases hits the 1024-bit cap and raises a `ResolutionAlarm` rather than producing a vacuous truth. The 384-bit run, starting above the inflation threshold, completes ten steps with the divergence ball rigorously containing zero and the radius remaining well below $1\mathrm{e}{-72}$. This empirical evidence confirms that MSAF transparently tracks uncertainty growth and prevents long-run certificates from going vacuous.
@@ -182,23 +182,23 @@ Suites at seal: isolated `21 passed`; main `126 passed`; `exit 0`.
 
 Benchmarks of the spectral pressure inversion kernel on a frozen N=4 lattice with a mild single-cell perturbation.
 
-| Working precision | Source type | swept iterations to dual PASS | pressure max half-width | P111 enclosure (mid ± rad) |
+| Working precision | Source type | swept iterations to dual PASS | pressure max half-width | P111 enclosure (mid Â± rad) |
 |-------------------|-------------|------------------------------|--------------------------|-----------------------------|
-| 256-bit           | single-cell perturbation | 1 | 4.97e-79 | p111 = 2.509765625e-4 ± 4.84e-79 |
-| 384-bit           | single-cell perturbation | 1 | 1.54e-78 | p111 = 2.509765625e-4 ± 4.84e-78 |
+| 256-bit           | single-cell perturbation | 1 | 4.97e-79 | p111 = 2.509765625e-4 Â± 4.84e-79 |
+| 384-bit           | single-cell perturbation | 1 | 1.54e-78 | p111 = 2.509765625e-4 Â± 4.84e-78 |
 
 Uniform-field case triggers UNDTERMINEDBLOCK due to sign-unknowable zero mode; hardware treats it as an uncertified divergence envelope rather than a silent PASS. This behavior preserves the "honest failure" contract of the MSAF metrological layer.
 
 ## BAB 3.1: THE RADIUS INFLATION PHENOMENON & PRECISION RAMPING DATA
 
-Fractional-step projection multiplies discrete divergence widths by the scale factor `ρ/Δt = 1e43`. Each restoring correction inflates radii by ≈42× before the adaptive ramp can compensate.
+Fractional-step projection multiplies discrete divergence widths by the scale factor `Ï/Î”t = 1e43`. Each restoring correction inflates radii by â‰ˆ42Ã— before the adaptive ramp can compensate.
 
 | Starting precision | Step 3 max div half-width | Step 10 max div half-width | Adaptive jumps triggered | Final status |
 |-------------------|---------------------------|----------------------------|---------------------------|--------------|
-| 256-bit           | 1.17e-73 ± 1.71e-149    | —                           | 5 jumps (128-bit increments) | ResolutionAlarm (guard trip at step 3) |
-| 384-bit           | 3.44e-111 ± 2.07e-227   | 8.69e-100 ± 4.79e-217      | 0 jumps                   | divergence_contains_zero_everywhere() = TRUE (10 steps) |
+| 256-bit           | 1.17e-73 Â± 1.71e-149    | â€”                           | 5 jumps (128-bit increments) | ResolutionAlarm (guard trip at step 3) |
+| 384-bit           | 3.44e-111 Â± 2.07e-227   | 8.69e-100 Â± 4.79e-217      | 0 jumps                   | divergence_contains_zero_everywhere() = TRUE (10 steps) |
 
-The 256-bit run demonstrates the metrological limit: width exceeds the 1e-72 guard, ramp escalates to the 1024-bit cap, and ResolutionAlarm fires (“re-tightening attempts exhausted above 1e-72; solenoidal quality unrecoverable at this grid”). The 384-bit run starts above the inflation threshold, completing ten steps with the divergence ball rigorously containing zero and the radius stabilized under 1e-100.
+The 256-bit run demonstrates the metrological limit: width exceeds the 1e-72 guard, ramp escalates to the 1024-bit cap, and ResolutionAlarm fires (â€œre-tightening attempts exhausted above 1e-72; solenoidal quality unrecoverable at this gridâ€). The 384-bit run starts above the inflation threshold, completing ten steps with the divergence ball rigorously containing zero and the radius stabilized under 1e-100.
 
 ## BAB 3.2: HARDWARE INFORMATIONAL LIMITS & MATERIALISATION CEILING
 
@@ -208,14 +208,14 @@ Materialisation enforcement protects physical memory by rejecting dense grids th
 MATERIALISATION_CAP = 1_000_000
 ```
 
-Any operational request with `N^3 * sizeof(CellVelocity) > MATERIALISATION_CAP` triggers `ResolutionAlarm("Hardware informational limit reached via precision exhaustion")` at the gate of the lattice constructor. For a N=4 cell velocity of three ℚs, the demand is 144 bytes — well under the cap — while N=128 would be 49,152 bytes per cell and is explicitly blocked by the architectural guard. This conservative ceiling guarantees that the solver remains within real-world device memory constraints, even for the largest admissible lattice sizes.
+Any operational request with `N^3 * sizeof(CellVelocity) > MATERIALISATION_CAP` triggers `ResolutionAlarm("Hardware informational limit reached via precision exhaustion")` at the gate of the lattice constructor. For a N=4 cell velocity of three â„šs, the demand is 144 bytes â€” well under the cap â€” while N=128 would be 49,152 bytes per cell and is explicitly blocked by the architectural guard. This conservative ceiling guarantees that the solver remains within real-world device memory constraints, even for the largest admissible lattice sizes.
 
 ### R. RESIDUAL REGISTER (updated)
 
 - BAB 3.0 CLOSED (benchmarks and uniform-field UndeterminedBlock documented)
-- BAB 3.1 CLOSED (42× inflation, precision ramp validated)
+- BAB 3.1 CLOSED (42Ã— inflation, precision ramp validated)
 - BAB 3.2 CLOSED (hardware cap enforced at N=128)
-- R-NS-SPEC OPEN (R³ decay tails, ν→0 limit, 3-grid convergence order)
+- R-NS-SPEC OPEN (RÂ³ decay tails, Î½â†’0 limit, 3-grid convergence order)
 
 Suites at seal: isolated `21 passed`; main `126 passed`; `exit 0`.
 
@@ -279,3 +279,4 @@ runtime proves the enclosures tight.
 - CONV-ORDER, NU-LIMIT, TAILS, CORR-SBP, CI: CLOSED (see OMEGA register)
 
 Suites at seal: isolated `37 passed, 1 skipped`; main `141 passed`; `exit 0`.
+

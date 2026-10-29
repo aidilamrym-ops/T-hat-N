@@ -1,4 +1,4 @@
-            ARCHIVED PUBLICATION
+﻿            ARCHIVED PUBLICATION
 
 
 
@@ -89,7 +89,7 @@ Information Processing Standards.
 
 Federal Information Processing Standards Publications (FIPS PUBS) are issued by the National
 Institute of Standards and Technology (NIST) after approval by the Secretary of Commerce pursuant
-to Section 5131 of the Information Technology Management Reform Act of 1996 (Public Law 104­
+to Section 5131 of the Information Technology Management Reform Act of 1996 (Public Law 104Â­
 106), and the Computer Security Act of 1987 (Public Law 100-235).
 
 Name of Standard: Digital Signature Standard (DSS).
@@ -310,7 +310,7 @@ certificates.
 
 The DSA makes use of the following parameters:
 
- 1. p = a prime modulus, where 2L-1 < p < 2L for 512 £ L £ 1024 and L a multiple of 64
+ 1. p = a prime modulus, where 2L-1 < p < 2L for 512 Â£ L Â£ 1024 and L a multiple of 64
 
  2. q = a prime divisor of p - 1, where 2159 < q < 2160
 
@@ -360,24 +360,24 @@ The signature is transmitted along with the message to the verifier.
 Prior to verifying the signature in a signed message, p, q and g plus the sender's public key and
 identity are made available to the verifier in an authenticated manner.
 
-Let M¢, r¢, and s¢ be the received versions of M, r, and s, respectively, and let y be the public key of
-the signatory. To verify the signature, the verifier first checks to see that 0 < r¢ < q and 0 < s¢ < q;
+Let MÂ¢, rÂ¢, and sÂ¢ be the received versions of M, r, and s, respectively, and let y be the public key of
+the signatory. To verify the signature, the verifier first checks to see that 0 < rÂ¢ < q and 0 < sÂ¢ < q;
 if either condition is violated the signature shall be rejected. If these two conditions are satisfied,
 the verifier computes
 
-  w = (s¢)-1 mod q
+  w = (sÂ¢)-1 mod q
 
-  u1 = ((SHA-1(M¢))w) mod q
+  u1 = ((SHA-1(MÂ¢))w) mod q
 
-  u2 = ((r¢)w) mod q
+  u2 = ((rÂ¢)w) mod q
 
   v = (((g)u1 (y)u2) mod p) mod q.
 
-If v = r¢, then the signature is verified and the verifier can have high confidence that the received
-message was sent by the party holding the secret key x corresponding to y. For a proof that v = r¢
-when M¢ = M, r¢ = r, and s¢ = s, see Appendix 1.
+If v = rÂ¢, then the signature is verified and the verifier can have high confidence that the received
+message was sent by the party holding the secret key x corresponding to y. For a proof that v = rÂ¢
+when MÂ¢ = M, rÂ¢ = r, and sÂ¢ = s, see Appendix 1.
 
-If v does not equal r¢, then the message may have been modified, the message may have been
+If v does not equal rÂ¢, then the message may have been modified, the message may have been
 incorrectly signed by the signatory, or the message may have been signed by an impostor. The
 message should be considered invalid.
 
@@ -398,15 +398,15 @@ included in Appendix 6.
 
 
                                               10
-                      APPENDIX 1. A PROOF THAT v = r¢ IN THE DSA
+                      APPENDIX 1. A PROOF THAT v = rÂ¢ IN THE DSA
 
 
 This appendix is for informational purposes only and is not required to meet the standard.
 
-The purpose of this appendix is to show that in the DSA, if M¢ = M, r¢ = r and s¢ = s in the signature
-verification then v = r¢. We need the following easy result.
+The purpose of this appendix is to show that in the DSA, if MÂ¢ = M, rÂ¢ = r and sÂ¢ = s in the signature
+verification then v = rÂ¢. We need the following easy result.
 
-LEMMA. Let p and q be primes so that q divides p - 1, h a positive integer less than p, and g = h(p­
+LEMMA. Let p and q be primes so that q divides p - 1, h a positive integer less than p, and g = h(pÂ­
   mod p. Then gq mod p = 1, and if m mod q = n mod q, then gm mod p = gn mod p.
 1)/q
 
@@ -430,19 +430,19 @@ by Fermat's Little Theorem. Now let m mod q = n mod q, i.e., m = n + kq for some
 
          = gn mod p
 
-since gq mod p = 1. �
+since gq mod p = 1. ï¿½
 
 We are now ready to prove the main result.
 
-THEOREM. If M¢ = M, r¢ = r, and s¢ = s in the signature verification, then v = r¢.
+THEOREM. If MÂ¢ = M, rÂ¢ = r, and sÂ¢ = s in the signature verification, then v = rÂ¢.
 
 Proof: We have
 
-  w = (s¢)-1 mod q = s-1 mod q
+  w = (sÂ¢)-1 mod q = s-1 mod q
 
-  u1 = ((SHA-1(M¢))w) mod q = ((SHA-1(M))w) mod q
+  u1 = ((SHA-1(MÂ¢))w) mod q = ((SHA-1(M))w) mod q
 
-  u2 = ((r¢)w) mod q = (rw) mod q.
+  u2 = ((rÂ¢)w) mod q = (rw) mod q.
 
 
                                                  11
@@ -472,7 +472,7 @@ Thus by the lemma,
 
   =r
 
-  = r¢. �
+  = rÂ¢. ï¿½
 
 
 
@@ -493,9 +493,9 @@ There are several fast probabilistic algorithms available. The following algorit
 version of a procedure due to M.O. Rabin, based in part on ideas of Gary L. Miller. [See Knuth, The
 Art of Computer Programming, Vol. 2, Addison-Wesley, 1981, Algorithm P, page 379.] If this
 algorithm is iterated n times, it will produce a false prime with probability no greater than 1/4n.
-Therefore, n ‡ 50 will give an acceptable probability of error. To test whether an integer is prime:
+Therefore, n â€¡ 50 will give an acceptable probability of error. To test whether an integer is prime:
 
- Step 1. Set i = 1 and n ‡ 50.
+ Step 1. Set i = 1 and n â€¡ 50.
 
   Step 2. Set w = the integer to be tested, w = 1 + 2am, where m is odd and 2a is the largest
    power of 2 dividing w - 1.
@@ -520,7 +520,7 @@ The DSA requires two primes, p and q, satisfying the following three conditions:
 
  a. 2159 < q < 2160
 
- b. 2L-1 < p < 2L for a specified L, where L = 512 + 64j for some 0 £ j £ 8
+ b. 2L-1 < p < 2L for a specified L, where L = 512 + 64j for some 0 Â£ j Â£ 8
 
                                                    13
     c. q divides p - 1.
@@ -530,7 +530,7 @@ prime, q, in the range 2159 < q < 2160. Once this is accomplished, the same SEED
 construct an X in the range 2L-1 < X < 2L. The prime, p, is then formed by rounding X to a number
 congruent to 1 mod 2q as described below.
 
-An integer x in the range 0 £ x < 2g may be converted to a g-long sequence of bits by using its binary
+An integer x in the range 0 Â£ x < 2g may be converted to a g-long sequence of bits by using its binary
 expansion as shown below:
 
     x = x1*2g-1 + x2*2g-2 + ... + xg-1*2 + xg -> { x1,...,xg }.
@@ -542,7 +542,7 @@ Conversely, a g-long sequence of bits { x1,...,xg } is converted to an integer b
 Note that the first bit of a sequence corresponds to the most significant bit of the corresponding
 integer and the last bit to the least significant bit.
 
-Let L - 1 = n*160 + b, where both b and n are integers and 0 £ b < 160.
+Let L - 1 = n*160 + b, where both b and n are integers and 0 Â£ b < 160.
 
     Step 1. Choose an arbitrary sequence of at least 160 bits and call it SEED. Let g be the length
           of SEED in bits.
@@ -572,7 +572,7 @@ most 2-80.
 
           W = V0 + V1*2160 + ... + Vn-1*2(n-1)*160 + (Vn mod 2b) * 2n*160
 
-       and let X = W + 2L-1. Note that 0 £ W < 2L-1 and hence 2L-1 £ X < 2L.
+       and let X = W + 2L-1. Note that 0 Â£ W < 2L-1 and hence 2L-1 Â£ X < 2L.
 
 Step 9. Let c = X mod 2q and set p = X - (c - 1). Note that p is congruent to 1 mod 2q.
 
@@ -584,7 +584,7 @@ Step 12. If p passes the test performed in step 11, go to step 15.
 
 Step 13. Let counter = counter + 1 and offset = offset + n + 1.
 
-Step 14. If counter ‡ 212 = 4096 go to step 1, otherwise (i.e. if counter < 4096) go to step 7.
+Step 14. If counter â€¡ 212 = 4096 go to step 1, otherwise (i.e. if counter < 4096) go to step 7.
 
 Step 15. Save the value of SEED and the value of counter for use in certifying the proper
    generation of p and q.
@@ -610,7 +610,7 @@ generate values for x. An algorithm for k and r is given in section 3.2. The lat
 most of the signature computation to be precomputed without knowledge of the message to be
 signed.
 
-The algorithms employ a one-way function G(t,c), where t is 160 bits, c is b bits (160 £ b £ 512) and
+The algorithms employ a one-way function G(t,c), where t is 160 bits, c is b bits (160 Â£ b Â£ 512) and
 G(t,c) is 160 bits. One way to construct G is via the Secure Hash Algorithm (SHA-1), as defined
 in the Secure Hash Standard (SHS). The 160-bit message digest output of the SHA-1 algorithm
 when message M is input is denoted by SHA-1(M). A second method for constructing G is to use
@@ -691,7 +691,7 @@ whenever the next of the m messages is not ready. As soon as steps 4 and 5 have 
 3 can be executed, and the results saved until the first member of the next group of m messages is
 ready.
 
-In addition to space for KKEY, two arrays of length m are needed to store r0 , ... rm-1 and k0-1, ... , km­
+In addition to space for KKEY, two arrays of length m are needed to store r0 , ... rm-1 and k0-1, ... , kmÂ­
  -1
 1 when they are computed in step 3. Storage for s0 , ... , sm-1 is only needed if the signatures for a
 group of messages are stored; otherwise sj in step 4 can be replaced by s and a single space allocated.
@@ -967,7 +967,7 @@ cryptovariable length.
 For each cryptovariable length, there are given two kinds of fields.
 
 
-      • A prime field is the field GF(p) which contains a prime number p of
+      â€¢ A prime field is the field GF(p) which contains a prime number p of
           elements. The elements of this field are the integers modulo p, and the
 
 
@@ -976,7 +976,7 @@ For each cryptovariable length, there are given two kinds of fields.
                                            24
           field arithmetic is implemented in terms of the arithmetic of integers
           modulo p.
-      • A binary field is the field GF(2m) which contains 2m elements for some m
+      â€¢ A binary field is the field GF(2m) which contains 2m elements for some m
           (called the degree of the field). The elements of this field are the bit
           strings of length m, and the field arithmetic is implemented in terms of
           operations on the bits.
@@ -1007,14 +1007,14 @@ CV Length Algorithm                      Prime Field         Binary Field
 how a bit string is to be interpreted. This is referred to as choosing a basis for the
 field. There are two common types of bases: a polynomial basis and a normal basis.
                                            25
-      • A polynomial basis is specified by an irreducible polynomial modulo 2,
-         called the field polynomial . The bit string (am-1 … a 2 a1 a0) is taken to
+      â€¢ A polynomial basis is specified by an irreducible polynomial modulo 2,
+         called the field polynomial . The bit string (am-1 â€¦ a 2 a1 a0) is taken to
          represent the polynomial
-                          am-1 t m-1 + …+ a2 t2 + a1 t + a0
+                          am-1 t m-1 + â€¦+ a2 t2 + a1 t + a0
          over GF(2). The field arithmetic is implemented as polynomial arithmetic
          modulo p(t), where p(t) is the field polynomial.
-      • A normal basis is specified by an element q of a particular kind. The bit
-         string (a0 a1 a2 … a m-1) is taken to represent the element
+      â€¢ A normal basis is specified by an element q of a particular kind. The bit
+         string (a0 a1 a2 â€¦ a m-1) is taken to represent the element
                                        2           m-1
                    a0q + a1q 2 + a2q 2 + am-1q 2         .
          Normal basis field arithmetic is not easy to describe or efficient to
@@ -1023,7 +1023,7 @@ field. There are two common types of bases: a polynomial basis and a normal basi
          specifies the basis and the field arithmetic (see Appendix 6.2).
 There are many polynomial bases and normal bases from which to choose. The
 following procedures are commonly used to select a basis representation.
-      • Polynomial Basis: If an irreducible trinomial tm + tk + 1 exists over GF
+      â€¢ Polynomial Basis: If an irreducible trinomial tm + tk + 1 exists over GF
          (2), then the field polynomial p(t) is chosen to be the irreducible trinomial
          with the lowest-degree middle term tk . If no irreducible trinomial exists,
          then one selects instead a pentanomial t m + t a + t b + t c + 1. The
@@ -1036,7 +1036,7 @@ following procedures are commonly used to select a basis representation.
 
 
                                            26
-      • Normal Basis: Choose the Type T low-complexity normal basis with the
+      â€¢ Normal Basis: Choose the Type T low-complexity normal basis with the
          smallest T.
 For each binary field, the parameters are given for the above basis representations.
 
@@ -1045,16 +1045,16 @@ For each binary field, the parameters are given for the above basis representati
 1.4 Choice of Curves
 
 Two kinds of curves are given:
-      • Pseudo-random curves are those whose coefficients are generated from
+      â€¢ Pseudo-random curves are those whose coefficients are generated from
          the output of a seeded cryptographic hash. If the seed value is given
          along with the coefficients, it can be verified easily that the coefficients
          were indeed generated by that method.
-      • Special curves whose coefficients and underlying field have been selected
+      â€¢ Special curves whose coefficients and underlying field have been selected
          to optimize the efficiency of the elliptic curve operations.
 For each size, the following curves are given:
-      ﬁ A pseudo-random curve over GF(p).
-      ﬁ A pseudo-random curve over GF(2m).
-      ﬁ A special curve over GF(2m) called a Koblitz curve or anomalous binary
+      ï¬ A pseudo-random curve over GF(p).
+      ï¬ A pseudo-random curve over GF(2m).
+      ï¬ A special curve over GF(2m) called a Koblitz curve or anomalous binary
            curve.
 The pseudo-random curves are generated via the SHA-1 based method given in the
 ANSI X9.62 and IEEE P1363 standards. (The generation and verification
@@ -1074,23 +1074,23 @@ points to ensure cryptographic separation of networks.
 2. Curves over Prime Fields
 
 For each prime p, a pseudo-random curve
-                                       E : y2 ” x3 - 3x + b (mod p)
+                                       E : y2 â€ x3 - 3x + b (mod p)
 of prime order r is listed1. (Thus, for these curves, the cofactor is always f = 1.)
 The following parameters are given:
-         • The prime modulus p
-         • The order r
-         • the 160-bit input seed s to SHA-1 based algorithm
-         • The output c of the SHA-1 based algorithm
-         • The coefficient b (satisfying b2 c ” -27 (mod p))
-         • The base point x coordinate Gx
-         • The base point y coordinate Gy
+         â€¢ The prime modulus p
+         â€¢ The order r
+         â€¢ the 160-bit input seed s to SHA-1 based algorithm
+         â€¢ The output c of the SHA-1 based algorithm
+         â€¢ The coefficient b (satisfying b2 c â€ -27 (mod p))
+         â€¢ The base point x coordinate Gx
+         â€¢ The base point y coordinate Gy
 The integers p and r are given in decimal form; bit strings and field elements are
 given in hex.
 
 
 
 
-1 The selection a ” -3 for the coefficient of x was made for reasons of efficiency; see IEEE P1363.
+1 The selection a â€ -3 for the coefficient of x was made for reasons of efficiency; see IEEE P1363.
 
                                                          28
                                Curve P-192
@@ -1224,26 +1224,26 @@ base points of both kinds of curves, are given in terms of both the polynomial a
 normal basis representations discussed in 1.3.
 For each m, the following parameters are given:
 Field Representation:
-       • The normal basis type T
-       • The field polynomial (a trinomial or pentanomial)
+       â€¢ The normal basis type T
+       â€¢ The field polynomial (a trinomial or pentanomial)
 Koblitz Curve:
-       • The coefficient a
-       • The base point order r
-       • The base point x coordinate G x
-       • The base point y coordinate G y
+       â€¢ The coefficient a
+       â€¢ The base point order r
+       â€¢ The base point x coordinate G x
+       â€¢ The base point y coordinate G y
 Pseudo-random curve:
-       • The base point order r
+       â€¢ The base point order r
 
                                             34
 Pseudo-random curve (Polynomial Basis representation):
-   • The coefficient b
-   • The base point x coordinate G x
-   • The base point y coordinate G y
+   â€¢ The coefficient b
+   â€¢ The base point x coordinate G x
+   â€¢ The base point y coordinate G y
 Pseudo-random curve (Normal Basis representation):
-      • The 160-bit input seed s to the SHA-1 based algorithm
-      • The coefficient b (i.e., the output of the SHA-1 based algorithm)
-      • The base point x coordinate G x
-      • The base point y coordinate G y
+      â€¢ The 160-bit input seed s to the SHA-1 based algorithm
+      â€¢ The coefficient b (i.e., the output of the SHA-1 based algorithm)
+      â€¢ The base point x coordinate G x
+      â€¢ The base point y coordinate G y
 Integers (such as T, m, and r) are given in decimal form; bit strings and
 field elements are given in hex.
 
@@ -1559,14 +1559,14 @@ Mersenne number.
 
       The modulus for this curve is p = 2 192 - 2 64 - 1. Every integer A less than p2
 can be written
-      A = A5 � 2320 + A4 � 2256 + A3 � 2192 + A2 � 2128 + A1 � 264 + A0,
+      A = A5 ï¿½ 2320 + A4 ï¿½ 2256 + A3 ï¿½ 2192 + A2 ï¿½ 2128 + A1 ï¿½ 264 + A0,
 where each Ai is a 64-bit integer. The expression for B is
                     B := T + S1 + S2 + S3 mod p;
 where the 192-bit terms are given by
-             T = A2 � 2128 + A1 � 264 + A0
-             S1 =           A3 � 264 + A3
-             S2 = A4 � 2128 + A4 � 264
-             S3 = A5 � 2128 + A5 � 264+ A5.
+             T = A2 ï¿½ 2128 + A1 ï¿½ 264 + A0
+             S1 =           A3 ï¿½ 264 + A3
+             S2 = A4 ï¿½ 2128 + A4 ï¿½ 264
+             S3 = A5 ï¿½ 2128 + A5 ï¿½ 264+ A5.
 
 
 
@@ -1576,11 +1576,11 @@ where the 192-bit terms are given by
 
        The modulus for this curve is p = 2 224 - 2 96 + 1. Every integer A less than
 p2 can be written
-A = A13 � 2416 + A12 � 2384 + A11 � 2352 + A10 � 2320 + A9 � 2288 + A8 � 2256 + A7 � 2224 +
-A6 � 2192 + A5 � 2160 + A4 � 2128 + A3 � 296 + A2 � 264 + A1 � 232 + A0,
+A = A13 ï¿½ 2416 + A12 ï¿½ 2384 + A11 ï¿½ 2352 + A10 ï¿½ 2320 + A9 ï¿½ 2288 + A8 ï¿½ 2256 + A7 ï¿½ 2224 +
+A6 ï¿½ 2192 + A5 ï¿½ 2160 + A4 ï¿½ 2128 + A3 ï¿½ 296 + A2 ï¿½ 264 + A1 ï¿½ 232 + A0,
 where each Ai is a 32-bit integer. As a concatenation of 32-bit words, this can be
 denoted by
-                                A = (A13 || A12 || � � � || A0 ).
+                                A = (A13 || A12 || ï¿½ ï¿½ ï¿½ || A0 ).
 The expression for B is
                             B := T + S 1 + S 2 - D1 - D2 mod p,
 where the 224-bit terms are given by
@@ -1597,12 +1597,12 @@ where the 224-bit terms are given by
 Curve P-256:
       The modulus for this curve is p = 2256 - 2224 + 2192 + 296 - 1. Every integer A
 less than p2 can be written
-      A = A15 � 2480 + A14 � 2448 + A13 � 2416 + A12 � 2384 + A11 � 2352 +
-      A10 � 2320 + A9 � 2288 + A8 � 2256 + A7 � 2224 + A6 � 2192 + A5 � 2160 +
-      A4 � 2128 + A3 � 296 + A2 � 264 + A1 � 232 + A0,
+      A = A15 ï¿½ 2480 + A14 ï¿½ 2448 + A13 ï¿½ 2416 + A12 ï¿½ 2384 + A11 ï¿½ 2352 +
+      A10 ï¿½ 2320 + A9 ï¿½ 2288 + A8 ï¿½ 2256 + A7 ï¿½ 2224 + A6 ï¿½ 2192 + A5 ï¿½ 2160 +
+      A4 ï¿½ 2128 + A3 ï¿½ 296 + A2 ï¿½ 264 + A1 ï¿½ 232 + A0,
 where each A i is a 32-bit integer. As a concatenation of 32-bit words, this can be
 denoted by
-                                A = (A15 || A14 || � � � || A0 ).
+                                A = (A15 || A14 || ï¿½ ï¿½ ï¿½ || A0 ).
 The expression for B is
       B := T + 2S1 + 2S2 + S3 + S4 - D1 - D2 - D3 - D4 mod p,
 where the 256-bit terms are given by
@@ -1623,13 +1623,13 @@ where the 256-bit terms are given by
 Curve P-384:
       The modulus for this curve is p = 2 384 - 2 128 - 2 96 + 2 32 - 1. Every integer A
 less than p2 can be written
-      A = A23 � 2736 + A22 � 2704 + A21 � 2672 + A20 � 2640 + A19 � 2608 +
-      A18 � 2576 + A17 � 2544 + A16 � 2512 + A15 � 2480 + A14 � 2448 + A13 � 2416 + A12
-      � 2384 + A11 � 2352 + A10 � 2320 + A9 � 2288 + A8 � 2256 + A7 � 2224 +
-      A6 � 2192 + A5 � 2160 + A4 � 2128 + A3 � 296 + A2 � 264 + A1 � 232 + A0,
+      A = A23 ï¿½ 2736 + A22 ï¿½ 2704 + A21 ï¿½ 2672 + A20 ï¿½ 2640 + A19 ï¿½ 2608 +
+      A18 ï¿½ 2576 + A17 ï¿½ 2544 + A16 ï¿½ 2512 + A15 ï¿½ 2480 + A14 ï¿½ 2448 + A13 ï¿½ 2416 + A12
+      ï¿½ 2384 + A11 ï¿½ 2352 + A10 ï¿½ 2320 + A9 ï¿½ 2288 + A8 ï¿½ 2256 + A7 ï¿½ 2224 +
+      A6 ï¿½ 2192 + A5 ï¿½ 2160 + A4 ï¿½ 2128 + A3 ï¿½ 296 + A2 ï¿½ 264 + A1 ï¿½ 232 + A0,
 where each A i is a 32-bit integer. As a concatenation of 32-bit words, this can be
 denoted by
-                                  A = (A23 || A22 || � � � || A0 ).
+                                  A = (A23 || A22 || ï¿½ ï¿½ ï¿½ || A0 ).
 The expression for B is
       B := T + 2S1 + S2 + S3 + S4 + S5 + S6 - D1 - D2 - D3 mod p,
 where the 384-bit terms are given by
@@ -1651,7 +1651,7 @@ where the 384-bit terms are given by
 Curve P-521:
       The modulus for this curve is p = 2 521 - 1. Every integer A less than p2 can
 be written
-                                 A = A1 � 2521 + A0,
+                                 A = A1 ï¿½ 2521 + A0,
 The expression for B is
                                 B := A0 + A1 mod p
 
@@ -1677,7 +1677,7 @@ Multiplication: to perform multiplication, one first constructs a function F(u,v
 inputs
          u = ( u0 u1 . . . um-1 )                       and       v = ( v0 v1 . . . vm-1 )
 as follows.
-         1.       Set p ‹ Tm + 1
+         1.       Set p â€¹ Tm + 1
          2.       Let u be an integer having order T modulo p
 
 
@@ -1686,14 +1686,14 @@ as follows.
 2 It is assumed in this section that m is odd and T is even, since this is the only case considered in this standard.
 
                                                             55
-      3.      Compute the sequence F (1); F (2),…,F (p-1) as follows:
-              3.1    Set w‹ 1
+      3.      Compute the sequence F (1); F (2),â€¦,F (p-1) as follows:
+              3.1    Set wâ€¹ 1
               3.2    For j from 0 to T-1 do
-                             Set n ‹ w
+                             Set n â€¹ w
                              For i from 0 to m-1 do
-                                     Set F(n) ‹ i
-                                     Set n ‹ 2n mod p
-                             Set w ‹ uw mod p
+                                     Set F(n) â€¹ i
+                                     Set n â€¹ 2n mod p
+                             Set w â€¹ uw mod p
       4.      Output the formula
                                               p-2
 
@@ -1703,14 +1703,14 @@ as follows.
 
 This computation need only be performed once per basis.
 Given the function F for B, one computes the product
-      ( c0 c1 . . . cm-1 ) = ( a0 a1 . . . am-1 ) · ( b0 b1 . . . bm-1 )
+      ( c0 c1 . . . cm-1 ) = ( a0 a1 . . . am-1 ) Â· ( b0 b1 . . . bm-1 )
 as follows.
-      1.      Set ( u0 u1 . . . um-1 ) ‹ ( a0 a1 . . . am-1 )
-      2.      Set ( v0 v1 . . . vm-1 ) ‹ ( b0 b1 . . . bm-1 )
+      1.      Set ( u0 u1 . . . um-1 ) â€¹ ( a0 a1 . . . am-1 )
+      2.      Set ( v0 v1 . . . vm-1 ) â€¹ ( b0 b1 . . . bm-1 )
       3.      For k from 0 to m - 1 do
               3.1    Compute
                                              ck := F(u, v)
-              3.2    Set u ‹ LeftShift (u) and v ‹ LeftShift (v), where LeftShift
+              3.2    Set u â€¹ LeftShift (u) and v â€¹ LeftShift (v), where LeftShift
                      denotes the circular left shift operation.
       4.      Output c := ( c0 c1 . . . cm-1 )
 
@@ -1755,14 +1755,14 @@ scalar multiple nP on the Koblitz curve Ea over GF(2m).
 implemented by performing right circular shifts on the bit strings representing x and
 y.
       Given m and a, define the following parameters:
-             • C is some integer greater than 5.
-             • m := (-1)1-a
-             • For i = 0 and i = 1, define the sequence si(m) by
+             â€¢ C is some integer greater than 5.
+             â€¢ m := (-1)1-a
+             â€¢ For i = 0 and i = 1, define the sequence si(m) by
                                  si(0) = 0,     si(1) = 1 - i,
-                          si(m) = m • si(m - 1) - 2 si(m - 2) + (-1)i
-             • Define the sequence V(m)
+                          si(m) = m â€¢ si(m - 1) - 2 si(m - 2) + (-1)i
+             â€¢ Define the sequence V(m)
                           V(0) = 2,      V(1) = m
-                   V(m) = m • v(m -1) - 2V(m - 2).
+                   V(m) = m â€¢ v(m -1) - 2V(m - 2).
 
 
 
@@ -1814,51 +1814,51 @@ at most ~ 1 + (m/3), and is at most ~ m/3 with probability at least 1 - 25-C.
 
 
       For i = 0 to 1 do
-             n¢ ‹ º n / 2a-C + (m-9) / 2ß
-             g¢ ‹ si(m) · n¢
-             h¢ ‹ º g¢ / 2m ß
-             j¢ ‹ V(m) · h¢
-             l¢ ‹ Round((g¢ + j¢) / 2(m+5) / 2)
-             li ‹ l¢ / 2C
-             fi ‹ Round(li)
-             hi ‹ li - fi
-             hi ‹ 0
-      h ‹ 2 h0 + m h1
-      If h ‡ 1
+             nÂ¢ â€¹ Âº n / 2a-C + (m-9) / 2ÃŸ
+             gÂ¢ â€¹ si(m) Â· nÂ¢
+             hÂ¢ â€¹ Âº gÂ¢ / 2m ÃŸ
+             jÂ¢ â€¹ V(m) Â· hÂ¢
+             lÂ¢ â€¹ Round((gÂ¢ + jÂ¢) / 2(m+5) / 2)
+             li â€¹ lÂ¢ / 2C
+             fi â€¹ Round(li)
+             hi â€¹ li - fi
+             hi â€¹ 0
+      h â€¹ 2 h0 + m h1
+      If h â€¡ 1
              then
 
 
                                             60
                if ho - 3 mh1 < -1
-                     then set h1 ‹ m
-                     else set h0 ‹ 1
+                     then set h1 â€¹ m
+                     else set h0 â€¹ 1
        else
-               if h0 + 4 m h1 ‡ 2
-                     then set h1 ‹ m
+               if h0 + 4 m h1 â€¡ 2
+                     then set h1 â€¹ m
 If h < -1
        then
-               if h0 - 3 m h1 ‡ 1
-                     then set h1 ‹ - m
-                     else set h0 ‹ -1
+               if h0 - 3 m h1 â€¡ 1
+                     then set h1 â€¹ - m
+                     else set h0 â€¹ -1
        else
                if h0 + 4 m h1 < -2
-                     then set h1 ‹ - m
-q0 ‹ f0 + h0
-q1 ‹ f1 + h1
-r0 ‹ n - (s0 + m s1) q0 - 2s1 q1
-r1 ‹ s1 q0 - s0 q1
-Set Q ‹ O
-P0 ‹ P
-While r0 „ 0 or r1 „ 0
+                     then set h1 â€¹ - m
+q0 â€¹ f0 + h0
+q1 â€¹ f1 + h1
+r0 â€¹ n - (s0 + m s1) q0 - 2s1 q1
+r1 â€¹ s1 q0 - s0 q1
+Set Q â€¹ O
+P0 â€¹ P
+While r0 â€ž 0 or r1 â€ž 0
        If r0 odd then
-               set u ‹ 2 - (r0 - 2 r1 mod 4)
-               set r0 ‹ r0 - u
+               set u â€¹ 2 - (r0 - 2 r1 mod 4)
+               set r0 â€¹ r0 - u
 
                                        61
-            if u = 1 then set Q ‹ Q + P0
-            if u = -1 then set Q ‹ Q - P0
-     Set P0 ‹ tP0
-     Set (r0 , r1) ‹ (r1 + mr0 /2, - r0 /2)
+            if u = 1 then set Q â€¹ Q + P0
+            if u = -1 then set Q â€¹ Q - P0
+     Set P0 â€¹ tP0
+     Set (r0 , r1) â€¹ (r1 + mr0 /2, - r0 /2)
 Endwhile
 Output Q
 
@@ -1870,7 +1870,7 @@ Output Q
                   PSEUDO-RANDOM CURVES (PRIME CASE)
 
 Let l be the bit length of p, and define
-                                   v = º ( l - 1) /160ß
+                                   v = Âº ( l - 1) /160ÃŸ
                                    w = l - 160v - 1
 1. Choose an arbitrary 160-bit string s.
 2. Compute h:= SHA-1(s).
@@ -1883,9 +1883,9 @@ Let l be the bit length of p, and define
 6. Let h be the bit string obtained by the concatenation of h0 , h1, . . . , hv as follows:
                                    h = h0 || h1 || . . . || hv
 7. Let c be the integer whose binary expansion is given by the bit string h.
-8. If c = 0 or 4c + 27 ” 0 (mod p), then go to Step 1.
-9. Choose integers a, b ˛GF(p) such that
-                                    c b2 ” a3 (mod p).
+8. If c = 0 or 4c + 27 â€ 0 (mod p), then go to Step 1.
+9. Choose integers a, b Ë›GF(p) such that
+                                    c b2 â€ a3 (mod p).
 (The simplest choice is a = c and b = c. However, one may want to choose
 differently for performance reasons.)
 10. Check that the elliptic curve E over GF(p) given by y 2 = x3 + ax + b has
@@ -1901,7 +1901,7 @@ suitable order. If not, go to Step 1.
        Given the 160-bit seed value s, one can verify that the coefficient b was
 obtained from s via the cryptographic hash function SHA-1 as follows.
 Let l be the bit length of p, and define
-                                   v = º ( l - 1) /160ß
+                                   v = Âº ( l - 1) /160ÃŸ
                                    w = l - 160v - 1
 1. Compute h := SHA-1(s).
 2. Let h0 be the bit string obtained by taking the w rightmost bits of h.
@@ -1913,7 +1913,7 @@ Let l be the bit length of p, and define
 5. Let h be the bit string obtained by the concatenation of h0 , h1, . . . , hv as follows:
                                   h = h0 || h1 || . . . || hv.
 6. Let c be the integer whose binary expansion is given by the bit string h.
-7. Verify that b2 c ” -27 (mod p).
+7. Verify that b2 c â€ -27 (mod p).
 
 
 
@@ -1923,7 +1923,7 @@ Let l be the bit length of p, and define
                  PSEUDO-RANDOM CURVES (BINARY CASE)
 
 Let:
-                                   v = º (m - 1) /Bß
+                                   v = Âº (m - 1) /BÃŸ
                                    w = m - Bv
 1. Choose an arbitrary 160-bit string s.
 2, Compute h := SHA-1(s)
@@ -1951,7 +1951,7 @@ Let:
       Given the 160-bit seed value s, one can verify that the coefficient b was
 obtained from s via the cryptographic hash function SHA-1 as follows.
 Define
-                           v = º (m - 1) /160ß
+                           v = Âº (m - 1) /160ÃŸ
                            w= m - 160v
       1. Compute h := SHA-1(s)
       2. Let h0 be the bit string obtained by taking the w rightmost bits of h.
@@ -2070,7 +2070,7 @@ be the element of GF(2 m) whose representation with respect to the polynomial
 basis is r. Then the rows of G, from top to bottom, are the bit strings representing
 the elements
                                                2           m-1
-                                    b, b 2, b 2 , …, b 2
+                                    b, b 2, b 2 , â€¦, b 2
 with respect to the polynomial basis.
        Alternatively, the matrix is the inverse of the matrix described in Appendix
 6.8.
@@ -2103,7 +2103,7 @@ systems.
 
 FIPS 186-2 is used in conjunction with the hash function specified in FIPS 180-1, Secure Hash
 Standard (SHS), and includes specifications for the size of the prime modulus p, and algorithms
-for the generation of a user’s private key, x, and a user’s per message secret number, k.
+for the generation of a userâ€™s private key, x, and a userâ€™s per message secret number, k.
 
 This change notice provides changes for the continued use of DSA as specified in FIPS 186-2
 about the size of the prime modulus p, modifications for the random number generation
@@ -2118,7 +2118,7 @@ Questions regarding this change notice may be directed to FIPS186@nist.gov or to
 The Size of the Prime Modulus
 
 Section 4 of FIPS 186-2 specifies that the prime modulus p of DSA is defined for the range of
-prime integers 2L-1 < p < 2L , where 512 £ L £ 1024 and L is a multiple of 64. This change notice
+prime integers 2L-1 < p < 2L , where 512 Â£ L Â£ 1024 and L is a multiple of 64. This change notice
 specifies that L should assume only the value 1024 for DSA as specified in FIPS 186-2, i.e., the
 prime modulus p should be defined in the range 21023 < p < 21024.
 
@@ -2131,7 +2131,7 @@ n and prime factors p and q of n. This change notice specifies that n should be 
 
 Random Number Generation
 
-FIPS 186-2 includes algorithms for the generation of a user’s private key, x, and a user’s per
+FIPS 186-2 includes algorithms for the generation of a userâ€™s private key, x, and a userâ€™s per
 message secret number, k. These values must be generated randomly or pseudorandomly and
 must have values between 0 and the 160-bit prime q (as specified in the standard). Techniques
 for generating x and k are provided in Appendix 3 of the standard.
@@ -2151,8 +2151,8 @@ not affect interoperability.
 
 The two algorithms described below use a one-way function G(t,c), where t is 160 bits, c is b bits
 and G(t,c) is 160 bits. Two methods for constructing G are defined in FIPS 186-2: using SHA-1
-as defined in FIPS 180-1, and using the Data Encryption Standard (DES) as defined in FIPS 46­
-3. If G is constructed using SHA-1, b is between 160 and 512 bits (160 £ b £ 512); if G is
+as defined in FIPS 180-1, and using the Data Encryption Standard (DES) as defined in FIPS 46Â­
+3. If G is constructed using SHA-1, b is between 160 and 512 bits (160 Â£ b Â£ 512); if G is
 constructed using DES, b is equal to 160 bits.
 
 1.      Revised Algorithm for Computing m values of x (Appendix 3.1 of FIPS 186-2)
@@ -2235,7 +2235,7 @@ whenever the next of the m messages is not ready. As soon as steps 4 and 5 have 
 3 can be executed, and the results saved until the first member of the next group of m messages is
 ready.
 
-In addition to space for KKEY , two arrays of length m are needed to store r0 , ... rm-1 and k0-1, ... , km-1­
+In addition to space for KKEY , two arrays of length m are needed to store r0 , ... rm-1 and k0-1, ... , km-1Â­
 1
   when they are computed in step 3. Storage for s0 , ... , sm-1 is only needed if the signatures for a
 group of messages are stored; otherwise sj in step 4 can be replaced by s, and a single space
@@ -2248,17 +2248,18 @@ Several of the FIPS require the use of an Approved (i.e., FIPS-approved or NIST 
 random number generator (RNG). The RNG specified as algorithm 1 above or the algorithm
 specified in Appendix 3.1 of FIPS 186-2 may be used in addition to any other Approved RNG.
 However, when the RNG is used for the generation of random numbers other than for DSA keys,
-the “mod q” term should be omitted. This will result in the following changes to the
+the â€œmod qâ€ term should be omitted. This will result in the following changes to the
 specification:
 
 FIPS 186-2, Appendix 3.1, Step 3 c:
-       Change “xj = G(t, XVAL ) mod q” to “xj = G(t, XVAL )”.
+       Change â€œxj = G(t, XVAL ) mod qâ€ to â€œxj = G(t, XVAL )â€.
 
 Algorithm 1 of this change notice, Step 3, substep 3.2:
-       Change “xj = (w0 || w1) mod q” to “xj = (w0 || w1)”.
+       Change â€œxj = (w0 || w1) mod qâ€ to â€œxj = (w0 || w1)â€.
 
 
 
 
                                                      74
 
+

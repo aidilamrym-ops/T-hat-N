@@ -1,15 +1,15 @@
-[i] OPERATIONAL STATUS: 
+﻿[i] OPERATIONAL STATUS: 
 - fluid_lattice.py: 813 lines; PowerShell exit 0 throughout
 - T-hat-N: 23 passed, exit 0. Main: 126 passed (target 126+ met), exit 0
 
 [!] RESTORATION RESIDUAL ENCLOSURE:
-- Rotation field (tr(G²)≠0) at 256-bit precision: 
-  • Step 1-2: max_div_half_width = 1e-76 → 1e-74 (within 1e-72)
-  • Step 3: width = 1e-73 → exceeds 1e-72 → ramp exhaustion → ResolutionAlarm
-  • Guard demo: tripwire fires at step 3, escalation clean (no vacuous pass)
-- 384-bit working precision: 10 steps, max_div_half_width = 1e-100 → 1e-100 (well below 1e-72), zero jumps, div TRUE throughout
+- Rotation field (tr(GÂ²)â‰ 0) at 256-bit precision: 
+  â€¢ Step 1-2: max_div_half_width = 1e-76 â†’ 1e-74 (within 1e-72)
+  â€¢ Step 3: width = 1e-73 â†’ exceeds 1e-72 â†’ ramp exhaustion â†’ ResolutionAlarm
+  â€¢ Guard demo: tripwire fires at step 3, escalation clean (no vacuous pass)
+- 384-bit working precision: 10 steps, max_div_half_width = 1e-100 â†’ 1e-100 (well below 1e-72), zero jumps, div TRUE throughout
 
-[⚡] CODE EXTENSION (verbatim):
+[âš¡] CODE EXTENSION (verbatim):
 ```python
 def compute_restoring_pressure(self, rho_str: str, dt_str: str) -> list[arb]:
     _reject_float(rho_str, "rho_str"); _reject_float(dt_str, "dt_str")
@@ -36,5 +36,6 @@ def compute_restoring_pressure(self, rho_str: str, dt_str: str) -> list[arb]:
 | ID | status |
 |---|---|
 | R-NS-REST restoring loop (clears div, green) | CLOSED |
-| Enclosure reconditioning (42×/step inflation; higher-prec/defect-correction) | CLOSED (ramp + guard demo validated) |
-| Multi-grid order / R³ tails / nu→0 | OPEN (mapped) |
+| Enclosure reconditioning (42Ã—/step inflation; higher-prec/defect-correction) | CLOSED (ramp + guard demo validated) |
+| Multi-grid order / RÂ³ tails / nuâ†’0 | OPEN (mapped) |
+

@@ -207,3 +207,5 @@ def collect_first_zeros(count: int) -> tuple[list[arb], list[str]]:
         gammas.append(result.final_ball.imag)
         verdicts.append(result.verdict)
     return gammas, verdicts
+
+

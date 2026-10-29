@@ -1,4 +1,4 @@
-BRIDGE KIT DEMO -- bounded [B] + bridge [J] + unbounded [U]
+﻿BRIDGE KIT DEMO -- bounded [B] + bridge [J] + unbounded [U]
 arb precision: 128
 
 D1  zeta(2) = sum_{n>=1} 1/n^2   (L2, two-sided)
@@ -30,3 +30,5 @@ D3  int_2^inf exp(-x^2) dx   (L4, Gaussian tail)
         label        : gaussian tail bound at M=2 (L4)
 
 ALL DEMOS CERTIFIED: True
+
+

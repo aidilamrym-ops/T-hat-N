@@ -1,4 +1,4 @@
-[i] OPERATIONAL STATUS (live; historical snapshots removed):
+﻿[i] OPERATIONAL STATUS (live; historical snapshots removed):
 - lean/NavierStokesCore.lean: machine-checked kernel 1D/2D/3D/cubic +
   central variant (`lake build` green, 0 sorry/admit/unsafe).
 - T-hat-N: 39 passed, 1 honest skip, exit 0. Main: 143 passed, exit 0.
@@ -25,7 +25,7 @@
 | F17-NS6 | CLOSED |
 | Enclosure reconditioning | CLOSED (ramp + guard demo validated) |
 | BAB 3.0 (benchmarks, uniform-field UndeterminedBlock) | CLOSED |
-| BAB 3.1 (radius inflation 42×, ramp data) | CLOSED |
+| BAB 3.1 (radius inflation 42Ã—, ramp data) | CLOSED |
 | BAB 3.2 (MATERIALISATION_CAP = 1_000_000, N=128 guard) | CLOSED |
 | VIS renderer (msaf/navier_stokes/visualizer.py, 86 lines, 3000x2400) | CLOSED |
 | VIS-3D renderer (generate_fluid_state_3d_render, 139 lines, N^3 quiver) | CLOSED |
@@ -84,3 +84,5 @@
 | ALL NAVIER-STOKES RESIDUALS | CLOSED (frontier: scaffolding only, no proofs) |
 
 Suites at seal: isolated `120 passed, 2 skipped`; main `250 passed`; `exit 0`.
+
+

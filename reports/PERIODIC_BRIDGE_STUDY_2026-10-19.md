@@ -1,4 +1,4 @@
-# Studi Jembatan Kotak Periodik ↔ Ruang Bebas (sisi terbatas [B]; jembatan [J] OPEN)
+﻿# Studi Jembatan Kotak Periodik â†” Ruang Bebas (sisi terbatas [B]; jembatan [J] OPEN)
 
 - **Tanggal:** 2026-10-19
 - **Status:** studi kuantitatif sisi-terbatas (internal); **[J] TIDAK ditutup**
@@ -11,35 +11,35 @@
 
 ## 1. Tujuan
 
-Menguji secara kuantitatif apakah statistik rasio selisih pada kotak
-periodik — `q(N) = (v1 - v2) / (v2 - v4)` dengan `v_r = phi_N(r,0,0)` —
-mendekati nilai kontinuum ruang-bebas (untuk `1/r` murni, `q = 2`). Ini
-adalah pertanyaan yang *tidak* dijawab oleh guard lama
-`msaf/tests/test_tail_decay.py`: guard itu menetapkan satu titik N=16 pada
+Menguji secara kuantitatif apakah statistik rasio selisih on kotak
+periodik â€” `q(N) = (v1 - v2) / (v2 - v4)` with `v_r = phi_N(r,0,0)` â€”
+mendekati nilai kontinuum ruang-bebas (for `1/r` murni, `q = 2`). Ini
+adalah question which *no* dijawab oleh guard lama
+`msaf/tests/test_tail_decay.py`: guard itu menetapkan satu titik N=16 on
 band `1.7 < q < 2.3`, bukan arah limit.
 
-## 2. Model dan metode
+## 2. Model and metode
 
 Model = model tersegel `msaf/navier_stokes/fluid_lattice.py`: Laplacian
-periodik 7-titik pada `T^3_N`, `dx = 1/N`, sumber titik `delta_0 - 1/N^3`
-(gauge zero-mean), nilai diambil pada sumbu `(r,0,0)`.
+periodik 7-titik on `T^3_N`, `dx = 1/N`, source titik `delta_0 - 1/N^3`
+(gauge zero-mean), nilai diambil on sumbu `(r,0,0)`.
 
 Dua engine independen:
 
 1. **Mode sum langsung** (`msaf/periodic_bridge.py`, O(N^3)/radius):
    `phi_N(x) = -(1/N^3) * sum_{f != 0} e^{2 pi i f.x/N} / lam_f`,
    `lam_f = (2/dx^2)(3 - cos(2 pi f_x/N) - cos(2 pi f_y/N) - cos(2 pi f_z/N))`,
-   setiap suku = bola Arb dari `cos_pi` rasional eksak → enclosure rigor.
-2. **Solver DFT tersegel** `_spectral_poisson_direct` (O(N^4), berhenti di
-   N≈16–32).
+   setiap suku = bola Arb dari `cos_pi` rasional eksak â†’ enclosure rigor.
+2. **Solver DFT tersegel** `_spectral_poisson_direct` (O(N^4), berhenti in
+   Nâ‰ˆ16â€“32).
 
-Kesesuaian diuji dengan aturan `certify.py`: selisih kedua enclosure harus
+Kesesuaian diuji with aturan `certify.py`: selisih kedua enclosure harus
 **memuat nol eksak** (bukan perbandingan titik-tengah). Guard
-`test_mode_sum_agrees_with_sealed_solver` lulus untuk N=8, r=0..4, dengan
+`test_mode_sum_agrees_with_sealed_solver` lulus for N=8, r=0..4, with
 radius kedua sisi < 1e-60.
 
-Band valid: shell 1,2,4 memerlukan `r=4 << N/2` → N ≥ 16 (aturan yang sama
-dengan record tersegel).
+Band valid: shell 1,2,4 memerlukan `r=4 << N/2` â†’ N â‰¥ 16 (aturan which sama
+with record tersegel).
 
 ## 3. Hasil (verbatim)
 
@@ -73,56 +73,58 @@ no rate claimed; no limit value claimed; continuum limit NOT taken
 
 ## 4. Temuan
 
-**F1 — Reproduksi independen record tersegel.** q(16) = 1.95190443254715846
-(vs catatan tersegel `1.9519`); rasio mentah v1/v2 = 2.48682391781416897 dan
-v2/v4 = 4.19691724489420821 (vs catatan "2.49 / 4.20"). Dua angka lama
-direproduksi oleh engine yang berbeda dan lebih ketat.
+**F1 â€” Reproduksi independen record tersegel.** q(16) = 1.95190443254715846
+(vs note tersegel `1.9519`); rasio mentah v1/v2 = 2.48682391781416897 and
+v2/v4 = 4.19691724489420821 (vs note "2.49 / 4.20"). Dua angka lama
+direproduksi oleh engine which berbeda and lebih ketat.
 
-**F2 — Monotonisitas rigor.** q(N) menurun tegas di seluruh band
-(perbandingan Arb rigor, bukan float): 1.9519 → 1.9305 → 1.9217 → 1.9150 →
-1.9127 → 1.9117 → 1.9109 pada N = 16, 20, 24, 32, 40, 48, 64.
+**F2 â€” Monotonisitas rigor.** q(N) menurun tegas in seluruh band
+(perbandingan Arb rigor, bukan float): 1.9519 â†’ 1.9305 â†’ 1.9217 â†’ 1.9150 â†’
+1.9127 â†’ 1.9117 â†’ 1.9109 on N = 16, 20, 24, 32, 40, 48, 64.
 
-**F3 — Increment mengecil.** Selisih q antar titik mengecil tegas
-(0.02144 → 0.00880 → 0.00666 → 0.00229 → 0.000997 → 0.000783); pada
-interval terakhir yang dua kali lebih lebar (48→64) penurunannya justru
+**F3 â€” Increment mengecil.** Selisih q antar titik mengecil tegas
+(0.02144 â†’ 0.00880 â†’ 0.00666 â†’ 0.00229 â†’ 0.000997 â†’ 0.000783); on
+interval terakhir which dua kali lebih lebar (48â†’64) penurunannya justru
 lebih kecil daripada interval 8-lebar sebelumnya.
 
-**F4 — Kesimpulan negatif (inti studi).** Gap `2 - q(64) = 0.0890732860327
-± 3.89e-14`: **tidak** menuju nol. Jadi pada N ≤ 64, q(N) bergerak
-**menjauh** dari nilai kontinuum 2, bukan mendekatinya. Penyebab yang
-konsisten dengan model: citra periodik masih material pada r=4 (koreksi
-~1/N pada tiap `g(r)` masuk ke pembilang dan penyebut dengan bobot
-berbeda). **q bukan statistik jembatan**; ia tidak boleh dipakai sebagai
+**F4 â€” Kesimpulan negatif (inti studi).** Gap `2 - q(64) = 0.0890732860327
+Â± 3.89e-14`: **no** menuju nol. Jadi on N â‰¤ 64, q(N) bergerak
+**menjauh** dari nilai kontinuum 2, bukan mendekatinya. Penyebab which
+konsisten with model: citra periodik masih material on r=4 (koreksi
+~1/N on tiap `g(r)` masuk ke pembilang and penyebut with bobot
+berbeda). **q bukan statistik jembatan**; ia no boleh dipakai sebagai
 bukti konvergensi ke ruang bebas.
 
-Catatan: F4 **tidak** menyalahi guard tersegel — guard itu hanya menetapkan
-band satu titik (1.7 < q < 2.3) dan kontaminasi far-field < 2%, keduanya
-tetap benar. F4 hanya menetapkan batas interpretasi: band sempit di satu N
+Catatan: F4 **no** menyalahi guard tersegel â€” guard itu hanya menetapkan
+band satu titik (1.7 < q < 2.3) and kontaminasi far-field < 2%, keduanya
+tetap benar. F4 hanya menetapkan limit interpretasi: band sempit in satu N
 bukan bukti limit.
 
 ## 5. Blok [B] / [J] / [U]
 
 | Blok | Isi | Status |
 |------|-----|--------|
-| **[B]** | `phi_N(r,0,0)` untuk N = 16…64, r = 1,2,4; dua engine sepakat (containment nol); radius < 1e-60; q(N) rigor | **CERTIFIED** |
-| **[J]** | Identitas jembatan: `phi_inf(r) = phi_N(r) - sum_{m != 0} G_free(r + mN)`; dibutuhkan bound ekor citra seragam pada band shell | **OPEN** — tidak ada bound yang dibuktikan di sini |
-| **[U]** | Nilai/limit ruang-bebas, atau laju konvergensi q(N) | **TIDAK DIKLAIM** |
+| **[B]** | `phi_N(r,0,0)` for N = 16â€¦64, r = 1,2,4; dua engine sepakat (containment nol); radius < 1e-60; q(N) rigor | **CERTIFIED** |
+| **[J]** | Identitas jembatan: `phi_inf(r) = phi_N(r) - sum_{m != 0} G_free(r + mN)`; dibutuhkan bound ekor citra seragam on band shell | **OPEN** â€” no ada bound which dibuktikan in sini |
+| **[U]** | Nilai/limit ruang-bebas, or laju konvergensi q(N) | **TIDAK DIKLAIM** |
 
 ## 6. Batas
 
 - Studi ini **hanya** menyertifikasi sisi terbatas. Tidak ada nilai limit,
-  tidak ada laju konvergensi, tidak ada klaim kontinuum (`lim dx → 0` tidak
+  no ada laju konvergensi, no ada klaim kontinuum (`lim dx â†’ 0` no
   pernah diambil; `dx = 1/N` eksak).
 - F4 adalah temuan negatif tentang **statistik q**, bukan tentang model:
-  model tersegel dan guard lamanya tidak berubah dan tidak disalahkan.
-- Tidak menyentuh zeta/Weil/RH/P≠NP; tidak ada klaim fisik; bukan peer
+  model tersegel and guard lamanya no berubah and no disalahkan.
+- Tidak menyentuh zeta/Weil/RH/Pâ‰ NP; no ada klaim fisik; bukan peer
   review.
 - Jembatan [J] memerlukan bound ekor citra (pekerjaan terpisah); sampai itu
-  ada, status jembatan tetap OPEN dan itu dicatat, bukan disembunyikan.
+  ada, status jembatan tetap OPEN and itu dicatat, bukan disembunyikan.
 
 ## 7. Reproduksi
 
-- `python -m pytest msaf/tests/test_periodic_bridge.py -q` → 6 uji.
+- `python -m pytest msaf/tests/test_periodic_bridge.py -q` â†’ 6 uji.
 - Output beku: `reports/PERIODIC_BRIDGE_STUDY_OUTPUT_2026-10-19.txt`
-  (capture ganda, deterministik; sha256LF di `A-2026-0007`).
+  (capture ganda, deterministik; sha256LF in `A-2026-0007`).
 - Guard registry: `python -m pytest msaf/tests/test_fence_registry.py -q`.
+
+

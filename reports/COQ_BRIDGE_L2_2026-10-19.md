@@ -1,6 +1,6 @@
-# Coq: L2 deret-p eksponen bulat — batas dua sisi + limit (2026-10-19)
+﻿# Coq: L2 deret-p eksponen bulat â€” limit dua sisi + limit (2026-10-19)
 
-**Paket:** 6 (pra-registrasi baru; scope dikunci di
+**Paket:** 6 (pra-registrasi baru; scope dikunci in
 [`reports/PREREG_PAKET6_2026-10-19.md`](PREREG_PAKET6_2026-10-19.md))
 **Berkas utama:** [`formal_bridge/PseriesL2.v`](../formal_bridge/PseriesL2.v)
 **Berkas pendamping:** `formal_bridge/check_pseries.sh`,
@@ -13,18 +13,18 @@
 
 | Blok | Status | Isi |
 |---|---|---|
-| `[B]` | **CERTIFIED** | aljabar langkah Bernoulli + teleskopik finite untuk `p = k+1 ≥ 2` |
-| `[J]` | **CERTIFIED untuk `p` bulat ≥ 2** | eksistensi limit via `Un_cv_crit` (monoton + terbatas) |
-| `[U]` | **CERTIFIED untuk `p` bulat ≥ 2** | batas dua sisi `1/(k(N+1)^k) ≤ L ≤ 1/(k N^k)` |
+| `[B]` | **CERTIFIED** | aljabar step Bernoulli + teleskopik finite for `p = k+1 â‰¥ 2` |
+| `[J]` | **CERTIFIED for `p` bulat â‰¥ 2** | eksistensi limit via `Un_cv_crit` (monoton + terbatas) |
+| `[U]` | **CERTIFIED for `p` bulat â‰¥ 2** | limit dua sisi `1/(k(N+1)^k) â‰¤ L â‰¤ 1/(k N^k)` |
 
-Ini adalah **L2 kit** (`pseries_tail_bounds`) untuk **eksponen bulat**
-`p = k+1 ≥ 2` saja. Eksponen real `p > 1` (yang membutuhkan `Rpower`),
-L3–L5, studi periodic-box `A-2026-0007`, zeta/Weil/RH, P≠NP, dan klaim fisik
-**di luar scope**. Tidak ada klaim bahwa ini menutup seluruh L2 kit.
+Ini adalah **L2 kit** (`pseries_tail_bounds`) for **eksponen bulat**
+`p = k+1 â‰¥ 2` saja. Eksponen real `p > 1` (which membutuhkan `Rpower`),
+L3â€“L5, studi periodic-box `A-2026-0007`, zeta/Weil/RH, Pâ‰ NP, and klaim fisik
+**in luar scope**. Tidak ada klaim bahwa ini menutup seluruh L2 kit.
 
-## 2. Pernyataan yang dibuktikan
+## 2. Pernyataan which dibuktikan
 
-Dengan `pterm k n = 1/(INR n)^(S k)` dan
+Dengan `pterm k n = 1/(INR n)^(S k)` and
 `psum k N M = sum_{i=0}^{M} pterm k (N+1+i)`:
 
 ```coq
@@ -37,23 +37,23 @@ Theorem pseries_L2_integer :
       (L <= 1 / (INR k * (INR N) ^ k)).
 ```
 
-`Un_cv` adalah definisi ε-N standar `Coq.Reals.Rseries`; `sum_f_R0` adalah
+`Un_cv` adalah definisi Îµ-N standar `Coq.Reals.Rseries`; `sum_f_R0` adalah
 jumlah finite standar. Untuk `p = k+1`, batasnya persis
-`1/((p−1)(N+1)^(p−1)) ≤ tail ≤ 1/((p−1)N^(p−1))`.
+`1/((pâˆ’1)(N+1)^(pâˆ’1)) â‰¤ tail â‰¤ 1/((pâˆ’1)N^(pâˆ’1))`.
 
-Hasil antara yang menjadi tulang bukti (total **20** hasil):
+Hasil antara which menjadi tulang bukti (total **20** result):
 
 | # | Hasil | Peran |
 |---|---|---|
-| 1 | `bernoulli_int` | `(1+x)^n ≥ 1 + n x` untuk `x ≥ −1` |
-| 2 | `pterm_upper_step` | `1/(S m)^(k+1) ≤ (1/k)(1/m^k − 1/(S m)^k)`, `m ≥ 1` |
-| 3 | `pterm_lower_step` | `(1/k)(1/n^k − 1/(S n)^k) ≤ 1/n^(k+1)`, `n ≥ 1` |
-| 4 | `telescope` | `Σ_{i=0}^{M} (g(a+i) − g(a+i+1)) = g a − g(a+M+1)` |
-| 5 | `psum_upper` | `psum ≤ 1/(k N^k)` |
-| 6 | `psum_lower_sharp` | `(1/k)(1/(N+1)^k − 1/(N+M+2)^k) ≤ psum` |
-| 7 | `Un_cv_le_const` | `(∀n, Un n ≤ B) → limit ≤ B` |
-| 8 | `tail_term_small` | sisa `(1/k)/(N+M+2)^k` bisa dibuat `< ε` |
-| 9 | `pseries_L2_integer` | eksistensi + batas dua sisi |
+| 1 | `bernoulli_int` | `(1+x)^n â‰¥ 1 + n x` for `x â‰¥ âˆ’1` |
+| 2 | `pterm_upper_step` | `1/(S m)^(k+1) â‰¤ (1/k)(1/m^k âˆ’ 1/(S m)^k)`, `m â‰¥ 1` |
+| 3 | `pterm_lower_step` | `(1/k)(1/n^k âˆ’ 1/(S n)^k) â‰¤ 1/n^(k+1)`, `n â‰¥ 1` |
+| 4 | `telescope` | `Î£_{i=0}^{M} (g(a+i) âˆ’ g(a+i+1)) = g a âˆ’ g(a+M+1)` |
+| 5 | `psum_upper` | `psum â‰¤ 1/(k N^k)` |
+| 6 | `psum_lower_sharp` | `(1/k)(1/(N+1)^k âˆ’ 1/(N+M+2)^k) â‰¤ psum` |
+| 7 | `Un_cv_le_const` | `(âˆ€n, Un n â‰¤ B) â†’ limit â‰¤ B` |
+| 8 | `tail_term_small` | sisa `(1/k)/(N+M+2)^k` bisa created `< Îµ` |
+| 9 | `pseries_L2_integer` | eksistensi + limit dua sisi |
 
 Sisanya adalah lemma bantu: `one_le_pow`, `pow_ge_self`,
 `prod_pow_neq_0`, `pterm_nonneg`, `sum_f_R0_le_all`,
@@ -62,26 +62,26 @@ Sisanya adalah lemma bantu: `one_le_pow`, `pow_ge_self`,
 
 ## 3. Metode
 
-1. **Bernoulli integer** dibuktikan dengan induksi (tanpa lemma
-   `Rbernoulli` yang tidak ada di stdlib).
-2. **Ketaksamaan langkah** atas dan bawah diturunkan dari Bernoulli pada
-   `x = ±1/A`; keduanya adalah ketaksamaan aljabar murni, bukan integral.
-3. **Teleskopik finite** dibuktikan sendiri di atas `sum_f_R0`.
+1. **Bernoulli integer** dibuktikan with induksi (tanpa lemma
+   `Rbernoulli` which no ada in stdlib).
+2. **Ketaksamaan step** atas and bawah diturunkan dari Bernoulli on
+   `x = Â±1/A`; keduanya adalah ketaksamaan aljabar murni, bukan integral.
+3. **Teleskopik finite** dibuktikan sendiri in atas `sum_f_R0`.
 4. **Eksistensi limit** dari `Un_cv_crit`: barisan `psum` naik
-   (`Un_growing`) dan terbatas di atas (`bound (EUn ...)`).
-5. **Batas atas limit** lewat `Un_cv_le_const` yang dibuktikan dengan ε.
+   (`Un_growing`) and terbatas in atas (`bound (EUn ...)`).
+5. **Batas atas limit** lewat `Un_cv_le_const` which dibuktikan with Îµ.
 6. **Batas bawah limit** lewat `sum_incr` (suku tak-negatif: jumlah parsial
-   ≤ limit) dan `INR_unbounded` untuk mengecilkan sisa
+   â‰¤ limit) and `INR_unbounded` for mengecilkan sisa
    `(1/k)/(N+M+2)^k`. Lemma `pow_ge_self` mengubah
-   `1/(N+M+2)^k ≤ 1/(N+M+2)`.
+   `1/(N+M+2)^k â‰¤ 1/(N+M+2)`.
 
-Sakhi ε-N dan urutan memakai lemma stdlib; tidak ada `Axiom`, `Parameter`,
-`Admitted`, atau `admit` di berkas.
+Sakhi Îµ-N and urutan memakai lemma stdlib; no ada `Axiom`, `Parameter`,
+`Admitted`, or `admit` in file.
 
 ## 4. Bukti eksekusi (verbatim)
 
 Direkam oleh `formal_bridge/check_pseries.sh`: menyalin `PseriesL2.v` ke
-direktori sementara, mengompilasi dengan `coqc -Q . ""`, lalu menjalankan
+directory sementara, mengompilasi with `coqc -Q . ""`, lalu menjalankan
 `coqchk` sebagai pemeriksa kernel independen. Dua capture berturut-turut
 **byte-identik** (193 baris).
 
@@ -118,7 +118,7 @@ Print Assumptions blocks: 20
   telescope
 ```
 
-Blok audit `Print Assumptions` berjumlah 20, satu per hasil. **19 blok**
+Blok audit `Print Assumptions` berjumlah 20, satu per result. **19 blok**
 hanya memuat dua aksioma stdlib:
 
 ```text
@@ -132,7 +132,7 @@ FunctionalExtensionality.functional_extensionality_dep :
   (forall x : A, f x = g x) -> f = g
 ```
 
-**Blok ke-20** — teorema utama — memuat aksioma ketiga:
+**Blok ke-20** â€” teorema utama â€” memuat aksioma ketiga:
 
 ```text
 Axioms:
@@ -147,13 +147,13 @@ FunctionalExtensionality.functional_extensionality_dep :
 OK: pseries L2 module kernel-checked; audit block count matches results
 ```
 
-## 5. Trusted base dan deviasi audit
+## 5. Trusted base and deviasi audit
 
-**Tidak ada aksioma proyek.** Namun kriteria pra-registrasi §4 (“hanya dua
-aksioma stdlib”) **tidak terpenuhi secara literal** untuk teorema utama:
+**Tidak ada aksioma proyek.** Namun kriteria pra-registrasi Â§4 (â€œhanya dua
+aksioma stdlibâ€) **no terpenuhi secara literal** for teorema utama:
 `pseries_L2_integer` memakai **tiga** aksioma stdlib. Aksioma ketiga,
 `ClassicalDedekindReals.sig_not_dec`, masuk melalui `Un_cv_crit`
-(kelengkapan R) yang dipakai untuk membuktikan eksistensi limit. Probe
+(kelengkapan R) which dipakai for membuktikan eksistensi limit. Probe
 terpisah mengonfirmasi:
 
 ```text
@@ -164,22 +164,22 @@ ClassicalDedekindReals.sig_forall_dec : ...
 FunctionalExtensionality.functional_extensionality_dep : ...
 ```
 
-Sebagai minimalisasi, lemma urutan `Un_cv_le_const` **tidak** memakai
-`Rle_or_lt`; ia memakai `Rnot_lt_le` yang hanya bergantung pada
+Sebagai minimalisasi, lemma urutan `Un_cv_le_const` **no** memakai
+`Rle_or_lt`; ia memakai `Rnot_lt_le` which hanya bergantung on
 `sig_forall_dec`. Tetapi eksistensi limit tetap membutuhkan
-`Un_cv_crit`, yang membawa `sig_not_dec`. Menghapusnya akan memerlukan
-bukti kelengkapan/konvergensi lain yang setara; itu tidak dilakukan dalam
+`Un_cv_crit`, which membawa `sig_not_dec`. Menghapusnya akan memerlukan
+bukti kelengkapan/konvergensi lain which setara; itu no dilakukan dalam
 paket ini.
 
-Deviasi ini dicatat di **addendum §6 pra-registrasi**, di laporan ini, di
-registry `A-2026-0010`, dan di HANDOFF §2.0ab. Paket berstatus
-**CERTIFIED dengan deviasi audit tercatat** — bukan pemenuhan literal
-kriteria dua-aksioma. Yang disertifikasi adalah **tidak ada aksioma proyek
+Deviasi ini dicatat in **addendum Â§6 pra-registrasi**, in report ini, in
+registry `A-2026-0010`, and in HANDOFF Â§2.0ab. Paket berstatus
+**CERTIFIED with deviasi audit tercatat** â€” bukan pemenuhan literal
+kriteria dua-aksioma. Yang disertifikasi adalah **no ada aksioma proyek
 tambahan**, bukan konsistensi ZFC/Coq.
 
 ## 6. Anti-circularity gate: **TOOL NOT RUN** (bukan sukses)
 
-Gate dijalankan pada `formal_bridge/PseriesL2.v`; hasil verbatim:
+Gate dijalankan on `formal_bridge/PseriesL2.v`; result verbatim:
 
 ```text
 ------------------------------------------------------------------------------
@@ -190,15 +190,15 @@ ANTI-CIRCULARITY GATE [check]
   verdict: TOOL NOT RUN
 ```
 
-Exit code `2`. Gate hanya memindai `.lean`/`.smt2`; repo ini tidak punya
-Lean/SMT2, jadi hasil ini **tidak dihitung sebagai sukses**. Bukti yang
-dipakai adalah Coq-native (§4–§5), bukan gate tersebut.
+Exit code `2`. Gate hanya memindai `.lean`/`.smt2`; repo ini no punya
+Lean/SMT2, jadi result ini **no dihitung sebagai sukses**. Bukti which
+dipakai adalah Coq-native (Â§4â€“Â§5), bukan gate tersebut.
 
 ## 7. Uji negatif guard
 
 Guard `msaf/tests/test_coq_bridge_l2.py` menjalankan 5 uji pytest: empat
 uji positif (placeholder, kelengkapan audit, standalone + statement lock,
-receipt/trusted base) dan satu uji mutasi in-memory. Uji mutasi menangkap
+receipt/trusted base) and satu uji mutasi in-memory. Uji mutasi menangkap
 **8/8** mutasi:
 
 ```text
@@ -212,45 +212,47 @@ CAUGHT  one audit block removed
 CAUGHT  unterminated Coq comment
 ```
 
-Guard menolak aksioma keempat dan menolak penempatan `sig_not_dec` di blok
+Guard menolak aksioma keempat and menolak penempatan `sig_not_dec` in blok
 selain teorema utama. Statement lock memastikan teorema tetap berbunyi
-`exists L` + `Un_cv (psum) L` + batas bawah/atas yang dikunci.
+`exists L` + `Un_cv (psum) L` + limit bawah/atas which dikunci.
 
 ## 8. Batas
 
-1. **Hanya eksponen bulat** `p = k+1 ≥ 2`. Eksponen real `p > 1`
-   (`Rpower`) **tidak** diformalkan dan tidak diklaim.
-2. **L3–L5 tidak diformalkan** (amplop eksponensial, ekor Gaussian,
-   perbandingan integral). Masing-masing butuh pra-registrasi dan bukti
+1. **Hanya eksponen bulat** `p = k+1 â‰¥ 2`. Eksponen real `p > 1`
+   (`Rpower`) **no** diformalkan and no diklaim.
+2. **L3â€“L5 no diformalkan** (amplop eksponensial, ekor Gaussian,
+   perbandingan integral). Masing-masing butuh pra-registrasi and bukti
    sendiri.
 3. **Bukan periodic-box.** `[J]` studi `A-2026-0007` tetap **OPEN**;
-   hasil ini tidak boleh dipakai untuk mengklaim batas ekor citra periodik.
-4. **`Coq.Reals` aksiomatik.** 19 hasil memakai dua aksioma stdlib; teorema
+   result ini no boleh dipakai for mengklaim limit ekor citra periodik.
+4. **`Coq.Reals` aksiomatik.** 19 result memakai dua aksioma stdlib; teorema
    utama memakai tiga (`sig_not_dec` dari kelengkapan R). Tidak ada aksioma
    proyek, tetapi ini **bukan** bukti konsistensi ZFC/Coq.
-5. **CI tidak menjalankan Coq.** Runner tidak punya toolchain Coq; CI hanya
+5. **CI no menjalankan Coq.** Runner no punya toolchain Coq; CI hanya
    menjalankan guard statis (isi, kelengkapan audit, receipt). Kompilasi
-   ulang adalah langkah lokal §9.
-6. **Bukan peer review**, bukan klaim eksternal; tidak ada klaim
-   zeta/Weil/RH/P≠NP/fisika.
+   ulang adalah step lokal Â§9.
+6. **Bukan peer review**, bukan klaim eksternal; no ada klaim
+   zeta/Weil/RH/Pâ‰ NP/fisika.
 
 ## 9. Reproduksi
 
 ```bash
-# di WSL/Ubuntu dengan switch opam yang di-KEEP
+# in WSL/Ubuntu with switch opam which in-KEEP
 export PATH=/root/.opam/4.14.2/bin:$PATH
 cd formal_bridge
 bash check_pseries.sh
 ```
 
 `check_pseries.sh` gagal keras bila kompilasi gagal, `coqchk` gagal, ada
-hasil yang tidak muncul di keluaran pemeriksa kernel, jumlah blok audit
-tidak sama dengan jumlah hasil, atau `Print Assumptions` tidak lengkap.
+result which no muncul in keluaran pemeriksa kernel, jumlah blok audit
+no sama with jumlah result, or `Print Assumptions` no lengkap.
 
-## 10. CI dan registry
+## 10. CI and registry
 
 Guard statis: `python -m pytest msaf/tests/test_coq_bridge_l2.py -q`
-(5 uji). Registry `A-2026-0010` memuat sha256LF untuk sumber, skrip,
-receipt, guard, laporan ini, dan pra-registrasi. Artefak Paket 1–5
-(`A-2026-0006` … `A-2026-0009`) tidak diubah. HANDOFF §2.0ab mencatat
-status, deviasi audit, dan batas paket.
+(5 uji). Registry `A-2026-0010` memuat sha256LF for source, skrip,
+receipt, guard, report ini, and pra-registrasi. Artefak Paket 1â€“5
+(`A-2026-0006` â€¦ `A-2026-0009`) no diubah. HANDOFF Â§2.0ab mencatat
+status, deviasi audit, and limit paket.
+
+

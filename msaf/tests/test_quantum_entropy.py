@@ -31,3 +31,5 @@ def test_quantum_entropy_selftest_zero_failure() -> None:
     tail = (proc.stdout or "")[-4000:] + (proc.stderr or "")[-4000:]
     assert proc.returncode == 0, "selftest exit %d:\n%s" % (proc.returncode, tail)
     assert "ZERO FAILURE" in proc.stdout, tail
+
+

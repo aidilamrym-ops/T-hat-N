@@ -285,3 +285,5 @@ def picard_bound(
     if best["bound"] < 0:
         raise RuntimeError("no functional-equation sign admitted the traces")
     return best
+
+

@@ -1,4 +1,4 @@
-# Archive policy
+﻿# Archive policy
 
 Status: 2026-10-25.
 
@@ -15,3 +15,5 @@ Current state:
 - Figure-eight r4 prereg, receipt, and report remain in `reports/`.
 - Temporary scratch files are not stored here; they belong outside the
   repository.
+
+

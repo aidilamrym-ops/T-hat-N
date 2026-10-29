@@ -112,3 +112,4 @@ def spectral_profile(n: int) -> SpectralProfile:
         ),
         min_magnitude=spec.min_magnitude,
     )
+

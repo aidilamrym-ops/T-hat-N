@@ -48,3 +48,5 @@ def test_trace_form_linear_lock():
         random.seed(0)
         for a in random.sample(elems, min(100, len(elems))):
             assert _trace_to_fp(a, mod, p, n) == _trace_lin(a, tvec, p)
+
+

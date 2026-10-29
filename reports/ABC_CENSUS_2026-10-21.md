@@ -1,6 +1,6 @@
-# Laporan Sensus abc Tersertifikasi — C = 100.000 — 2026-10-21
+﻿# Laporan Sensus abc Tersertifikasi â€” C = 100.000 â€” 2026-10-21
 
-**Status:** SELESAI — verdict `ALL PASS` (count A = count B = 6, max_gap A = max_gap B = 6825, daftar triple identik)
+**Status:** SELESAI â€” verdict `ALL PASS` (count A = count B = 6, max_gap A = max_gap B = 6825, daftar triple identik)
 
 **Registry:** `A-2026-0032` (CERTIFIED)
 
@@ -8,11 +8,11 @@
 
 ## 1. Ringkasan
 
-Sensus abc lengkap hingga batas **C = 100.000** telah dieksekusi dengan dua implementasi sieve independen yang sepakat eksak pada:
+Sensus abc lengkap hingga limit **C = 100.000** telah dieksekusi with dua implementasi sieve independen which sepakat eksak on:
 
-- **Total triple (a,b,c) dengan q > 1.4:** 6
+- **Total triple (a,b,c) with q > 1.4:** 6
 - **Maximum gap antar triple:** 6825
-- **Daftar triple identik pada kedua sieve:**
+- **Daftar triple identik on kedua sieve:**
 
 | No | a | b | c | q = log(c)/log(rad(abc)) |
 |---|---|---|---|---|
@@ -28,28 +28,28 @@ Sensus abc lengkap hingga batas **C = 100.000** telah dieksekusi dengan dua impl
 ## 2. Metodologi
 
 ### 2.1 Definisi
-- **Triple abc valid:** a, b, c ∈ ℕ, a + b = c, a < b < c, gcd(a, b, c) = 1
+- **Triple abc valid:** a, b, c âˆˆ â„•, a + b = c, a < b < c, gcd(a, b, c) = 1
 - **Radikal:** rad(n) = produk faktor prima unik dari n
-- **Kualitas:** q(a,b,c) = log(c) / log(rad(a·b·c))
-- **Threshold:** q > 1.4 (standar untuk "abc hits")
+- **Kualitas:** q(a,b,c) = log(c) / log(rad(aÂ·bÂ·c))
+- **Threshold:** q > 1.4 (standar for "abc hits")
 
 ### 2.2 Dua Implementasi Independen
 
 **Sieve A (rad-sieve + bilangan halus):**
-- Linear sieve untuk rad(n) hingga C
-- Generasi bilangan halus (smooth numbers) dengan faktor prima ≤ 100
-- Hanya memeriksa triple di mana a, b, c semua halus (pruning agresif)
-- Kompleksitas praktis jauh di bawah O(C²)
+- Linear sieve for rad(n) hingga C
+- Generasi bilangan halus (smooth numbers) with faktor prima â‰¤ 100
+- Hanya memeriksa triple in mana a, b, c semua halus (pruning agresif)
+- Kompleksitas praktis jauh in bawah O(CÂ²)
 
 **Sieve B (sympy.factorint):**
-- Faktorisasi langsung menggunakan sympy untuk verifikasi independen
+- Faktorisasi langsung menggunakan sympy for verifikasi independen
 - Generasi bilangan halus terpisah
-- Tidak berbagi kode inti dengan Sieve A
+- Tidak berbagi kode inti with Sieve A
 
 ### 2.3 Kriteria Kesepakatan (sepakat integer-per-integer)
-- `count_A == count_B` ✓ (6 == 6)
-- `max_gap_A == max_gap_B` ✓ (6825 == 6825)
-- `pairs_A == pairs_B` ✓ (daftar identik)
+- `count_A == count_B` âœ“ (6 == 6)
+- `max_gap_A == max_gap_B` âœ“ (6825 == 6825)
+- `pairs_A == pairs_B` âœ“ (daftar identik)
 
 ---
 
@@ -57,17 +57,17 @@ Sensus abc lengkap hingga batas **C = 100.000** telah dieksekusi dengan dua impl
 
 | Metrik | Sieve A | Sieve B | Match |
 |---|---|---|---|
-| Count | 6 | 6 | ✓ |
-| Max gap | 6825 | 6825 | ✓ |
-| First triple | (3, 125, 128) | (3, 125, 128) | ✓ |
-| Last triple | (7168, 78125, 85293) | (7168, 78125, 85293) | ✓ |
-| Runtime | 9.44 s | 19.17 s | — |
+| Count | 6 | 6 | âœ“ |
+| Max gap | 6825 | 6825 | âœ“ |
+| First triple | (3, 125, 128) | (3, 125, 128) | âœ“ |
+| Last triple | (7168, 78125, 85293) | (7168, 78125, 85293) | âœ“ |
+| Runtime | 9.44 s | 19.17 s | â€” |
 
-**Integrity checks (C1–C4):**
-- **C1:** Kedua sieve menghasilkan count identik ✓
-- **C2:** Daftar triple q > 1.4 identik ✓
-- **C3:** Receipt deterministik (hash sha256 terkunci) ✓
-- **C4:** Verifikasi independen vs literature ✓ (6 triple cocok dengan known abc hits di literature)
+**Integrity checks (C1â€“C4):**
+- **C1:** Kedua sieve menghasilkan count identik âœ“
+- **C2:** Daftar triple q > 1.4 identik âœ“
+- **C3:** Receipt deterministik (hash sha256 terkunci) âœ“
+- **C4:** Verifikasi independen vs literature âœ“ (6 triple cocok with known abc hits in literature)
 
 ---
 
@@ -116,12 +116,12 @@ python -m pytest msaf/tests/test_abc_census.py -q
 
 ## 7. Batas Eksplisit (TIDAK diklaim)
 
-- ❌ Pembuktian konjektur abc (hanya sensus hingga C = 100.000)
-- ❌ Klaim asimtotik (hanya hitungan hingga C)
-- ❌ Klaim RH, GRH, σ = 1/2, lokasi nol
-- ❌ Faktorisasi, RSA/ECC breaking
-- ❌ Anderson transition, fisika
-- ❌ Global ergodicity
+- âŒ Pembuktian konjektur abc (hanya sensus hingga C = 100.000)
+- âŒ Klaim asimtotik (hanya hitungan hingga C)
+- âŒ Klaim RH, GRH, Ïƒ = 1/2, lokasi nol
+- âŒ Faktorisasi, RSA/ECC breaking
+- âŒ Anderson transition, fisika
+- âŒ Global ergodicity
 
 ---
 
@@ -147,4 +147,5 @@ python -m pytest msaf/tests/test_fence_registry.py -q
 
 Per `reports/DAFTAR_MASALAH_KERJA.md`:
 - **Q4 RH Extension** (prioritas tinggi)
-- **Q3 abc Census** lanjutan ke C = 10⁷ (jika diminta)
+- **Q3 abc Census** lanjutan ke C = 10â· (jika diminta)
+

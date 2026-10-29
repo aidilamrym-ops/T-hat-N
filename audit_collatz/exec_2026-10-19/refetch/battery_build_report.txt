@@ -1,4 +1,4 @@
-P2 battery build report (freeze package transcription)
+﻿P2 battery build report (freeze package transcription)
 SRC = audit_collatz/exec_2026-10-19/refetch
 OUT = audit_collatz/exec_2026-10-19/batteries_re
 
@@ -30,3 +30,5 @@ first path row: n=1 t=1 ; last: n=2358909599867980429759 t=494114680693632162318
 wrote battery_path_records.tsv                 len=3757   sha256=faa157b296f6fe4924b81eead8dd1182b4104e4af04110075a2bc6f22a0e54ad sha256LF=faa157b296f6fe4924b81eead8dd1182b4104e4af04110075a2bc6f22a0e54ad
 wrote battery_heights_std_a006885.tsv          len=3828   sha256=9f5bed262520a10bafb292d3f1cf689fc6914062ba70d24cb256e07db28cdbe0 sha256LF=9f5bed262520a10bafb292d3f1cf689fc6914062ba70d24cb256e07db28cdbe0
 wrote battery_delay_records.tsv                len=3109   sha256=09a252407f6cc89e40499b341671014a8622d3c545d2b636b9ec8a1b45f85cf5 sha256LF=09a252407f6cc89e40499b341671014a8622d3c545d2b636b9ec8a1b45f85cf5
+
+

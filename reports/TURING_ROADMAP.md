@@ -1,4 +1,4 @@
-# Turing Roadmap: From Certified Counting to Bounded Verification
+﻿# Turing Roadmap: From Certified Counting to Bounded Verification
 
 ## Status: Turing implementation track CLOSED as designed (v1.29.0)
 
@@ -9,11 +9,11 @@ work; no code action is planned for them in this track.
 
 ### 1. Measured N(T) (certified counts, 256-bit)
 
-| T | N(T) measured | Main term `(T/2π)log(T/2πe)+7/8` | Implied S(T) |
+| T | N(T) measured | Main term `(T/2Ï€)log(T/2Ï€e)+7/8` | Implied S(T) |
 |---|---|---|---|
-| 10 | 0 (COMPLETE, 2845 evals) | 0.0231 | ≈ -0.02 |
-| 25 | 2 (COMPLETE, 5173 evals) | 2.3909 | ≈ -0.39 |
-| 50 | 10 (COMPLETE, 7041 evals) | 9.4228 | ≈ +0.58 |
+| 10 | 0 (COMPLETE, 2845 evals) | 0.0231 | â‰ˆ -0.02 |
+| 25 | 2 (COMPLETE, 5173 evals) | 2.3909 | â‰ˆ -0.39 |
+| 50 | 10 (COMPLETE, 7041 evals) | 9.4228 | â‰ˆ +0.58 |
 
 (Main-term values via display-only float arithmetic; counts are
 ball-certified. Agreement is CONSISTENCY, not verification: nothing
@@ -41,11 +41,11 @@ A full Turing verification "RH true up to T" needs, beyond counting:
     and agreeing with the Newton counter; contour-through-zero
     honestly INCONCLUSIVE. Status: CLOSED.
 - (G2) **Explicit S(T) bounds** (Backlund/Trudgian type): a proven
-  inequality `|S(T)| ≤ B(T)` to compare against `N(T) - main(T)`.
+  inequality `|S(T)| â‰¤ B(T)` to compare against `N(T) - main(T)`.
   Without it, agreement in the table above constrains nothing.
   Status: MAPPED OPEN -- pure analysis research, not incremental
   implementation work; no code action planned in this track.
-- (G3) **Off-line zeros**: our rectangles cover sigma ∈ [0.49, 0.51].
+- (G3) **Off-line zeros**: our rectangles cover sigma âˆˆ [0.49, 0.51].
   A Turing claim needs the FULL critical strip (or a functional-equation
   reduction argument made explicit). Status: MAPPED OPEN by design
   scope (strip width is an explicit scope decision); widening is a
@@ -70,3 +70,5 @@ A full Turing verification "RH true up to T" needs, beyond counting:
 No bound on S(T) is proven here. No statement is made about zeros
 outside computed rectangles. Agreement with the main term is
 expected behavior of a correct counter, not evidence for RH.
+
+

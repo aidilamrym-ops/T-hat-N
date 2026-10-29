@@ -53,3 +53,5 @@ def test_boundary_float_rejection():
         certify_boundary("13.9", "14.4", max_depth=8.0)  # type: ignore[arg-type]
     with pytest.raises(ValueError):
         certify_boundary("14.4", "13.9")
+
+

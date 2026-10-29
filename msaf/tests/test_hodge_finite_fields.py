@@ -23,3 +23,5 @@ def test_finite_field_input_gates():
         frobenius_traces([1.0])  # type: ignore[list-item]
     with pytest.raises(ValueError):
         frobenius_traces([7])
+
+

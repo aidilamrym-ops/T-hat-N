@@ -90,3 +90,5 @@ def test_receipt_records_kernel_success_and_only_stdlib_axioms():
         assert re.search(r"^\s+%s$" % re.escape(name), log, re.M), (
             "receipt does not list %s as kernel-checked" % name
         )
+
+

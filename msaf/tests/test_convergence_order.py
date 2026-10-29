@@ -1,6 +1,6 @@
 """3-grid convergence-order regression (R-NS-SPEC, partial closure).
 
-Manufactured periodic solution p* = cos2px·cos2py + cycl., src = -8pi^2·p*.
+Manufactured periodic solution p* = cos2pxÂ·cos2py + cycl., src = -8pi^2Â·p*.
 The spectral kernel inverts the DISCRETE 7-point Laplacian, so the
 midpoint error vs the analytic field is pure truncation O(dx^2).
 Locks observed order in [1.7, 2.5] on N = 4/8/16 at 256-bit.
@@ -63,3 +63,5 @@ def test_convergence_order_second_order():
     assert abs(o2 - 2.0) < abs(o1 - 2.0)  # refining toward theory
     for r in (r4, r8, r16):
         assert bool(r < arb("1e-70")) is True  # radii honest, far below error
+
+

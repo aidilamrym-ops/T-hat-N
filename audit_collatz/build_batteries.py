@@ -201,3 +201,5 @@ report_path = SRC / "battery_build_report.txt"
 report_path.write_text("\n".join(report) + "\n", encoding="utf-8", newline="\n")
 print("report written: %s" % report_path)
 print("BUILD OK")
+
+

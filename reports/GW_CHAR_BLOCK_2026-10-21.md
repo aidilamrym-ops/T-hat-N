@@ -1,4 +1,4 @@
-from pathlib import Path
+﻿from pathlib import Path
 
 path = Path(r"D:\Opencode AI Agent\reports\GW_CHAR_BLOCK_2026-10-21.md")
 text = path.read_text(encoding="utf-8")
@@ -6,23 +6,23 @@ text = path.read_text(encoding="utf-8")
 # Update status line
 text = text.replace(
     "**Status:** eksekusi `PASS`, **sertifikasi `INCONCLUSIVE` / `NOT READY`**.",
-    "**Status:** eksekusi `PASS`, **sertifikasi `INCONCLUSIVE` / `NOT READY`** (blok pole principal sudah diimplementasikan; validasi independen belum)."
+    "**Status:** eksekusi `PASS`, **sertifikasi `INCONCLUSIVE` / `NOT READY`** (blok pole principal already diimplementasikan; validasi independen belum)."
 )
 
 # Update the two missing items
 text = text.replace(
-    "1. tidak ada validasi independen untuk pergeseran paritas `alpha = 3/4`\n"
+    "1. no ada validasi independen for pergeseran paritas `alpha = 3/4`\n"
     "   maupun konstanta konduktor `log q*`;\n"
-    "2. blok pole untuk karakter **principal** belum diturunkan maupun diuji.",
-    "1. tidak ada validasi independen untuk pergeseran paritas `alpha = 3/4`\n"
+    "2. blok pole for karakter **principal** belum diturunkan maupun diuji.",
+    "1. no ada validasi independen for pergeseran paritas `alpha = 3/4`\n"
     "   maupun konstanta konduktor `log q*`;\n"
-    "2. blok pole untuk karakter **principal** sudah diturunkan dan diuji "
-    "(residu φ(q)/q, blok W02 diskalakan)."
+    "2. blok pole for karakter **principal** already diturunkan and diuji "
+    "(residu Ï†(q)/q, blok W02 diskalakan)."
 )
 
 # Update the closing items
 text = text.replace(
-    "2. derivasi blok pole principal (sumber `psi_0` diskalakan residu\n"
+    "2. derivasi blok pole principal (source `psi_0` diskalakan residu\n"
     "   `phi(q)/q`) beserta uji fungsinya;",
     "2. validasi independen blok paritas/konduktor (mis. pencocokan\n"
     "   explicit formula terhadap jumlah nol numerik)."
@@ -30,17 +30,17 @@ text = text.replace(
 
 # Update the "Langkah penutup C" section
 text = text.replace(
-    "1. validasi independen blok `alpha=3/4` dan `log q*`, misalnya pencocokan\n"
-    "   explicit formula pada test vector terhadap jumlah nol `L(s,chi)` yang\n"
-    "   dihitung numerik, atau implementasi kedua yang independen;\n"
-    "2. derivasi blok pole principal (sumber `psi_0` diskalakan residu\n"
+    "1. validasi independen blok `alpha=3/4` and `log q*`, misalnya pencocokan\n"
+    "   explicit formula on test vector terhadap jumlah nol `L(s,chi)` which\n"
+    "   dihitung numerik, or implementasi kedua which independen;\n"
+    "2. derivasi blok pole principal (source `psi_0` diskalakan residu\n"
     "   `phi(q)/q`) beserta uji fungsinya;\n"
-    "3. baru setelah keduanya tertutup, tulis registry dan boleh naik ke\n"
+    "3. baru setelah keduanya tertutup, tulis registry and boleh naik ke\n"
     "   `PASS`.",
-    "1. validasi independen blok `alpha=3/4` dan `log q*`, misalnya pencocokan\n"
-    "   explicit formula pada test vector terhadap jumlah nol `L(s,chi)` yang\n"
-    "   dihitung numerik, atau implementasi kedua yang independen.\n"
-    "2. Blok pole principal sudah diimplementasikan (sumber `psi_0` diskalakan\n"
+    "1. validasi independen blok `alpha=3/4` and `log q*`, misalnya pencocokan\n"
+    "   explicit formula on test vector terhadap jumlah nol `L(s,chi)` which\n"
+    "   dihitung numerik, or implementasi kedua which independen.\n"
+    "2. Blok pole principal already diimplementasikan (source `psi_0` diskalakan\n"
     "   residu `phi(q)/q`, blok W02 diskalakan)."
 )
 
@@ -59,3 +59,4 @@ report_hash = hashlib.sha256(pl.Path(r"D:\Opencode AI Agent\reports\GW_CHAR_BLOC
 path.write_text(text, encoding="utf-8", newline="")
 print("Report updated")
 print("New receipt hash:", receipt_hash)
+

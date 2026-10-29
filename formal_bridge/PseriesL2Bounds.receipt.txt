@@ -1,4 +1,4 @@
-coqc:   /root/.opam/4.14.2/bin/coqc
+﻿coqc:   /root/.opam/4.14.2/bin/coqc
 coqchk: /root/.opam/4.14.2/bin/coqchk
 coqc PseriesL2 exit: 0
 coqc PseriesL2Bounds exit: 0
@@ -21,3 +21,5 @@ FunctionalExtensionality.functional_extensionality_dep :
   forall (A : Type) (B : A -> Type) (f g : forall x : A, B x),
   (forall x : A, f x = g x) -> f = g
 OK: conditional bounds module kernel-checked; exactly two stdlib axioms; no sig_not_dec
+
+

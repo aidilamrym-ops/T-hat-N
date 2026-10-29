@@ -1,4 +1,4 @@
-################################################################################################
+﻿################################################################################################
 # OMEGA OPSI (d) -- MONTGOMERY PAIR CORRELATION / GUE CONSISTENCY
 # input = D:\Opencode AI Agent\reports\gw_spectrum_100_150.json   surrogate samples per ensemble = 2000   seed = 20260927
 ################################################################################################
@@ -181,3 +181,5 @@ target = Montgomery convolved with the estimator's own sigma_e
 TOOL STATUS: python 3.14 + numpy 2.5.2 + scipy 1.18.0 + mpmath + python-flint.
 lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN.
 seed = 20260927 (fixed for reproducibility, declared before the run).
+
+

@@ -130,3 +130,5 @@ def test_full_receipt_has_all_six_s2_cells() -> None:
         assert len(data["rbm"][b]["s1"]) == 2
     assert data["s2_extreme"]["b_min"]["n"] == 6
     assert data["s2_extreme"]["b_max"]["n"] == 6
+
+

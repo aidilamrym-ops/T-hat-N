@@ -158,3 +158,5 @@ class HodgeLattice:
             "leading_minors": [str(m) for m in minors],
             "scope": self.SCOPE,
         }
+
+

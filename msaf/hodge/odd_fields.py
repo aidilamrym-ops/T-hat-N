@@ -395,3 +395,5 @@ def jacobi_trace(n: int, p: int = 3, prec_bits: int = 256) -> dict:
         "projective": (n_aff_int - 1) // (q - 1),
         "radius": n_aff.real.rad().str(4),
     }
+
+

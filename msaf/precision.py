@@ -148,3 +148,4 @@ def log2_e() -> arb:
     callers always observe the precision they actually locked.
     """
     return 1 / arb(2).log()
+

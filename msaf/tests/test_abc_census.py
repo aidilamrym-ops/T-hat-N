@@ -202,3 +202,5 @@ def test_committed_receipt_is_locked() -> None:
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
+
+

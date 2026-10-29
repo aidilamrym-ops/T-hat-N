@@ -316,3 +316,5 @@ def test_section2_3_slack_obligation_gates_c4_c5_verdict(
     res = b.check_c5()
     assert res["section2_3_slack_ok"] is True
     assert res["passed"] is True
+
+

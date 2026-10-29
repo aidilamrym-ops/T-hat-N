@@ -115,3 +115,5 @@ def test_guard_rejects_mutations() -> None:
         text.replace(" --exclude-dir=spec_v2", "")
     )
     assert _spec_v2_sensor_violation(text.replace('test "$n" -eq 8', 'test "$n" -eq 9'))
+
+

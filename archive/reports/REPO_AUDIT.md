@@ -1,188 +1,188 @@
-# Audit Titik-Buta: Empat Repo Milik Kita (review read-only, tanpa unduh)
+﻿# Audit Titik-Buta: Empat Repo Milik Kita (review read-only, tanpa unduh)
 
 Tanggal: 2026-10-15. Metode: baca via API (metadata, listing, file),
 tanpa menjalankan kode mereka, tanpa menulis ke repo mana pun.
-Standar yang dipakai persis standar yang dipakai ke diri sendiri:
-klaim = saksi mesin + scope tertulis; sisanya ditandai.
+Standar which dipakai persis standar which dipakai ke diri sendiri:
+klaim = saksi mesin + scope tertulis; sisanya marked.
 
-Legenda: **[B-*]** blind spot (butuh perbaikan) · **[S-*]** kekuatan
-(diakui, diadopsi bila cocok) · tingkat: kritis / sedang / ringan.
+Legenda: **[B-*]** blind spot (butuh perbaikan) Â· **[S-*]** kekuatan
+(diakui, diadopsi bila cocok) Â· tingkat: kritis / sedang / ringan.
 
 ---
 
-## 1. anti-turing-pnp — verdict: teorema benar, entailment tidak ada
+## 1. anti-turing-pnp â€” verdict: teorema benar, entailment no ada
 
-**[S-AT1]** 6 teorema Lean adalah analisis elementer yang benar
-(positivitas/batas sigmoid, penghitungan indikator, 2^n > 1).
+**[S-AT1]** 6 teorema Lean adalah analisis elementer which benar
+(positivitas/limit sigmoid, penghitungan indikator, 2^n > 1).
 Hasil Z3 UNSAT atas enkoding ODE juga dibaca apa adanya: benar
-pada level enkodingnya.
+on level enkodingnya.
 
-**[B-AT1] KRITIS — tidak ada definisi P, NP, SAT, waktu-polinomial,
-reduksi, atau Cook-Levin di rantai bukti.** Berkas lengkap sudah
+**[B-AT1] KRITIS â€” no ada definisi P, NP, SAT, waktu-polinomial,
+reduksi, or Cook-Levin in rantai bukti.** Berkas lengkap already
 dibaca (`AntiTuringCore.lean`): objeknya `VectorFieldLTC`,
 `tau_LTC`, `bypass_selector`, `DiscreteTuringStep`. Ketidakhadiran
-total kosakata kompleksitas membuat "resolusi P vs NP" tidak
-ter-derive secara prinsip, bukan karena kurang langkah. O(1)
-kontinu ≠ O(1) Turing (model analog; hasil literatur komputasi
+total kosakata kompleksitas membuat "resolusi P vs NP" no
+ter-derive secara prinsip, bukan karena kurang step. O(1)
+kontinu â‰  O(1) Turing (model analog; result literatur komputasi
 analog justru menunjukkan presisi tak terbatas menyelundupkan
-infinity kembali — ironis untuk repo anti-infinity).
+infinity kembali â€” ironis for repo anti-infinity).
 Rekomendasi: turunkan headline ke "continuous relaxation bounds"
-(ini yang sebenarnya dibuktikan), ATAU formalkan jembatan
+(ini which sebenarnya dibuktikan), ATAU formalkan jembatan
 Cook-Levin (proyek raksasa). Alasan: klaim tanpa jembatan adalah
-klaim tanpa rantai bukti — kelas yang sama dengan yang kita tolak
-di repo sendiri.
+klaim tanpa rantai bukti â€” kelas which sama with which kita tolak
+in repo sendiri.
 
-**[B-AT2] SEDANG — sel "0 axiom" tak terverifikasi.** Berkas membuka
+**[B-AT2] SEDANG â€” sel "0 axiom" tak terverifikasi.** Berkas membuka
 `open Classical`, memakai `Real.sqrt`/`Real.exp` Mathlib
 (noncomputable). Prediksi terukur: `#print axioms` menghasilkan
-tiga aksioma standar (persis seperti audit 73/73 kita) — artinya
+tiga aksioma standar (persis seperti audit 73/73 kita) â€” artinya
 sel itu berarti "tanpa deklarasi axiom", BUKAN "tanpa ketergantungan
 aksioma". Rekomendasi: jalankan audit `#print axioms` (pola kita,
-30 detik) dan tulis ulang selnya. Alasan: sel yang salah membaca
+30 detik) and tulis ulang selnya. Alasan: sel which salah membaca
 membuat seluruh matriks audit diragukan.
 
-**[B-AT3] RINGAN — drift dokumen vs kode.** Laporan bilang 5 teorema;
-berkas memuat 6 (`continuous_energy_decreasing` tak terdaftar).
+**[B-AT3] RINGAN â€” drift dokumen vs kode.** Laporan bilang 5 teorema;
+file memuat 6 (`continuous_energy_decreasing` tak terdaftar).
 Rekomendasi: hitung teorema secara mekanis (regex `^theorem`),
 jangan tulis tangan. Alasan: ini persis kelas bug "baris-G1-basi"
-yang pernah kita miliki.
+which pernah kita miliki.
 
-**[B-AT4] RINGAN — konstanta mati / klaim dimensi.** `StateDim := 42`
-didefinisikan tapi struktur hanya punya 4 field (w1..w4); "untuk n
-klausa" tidak terhubung ke 42. `bypass_selector` disebut "lim" tapi
-tak ada limit yang diformalkan (jumlah 4 indikator). Rekomendasi:
-parameterisasi dimensi atau dokumentasikan 4 sebagai instans;
-ganti nama "lim" atau formalkan limitnya. Alasan: nama yang
-melebihi isi adalah klaim yang belum dibayar.
+**[B-AT4] RINGAN â€” konstanta mati / klaim dimensi.** `StateDim := 42`
+didefinisikan tapi struktur hanya punya 4 field (w1..w4); "for n
+klausa" no terhubung ke 42. `bypass_selector` disebut "lim" tapi
+tak ada limit which diformalkan (jumlah 4 indikator). Rekomendasi:
+parameterisasi dimensi or dokumentasikan 4 sebagai instans;
+ganti nama "lim" or formalkan limitnya. Alasan: nama which
+melebihi isi adalah klaim which belum dibayar.
 
-**[B-AT5] SEDANG — skrip Z3 memverifikasi enkoding, bukan kompleksitas.**
-`UNSAT` atas konsistensi ODE ≠ batas atas/bawah kompleksitas.
-Rekomendasi: catatan scope satu baris per batch (apa yang di-encode,
-apa yang TIDAK disimpulkan). Alasan: tanpa itu pembaca mengira
+**[B-AT5] SEDANG â€” skrip Z3 verifying enkoding, bukan kompleksitas.**
+`UNSAT` atas konsistensi ODE â‰  limit atas/bawah kompleksitas.
+Rekomendasi: note scope satu baris per batch (apa which in-encode,
+apa which TIDAK disimpulkan). Alasan: tanpa itu pembaca mengira
 tribunal memutuskan P vs NP.
 
 Disposisi queue TETAP: B-list formalisasi-saja. Satu-satunya
 kontribusi jujur repo ini ke P-vs-NP adalah merumuskan presisi
-GAP-nya — dan itu pekerjaan mereka, bukan kita.
+GAP-nya â€” and itu pekerjaan mereka, bukan kita.
 
 ---
 
-## 2. gw-spectral-map — verdict: teladan disiplin, temuan ringan
+## 2. gw-spectral-map â€” verdict: teladan disiplin, temuan ringan
 
-**[S-SM1]** Diakui dan patut ditiru: two-engine dengan vetting
+**[S-SM1]** Diakui and patut ditiru: two-engine with vetting
 ambiguitas eksplisit, exit code fail-closed (0/1/2), artefak KILLED
-disimpan sebagai rekor jujur, hasil negatif S2 dilaporkan
-(INCONSISTENT WITH MONTGOMERY — bukan disembunyikan), analisis biaya
+disimpan sebagai rekor jujur, result negatif S2 dilaporkan
+(INCONSISTENT WITH MONTGOMERY â€” bukan disembunyikan), analisis biaya
 level-0 vs level-1 sebelum kampanye, resume JSONL terverifikasi.
 
-**[B-SM1] SEDANG — basis data verdict S2 tidak berprovisional.**
-Status S2 INCONSISTENT dikutip, tapi kampanye penuh masih QUEUED di
-belakang OMEGA; pembaca tak bisa tahu artefak hash apa yang memberi
+**[B-SM1] SEDANG â€” basis data verdict S2 no berprovisional.**
+Status S2 INCONSISTENT dikutip, tapi kampanye penuh masih QUEUED in
+belakang OMEGA; pembaca tak bisa tahu artefak hash apa which memberi
 makan verdict itu. Rekomendasi: tiap verdict menunjuk hash artefak
-data (pola sama dengan digest transkrip pivot mereka). Alasan:
+data (pola sama with digest transkrip pivot mereka). Alasan:
 verdict tanpa data-pin adalah kalimat, bukan sertifikat.
 
-**[B-SM2] RINGAN — konstanta vetting `ambig = 1e-6 * scale` heuristik.**
-Sudah dimitigasi (cluster certificate untuk zona ketat), tapi
+**[B-SM2] RINGAN â€” konstanta vetting `ambig = 1e-6 * scale` heuristik.**
+Sudah dimitigasi (cluster certificate for zona ketat), tapi
 s sixty sensitivitasnya tak tercatat. Rekomendasi: catat variasi
-ambig ×/÷10 pada selftest dan tunjukkan verdict stabil. Alasan:
-konstanta tanpa uji sensitivitas adalah asumsi yang belum dibayar.
+ambig Ã—/Ã·10 on selftest and tunjukkan verdict stabil. Alasan:
+konstanta tanpa uji sensitivitas adalah asumsi which belum dibayar.
 
-**[B-SM3] RINGAN — konvensi endpoint bracket tak tertulis.**
+**[B-SM3] RINGAN â€” konvensi endpoint bracket tak tertulis.**
 `N(mu) = n_neg` menghitung strictly-below; bracket "(lo,hi]"
-dengan eigenvalue TEPAT di endpoint butuh konvensi yang dicetak.
+with eigenvalue TEPAT in endpoint butuh konvensi which dicetak.
 Undetermined-pivot menanganinya operasional, tapi dokumen harus
 menyatakannya. Rekomendasi: satu paragraf konvensi + satu uji
-eigenvalue-di-tepi. Alasan: ambiguitas konvensi adalah blind spot
+eigenvalue-in-tepi. Alasan: ambiguitas konvensi adalah blind spot
 klasik penghitung interval.
 
-**[B-SM4] RINGAN — `results/` tanpa manifest.** Enam JSON + rekor
-KILLED, tapi tak ada CHECKSUM/manifest terlihat (praktik yang justru
-ada di repo saudaranya). Rekomendasi: port praktik manifest ke sini.
+**[B-SM4] RINGAN â€” `results/` tanpa manifest.** Enam JSON + rekor
+KILLED, tapi tak ada CHECKSUM/manifest terlihat (praktik which justru
+ada in repo saudaranya). Rekomendasi: port praktik manifest ke sini.
 Alasan: artefak tanpa manifest bisa diganti diam-diam.
 
 ---
 
-## 3. guinand-weil-rigorous-numerics — verdict: pola kelas-satu, 2 lubang
+## 3. guinand-weil-rigorous-numerics â€” verdict: pola kelas-satu, 2 lubang
 
-**[S-GW1]** Diakui: cross-check literal README↔Lean via regex (tak
-percaya salinan tangan); file SMT single-assert yang kompatibel
-dengan auditor sirkularitas + tujuh run individual (pelajaran
-VACUOUS mereka documented!); analisis diskrepansi yang JUJUR
-(`tolerance_fails_the_coarse_bound` — teorema yang menyatakan kapan
-angka laporan TIDAK cocok, untuk mengidentifikasi norma yang
+**[S-GW1]** Diakui: cross-check literal READMEâ†”Lean via regex (tak
+percaya salinan tangan); file SMT single-assert which kompatibel
+with auditor sirkularitas + tujuh run individual (pelajaran
+VACUOUS mereka documented!); analisis diskrepansi which JUJUR
+(`tolerance_fails_the_coarse_bound` â€” teorema which menyatakan kapan
+angka report TIDAK cocok, for mengidentifikasi norma which
 dipakai); exit code 0/1/2/3; artefak SMT+log ter-commit; status tool
-per-run (coqc/isabelle/dkcheck/gcc NOT RUN — ditulis, bukan disembunyikan).
+per-run (coqc/isabelle/dkcheck/gcc NOT RUN â€” ditulis, bukan disembunyikan).
 
-**[B-GW1] SEDANG — cross-check literal memeriksa KEBERADAAN, bukan
+**[B-GW1] SEDANG â€” cross-check literal memeriksa KEBERADAAN, bukan
 ATRIBUSI.** `ok = (mant, exp10) in readme_set`: pasangan digit
-cukup MUNCUL di README di mana saja — angka rhoActual yang tertulis
-di paragraf yang salah (topik lain) tetap MATCH. Rekomendasi:
+cukup MUNCUL in README in mana saja â€” angka rhoActual which tertulis
+in paragraf which salah (topik lain) tetap MATCH. Rekomendasi:
 jangkarkan per-konstanta (nama konstanta dalam N baris dari angka,
-atau posisi seksi). Alasan: existence ≠ attribution; lubang kecil,
-probabilitas rendah, tapi tepat di gerbang yang mengklaim ketepatan.
+or posisi seksi). Alasan: existence â‰  attribution; lubang kecil,
+probabilitas rendah, tapi tepat in gerbang which mengklaim ketepatan.
 
-**[B-GW2] SEDANG — pasangan Lean↔SMT manual.** Komentar "keep names
+**[B-GW2] SEDANG â€” pasangan Leanâ†”SMT manual.** Komentar "keep names
 identical so a reader can pair them up" = pairing oleh mata.
-Rekomendasi (murah, pola kita): uji mekanis dua arah — setiap nama
-di CLAIMS ada di .lean, dan setiap teorema `norm_num` di .lean ada
-di CLAIMS (klaim tanpa pasangan = klaim tanpa audit). Alasan:
-drift pasangan adalah versi lain dari bug baris-basi kita; yang
-menangkapnya harus mesin (`audited == found` — mereka belum punya
-bentuk ini untuk pasangan klaim).
+Rekomendasi (murah, pola kita): uji mekanis dua arah â€” setiap nama
+in CLAIMS ada in .lean, and setiap teorema `norm_num` in .lean ada
+in CLAIMS (klaim tanpa pasangan = klaim tanpa audit). Alasan:
+drift pasangan adalah versi lain dari bug baris-basi kita; which
+menangkapnya harus mesin (`audited == found` â€” mereka belum punya
+bentuk ini for pasangan klaim).
 
 ---
 
-## 4. the-asymmetric-wager-msaf — verdict: gate prosa paling matang yang
+## 4. the-asymmetric-wager-msaf â€” verdict: gate prosa paling matang which
 pernah saya baca; pengencangan, bukan perbaikan
 
 **[S-MW1]** Diakui: exit 2 tak-pernah-pass; vocabulary self-guard
-(generator yang salah menghentikan gate, bukan memiringkannya);
+(generator which salah menghentikan gate, bukan memiringkannya);
 manifest memeriksa tally-nya sendiri; deteksi ghost dua arah (P6);
 map_check P8; tiap pola disertai komentar pelajaran dari miss
-terdahulu (A16-R1, F8-R1, tally_object ordering). Ini di atas praktik
-kita untuk gate prosa — tidak ada yang setara di repo kerja.
+terdahulu (A16-R1, F8-R1, tally_object ordering). Ini in atas praktik
+kita for gate prosa â€” no ada which setara in repo kerja.
 
-**[B-MW1] SEDANG — jangkar `now`, `F\d`, `A\d` terlalu permisif.**
-`anchor_window` memvalidasi SELURUH angka di baris bila SATU jangkar
-ada di ±1 baris — dan `\bnow\b` ("now" = kini!) mengesahkan riwayat.
-Baris "now 13 gates" dengan angka basi lolos. Rekomendasi: jangkar
+**[B-MW1] SEDANG â€” jangkar `now`, `F\d`, `A\d` terlalu permisif.**
+`anchor_window` memvalidasi SELURUH angka in baris bila SATU jangkar
+ada in Â±1 baris â€” and `\bnow\b` ("now" = kini!) mengesahkan riwayat.
+Baris "now 13 gates" with angka basi lolos. Rekomendasi: jangkar
 hanya tag eksplisit (tanggal/fase/versi), ATAU kedekatan per-klaim
-(jangkar dalam N karakter dari angka). Alasan: jangkar yang longgar
+(jangkar dalam N karakter dari angka). Alasan: jangkar which longgar
 mengubah gate presisi menjadi gate perasaan; catat biaya
 false-positive bila diketatkan.
 
-**[B-MW2] RINGAN — berkas non-UTF8 dilewati diam-diam.**
-`readable()` None → `continue` di `dated_claims` (hanya BRAIN yang
-dijaga exit-2). Dokumen .md non-UTF8 dengan angka basi lolos lewat
-omisi. Rekomendasi: catat SKIP eksplisit per berkas. Alasan: omisi
+**[B-MW2] RINGAN â€” file non-UTF8 dilewati diam-diam.**
+`readable()` None â†’ `continue` in `dated_claims` (hanya BRAIN which
+dijaga exit-2). Dokumen .md non-UTF8 with angka basi lolos lewat
+omisi. Rekomendasi: catat SKIP eksplisit per file. Alasan: omisi
 diam-diam adalah bentuk pass-diam-diam.
 
-**[B-MW3] RINGAN — siapa mengawasi pengawas.** Pola klaim baru di
-luar pola yang ada lolos by-design (tak ada pola = tak ada klaim
+**[B-MW3] RINGAN â€” siapa mengawasi pengawas.** Pola klaim baru in
+luar pola which ada lolos by-design (tak ada pola = tak ada klaim
 terbaca). Mereka menjawab sebagian (komentar tiap miss), tapi tak
-ada suite fixture-negatif yang terlihat di listing (tak ada dir
-tests/ di root; `harnesses/` belum diperiksa isinya).
-Rekomendasi: suite fixture yang HARUS gagal (pola anti-circularity
+ada suite fixture-negatif which terlihat in listing (tak ada dir
+tests/ in root; `harnesses/` belum diperiksa isinya).
+Rekomendasi: suite fixture which HARUS gagal (pola anti-circularity
 kita punya `tests/run_tests.py` 11 kasus sebagai contoh) + entri CI.
-Alasan: gate tanpa negatif yang gagal adalah gate yang tak bisa
-dibuktikan hidup — pelajaran yang KITA petik dengan cara keras
+Alasan: gate tanpa negatif which gagal adalah gate which tak bisa
+dibuktikan hidup â€” pelajaran which KITA petik with cara keras
 (audit 0 deklarasi).
 
 ---
 
-## 5. Yang diadopsi kembali ke repo kerja (hasil audit ini)
+## 5. Yang diadopsi kembali ke repo kerja (result audit ini)
 
-- **[ADOPT-1]** Praktik manifest untuk direktori artefak: `results/`
-  mereka (dan `reports/*.json` KITA — artefak trace kuartik!) belum
+- **[ADOPT-1]** Praktik manifest for directory artefak: `results/`
+  mereka (and `reports/*.json` KITA â€” artefak trace kuartik!) belum
   punya CHECKSUM. Dicatat sebagai peningkatan antrian, bukan klaim.
-- **[ADOPT-2]** Bentuk `audited == found` untuk pasangan klaim
-  (pelajaran B-GW2) — sudah kita miliki untuk aksioma Lean; spek CH
+- **[ADOPT-2]** Bentuk `audited == found` for pasangan klaim
+  (pelajaran B-GW2) â€” already kita miliki for aksioma Lean; spek CH
   kita (combiner vs klaim) akan mengikutinya.
 - **[ADOPT-3]** Sel status-tool per-run (NOT RUN ditulis eksplisit,
-  pola OMEGATrackC) — diadopsi untuk run berat kita (offline k=10
-  sudah mencatat elapsed; format diselaraskan berikutnya).
-## 6. FIXES APPLIED — anti-turing-pnp (2026-10-15, pushed, CI green)
+  pola OMEGATrackC) â€” diadopsi for run berat kita (offline k=10
+  already mencatat elapsed; format diselaraskan berikutnya).
+## 6. FIXES APPLIED â€” anti-turing-pnp (2026-10-15, pushed, CI green)
 
 - Kernel builds green LOCALLY (`lake env lean`, exit 0, no warnings)
   and REMOTELY (`lake build`, 8707 jobs, exit 0); `#print axioms`
@@ -207,25 +207,25 @@ dibuktikan hidup — pelajaran yang KITA petik dengan cara keras
 - The provided tokens were NOT used (gh keyring auth sufficed);
   owner to revoke them regardless.
 
-## 7. FIXES APPLIED — gw-spectral-map (2026-10-15, pushed, CI green)
+## 7. FIXES APPLIED â€” gw-spectral-map (2026-10-15, pushed, CI green)
 
 - B-SM1: S1/S2 verdict lines now point at the producing machinery
   (OMEGA gw_montgomery.py:562 + K5 fixture gw_mont_pipeline_check.py:195,256)
   and state the certified-spectrum re-run is QUEUED.
 - B-SM2: ambig sensitivity MEASURED (17/17 + 0 conflicts at 1e-7/1e-6/1e-5;
-  only granularity moves 9/1, 8/1, 7/1) — recorded, not assumed.
+  only granularity moves 9/1, 8/1, 7/1) â€” recorded, not assumed.
 - B-SM3: endpoint-convention test 5/5 PASS (exact-hit -> UNDETERMINED;
   strict-below exact); convention documented in NOTES section D.
 - B-SM4: results/MANIFEST.sha256 + stdlib verifier (roundtrip green).
 - CI added (py_compile + sm_dual + manifest + endpoint loud-SKIP +
   sibling-gated selftests). CI history honest: one CRLF/LF manifest
   failure (all 7 files flagged drifted on Linux checkouts) fixed at
-  the root (LF-normalized hashing — immune to checkout style).
+  the root (LF-normalized hashing â€” immune to checkout style).
 - Verified locally first: sm_dual PASS, sturm 10/10, brackets 17/17
-  (matches README), endpoint 5/5 — via a sibling tree wired in temp
+  (matches README), endpoint 5/5 â€” via a sibling tree wired in temp
   (nested copy), both repos otherwise untouched.
 
-## 8. FIXES APPLIED — guinand-weil-rigorous-numerics (2026-10-15, pushed, CI green)
+## 8. FIXES APPLIED â€” guinand-weil-rigorous-numerics (2026-10-15, pushed, CI green)
 
 - B-GW1: cross-check now requires ATTRIBUTION (full-precision pair
   within +-3 lines of a naming line, narrow per-constant patterns);
@@ -347,3 +347,5 @@ the owner to log in at zenodo.org and click Enable per repository; no API
 token can do it. Until that is done, future versions must be deposited by
 hand - which is what `msaf/zenodo_deposit.py` does, and it is written to
 refuse to invent a licence or a claim.
+
+

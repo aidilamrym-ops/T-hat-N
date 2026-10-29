@@ -319,9 +319,9 @@ class FluidLattice:
     def evolve_viscous_step(self, dt_str: str = "1e-43") -> int:
         """Sequential Godunov step: advect (T-hat), then aligned diffusion.
 
-        STEP 1 — pure advection: ``u_adv[idx(i,j,l)] = old[idx(i-1,j,l)]``,
+        STEP 1 â€” pure advection: ``u_adv[idx(i,j,l)] = old[idx(i-1,j,l)]``,
         one-pixel cyclic shift into a temporary array, no arithmetic.
-        STEP 2 — aligned diffusion: 7-point ``laplacian_at`` evaluated on
+        STEP 2 â€” aligned diffusion: 7-point ``laplacian_at`` evaluated on
         the ALREADY-ADVECTED field (diffusion footprint alignment), then
         ``self.u[k] = u_adv[k] + (nu*dt)*lap_adv[k]`` per component.
         Ball arithmetic only; ``float`` rejected. Advances the Planck
@@ -359,14 +359,14 @@ class FluidLattice:
     def evolve_full_ns_step(self, dt_str: str, rho_str: str = "1.0") -> int:
         """Fractional-step Navier-Stokes loop (predict + diagnose + project).
 
-        PHASE 1 — prediction: certified ``evolve_viscous_step(dt_str)``
+        PHASE 1 â€” prediction: certified ``evolve_viscous_step(dt_str)``
         (advect + diffuse, ticks advanced there, nothing else).
-        PHASE 2 — restoring pressure: ``compute_restoring_pressure(rho_str,
-        dt_str)`` solving ``Δp = (rho/dt)·div(u*)`` on the intermediate
+        PHASE 2 â€” restoring pressure: ``compute_restoring_pressure(rho_str,
+        dt_str)`` solving ``Î”p = (rho/dt)Â·div(u*)`` on the intermediate
         grid (active divergence-clearing projection, non-circular: pure
         diagnostic of the frozen intermediate field, never a residual
         claim).
-        PHASE 3 — projection correction: ``u_final = u_pred - (dt/rho)∇p``
+        PHASE 3 â€” projection correction: ``u_final = u_pred - (dt/rho)âˆ‡p``
         with central-difference pressure gradient, ball arithmetic only.
         Safeguard: divergence balls must all contain 0 afterwards
         (else :class:`ResolutionAlarm`); velocity envelopes must not
@@ -414,7 +414,7 @@ class FluidLattice:
         return self.ticks
 
     def _apply_restoring_projection(self, rho_str: str, dt_str: str) -> None:
-        """Phases 2+3: restoring pressure solve + ``u -= (dt/rho)∇p``.
+        """Phases 2+3: restoring pressure solve + ``u -= (dt/rho)âˆ‡p``.
 
         Mutates ``self.u`` in place; tick count untouched (re-evaluation
         of the same instant, not new time). Ball arithmetic only.
@@ -525,14 +525,14 @@ class FluidLattice:
                         return False
         return True
 
-    # -- Spectral/circulant Poisson pressure: p = -rho Δ^{-1} tr(G²) --
+    # -- Spectral/circulant Poisson pressure: p = -rho Î”^{-1} tr(GÂ²) --
     def _spectral_poisson_direct(self, src: list[arb]) -> list[arb]:
         """Single-shot circulant inverse via separable unitary 1D DFT (acb).
 
         The periodic 7-point Laplacian is block-circulant, diagonalised by
         the 3D Fourier basis with analytic eigenvalues
-        ``lam = (2/dx²)(3 - cos2πfx/N - cos2πfy/N - cos2πfz/N)`` from
-        exact ``cos_pi`` balls; Δ itself carries ``-lam``, so each mode
+        ``lam = (2/dxÂ²)(3 - cos2Ï€fx/N - cos2Ï€fy/N - cos2Ï€fz/N)`` from
+        exact ``cos_pi`` balls; Î” itself carries ``-lam``, so each mode
         is divided by ``-lam``. Zero mode pinned to 0 (gauge). Forward
         and inverse transforms use hand-built unitary matrices
         (``1/sqrt(N)`` from integer balls); no ``float()`` anywhere.
@@ -618,7 +618,7 @@ class FluidLattice:
         return out
 
     def _residual_mids_width(self, p: list[arb], src: list[arb]) -> tuple[list[arb], arb]:
-        """Residual ``R = Δp - src``: per-cell mids and ``w = max(R.rad())``."""
+        """Residual ``R = Î”p - src``: per-cell mids and ``w = max(R.rad())``."""
         n = self.n
         invdx2 = arb(1) / (self.dx * self.dx)
         six = arb(6)
@@ -640,14 +640,14 @@ class FluidLattice:
                     mids[k] = r.mid()
         return mids, w
     def compute_restoring_pressure(self, rho_str: str, dt_str: str) -> list[arb]:
-        """True restoring projection pressure: ``Δp = (rho/dt)·div(u*)``.
+        """True restoring projection pressure: ``Î”p = (rho/dt)Â·div(u*)``.
 
         Source from the certified divergence of the CURRENT (intermediate)
         field: ``src[k] = (rho/dt) * divergence_at(i,j,l)``. Inverted with
         the active ``_spectral_poisson_direct`` circulant infrastructure
         under pure ``arb`` confinement (zero-mean gauge, single shot).
-        Correcting with ``(dt/rho)∇p`` then clears discrete divergence by
-        construction: ``div(u_new) = div(u*) - (dt/rho)Δp = 0`` up to ball
+        Correcting with ``(dt/rho)âˆ‡p`` then clears discrete divergence by
+        construction: ``div(u_new) = div(u*) - (dt/rho)Î”p = 0`` up to ball
         enclosure. No ``float()`` at any point.
         """
         _reject_float(rho_str, "rho_str")
@@ -671,15 +671,15 @@ class FluidLattice:
     def compute_pressure_field(
         self, rho_str: str = "1.0", tolerance_str: str = "1e-73", max_iters: int = 1000
     ) -> list[arb]:
-        """Discrete pressure field over all N³ cells as Arb balls.
+        """Discrete pressure field over all NÂ³ cells as Arb balls.
 
-        Source from certified gradients: ``src = -rho*Σ_{a,b} G[b][a]*G[a][b]``
-        with ``G = gradient_at(i,j,l)``. Inverse Laplacian Δ^{-1} via a
+        Source from certified gradients: ``src = -rho*Î£_{a,b} G[b][a]*G[a][b]``
+        with ``G = gradient_at(i,j,l)``. Inverse Laplacian Î”^{-1} via a
         spectral-direct circulant solve (separable unitary DFT, analytic
         eigenvalues) followed by dual-gate damped-Jacobi polish, ball
         arithmetic only. No ``float()``, no rounding primitive.
 
-        Dual-Gate Convergence (per sweep k, residual ``R = Δp - src``,
+        Dual-Gate Convergence (per sweep k, residual ``R = Î”p - src``,
         ``w_k = max(R.rad())``, ``s_k = max|mid(R_k)-mid(R_{k-1})|``):
 
         - PASS: return only when ``w_k`` lies strictly below
@@ -696,7 +696,7 @@ class FluidLattice:
         limit cycle on even periodic grids (adjacency eigenvalue -6 gives
         iteration eigenvalue exactly -1), so gate B would be
         unsatisfiable without damping. Damping keeps the identical fixed
-        point ``6p = hood - dx²·src`` while contracting every non-gauge
+        point ``6p = hood - dxÂ²Â·src`` while contracting every non-gauge
         mode (optimal rate 5/7 over the discrete spectrum).
 
         The sweep count of the last solve is kept on
@@ -906,11 +906,11 @@ class FluidLattice:
 
     # -- Vorticity (curl) computation --
     def curl_at(self, i: int, j: int, l: int) -> tuple[arb, arb, arb]:
-        """Vorticity ω = ∇ × u at cell (i,j,l) using central differences.
+        """Vorticity Ï‰ = âˆ‡ Ã— u at cell (i,j,l) using central differences.
         
-        ω_x = ∂_y u_z - ∂_z u_y
-        ω_y = ∂_z u_x - ∂_x u_z
-        ω_z = ∂_x u_y - ∂_y u_x
+        Ï‰_x = âˆ‚_y u_z - âˆ‚_z u_y
+        Ï‰_y = âˆ‚_z u_x - âˆ‚_x u_z
+        Ï‰_z = âˆ‚_x u_y - âˆ‚_y u_x
         
         Central differences with periodic boundary conditions.
         Ball arithmetic only.
@@ -918,37 +918,37 @@ class FluidLattice:
         inv2dx = arb(1) / (arb(2) * self.dx)
         n = self.n
         
-        # ∂_y u_z
+        # âˆ‚_y u_z
         uz_py = self.cell(i, j + 1, l)[2]
         uz_my = self.cell(i, j - 1, l)[2]
         duy_dz = (uz_py - uz_my) * inv2dx
         
-        # ∂_z u_y
+        # âˆ‚_z u_y
         uy_pz = self.cell(i, j, l + 1)[1]
         uy_mz = self.cell(i, j, l - 1)[1]
         duy_dy = (uy_pz - uy_mz) * inv2dx
         
-        # ∂_z u_x
+        # âˆ‚_z u_x
         ux_pz = self.cell(i, j, l + 1)[0]
         ux_mz = self.cell(i, j, l - 1)[0]
         dux_dz = (ux_pz - ux_mz) * inv2dx
         
-        # ∂_x u_z
+        # âˆ‚_x u_z
         uz_px = self.cell(i + 1, j, l)[2]
         uz_mx = self.cell(i - 1, j, l)[2]
         duz_dx = (uz_px - uz_mx) * inv2dx
         
-        # ∂_x u_y
+        # âˆ‚_x u_y
         uy_px = self.cell(i + 1, j, l)[1]
         uy_mx = self.cell(i - 1, j, l)[1]
         duy_dx = (uy_px - uy_mx) * inv2dx
         
-        # ∂_y u_x
+        # âˆ‚_y u_x
         ux_py = self.cell(i, j + 1, l)[0]
         ux_my = self.cell(i, j - 1, l)[0]
         dux_dy = (ux_py - ux_my) * inv2dx
         
-        # ω = ∇ × u
+        # Ï‰ = âˆ‡ Ã— u
         wx = duy_dz - duy_dy
         wy = dux_dz - duz_dx
         wz = duy_dx - dux_dy
@@ -956,7 +956,7 @@ class FluidLattice:
         return (wx, wy, wz)
     
     def vorticity_field(self) -> list[tuple[arb, arb, arb]]:
-        """Vorticity field ω = ∇ × u for all cells."""
+        """Vorticity field Ï‰ = âˆ‡ Ã— u for all cells."""
         n = self.n
         ncells = self.ncells
         omega: list[tuple[arb, arb, arb]] = [(arb(0), arb(0), arb(0))] * ncells
@@ -968,7 +968,7 @@ class FluidLattice:
         return omega
     
     def max_vorticity_magnitude(self) -> arb:
-        """Maximum |ω| over all cells."""
+        """Maximum |Ï‰| over all cells."""
         omega = self.vorticity_field()
         max_mag = arb(0)
         for wx, wy, wz in omega:
@@ -979,7 +979,7 @@ class FluidLattice:
         return max_mag
     
     def max_vorticity_component(self) -> arb:
-        """Maximum |ω_i| component over all cells."""
+        """Maximum |Ï‰_i| component over all cells."""
         omega = self.vorticity_field()
         max_comp = arb(0)
         for wx, wy, wz in omega:
@@ -991,13 +991,13 @@ class FluidLattice:
         return max_comp
     
     def vorticity_divergence_max(self) -> arb:
-        """Max |∇·ω| over all cells (should be zero analytically)."""
+        """Max |âˆ‡Â·Ï‰| over all cells (should be zero analytically)."""
         n = self.n
         max_div = arb(0)
         for i in range(self.n):
             for j in range(self.n):
                 for k in range(self.n):
-                    # ∇·ω = ∂_x ω_x + ∂_y ω_y + ∂_z ω_z
+                    # âˆ‡Â·Ï‰ = âˆ‚_x Ï‰_x + âˆ‚_y Ï‰_y + âˆ‚_z Ï‰_z
                     # Using finite differences on the vorticity field
                     wx_px = self.curl_at(i + 1, j, k)[0]
                     wx_mx = self.curl_at(i - 1, j, k)[0]
@@ -1015,3 +1015,5 @@ class FluidLattice:
                     if div_omega.abs_upper() > max_div:
                         max_div = div_omega.abs_upper()
         return max_div
+
+

@@ -159,3 +159,5 @@ class Server:
                 if req_id is not None and isinstance(request.get("method"), str):
                     self._error(req_id, -32603, f"internal error: {exc}")
         self._log(f"server exit pid={os.getpid()}")
+
+

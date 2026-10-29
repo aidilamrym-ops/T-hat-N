@@ -313,14 +313,14 @@ def build_s10_svg(s10: dict) -> str:
              % (x, H - B + 32, SLATE, FONT, ext["pooled_k"],
                 ext["pooled_n"]))
     p.append('<text x="%d" y="14" font-size="11" fill="#1c2433" '
-             'style="%s">homogeneity %s² = %.4f (df %d), p = %s → %s'
+             'style="%s">homogeneity %sÂ² = %.4f (df %d), p = %s â†’ %s'
              '</text>'
              % (L, FONT, CHI, ext["homogeneity_stat"],
                 ext["homogeneity_df"], f5(ext["homogeneity_p"]),
                 ext["classification"].split(" (")[0]))
     p.append('<text x="%d" y="14" font-size="11" fill="%s" '
-             'text-anchor="end" style="%s">S5 sealed (blue) · S10 new '
-             '(amber) · pooled (rose)</text>' % (W - R, SLATE, FONT))
+             'text-anchor="end" style="%s">S5 sealed (blue) Â· S10 new '
+             '(amber) Â· pooled (rose)</text>' % (W - R, SLATE, FONT))
     p.append('</svg>')
     return "".join(p)
 
@@ -347,22 +347,22 @@ def build_res4_svg(res4: dict) -> str:
              'stroke-width="2"/>'
              % (x0 + wp, y - 6, x0 + wp, y + h + 6, ROSE))
     p.append('<text x="%d" y="%d" font-size="11" fill="%s" '
-             'style="%s">LDL^T pivot census — dim %d · Route S ladder · '
+             'style="%s">LDL^T pivot census â€” dim %d Â· Route S ladder Â· '
              'c = %d, N = %d, 6000 bit</text>'
              % (x0, 26, SLATE, FONT, dim, r["c"], r["N"]))
     p.append('<text x="%.1f" y="%d" font-size="10.5" fill="%s" '
              'style="%s">pivot %d</text>'
              % (x0 + wp + 4, y - 8, ROSE, FONT, r["undetermined_pivot"]))
     p.append('<text x="%d" y="%d" font-size="11.5" fill="#1c2433" '
-             'style="%s">n_neg = %d · entries finite = %s · first '
-             'undetermined pivot: %d → UNDETERMINED at pivot %d '
+             'style="%s">n_neg = %d Â· entries finite = %s Â· first '
+             'undetermined pivot: %d â†’ UNDETERMINED at pivot %d '
              '(non-PD outcome; the statistics of this point end here)'
              '</text>'
              % (x0, y + h + 24, FONT, r["n_neg"],
                 str(r["entries_finite"]).lower(),
                 r["undetermined_pivot"], r["undetermined_pivot"]))
     p.append('<text x="%d" y="%d" font-size="11" fill="%s" '
-             'style="%s">build %.2f s · LDL^T %.2f s · total %.2f s '
+             'style="%s">build %.2f s Â· LDL^T %.2f s Â· total %.2f s '
              '(launcher elapsed 1791 s)</text>'
              % (x0, y + h + 40, SLATE, FONT, r["build_s"], r["ldlt_s"],
                 r["total_s"]))
@@ -784,3 +784,5 @@ def main(argv: list) -> int:
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv))
+
+

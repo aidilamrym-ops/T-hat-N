@@ -112,3 +112,5 @@ def test_lean_has_no_placeholders() -> None:
     text = LEAN.read_text(encoding="utf-8")
     for token in ("sorry", "admit", "axiom ", "Abort"):
         assert token not in text, token
+
+

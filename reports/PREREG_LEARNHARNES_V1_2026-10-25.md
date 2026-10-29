@@ -1,6 +1,6 @@
-# Pra-registrasi Learnharness v1 — simple deterministic stub
+﻿# Pra-registrasi Learnharness v1 â€” simple deterministic stub
 
-**Status:** PRE‑REG, locked before any code.  Intended to replace the prototype with a minimal, certified learning engine that does not use floats, numpy, or external ML libraries.  The engine stores the length of training data and returns an identity matrix of appropriate size on `predict`.  No claim of real‑world performance; only deterministic behavior.
+**Status:** PREâ€‘REG, locked before any code.  Intended to replace the prototype with a minimal, certified learning engine that does not use floats, numpy, or external ML libraries.  The engine stores the length of training data and returns an identity matrix of appropriate size on `predict`.  No claim of realâ€‘world performance; only deterministic behavior.
 
 ## Locked parameters
 
@@ -20,3 +20,5 @@
 | `reports/PREREG_LEARNHARNES_V1_2026-10-25.md` | prereg file |
 
 All hashes will be recorded in the receipt and later in `FENCE_REGISTRY.md`.
+
+

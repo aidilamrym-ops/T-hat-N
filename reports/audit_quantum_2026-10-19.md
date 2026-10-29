@@ -1,4 +1,4 @@
-# Quantum audit 2026-10-19
+﻿# Quantum audit 2026-10-19
 
 Status: **statistical layer reproduced**.
 
@@ -10,7 +10,7 @@ replace the certified interval layer.
 
 ## Bin counts (expected 1250 per bin)
 
-| File | b0 | b1 | b2 | b3 | b4 | b5 | b6 | b7 | b8 | b9 | b10 | b11 | b12 | b13 | b14 | b15 | χ² | tail z≥3.5 |
+| File | b0 | b1 | b2 | b3 | b4 | b5 | b6 | b7 | b8 | b9 | b10 | b11 | b12 | b13 | b14 | b15 | Ï‡Â² | tail zâ‰¥3.5 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | stats_d201.bin | 1229 | 1233 | 1270 | 1236 | 1237 | 1284 | 1278 | 1279 | 1278 | 1248 | 1241 | 1272 | 1199 | 1250 | 1216 | 1250 | 7.508800 | 2 |
 | stats_d301.bin | 1256 | 1203 | 1288 | 1267 | 1263 | 1205 | 1271 | 1220 | 1222 | 1218 | 1291 | 1251 | 1233 | 1277 | 1254 | 1281 | 10.398400 | 4 |
@@ -18,7 +18,7 @@ replace the certified interval layer.
 
 ## Verdict
 
-| File | Samples | Mean | Std | χ² | Window | Passed |
+| File | Samples | Mean | Std | Ï‡Â² | Window | Passed |
 |---|---:|---:|---:|---:|---|---|
 | stats_d201.bin | 20000 | -0.005927863 | 0.997875056 | 7.508800 | [0.0, 60.0] | PASS |
 | stats_d301.bin | 20000 | 0.004626308 | 1.005679575 | 10.398400 | [0.0, 60.0] | PASS |
@@ -165,3 +165,5 @@ Overall: **RESOLVED**.
   "summary": "RESOLVED"
 }
 ```
+
+

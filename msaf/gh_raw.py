@@ -11,3 +11,5 @@ with urllib.request.urlopen(req) as r:
 open(dest, "wb").write(blob)
 print("%s: %d bytes, CRLF=%d, LF=%d"
       % (dest, len(blob), blob.count(b"\r\n"), blob.count(b"\n")))
+
+

@@ -71,3 +71,5 @@ def verify_multi_grid_pivot_stability(
         "min_half_width": min_w.str(10) if min_w is not None else "n/a",
         "max_half_width": max_w.str(10) if max_w is not None else "n/a",
     }
+
+

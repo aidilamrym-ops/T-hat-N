@@ -68,3 +68,4 @@ def test_receipt_matches_disk() -> None:
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
+

@@ -91,3 +91,5 @@ def test_registry_entries_are_wellformed() -> None:
             assert CERT_RE.search(joined), (
                 "CERTIFIED entry without a certificate line: %r"
                 % (body[0] if body else ""))
+
+

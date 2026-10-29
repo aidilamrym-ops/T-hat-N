@@ -80,3 +80,4 @@ def fermat_k3_report(prime: int, degree: int = 11) -> dict:
         "K3 surfaces in general or about the Hodge conjecture."
     )
     return {"text": "\n".join(lines), "detail": out}
+

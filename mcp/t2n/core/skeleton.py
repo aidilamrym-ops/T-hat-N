@@ -55,3 +55,5 @@ def serve_generic(name: str, description: str,
     all_tools = builtin_tools + list(tools or [])
     all_handlers = {**builtin_handlers, **(handlers or {})}
     Server(name, description, all_tools, all_handlers).serve()
+
+

@@ -58,3 +58,4 @@ def main(degrees=(9, 10)) -> None:
 
 if __name__ == "__main__":
     main()
+

@@ -2,7 +2,7 @@
 """Guard for the Q1 BSD pilot: 2-descent + modular symbols.
 
 The guard locks the 2-descent rank-zero check, the modular symbol
-L(E,1)/Ω computation, and the BSD identity for the 5 pilot curves.
+L(E,1)/Î© computation, and the BSD identity for the 5 pilot curves.
 """
 
 from __future__ import annotations
@@ -107,3 +107,4 @@ def test_core_has_no_float_or_numpy() -> None:
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
+

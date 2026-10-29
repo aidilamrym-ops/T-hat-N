@@ -494,3 +494,4 @@ def verify_unitarity(t_matrix: arb_mat) -> CommutationAudit:
         else "FAIL: residual does not contain zero",
         mandate=MANDATE,
     )
+

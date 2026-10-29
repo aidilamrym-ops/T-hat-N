@@ -488,3 +488,5 @@ def write_bracket_report(path, dossier: dict):
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(dossier, indent=2), encoding="utf-8")
     return target
+
+

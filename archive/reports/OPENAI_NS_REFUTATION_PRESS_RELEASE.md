@@ -1,4 +1,4 @@
-# Scope notice (binding, read first)
+﻿# Scope notice (binding, read first)
 
 A draft title for this file proposed an "adversarial metrological
 refutation" of an external party's hydrodynamics. That title is
@@ -43,3 +43,5 @@ ball arithmetic, zero float64, Planck-tick time accounting:
 
 Suite at seal: main `137 passed`, isolated `34 passed`, exit 0.
 Commit range dcae3a2..bb34b52, tags v1.7.5-alpha / v1.7.6-alpha.
+
+

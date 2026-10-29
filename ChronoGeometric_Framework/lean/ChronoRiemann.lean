@@ -29,9 +29,19 @@ def simulate_riemann (n : MyNat) : ChronoState :=
     Applying `collapse_to_harmony` collapses the complex sign‑budget shape to a single point
     while preserving the numeric index and the time step. -/
 
+theorem sign_budget_shape_is_space (n : MyNat) :
+    ∃ lst, sign_budget_shape n = Shape.space lst := by
+  induction n with
+  | zero => exact ⟨[], rfl⟩
+  | succ n ih =>
+    rcases ih with ⟨lst, h⟩
+    exact ⟨Shape.point :: lst, by
+      rw [sign_budget_shape, h]⟩
+
 theorem riemann_instant_reduction (n : MyNat) :
     collapse_to_harmony (simulate_riemann n) =
       { value := n,
         shape := Shape.point,
-        time  := Chronon.next Chronon.now } :=
-  rfl
+        time  := Chronon.next Chronon.now } := by
+  rcases sign_budget_shape_is_space n with ⟨lst, h⟩
+  simp [simulate_riemann, h, collapse_to_harmony]

@@ -1,17 +1,17 @@
-# SYSTEM PROMPT: STAGE 4 - CONTAINMENT PROOF & ASYMPTOTIC CLOSURE
+﻿# SYSTEM PROMPT: STAGE 4 - CONTAINMENT PROOF & ASYMPTOTIC CLOSURE
 
-> **STATUS: HISTORIS — JANGAN DIEKSEKUSI SEBAGAI TUGAS BARU (D4, 2026-10-27).**
-> Prompt scaffold ini superseded dan tidak mendefinisikan klaim aktif:
+> **STATUS: HISTORIS â€” JANGAN DIEKSEKUSI SEBAGAI TUGAS BARU (D4, 2026-10-27).**
+> Prompt scaffold ini superseded and no mendefinisikan klaim aktif:
 > lingkup P2 hanya diagonal `XC` matriks; menyebut proyek "formal Riemann
-> Hypothesis claim" sesuai langkah 4 prompt ini adalah bacaan salah.
-> Implementasi aktif hidup di `lean/` dan `msaf/`;
-> `Stage_4_Containment_Proof.lean` dipertahankan sebagai artefak historis —
-> hash-nya tersegel di `reports/FENCE_REGISTRY.md` entri `T-2026-0050`,
-> jangan diedit atau dihapus; receipt Stage 4 historis (byte identik dengan
+> Hypothesis claim" sesuai step 4 prompt ini adalah bacaan salah.
+> Implementasi aktif hidup in `lean/` and `msaf/`;
+> `Stage_4_Containment_Proof.lean` dipertahankan sebagai artefak historis â€”
+> hash-nya tersegel in `reports/FENCE_REGISTRY.md` entri `T-2026-0050`,
+> jangan diedit or dihapus; receipt Stage 4 historis (byte identik with
 > commit `a55fe79`). Menjalankan kembali prompt ini tanpa pra-registrasi
-> dan keputusan pemilik yang tercatat di `reports/DECISION_LOG.md`
+> and keputusan pemilik which tercatat in `reports/DECISION_LOG.md`
 > melanggar aturan repo. Rujukan: `AGENTS.md` (arsip `RH_SCAFFOLD_NOTES`
-> historis) dan `reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md`.
+> historis) and `reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md`.
 
 ## IDENTITY & OPERATIONAL STANCE
 You act as an Adversarial Computational Formalizer & Lean 4 Structural Auditor. Your tone is cold, precise, and highly skeptical. Your objective is to execute the final holographic closure, merging the finite-lattice measurements with the analytical tail bounds to lift the project status to a formal Riemann Hypothesis claim.
@@ -30,9 +30,9 @@ The finite-lattice kernel has locked the numerical derivative mismatch down to 2
 import Mathlib.Algebra.Order.Ring.Basic
 
 -- Final asymptotic closure: The finite measurement floor overrides the infinite tail error
-theorem msaf_final_asymptotic_closure (λ_min : ℝ) (h_measured : 0 < λ_min) 
-    (ε_tail : ℝ) (h_tail : ε_tail < λ_min) (h_pos_tail : 0 ≤ ε_tail) : 
-    λ_min - ε_tail > 0 := {
+theorem msaf_final_asymptotic_closure (Î»_min : â„) (h_measured : 0 < Î»_min) 
+    (Îµ_tail : â„) (h_tail : Îµ_tail < Î»_min) (h_pos_tail : 0 â‰¤ Îµ_tail) : 
+    Î»_min - Îµ_tail > 0 := {
   -- Absolute closure: Infinite tail error has zero capacity to pull the spectrum below zero
   sub_pos.mpr h_tail
 }
@@ -47,13 +47,15 @@ Execute the #print axioms audit command immediately after compilation. The outpu
 - **Stage 4** scaffold added and **kernel-checked PASS** with Lean 4.33.1 / Mathlib `0df444a360`.
 - Lean file: `Stage_4_Containment_Proof.lean`
 - SHA-256LF: `622caed5f30e3fa5b20fe009d68fdfbcef66c71ebf35d2d932498d09e289c1b4`
-- Scope: only the placeholder predicate `TestFunctionInL2 := True` and its trivial proof are checked. This is **not** an L² containment proof and not an RH result.
-- Import migration: `Topology.Algebra.Module` → `Topology.Algebra.Module.Basic`; `MeasureTheory.Measure.Lebesgue` → `MeasureTheory.Measure.Lebesgue.Basic`.
+- Scope: only the placeholder predicate `TestFunctionInL2 := True` and its trivial proof are checked. This is **not** an LÂ² containment proof and not an RH result.
+- Import migration: `Topology.Algebra.Module` â†’ `Topology.Algebra.Module.Basic`; `MeasureTheory.Measure.Lebesgue` â†’ `MeasureTheory.Measure.Lebesgue.Basic`.
 
 ---
 
 > **Catatan 2026-10-26.** Dokumen ini adalah arsip prompt 2026-10-25.
-> Berkas Lean `Stage_4_Containment_Proof.lean` di folder yang sama sudah
-> ditulis ulang dan sekarang membuktikan `test_function_l2_containment`
-> (bukan `TestFunctionInL2 := True`). Status implementasi saat ini ada di
-> `reports/GW_TAIL_CONSTANTS_2026-10-26.md` dan registry `T-2026-0050`.
+> Berkas Lean `Stage_4_Containment_Proof.lean` in folder which sama already
+> ditulis ulang and sekarang membuktikan `test_function_l2_containment`
+> (bukan `TestFunctionInL2 := True`). Status implementasi saat ini ada in
+> `reports/GW_TAIL_CONSTANTS_2026-10-26.md` and registry `T-2026-0050`.
+
+

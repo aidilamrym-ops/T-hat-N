@@ -1,4 +1,4 @@
-# Resolution series, fourth point -- pre-registration (dim 501)
+﻿# Resolution series, fourth point -- pre-registration (dim 501)
 
 Date: 2026-10-17 (local). Status: **PRE-REGISTERED BEFORE ANY 501
 COMPUTATION.** At the time of this declaration no 501 eigenvalue, no 501
@@ -180,3 +180,5 @@ log `reports/res4_dim501_launch_2026-10-17.log` record the time ordering.
   time must be later than the add-commit time of this file.
 
 Declared by the analysis session on 2026-10-17, before launch.
+
+

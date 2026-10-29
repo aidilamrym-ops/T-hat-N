@@ -1,4 +1,4 @@
-# P1 audit — pre-registration (BB(5) = 47,176,870, bbchallenge / Coq-BB5)
+﻿# P1 audit â€” pre-registration (BB(5) = 47,176,870, bbchallenge / Coq-BB5)
 
 Date: 2026-10-18 (local). Status: **PRE-REGISTERED BEFORE ANY AUDIT
 EXECUTION.** At the time of this declaration no simulation of any
@@ -14,19 +14,19 @@ not result.
 
 - Target claims (exact, as published):
   - **C1: S(5) = 47,176,870.**
-  - **C2: Σ(5) = 4,098.**
+  - **C2: Î£(5) = 4,098.**
 - Depots of record:
   - Formal artifact: Zenodo release **Coq-BB5 v1.0.0**
     (DOI `10.5281/zenodo.17061968`), file md5s pinned from the Zenodo
-    API (recon §1 S2); sibling repository pinned at commit
-    `9142e219229baf2245d3f70851947230ea28a318` (recon §1 S1).
+    API (recon Â§1 S2); sibling repository pinned at commit
+    `9142e219229baf2245d3f70851947230ea28a318` (recon Â§1 S1).
   - Published values: BusyBeaverWiki BB(5) oldid `9024`, 5-state winner
     oldid `4369`, BB(2) oldid `5358`, BB(3) oldid `8372` (CC BY);
     P. Michel "Behavior of busy beavers"; arXiv:2509.12337v2.
-- What this audit checks (frozen item list, §2): witness replay (W),
+- What this audit checks (frozen item list, Â§2): witness replay (W),
   statement transcription (S), hygiene scan (H), enumeration-file
-  replay for BB(3) (E), release/repository weld (P), and — optionally,
-  owner-gated, post-sweep — proof rebuild (R).
+  replay for BB(3) (E), release/repository weld (P), and â€” optionally,
+  owner-gated, post-sweep â€” proof rebuild (R).
 - Out of scope (explicit): the universal direction ("no 5-state machine
   beats 47,176,870") is NOT verified by items W/S/H/E/P; the hygiene
   scan is textual, not a kernel check; no claim about Coq's own
@@ -36,41 +36,41 @@ not result.
 
 ## 2. Audit items (frozen definitions) and their maximum labels
 
-- **W — witness replay.** Both published halt witnesses (the S champion
-  and the Σ champion) are simulated on the all-zero tape by two
+- **W â€” witness replay.** Both published halt witnesses (the S champion
+  and the Î£ champion) are simulated on the all-zero tape by two
   independent engines committed with this file; the full validation
   battery (Appendix A) must reproduce its published run lengths and
   ones counts first. Maximum label: *"both published halt witnesses
   replayed exactly by two independent in-repo engines; every battery
   entry reproduced its published run length and ones count."* This is
   a finite arithmetic check, not a peer review and not a proof.
-- **S — statement transcription.** `CoqBB5/BB5/BB5_Statement.v` is
+- **S â€” statement transcription.** `CoqBB5/BB5/BB5_Statement.v` is
   re-fetched from the pinned commit, hashed (sha256LF), and its claim
   content transcribed with line numbers into the report. Maximum label:
   *"the isolated statement file at the pinned commit was downloaded,
   hashed, and transcribed; it defines BB5 as 47176870 and states
   upper-bound-forall plus lower-bound-exists over its own semantics."*
   No claim that the statement is proved.
-- **H — hygiene scan.** A textual scan of the pinned tree for proof
+- **H â€” hygiene scan.** A textual scan of the pinned tree for proof
   escapes (`Admitted`, `admit`, `Axiom(+s)`, `Parameter(+s)`,
   `Conjecture`, `Hypothesis`, `Abort`). Maximum label: *"a textual scan
   of the pinned tree found the recorded hit list; this is not a kernel
   check and no statement about proof correctness is made."*
-- **E — enumeration-file replay (BB3, secondary).** The published
+- **E â€” enumeration-file replay (BB3, secondary).** The published
   `BB3_verified_enumeration.csv` from the same release is parsed,
   structurally checked, and every `halt` row is replayed by both
   engines; maxima are compared against published BB(3) values under a
-  frozen decision table (§6). Maximum label: *"the published BB(3)
+  frozen decision table (Â§6). Maximum label: *"the published BB(3)
   enumeration file was replayed row-by-row for its halting rows; its
   maxima behave as recorded in the report; this is not an independent
   enumeration and proves no non-halting claim."*
-- **P — release/repository weld.** The Zenodo `Coq-BB5-1.0.0.tar.gz`
+- **P â€” release/repository weld.** The Zenodo `Coq-BB5-1.0.0.tar.gz`
   is downloaded, md5-verified against the Zenodo API value,
   sha256-recorded, and compared file-by-file against a clone at the
   pinned commit. Maximum label: *"the archival release archive was
   compared to the pinned repository commit; differences are listed
   verbatim."* No verdict beyond the listing.
-- **R — proof rebuild (OPTIONAL; owner-gated; after sweep).** Rebuild
+- **R â€” proof rebuild (OPTIONAL; owner-gated; after sweep).** Rebuild
   Coq-BB5 with vanilla Coq 8.20.1 on this host, capture the build
   transcript and the axiom-dependency print at end of compilation.
   Maximum label: *"the proof was rebuilt with Coq 8.20.1 on this host;
@@ -89,7 +89,7 @@ not result.
   `---` = undefined). Start: all-zero tape, head at position 0, state
   A. Every executed clause counts as one step, including a clause whose
   target is Z (write and move are performed, then the machine halts).
-  S = executed clauses; Σ = 1s on tape at halt. A `---` read halts the
+  S = executed clauses; Î£ = 1s on tape at halt. A `---` read halts the
   machine without write/move and is not counted (supported for item E).
 - Battery: Appendix A (15 entries; 2 are the primaries). Acceptance:
   every entry must match its published (steps, ones) exactly.
@@ -98,7 +98,7 @@ not result.
   outputs; runs 2 are byte-compared for determinism (engines emit
   timing only to stdout, never into the JSON). Cross-check: the two
   canonical JSONs must agree on every (label, steps, ones). Any
-  mismatch → §8.
+  mismatch â†’ Â§8.
 - Commands (from repo root, in WSL):
   `python3 audit_bb5/bb5_engine_p.py --out reports/audit_bb5_witnesses_p_2026-10-18.json`
   `python3 audit_bb5/bb5_engine_q.py --out reports/audit_bb5_witnesses_q_2026-10-18.json`
@@ -110,9 +110,9 @@ not result.
 - Command: `curl -sSfL <raw.githubusercontent.com URL of BB5_Statement.v
   at the pinned commit>` into a temp file; then
   `python3 audit_bb5/artifact_checks.py sha256lf <file>`; `wc -l -c`.
-- The transcription already recorded in recon §3 is compared against
+- The transcription already recorded in recon Â§3 is compared against
   the downloaded bytes (the quoted fragments must occur verbatim); any
-  divergence → §8. The sha256LF is recorded in the final report; no
+  divergence â†’ Â§8. The sha256LF is recorded in the final report; no
   other interpretation of the file is attempted in Phase A.
 
 ## 5. H protocol (frozen)
@@ -132,7 +132,7 @@ not result.
   recorded as-is.
 - Reference claim for later comparison (recorded now, not treated as
   evidence): the Coq-BB5 README states the proof depends only on
-  `functional_extensionality_dep` (recon §2). A full assumptions check
+  `functional_extensionality_dep` (recon Â§2). A full assumptions check
   requires Coq and belongs to item R only.
 
 ## 6. E protocol (frozen)
@@ -147,14 +147,14 @@ not result.
   1,000,000). X = max executed steps, Y = max ones, with full argmax
   lists. Engine P and Q must agree on (X, Y, argmax sets).
 - E3 (decision table, frozen):
-  - X in {20, 21} and Y in {5, 6} → CONSISTENT; sub-note: X = 20 is
+  - X in {20, 21} and Y in {5, 6} â†’ CONSISTENT; sub-note: X = 20 is
     recorded as the documented one-step difference between partial
     (`---`) encoding counts and the standard counting (cf. the
     `HaltsAtPlusOne` note in `BB5_Statement.v`), X = 21 as EXACT; the
     exact (X, Y) and argmax machines are quoted in the report.
-  - anything else → DISCREPANCY (§8).
+  - anything else â†’ DISCREPANCY (Â§8).
   - a `halt` row not halting within the cap, or any engine crash on a
-    row → DISCREPANCY.
+    row â†’ DISCREPANCY.
 - E4 (informational probes, presence not required): the partial forms
   `1RB---_1LB0RC_1LC1LA` and `1RB---_0RC1RB_1LC1LA`, and the Z-form
   wiki champion strings, are looked up and their presence/absence
@@ -172,7 +172,7 @@ not result.
 - Output JSON lists only-in-tar / only-in-clone / changed (relative
   paths + hashes). Recorded a priori as hypothesis, not expectation:
   the archive was created 2025-09-05, the pinned commit is 2025-09-20
-  (a later README bibliography edit is known to exist), so ≥ 1 changed
+  (a later README bibliography edit is known to exist), so â‰¥ 1 changed
   file is plausible; whatever the listing shows is quoted verbatim.
 
 ## 8. Discrepancy protocol (frozen)
@@ -195,12 +195,12 @@ not result.
 - Machine: this Windows host + WSL2 Ubuntu (python3 3.14.4); engines
   single-threaded, stdlib only. The host is concurrently finishing the
   P1 DBN L1 sweep; Phase A runs one core with `nice -n 10`.
-- Phase A caps (wall): W ≤ 30 min (four engine passes); S ≤ 5 min;
-  H ≤ 10 min; E ≤ 15 min; P ≤ 20 min; Phase A total ≤ 90 min. Overrun
-  → UNRESOLVED-BUDGET recorded; partial outputs stay as-is.
+- Phase A caps (wall): W â‰¤ 30 min (four engine passes); S â‰¤ 5 min;
+  H â‰¤ 10 min; E â‰¤ 15 min; P â‰¤ 20 min; Phase A total â‰¤ 90 min. Overrun
+  â†’ UNRESOLVED-BUDGET recorded; partial outputs stay as-is.
 - Phase R (optional): precondition = L1 sweep complete AND explicit
   owner consent (installing opam/Coq = owner-gated system change).
-  Setup cap ≤ 3 h wall; build cap ≤ 14 h wall; overrun or failure →
+  Setup cap â‰¤ 3 h wall; build cap â‰¤ 14 h wall; overrun or failure â†’
   recorded as-is (NOT-RUN-ENVIRONMENT / BUILD-FAILED / UNRESOLVED-
   BUDGET). The 10 GB extraction step is excluded by design.
 
@@ -228,7 +228,7 @@ not result.
 
 Declared by the analysis session on 2026-10-18, before execution.
 
-## Appendix A — frozen fixture battery (identical table in both engines)
+## Appendix A â€” frozen fixture battery (identical table in both engines)
 
 Sources: W2=wiki BB(2) oldid 5358; W3=wiki BB(3) oldid 8372;
 W5=wiki BB(5) oldid 9024 timeline; W5t=wiki BB(5) oldid 9024
@@ -250,6 +250,8 @@ top-halters; Wc=5-state winner oldid 4369; M=Michel/beh.
     mb89-shift      1RB1LC_1RC1RB_1RD0LE_1LA1LD_1RZ0LA            47176870  4098     W5/W5t/Wc/M  PRIMARY
     bb3-champion    1RB1RZ_1LB0RC_1LC1LA                          21        5        W3
 
-(Rows marked W5 are shown on the wiki timeline with "≥" prenotation and
+(Rows marked W5 are shown on the wiki timeline with "â‰¥" prenotation and
 are frozen here as the machines' actual run lengths; a mismatch is a
-§8 discrepancy, never a re-labeling.)
+Â§8 discrepancy, never a re-labeling.)
+
+

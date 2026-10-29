@@ -626,3 +626,4 @@ def quartic_traces(coeffs, degree, p=3, kmax=11) -> dict[int, int]:
         assert_weil(a, k, q)
         traces[k] = a
     return traces
+

@@ -63,3 +63,4 @@ def test_fermat_bound_is_structural_not_accidental():
     for p in (13, 17):
         out = fermat_k3_picard(p, 11)
         assert sum(out["exact_orders"].values()) == 20
+

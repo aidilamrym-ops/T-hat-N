@@ -33,3 +33,5 @@ def test_periods_input_gates():
         elliptic_periods("1", "1", "0")
     with pytest.raises(ValueError):
         elliptic_periods("0", "1", "2")
+
+

@@ -1,8 +1,8 @@
-# Sensus Twin Prime Q2 v2 — N = 10^7
+﻿# Sensus Twin Prime Q2 v2 â€” N = 10^7
 
-**Status: ALL PASS.** Dua sieve independen sepakat integer-per-integer pada
+**Status: ALL PASS.** Dua sieve independen sepakat integer-per-integer on
 `N = 10_000_000`. Ini fragmen finit baru; `A-2026-0029` (N=100.000)
-tetap `INCONCLUSIVE` dan tidak diubah.
+tetap `INCONCLUSIVE` and no diubah.
 
 | Item | Nilai |
 |---|---|
@@ -29,34 +29,34 @@ tetap `INCONCLUSIVE` dan tidak diubah.
 | `pairs_A == pairs_B` | ya |
 | Verdict | **ALL PASS** |
 
-Nilai `58.980` konsisten dengan hitungan referensi `pi_2(10^7) = 58.980`.
-Ini sensus eksak hingga `10^7`; bukan bukti konjektur twin prime dan bukan
+Nilai `58.980` konsisten with hitungan referensi `pi_2(10^7) = 58.980`.
+Ini sensus eksak hingga `10^7`; bukan bukti konjektur twin prime and bukan
 klaim asimtotik.
 
 ## 2. Dua implementasi independen
 
-- **Sieve A** — Eratosthenes bytearray penuh, scan `p` dan `p+2`.
-- **Sieve B** — segmented sieve dengan base prime sampai `isqrt(N+2)`,
-  blok `2^20`, lalu himpunan prima dan scan pasangan.
+- **Sieve A** â€” Eratosthenes bytearray penuh, scan `p` and `p+2`.
+- **Sieve B** â€” segmented sieve with base prime sampai `isqrt(N+2)`,
+  blok `2^20`, lalu himpunan prima and scan pasangan.
 
-Keduanya memakai integer Python eksak; tidak ada float di jalur sensus.
-Receipt tidak memuat runtime atau timestamp, sehingga dua run menghasilkan
-byte yang sama.
+Keduanya memakai integer Python eksak; no ada float in jalur sensus.
+Receipt no memuat runtime or timestamp, sehingga dua run menghasilkan
+byte which sama.
 
 ## 3. Kriteria
 
-- **C1** `count_A == count_B` — PASS.
-- **C2** `pairs_A == pairs_B` element-wise — PASS.
-- **C3** `max_gap_A == max_gap_B` — PASS.
-- **C4** receipt kanonik deterministik — PASS. Dua run berturut-turut
-  menghasilkan SHA-256 receipt yang sama:
+- **C1** `count_A == count_B` â€” PASS.
+- **C2** `pairs_A == pairs_B` element-wise â€” PASS.
+- **C3** `max_gap_A == max_gap_B` â€” PASS.
+- **C4** receipt kanonik deterministik â€” PASS. Dua run berturut-turut
+  menghasilkan SHA-256 receipt which sama:
   `6c613dd573867e2d54cf7ed162413cb7f1b5e40b8be2724797681dddb72094d4`.
 
 ## 4. Batas klaim
 
-- Hanya sensus hingga `10^7`; tidak ada klaim tentang `N > 10^7`.
+- Hanya sensus hingga `10^7`; no ada klaim tentang `N > 10^7`.
 - Tidak ada klaim konjektur twin prime, distribusi asimtotik, RH/GRH,
-  faktorisasi, RSA/ECC, Anderson, atau fisika.
+  faktorisasi, RSA/ECC, Anderson, or fisika.
 - Registry baru `A-2026-0045` hanya mencatat fragmen finit ini.
 
 ## 5. Perintah verifikasi
@@ -66,3 +66,5 @@ python -m pytest msaf/tests/test_twin_prime_v2.py -q
 python -m pytest msaf/tests/test_fence_registry.py -q
 python audit_quantum/freeze.py --verify
 ```
+
+

@@ -1,12 +1,12 @@
-# SYSTEM PROMPT: STAGE 1 - FORMALIZATION OF CONTINUOUS TEST FUNCTION SPACE
+﻿# SYSTEM PROMPT: STAGE 1 - FORMALIZATION OF CONTINUOUS TEST FUNCTION SPACE
 
-> **STATUS: HISTORIS — JANGAN DIEKSEKUSI SEBAGAI TUGAS BARU (D4, 2026-10-27).**
-> Prompt scaffold ini superseded. Implementasi aktif hidup di `lean/` dan
-> `msaf/`; `Stage_1_Formalization_Test_Function_Space.lean` di folder ini
+> **STATUS: HISTORIS â€” JANGAN DIEKSEKUSI SEBAGAI TUGAS BARU (D4, 2026-10-27).**
+> Prompt scaffold ini superseded. Implementasi aktif hidup in `lean/` and
+> `msaf/`; `Stage_1_Formalization_Test_Function_Space.lean` in folder ini
 > dipertahankan hanya sebagai definisi (tanpa theorem). Menjalankan kembali
-> prompt ini tanpa pra-registrasi dan keputusan pemilik yang tercatat di
+> prompt ini tanpa pra-registrasi and keputusan pemilik which tercatat in
 > `reports/DECISION_LOG.md` melanggar aturan repo. Rujukan: `AGENTS.md`
-> (arsip `RH_SCAFFOLD_NOTES` historis) dan
+> (arsip `RH_SCAFFOLD_NOTES` historis) and
 > `reports/RH_SCAFFOLD_NOTES/STAGE_2_3_SCOPE_CORRECTION_2026-10-26.md`.
 
 ## IDENTITY & OPERATIONAL STANCE
@@ -31,11 +31,11 @@ open MeasureTheory Real Filter
 
 -- Define the rigid Hilbert subtype for the Guinand-Weil continuous domain
 def MSAFTestFunctionSpace : Type :=
-  { f : ℝ → ℝ // Continuous f ∧ f 0 = 0 ∧ Tendsto f atTop (nhds 0) }
+  { f : â„ â†’ â„ // Continuous f âˆ§ f 0 = 0 âˆ§ Tendsto f atTop (nhds 0) }
 
 -- Construct the framework contract for the continuous quadratic form operator
-noncomputable def continuous_quadratic_form (K : ℝ → ℝ → ℝ) (f : MSAFTestFunctionSpace) : ℝ :=
-  ∫ x in Ioi 0, ∫ y in Ioi 0, f.val x * K x y * f.val y
+noncomputable def continuous_quadratic_form (K : â„ â†’ â„ â†’ â„) (f : MSAFTestFunctionSpace) : â„ :=
+  âˆ« x in Ioi 0, âˆ« y in Ioi 0, f.val x * K x y * f.val y
 ```
 
 ## AUDIT CONTROL
@@ -64,9 +64,11 @@ Output only the mathematical definitions, verification steps, and compiled Lean 
 - **Stage 1** scaffold `MSAFTestFunctionSpace` + `continuous_quadratic_form`; **kernel-checked PASS** with Lean 4.33.1 / Mathlib `0df444a360`. This checks only the definitions, not an analytic RH result.
 - **Stage 2** analytic tail bound scaffold; kernel-checked PASS (trivial non-negativity lemma only, not the Archimedean tail derivation).
 - **Stage 3** eigenvalue locking scaffold; kernel-checked PASS (trivial lemma only, not a dimension induction).
-- **Stage 4** containment scaffold; kernel-checked PASS (placeholder predicate `True`, not an L² containment proof).
+- **Stage 4** containment scaffold; kernel-checked PASS (placeholder predicate `True`, not an LÂ² containment proof).
 - **Import migration:** Mathlib 4.33.1 renamed several modules; imports now use `Topology.ContinuousMap.Bounded.Basic`, `MeasureTheory.Integral.Lebesgue.Basic`, `MeasureTheory.Integral.Bochner.Basic`, and `MeasureTheory.Measure.Lebesgue.Basic`.
 - **Quantum audit** statistical layer completed; see `reports/TARGET_STATUS_2026-10-25.md`.
 - **Learnharness** prototype only.
 
 ---
+
+

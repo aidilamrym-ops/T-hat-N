@@ -61,7 +61,7 @@ def test_v3_has_no_project_axioms_and_one_explicit_hypothesis() -> None:
     assert "completedRiemannZeta_one_sub" in stripped
 
     # The removable endpoints are guarded to 1/2.
-    assert "if x = 0 ∨ x = 1 then 1 / 2" in stripped
+    assert "if x = 0 âˆ¨ x = 1 then 1 / 2" in stripped
 
 
 def test_v3_workflow_is_scoped_and_fail_closed() -> None:
@@ -122,3 +122,5 @@ def test_v3_axiom_footprint_is_standard_only() -> None:
     # The theorem type must still expose hmid; it is not discharged by a hidden axiom.
     assert "fun hmid" in out or "hmid" in out
     assert "completedRiemannZeta" in out
+
+

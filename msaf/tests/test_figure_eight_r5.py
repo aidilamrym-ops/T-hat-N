@@ -30,7 +30,7 @@ BASE_PREREG = ROOT / "reports" / "PREREG_FIGURE_EIGHT_R3_2026-10-23.md"
 BASE_RECEIPT = ROOT / "reports" / "figure_eight_r3_2026-10-23.json"
 RECEIPT = ROOT / "reports" / "figure_eight_r5_2026-10-23.json"
 
-# Expected hashes (pre‑computed at commit time)
+# Expected hashes (preâ€‘computed at commit time)
 EXPECTED_PREREG_SHA = "6c845bbbdbc8724d9bb07b7798927bacee9bebab5714a69328ccc3d6bc1edd03"
 EXPECTED_BASE_MODULE_SHA = "8eddc2bb17647d452e15325397e852e224e1af028f055fa4fe41de94af939ec6"
 EXPECTED_BASE_RECEIPT_SHA = "6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9"
@@ -116,3 +116,5 @@ def test_registry_entry(campaign):
         assert payload["registry"] == r5.REGISTRY_ID
     else:
         assert payload["registry"] is None
+
+

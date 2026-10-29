@@ -6,13 +6,13 @@ module checks the three Banach conditions (invariance, clean
 derivative, Lipschitz < 1) on complex balls with circular
 containment -- the same three conditions as
 ``NewtonExistence.moore_box``, but ``moore_box`` is stated over real
-intervals while these boxes live in ℂ. The Banach principle transfers
+intervals while these boxes live in â„‚. The Banach principle transfers
 across complete metric spaces, but that transfer is itself
 unformalized: a PREMISES-HOLD verdict certifies the analogue
 conditions on this box, never the Lean theorem's literal premises.
 Every returned dict carries the ``scope`` key saying so.
 
-(a) invariance ``N(B) ⊆ B`` for the pointwise Newton map, by interval
+(a) invariance ``N(B) âŠ† B`` for the pointwise Newton map, by interval
     evaluation (circular containment, strict);
 (b) clean derivative: the ``xi'`` enclosure over ``B`` excludes zero
     (hence every pointwise derivative is nonzero);
@@ -145,3 +145,5 @@ def verify_moore_premises(box: acb, degree: int = DEFAULT_TAYLOR_DEGREE) -> dict
         "k_below_one": bool(k_below_one),
         "scope": _SCOPE,
     }
+
+

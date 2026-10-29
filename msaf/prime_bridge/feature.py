@@ -1,4 +1,4 @@
-"""Feature extraction utilities for prime‑sieve output.
+"""Feature extraction utilities for primeâ€‘sieve output.
 Exports:
 - gaps(primes: list[int]) -> list[int]
 - gap_histogram(gaps: list[int], bins: int = 20) -> tuple[list[int], list[int]]
@@ -25,8 +25,8 @@ def gap_histogram(gap_list: list[int], bins: int = 20) -> tuple[list[int], list[
     return (edges, counts)
 
 def dirichlet_sums(primes: list[int], moduli: list[int]) -> dict[int, complex]:
-    """Compute Σ χ(p) for each modulus where χ is the primitive character.
-    For simplicity we use χ(p)=exp(2πi * (p % q) / q)."""
+    """Compute Î£ Ï‡(p) for each modulus where Ï‡ is the primitive character.
+    For simplicity we use Ï‡(p)=exp(2Ï€i * (p % q) / q)."""
     from cmath import exp, pi
     result = {}
     for q in moduli:
@@ -35,3 +35,5 @@ def dirichlet_sums(primes: list[int], moduli: list[int]) -> dict[int, complex]:
             total += exp(2j * pi * (p % q) / q)
         result[q] = total
     return result
+
+

@@ -1,4 +1,4 @@
-coqc:   /root/.opam/4.14.2/bin/coqc
+﻿coqc:   /root/.opam/4.14.2/bin/coqc
 coqchk: /root/.opam/4.14.2/bin/coqchk
 coqc PseriesL2 (dependency) exit: 0
 coqc IntegralComparison (dependency) exit: 0
@@ -176,3 +176,5 @@ FunctionalExtensionality.functional_extensionality_dep :
   (forall x : A, f x = g x) -> f = g
 Classical_Prop.classic : forall P : Prop, P \/ ~ P
 OK: L5 infinite module kernel-checked; 17/17 results; final audit = 4 stdlib axioms; no project axioms
+
+

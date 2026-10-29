@@ -1,4 +1,4 @@
-# HODGE-CH Specification: the Last Trace via Couveignes-Henocq
+﻿# HODGE-CH Specification: the Last Trace via Couveignes-Henocq
 
 Status (2026-10-21): OPTION 2 ADOPTED, HODGE-CH **EXECUTED AND VERIFIED** for the smooth
 quartic over F_3. The enumeration isolated a_11 = 354294 uniquely
@@ -10,8 +10,8 @@ leave-one-out rehearsal (all 10 drops PASS), circle test PASS.
 The residue-engine path (option 1/3) is retired for this
 surface, NOT implemented: it answered nothing option 2 left open.
 
-Deviations from §3, recorded honestly (not silently):
-- §3.3 asked leave-one-out over k = 1..10. Interior drops are
+Deviations from Â§3, recorded honestly (not silently):
+- Â§3.3 asked leave-one-out over k = 1..10. Interior drops are
   ill-posed (Newton needs consecutive traces), so "dropping p_5 and
   recovering it" is not an experiment that exists. Substituted:
   (a) full-method rehearsal on Fermat F_3 (all 11 traces known
@@ -19,7 +19,7 @@ Deviations from §3, recorded honestly (not silently):
   (b) regime analysis of discriminating power (Lakatos bias at small
   coefficients named and bounded; truth-regime teeth measured at
   708587/708588 rejections + a truth-scale rejection control).
-- §3.2 (oracle residues): the adopted method determines the integer
+- Â§3.2 (oracle residues): the adopted method determines the integer
   directly, emitting no residues; the CRT combiner stays sealed and
   tested but unused here. The rehearsal serves as the oracle-grade
   check the gate was built for.
@@ -62,7 +62,7 @@ the residue route below needs only the already-held counts.
                   +------------------+
 ```
 
-**Part A — CRT combiner (sealed).** `crt_combine.recover_integer`
+**Part A â€” CRT combiner (sealed).** `crt_combine.recover_integer`
 takes residues r_l = a mod l over distinct primes l, forms
 x mod M by exact Garner CRT, and returns the symmetric
 representative ONLY if M > 2B (uniqueness certificate: any two
@@ -70,7 +70,7 @@ candidates differ by a multiple of M). Otherwise INCONCLUSIVE --
 never a guess. Input gates: pairwise coprimality asserted (gcd),
 residues in range asserted, no floats, no bools.
 
-**Part B — oracle gate (sealed).** The residue engine is untrusted
+**Part B â€” oracle gate (sealed).** The residue engine is untrusted
 until it reproduces the KNOWN: it must emit residues for a_1..a_10
 (computed by whatever method it uses for a_11); the combiner
 recovers each; `oracle_check` compares against the locked exact
@@ -79,7 +79,7 @@ A corrupted residue otherwise yields a wrong-but-in-envelope
 integer that NOTHING would catch -- this gate exists because of
 exactly that failure mode (found by reasoning, locked by test).
 
-**Part C — residue engine (OPEN).** Source of r_l = a_11 mod l.
+**Part C â€” residue engine (OPEN).** Source of r_l = a_11 mod l.
 Options, honestly graded:
   1. *Schoof-Pila on the K3*: needs explicit l-torsion in a
      22-dimensional cohomology -- heavy algebraic geometry, no
@@ -116,3 +116,5 @@ Options, honestly graded:
   over F_3 (same scope discipline as F_5).
 - If option 2 fails to isolate uniquely, that failure is REPORTED
   (measured non-uniqueness counts), not worked around.
+
+

@@ -1,4 +1,4 @@
-# Sensus abc Tersertifikasi Q3 v3 — hingga C = 10^7
+﻿# Sensus abc Tersertifikasi Q3 v3 â€” hingga C = 10^7
 
 **Tanggal:** 2026-10-27
 **Status:** `ALL PASS` (dua sieve sepakat eksak, receipt deterministik)
@@ -8,9 +8,9 @@ sha256LF `aed8e63cdbb463b58bf207686ddf562ae50114b1d38b40f52174e53f1a6001a2`
 
 ## 1. Ringkasan
 
-Sensus lengkap abc hingga C = 10^7 untuk kualitas
+Sensus lengkap abc hingga C = 10^7 for kualitas
 `q = log(c) / log(rad(a*b*c)) > 1.4` menemukan **17 triple**. Kedua sieve
-independen sepakat eksak pada count, max_gap, dan daftar triple.
+independen sepakat eksak on count, max_gap, and daftar triple.
 
 | C | Count | Max gap | Verdict | Canonical SHA-256 |
 |---|---:|---:|---|---|
@@ -21,19 +21,19 @@ independen sepakat eksak pada count, max_gap, dan daftar triple.
 Gate C=10^5 mereproduksi `A-2026-0032` persis: 6 triple, max_gap 6825,
 daftar triple identik.
 
-## 2. Koreksi penting: v2 100-smooth tidak lengkap
+## 2. Koreksi penting: v2 100-smooth no lengkap
 
 Versi v2 mengunci `max_prime = 100` (hanya bilangan 100-halus). Itu bukan
-batas yang sah untuk kelengkapan. Batas yang benar dari `q > 1.4` hanyalah
+limit which sah for kelengkapan. Batas which benar dari `q > 1.4` hanyalah
 
 ```text
 rad(abc) < c^(5/7) <= N^(5/7)
 ```
 
-sehingga faktor prima individual boleh jauh di atas 100 selama radikal
+sehingga faktor prima individual boleh jauh in atas 100 selama radikal
 totalnya tetap kecil. Akibatnya v2 menemukan 12 triple, bukan 17.
 
-Lima triple yang hilang dari v2:
+Lima triple which hilang dari v2:
 
 | Triple | Faktor prima > 100 | q |
 |---|---|---:|
@@ -43,11 +43,11 @@ Lima triple yang hilang dari v2:
 | (2, 6436341, 6436343) | 109 | 1,629912 |
 | (11, 9565927, 9565938) | 167 | 1,428323 |
 
-v2 tetap sah sebagai **sensus parsial bilangan 100-halus**, tetapi tidak sah
-sebagai sensus lengkap. Receipt v2 parsial dipertahankan di
+v2 tetap sah sebagai **sensus parsial bilangan 100-halus**, tetapi no sah
+sebagai sensus lengkap. Receipt v2 parsial dipertahankan in
 `reports/abc_census_v2_10000000.json`
 (sha256LF `402e9acd2a136432918420498bf9282c5ff148888cf75255e823d9cc7308a46b`)
-dan tidak disertifikasi.
+and no disertifikasi.
 
 ## 3. Metodologi v3
 
@@ -61,48 +61,48 @@ log(rad(abc)) < (5/7) log(c)
 rad(abc) < c^(5/7) <= N^(5/7)
 ```
 
-Karena `rad(a)`, `rad(b)`, dan `rad(c)` masing-masing tidak melebihi
-`rad(abc)`, ketiganya berada di himpunan low-rad
+Karena `rad(a)`, `rad(b)`, and `rad(c)` masing-masing no melebihi
+`rad(abc)`, ketiganya berada in himpunan low-rad
 
 ```text
 L_N = { n <= N : rad(n) <= floor(N^(5/7)) + 1 }.
 ```
 
-Jadi enumerasi atas `L_N` lengkap; tidak ada triple `q > 1.4` yang bisa lolos.
+Jadi enumerasi atas `L_N` lengkap; no ada triple `q > 1.4` which bisa lolos.
 
 ### 3.2 Aturan kandidat
 
-1. Iterasi `c` di `L_N`, `c >= 3`.
+1. Iterasi `c` in `L_N`, `c >= 3`.
 2. Uji eksak integer `rad(c)^7 < c^5`.
-3. Untuk `a` di `L_N` yang diurutkan berdasarkan rad, dengan
-   `rad(a) <= floor(c^(5/7) / rad(c)) + 2` dan `2a < c`:
+3. Untuk `a` in `L_N` which diurutkan berdasarkan rad, with
+   `rad(a) <= floor(c^(5/7) / rad(c)) + 2` and `2a < c`:
    - `b = c - a`;
-   - `b` harus di `L_N`;
+   - `b` harus in `L_N`;
    - uji eksak integer `(rad(a) rad(b) rad(c))^7 < c^5`;
-   - `gcd(a,b) = 1` (ekuivalen dengan `gcd(a,b,c) = 1` untuk `a+b=c`);
-   - terima; hitung `q` float64 untuk pelaporan.
+   - `gcd(a,b) = 1` (ekuivalen with `gcd(a,b,c) = 1` for `a+b=c`);
+   - terima; hitung `q` float64 for pelaporan.
 4. `max_gap` dihitung dari selisih `a` berurutan dalam urutan `c` menaik.
 
-Uji `prod^7 < c^5` adalah uji eksak untuk `q > 1.4` dalam aritmetika real;
-`math.log` float64 hanya dipakai untuk pelaporan.
+Uji `prod^7 < c^5` adalah uji eksak for `q > 1.4` dalam aritmetika real;
+`math.log` float64 hanya dipakai for pelaporan.
 
 ### 3.3 Dua sieve independen
 
 | Sieve | Rad | Himpunan low-rad | Verifikasi akhir |
 |---|---|---|---|
-| A | multiplicative list sieve | scan `rad` + urut rad | — |
+| A | multiplicative list sieve | scan `rad` + urut rad | â€” |
 | B | segmented `array("I")` sieve | scan `rad` B sendiri | `sympy.factorint` per triple final |
 
-Sieve B tidak mengimpor helper internal A. `factorint` tidak pernah dipanggil
-untuk setiap bilangan 3..N; ia hanya dipakai pada 17 triple final.
+Sieve B no mengimpor helper internal A. `factorint` no pernah dipanggil
+for setiap bilangan 3..N; ia hanya dipakai on 17 triple final.
 
 ### 3.4 Receipt, progress, checkpoint
 
 - Receipt ditulis atomik ke `--out` melalui `.tmp` lalu `os.replace`.
-- Progress log mencatat prep/scan per sieve dan penulisan receipt.
+- Progress log mencatat prep/scan per sieve and penulisan receipt.
 - Checkpoint menyimpan `next_index`, count, max_gap, last_a, pairs, runtime,
-  dan done per sieve; resume menghasilkan canonical hash yang sama.
-- `canonical_sha256` mengecualikan `runtime_a`, `runtime_b`, dan dirinya
+  and done per sieve; resume menghasilkan canonical hash which sama.
+- `canonical_sha256` mengecualikan `runtime_a`, `runtime_b`, and dirinya
   sendiri.
 
 ## 4. Hasil penuh C = 10^7
@@ -131,19 +131,19 @@ untuk setiap bilangan 3..N; ia hanya dipakai pada 17 triple final.
 
 `first_triple = (3, 125, 128)`, `last_triple = (11, 9565927, 9565938)`.
 
-## 5. Determinisme dan resume
+## 5. Determinisme and resume
 
 - Gate C=10^5 dijalankan dua kali: canonical
   `cc077c8a...` identik.
 - Validasi C=10^6 dijalankan dua kali (run kedua oleh proses verifikasi
   terpisah): canonical `fb8cd831...` identik.
 - Full C=10^7 dijalankan dua kali: canonical `fb0ea6f8...` identik.
-- Uji `test_resume_matches_clean_run` memaksa chunking pada C=10^5 dan
-  membandingkan canonical hash dengan run bersih: identik.
+- Uji `test_resume_matches_clean_run` memaksa chunking on C=10^5 and
+  membandingkan canonical hash with run bersih: identik.
 
-Runtime di receipt tidak deterministik dan dikecualikan dari canonical hash.
+Runtime in receipt no deterministik and dikecualikan dari canonical hash.
 Run full pertama selesai sekitar 4 menit; run kedua sekitar 5 menit karena
-berjalan bersamaan dengan proses verifikasi lain.
+berjalan bersamaan with proses verifikasi lain.
 
 ## 6. Verifikasi
 
@@ -159,7 +159,7 @@ python -m pytest msaf/tests/test_fence_registry.py -q
 ```
 
 `--max-seconds 0` berarti tanpa deadline per chunk. Default produksi adalah
-900 detik per chunk dengan checkpoint/resume.
+900 detik per chunk with checkpoint/resume.
 
 ## 7. Artefak
 
@@ -174,34 +174,36 @@ python -m pytest msaf/tests/test_fence_registry.py -q
 | `reports/abc_census_exploratory_2026-10-27.json` | `82bb92a186adb8b1f3a32de0fc9c98a22d6ac2c612ba4363c1dcc1ba9f3a4351` |
 
 Receipt eksploratori `abc_census_exploratory_2026-10-27.json` adalah run
-independen awal yang menemukan 17 triple; ia bukan sertifikat dan tidak
-dipakai sebagai bukti formal. Sertifikat adalah receipt v3 di atas.
+independen awal which menemukan 17 triple; ia bukan sertifikat and no
+dipakai sebagai bukti formal. Sertifikat adalah receipt v3 in atas.
 
-## 8. Batas dan non-klaim
+## 8. Batas and non-klaim
 
 - Ini sensus finit hingga C = 10^7; bukan pembuktian konjektur abc.
-- Tidak ada klaim asimtotik, RH, GRH, faktorisasi, RSA/ECC, Anderson, atau
+- Tidak ada klaim asimtotik, RH, GRH, faktorisasi, RSA/ECC, Anderson, or
   fisika.
-- Threshold dikunci pada q > 1.4.
-- `q` dilaporkan dengan float64 `math.log`; keputusan kelengkapan memakai uji
+- Threshold dikunci on q > 1.4.
+- `q` dilaporkan with float64 `math.log`; keputusan kelengkapan memakai uji
   integer eksak `prod^7 < c^5`.
 - `max_gap` adalah maksimum selisih `a` berurutan dalam urutan scan `c`,
   bukan selisih `c`.
-- Tidak ada `numpy`/`scipy` di jalur inti.
+- Tidak ada `numpy`/`scipy` in jalur inti.
 
 ## 9. Catatan integritas registry
 
-- `A-2026-0032` (C=100.000, 6 triple) tidak di-retract. Karena modul dan guard
-  berubah untuk v3, dua baris `sha256LF` miliknya diperbarui ke hash v3 dan
-  diberi catatan tanggal di entri. Klaim 6 triple tidak berubah.
-- `A-2026-0052` adalah entri baru untuk Q3 v3; ia tidak menulis ulang entri
+- `A-2026-0032` (C=100.000, 6 triple) no in-retract. Karena modul and guard
+  berubah for v3, dua baris `sha256LF` miliknya diperbarui ke hash v3 and
+  diberi note tanggal in entri. Klaim 6 triple no berubah.
+- `A-2026-0052` adalah entri baru for Q3 v3; ia no menulis ulang entri
   lama.
-- v2 (12 triple) adalah hasil parsial yang superseded; receipt-nya
+- v2 (12 triple) adalah result parsial which superseded; receipt-nya
   dipertahankan sebagai bukti, bukan sertifikat.
 
 ## 10. Kesimpulan
 
-Q3 v3 lulus semua kriteria C1–C7: gate C=10^5 mereproduksi 6/6825, validasi
+Q3 v3 lulus semua kriteria C1â€“C7: gate C=10^5 mereproduksi 6/6825, validasi
 C=10^6 menghasilkan 11/6825, full C=10^7 menghasilkan 17/40640, kedua sieve
-sepakat eksak, receipt deterministik, resume identik, dan verifikasi
-`factorint` berhasil untuk seluruh 17 triple.
+sepakat eksak, receipt deterministik, resume identik, and verifikasi
+`factorint` berhasil for seluruh 17 triple.
+
+

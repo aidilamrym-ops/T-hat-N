@@ -1,4 +1,4 @@
-"""Certified twin prime sieve — reference implementation for verification.
+"""Certified twin prime sieve â€” reference implementation for verification.
 
 This module provides a reference implementation for twin prime counting
 using a simple sieve. For the certified version, two independent 
@@ -176,3 +176,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

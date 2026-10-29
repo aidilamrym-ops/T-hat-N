@@ -24,3 +24,5 @@ class LearnEngine:
     def predict(self, state: object | None = None) -> list[list[int]]:
         """Return a deterministic 8x8 identity matrix."""
         return [[1 if i == j else 0 for j in range(8)] for i in range(8)]
+
+

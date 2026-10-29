@@ -51,7 +51,7 @@ def test_v5_has_no_project_axioms_and_no_escape_tokens() -> None:
 
     # The V5 theorem must be unconditional: no `hmid` parameter.
     assert re.search(
-        r"^theorem xi_pos_on_reals_unconditional \(x : ℝ\) :\s*"
+        r"^theorem xi_pos_on_reals_unconditional \(x : â„\) :\s*"
         r"0 < XiAnalyticFaithful\.xiReal x :=",
         stripped,
         re.M,
@@ -183,3 +183,5 @@ def test_v5_axiom_footprint_is_standard_only() -> None:
 
     assert "XiPosUnconditional.xi_pos_on_reals_unconditional" in out
     assert "sorryAx" not in out
+
+

@@ -1,7 +1,7 @@
 name = "ChronoGeometric_Framework"
 version = "0.1.0"
 srcDir = "lean"
-defaultTargets = ["NewArithmetic", "ChronoNat", "ChronoReduction", "ChronoBridge", "ChronoSAT", "ChronoRiemann"]
+defaultTargets = ["NewArithmetic", "ChronoNat", "ChronoReduction", "ChronoBridge", "ChronoSAT", "ChronoRiemann", "Test"]
 
 [[require]]
 name = "mathlib"
@@ -25,3 +25,6 @@ name = "ChronoSAT"
 
 [[lean_lib]]
 name = "ChronoRiemann"
+
+[[lean_lib]]
+name = "Test"

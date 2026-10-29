@@ -212,3 +212,5 @@ def test_core_has_no_float_or_numpy() -> None:
             imports.extend(alias.name for alias in node.names)
     assert not any(name == "numpy" or name.startswith("numpy.") for name in imports)
     assert not any(name == "mpmath" or name.startswith("mpmath.") for name in imports)
+
+

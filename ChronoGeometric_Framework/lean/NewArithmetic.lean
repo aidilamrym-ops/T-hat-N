@@ -9,6 +9,7 @@ namespace MyNat
 
 -- addition defined by recursion on second argument
 
+@[simp]
 def add : MyNat → MyNat → MyNat
   | a, zero => a
   | a, succ b => succ (add a b)
@@ -20,6 +21,8 @@ instance : HAdd MyNat MyNat MyNat := ⟨add⟩
   induction a with
   | zero => rfl
   | succ a ih =>
-    simp [add, ih]
+    rw [show zero + succ a = succ (zero + a) by rfl]
+    rw [ih]
+    <;> rfl
 
 end MyNat

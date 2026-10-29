@@ -1,15 +1,15 @@
-# AUDIT DBN — L4: laporan verdict (final)
+﻿# AUDIT DBN â€” L4: report verdict (final)
 
-Ditulis 2026-10-17 (waktu lokal mesin). Status: **SELESAI** — langkah L4
+Ditulis 2026-10-17 (waktu lokal mesin). Status: **SELESAI** â€” step L4
 (terakhir) dari pra-registrasi audit P1.
 
 - **Target ter-pin (beku):** rilis `review-01787854-v3`, repo
   `judegomila/dbn-lambda-01787854-candidate-audit`, commit
   `2e9976c4becbf97e31c56fe75fce07cdff5dd4ea` (dibaca 2026-10-17).
 - **Pra-registrasi:** `reports/AUDIT_DBN_PREREG_2026-10-17.md`
-  (commit `86a32c9`; §2 definisi L1–L4, §6 protokol L4 — naskah beku,
-  tidak diamandemen).
-- **Bahan:** recon `reports/AUDIT_DBN_RECON_2026-10-17.md`; laporan L3
+  (commit `86a32c9`; Â§2 definisi L1â€“L4, Â§6 protokol L4 â€” naskah beku,
+  no diamandemen).
+- **Bahan:** recon `reports/AUDIT_DBN_RECON_2026-10-17.md`; report L3
   `reports/AUDIT_DBN_L3_2026-10-17.md`; log + JSON item L2
   `reports/audit_p1_l2_*`; log L1 `reports/audit_p1_l1_launch.log`;
   gate Lean `reports/audit_p1_lean_gate.log`.
@@ -18,19 +18,19 @@ Ditulis 2026-10-17 (waktu lokal mesin). Status: **SELESAI** — langkah L4
   `msaf/tests/test_fence_registry.py`.
 
 Laporan ini memakai **struktur template reviewer milik rilis sendiri**
-(`REVIEWER_REPORT_TEMPLATE.md` di commit ter-pin; transkripsi penuh di
-recon §7.12) dengan field wajibnya diisi dari log sebenarnya. Token
+(`REVIEWER_REPORT_TEMPLATE.md` in commit ter-pin; transkripsi penuh in
+recon Â§7.12) with field wajibnya diisi dari log sebenarnya. Token
 label lapis mengikuti template (`valid` / `needs repair` / `invalid` /
-`not reviewed`); verdict per-obligasi mengikuti skema pra-reg §6
+`not reviewed`); verdict per-obligasi mengikuti skema pra-reg Â§6
 (`accepted` / `rejected` / `unresolved`).
 
 ## 1. Blok template reviewer (terisi; kutipan mesin)
 
 ```text
-# Suggested referee response — filled by our independent audit
+# Suggested referee response â€” filled by our independent audit
 
 ## Overall assessment
-plausible but incomplete  — read as OUR assessment status, not as a defect
+plausible but incomplete  â€” read as OUR assessment status, not as a defect
 claim on the submission: every executed independent lane passed (L2 items
 1-4 REPRODUCED; L3 weld HELD), and the parts we did not execute (coverage,
 section 5) prevent us from claiming "validated as stated". No GAP-FOUND;
@@ -45,7 +45,7 @@ during the audit).
 os: Microsoft Windows 10 Pro 10.0.19045 (4 logical processors;
 PowerShell 5.1.19041.6456).
 python: Python 3.14.4 (mpmath 1.3.0; sympy 1.14.0).
-stored checks: PASS — the release was consumed from its pinned tree;
+stored checks: PASS â€” the release was consumed from its pinned tree;
 every statement-source and input file used by our lanes was re-verified
 in-run by git blob sha1 + size (and sha256) against the pinned commit
 (per-item counts: item 1 = 3 sources, item 2 = 7, item 3 = 10,
@@ -53,7 +53,7 @@ item 4 = 11 provenance gates, L3 = 14 blob gates; reference PDF hashes
 byte-identical to references/README.md: Polymath 60d0d2d3..., Platt-
 Trudgian 3362f66a...). Logs: reports/audit_p1_l2_*.log,
 reports/audit_p1_l3.log.
-container checks: NOT RUN — no container engine on the audit machine
+container checks: NOT RUN â€” no container engine on the audit machine
 (docker/podman/nerdctl absent; WSL2 without distro; no OCI archive in a
 bounded local search); prereg section 3.4 stop rule applied; L1 =
 NOT-RUN-ENVIRONMENT (reports/audit_p1_l1_launch.log). Enabling an engine
@@ -84,7 +84,7 @@ is owner-gated.
    level. L2 item 2: 48/48 (e_A+e_B <= sealed 2.057023688667e-12;
    e_C,0 <= sealed 2.33492848188649183e-7; E_max <= sealed
    2.33494905212337849e-7; margin >= sealed 5.57871094787e-7; sampled
-   windows only — first window + 3 further windows incl. far end; their
+   windows only â€” first window + 3 further windows incl. far end; their
    evaluator not run).
 5. standalone infinite-tail theorem: valid at checked level, DESIGN
    POINT ONLY (N = N_* = 3840000). L2 item 3: 47/47 (corridor
@@ -110,7 +110,7 @@ is owner-gated.
 ## Decisive objections or repairs
 none within the executed scope (no GAP-FOUND; nothing rejected). The
 unresolved / not-reviewed items in the obligation table (section 3) and
-coverage (section 5) are resource limits of this audit — they are not
+coverage (section 5) are resource limits of this audit â€” they are not
 claimed defects, and no repair is requested on their basis.
 
 ## Disclosure recommendation
@@ -120,39 +120,39 @@ own disposition is the release owner's call. No objection was found in
 scope that would require a corrected preprint.
 ```
 
-## 2. Ringkas hasil L1–L3 (pembacaan)
+## 2. Ringkas result L1â€“L3 (pembacaan)
 
-- **L1 — TIDAK dijalankan: `NOT-RUN-ENVIRONMENT`.** Tidak ada engine
-  container di mesin audit (docker/podman/nerdctl absen; WSL2 tanpa
-  distro; pencarian arsip OCI lokal terbatas tidak menemukan paket);
-  aturan stop pra-reg §3.4 berlaku; instalasi engine = owner-gated.
-  Attempt A/B/C (dua kegagalan awal) tercatat apa adanya di
+- **L1 â€” TIDAK dijalankan: `NOT-RUN-ENVIRONMENT`.** Tidak ada engine
+  container in mesin audit (docker/podman/nerdctl absen; WSL2 tanpa
+  distro; pencarian arsip OCI lokal terbatas no menemukan paket);
+  aturan stop pra-reg Â§3.4 berlaku; instalasi engine = owner-gated.
+  Attempt A/B/C (dua kegagalan awal) tercatat apa adanya in
   `reports/audit_p1_l1_launch.log`.
-- **Gate Lean — AUXILIARY, bukan verdict rilis.** Rilis ter-pin memuat
-  **0 berkas `.lean`**; gate dijalankan atas `lean/` di commit
-  pasca-rilis ter-pin `a74738de` dan diberi label **AUXILIARY** (bukan
-  bukti depot rilis; diskrepansi dicatat di coverage §5.7). Hasil:
-  scan placeholder PASS (25 berkas; `FAIL=0 NOT_RUN=0 SKIP=0`; token
+- **Gate Lean â€” AUXILIARY, bukan verdict rilis.** Rilis ter-pin memuat
+  **0 file `.lean`**; gate dijalankan atas `lean/` in commit
+  pasca-rilis ter-pin `a74738de` and diberi label **AUXILIARY** (bukan
+  bukti depot rilis; diskrepansi dicatat in coverage Â§5.7). Hasil:
+  scan placeholder PASS (25 file; `FAIL=0 NOT_RUN=0 SKIP=0`; token
   `{sorry, admit, unsafe, axiom, native_decide, Abort}` total 0);
-  self-test gate 13/13; attempt-1 (bug fetch, superseded) tersimpan di
+  self-test gate 13/13; attempt-1 (bug fetch, superseded) tersimpan in
   `reports/audit_p1_lean_gate_attempt1.log`.
-- **L2 — 4 item, semua `REPRODUCED` di level yang dideklarasikan:**
+- **L2 â€” 4 item, semua `REPRODUCED` in level which dideklarasikan:**
   item 1 window freeze & affine sign map **34/34**; item 2 budget error
   Prop 4.10 **48/48** (jendela tersampel); item 3 tail lane **47/47**
   (titik desain `N = N_* = 3840000`); item 4 subset barrier **124/124**
   (K = 8 + seam + first/last; margin minimum tersegel
-  `0.519849894613872543374989997` di prisma 882 direproduksi eksak).
+  `0.519849894613872543374989997` in prisma 882 direproduksi eksak).
   Stack kita: Python 3.14 + `mpmath.iv` (240-bit) +
-  `fractions.Fraction` — bukan FLINT/Arb; tanpa reuse source/parser/
-  partisi/decimal table rilis. Batas per item = coverage §5.3–§5.5.
-- **L3 — weld theorem-source `HELD` 57/57.** Statement weld (i)/(ii)/
-  (iii) + konklusi ≡ `PROOF_NOTE` (2.1)–(2.4) setelah kanonikalisasi
+  `fractions.Fraction` â€” bukan FLINT/Arb; tanpa reuse source/parser/
+  partisi/decimal table rilis. Batas per item = coverage Â§5.3â€“Â§5.5.
+- **L3 â€” weld theorem-source `HELD` 57/57.** Statement weld (i)/(ii)/
+  (iii) + konklusi â‰¡ `PROOF_NOTE` (2.1)â€“(2.4) setelah kanonikalisasi
   terdokumentasi (`equal=True`); temuan kunci: PT Thm 1 (v1, baris
-  61–63) berbunyi height persis `3 000 175 332 800 = T_PT` (abstrak
-  hanya membulatkan ke 3·10^12) dan identitas margin `X/2 +
+  61â€“63) berbunyi height persis `3 000 175 332 800 = T_PT` (abstrak
+  hanya membulatkan ke 3Â·10^12) and identitas margin `X/2 +
   350479773/2 = T_PT` eksak; containment + overlap + citation chain
-  eksak/byte-identik. Batas = coverage §5.6.
-- **Lane rilis tidak di-re-run** untuk semua item (verdict item 1–4
+  eksak/byte-identik. Batas = coverage Â§5.6.
+- **Lane rilis no in-re-run** for semua item (verdict item 1â€“4
   dikonsumsi dari log ter-commit; input reuse sesuai pra-reg).
 
 ## 3. Tabel per-obligasi (ID blueprint rilis; kutipan mesin)
@@ -160,22 +160,22 @@ scope that would require a corrected preprint.
 ```text
 Table schema per prereg section 6: obligation ID | L1 evidence |
 L2 evidence | L3 evidence | verdict | references.
-L1 column is "—" for every row: L1 = NOT-RUN-ENVIRONMENT (no container
+L1 column is "â€”" for every row: L1 = NOT-RUN-ENVIRONMENT (no container
 engine), so no row carries replay-level evidence; the L2/L3 columns
 carry all independent weight.
 
-P1 | verified-height theorem: normalization & range | — | — | PT v1 e-print payload c6c29099...; Thm 1 lines 61-63: height exactly 3000175332800 = T_PT; margin identity X/2 + 350479773/2 = T_PT exact; PROOF_NOTE statement-canonical-equal | accepted | L3 report sec. 2; audit_p1/l3_weld_checks.py sha256 9AF03B5D...
-P2 | Thm 1.2/1.3 + Lemma 8.4 transcription | — | — | segment digests reproduced (06290d46 / 2bdd6d87 / cebe9801 / 4353e6c8 / b2fbc004); F.hyp_* + F.conclusion strings equal after documented canonicalisation | accepted | recon sec. 7.11; L3 log
-P3 | Cor 6.6(vi) => x-12, 10.50 bound without eq. (24) | — | item 2 covers the finite-lane budget only, not this weld | document blob gate only; verifier not re-run | unresolved | coverage sec. 5.8
-G1 | exact parameters, sign conventions, final substitution | — | anchors rechecked in items 2-4 | CANDIDATE_PARAMETERS identities exact; final-substitution strings canonical-equal; overlap 3149013 = 3840000 - 690988 + 1 contiguous | accepted | L3 log (C.*, E.legs, F.conclusion)
-F1 | native finite convolution + effective-error bridge | — | item 1 34/34; item 2 48/48 | NATIVE_BINDING + WINDOW_FREEZE_THEOREM blob gates | accepted | item logs; coverage sec. 5.3
-F2 | Dini upper bound + normalizer monotonicity | — | — | — (document not fetched; analytic content not re-proved) | unresolved | coverage sec. 5.8
-F3 | all finite rows (3149013) + half-open seam | — | item 1 freeze/endpoints only | partition arithmetic + seam window domains | unresolved | coverage sec. 5.8 (rows not re-generated)
-T1 | tail all-N: endpoint-cap, partition, monotonicity | — | item 3 47/47 (design point) | TAIL_LEMMA + TAIL_PROVENANCE blob gates | accepted | item 3 log; all-N = release sec. 6/7 reductions (gated as premises)
-T2 | two independent tail implementations | — | verifier sources blob-gated (claim identification only) | — | unresolved | item 3 log source list; coverage sec. 5.8
-B1 | derivative box, quadrature, Taylor, coefficient provenance | — | item 4 124/124 (descriptor / error-budget level) | BARRIER_CERTIFICATE + DERIVATIVE_BOX_LEMMA blob gates | accepted | item 4 log; coefficient regeneration + Taylor-tail not rechecked (coverage sec. 5.5)
-B2 | every prism + seam + homotopy winding nonzero | — | item 4: 883/883 gates exact; K=8 smallest (prisms 875-882) + seam + first/last; aggregate winding +/-8.95e-13 in (-1/4, 1/4); seam 882/882 tokens | log-side byte identity | accepted | item 4 log (min margin 0.519849894613872543374989997 reproduced)
-C1 | overlap domain + three-hypothesis weld without weakening | — | inputs from items 1-4 | weld HELD 57/57; hypotheses (i)/(ii)/(iii) compatible; canonicalised equality equal=True; containment exact | accepted | L3 report; audit_p1/l3_weld_checks.py
+P1 | verified-height theorem: normalization & range | â€” | â€” | PT v1 e-print payload c6c29099...; Thm 1 lines 61-63: height exactly 3000175332800 = T_PT; margin identity X/2 + 350479773/2 = T_PT exact; PROOF_NOTE statement-canonical-equal | accepted | L3 report sec. 2; audit_p1/l3_weld_checks.py sha256 9AF03B5D...
+P2 | Thm 1.2/1.3 + Lemma 8.4 transcription | â€” | â€” | segment digests reproduced (06290d46 / 2bdd6d87 / cebe9801 / 4353e6c8 / b2fbc004); F.hyp_* + F.conclusion strings equal after documented canonicalisation | accepted | recon sec. 7.11; L3 log
+P3 | Cor 6.6(vi) => x-12, 10.50 bound without eq. (24) | â€” | item 2 covers the finite-lane budget only, not this weld | document blob gate only; verifier not re-run | unresolved | coverage sec. 5.8
+G1 | exact parameters, sign conventions, final substitution | â€” | anchors rechecked in items 2-4 | CANDIDATE_PARAMETERS identities exact; final-substitution strings canonical-equal; overlap 3149013 = 3840000 - 690988 + 1 contiguous | accepted | L3 log (C.*, E.legs, F.conclusion)
+F1 | native finite convolution + effective-error bridge | â€” | item 1 34/34; item 2 48/48 | NATIVE_BINDING + WINDOW_FREEZE_THEOREM blob gates | accepted | item logs; coverage sec. 5.3
+F2 | Dini upper bound + normalizer monotonicity | â€” | â€” | â€” (document not fetched; analytic content not re-proved) | unresolved | coverage sec. 5.8
+F3 | all finite rows (3149013) + half-open seam | â€” | item 1 freeze/endpoints only | partition arithmetic + seam window domains | unresolved | coverage sec. 5.8 (rows not re-generated)
+T1 | tail all-N: endpoint-cap, partition, monotonicity | â€” | item 3 47/47 (design point) | TAIL_LEMMA + TAIL_PROVENANCE blob gates | accepted | item 3 log; all-N = release sec. 6/7 reductions (gated as premises)
+T2 | two independent tail implementations | â€” | verifier sources blob-gated (claim identification only) | â€” | unresolved | item 3 log source list; coverage sec. 5.8
+B1 | derivative box, quadrature, Taylor, coefficient provenance | â€” | item 4 124/124 (descriptor / error-budget level) | BARRIER_CERTIFICATE + DERIVATIVE_BOX_LEMMA blob gates | accepted | item 4 log; coefficient regeneration + Taylor-tail not rechecked (coverage sec. 5.5)
+B2 | every prism + seam + homotopy winding nonzero | â€” | item 4: 883/883 gates exact; K=8 smallest (prisms 875-882) + seam + first/last; aggregate winding +/-8.95e-13 in (-1/4, 1/4); seam 882/882 tokens | log-side byte identity | accepted | item 4 log (min margin 0.519849894613872543374989997 reproduced)
+C1 | overlap domain + three-hypothesis weld without weakening | â€” | inputs from items 1-4 | weld HELD 57/57; hypotheses (i)/(ii)/(iii) compatible; canonicalised equality equal=True; containment exact | accepted | L3 report; audit_p1/l3_weld_checks.py
 ```
 
 ## 4. Verdict L3 (kutipan mesin; dari log resmi)
@@ -189,65 +189,65 @@ checks_total: 57  checks_failed: 0
 L3 machine verdict: PASS
 ```
 
-## 5. Coverage — langkah yang TIDAK dilakukan (masing-masing dengan sebab)
+## 5. Coverage â€” step which TIDAK dilakukan (masing-masing with sebab)
 
 1. **L1 replay repository** (`verify.sh`, `run_prop410_arb.sh`,
-   `run_tail_arb.sh`, `run_barrier_replay.sh`, `run_full_sweep.sh`) —
-   TIDAK dijalankan: tidak ada engine container; stop rule pra-reg
-   §3.4; instalasi engine owner-gated. Bukti: `audit_p1_l1_launch.log`.
-2. **`run_full_sweep.sh`** — TIDAK dijalankan (optional per pra-reg §8;
+   `run_tail_arb.sh`, `run_barrier_replay.sh`, `run_full_sweep.sh`) â€”
+   TIDAK dijalankan: no ada engine container; stop rule pra-reg
+   Â§3.4; instalasi engine owner-gated. Bukti: `audit_p1_l1_launch.log`.
+2. **`run_full_sweep.sh`** â€” TIDAK dijalankan (optional per pra-reg Â§8;
    anggaran).
-3. **Item 2 — jendela tersampel saja:** jendela pertama + 3 jendela
-   lain (termasuk ujung jauh); sisa `N = 690989…3839999` dikreditkan ke
-   teorema window-freeze rilis (tidak dire-derivasi ulang melebihi item
-   1); evaluator rilis tidak dijalankan; item ini mensertifikasi
+3. **Item 2 â€” jendela tersampel saja:** jendela pertama + 3 jendela
+   lain (termasuk ujung jauh); sisa `N = 690989â€¦3839999` dikreditkan ke
+   teorema window-freeze rilis (no dire-derivasi ulang melebihi item
+   1); evaluator rilis no dijalankan; item ini mensertifikasi
    jendela tersampel saja.
-4. **Item 3 — titik desain saja (`N = N_* = 3840000`):** semua-N ≥ N_*
-   dan cakupan y di atas I_box = reduksi §6/§7 rilis (gate dicek
-   sebagai premis); lane Arb/FLINT C dan lane Python 160/256-bit rilis
-   tidak di-re-run; Polymath Thm 1.3 sendiri tidak dire-derivasi.
-5. **Item 4 — subset + input tersegel:** lane C/Arb (`barrier_closed`,
-   `uniform_error`) tidak di-re-run; deskriptor per-prisma (mesh,
+4. **Item 3 â€” titik desain saja (`N = N_* = 3840000`):** semua-N â‰¥ N_*
+   and cakupan y in atas I_box = reduksi Â§6/Â§7 rilis (gate dicek
+   sebagai premis); lane Arb/FLINT C and lane Python 160/256-bit rilis
+   no in-re-run; Polymath Thm 1.3 sendiri no dire-derivasi.
+5. **Item 4 â€” subset + input tersegel:** lane C/Arb (`barrier_closed`,
+   `uniform_error`) no in-re-run; deskriptor per-prisma (mesh,
    winding, Dz, Dt) dipercaya sebagai input tersegel; regenerasi
-   koefisien stored-sum + artefak Taylor-tail tidak dicek ulang;
-   byte-identity seam terserialisasi dalam assembli rilis tidak dicek
-   ulang (identitas token sisi log saja); sapuan penuh 883 prisma tidak
-   diulang; lane prop43/prop62 di luar scope.
-6. **L3 — batas-batas (dari `boundary` di JSON L3):** kebenaran
-   teorema terbitan tidak direview (statement + pemetaan yang di-weld);
+   koefisien stored-sum + artefak Taylor-tail no dicek ulang;
+   byte-identity seam terserialisasi dalam assembli rilis no dicek
+   ulang (identitas token sisi log saja); sapuan penuh 883 prisma no
+   diulang; lane prop43/prop62 in luar scope.
+6. **L3 â€” limit-limit (dari `boundary` in JSON L3):** kebenaran
+   teorema terbitan no direview (statement + pemetaan which in-weld);
    reduksi analitik paket (Dini all-y, limit t=0, native binding,
-   derivative-box/tail) tidak dibuktikan ulang; full text Bull. LMS
-   (refereed) tidak dapat diakses fetch scripted (403) — hanya record
-   bibliografi; pagination typeset Polymath jurnal tidak dibandingkan
+   derivative-box/tail) no dibuktikan ulang; full text Bull. LMS
+   (refereed) no dapat diakses fetch scripted (403) â€” hanya record
+   bibliografi; pagination typeset Polymath jurnal no dibandingkan
    (v2 = "final version" per record arXiv); snapshot arXiv dated
-   2026-10-17; bracket π sekunder non-primer (mpmath-60d);
-   bentuk zero-count PT tidak dikonsumsi; tidak ada lane rilis di-re-run.
+   2026-10-17; bracket Ï€ sekunder non-primer (mpmath-60d);
+   bentuk zero-count PT no dikonsumsi; no ada lane rilis in-re-run.
 7. **Gate Lean = AUXILIARY, bukan verdict rilis:** rilis ter-pin memuat
-   0 berkas `.lean`; gate dijalankan atas `lean/` commit pasca-rilis
-   `a74738de`; scan teks (placeholder) + self-test saja — bukan
+   0 file `.lean`; gate dijalankan atas `lean/` commit pasca-rilis
+   `a74738de`; scan teks (placeholder) + self-test saja â€” bukan
    pembangunan ulang Lean; diskrepansi rilis-vs-HEAD dicatat; attempt-1
    (bug fetch) tersimpan.
-8. **Item lain yang tidak dieksekusi:** F2 (dokumen Dini/Triangle tidak
-   di-fetch/hash; tidak dibuktikan ulang); P3 (verifier
-   `verify_error_constant_weld.py` tidak di-re-run); T2 (dua
-   implementasi tail rilis tidak dieksekusi ulang; sumber di-gate
-   sebagai identifikasi klaim saja); F3 (baris finite tidak
+8. **Item lain which no dieksekusi:** F2 (dokumen Dini/Triangle no
+   in-fetch/hash; no dibuktikan ulang); P3 (verifier
+   `verify_error_constant_weld.py` no in-re-run); T2 (dua
+   implementasi tail rilis no dieksekusi ulang; source in-gate
+   sebagai identifikasi klaim saja); F3 (baris finite no
    diregenerasi); verifier rilis lain (`verify_assembly_1787854.py`,
-   `verify_criterion_sign_map.py`, `verify_tail*`, dsb.) tidak
-   di-re-run — yang di-gate hanya sebagai identifikasi klaim/sumber;
-   mutation-kill verifier rilis tidak dilakukan; sapuan penuh baris/
-   prisma tidak dilakukan.
-9. **Kesegaran target:** audit berlaku untuk commit ter-pin; HEAD repo
+   `verify_criterion_sign_map.py`, `verify_tail*`, dsb.) no
+   in-re-run â€” which in-gate hanya sebagai identifikasi klaim/source;
+   mutation-kill verifier rilis no dilakukan; sapuan penuh baris/
+   prisma no dilakukan.
+9. **Kesegaran target:** audit berlaku for commit ter-pin; HEAD repo
    kandidat (`a74738de`, 21 Agu 2026, PGP-signed) terpisah dari target
-   ter-pin; watch recon (cek-2) mencatat tidak ada commit/rilis baru
-   pada saat audit; tidak ada pengaruh pada verdict.
+   ter-pin; watch recon (cek-2) mencatat no ada commit/rilis baru
+   on saat audit; no ada pengaruh on verdict.
 
-## 6. Agregat (kutipan mesin; skema pra-reg §6)
+## 6. Agregat (kutipan mesin; skema pra-reg Â§6)
 
 ```text
 GAP-FOUND: none.
 INDEPENDENTLY-CERTIFIED (parts, with level):
-  - L2 item 1 (window freeze & affine sign map): REPRODUCED 34/34 — our
+  - L2 item 1 (window freeze & affine sign map): REPRODUCED 34/34 â€” our
     stack (Python 3.14 + mpmath.iv 240-bit + fractions.Fraction).
   - L2 item 2 (Prop 4.10 finite-lane error budget & binding):
     REPRODUCED 48/48 (sampled windows; declared).
@@ -270,7 +270,7 @@ RECOMMENDATION FROM AGGREGATES: no repairs requested; verdicts are
 per-obligation in section 3.
 ```
 
-## 7. Kalimat standar (beku; kutipan verbatim pra-reg §6)
+## 7. Kalimat standar (beku; kutipan verbatim pra-reg Â§6)
 
 ```text
 A repository replay is not a mathematical review.
@@ -289,27 +289,29 @@ no verdict here asserts or denies RH or any universal statement.
   (`..._attempt1.log`, `..._smoke1.log`, `..._smoke2.log`); L1
   `reports/audit_p1_l1_launch.log`; Lean
   `reports/audit_p1_lean_gate.log` (+ `_attempt1.log`).
-- **sha256LF lengkap semua artefak di atas ada di
+- **sha256LF lengkap semua artefak in atas ada in
   `reports/FENCE_REGISTRY.md`** (entri `A-2026-0001`); tiap baris
   diverifikasi ulang oleh guard CI
   `msaf/tests/test_fence_registry.py` (fail-closed).
 - Catatan jujur: runner `.ps1` resmi dijalankan dari luar repo (hash
-  runner tercatat di masing-masing log; skrip inti + hash input lengkap
-  ada di repo, sehingga re-run dapat direproduksi); smoke/attempt yang
+  runner tercatat in masing-masing log; skrip inti + hash input lengkap
+  ada in repo, sehingga re-run dapat direproduksi); smoke/attempt which
   gagal disimpan tanpa dihapus.
 
 ## 9. Owner-gated & berikutnya
 
 - **Dashboard:** update apa pun wajib v6 baru (v3/v4/v5 dibekukan);
   persetujuan pemilik belum diberikan (now/defer/skip).
-- **Scope Note recording** — menunggu keputusan pemilik.
-- **Instalasi engine container** untuk replay L1 di masa depan —
-  owner-gated, tidak memblok.
+- **Scope Note recording** â€” menunggu keputusan pemilik.
+- **Instalasi engine container** for replay L1 in masa depan â€”
+  owner-gated, no memblok.
 - **Registry P3 aktif:** entri awal (T-2026-0001, T-2026-0002,
   F-2026-0001, F-2026-0002, T-2026-0003, A-2026-0001) + guard CI;
-  entri baru menyusul mengikuti skema yang sama.
+  entri baru menyusul mengikuti skema which sama.
 
-Ditulis oleh sesi audit, 2026-10-17. Berkas ini dan registry-nya
-disertakan dalam commit yang sama; tidak ada angka di laporan ini yang
-diketik ulang tanpa sumber log di repo (semua blok mesin di atas
+Ditulis oleh sesi audit, 2026-10-17. Berkas ini and registry-nya
+disertakan dalam commit which sama; no ada angka in report ini which
+diketik ulang tanpa source log in repo (semua blok mesin in atas
 disalin dari log/JSON ter-commit).
+
+

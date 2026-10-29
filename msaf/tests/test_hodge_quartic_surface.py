@@ -87,3 +87,4 @@ def test_input_gates():
         count_quartic_brute(FERMAT_SURFACE, 0, 3)
     with pytest.raises(TypeError):
         count_quartic_brute(FERMAT_SURFACE, 1.0, 3)  # type: ignore[arg-type]
+

@@ -461,3 +461,4 @@ def certify_sigma_one_half(
         "claim_note": result.claim_note,
         "rendered": result.render(),
     }
+

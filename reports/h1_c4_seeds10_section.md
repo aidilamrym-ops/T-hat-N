@@ -1,4 +1,4 @@
-## C4 robustness array extension (S10) -- dim 301, chart T, sigma_u 0.5
+﻿## C4 robustness array extension (S10) -- dim 301, chart T, sigma_u 0.5
 
 Pre-registration: `reports/C4_SEEDS10_PREREG_2026-10-17.md` (commit 657352cc2b47ee8480686c4281664b70a5714c64; ordering check: PASS).
 
@@ -26,3 +26,5 @@ C4 stays flagged resolution-sensitive per frozen spec section 4; the verdict gri
 Number of record (UNCHANGED): 1262/20000 = 6.31000e-02 (canonical seed 20260927).
 
 Old five seeds: re-parsed from the original logs and cross-checked against the sealed artifact (`reports/gw_h1_floor_refine.json`, sha256_lf 4777d94f9ec533712b14cc097b9240e5c961790b3d9025f452b7c21aade6148f); cross-check PASS.
+
+

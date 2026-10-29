@@ -1,4 +1,4 @@
-# ZENODO_ACTIVATE -- enabling the GitHub -> Zenodo webhook (T-hat-N)
+﻿# ZENODO_ACTIVATE -- enabling the GitHub -> Zenodo webhook (T-hat-N)
 
 Operational guideline. Owner action required: the switch can only be flipped
 from a logged-in browser session at zenodo.org -- no API token bypasses it.
@@ -77,3 +77,5 @@ must be launched manually.
 
 Update `reports/HANDOFF.md`: section 3 (canonical path status for T-hat-N)
 and section 1 (new seal row: DOI + verification evidence).
+
+

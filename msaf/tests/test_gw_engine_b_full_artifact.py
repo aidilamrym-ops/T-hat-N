@@ -94,3 +94,5 @@ def test_log_carries_frozen_verdict_lines():
     assert ("observed grid: 720 bins compared; frozen OR 666/720; "
             "tighter 10-ulp branch 8/720") in text
     assert "script sha256 = " + SCRIPT_SHA in text
+
+

@@ -83,3 +83,5 @@ def sylvester_b(diag: list, off2: list) -> dict:
     else:
         status = _FENCE
     return {"status": status, "index": None, "pivots": _compact(pivots, b_fmt)}
+
+

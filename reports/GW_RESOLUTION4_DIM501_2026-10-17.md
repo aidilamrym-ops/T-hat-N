@@ -1,26 +1,26 @@
-# GW — Resolusi ke-4 (dim 501): OUTCOME non-PD di ladder — statistik titik berakhir
+﻿# GW â€” Resolusi ke-4 (dim 501): OUTCOME non-PD in ladder â€” statistik titik berakhir
 
-Tanggal: 2026-10-17 (waktu lokal mesin). Status: **SELESAI — OUTCOME.**
+Tanggal: 2026-10-17 (waktu lokal mesin). Status: **SELESAI â€” OUTCOME.**
 Pra-registrasi: `reports/RESOLUTION4_DIM501_PREREG_2026-10-17.md`
 (commit `ea2ed77`, dipush + CI hijau `39020789629` SEBELUM launch;
 launcher start 17:24:00; ordering PASS).
 
-Ringkas: Stage L dijalankan; ladder Route S 6000 bit (c=100, N=250 →
-dim 501) mencetak `UNDETERMINED at pivot 446` — **bukan** CERTIFIED
-POSITIVE DEFINITE. Pra-registrasi §4 (verbatim): "A G-M0 FAIL or a
+Ringkas: Stage L dijalankan; ladder Route S 6000 bit (c=100, N=250 â†’
+dim 501) mencetak `UNDETERMINED at pivot 446` â€” **bukan** CERTIFIED
+POSITIVE DEFINITE. Pra-registrasi Â§4 (verbatim): "A G-M0 FAIL or a
 non-PD ladder is NOT an infrastructure failure: it is the outcome,
 reported as-is, and it ends the statistics of this point." Maka titik
-keempat BERAKHIR di ladder: Stage C dan Stage M tidak dijalankan; tidak
-ada angka S1/S2 untuk dim 501; tidak ada blok GW-DELTA keempat. Tidak
-ada parameter yang diubah dan **tidak ada rerun** — aturan rerun §4
-hanya untuk kegagalan infrastruktur terenumerasi, dan tidak satu pun
-dari ketiganya terjadi (§3).
+keempat BERAKHIR in ladder: Stage C and Stage M no dijalankan; no
+ada angka S1/S2 for dim 501; no ada blok GW-DELTA keempat. Tidak
+ada parameter which diubah and **no ada rerun** â€” aturan rerun Â§4
+hanya for kegagalan infrastruktur terenumerasi, and no satu pun
+dari ketiganya terjadi (Â§3).
 
 ## 1. Angka (diekstrak mesin; verbatim)
 
-Dari `reports/gw_route_s_ladder_c100_n250.log` (baris tabel hasil,
-ringkasan, dan baris penutup; baris pemisah `----` 92 karakter tidak
-dikutip di sini tetapi utuh di log):
+Dari `reports/gw_route_s_ladder_c100_n250.log` (baris tabel result,
+ringkasan, and baris penutup; baris pemisah `----` 92 karakter no
+dikutip in sini tetapi utuh in log):
 
 ```text
 250  501   6000     446    0      True      1612.96  177.07   UNDETERMINED at pivot 446
@@ -35,10 +35,10 @@ Field JSON (`reports/gw_route_s_ladder_c100_n250.json`): `n_pos = 446`;
 
 Baca tool (`msaf/gw_route_s_ladder.py`, sha256 raw=lf
 `cc09ed5a35ac90b581cf2ef5660f3db903704843909b8a80b7fb21bf036a5b20`,
-tidak diubah): verdict `UNDETERMINED` = pivot tak-terputuskan pertama
-dilaporkan di indeks 446; tidak ada pivot negatif yang ditemukan. Ini
-pernyataan tentang SERTIFIKAT tanda interval pada satu matriks finit
-pada presisi 6000 bit — bukan tentang spektrum sebenarnya, bukan tren.
+no diubah): verdict `UNDETERMINED` = pivot tak-terputuskan pertama
+dilaporkan in indeks 446; no ada pivot negatif which ditemukan. Ini
+pernyataan tentang SERTIFIKAT tanda interval on satu matriks finit
+on presisi 6000 bit â€” bukan tentang spektrum sebenarnya, bukan tren.
 
 ## 2. Timeline (verbatim, utuh 5 baris, dari `reports/res4_dim501_launch_2026-10-17.log`; file berawalan BOM UTF-8)
 
@@ -50,59 +50,59 @@ pada presisi 6000 bit — bukan tentang spektrum sebenarnya, bukan tren.
 [2026-10-17T17:53:51] ABORT: stage L nonzero exit -> infrastructure failure per prereg section 4; stopping for review (identical rerun allowed only after the issue is fixed and logged).
 ```
 
-## 3. Klasifikasi (hasil review; bagian ini yang mengikat)
+## 3. Klasifikasi (result review; section ini which mengikat)
 
 Review dilakukan setelah stop (2026-10-17). Temuan, berurutan:
 
-1. **Komputasi Stage L tidak gagal.** Proses selesai normal: log lengkap
-   (termasuk baris `written:`), JSON lengkap dan konsisten
-   (`total_s = 1790.13` ≈ elapsed launcher 1791 s), `err.log` 0 byte.
-   Tool `gw_route_s_ladder.py` juga **selalu exit 0** — semua outcome
-   (UNDETERMINED / NOT PD / ERROR per baris) tercatat di JSON, bukan di
-   exit code (dibaca dari sumber: `sys.exit(main())`; `main()` selalu
+1. **Komputasi Stage L no gagal.** Proses selesai normal: log lengkap
+   (termasuk baris `written:`), JSON lengkap and konsisten
+   (`total_s = 1790.13` â‰ˆ elapsed launcher 1791 s), `err.log` 0 byte.
+   Tool `gw_route_s_ladder.py` juga **selalu exit 0** â€” semua outcome
+   (UNDETERMINED / NOT PD / ERROR per baris) tercatat in JSON, bukan in
+   exit code (dibaca dari source: `sys.exit(main())`; `main()` selalu
    `return 0`).
-2. **`exit=` kosong di log launcher adalah cacat penangkapan wrapper,
-   bukan bukti exit nonzero.** Root cause direproduksi di mesin ini
+2. **`exit=` kosong in log launcher adalah cacat penangkapan wrapper,
+   bukan bukti exit nonzero.** Root cause direproduksi in mesin ini
    (PowerShell 5.1.19041.6456): `Start-Process -PassThru` +
    `-RedirectStandardOutput/-RedirectStandardError` + `.WaitForExit()`
-   → `$p.ExitCode` = null (kosong) meskipun `HasExited` = True;
-   `-WindowStyle Hidden` bukan penyebabnya. Dengan flag `-Wait`, atau
+   â†’ `$p.ExitCode` = null (kosong) meskipun `HasExited` = True;
+   `-WindowStyle Hidden` bukan penyebabnya. Dengan flag `-Wait`, or
    `cmd /c` + `$LASTEXITCODE`, exit code tertangkap benar. Probe
-   `ps_exitprobe.py` (exit 7 dan exit 0): launcher-style → `ExitCode=[]`;
-   `-Wait` → `ExitCode=[7]`; `cmd /c` → `$LASTEXITCODE=7`.
+   `ps_exitprobe.py` (exit 7 and exit 0): launcher-style â†’ `ExitCode=[]`;
+   `-Wait` â†’ `ExitCode=[7]`; `cmd /c` â†’ `$LASTEXITCODE=7`.
 3. **Konsekuensi: launcher salah-branch.** Karena `$rcL` kosong,
-   launcher menempuh cabang "nonzero exit → infrastructure failure"
-   (baris 35–38 skrip, `exit 2`) alih-alih gerbang verdict. Alur yang
-   benar, sesuai skrip baris 39–44, adalah: baris log
+   launcher menempuh cabang "nonzero exit â†’ infrastructure failure"
+   (baris 35â€“38 skrip, `exit 2`) alih-alih gerbang verdict. Alur which
+   benar, sesuai skrip baris 39â€“44, adalah: baris log
    `stage L verdict (N=250, dim 501): UNDETERMINED at pivot 446` lalu
    (verbatim baris 43): "STOP: non-PD / undetermined ladder is an
    OUTCOME, not infrastructure; per prereg section 4 the statistics of
    this point end here; stage C NOT launched." **End-state identik**
-   (Stage C/M tidak jalan), tetapi label di log salah. Log launcher
-   TIDAK diedit (arsip); klasifikasi resmi adalah bagian ini.
+   (Stage C/M no jalan), tetapi label in log salah. Log launcher
+   TIDAK diedit (arsip); klasifikasi resmi adalah section ini.
 
-**Klasifikasi final:** ini cabang **OUTCOME** per pra-registrasi §4
-(non-PD ladder), bukan infrastruktur: (a) exit sebenarnya 0 (butir 1–2,
+**Klasifikasi final:** ini cabang **OUTCOME** per pra-registrasi Â§4
+(non-PD ladder), bukan infrastruktur: (a) exit sebenarnya 0 (butir 1â€“2,
 err.log kosong); (b) artefak lengkap; (c) kriteria "missing 36
-captures" N/A karena Stage M memang tidak dijalankan oleh outcome.
-Aturan rerun §4 karena itu TIDAK berlaku: **tidak ada rerun**, tidak
-ada perubahan parameter. Tidak ada angka dari "percobaan gagal" yang
-dipakai — karena tidak ada percobaan yang gagal; yang dilaporkan adalah
-output komputasi yang selesai (verdict + counts). Perbaikan untuk
-orkestrasi masa depan (dokumentasi, bukan tindakan di titik ini):
-tangkap exit code dengan `-Wait` atau `cmd`+`$LASTEXITCODE`. Skrip
-launcher (temp, tidak dikomit): sha256
+captures" N/A karena Stage M memang no dijalankan oleh outcome.
+Aturan rerun Â§4 karena itu TIDAK berlaku: **no ada rerun**, no
+ada perubahan parameter. Tidak ada angka dari "percobaan gagal" which
+dipakai â€” karena no ada percobaan which gagal; which dilaporkan adalah
+output komputasi which selesai (verdict + counts). Perbaikan for
+orkestrasi masa depan (dokumentasi, bukan action in titik ini):
+tangkap exit code with `-Wait` or `cmd`+`$LASTEXITCODE`. Skrip
+launcher (temp, no dikomit): sha256
 `bec67db055d64fdaf76f35798f047b8663f448f5eec81c1ec50761d60a491d30`.
 
 ## 4. Yang TIDAK ada (karena outcome)
 
-Stage C dan Stage M tidak dijalankan. Artefak yang tidak dibuat:
+Stage C and Stage M no dijalankan. Artefak which no created:
 `reports/gw_capture_100_250.log`, `reports/gw_spectrum_100_250.json`,
 `reports/mont_run_100_250.txt`, `reports/res4_dim501_m_stdout.log`,
-`reports/res4_dim501_m_stderr.log`. Tidak ada angka S1/S2 untuk dim
-501; tidak ada pembahasan tren (tidak ada yang bisa dibahas).
+`reports/res4_dim501_m_stderr.log`. Tidak ada angka S1/S2 for dim
+501; no ada pembahasan tren (no ada which bisa dibahas).
 
-## 5. Artefak + hash + segel (semua dihitung di mesin ini)
+## 5. Artefak + hash + segel (semua dihitung in mesin ini)
 
 | File | Byte | sha256 (raw) | sha256 (lf) |
 |---|---|---|---|
@@ -111,9 +111,9 @@ Stage C dan Stage M tidak dijalankan. Artefak yang tidak dibuat:
 | `reports/gw_route_s_ladder_c100_n250.err.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` (kosong) | sama |
 | `reports/res4_dim501_launch_2026-10-17.log` | 921 | `d4225ac05181ef055886c840273567be7ca0915b07844da0713a572d780cd846` | `48074b5d8b54b831d4721a5cf8002e945fbf58d4302ca68b6d4fad0234771e67` |
 
-Rumus: raw = byte apa adanya; lf = `\r\n` → `\n` lalu sha256.
+Rumus: raw = byte apa adanya; lf = `\r\n` â†’ `\n` lalu sha256.
 
-**Cek ulang segel pra-registrasi §5 (raw byte, PASS semua):**
+**Cek ulang segel pra-registrasi Â§5 (raw byte, PASS semua):**
 
 | File tersegel | sha256 raw (= nilai pra-registrasi) |
 |---|---|
@@ -126,37 +126,39 @@ Rumus: raw = byte apa adanya; lf = `\r\n` → `\n` lalu sha256.
 | `reports/mont_run_100_150.txt` | `faecc52318b729be13c624b589e9d1ed4a332f5da8b2af316957b67f0bf7f017` |
 | `msaf/mont_run.txt` | `eb072757c3b1b18e502ab25dc1bff329d115b7d6c2c74baec89e279340b54b10` |
 
-Item sha256_lf pra-registrasi §5 (PASS): `reports/gw_h1_floor_refine.json`
+Item sha256_lf pra-registrasi Â§5 (PASS): `reports/gw_h1_floor_refine.json`
 `4777d94f9ec533712b14cc097b9240e5c961790b3d9025f452b7c21aade6148f`,
 `reports/AMENDMENT_FLOOR_SPEC.md`
 `3c9958bee3021385b242b84b2ecda136e15f35d5682c16ff690713830efbb917`,
 `msaf/gw_h1_floor_refine.py`
 `c70a76973e8e4e756642f310af4f7a721c6bbde485c7d8dcb5ab20961e4a5cf2`.
-Dashboard v3/v4/v5 dan blok mesin README §7 tidak disentuh oleh run ini
-(tidak ada penulisan ke file apa pun di luar daftar New files §5);
-segelnya hidup di dokumen masing-masing.
+Dashboard v3/v4/v5 and blok mesin README Â§7 no disentuh oleh run ini
+(no ada penulisan ke file apa pun in luar daftar New files Â§5);
+segelnya hidup in dokumen masing-masing.
 
-Verifikasi kutipan: setiap string angka/hash di laporan ini dicek mesin
+Verifikasi kutipan: setiap string angka/hash in report ini dicek mesin
 terhadap artefaknya (skrip verifikasi sesi; semua PASS).
 
 ## 6. Publikasi (append-only)
 
-- Laporan ini (kewajiban pra-registrasi §5).
-- `reports/HANDOFF.md`: paragraf update di kepala, baris tabel §1 baru,
-  §2.0e baru; "seri keempat tersisa" dihapus (statistik berakhir).
-- `README.md` §6.7 item 2: outcome wider-N dicatat.
+- Laporan ini (kewajiban pra-registrasi Â§5).
+- `reports/HANDOFF.md`: paragraf update in kepala, baris tabel Â§1 baru,
+  Â§2.0e baru; "seri keempat tersisa" dihapus (statistik berakhir).
+- `README.md` Â§6.7 item 2: outcome wider-N dicatat.
 - `reports/THREE_TASKS_2026-10-15.md`: blok BARU (notice outcome, bukan
-  blok terukur) ditambahkan di akhir; GW-DELTA dan GW-DELTA-3
-  byte-identik (tidak disentuh; syarat pra-registrasi §5).
-- Artefak dikomit pada commit publikasi yang membawa file ini.
+  blok terukur) ditambahkan in akhir; GW-DELTA and GW-DELTA-3
+  byte-identik (no disentuh; syarat pra-registrasi Â§5).
+- Artefak dikomit on commit publikasi which membawa file ini.
 
 ## 7. Batas (beku)
 
-Outcome dari satu matriks finit pada satu presisi (6000 bit). Bukan
+Outcome dari satu matriks finit on satu presisi (6000 bit). Bukan
 teorema Montgomery, bukan bukti RH, bukan Weil-positivity, bukan
 pernyataan tentang spektrum sebenarnya, bukan prime counting, bukan
-faktorisasi, bukan tren. Yang bisa dikatakan: ladder 6000 bit untuk dim
-501 TIDAK memberikan sertifikat PD; titik keempat seri tidak
+faktorisasi, bukan tren. Yang bisa dikatakan: ladder 6000 bit for dim
+501 TIDAK memberikan sertifikat PD; titik keempat seri no
 menghasilkan statistik.
 
 Ditulis oleh sesi analisis, 2026-10-17.
+
+

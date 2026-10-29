@@ -1,82 +1,82 @@
-# Pra-registrasi T2: orbit periodik figure-eight three-body tervalidasi (Daftar-B 16) - 2026-10-22
+﻿# Pra-registrasi T2: orbit periodik figure-eight three-body tervalidasi (Daftar-B 16) - 2026-10-22
 
-**Status:** scope DIKUNCI untuk trek T2; implementasi dan eksekusi **belum**
-dimulai. Berkas ini ditulis dan di-commit sebelum kode T2. Hash `sha256LF`
-berkas ini dicatat di receipt T2 dan laporan.
+**Status:** scope DIKUNCI for trek T2; implementasi and eksekusi **belum**
+dimulai. Berkas ini ditulis and in-commit sebelum kode T2. Hash `sha256LF`
+file ini dicatat in receipt T2 and report.
 
-**Latar:** T1b (`reports/PREREG_ODE_VALIDATED_T1B_2026-10-21.md`) sudah
-diseal dengan verdict **ALL PASS** dan registry `A-2026-0040`. Pemilik membuka
+**Latar:** T1b (`reports/PREREG_ODE_VALIDATED_T1B_2026-10-21.md`) already
+diseal with verdict **ALL PASS** and registry `A-2026-0040`. Pemilik membuka
 Daftar-B butir 16 (orbit figure-eight tervalidasi) melalui pilihan soal
-("Daftar-B 16: Three-Body (Recommended)"), pola sama dengan T1/T1b:
-ukur-dulu → pra-registrasi di-commit sebelum kode → implementasi → seal →
-registry hanya bila ALL PASS → push. Pra-registrasi ini mengunci scope T2
-**setelah** kampanye probe (pengungkapan wajib di §2), sebelum ada satu baris
-kode pun di `msaf/figure_eight.py`.
+("Daftar-B 16: Three-Body (Recommended)"), pola sama with T1/T1b:
+ukur-dulu â†’ pra-registrasi in-commit sebelum kode â†’ implementasi â†’ seal â†’
+registry hanya bila ALL PASS â†’ push. Pra-registrasi ini mengunci scope T2
+**setelah** kampanye probe (pengungkapan wajib in Â§2), sebelum ada satu baris
+kode pun in `msaf/figure_eight.py`.
 
 **Paket:** Daftar-B 16. **Bukan** klaim prioritas; **bukan** klaim bahwa
-data desimal-eksak ini "figure-eight yang asli" dalam arti data bilangan
-real sejatinya; **bukan** bukti di Lean/Coq.
+data desimal-eksak ini "figure-eight which asli" dalam arti data bilangan
+real sejatinya; **bukan** bukti in Lean/Coq.
 
 **Berkas target:** `msaf/figure_eight.py` (modul bersertifikat baru),
-`msaf/tests/test_figure_eight.py` (guard), kampanye → receipt
-`reports/figure_eight_three_body_2026-10-22.json`, laporan
-`reports/FIGURE_EIGHT_2026-10-22.md`. Registry yang direncanakan:
+`msaf/tests/test_figure_eight.py` (guard), kampanye â†’ receipt
+`reports/figure_eight_three_body_2026-10-22.json`, report
+`reports/FIGURE_EIGHT_2026-10-22.md`. Registry which direncanakan:
 `A-2026-0041`, **hanya** bila verdict ALL PASS.
 
 **Dependensi:** Python 3.14, python-flint 0.9.0 (.ball/arb), `fractions`.
 Reuse **import-saja** dari modul tersegel `msaf/ode_validated.py`
 (`sha256LF c1d9b5d60036a5f0772f7e3f1b8c78969efaa7146a713c762531ddce346251b9`)
-dan `msaf/ode_validated_block.py`
+and `msaf/ode_validated_block.py`
 (`sha256LF 42d196a51c5ae45e3b87b8c1e36319abfeb93df776b3c2317e812f7c2c0b5b97`,
 guard `f061e7ebeabfaa808280455f6d5bff595c32d9feaef164fa11d76bcbcf8aa98f`,
-terpin di `A-2026-0040`). Tidak ada modul beku yang diubah. Probe memakai
-floating-point di **luar** jalur tersertifikasi (dibatasi §2 dan K1).
+terpin in `A-2026-0040`). Tidak ada modul beku which diubah. Probe memakai
+floating-point in **luar** jalur tersertifikasi (dibatasi Â§2 and K1).
 
 ---
 
-## 1. Maksud dan batas
+## 1. Maksud and limit
 
-T2 menyertifikasi sebagai hasil komputer-assisted **miliknya sendiri**:
+T2 menyertifikasi sebagai result komputer-assisted **miliknya sendiri**:
 
 1. **Keberadaan + keunikan lokal** orbit periodik masalah tiga-bodi planar
-   Newtonian (m = G = 1) untuk IVP yang dinyatakan **persis rasional**
+   Newtonian (m = G = 1) for IVP which dinyatakan **persis rasional**
    (desimal-pendekatan klasik Moore, dipotong menjadi pecahan), dekat data
-   awal yang diukur probe, melalui keberadaan titik tetap peta Kembali-2 di
-   seksi Poincaré (Krawczyk).
+   awal which diukur probe, melalui keberadaan titik tetap peta Kembali-2 in
+   seksi PoincarÃ© (Krawczyk).
 2. **Tabung (tube) lintasan tervalidasi** satu-periode: pembungkus keadaan
-   di sepanjang horizon, termasuk pembungkus matriks monodromi
-   (`∂Φ/∂y₀`, 12×12) sebagai artefak untuk T2b.
+   in sepanjang horizon, termasuk pembungkus matriks monodromi
+   (`âˆ‚Î¦/âˆ‚yâ‚€`, 12Ã—12) sebagai artefak for T2b.
 3. **Deskriptor bentuk tervalidasi** (K5): struktur penyilangan sumbu-x badan
-   3 dan cacat koreografi.
+   3 and cacat koreografi.
 
-Yang **tidak** diklaim di T2 (dan tidak boleh muncul di laporan/receipt):
+Yang **no** diklaim in T2 (and no boleh muncul in report/receipt):
 
-- **Spektrum/stabilitas Floquet** (multiplikator dekat-1) → dialihkan ke
-  **T2b** dengan alasan terukur: probe FD vs monodromy tidak konvergen
-  (§2). K4 hanya menghasilkan matriks terenclosure, tanpa klaim eigen.
-- Keunikan **global** (hanya lokal di kotak Krawczyk), keberadaan orbit
-  lain, atau identifikasi absolut dengan figure-eight bilangan-real sejati.
-- Segala klaim di luar batas T1b: RH/PDE/chaos/ergodicity/Soliton/Evans/
+- **Spektrum/stabilitas Floquet** (multiplikator dekat-1) â†’ dialihkan ke
+  **T2b** with alasan terukur: probe FD vs monodromy no konvergen
+  (Â§2). K4 hanya menghasilkan matriks terenclosure, tanpa klaim eigen.
+- Keunikan **global** (hanya lokal in kotak Krawczyk), keberadaan orbit
+  lain, or identifikasi absolut with figure-eight bilangan-real sejati.
+- Segala klaim in luar limit T1b: RH/PDE/chaos/ergodicity/Soliton/Evans/
   fisika/analytic-continuation/prioritas/bukti formal. Hasil S4 T1b tetap
-  **bukan** klaim keberadaan orbit figure-eight (batas T1b tidak dicabut;
-  T2 adalah lintasan klaim yang terpisah dengan mekanisme dan pra-registrasi
+  **bukan** klaim keberadaan orbit figure-eight (limit T1b no dicabut;
+  T2 adalah lintasan klaim which terpisah with mekanisme and pra-registrasi
   sendiri).
 
 ---
 
-## 2. Pengukuran pra-kunci (probe — sebelum scope dikunci)
+## 2. Pengukuran pra-kunci (probe â€” sebelum scope dikunci)
 
-Semua angka di bawah diukur **sebelum** berkas ini ditulis; angka inilah yang
-mengunci toleransi §3–§4. Probe memakai scipy DOP853 (rtol=2.3e-14, atol=1e-15,
-max_step=0.005) dan Jacobian syuting analitik (matriks variasional + koreksi
-waktu-implisit), **di luar** jalur tersertifikasi.
+Semua angka in bawah diukur **sebelum** file ini ditulis; angka inilah which
+mengunci toleransi Â§3â€“Â§4. Probe memakai scipy DOP853 (rtol=2.3e-14, atol=1e-15,
+max_step=0.005) and Jacobian syuting analitik (matriks variasional + koreksi
+waktu-implisit), **in luar** jalur tersertifikasi.
 
-**a. Data IVP tersegel (T1b `_run_s4`):** q(0) = (−1,0), (1,0), (0,0);
-v₁ = v₂ = (347111/10⁶, 532728/10⁶); v₃ = (−694222/10⁶, −1065456/10⁶);
-E₀ = −257428899017/200000000000 = −1.287144495085; L₀ = 0; COM = 0.
+**a. Data IVP tersegel (T1b `_run_s4`):** q(0) = (âˆ’1,0), (1,0), (0,0);
+vâ‚ = vâ‚‚ = (347111/10â¶, 532728/10â¶); vâ‚ƒ = (âˆ’694222/10â¶, âˆ’1065456/10â¶);
+Eâ‚€ = âˆ’257428899017/200000000000 = âˆ’1.287144495085; Lâ‚€ = 0; COM = 0.
 
 **b. Orbit periodik sejati (Newton least-squares, pangkal analitik):**
-residu |G|∞: 1.7e-6 → 4.561e-14; jarak data-awal-seeded 1.089e-04
+residu |G|âˆž: 1.7e-6 â†’ 4.561e-14; jarak data-awal-seeded 1.089e-04
 (didominasi geser periode). Data (dalam presisi ganda, **bukan** benih
 tersertifikasi):
 
@@ -89,30 +89,30 @@ v3 = (-0.694222975412007, -1.0654498057992956)
 T* = 6.326003039910031
 ```
 
-E(orbit) = −1.2871299154104481 (Δ = 1.458e-05 dari E₀); L(orbit) = −1.9e-12.
+E(orbit) = âˆ’1.2871299154104481 (Î” = 1.458e-05 dari Eâ‚€); L(orbit) = âˆ’1.9e-12.
 
-**c. Seksi Poincaré (codim-1) — Σ = {q₃ᵧ = 0, orientasi v₃ᵧ < 0}:**
-penyilangan q₃ᵧ pada orbit sejati (periode [0, T\*]):
+**c. Seksi PoincarÃ© (codim-1) â€” Î£ = {qâ‚ƒáµ§ = 0, orientasi vâ‚ƒáµ§ < 0}:**
+penyilangan qâ‚ƒáµ§ on orbit sejati (periode [0, T\*]):
 
-| waktu | q₃x | v₃ᵧ |
+| waktu | qâ‚ƒx | vâ‚ƒáµ§ |
 |---|---|---|
-| 0 (titik awal, eksak) | 0 | −1.065450 |
-| 2.108735283 | −1.0000047703 | +0.532725 |
-| 3.162988113 | −4.769194074911e-05 | −0.612126 |
+| 0 (titik awal, eksak) | 0 | âˆ’1.065450 |
+| 2.108735283 | âˆ’1.0000047703 | +0.532725 |
+| 3.162988113 | âˆ’4.769194074911e-05 | âˆ’0.612126 |
 | 4.217376381 | +1.0000047717 | +0.532725 |
-| T\* ≈ 6.326003040 | 0 (kembali) | −1.065450 |
+| T\* â‰ˆ 6.326003040 | 0 (kembali) | âˆ’1.065450 |
 
-Jadi per periode ada **4 penyilangan** (2 turun = orientasi seksi: t=0 dan
-t≈3.163; 2 naik di luar orientasi), jarak antar-silang ≥ 3.16. Keadaan
-seksi bebas-rotasi di titik kerja (q₃x ≠ 0; rotasi tidak mempertahankan Σ
-kecuali θ = kπ).
+Jadi per periode ada **4 penyilangan** (2 turun = orientasi seksi: t=0 and
+tâ‰ˆ3.163; 2 naik in luar orientasi), jarak antar-silang â‰¥ 3.16. Keadaan
+seksi bebas-rotasi in titik kerja (qâ‚ƒx â‰  0; rotasi no mempertahankan Î£
+kecuali Î¸ = kÏ€).
 
-**d. Titik kerja (pembulatan 12 desimal → benih rasional eksak):** dari
-x_c2 (seksi pada silang-turun 3.162988113) diperbaiki sekali langkah lstsq
-Jacobian seksi (jarak langkah 9.484e-07, |F|∞ 3.379e-11 → 6.176e-12):
+**d. Titik kerja (pembulatan 12 desimal â†’ benih rasional eksak):** dari
+x_c2 (seksi on silang-turun 3.162988113) diperbaiki sekali step lstsq
+Jacobian seksi (jarak step 9.484e-07, |F|âˆž 3.379e-11 â†’ 6.176e-12):
 
 ```
-x̂₀ = ( 0.881825885905,  0.471573247799,
+xÌ‚â‚€ = ( 0.881825885905,  0.471573247799,
        -0.881817147851, -0.471630773362,
        -0.000048006190,
        -0.557287392981,  0.306081711672,
@@ -122,155 +122,155 @@ x̂₀ = ( 0.881825885905,  0.471573247799,
 
 (koordinat seksi: q1x,q1y,q2x,q2y,q3x, v1x,v1y,v2x,v2y,v3x,v3y).
 
-**e. Peta kembali-2:** dari x_c2: kaki-1 (silang turun berikutnya, di t₁ =
-3.163014927), kaki-2 (t₂ = 3.162988113); t₁+t₂ = 6.326003040 = T̃ (diskalai
-sebagai T̃). |P̃²(x_c2) − x_c2|∞ = 3.379e-11 (ganda).
+**e. Peta kembali-2:** dari x_c2: kaki-1 (silang turun berikutnya, in tâ‚ =
+3.163014927), kaki-2 (tâ‚‚ = 3.162988113); tâ‚+tâ‚‚ = 6.326003040 = TÌƒ (diskalai
+sebagai TÌƒ). |PÌƒÂ²(x_c2) âˆ’ x_c2|âˆž = 3.379e-11 (ganda).
 
-**f. Kondisi Jacobian seksi DF (FD ganda — TIDAK andal, dipakai hanya untuk
-estimasi):** σmax = 61.59, σmin = 1.5368e-09, cond = 4.008e+10. Lantai noise
-FD ≈ 5e-7 per entri (integrasi + akar) → σmin **tidak terukur andal** di
-ganda; monodromy menyiratkan |μ−1| terkecil ~1.5e-07. Pasangan eigen jauh
-FD cocok silang dengan monodromy sampai 9 digit
-(−0.2976±0.9547j, 0.9986±0.0529j). **Konsekuensi:** K3 bergantung pada
-σmin DF sesungguhnya; kasus terburuk terukur (1.5e-09) memberi margin
-inclusion tipis (§4 K3). Bila inclusion gagal → FAILED jujur, bukan cacat
+**f. Kondisi Jacobian seksi DF (FD ganda â€” TIDAK andal, dipakai hanya for
+estimasi):** Ïƒmax = 61.59, Ïƒmin = 1.5368e-09, cond = 4.008e+10. Lantai noise
+FD â‰ˆ 5e-7 per entri (integrasi + akar) â†’ Ïƒmin **no terukur andal** in
+ganda; monodromy menyiratkan |Î¼âˆ’1| terkecil ~1.5e-07. Pasangan eigen jauh
+FD cocok silang with monodromy sampai 9 digit
+(âˆ’0.2976Â±0.9547j, 0.9986Â±0.0529j). **Konsekuensi:** K3 bergantung on
+Ïƒmin DF sesungguhnya; kasus terburuk terukur (1.5e-09) memberi margin
+inclusion tipis (Â§4 K3). Bila inclusion gagal â†’ FAILED jujur, bukan cacat
 pra-registrasi.
 
-**g. Monodromy (matriks variasional benar):** 12 multiplikator — 4 real
+**g. Monodromy (matriks variasional benar):** 12 multiplikator â€” 4 real
 {1.000001239651, 1.000000246527, 0.999999753473, 0.999998760351}, dua pasang
-nyaris-1 {1±1.463e-7j, 1±1.5538e-6j}, dua pasang unit {−0.2976±0.9547j,
-0.9986±0.0529j}; |detM − 1| = 5.77e-14.
+nyaris-1 {1Â±1.463e-7j, 1Â±1.5538e-6j}, dua pasang unit {âˆ’0.2976Â±0.9547j,
+0.9986Â±0.0529j}; |detM âˆ’ 1| = 5.77e-14.
 
 **h. Klaster nyaris-1 belum konvergen antar-metode:** FD peta kembali-2
-memberi deviasi ~5e-4, monodromy ~1.2e-6 — keduanya bisa tercemar (noise FD
+memberi deviasi ~5e-4, monodromy ~1.2e-6 â€” keduanya bisa tercemar (noise FD
 vs pengelompokan eigen dekat-1). **Maka stabilitas spektral DIKECUALI dari
-T2 (→ T2b).**
+T2 (â†’ T2b).**
 
-**i. Koreografi (orbit sejati, ganda):** ‖q1(t+T/3) − q2(t)‖∞ ≤ 2.524e-11;
-‖q1(t+2T/3) − q3(t)‖∞ ≤ 2.687e-11 — koreografi **eksak** sampai noise
+**i. Koreografi (orbit sejati, ganda):** â€–q1(t+T/3) âˆ’ q2(t)â€–âˆž â‰¤ 2.524e-11;
+â€–q1(t+2T/3) âˆ’ q3(t)â€–âˆž â‰¤ 2.687e-11 â€” koreografi **eksak** sampai noise
 integrasi.
 
-**j. Simetri antipodal setengah-periode: FALSE** — residu terbaik atas semua
-permutasi label = 6.946e-01. Tidak ada klaim simetri (tidak dikunci).
+**j. Simetri antipodal setengah-periode: FALSE** â€” residu terbaik atas semua
+permutasi label = 6.946e-01. Tidak ada klaim simetri (no dikunci).
 
-**k. Kecacatan probe (diungkap, bukan dihaluskan):** matriks variasional pada
-probe sempat salah tanda **dan** salah skala (`−K`, pembagian `d²`, seharusnya
-`+K`, `d³`); angka monodromy lama (953, 28) **dibuang** dan dihitung ulang.
-Probe hanya mengukur; tidak ada angka probe yang masuk jalur tersertifikasi
-selain benih rasional §2d dan jendela §3 yang semuanya dinyatakan persis.
+**k. Kecacatan probe (diungkap, bukan dihaluskan):** matriks variasional on
+probe sempat salah tanda **and** salah skala (`âˆ’K`, pembagian `dÂ²`, seharusnya
+`+K`, `dÂ³`); angka monodromy lama (953, 28) **dibuang** and dihitung ulang.
+Probe hanya mengukur; no ada angka probe which masuk jalur tersertifikasi
+selain benih rasional Â§2d and jendela Â§3 which semuanya dinyatakan persis.
 
 ---
 
-## 3. Formulasi yang dikunci
+## 3. Formulasi which dikunci
 
 **3.1 Sistem.** Tiga-bodi planar Newtonian, massa = 1, G = 1; tata letak
 keadaan 12-dim identik T1b: y = (q1x,q1y,q2x,q2y,q3x,q3y, v1x,v1y,v2x,v2y,
 v3x,v3y). Koefisien gaya diimpor dari modul tersegel (`coeffs_three_body`).
 
-**3.2 Seksi dan peta.** Σ = {q₃ᵧ = 0} dengan orientasi silang-turun
-(v₃ᵧ < 0). Koordinat seksi x ∈ ℝ¹¹ = (q1x,q1y,q2x,q2y,q3x, v1x,v1y,v2x,
-v2y,v3x,v3y); embedding y = (x₀,x₁,x₂,x₃, x₄, 0, x₅,…,x₁₀); proyeksi
-balik membuang q₃ᵧ. P̃ = kembali-silang-turun-pertama; F(x) =
-Π(P̃²(x)) − x. Titik tetap F(x\*) = 0 ⇔ orbit periodik dengan periode
-t₁(x\*)+t₂(x\*).
+**3.2 Seksi and peta.** Î£ = {qâ‚ƒáµ§ = 0} with orientasi silang-turun
+(vâ‚ƒáµ§ < 0). Koordinat seksi x âˆˆ â„Â¹Â¹ = (q1x,q1y,q2x,q2y,q3x, v1x,v1y,v2x,
+v2y,v3x,v3y); embedding y = (xâ‚€,xâ‚,xâ‚‚,xâ‚ƒ, xâ‚„, 0, xâ‚…,â€¦,xâ‚â‚€); proyeksi
+balik membuang qâ‚ƒáµ§. PÌƒ = kembali-silang-turun-pertama; F(x) =
+Î (PÌƒÂ²(x)) âˆ’ x. Titik tetap F(x\*) = 0 â‡” orbit periodik with periode
+tâ‚(x\*)+tâ‚‚(x\*).
 
-**3.3 Jendela waktu (terkunci dari §2):**
+**3.3 Jendela waktu (terkunci dari Â§2):**
 
-- w₁ = [3.163014927 − 0.01, 3.163014927 + 0.01] (silang-turun pertama),
-- w₂ = [6.326003040 − 0.01, 6.326003040 + 0.01] (silang-turun kedua).
+- wâ‚ = [3.163014927 âˆ’ 0.01, 3.163014927 + 0.01] (silang-turun pertama),
+- wâ‚‚ = [6.326003040 âˆ’ 0.01, 6.326003040 + 0.01] (silang-turun kedua).
 
-Uji tanda tersertifikasi di ujung-ujung jendela (q₃ᵧ bertanda ketat:
-w₁: −/+; w₂: +/−; margin terukur 0.06 dan 0.10) **dan** keadaan
-monoton v₃ᵧ ≤ −1/2 di sepanjang kedua jendela → silang unik per jendela.
-Lebar pembungkus waktu-silang ≤ 1e-19 (bisection-berpagar pada polinomial
-Taylor tersertifikasi; monoton memberi batas |Δt| ≤ |q₃ᵧ|/0.5).
+Uji tanda tersertifikasi in ujung-ujung jendela (qâ‚ƒáµ§ bertanda ketat:
+wâ‚: âˆ’/+; wâ‚‚: +/âˆ’; margin terukur 0.06 and 0.10) **and** keadaan
+monoton vâ‚ƒáµ§ â‰¤ âˆ’1/2 in sepanjang kedua jendela â†’ silang unik per jendela.
+Lebar pembungkus waktu-silang â‰¤ 1e-19 (bisection-berpagar on polinomial
+Taylor tersertifikasi; monoton memberi limit |Î”t| â‰¤ |qâ‚ƒáµ§|/0.5).
 
-**3.4 Grid.** T̃ = 6.326003040 (desimal-hingga, rasional); h := T̃/1536 =
-0.0041184915625 (eksak, sehingga T̃/3 = 512h dan 2T̃/3 = 1024h bilangan
-bulat — syarat perbandingan koreografi pada §4 K5); N = 1554 langkah
-(H = N·h ≥ 6.4 ≥ atas-w₂); ambang-atas N dikunci, bukan knob.
+**3.4 Grid.** TÌƒ = 6.326003040 (desimal-hingga, rasional); h := TÌƒ/1536 =
+0.0041184915625 (eksak, sehingga TÌƒ/3 = 512h and 2TÌƒ/3 = 1024h bilangan
+bulat â€” syarat perbandingan koreografi on Â§4 K5); N = 1554 step
+(H = NÂ·h â‰¥ 6.4 â‰¥ atas-wâ‚‚); ambang-atas N dikunci, bukan knob.
 
-**3.5 Konfigurasi.** Presisi 256-bit; orde Taylor 24; sisa (remainder) 1×
+**3.5 Konfigurasi.** Presisi 256-bit; orde Taylor 24; sisa (remainder) 1Ã—
 nilai baku T1b; propagasi ketidakpastian **sweep bertanda lintas-blok**
-(mekanisme T1b, diimpor) — knob `SWEEP_SIGNED = True` (mutasi M5 membalik
+(mekanisme T1b, diimpor) â€” knob `SWEEP_SIGNED = True` (mutasi M5 membalik
 nilai ini tanpa mengubah nilai baku lainnya); faktor sisa `REMAINDER_FACTOR
 = 1` (mutasi M1 mengubahnya).
 
-**3.6 Mekanisme Krawczyk.** Benih: x̂₀ §2d. (i) **Newton bersertifikat
-presisi-256-bit, ≤ 6 iterasi**: tiap iterasi wajib menurunkan |F|∞ secara
-ketat; dua kenaikan berturut-turut → abort K3 (status gagal jujur); berhenti
-bila |F|∞ ≤ 1e-20. (ii) **Satu kampanye kotak**: integrasi tervalidasi dari
-kotak B = box(x̂, r_B), r_B = 1e-10, di sepanjang [0, H] dengan propagasi
-turunan S (∂Φ/∂y₀) yang sama; tabung, F(x̂), dan DF(B) dihitung dari satu
-kampanye ini (DF dari produk Jacobian langkah + koreksi waktu-implisit
-rumus peta Poincaré: ∂Φ_{t(x)}/∂x = S − f·(∇g·S)/(∇g·f), g = q₃ᵧ).
-(iii) Ŵ = invers matriks titik-tengah DF(x̂) di 256-bit;
-K(B) = x̂ − ŴF(x̂) + (I − Ŵ·DF(B))·(B − x̂); suksesi:
-K(B) ⊆ box(x̂, 0.9·r_B).
+**3.6 Mekanisme Krawczyk.** Benih: xÌ‚â‚€ Â§2d. (i) **Newton bersertifikat
+presisi-256-bit, â‰¤ 6 iterasi**: tiap iterasi wajib menurunkan |F|âˆž secara
+ketat; dua kenaikan berturut-turut â†’ abort K3 (status gagal jujur); berhenti
+bila |F|âˆž â‰¤ 1e-20. (ii) **Satu kampanye kotak**: integrasi tervalidasi dari
+kotak B = box(xÌ‚, r_B), r_B = 1e-10, in sepanjang [0, H] with propagasi
+turunan S (âˆ‚Î¦/âˆ‚yâ‚€) which sama; tabung, F(xÌ‚), and DF(B) dihitung dari satu
+kampanye ini (DF dari produk Jacobian step + koreksi waktu-implisit
+rumus peta PoincarÃ©: âˆ‚Î¦_{t(x)}/âˆ‚x = S âˆ’ fÂ·(âˆ‡gÂ·S)/(âˆ‡gÂ·f), g = qâ‚ƒáµ§).
+(iii) Å´ = invers matriks titik-tengah DF(xÌ‚) in 256-bit;
+K(B) = xÌ‚ âˆ’ Å´F(xÌ‚) + (I âˆ’ Å´Â·DF(B))Â·(B âˆ’ xÌ‚); suksesi:
+K(B) âŠ† box(xÌ‚, 0.9Â·r_B).
 
-**3.7 Batas sensitivitas (diungkap):** margin inclusion bergantung pada
-σmin DF dan L = ‖D²F‖: pada kasus terburuk terukur (σmin = 1.5e-09)
-kebutuhan ‖Ŵ‖·L·r_B² + ‖Ŵ‖·1e-20 ≈ 6.7e-12·L + 6.7e-12 < 9e-11 menuntut
-L ≲ 12; pada σmin ≥ 1e-07 margin melompat lebar. Kegagalan → FAILED jujur.
+**3.7 Batas sensitivitas (diungkap):** margin inclusion bergantung on
+Ïƒmin DF and L = â€–DÂ²Fâ€–: on kasus terburuk terukur (Ïƒmin = 1.5e-09)
+kebutuhan â€–Å´â€–Â·LÂ·r_BÂ² + â€–Å´â€–Â·1e-20 â‰ˆ 6.7e-12Â·L + 6.7e-12 < 9e-11 menuntut
+L â‰² 12; on Ïƒmin â‰¥ 1e-07 margin melompat lebar. Kegagalan â†’ FAILED jujur.
 
 ---
 
 ## 4. Kriteria lulus
 
-- **K1 — data persis, tanpa float.** Semua konstanta modul rasional (benih
-  12-desimal §2d, jendela §3.3, T̃, h, N, r_B, ambang); AST-scan
+- **K1 â€” data persis, tanpa float.** Semua konstanta modul rasional (benih
+  12-desimal Â§2d, jendela Â§3.3, TÌƒ, h, N, r_B, ambang); AST-scan
   `msaf/figure_eight.py` tanpa literal float, `math`, `numpy`, `scipy`,
   `random`, waktu; import hanya dari modul tersegel; hash modul tersegel
-  tidak berubah (diverifikasi suite/freeze yang sudah ada).
+  no berubah (diverifikasi suite/freeze which already ada).
 
-- **K2 — integrasi tervalidasi.** Tabung keadaan ≤ 1e-22 di **semua**
-  checkpoint di [0, H] (termasuk di dalam w₁ dan w₂); lebar pembungkus
-  waktu-silang ≤ 1e-19; uji tanda q₃ᵧ di ujung jendela ketat sesuai §3.3;
-  v₃ᵧ ≤ −1/2 di kedua jendela (monotonitas tersertifikasi).
+- **K2 â€” integrasi tervalidasi.** Tabung keadaan â‰¤ 1e-22 in **semua**
+  checkpoint in [0, H] (termasuk in dalam wâ‚ and wâ‚‚); lebar pembungkus
+  waktu-silang â‰¤ 1e-19; uji tanda qâ‚ƒáµ§ in ujung jendela ketat sesuai Â§3.3;
+  vâ‚ƒáµ§ â‰¤ âˆ’1/2 in kedua jendela (monotonitas tersertifikasi).
 
-- **K3 — keberadaan + keunikan lokal.** Newton §3.6 mencapai |F|∞ ≤ 1e-20
-  dalam ≤ 6 iterasi monoton, lalu Krawczyk: K(B) ⊆ box(x̂, 9e-11).
-  Implikasi yang diklaim: ada **tepat satu** titik tetap F di B (→ orbit
-  periodik periode t₁+t₂ dengan t₂ ∈ w₂, keunikan **lokal di B saja**).
+- **K3 â€” keberadaan + keunikan lokal.** Newton Â§3.6 mencapai |F|âˆž â‰¤ 1e-20
+  dalam â‰¤ 6 iterasi monoton, lalu Krawczyk: K(B) âŠ† box(xÌ‚, 9e-11).
+  Implikasi which diklaim: ada **tepat satu** titik tetap F in B (â†’ orbit
+  periodik periode tâ‚+tâ‚‚ with tâ‚‚ âˆˆ wâ‚‚, keunikan **lokal in B saja**).
 
-- **K4 — artefak monodromy.** Matriks 12×12 ∂Φ/∂y₀ pada silang-turun kedua
-  terkenclosure: lebar per entri ≤ 1e-16; determinan terenclosure
+- **K4 â€” artefak monodromy.** Matriks 12Ã—12 âˆ‚Î¦/âˆ‚yâ‚€ on silang-turun kedua
+  terkenclosure: lebar per entri â‰¤ 1e-16; determinan terenclosure
   (hitungan interval 256-bit) **memuat 1** (Liouville). Tanpa klaim eigen.
 
-- **K5 — deskriptor bentuk.** (a) Ada silang naik q₃ᵧ unik di
-  [2.108735283 ± 1e-6] dan [4.217376381 ± 1e-6] dengan v₃ᵧ ≥ +1/4 di
-  bracket, dan q₃x di silang masing-masing ∈ [−1.00001, −0.99999] dan
-  [0.99999, 1.00001]; (b) silang di w₁: q₃x ∈ [−6e-05, −3e-05]; silang di
-  w₂: q₃x ∈ [−1e-06, +1e-06]; (c) selisih periode |T̃ − (t₁+t₂)(x̂)| ≤ 1e-09;
-  (d) cacat koreografi pada **semua** checkpoint kisi dengan jarak tepat
-  T̃/3 = 512h dan 2T̃/3 = 1024h: ‖q1(t+T̃/3) − q2(t)‖∞ ≤ 1e-06 dan
-  ‖q1(t+2T̃/3) − q3(t)‖∞ ≤ 1e-06 (ukur 2.5e-11 + koreksi selisih-periode
-  ≤ 4.3e-10 dari (c)).
+- **K5 â€” deskriptor bentuk.** (a) Ada silang naik qâ‚ƒáµ§ unik in
+  [2.108735283 Â± 1e-6] and [4.217376381 Â± 1e-6] with vâ‚ƒáµ§ â‰¥ +1/4 in
+  bracket, and qâ‚ƒx in silang masing-masing âˆˆ [âˆ’1.00001, âˆ’0.99999] and
+  [0.99999, 1.00001]; (b) silang in wâ‚: qâ‚ƒx âˆˆ [âˆ’6e-05, âˆ’3e-05]; silang in
+  wâ‚‚: qâ‚ƒx âˆˆ [âˆ’1e-06, +1e-06]; (c) selisih periode |TÌƒ âˆ’ (tâ‚+tâ‚‚)(xÌ‚)| â‰¤ 1e-09;
+  (d) cacat koreografi on **semua** checkpoint kisi with jarak tepat
+  TÌƒ/3 = 512h and 2TÌƒ/3 = 1024h: â€–q1(t+TÌƒ/3) âˆ’ q2(t)â€–âˆž â‰¤ 1e-06 and
+  â€–q1(t+2TÌƒ/3) âˆ’ q3(t)â€–âˆž â‰¤ 1e-06 (ukur 2.5e-11 + koreksi selisih-periode
+  â‰¤ 4.3e-10 dari (c)).
 
-- **K6 — guard integritas.** (i) determinisme: dua kampanye penuh
-  menghasilkan receipt **byte-identical** dan sama dengan receipt ter-commit;
+- **K6 â€” guard integritas.** (i) determinisme: dua kampanye penuh
+  menghasilkan receipt **byte-identical** and sama with receipt ter-commit;
   (ii) AST-scan K1 lolos; (iii) lima mutasi gagal sebagaimana mestinya:
-  - **M1** `REMAINDER_FACTOR := 10` → tabung melebar → K2 gagal **cepat**
-    (abort pada checkpoint pertama yang melebihi 1e-22);
-  - **M2** benih digeser +1e-03 pada kolom q1x → Newton monoton gagal
-    mencapai 1e-20 (≥2 kenaikan) → K3 gagal;
-  - **M3** satu byte receipt diubah → deteksi hash mismatch;
-  - **M4** injeksi literal float di modul → AST-scan gagal;
-  - **M5** `SWEEP_SIGNED := False` (varian reset-per-blok) → lebar tabung
-    meledak di horizon → K2 gagal cepat (differentiator mekanisme inti).
+  - **M1** `REMAINDER_FACTOR := 10` â†’ tabung melebar â†’ K2 gagal **cepat**
+    (abort on checkpoint pertama which melebihi 1e-22);
+  - **M2** benih digeser +1e-03 on kolom q1x â†’ Newton monoton gagal
+    mencapai 1e-20 (â‰¥2 kenaikan) â†’ K3 gagal;
+  - **M3** satu byte receipt diubah â†’ deteksi hash mismatch;
+  - **M4** injeksi literal float in modul â†’ AST-scan gagal;
+  - **M5** `SWEEP_SIGNED := False` (varian reset-per-blok) â†’ lebar tabung
+    meledak in horizon â†’ K2 gagal cepat (differentiator mekanisme inti).
 
 ---
 
 ## 5. Verdict
 
-- **ALL PASS (K1–K6)** → registry `A-2026-0041`, sertifikat hash
-  (prereg + receipt + modul + guard), klaim §1 sah.
-- **FAILED** bila K1, K2, atau K3 gagal, **atau** K6 gagal (integritas:
-  determinisme/AST/mutasi tidak berperilaku sebagaimana dikunci).
-- **INCONCLUSIVE** bila K3 PASS tetapi K4 atau K5 gagal (keberadaan
-  tercatat di laporan, tanpa registry).
-- Anggaran durasi (kampanye tunggal ~est. 2–6 menit; suite ~20–30 menit
-  dengan guard) adalah **catatan operasional**, bukan kriteria verdict.
+- **ALL PASS (K1â€“K6)** â†’ registry `A-2026-0041`, sertifikat hash
+  (prereg + receipt + modul + guard), klaim Â§1 sah.
+- **FAILED** bila K1, K2, or K3 gagal, **or** K6 gagal (integritas:
+  determinisme/AST/mutasi no berperilaku sebagaimana dikunci).
+- **INCONCLUSIVE** bila K3 PASS tetapi K4 or K5 gagal (keberadaan
+  tercatat in report, tanpa registry).
+- Anggaran durasi (kampanye tunggal ~est. 2â€“6 menit; suite ~20â€“30 menit
+  with guard) adalah **note operasional**, bukan kriteria verdict.
 
 ---
 
@@ -278,30 +278,30 @@ L ≲ 12; pada σmin ≥ 1e-07 margin melompat lebar. Kegagalan → FAILED jujur
 
 Pra-registrasi ini gagal/terbantahkan bila:
 
-1. ditemukan nilai di luar enclosure yang diklaim (mis. tabung > 1e-22
+1. ditemukan nilai in luar enclosure which diklaim (mis. tabung > 1e-22
    tetapi K2 dilaporkan PASS);
-2. K(B) ⊄ int(B) tetapi K3 dilaporkan PASS, atau benih/jendela diubah
+2. K(B) âŠ„ int(B) tetapi K3 dilaporkan PASS, or benih/jendela diubah
    setelah commit ini;
-3. receipt tidak byte-identical antar-dua-run atau beda dari commit;
-4. ada float/literally-time/random di jalur tersertifikasi (AST);
-5. mutasi M1–M5 tidak gagal sesuai ekspektasi §4 K6;
-6. laporan/receipt memuat klaim spektrum/stabilitas, simetri antipodal,
-   keunikan global, prioritas, atau klaim di luar §1;
-7. modul tersegel (hash §header) berubah.
+3. receipt no byte-identical antar-dua-run or beda dari commit;
+4. ada float/literally-time/random in jalur tersertifikasi (AST);
+5. mutasi M1â€“M5 no gagal sesuai ekspektasi Â§4 K6;
+6. report/receipt memuat klaim spektrum/stabilitas, simetri antipodal,
+   keunikan global, prioritas, or klaim in luar Â§1;
+7. modul tersegel (hash Â§header) berubah.
 
 ---
 
-## 7. Artefak dan urutan eksekusi
+## 7. Artefak and urutan eksekusi
 
-1. Commit berkas pra-registrasi ini (hash-nya dikunci; **tidak diedit**
-   setelahnya — perubahan hanya via amendemen bernomor yang ditulis sebelum
+1. Commit file pra-registrasi ini (hash-nya dikunci; **no diedit**
+   setelahnya â€” perubahan hanya via amendemen bernomor which ditulis sebelum
    kode, pola T1b).
-2. Commit docs: `DAFTAR_MASALAH_KERJA.md` butir 16 → TREK AKTIF;
+2. Commit docs: `DAFTAR_MASALAH_KERJA.md` butir 16 â†’ TREK AKTIF;
    `HANDOFF.md` seksi `## 2.0bl` (berisi ringkasan probe + deferensi T2b).
 3. Implementasi `msaf/figure_eight.py` + guard
-   `msaf/tests/test_figure_eight.py` (determinisme, AST, M1–M5 fail-fast).
-4. Kampanye → receipt `reports/figure_eight_three_body_2026-10-22.json`
-   (memuat hash prereg ini, semua ambang K1–K6, angka aktual).
+   `msaf/tests/test_figure_eight.py` (determinisme, AST, M1â€“M5 fail-fast).
+4. Kampanye â†’ receipt `reports/figure_eight_three_body_2026-10-22.json`
+   (memuat hash prereg ini, semua ambang K1â€“K6, angka aktual).
 5. Laporan `reports/FIGURE_EIGHT_2026-10-22.md` (bahasa Indonesia).
 6. Suite penuh + `freeze.py --verify` + registry `A-2026-0041` bila ALL
    PASS (entry memuat hash prereg/receipt/modul/guard).
@@ -311,101 +311,103 @@ Pra-registrasi ini gagal/terbantahkan bila:
 
 ## 8. Batas eksplisit
 
-- Hasil T2 adalah **keberadaan lokal + keunikan lokal** orbit periodik untuk
-  IVP rasional-eksak seperti didefinisikan di K1, dekat benih §2d — bukan
-  identifikasi absolut dengan figure-eight bilangan-real sejati, bukan
+- Hasil T2 adalah **keberadaan lokal + keunikan lokal** orbit periodik for
+  IVP rasional-eksak seperti didefinisikan in K1, dekat benih Â§2d â€” bukan
+  identifikasi absolut with figure-eight bilangan-real sejati, bukan
   keunikan global, bukan eksistensi atas sistem lain.
 - Stabilitas (spektrum multiplikator, Lyapunov, stabilitas nonlinear)
-  **di luar** T2; hanya T2b (pra-registrasi terpisah) yang boleh mengklaim,
-  setelah diverifikasi konvergen antar-metode (§2h).
-- Batas T1b tetap berlaku untuk T1b: S4 tetap uji-stress tersegel, bukan
+  **in luar** T2; hanya T2b (pra-registrasi terpisah) which boleh mengklaim,
+  setelah diverifikasi konvergen antar-metode (Â§2h).
+- Batas T1b tetap berlaku for T1b: S4 tetap uji-stress tersegel, bukan
   klaim keberadaan orbit figure-eight.
 - Tanpa klaim RH/PDE/chaos/ergodicity/Soliton/Evans/fisika/analytic-
-  continuation/prioritas/pembuktian formal; tidak disebut "terbukti di
+  continuation/prioritas/pembuktian formal; no disebut "terbukti in
   Lean".
-- Kode/docstring Inggris; laporan peneliti (HANDOFF/registry/daftar/laporan
+- Kode/docstring Inggris; report peneliti (HANDOFF/registry/daftar/report
   T2) bahasa Indonesia.
 
 ---
 
-## 9. Amendemen #1 (ditulis SEBELUM ada kode; hash berkas ini terkunci pada commit amendemen)
+## 9. Amendemen #1 (ditulis SEBELUM ada kode; hash file ini terkunci on commit amendemen)
 
 Diungkap jujur: analisis kelayakan mekanisme Krawczyk (masih pra-kode,
-belum ada satu baris pun implementasi) menemukan tiga hal yang menuntut
-perubahan angka/mutasi di bawah. Tidak ada ambang kriteria K1-K6 yang
-dilonggarkan; semua perubahan MEMPERKETAT kotak/mutasi atau membetulkan
-gerbang mutasi yang terbukti vakum. Angka probe §2, jendela, grid, T̃,
-K2, K4, K5 tidak berubah.
+belum ada satu baris pun implementasi) menemukan tiga hal which menuntut
+perubahan angka/mutasi in bawah. Tidak ada ambang kriteria K1-K6 which
+dilonggarkan; semua perubahan MEMPERKETAT kotak/mutasi or membetulkan
+gerbang mutasi which terbukti vakum. Angka probe Â§2, jendela, grid, TÌƒ,
+K2, K4, K5 no berubah.
 
 **9.1 Alasan (dependensi waktu-silang).** Pada kampanye kotak, waktu
-silang t₂(x) untuk x ∈ B menyebar |dt₂/dx|·r_B ≈ 10.5·r_B (turunan
-implisit, terkunci §3.3-§3.6). Membungkus S pada rentang waktu selebar
-ini menambah lebarDF(B) ~ A·r_B dengan A ≈ 1e3-1e4 (faktor ketergantungan;
-melebihi variasi sah ‖D²F‖·r_B ~ 10·r_B sebesar ~100×). Syarat kontraksi
-‖Ŵ‖·A·r_B < 0.9 pada kasus terburuk terukur σ_min = 1.5368e-09 menuntut
+silang tâ‚‚(x) for x âˆˆ B menyebar |dtâ‚‚/dx|Â·r_B â‰ˆ 10.5Â·r_B (turunan
+implisit, terkunci Â§3.3-Â§3.6). Membungkus S on rentang waktu selebar
+ini menambah lebarDF(B) ~ AÂ·r_B with A â‰ˆ 1e3-1e4 (faktor ketergantungan;
+melebihi variasi sah â€–DÂ²Fâ€–Â·r_B ~ 10Â·r_B sebesar ~100Ã—). Syarat kontraksi
+â€–Å´â€–Â·AÂ·r_B < 0.9 on kasus terburuk terukur Ïƒ_min = 1.5368e-09 menuntut
 r_B < ~2.5e-13, bukan 1e-10.
 
 **9.2 Perubahan angka terkunci:**
 
-- r_B: 1e-10 → **2e-13**; ambang suksesi K3 tetap K(B) ⊆ box(x̂, 0.9·r_B)
+- r_B: 1e-10 â†’ **2e-13**; ambang suksesi K3 tetap K(B) âŠ† box(xÌ‚, 0.9Â·r_B)
   (kini 1.8e-13).
-- Target Newton §3.6: |F|∞ ≤ 1e-20 → **|F|∞ ≤ 1e-22** (masih ≤ target lama;
+- Target Newton Â§3.6: |F|âˆž â‰¤ 1e-20 â†’ **|F|âˆž â‰¤ 1e-22** (masih â‰¤ target lama;
   lebar aktual tabung titik diperkirakan ~1e-76 - rems Taylor ~ h^25/25! -
   sehingga target 1e-22 punya kepala-ruang ~54 pesanan; sekaligus membatasi
-  ‖x̂ − x*‖ ≤ τ_F/σ_min ≤ 6.7e-14 < r_B pada kasus terburuk).
-- Setiap iterasi Newton (termasuk x̂ final) dibulatkan ke **25 desimal**
-  (rasional eksak, K1); pembulatan ≤ 5e-26 tidak material.
-- Sensitivitas §3.7 kini: total suksesi (kasus terburuk σ_min = 1.5e-09)
-  ≈ ‖Ŵ‖·(τ_F + F-rad) + ‖Ŵ‖·A·r_B² ≈ 6.7e-14 + A·2.7e-13·(A/1e3); dengan
-  A ~ 1e3 muat di 1.8e-13 (margin ~1.2×); pada σ_min ≥ 1e-08 semua margin
-  ≥ 5×. Bila σ_min sesungguhnya ≪ 1e-08 atau A ≫ 1e4 → inclusion gagal →
-  **FAILED jujur** (falsifier §6 butir 2 tetap berlaku).
+  â€–xÌ‚ âˆ’ x*â€– â‰¤ Ï„_F/Ïƒ_min â‰¤ 6.7e-14 < r_B on kasus terburuk).
+- Setiap iterasi Newton (termasuk xÌ‚ final) dibulatkan ke **25 desimal**
+  (rasional eksak, K1); pembulatan â‰¤ 5e-26 no material.
+- Sensitivitas Â§3.7 kini: total suksesi (kasus terburuk Ïƒ_min = 1.5e-09)
+  â‰ˆ â€–Å´â€–Â·(Ï„_F + F-rad) + â€–Å´â€–Â·AÂ·r_BÂ² â‰ˆ 6.7e-14 + AÂ·2.7e-13Â·(A/1e3); with
+  A ~ 1e3 muat in 1.8e-13 (margin ~1.2Ã—); on Ïƒ_min â‰¥ 1e-08 semua margin
+  â‰¥ 5Ã—. Bila Ïƒ_min sesungguhnya â‰ª 1e-08 or A â‰« 1e4 â†’ inclusion gagal â†’
+  **FAILED jujur** (falsifier Â§6 butir 2 tetap berlaku).
 
 **9.3 Gerbang mutasi (M1, M5) dibetulkan sebelum vakum terbukti:**
 
-- Lebar aktual tabung ~1e-76 berada ~50 pesanan di bawah ambang K2
-  (1e-22) dan K4 (1e-16); oleh itu:
+- Lebar aktual tabung ~1e-76 berada ~50 pesanan in bawah ambang K2
+  (1e-22) and K4 (1e-16); oleh itu:
 - **M1 (diubah):** `REMAINDER_FACTOR := 1e70` (sebelumnya 10): faktor 10
-  terbukti tak terdeteksi (lebar tetap ~1e-75 ≪ 1e-22 - gerbang vakum);
-  faktor 1e70 mendorong rem ~1e-14 → tabung > 1e-22 pada checkpoint
-  pertama → K2 gagal **cepat** (abort pada checkpoint pertama yang
-  melebihi ambang, tetap sesuai semangat §4/M1).
+  terbukti tak terdeteksi (lebar tetap ~1e-75 â‰ª 1e-22 - gerbang vakum);
+  faktor 1e70 mendorong rem ~1e-14 â†’ tabung > 1e-22 on checkpoint
+  pertama â†’ K2 gagal **cepat** (abort on checkpoint pertama which
+  melebihi ambang, tetap sesuai semangat Â§4/M1).
 - **M5 (gerbang diperbaiki):** `SWEEP_SIGNED := False` (reset-per-blok)
-  menggembungkan c_out/S ~8.7e7× per periode (ukuran T1b §2.3); pada
-  checkpoint titik lebar tetap di bawah ambang K2 (vakum di sana), tetapi
-  pada **kampanye kotak** DF(B) meledak sehingga K(B) ⊄ box(x̂, 0.9·r_B) →
-  **K3 gagal** (bukan K2 seperti §4 semula). Ekspektasi kegagalan dan
-  sifat fail-early-nya (K3 gagal pada akhir kampanye kotak) dikunci di sini.
+  menggembungkan c_out/S ~8.7e7Ã— per periode (ukuran T1b Â§2.3); on
+  checkpoint titik lebar tetap in bawah ambang K2 (vakum in sana), tetapi
+  on **kampanye kotak** DF(B) meledak sehingga K(B) âŠ„ box(xÌ‚, 0.9Â·r_B) â†’
+  **K3 gagal** (bukan K2 seperti Â§4 semula). Ekspektasi kegagalan and
+  sifat fail-early-nya (K3 gagal on akhir kampanye kotak) dikunci in sini.
 
-**9.4 Mekanisme tambahan yang dikunci (implementasi wajib mengikuti):**
+**9.4 Mekanisme tambahan which dikunci (implementasi wajib mengikuti):**
 
-- Tabung pada waktu sembarang t di dalam langkah k: polinomial Taylor
-  langkah-k dari titik-tengah tersimpan + perpanjangan suara dari
-  checkpoint blok terakhir (|J|·c + rem + quad) + Jacobian parsial pada τ
-  (bentuk nilai-rata-rata, sama seperti `forward_step`); untuk uji tanda
-  pembuangan-bisection, radius boleh dibatasi kasar ‖J_τ‖∞ ≤ 2 dengan
-  justifikasi jarak-pasir-badan bersertifikat ≥ 1/2 di seluruh horizon
+- Tabung on waktu sembarang t in dalam step k: polinomial Taylor
+  step-k dari titik-tengah tersimpan + perpanjangan suara dari
+  checkpoint blok terakhir (|J|Â·c + rem + quad) + Jacobian parsial on Ï„
+  (bentuk nilai-rata-rata, sama seperti `forward_step`); for uji tanda
+  pembuangan-bisection, radius boleh dibatasi kasar â€–J_Ï„â€–âˆž â‰¤ 2 with
+  justifikasi jarak-pasir-badan bersertifikat â‰¥ 1/2 in seluruh horizon
   (verifikasi internal, bukan kriteria).
-- Pembungkus waktu-silang: bisection-berpagar pada polinomial tersertifikasi
+- Pembungkus waktu-silang: bisection-berpagar on polinomial tersertifikasi
   hingga lantai radius tabung q3y tercapai; lebar aktual diperkirakan
-  ~1e-75 (ambang K2 ≤ 1e-19 tetap berlaku sebagai batas-atas).
-- F(x̂) dan Ŵ berasal dari **kampanye titik (point-run) Newton terakhir**
-  (tabung tajam); kampanye kotak menyumbang DF(B) dan konfirmasi tabung;
+  ~1e-75 (ambang K2 â‰¤ 1e-19 tetap berlaku sebagai limit-atas).
+- F(xÌ‚) and Å´ berasal dari **kampanye titik (point-run) Newton terakhir**
+  (tabung tajam); kampanye kotak menyumbang DF(B) and konfirmasi tabung;
   K5 dibaca dari kampanye titik final.
-- Iterasi Newton memakai inversi matriks titik-tengah DF(x) di 256-bit
-  (`arb_mat`); aturan monoton (§3.6) tetap berlaku.
+- Iterasi Newton memakai inversi matriks titik-tengah DF(x) in 256-bit
+  (`arb_mat`); aturan monoton (Â§3.6) tetap berlaku.
 
 - **Amendemen #2 (masih sebelum kode):** dua kekeliruan pencatatan probe
-  di §3.3 dibetulkan tanpa mengubah gerbang kriteria: (a) silang-**turun**
-  (v3y < 0) berarti q3y **lo > 0 dan hi < 0** untuk KEDUA jendela — pola
-  tertulis "w₁: −/+" adalah kebalikan; kini keduanya "+/−"; (b) margin
-  terukur pada jendela terkunci (setengah-lebar 0.01) adalah **0.0061
-  (w₁) dan 0.0107 (w₂)** — angka "0.06/0.10" tercatat milik hipotesis
-  jendela ±0.1 yang tidak jadi terkunci. Gerbang K2 tetap: perubahan tanda
-  ketat di kedua ujung + monotonitas v3y ≤ −1/2 (tidak berubah).
-  Dibuka sebagai kesalahan pencatatan, pola kejujuran yang sama dengan
-  kecacatan probe variational §2k.
+  in Â§3.3 dibetulkan tanpa mengubah gerbang kriteria: (a) silang-**turun**
+  (v3y < 0) berarti q3y **lo > 0 and hi < 0** for KEDUA jendela â€” pola
+  tertulis "wâ‚: âˆ’/+" adalah kebalikan; kini keduanya "+/âˆ’"; (b) margin
+  terukur on jendela terkunci (setengah-lebar 0.01) adalah **0.0061
+  (wâ‚) and 0.0107 (wâ‚‚)** â€” angka "0.06/0.10" tercatat milik hipotesis
+  jendela Â±0.1 which no jadi terkunci. Gerbang K2 tetap: perubahan tanda
+  ketat in kedua ujung + monotonitas v3y â‰¤ âˆ’1/2 (no berubah).
+  Dibuka sebagai kesalahan pencatatan, pola kejujuran which sama with
+  kecacatan probe variational Â§2k.
 
 Amendemen berikutnya hanya boleh ditulis sebelum kode modul
 `msaf/figure_eight.py`; setelah modul ditulis, scope terkunci penuh
 (pola T1b: tanpa perubahan ambang pasca-kode).
+
+

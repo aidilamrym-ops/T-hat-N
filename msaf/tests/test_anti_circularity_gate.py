@@ -139,12 +139,12 @@ def _log_violation(log: str) -> str | None:
 def _report_violation(report: str) -> str | None:
     low = report.lower()
     for needle in (
-        "pass untuk scope sumber lean kernel",
+        "pass for scope source lean kernel",
         "lean/spec/",
         "out of scope",
         "9 aksioma deklaratif",
         "sub-gate audit",
-        "tidak dipanggil",
+        "no dipanggil",
         "verifikasi ulang paket 8/9",
         "tool not run",
     ):
@@ -152,7 +152,7 @@ def _report_violation(report: str) -> str | None:
             return "report missing scope needled %r" % needle
     for banned in (
         "rh terbukti",
-        "p≠np terbukti",
+        "pâ‰ np terbukti",
         "smt audit pass",
         "semua teorema lean terbukti",
         "coq sekarang lean-verified",
@@ -233,3 +233,5 @@ def test_guard_rejects_mutations() -> None:
 
     # 12. A forged RH claim in the report.
     assert _report_violation(report + "\nRH terbukti\n")
+
+

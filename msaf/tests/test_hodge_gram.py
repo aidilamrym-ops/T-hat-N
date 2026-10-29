@@ -46,3 +46,5 @@ def test_hodge_gram_pairing_exactness():
         h.compute_exact_gram_matrix([[0.5, 0]])  # type: ignore[list-item]
     with pytest.raises(TypeError):
         h.add_cycle([1.0, 0])  # type: ignore[list-item]
+
+

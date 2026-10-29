@@ -1,0 +1,7 @@
+.lake/
+lake-packages/
+*.olean
+*.ilean
+__pycache__/
+*.pyc
+.pytest_cache/

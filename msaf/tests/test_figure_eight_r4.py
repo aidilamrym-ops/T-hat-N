@@ -38,7 +38,7 @@ BASE_MODULE_SHA = "8eddc2bb17647d452e15325397e852e224e1af028f055fa4fe41de94af939
 BASE_RECEIPT_SHA = "6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9"
 BASE_PREREG_SHA = "23ab24254f13539dddf1bd3cccd87dbbcef01b3398dab1ccf5fb2d75099a6b93"
 
-# Expected mutation catalogue and gate failures (from prereg §5).
+# Expected mutation catalogue and gate failures (from prereg Â§5).
 EXPECTED_MUTATIONS = {
     "M1": {
         "parameter": "REMAINDER_FACTOR=10^70",
@@ -337,3 +337,4 @@ def test_report_records_all_pass_verdict() -> None:
     assert "ALL PASS" in text
     assert "A-2026-0043" in text
     assert "non-diskriminatif" in text  # old r3 M5 disclosure
+

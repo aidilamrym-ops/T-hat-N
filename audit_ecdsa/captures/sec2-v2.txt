@@ -1,4 +1,4 @@
-                 Standards for Efficient Cryptography
+﻿                 Standards for Efficient Cryptography
 
 
 
@@ -14,8 +14,8 @@ SEC 2: Recommended Elliptic Curve Domain Parameters
 
 
                                      c 2010 Certicom Corp.
-  License to copy this document is granted provided it is identified as “Standards for Efficient
-             Cryptography 2 (SEC 2)”, in all material mentioning or referencing it.
+  License to copy this document is granted provided it is identified as â€œStandards for Efficient
+             Cryptography 2 (SEC 2)â€, in all material mentioning or referencing it.
 SEC 2 (Draft) Ver. 2.0
 
 Contents
@@ -113,7 +113,7 @@ based on elliptic curve cryptography included in the implementation.
 It is envisioned that implementations choosing to comply with this document will typically choose
 also to comply with its companion document, SEC 1 [SEC 1].
 It is intended to make a validation system available so that implementors can check compliance
-with this document—see the SECG website, www.secg.org, for further information.
+with this documentâ€”see the SECG website, www.secg.org, for further information.
 
 
 1.3    Document Evolution
@@ -124,7 +124,7 @@ the Standards for Efficient Cryptography Group.
 
 
 1.4    Intellectual Property
-The reader’s attention is called to the possibility that compliance with this document may require
+The readerâ€™s attention is called to the possibility that compliance with this document may require
 use of an invention covered by patent rights. By publication of this document, no position is taken
 with respect to the validity of this claim or of any patent rights in connection therewith. The
 patent holder(s) may have filed with the SECG a statement of willingness to grant a license under
@@ -136,7 +136,7 @@ SECG website, www.secg.org.
 1.5    Organization
 This document is organized as follows.
 
-§1 Introduction                                                                       Page 1 of 33
+Â§1 Introduction                                                                       Page 1 of 33
 1.5 Organization                                                       SEC 2 (Draft) Ver. 2.0
 
 The main body of the document focuses on the specification of recommended elliptic curve domain
@@ -149,7 +149,7 @@ references cited in the document.
 
 
 
-Page 2 of 33                                                                  §1 Introduction
+Page 2 of 33                                                                  Â§1 Introduction
 SEC 2 (Draft) Ver. 2.0
 
 2     Recommended Elliptic Curve Domain Parameters over
@@ -166,18 +166,18 @@ specifies recommended 521-bit elliptic curve domain parameters over Fp ,
 2.1    Properties of Elliptic Curve Domain Parameters over Fp
 Following SEC 1 [SEC 1], elliptic curve domain parameters over Fp are a sextuple:
                                           T = (p, a, b, G, n, h)
-consisting of an integer p specifying the finite field Fp , two elements a, b ∈ Fp specifying an elliptic
+consisting of an integer p specifying the finite field Fp , two elements a, b âˆˆ Fp specifying an elliptic
 curve E(Fp ) defined by the equation:
-                                  E : y 2 ≡ x3 + a.x + b     (mod p),
+                                  E : y 2 â‰¡ x3 + a.x + b     (mod p),
 a base point G = (xG , yG ) on E(Fp ), a prime n which is the order of G, and an integer h which is
 the cofactor h = #E(Fp )/n.
 When elliptic curve domain parameters are specified in this document, each component of this sex-
 tuple is represented as an octet string converted using the conventions specified in SEC 1 [SEC 1].
 Again following SEC 1 [SEC 1], elliptic curve domain parameters over Fp must have:
-                                 dlog2 pe ∈ {192, 224, 256, 384, 521}.
+                                 dlog2 pe âˆˆ {192, 224, 256, 384, 521}.
 This restriction is designed to encourage interoperability while allowing implementers to sup-
-ply commonly required security levels—recall that elliptic curve domain parameters over Fp with
-dlog2 pe = 2t supply approximately t bits of security—meaning that solving the logarithm problem
+ply commonly required security levelsâ€”recall that elliptic curve domain parameters over Fp with
+dlog2 pe = 2t supply approximately t bits of securityâ€”meaning that solving the logarithm problem
 on the associated elliptic curve is believed to take approximately 2t operations.
 Here recommended elliptic curve domain parameters are supplied at each of the sizes allowed in
 SEC 1.
@@ -186,16 +186,16 @@ order p. These special form primes facilitate especially efficient implementatio
 in [Nat99]. Recommended elliptic curve domain parameters over Fp which use random primes for
 their field order p may be added later if commercial demand for such parameters increases.
 The elliptic curve domain parameters over Fp supplied at each security level typically consist of
-examples of two different types of parameters—one type being parameters associated with a Koblitz
-curve and the other type being parameters chosen verifiably at random—although only verifiably
+examples of two different types of parametersâ€”one type being parameters associated with a Koblitz
+curve and the other type being parameters chosen verifiably at randomâ€”although only verifiably
 random parameters are supplied at export strength and at extremely high strength.
 
-§2 Recommended Elliptic Curve Domain Parameters over Fp                                    Page 3 of 33
+Â§2 Recommended Elliptic Curve Domain Parameters over Fp                                    Page 3 of 33
 2.1 Properties of Elliptic Curve Domain Parameters over Fp                SEC 2 (Draft) Ver. 2.0
 
 Parameters associated with a Koblitz curve admit especially efficient implementation. The name
 Koblitz curve is best-known when used to describe binary anomalous curves over F2m which have
-a, b ∈ {0, 1} [Kob92]. Here it is generalized to refer also to curves over Fp which possess an
+a, b âˆˆ {0, 1} [Kob92]. Here it is generalized to refer also to curves over Fp which possess an
 efficiently computable endomorphism [GLV01]. The recommended parameters associated with a
 Koblitz curve were chosen by repeatedly selecting parameters admitting an efficiently computable
 endomorphism until a prime order curve was found.
@@ -208,11 +208,11 @@ at random, the seed S used to generate the parameters may optionally be stored a
 parameters so that users can verify the parameters were chosen verifiably at random.
 Here verifiably random parameters have been chosen either so that the associated elliptic curve
 has prime order, or so that scalar multiplication of points on the associated elliptic curve can be
-accelerated using Montgomery’s method [Mon87]. The recommended verifiably random parameters
+accelerated using Montgomeryâ€™s method [Mon87]. The recommended verifiably random parameters
 were chosen by repeatedly selecting a random seed and counting the number of points on the
 corresponding curve until appropriate parameters were found. Typically the parameters were
-chosen so that a = p − 3 because such parameters admit efficient implementation. For a given p,
-approximately half the isomorphism classes of elliptic curves over Fp contain a curve with a = p−3.
+chosen so that a = p âˆ’ 3 because such parameters admit efficient implementation. For a given p,
+approximately half the isomorphism classes of elliptic curves over Fp contain a curve with a = pâˆ’3.
 See SEC 1 [SEC 1] for further guidance on the selection of elliptic curve domain parameters over
 Fp .
 
@@ -233,9 +233,9 @@ Fp .
 
 The recommended elliptic curve domain parameters over Fp have been given nicknames to enable
 them to be easily identified. The nicknames were chosen as follows. Each name begins with
-sec to denote ‘Standards for Efficient Cryptography’, followed by a p to denote parameters over
+sec to denote â€˜Standards for Efficient Cryptographyâ€™, followed by a p to denote parameters over
 
-Page 4 of 33                       §2 Recommended Elliptic Curve Domain Parameters over Fp
+Page 4 of 33                       Â§2 Recommended Elliptic Curve Domain Parameters over Fp
 SEC 2 (Draft) Ver. 2.0               2.1 Properties of Elliptic Curve Domain Parameters over Fp
 
 Fp , followed by a number denoting the length in bits of the field size p, followed by a k to denote
@@ -243,15 +243,15 @@ parameters associated with a Koblitz curve or an r to denote verifiably random p
 by a sequence number.
 Table 1 summarizes salient properties of the recommended elliptic curve domain parameters over
 Fp .
-Information is represented in Table 1 as follows. The column labelled ‘parameters’ gives the
-nickname of the elliptic curve domain parameters. The column labelled ‘section’ refers to the
-section of this document where the parameters are specified. The column labelled ‘strength’ gives
-the approximate number of bits of security the parameters offer. The column labelled ‘size’ gives
-the length in bits of the field order. The column labelled ‘RSA/DSA’ gives the approximate
+Information is represented in Table 1 as follows. The column labelled â€˜parametersâ€™ gives the
+nickname of the elliptic curve domain parameters. The column labelled â€˜sectionâ€™ refers to the
+section of this document where the parameters are specified. The column labelled â€˜strengthâ€™ gives
+the approximate number of bits of security the parameters offer. The column labelled â€˜sizeâ€™ gives
+the length in bits of the field order. The column labelled â€˜RSA/DSAâ€™ gives the approximate
 size of an RSA or DSA modulus at comparable strength. (See SEC 1 [SEC 1] for precise technical
-guidance on the strength of elliptic curve domain parameters.) Finally the column labelled ‘Koblitz
-or random’ indicates whether the parameters are associated with a Koblitz curve — ‘k’ — or were
-chosen verifiably at random — ‘r’.
+guidance on the strength of elliptic curve domain parameters.) Finally the column labelled â€˜Koblitz
+or randomâ€™ indicates whether the parameters are associated with a Koblitz curve â€” â€˜kâ€™ â€” or were
+chosen verifiably at random â€” â€˜râ€™.
 
 
  Parameters    Section   ANSI X9.62     ANSI X9.63     echeck    IEEE P1363     IPSec   NIST     WAP
@@ -269,21 +269,21 @@ chosen verifiably at random — ‘r’.
 
 Table 2 summarizes the status of the recommended elliptic curve domain parameters over Fp with
 respect to their alignment with other standards.
-Information is represented in Table 2 as follows. The column labelled ‘parameters’ gives the
-nickname of the elliptic curve domain parameters. The column labelled ‘section’ refers to the section
+Information is represented in Table 2 as follows. The column labelled â€˜parametersâ€™ gives the
+nickname of the elliptic curve domain parameters. The column labelled â€˜sectionâ€™ refers to the section
 of this document where the parameters are specified. The remaining columns give the status of
 the parameters with respect to various other standards which specify mechanisms based on elliptic
-curve cryptography: ‘ANSI X9.62’ refers to the ANSI X9.62 standard [X9.62], ‘ANSI X9.63’ refers
-to the ANSI X9.63 standard [X9.63], ‘echeck’ refers to the draft FSML standard [Fin99], ‘IEEE
-P1363’ refers to the IEEE 1363 standard [1363], ‘IPSec’ refers to the recent internet draft related to
-ECC [Int06] submitted to the IETF’s IPSec working group, ‘NIST’ refers to the list of recommended
-parameters recently released by the U.S. government [Nat99], and ’WAP’ refers to the Wireless
-Application Forum’s WTLS standard [WTLS]. In these columns, a ‘-’ denotes parameters non-
+curve cryptography: â€˜ANSI X9.62â€™ refers to the ANSI X9.62 standard [X9.62], â€˜ANSI X9.63â€™ refers
+to the ANSI X9.63 standard [X9.63], â€˜echeckâ€™ refers to the draft FSML standard [Fin99], â€˜IEEE
+P1363â€™ refers to the IEEE 1363 standard [1363], â€˜IPSecâ€™ refers to the recent internet draft related to
+ECC [Int06] submitted to the IETFâ€™s IPSec working group, â€˜NISTâ€™ refers to the list of recommended
+parameters recently released by the U.S. government [Nat99], and â€™WAPâ€™ refers to the Wireless
+Application Forumâ€™s WTLS standard [WTLS]. In these columns, a â€˜-â€™ denotes parameters non-
 
-§2 Recommended Elliptic Curve Domain Parameters over Fp                                  Page 5 of 33
+Â§2 Recommended Elliptic Curve Domain Parameters over Fp                                  Page 5 of 33
 2.2 Recommended 192-bit Elliptic Curve Domain Parameters over Fp          SEC 2 (Draft) Ver. 2.0
 
-conformant with the standard, a ‘c’ denotes parameters conformant with the standard, and an ‘r’
+conformant with the standard, a â€˜câ€™ denotes parameters conformant with the standard, and an â€˜râ€™
 denotes parameters explicitly recommended in the standard.
 Note that ANSI X9.62 has been updated. The set of recommended parameters in the updated
 ANSI X9.62 [X9.62] is a subset of the set of recommended parameters in this document.
@@ -305,7 +305,7 @@ The elliptic curve domain parameters over Fp associated with a Koblitz curve sec
 specified by the sextuple T = (p, a, b, G, n, h) where the finite field Fp is defined by:
 
         p = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE FFFFEE37
-          = 2192 − 232 − 212 − 28 − 27 − 26 − 23 − 1
+          = 2192 âˆ’ 232 âˆ’ 212 âˆ’ 28 âˆ’ 27 âˆ’ 26 âˆ’ 23 âˆ’ 1
 The curve E: y 2 = x3 + ax + b over Fp is defined by:
 
         a = 00000000 00000000 00000000 00000000 00000000 00000000
@@ -328,11 +328,11 @@ Finally the order n of G and the cofactor are:
 The verifiably random elliptic curve domain parameters over Fp secp192r1 are specified by the
 sextuple T = (p, a, b, G, n, h) where the finite field Fp is defined by:
 
-Page 6 of 33                       §2 Recommended Elliptic Curve Domain Parameters over Fp
+Page 6 of 33                       Â§2 Recommended Elliptic Curve Domain Parameters over Fp
 SEC 2 (Draft) Ver. 2.0       2.3 Recommended 224-bit Elliptic Curve Domain Parameters over Fp
 
         p = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE FFFFFFFF FFFFFFFF
-          = 2192 − 264 − 1
+          = 2192 âˆ’ 264 âˆ’ 1
 The curve E: y 2 = x3 + ax + b over Fp is defined by:
 
         a = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE FFFFFFFF FFFFFFFC
@@ -367,14 +367,14 @@ The elliptic curve domain parameters over Fp associated with a Koblitz curve sec
 specified by the sextuple T = (p, a, b, G, n, h) where the finite field Fp is defined by:
 
         p = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE FFFFE56D
-          = 2224 − 232 − 212 − 211 − 29 − 27 − 24 − 2 − 1
+          = 2224 âˆ’ 232 âˆ’ 212 âˆ’ 211 âˆ’ 29 âˆ’ 27 âˆ’ 24 âˆ’ 2 âˆ’ 1
 The curve E: y 2 = x3 + ax + b over Fp is defined by:
 
         a = 00000000 00000000 00000000 00000000 00000000 00000000 00000000
         b = 00000000 00000000 00000000 00000000 00000000 00000000 00000005
 The base point G in compressed form is:
 
-§2 Recommended Elliptic Curve Domain Parameters over Fp                               Page 7 of 33
+Â§2 Recommended Elliptic Curve Domain Parameters over Fp                               Page 7 of 33
 2.3 Recommended 224-bit Elliptic Curve Domain Parameters over Fp       SEC 2 (Draft) Ver. 2.0
 
         G =          03 A1455B33 4DF099DF 30FC28A1 69A467E9 E47075A9 0F7E650E
@@ -398,7 +398,7 @@ The verifiably random elliptic curve domain parameters over Fp secp224r1 are spe
 sextuple T = (p, a, b, G, n, h) where the finite field Fp is defined by:
 
         p = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 00000000 00000000 00000001
-          = 2224 − 296 + 1
+          = 2224 âˆ’ 296 + 1
 The curve E: y 2 = x3 + ax + b over Fp is defined by:
 
         a = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE FFFFFFFF FFFFFFFF FFFFFFFE
@@ -420,7 +420,7 @@ Finally the order n of G and the cofactor are:
         n = FFFFFFFF FFFFFFFF FFFFFFFF FFFF16A2 E0B8F03E 13DD2945 5C5C2A3D
         h =          01
 
-Page 8 of 33                       §2 Recommended Elliptic Curve Domain Parameters over Fp
+Page 8 of 33                       Â§2 Recommended Elliptic Curve Domain Parameters over Fp
 SEC 2 (Draft) Ver. 2.0     2.4 Recommended 256-bit Elliptic Curve Domain Parameters over Fp
 
 2.4     Recommended 256-bit Elliptic Curve Domain Parameters over Fp
@@ -438,7 +438,7 @@ specified by the sextuple T = (p, a, b, G, n, h) where the finite field Fp is de
 
         p = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE
               FFFFFC2F
-          = 2256 − 232 − 29 − 28 − 27 − 26 − 24 − 1
+          = 2256 âˆ’ 232 âˆ’ 29 âˆ’ 28 âˆ’ 27 âˆ’ 26 âˆ’ 24 âˆ’ 1
 The curve E: y 2 = x3 + ax + b over Fp is defined by:
 
         a = 00000000 00000000 00000000 00000000 00000000 00000000 00000000
@@ -466,12 +466,12 @@ Finally the order n of G and the cofactor are:
 The verifiably random elliptic curve domain parameters over Fp secp256r1 are specified by the
 sextuple T = (p, a, b, G, n, h) where the finite field Fp is defined by:
 
-§2 Recommended Elliptic Curve Domain Parameters over Fp                               Page 9 of 33
+Â§2 Recommended Elliptic Curve Domain Parameters over Fp                               Page 9 of 33
 2.5 Recommended 384-bit Elliptic Curve Domain Parameters over Fp          SEC 2 (Draft) Ver. 2.0
 
         p = FFFFFFFF 00000001 00000000 00000000 00000000 FFFFFFFF FFFFFFFF
               FFFFFFFF
-          = 2224 (232 − 1) + 2192 + 296 − 1
+          = 2224 (232 âˆ’ 1) + 2192 + 296 âˆ’ 1
 The curve E: y 2 = x3 + ax + b over Fp is defined by:
 
         a = FFFFFFFF 00000001 00000000 00000000 00000000 FFFFFFFF FFFFFFFF
@@ -511,12 +511,12 @@ Section 2.5.1 specifies the elliptic curve domain parameters secp384r1.
 The verifiably random elliptic curve domain parameters over Fp secp384r1 are specified by the
 sextuple T = (p, a, b, G, n, h) where the finite field Fp is defined by:
 
-Page 10 of 33                       §2 Recommended Elliptic Curve Domain Parameters over Fp
+Page 10 of 33                       Â§2 Recommended Elliptic Curve Domain Parameters over Fp
 SEC 2 (Draft) Ver. 2.0    2.6 Recommended 521-bit Elliptic Curve Domain Parameters over Fp
 
         p = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF
               FFFFFFFE FFFFFFFF 00000000 00000000 FFFFFFFF
-          = 2384 − 2128 − 296 + 232 − 1
+          = 2384 âˆ’ 2128 âˆ’ 296 + 232 âˆ’ 1
 The curve E: y 2 = x3 + ax + b over Fp is defined by:
 
         a = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF
@@ -557,13 +557,13 @@ Section 2.6.1 specifies the elliptic curve domain parameters secp521r1.
 The verifiably random elliptic curve domain parameters over Fp secp521r1 are specified by the
 sextuple T = (p, a, b, G, n, h) where the finite field Fp is defined by:
 
-§2 Recommended Elliptic Curve Domain Parameters over Fp                           Page 11 of 33
+Â§2 Recommended Elliptic Curve Domain Parameters over Fp                           Page 11 of 33
 2.6 Recommended 521-bit Elliptic Curve Domain Parameters over Fp       SEC 2 (Draft) Ver. 2.0
 
       p =          01FF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF
              FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF
              FFFFFFFF FFFFFFFF FFFFFFFF
-         = 2521 − 1
+         = 2521 âˆ’ 1
 The curve E: y 2 = x3 + ax + b over Fp is defined by:
 
       a =          01FF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF
@@ -597,7 +597,7 @@ Finally the order n of G and the cofactor are:
 
 
 
-Page 12 of 33                      §2 Recommended Elliptic Curve Domain Parameters over Fp
+Page 12 of 33                      Â§2 Recommended Elliptic Curve Domain Parameters over Fp
 SEC 2 (Draft) Ver. 2.0
 
 3     Recommended Elliptic Curve Domain Parameters over
@@ -618,7 +618,7 @@ Following SEC 1 [SEC 1], elliptic curve domain parameters over F2m are a septupl
                                      T = (m, f (x), a, b, G, n, h)
 
 consisting of an integer m specifying the finite field F2m , an irreducible binary polynomial f (x) of
-degree m specifying the polynomial basis representation of F2m , two elements a, b ∈ F2m specifying
+degree m specifying the polynomial basis representation of F2m , two elements a, b âˆˆ F2m specifying
 an elliptic curve E(F2m ) defined by the equation:
 
                                 E : y 2 + x.y = x3 + a.x2 + b in F2m ,
@@ -630,7 +630,7 @@ directly as an integer, f (x) is represented directly as a polynomial, and the r
 are represented as octet strings converted using the conventions specified in SEC 1 [SEC 1].
 Again following SEC 1 [SEC 1], elliptic curve domain parameters over F2m must have:
 
-                                 m ∈ {163, 233, 239, 283, 409, 571}.
+                                 m âˆˆ {163, 233, 239, 283, 409, 571}.
 
 Furthermore elliptic curve domain parameters over F2m must use the reduction polynomials listed
 in Table 3 below.
@@ -639,11 +639,11 @@ efficient implementations at commonly required security levels.
 Here recommended elliptic curve domain parameters are supplied at each of the sizes allowed by
 SEC 1.
 The elliptic curve domain parameters over F2m supplied at each security level typically consist
-of examples of two different types of parameters — one type being parameters associated with a
-Koblitz curve and the other type being parameters chosen verifiably at random — although only
+of examples of two different types of parameters â€” one type being parameters associated with a
+Koblitz curve and the other type being parameters chosen verifiably at random â€” although only
 verifiably random parameters are supplied at export strength.
 
-§3 Recommended Elliptic Curve Domain Parameters over F2m                               Page 13 of 33
+Â§3 Recommended Elliptic Curve Domain Parameters over F2m                               Page 13 of 33
 3.1 Properties of Elliptic Curve Domain Parameters over F2m                   SEC 2 (Draft) Ver. 2.0
 
                          Field           Reduction Polynomial(s)
@@ -659,7 +659,7 @@ verifiably random parameters are supplied at export strength.
 
 
 Parameters associated with a Koblitz curve admit especially efficient implementation. Koblitz
-curves over F2m are binary anomalous curves which have a, b ∈ {0, 1} [Kob92].
+curves over F2m are binary anomalous curves which have a, b âˆˆ {0, 1} [Kob92].
 Verifiably random parameters offer some additional conservative features. These parameters are
 chosen from a seed using SHA-1 as specified in ANSI X9.62 [X9.62]. This process ensures that
 the parameters cannot be predetermined. The parameters are therefore extremely unlikely to
@@ -668,7 +668,7 @@ parameters during their generation. When elliptic curve domain parameters are ch
 at random, the seed S used to generate the parameters may optionally be stored along with the
 parameters so that users can verify the parameters were chosen verifiably at random.
 The recommended verifiably random parameters were chosen by repeatedly selecting a random
-seed and counting the points on the corresponding curve using Schoof’s algorithm until appropriate
+seed and counting the points on the corresponding curve using Schoofâ€™s algorithm until appropriate
 parameters were found. The parameters were chosen so that either a is random or a = 1. For a
 given m, approximately half the isomorphism classes of elliptic curves over F2m contain a curve
 with a = 1.
@@ -676,19 +676,19 @@ See SEC 1 [SEC 1] for further guidance on the selection of elliptic curve domain
 F2 m .
 The example elliptic curve domain parameters over F2m have been given nicknames to enable them
 to be easily identified. The nicknames were chosen as follows. Each name begins with sec to denote
-‘Standards for Efficient Cryptography’, followed by a t to denote parameters over F2m , followed by
+â€˜Standards for Efficient Cryptographyâ€™, followed by a t to denote parameters over F2m , followed by
 a number denoting the field size m, followed by a k to denote parameters associated with a Koblitz
 curve or an r to denote verifiably random parameters, followed by a sequence number.
 Table 4 summarizes salient properties of the recommended elliptic curve domain parameters over
 F2 m .
-Information is represented in Table 4 as follows. The column labelled ‘parameters’ gives the
-nickname of the elliptic curve domain parameters. The column labelled ‘section’ refers to the
-section of this document where the parameters are specified. The column labelled ‘strength’ gives
-the approximate number of bits of security the parameters offer. The column labelled ‘size’ gives
-the field size m. The column labelled ‘RSA/DSA’ gives the approximate size of an RSA or DSA
+Information is represented in Table 4 as follows. The column labelled â€˜parametersâ€™ gives the
+nickname of the elliptic curve domain parameters. The column labelled â€˜sectionâ€™ refers to the
+section of this document where the parameters are specified. The column labelled â€˜strengthâ€™ gives
+the approximate number of bits of security the parameters offer. The column labelled â€˜sizeâ€™ gives
+the field size m. The column labelled â€˜RSA/DSAâ€™ gives the approximate size of an RSA or DSA
 modulus at comparable strength. (See SEC 1 [SEC 1] for precise technical guidance on the strength
 
-Page 14 of 33                      §3 Recommended Elliptic Curve Domain Parameters over F2m
+Page 14 of 33                      Â§3 Recommended Elliptic Curve Domain Parameters over F2m
 SEC 2 (Draft) Ver. 2.0          3.1 Properties of Elliptic Curve Domain Parameters over F2m
 
 
@@ -715,12 +715,12 @@ Page 14 of 33                      §3 Recommended Elliptic Curve Domain Paramet
 
 
 
-§3 Recommended Elliptic Curve Domain Parameters over F2m                      Page 15 of 33
+Â§3 Recommended Elliptic Curve Domain Parameters over F2m                      Page 15 of 33
 3.1 Properties of Elliptic Curve Domain Parameters over F2m                 SEC 2 (Draft) Ver. 2.0
 
-of elliptic curve domain parameters.) Finally the column labelled ‘Koblitz or random’ indicates
-whether the parameters are associated with a Koblitz curve — ‘k’ — or were chosen verifiably at
-random — ‘r’.
+of elliptic curve domain parameters.) Finally the column labelled â€˜Koblitz or randomâ€™ indicates
+whether the parameters are associated with a Koblitz curve â€” â€˜kâ€™ â€” or were chosen verifiably at
+random â€” â€˜râ€™.
 
 
 
@@ -745,22 +745,22 @@ random — ‘r’.
 
 Table 5 summarizes the status of the recommended elliptic curve domain parameters over F2m with
 respect to their alignment with other standards.
-Information is represented in Table 5 as follows. The column labelled ‘parameters’ gives the
-nickname of the elliptic curve domain parameters. The column labelled ‘section’ refers to the section
+Information is represented in Table 5 as follows. The column labelled â€˜parametersâ€™ gives the
+nickname of the elliptic curve domain parameters. The column labelled â€˜sectionâ€™ refers to the section
 of this document where the parameters are specified. The remaining columns give the status of
 the parameters with respect to various other standards which specify mechanisms based on elliptic
-curve cryptography: ‘ANSI X9.62’ refers to the ANSI X9.62 standard [X9.62], ‘ANSI X9.63’ refers
-to the draft ANSI X9.63 standard [X9.63], ‘echeck’ refers to the draft FSML standard [Fin99],
-‘IEEE P1363’ refers to the IEEE 1363 standard [1363], ‘IPSec’ refers to the recent internet draft
-related to ECC [Int06] submitted to the IETF’s IPSec working group, ‘NIST’ refers to the list of
-recommended parameters recently released by the U.S. government [Nat99], and ’WAP’ refers to the
-Wireless Application Forum’s WTLS standard [WTLS]. In these columns, a ‘-’ denotes parameters
-non-conformant with the standard, a ‘c’ denotes parameters conformant with the standard, and
-an ‘r’ denotes parameters explicitly recommended in the standard.
+curve cryptography: â€˜ANSI X9.62â€™ refers to the ANSI X9.62 standard [X9.62], â€˜ANSI X9.63â€™ refers
+to the draft ANSI X9.63 standard [X9.63], â€˜echeckâ€™ refers to the draft FSML standard [Fin99],
+â€˜IEEE P1363â€™ refers to the IEEE 1363 standard [1363], â€˜IPSecâ€™ refers to the recent internet draft
+related to ECC [Int06] submitted to the IETFâ€™s IPSec working group, â€˜NISTâ€™ refers to the list of
+recommended parameters recently released by the U.S. government [Nat99], and â€™WAPâ€™ refers to the
+Wireless Application Forumâ€™s WTLS standard [WTLS]. In these columns, a â€˜-â€™ denotes parameters
+non-conformant with the standard, a â€˜câ€™ denotes parameters conformant with the standard, and
+an â€˜râ€™ denotes parameters explicitly recommended in the standard.
 Note that ANSI X9.62 has been updated. The set of recommended parameters in the updated
 ANSI X9.62 [X9.62] is a subset of the set of recommended parameters in this document.
 
-Page 16 of 33                      §3 Recommended Elliptic Curve Domain Parameters over F2m
+Page 16 of 33                      Â§3 Recommended Elliptic Curve Domain Parameters over F2m
 SEC 2 (Draft) Ver. 2.0 3.2 Recommended 163-bit Elliptic Curve Domain Parameters over F2m
 
 3.2     Recommended 163-bit Elliptic Curve Domain Parameters over F2m
@@ -809,7 +809,7 @@ The curve E: y 2 + xy = x3 + ax2 + b over F2m is defined by:
 E was chosen verifiably at random from the seed:
 
 
-§3 Recommended Elliptic Curve Domain Parameters over F2m                               Page 17 of 33
+Â§3 Recommended Elliptic Curve Domain Parameters over F2m                               Page 17 of 33
 3.2 Recommended 163-bit Elliptic Curve Domain Parameters over F2m SEC 2 (Draft) Ver. 2.0
 
         S = 24B7B137 C8A14D69 6E676875 6151756F D0DA2E5C
@@ -856,7 +856,7 @@ Finally the order n of G and the cofactor are:
         n =           04 00000000 00000000 000292FE 77E70C12 A4234C33
         h =           02
 
-Page 18 of 33                     §3 Recommended Elliptic Curve Domain Parameters over F2m
+Page 18 of 33                     Â§3 Recommended Elliptic Curve Domain Parameters over F2m
 SEC 2 (Draft) Ver. 2.0 3.3 Recommended 233-bit Elliptic Curve Domain Parameters over F2m
 
 3.3     Recommended 233-bit Elliptic Curve Domain Parameters over F2m
@@ -903,7 +903,7 @@ septuple T = (m, f (x), a, b, G, n, h) where m = 233 and the representation of F
 
         f (x) = x233 + x74 + 1
 
-§3 Recommended Elliptic Curve Domain Parameters over F2m                               Page 19 of 33
+Â§3 Recommended Elliptic Curve Domain Parameters over F2m                               Page 19 of 33
 3.4 Recommended 239-bit Elliptic Curve Domain Parameters over F2m SEC 2 (Draft) Ver. 2.0
 
 The curve E: y 2 + xy = x3 + ax2 + b over F2m is defined by:
@@ -949,7 +949,7 @@ is defined by:
         f (x) = x239 + x158 + 1
 The curve E: y 2 + xy = x3 + ax2 + b over F2m is defined by:
 
-Page 20 of 33                       §3 Recommended Elliptic Curve Domain Parameters over F2m
+Page 20 of 33                       Â§3 Recommended Elliptic Curve Domain Parameters over F2m
 SEC 2 (Draft) Ver. 2.0 3.5 Recommended 283-bit Elliptic Curve Domain Parameters over F2m
 
         a =       0000 00000000 00000000 00000000 00000000 00000000 00000000
@@ -994,7 +994,7 @@ The curve E: y 2 + xy = x3 + ax2 + b over F2m is defined by:
         b = 00000000 00000000 00000000 00000000 00000000 00000000 00000000
               00000000 00000001
 
-§3 Recommended Elliptic Curve Domain Parameters over F2m                               Page 21 of 33
+Â§3 Recommended Elliptic Curve Domain Parameters over F2m                               Page 21 of 33
 3.5 Recommended 283-bit Elliptic Curve Domain Parameters over F2m SEC 2 (Draft) Ver. 2.0
 
 The base point G in compressed form is:
@@ -1040,7 +1040,7 @@ and in uncompressed form is:
                 80E2E198 F8CDBECD 86B12053 03676854 FE24141C B98FE6D4 B20D02B4
                 516FF702 350EDDB0 826779C8 13F0DF45 BE8112F4
 
-Page 22 of 33                       §3 Recommended Elliptic Curve Domain Parameters over F2m
+Page 22 of 33                       Â§3 Recommended Elliptic Curve Domain Parameters over F2m
 SEC 2 (Draft) Ver. 2.0 3.6 Recommended 409-bit Elliptic Curve Domain Parameters over F2m
 
 Finally the order n of G and the cofactor are:
@@ -1086,7 +1086,7 @@ and in uncompressed form is:
               E9EA10E3 DA5F6C42 E9C55215 AA9CA27A 5863EC48 D8E0286B
 Finally the order n of G and the cofactor are:
 
-§3 Recommended Elliptic Curve Domain Parameters over F2m                               Page 23 of 33
+Â§3 Recommended Elliptic Curve Domain Parameters over F2m                               Page 23 of 33
 3.6 Recommended 409-bit Elliptic Curve Domain Parameters over F2m SEC 2 (Draft) Ver. 2.0
 
         n =       7FFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFE5F
@@ -1130,7 +1130,7 @@ Finally the order n of G and the cofactor are:
                 AAD6A612 F33307BE 5FA47C3C 9E052F83 8164CD37 D9A21173
         h =           02
 
-Page 24 of 33                     §3 Recommended Elliptic Curve Domain Parameters over F2m
+Page 24 of 33                     Â§3 Recommended Elliptic Curve Domain Parameters over F2m
 SEC 2 (Draft) Ver. 2.0 3.7 Recommended 571-bit Elliptic Curve Domain Parameters over F2m
 
 3.7     Recommended 571-bit Elliptic Curve Domain Parameters over F2m
@@ -1175,7 +1175,7 @@ and in uncompressed form is:
 Finally the order n of G and the cofactor are:
 
 
-§3 Recommended Elliptic Curve Domain Parameters over F2m                               Page 25 of 33
+Â§3 Recommended Elliptic Curve Domain Parameters over F2m                               Page 25 of 33
 3.7 Recommended 571-bit Elliptic Curve Domain Parameters over F2m SEC 2 (Draft) Ver. 2.0
 
         n = 02000000 00000000 00000000 00000000 00000000 00000000 00000000
@@ -1219,7 +1219,7 @@ and in uncompressed form is:
                 1A4827AF 1B8AC15B
 Finally the order n of G and the cofactor are:
 
-Page 26 of 33                       §3 Recommended Elliptic Curve Domain Parameters over F2m
+Page 26 of 33                       Â§3 Recommended Elliptic Curve Domain Parameters over F2m
 SEC 2 (Draft) Ver. 2.0 3.7 Recommended 571-bit Elliptic Curve Domain Parameters over F2m
 
      n = 03FFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF
@@ -1230,7 +1230,7 @@ Page 26 of 33                       §3 Recommended Elliptic Curve Domain Parame
 
 
 
-§3 Recommended Elliptic Curve Domain Parameters over F2m                    Page 27 of 33
+Â§3 Recommended Elliptic Curve Domain Parameters over F2m                    Page 27 of 33
                                                                          SEC 2 (Draft) Ver. 2.0
 
 A       ASN.1 Syntax
@@ -1252,13 +1252,13 @@ Parameters{CURVES:IOSet} ::= CHOICE {
 
 where
 
-    • ecParameters of type ECParameters indicates that the full elliptic curve domain parameters
+    â€¢ ecParameters of type ECParameters indicates that the full elliptic curve domain parameters
       are given,
 
-    • namedCurve of type CURVES indicates that a named curve from the set delimited by CurveNames
+    â€¢ namedCurve of type CURVES indicates that a named curve from the set delimited by CurveNames
       is to be used, and
 
-    • implicitCA of type NULL indicates that the curve is known implicitly, that is, the actual
+    â€¢ implicitCA of type NULL indicates that the curve is known implicitly, that is, the actual
       curve is known to both parties by other means.
 
 The following syntax is then used to describe explicit representations of elliptic curve domain
@@ -1276,7 +1276,7 @@ ECParameters ::= SEQUENCE {
 See SEC 1 [SEC 1] for more details on the explicit representation of elliptic curve domain param-
 eters.
 
-Page 28 of 33                                                                §A ASN.1 Syntax
+Page 28 of 33                                                                Â§A ASN.1 Syntax
 SEC 2 (Draft) Ver. 2.0                        A.2 Object Identifiers for Recommended Parameters
 
 A.2     Object Identifiers for Recommended Parameters
@@ -1322,7 +1322,7 @@ secp192r1 OBJECT IDENTIFIER ::= { ansi-X9-62 curves(3) prime(1) 1 }
 secp224k1 OBJECT IDENTIFIER ::= { ellipticCurve 32 }
 secp224r1 OBJECT IDENTIFIER ::= { ellipticCurve 33 }
 
-§A ASN.1 Syntax                                                                         Page 29 of 33
+Â§A ASN.1 Syntax                                                                         Page 29 of 33
 A.2 Object Identifiers for Recommended Parameters                     SEC 2 (Draft) Ver. 2.0
 
 
@@ -1372,7 +1372,7 @@ SECGCurveNames CURVES ::= {
      -- Curves over prime-order fields:
      { ID secp192k1 } |
 
-Page 30 of 33                                                             §A ASN.1 Syntax
+Page 30 of 33                                                             Â§A ASN.1 Syntax
 SEC 2 (Draft) Ver. 2.0                   A.2 Object Identifiers for Recommended Parameters
 
      { ID secp192r1 } |
@@ -1406,7 +1406,7 @@ CURVES ::= CLASS {
 
 
 
-§A ASN.1 Syntax                                                              Page 31 of 33
+Â§A ASN.1 Syntax                                                              Page 31 of 33
 References                                                                SEC 2 (Draft) Ver. 2.0
 
 B References
@@ -1414,7 +1414,7 @@ B References
              tography, IEEE Standard 1363-2000, Aug. 2000. http://standards.ieee.org/
              catalog/olis/busarch.html.
 
-[1363A]      ———. Specifications for Public-Key Cryptography — Amendment 1: Additional
+[1363A]      â€”â€”â€”. Specifications for Public-Key Cryptography â€” Amendment 1: Additional
              Techniques, IEEE Standard 1363A-2004, Oct. 2004. http://standards.ieee.org/
              catalog/olis/busarch.html.
 
@@ -1444,27 +1444,28 @@ B References
              American National Standard X9.62-2005, 2005.         http://webstore.ansi.org/
              ansidocstore.
 
-[X9.63]      ———. Public-Key Cryptography for the Financial Services Industry: Key Agreement
+[X9.63]      â€”â€”â€”. Public-Key Cryptography for the Financial Services Industry: Key Agreement
              and Key Transport Using Elliptic Curve Cryptography, American National Standard
              X9.63-2001, 2001. http://webstore.ansi.org/ansidocstore.
 
 [GLV01]      R. P. Gallant, R. J. Lambert and S. A. Vanstone. Faster point multiplication
              on elliptic curves with efficient endomorphisms. In J. Kilian (ed.), Advances in
-             Cryptology — CRYPTO 2001, Lecture Notes in Computer Science 2139, pp. 190–200.
+             Cryptology â€” CRYPTO 2001, Lecture Notes in Computer Science 2139, pp. 190â€“200.
              International Association for Cryptologic Research, Springer, 2001.
 
 [Kob92]      N. Koblitz. CM-curves with good cryptographic properties. In J. Feigenbaum (ed.),
-             Advances in Cryptology — CRYPTO ’91, Lecture Notes in Computer Science 576, pp.
-             279–287. International Association for Cryptologic Research, Springer, 1992.
+             Advances in Cryptology â€” CRYPTO â€™91, Lecture Notes in Computer Science 576, pp.
+             279â€“287. International Association for Cryptologic Research, Springer, 1992.
 
-Page 32 of 33                                                                          §References
+Page 32 of 33                                                                          Â§References
 SEC 2 (Draft) Ver. 2.0                                                              References
 
 [Mon87]       P. Montgomery. Speeding the pollard and elliptic curve methods of factorization.
-              Mathematics of Computation, 48:243–264, 1987.
+              Mathematics of Computation, 48:243â€“264, 1987.
 
 
 
 
-§References                                                                      Page 33 of 33
+Â§References                                                                      Page 33 of 33
 
+

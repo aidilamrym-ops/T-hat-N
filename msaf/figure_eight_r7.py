@@ -31,3 +31,5 @@ if __name__ == "__main__":
     receipt = {"schema": SCHEMA, "result": result}
     RECEIPT_PATH.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
     print(f"Receipt written to {RECEIPT_PATH}")
+
+

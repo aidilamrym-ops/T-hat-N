@@ -103,3 +103,5 @@ def test_inputs_rejected() -> None:
 
 def test_deterministic() -> None:
     assert axis_value(8, 3).str(40) == axis_value(8, 3).str(40)
+
+

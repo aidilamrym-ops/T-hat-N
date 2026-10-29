@@ -172,3 +172,5 @@ def write_report(path, payload: dict) -> dict:
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(page, encoding="utf-8", newline="\n")
     return {"path": str(p), "bytes": len(page.encode("utf-8"))}
+
+
