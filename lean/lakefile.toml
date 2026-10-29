@@ -9,7 +9,8 @@ rev = "v4.33.1"
 
 [[require]]
 name = "ChronoFramework"
-path = "../ChronoGeometric_Framework"
+scope = "aidilamrym-ops"
+rev = "main"
 
 [[lean_lib]]
 name = "NavierStokesCore"
