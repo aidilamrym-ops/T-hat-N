@@ -1,0 +1,16 @@
+{
+  "verdict": "PREMISES-HOLD",
+  "failed_gate": null,
+  "maps_to": true,
+  "deriv_excludes_zero": true,
+  "lipschitz_K": "[3.0691468e-9 +/- 5.72e-18]",
+  "k_below_one": true,
+  "scope": "complex-ball analogue of NewtonExistence.moore_box premises (invariance, clean derivative, Lipschitz); the C-to-R transfer is unformalized",
+  "box": {
+    "real_mid": "0.50000000000000000000000000000000000000000000000000",
+    "real_rad": "[1.0000011940475977967324183737218845635652542114258e-10 +/- 1.88e-60]",
+    "imag_mid": "[14.134725141734692854811328288633376359939575195313 +/- 5.00e-49]",
+    "imag_rad": "[1.0000444927455581778374948953569401055574417114258e-10 +/- 1.88e-60]"
+  },
+  "degree": 12
+}

@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "t_center": 14.134725141734695,
+  "derivative_bound": "PLACEHOLDER",
+  "character_sum_bound": "PLACEHOLDER",
+  "orthogonality": "PLACEHOLDER",
+  "note": "Requires msaf.gw_* import; implement when available"
+}

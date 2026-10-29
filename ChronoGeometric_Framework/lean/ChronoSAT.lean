@@ -70,3 +70,29 @@ theorem sat_instant_reduction (f : Formula) :
         time  := Chronon.next Chronon.now } := by
   rcases formulaToShape_is_space f with ⟨lst, h⟩
   simp [simulate_sat, h, collapse_to_harmony]
+
+-- ============================================================================
+-- ENCODING CORRECTNESS (the real work -- currently SORRY)
+-- ============================================================================
+
+/-- Boolean assignment: maps variable index to truth value. -/
+def Assignment := MyNat → Bool
+
+/-- Evaluate a literal under an assignment. -/
+def eval_lit (α : Assignment) (l : Lit) : Bool :=
+  match l with
+  | Lit.pos n => α n
+  | Lit.neg n => !(α n)
+
+/-- Evaluate a clause (disjunction) under an assignment. -/
+def eval_clause (α : Assignment) (c : Clause) : Bool :=
+  c.foldr (fun l acc => eval_lit α l || acc) false
+
+/-- Evaluate a formula (conjunction of clauses) under an assignment. -/
+def eval_formula (α : Assignment) (f : Formula) : Bool :=
+  f.foldr (fun c acc => eval_clause α c && acc) true
+
+/-- A formula is satisfiable iff there exists an assignment making it true. -/
+def Sat (f : Formula) : Prop :=
+  ∃ (α : Assignment), eval_formula α f = true
+
