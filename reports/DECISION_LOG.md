@@ -7,12 +7,12 @@ alasan, commit, and dampaknya.
 Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
 `reports/FENCE_REGISTRY.md` > dokumen historis.
 
-## 2026-10-30 — Formalisasi Stage 7 Tail Extension
+## 2026-10-30 — Add Russell’s paradox formalisation as target
 
-- **Keputusan:** Formalisasi `sum_Ico_offdiag_le` diselesaikan dan didaftarkan sebagai `T-2026-0060`.
-- **Alasan:** Memenuhi target roadmap MSAF RH scaffold untuk bounds off-diagonal.
-- **Commit:** `e6b3c8b`
-- **Dampak:** Registry diperbarui; klaim `T-2026-0060` (PROPOSED) ditambahkan; CI harus divalidasi.
+- **Keputusan:** Formalisasi `Russell.lean` ditambahkan ke repo utama, didaftarkan sebagai `T‑2026‑0064`.
+- **Alasan:** Sudah ada Lean source, cocok untuk demonstrasi integrasi problem‑target baru.
+- **Commit:** `8d16809`
+- **Dampak:** Registry entry baru, CI harus lulus anti‑circularity, target dapat dipanggil dari `make verify`.
 
 ## 2026-10-30 — Analisis ChronoGeometric_Framework sebagai target baru
 
