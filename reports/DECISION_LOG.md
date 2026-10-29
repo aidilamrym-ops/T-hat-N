@@ -7,7 +7,12 @@ alasan, commit, and dampaknya.
 Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
 `reports/FENCE_REGISTRY.md` > dokumen historis.
 
-## 2026-10-25 â€” Pelanggaran prereg dicatat, belum diputuskan
+## 2026-10-30 — Formalisasi Stage 7 Tail Extension
+
+- **Keputusan:** Formalisasi `sum_Ico_offdiag_le` diselesaikan dan didaftarkan sebagai `T-2026-0060`.
+- **Alasan:** Memenuhi target roadmap MSAF RH scaffold untuk bounds off-diagonal.
+- **Commit:** `e6b3c8b`
+- **Dampak:** Registry diperbarui; klaim `T-2026-0060` (PROPOSED) ditambahkan; CI harus divalidasi.
 
 - **Temuan:** audit `reports/AUDIT_2026-10-24_26_REVIEW.md` Â§T6 menemukan
   empat commit which mencampur pra-registrasi and kode dalam satu commit:
