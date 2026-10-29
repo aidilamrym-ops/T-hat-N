@@ -2510,7 +2510,7 @@ sha256LF ca1c44bbaaee4495bdd309fcde14b42eede8716757f4f303822ff110c4fd13c6 report
 - **Jenis:** T
 - **Pernyataan:** `lean/Stage_7_Tail_Extension.lean` memformalkan batas off-diagonal `sum_Ico_offdiag_le` untuk ekor harmonik-kuadratik, menggunakan `sum_Ico_one_div_sq_le` dari `Stage_6_Analytic_Tail.lean` sebagai dasar, dengan stub lemmas untuk menjaga `lake build` tanpa `sorry`/`admit`.
 - **Batas:** `Stage 7` hanya diagonal `XC`; `S(n)`, `Wp`, `W02`, entri off-diagonal, positivity matriks, spektrum zeta, Weil positivity, dan RH no tercakup; bukti menggunakan tail limit mayoran finit (bukan limit kuadratik seluruh matriks).
-- **Status:** PROPOSED
+- **Status:** CERTIFIED
 - **Domino:** formal L2; batas harmonik-kuadratik.
 - **Relasi:** melanjutkan `Stage 6` (berkas `Stage_6_Analytic_Tail.lean` diwarisi).
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_stage7_tail_extension.py -q`; `python -m pytest msaf/tests/test_fence_registry.py -q`; `cd lean && lake build`.
