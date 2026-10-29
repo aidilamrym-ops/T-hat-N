@@ -1,6 +1,6 @@
 name = "that_n_lean"
 version = "0.1.0"
-defaultTargets = ["NavierStokesCore", "NewtonExistence", "XiNoRealZero", "ComplexMoore", "Stage_2_Tail_Bound", "Stage_3_Eigenvalue_Locking", "Stage_5_EntryError_Perturbation", "Stage_6_Analytic_Tail", "Stage_7_Tail_Extension", "Russell"]
+defaultTargets = ["NavierStokesCore", "NewtonExistence", "XiNoRealZero", "ComplexMoore", "Stage_2_Tail_Bound", "Stage_3_Eigenvalue_Locking", "Stage_5_EntryError_Perturbation", "Stage_6_Analytic_Tail", "Stage_7_Tail_Extension", "Russell", "Theory137"]
 
 [[require]]
 name = "mathlib"
@@ -51,6 +51,9 @@ name = "Stage_6_Analytic_Tail"
 # Stage 6 diagonal bound. Stub lemmas keep build green without sorry/admit.
 [[lean_lib]]
 name = "Russell"
+
+[[lean_lib]]
+name = "Theory137"
 
 # lean/spec/ is deliberately NOT registered as a library. It holds
 # XiAnalyticSpec.lean, the conditional derivation of xi > 0 on the reals

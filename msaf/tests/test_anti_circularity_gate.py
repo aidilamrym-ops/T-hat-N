@@ -34,6 +34,7 @@ KERNEL = (
     "lean/NewtonExistence.lean",
     "lean/XiNoRealZero.lean",
     "lean/Russell.lean",
+    "lean/Theory137.lean",
 )
 
 # Stage 2/3/5/6 are finite scaffold modules added after the 2026-10-20 gate
@@ -168,7 +169,7 @@ def test_kernel_sources_are_placeholder_free() -> None:
     violation = _scope_violation(KERNEL + SCAFFOLD)
     assert violation is None, violation
     sources = _lean_sources()
-    assert len(sources) == 10, "expected four kernel + five scaffold + 1 Russell Lean sources"
+    assert len(sources) == 11, "expected kernel + scaffold + Russell + Theory137 Lean sources"
     for path in sources:
         hits = _placeholders(path.read_text(encoding="utf-8"))
         assert not hits, "%s: placeholders %r" % (path.name, hits)

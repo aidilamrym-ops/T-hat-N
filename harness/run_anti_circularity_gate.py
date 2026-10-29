@@ -47,6 +47,7 @@ KERNEL_FILES = (
     Path("lean/NewtonExistence.lean"),
     Path("lean/XiNoRealZero.lean"),
     Path("lean/Russell.lean"),
+    Path("lean/Theory137.lean"),
 )
 SPEC_DIR = Path("lean/spec")
 SPEC_AXIOM_BUDGET = 9
