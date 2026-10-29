@@ -33,19 +33,19 @@
   "active": {
     "agents": {
       "path": "AGENTS.md",
-      "sha256lf": "873d15799feb5f7e0cd709e9ce02ece195da2af8bf649e33d3d2fb86de7bcbfa"
+      "sha256lf": "905bc22a0b77c912879ac2b38e58f15d02e5072f1e10fc1cfe9353d5f0389903"
     },
     "current_authority": {
       "path": "CURRENT_AUTHORITY.md",
-      "sha256lf": "0a1d2777280d218f08d8560dad3b6f8605c31305b83adb9fa40c4a39865a4c65"
+      "sha256lf": "ab3375b096166666591620e866302f2d4110c7e45f02b5a8199fbb4851e67f80"
     },
     "decision_log": {
       "path": "reports/DECISION_LOG.md",
-      "sha256lf": "5872e3faae94175b3df5e5e8a3edb07a26370051b8d5642da43be99c010603d4"
+      "sha256lf": "7834c52174a1b45fdf3c553011ecec8e1371b0c24d351e725a6903a709b6cbe0"
     },
     "archive_tombstones": {
       "path": "reports/ARCHIVE_TOMBSTONES.md",
-      "sha256lf": "77e62490f5e88a9404361bdf26967a6cbfa16058386ffd8fe204055d685a8c1e"
+      "sha256lf": "32e7d5ecb691003b2af56e3498b782681cf7f7887a86ee06202998979c9a05d6"
     }
   },
   "superseded": [

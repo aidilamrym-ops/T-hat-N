@@ -57,7 +57,7 @@
       "torsion_order": 3
     }
   ],
-  "module_sha256lf": "6f099ec17498f7bdf0f5c600de961b4a346e9dda78a4ccd37ea37b5bbbdd679c",
+  "module_sha256lf": "223254e57b910e24dd8bd416b85ef64069754b074678e7c79d53c654a93d28fe",
   "prereg_sha256lf": "4d32da643476f38895bbffd1ab4de40563cab5a6822c4a526a1450af32df4cc1",
   "schema": "msaf.bsd_v2.v1",
   "summary": "ALL PASS",
