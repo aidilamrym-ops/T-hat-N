@@ -14,6 +14,14 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
 - **Commit:** `e6b3c8b`
 - **Dampak:** Registry diperbarui; klaim `T-2026-0060` (PROPOSED) ditambahkan; CI harus divalidasi.
 
+## 2026-10-30 — Analisis ChronoGeometric_Framework sebagai target baru
+
+- **Keputusan:** Framework `ChronoGeometric_Framework` dianalisis dan ditambahkan sebagai daftar target masalah terstruktur di `ChronoGeometric_Framework/ANALYSIS_TARGETS.md`.
+- **Alasan:** Framework ini menjembatani verified interval-arithmetic T-hat-N (`msaf.zeta_inversion`, `msaf.gw_*`) ke Lean encoding; saat ini encoding correctness theorems trivial (placeholder `⟨true,true,true⟩`).
+- **Target utama:** (1) JSON→Lean import, (2) Real ZetaStep/sign_budget_shape dari enclosure data, (3) Bukti encoding correctness non-trivial, (4) SAT encoding correctness, (5) GW bounds integration, (6) CI/gate/registry.
+- **Batas:** IN SCOPE = formalisasi encoding hasil verified T-hat-N; OUT OF SCOPE = bukti RH, lokasi nol zeta, positivity matriks penuh.
+- **Pra-registrasi berikutnya:** `reports/PREREG_CHRONO_ENCODING_2026-10-30.md` sebelum implementasi.
+
 - **Temuan:** audit `reports/AUDIT_2026-10-24_26_REVIEW.md` Â§T6 menemukan
   empat commit which mencampur pra-registrasi and kode dalam satu commit:
   `eb61af7` (Learnharness v1), `ad34cbc` (figure-eight r6), `19fb2ec` (BSD
