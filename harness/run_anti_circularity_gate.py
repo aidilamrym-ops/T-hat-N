@@ -46,6 +46,7 @@ KERNEL_FILES = (
     Path("lean/NavierStokesCore.lean"),
     Path("lean/NewtonExistence.lean"),
     Path("lean/XiNoRealZero.lean"),
+    Path("lean/Russell.lean"),
 )
 SPEC_DIR = Path("lean/spec")
 SPEC_AXIOM_BUDGET = 9
