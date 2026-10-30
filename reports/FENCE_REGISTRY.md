@@ -2584,10 +2584,10 @@ sha256LF 5d43b4a94f34aa81fd038ccd6f4c4b90ce586689f5d128c2b87444abef8cb2f2 report
 - **Sertifikat:**
 
 ```text
-sha256LF 35bcc3a34f844b30a08b493dd36252fcc918899a145192b5ed4ff7a7241a6031 ChronoGeometric_Framework/lean/enclosures/gw_bounds.json
-sha256LF 13565b02fe9e5de01a9a519985fa666b58f28be92a3da4270d10f553441c5ca3 ChronoGeometric_Framework/lean/EnclosureData.lean
-sha256LF f95ec419ca82adbd5d27348a96ab041f57efe07a0c2702ec376105606138cef6 ChronoGeometric_Framework/lean/ChronoBridge.lean
-sha256LF bdc2f3229983aa6d00830e553a7ea2fb98818341427dd8b45a788a4bfb427426 ChronoGeometric_Framework/python/export_enclosures.py
+sha256LF d23d70632506b0c2a06932bb5809fe56485d7e929025b1f8874c7bf5febb8a36 ChronoGeometric_Framework/lean/enclosures/gw_bounds.json
+sha256LF 8c87076e48e2fcc3a43d6f79ea4d75951c8ef7c29687e36091a07a96d67100d8 ChronoGeometric_Framework/lean/EnclosureData.lean
+sha256LF 567c8d544eb97be94bab39f0abbe92754044b19a7a036ced1323ce63d8a77c57 ChronoGeometric_Framework/lean/ChronoBridge.lean
+sha256LF 94bb373e1562832b8e012ef0ae18558763308f536212ca5118f8b7f5a6412d0a ChronoGeometric_Framework/python/export_enclosures.py
 sha256LF eb510bd40ca4cd05ab9dc9dee5dd67aa1a4e42b8a17df841c4ee5f9f75f36de5 ChronoGeometric_Framework/python/test_enclosure_consistency.py
 sha256LF 010f6e4091c67a69eeb762afd45c3ed468f4a0c7cd0c51d3958a56f9b6fee03d ChronoGeometric_Framework/verify.ps1
 sha256LF d62216ecbb2297e5dbb61e1247be666b966991ea02536311e1d79dd14cbcfb6f ChronoGeometric_Framework/Makefile
@@ -2621,11 +2621,11 @@ sha256LF 4fc45359a82dfde0b17f5f7713428740eeb18716b29e757b225c9bf99807acce report
 - **Sertifikat:**
 
 ```text
-sha256LF 645b431248f92b5286c6fd6e3818b58fc223e4a5e2d766179f377663a9ef5f9f ChronoGeometric_Framework/lean/NewArithmetic.lean
-sha256LF f95ec419ca82adbd5d27348a96ab041f57efe07a0c2702ec376105606138cef6 ChronoGeometric_Framework/lean/ChronoBridge.lean
-sha256LF 03e0e11927f190db8b83d0d5e5b42a4175924cb3bd754dc740c1a48bbe6824cd ChronoGeometric_Framework/lean/ChronoRiemann.lean
-sha256LF 13565b02fe9e5de01a9a519985fa666b58f28be92a3da4270d10f553441c5ca3 ChronoGeometric_Framework/lean/EnclosureData.lean
-sha256LF cdd951e7602cbd159676dede0fb856ac8a7d59d89b77c55bef1140dd52ecc41f ChronoGeometric_Framework/lean/Test.lean
+sha256LF 474a10ec6ef1cc13d21bac6f92c224869d2a5e48881ecaa1e96e609cd770feda ChronoGeometric_Framework/lean/NewArithmetic.lean
+sha256LF 567c8d544eb97be94bab39f0abbe92754044b19a7a036ced1323ce63d8a77c57 ChronoGeometric_Framework/lean/ChronoBridge.lean
+sha256LF 25b3201f38485a75ab01b5b2578f5a129e05bbf6b98636b5a244ea0d454b91dd ChronoGeometric_Framework/lean/ChronoRiemann.lean
+sha256LF 8c87076e48e2fcc3a43d6f79ea4d75951c8ef7c29687e36091a07a96d67100d8 ChronoGeometric_Framework/lean/EnclosureData.lean
+sha256LF a8f1ae3959ea0a89b3101261a9fcdb7f1f870bb7455cd3a7203a005e2746e9e8 ChronoGeometric_Framework/lean/Test.lean
 sha256LF 4fc45359a82dfde0b17f5f7713428740eeb18716b29e757b225c9bf99807acce reports/CHRONO_ENCODING_2026-10-30.md
 ```
 
@@ -2661,7 +2661,7 @@ sha256LF 4fc45359a82dfde0b17f5f7713428740eeb18716b29e757b225c9bf99807acce report
 ```text
 sha256LF eb510bd40ca4cd05ab9dc9dee5dd67aa1a4e42b8a17df841c4ee5f9f75f36de5 ChronoGeometric_Framework/python/test_enclosure_consistency.py
 sha256LF 4fc45359a82dfde0b17f5f7713428740eeb18716b29e757b225c9bf99807acce reports/CHRONO_ENCODING_2026-10-30.md
-sha256LF 13565b02fe9e5de01a9a519985fa666b58f28be92a3da4270d10f553441c5ca3 ChronoGeometric_Framework/lean/EnclosureData.lean
+sha256LF 8c87076e48e2fcc3a43d6f79ea4d75951c8ef7c29687e36091a07a96d67100d8 ChronoGeometric_Framework/lean/EnclosureData.lean
 ```
 
 ---
@@ -2702,7 +2702,7 @@ sha256LF d6024166921f018791fec59ff70aeee15e9f28a7bb176bdd4fcf04fec4df89e0 report
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_ledger.py -q`
 
 ```text
-sha256LF e2266439897f911257d7bd24ca26792a3044d1563b00ab5f81eca9647e43169e ledger/chrono_execution_ledger.jsonl
+sha256LF bcd955b6a6a7d22fe7fb9f105988a06bf7a10a891a2577618a39ce0c02df0f86 ledger/chrono_execution_ledger.jsonl
 ```
 
 ### T-2026-0072 - Analisis Anatomi Matriks Tau (Toeplitz & Hankel Residuals)
@@ -2767,7 +2767,7 @@ sha256LF 73cad9aec42c0bb149edc5c55d5e4d3c3845c788425c625d6da764498d2d3eeb skills
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_ledger.py -q`
 
 ```text
-sha256LF e2266439897f911257d7bd24ca26792a3044d1563b00ab5f81eca9647e43169e ledger/chrono_execution_ledger.jsonl
+sha256LF bcd955b6a6a7d22fe7fb9f105988a06bf7a10a891a2577618a39ce0c02df0f86 ledger/chrono_execution_ledger.jsonl
 ```
 
 ### T-2026-0076 - Pra-Registrasi Amandemen Lisensi GNU GPLv3
@@ -2782,5 +2782,73 @@ sha256LF e2266439897f911257d7bd24ca26792a3044d1563b00ab5f81eca9647e43169e ledger
 ```text
 sha256LF 61b014f54f090ef9d24ac9106254aaf0099259a7a3037391ce23b3c85eda16ce reports/PREREG_GPLv3_TRANSITION_2026-10-30.md
 ```
+
+### T-2026-0077 - Migrasi Lisensi Utama ke GNU GPLv3
+
+- **Jenis:** T
+- **Pernyataan:** Penggantian teks lisensi utama repositori menjadi GNU GPLv3.
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Berkas `LICENSE`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py -q`
+
+```text
+sha256LF eeaa5dc5c4b1c09579ffabf7c8c12883201c98cdff6a41c3743c5cc80a384f16 LICENSE
+```
+
+### A-2026-0057 - Audit Eksekusi Migrasi Lisensi GPLv3
+
+- **Jenis:** A
+- **Pernyataan:** Verifikasi integritas pelaksanaan migrasi lisensi hukum.
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Ledger di `ledger/chrono_execution_ledger.jsonl`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_ledger.py -q`
+
+```text
+sha256LF bcd955b6a6a7d22fe7fb9f105988a06bf7a10a891a2577618a39ce0c02df0f86 ledger/chrono_execution_ledger.jsonl
+```
+
+### T-2026-0079 - Pra-Pendaftaran Eksplorasi Geometrik Langlands & Jembatan Operator
+
+- **Jenis:** T
+- **Pernyataan:** Laporan sintesis pemetaan teoretis prinsip lokalisasi Kac-Moody dan Teorema Multiplisitas Satu (GLC) terhadap matriks $\tau$ dan entropi spektral.
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Berkas laporan di `reports/GEOMETRIC_LANGLANDS_BRIDGE_2026-10-30.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py -q`
+
+```text
+sha256LF e6071a1b551a12b0d8edddc1930a4b2b75f686dfb3877802c99346dd5d39bf78 reports/GEOMETRIC_LANGLANDS_BRIDGE_2026-10-30.md
+```
+
+### T-2026-0080 - Sintesis Lengkap GLC & Matriks $\tau$
+
+- **Jenis:** T
+- **Pernyataan:** Finalisasi laporan sintesis pemetaan teoretis prinsip lokalisasi Kac-Moody dan Teorema Multiplisitas Satu (GLC) terhadap matriks $\tau$ dan entropi spektral.
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Berkas laporan di `reports/GEOMETRIC_LANGLANDS_BRIDGE_2026-10-30.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py -q`
+
+```text
+sha256LF e6071a1b551a12b0d8edddc1930a4b2b75f686dfb3877802c99346dd5d39bf78 reports/GEOMETRIC_LANGLANDS_BRIDGE_2026-10-30.md
+```
+
+### A-2026-0058 - Audit Eksekusi Eksplorasi GLC
+
+- **Jenis:** A
+- **Pernyataan:** Verifikasi integritas rantai ledger dan pemenuhan kriteria eksplorasi GLC.
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Ledger di `ledger/chrono_execution_ledger.jsonl`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_ledger.py -q`
+
+```text
+sha256LF bcd955b6a6a7d22fe7fb9f105988a06bf7a10a891a2577618a39ce0c02df0f86 ledger/chrono_execution_ledger.jsonl
+```
+
+
+
 
 
