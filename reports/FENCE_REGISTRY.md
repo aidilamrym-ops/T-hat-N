@@ -2705,3 +2705,16 @@ sha256LF d6024166921f018791fec59ff70aeee15e9f28a7bb176bdd4fcf04fec4df89e0 report
 sha256LF e40816cf0ab90d2d7cb80e79168b62c6b710e78bba72cbc89fd3172628370968 ledger/chrono_execution_ledger.jsonl
 ```
 
+### T-2026-0072 - Analisis Anatomi Matriks Tau (Toeplitz & Hankel Residuals)
+
+- **Jenis:** T
+- **Pernyataan:** Pengukuran residu maksimum matriks $\tau$ terhadap struktur Toeplitz dan Hankel menggunakan aritmatika bola Arb untuk dimensi 201 dan 301.
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Laporan di `reports/TAU_ANATOMY_RESULTS_2026-10-30.md`.
+- **Perintah verifikasi:** `python -m msaf.chrono_runtime.anatomy_test && python -m pytest msaf/tests/test_fence_registry.py -q`
+
+```text
+sha256LF ad43363dcc08e02538747dfdbc9ad69ff26bc6a22e2fb86da8f680cf33979425 reports/TAU_ANATOMY_RESULTS_2026-10-30.md
+```
+
