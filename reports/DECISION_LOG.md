@@ -22,6 +22,27 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
 - **Batas:** IN SCOPE = formalisasi encoding hasil verified T-hat-N; OUT OF SCOPE = bukti RH, lokasi nol zeta, positivity matriks penuh.
 - **Pra-registrasi berikutnya:** `reports/PREREG_CHRONO_ENCODING_2026-10-30.md` sebelum implementasi.
 
+## 2026-10-30 — Pra-registrasi Chrono Encoding target
+
+- **Keputusan:** Buat file preregistrasi `reports/PREREG_CHRONO_ENCODING_2026-10-30.md` yang mengunci roadmap target masalah yang dirinci dalam `ChronoGeometric_Framework/ANALYSIS_TARGETS.md`.
+- **Alasan:** Menetapkan snapshot target masalah yang disahkan sebelum komitmen implementasi; mendukung integrasi MSAF, CI, dan registri.
+- **Commit:** file preregistrasi ini ditambahkan (hash placeholder).
+- **Dampak:** Target masalah disahkan; target masalah yang akan datang harus memenuhi target yang dirinci (JSON import, Real ZetaStep, dll.) sebelum menambahkan klaim ke FENCE_REGISTRY.
+
+## 2026-10-30 — Integrasi masalah target theory_137
+
+- **Keputusan:** Tambahkan masalah target `theory_137` ke repo Lean (`lean/Theory137.lean`) dan target `ChronoFramework` di lakefile.toml.
+- **Alasan:** Menyelesaikan masalah-masalah target yang diidentifikasi dalam `problems/PROBLEMS_TARGETS.md`.
+- **Commit:** menambah `lean/Theory137.lean`.
+- **Dampak:** `lake build Theory137` sekarang hijau; masalah target terintegrasi; harus ditambahkan ke decision log.
+
+## 2026-10-30 — Integrasi masalah target computational_complexity (stub)
+
+- **Keputusan:** Tambahkan masalah target `computational_complexity` sebagai file README di `problems/computational_complexity/README.md`.
+- **Alasan:** Selesaikan daftar masalah target yang diidentifikasi dalam `problems/PROBLEMS_TARGETS.md`.
+- **Commit:** stub file README.
+- **Dampak:** Daftar masalah target sekarang mencakup tiga masalah target yang didokumentasikan; implementasi berikutnya dapat mengikuti formalisasi yang sama dengan yang digunakan untuk `theory_137`.
+
 - **Temuan:** audit `reports/AUDIT_2026-10-24_26_REVIEW.md` Â§T6 menemukan
   empat commit which mencampur pra-registrasi and kode dalam satu commit:
   `eb61af7` (Learnharness v1), `ad34cbc` (figure-eight r6), `19fb2ec` (BSD
