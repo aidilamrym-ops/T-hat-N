@@ -43,11 +43,17 @@ ROOT = Path(__file__).resolve().parents[1]
 # silently leaving the new file unscanned.
 KERNEL_FILES = (
     Path("lean/ComplexMoore.lean"),
+    Path("lean/EnclosureData.lean"),
     Path("lean/NavierStokesCore.lean"),
     Path("lean/NewtonExistence.lean"),
-    Path("lean/XiNoRealZero.lean"),
     Path("lean/Russell.lean"),
+    Path("lean/Stage_2_Tail_Bound.lean"),
+    Path("lean/Stage_3_Eigenvalue_Locking.lean"),
+    Path("lean/Stage_5_EntryError_Perturbation.lean"),
+    Path("lean/Stage_6_Analytic_Tail.lean"),
+    Path("lean/Stage_7_Tail_Extension.lean"),
     Path("lean/Theory137.lean"),
+    Path("lean/XiNoRealZero.lean"),
 )
 SPEC_DIR = Path("lean/spec")
 SPEC_AXIOM_BUDGET = 9

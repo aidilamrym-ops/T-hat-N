@@ -1097,10 +1097,10 @@ sha256LF 4e88f5f7d6e237046fac154f6afffe3ac150a38dc4fd1989308f0d9efccba1e9 report
 - **Sertifikat:**
 
   ```text
-sha256LF 9375c2f6c439cf0dde0dbb3d27e9d65659588cebeafa3ca1f7605754757347f3 harness/run_anti_circularity_gate.py
+sha256LF 701204089981143425ca57e97a6e7df3d93cef9d55d2f5d73cffa5c7a198e0f2 harness/run_anti_circularity_gate.py
 sha256LF 6e5c97a9d780e54a54968ca06a4d453236f65b45f881fbc6234902ef53ed9aab reports/anti_circularity_gate_2026-10-20.log
 sha256LF f64276ea877c88a2fc6675ded125c5bda96e17c31ded4a47327a776f097b3f07 reports/ANTI_CIRCULARITY_GATE_RUN_2026-10-20.md
-sha256LF 66d3ae7e17b6260713ab36eb01db8f2141d362790ac9ff7d092082e4709853f7 msaf/tests/test_anti_circularity_gate.py
+sha256LF 0c0410ee29fce414a3837a3f5c14f9eff83396f951938c60aa37f0c737d7250b msaf/tests/test_anti_circularity_gate.py
 sha256LF 5b3b263b6796016536653a4511124d9d4b5b81d47798d3580412eef89c86c0e9 lean/ComplexMoore.lean
 sha256LF e92f77e931a2db7c0c783f05688df17f999b72c2114954431296134fed7bca0b lean/NavierStokesCore.lean
 sha256LF 25d4bf7ae743b4b53673f120987c9e3daff2b2043ce7c79a92d5d535c863da49 lean/NewtonExistence.lean
@@ -2363,7 +2363,7 @@ sha256LF ee679910feb10b18f07c88d699b73271f50d2170d25e257a17b6d904913b41dd msaf/t
 sha256LF 2149a89242c3fc010a84d5796c6b4412746a07e6f8c6f8a3ccb917104941f71d lean/Stage_2_Tail_Bound.lean
 sha256LF 551e7e31f73de57ef2c8ee0c9c84fbd7da93295fbde8e6946b5f42db5916155f lean/Stage_3_Eigenvalue_Locking.lean
 sha256LF 5786929a607aa73bc2395481af8f3cb848fff79d3bfff82536b5be88b69a7d61 reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean
-sha256LF 83c554a4c0b58b2563f5fa599bc8ac19157f9b749dc4d5786ad3c3712a45142b lean/lakefile.toml
+sha256LF 152abf4a1e106e6579a7bf2a3aa8a15e4495a83394ef9cdb3755b050cbec8bad lean/lakefile.toml
 sha256LF bd0cc31c822cc9ec2a9de9d978056f90d14f5069f49359590d4c2d8e3716036d reports/GW_TAIL_CONSTANTS_2026-10-26.md
 sha256LF e92e05ef8d37b10bb3e39c65e7537e23c8e3a426da548028a0a560126b60b696 reports/lambda_min_eig_ladder_dim321.json
 sha256LF 84152da16f02125e85563184053ba958786efed65de68a0d48bfc5f741fdfc84 reports/lambda_min_eig_ladder_big.json
@@ -2424,7 +2424,7 @@ sha256LF c1637305e5703c6d5a8bd363fc50e55da0113a70883f43018758ef0684dd5486 report
 sha256LF e5ffa181fa69f2709c9cfdff3482b8f89b8431dd8b69901b90021a5bfaf25551 msaf/entry_error_envelope.py
 sha256LF 65f9ac60282baada3437c4f594bba36d5e4c4b4b134179fb597191c9498a844f reports/entry_error_envelope_c13_n160.json
 sha256LF 27e292f7f9c5d035a5451008564c410db33372a9a08257d914ac72888e42d68a lean/Stage_5_EntryError_Perturbation.lean
-sha256LF 83c554a4c0b58b2563f5fa599bc8ac19157f9b749dc4d5786ad3c3712a45142b lean/lakefile.toml
+sha256LF 152abf4a1e106e6579a7bf2a3aa8a15e4495a83394ef9cdb3755b050cbec8bad lean/lakefile.toml
 sha256LF 7bf13dfa9132d9bfb83d2b14020882b5c087d954a540e72c6b63a27835c6f4bc msaf/tests/test_entry_error_envelope.py
 sha256LF fb5f1008a60983beae526bbe68cc9bfbd56c1724db419ee0d14298fa17df9c2b reports/ENTRY_ERROR_ENVELOPE_2026-10-26.md
 sha256LF 2149a89242c3fc010a84d5796c6b4412746a07e6f8c6f8a3ccb917104941f71d lean/Stage_2_Tail_Bound.lean
@@ -2480,11 +2480,11 @@ sha256LF 12e6960a12e312ee8ff1453eab334a562bc4bf2b7ec4dc24a4ca287af8197ebe report
 sha256LF 3ae4b61f8e0a188de8cda5f35dc743f0889878034b219f59d4ab9f7ae3060dbc msaf/analytic_tail_bound.py
 sha256LF 1e581f8bdccc4abb2e39af48e54758c60840f4e3deea6ce3b103a7903320e95a reports/analytic_tail_bound_c13.json
 sha256LF 552f9296b20da6681a6c77a592aab5032c28ff692b901c231aacedc196d0d0db lean/Stage_6_Analytic_Tail.lean
-sha256LF 83c554a4c0b58b2563f5fa599bc8ac19157f9b749dc4d5786ad3c3712a45142b lean/lakefile.toml
+sha256LF 152abf4a1e106e6579a7bf2a3aa8a15e4495a83394ef9cdb3755b050cbec8bad lean/lakefile.toml
 sha256LF 79a504f7e6fb5b6b5073b1684766e5360dd649a6fdb8655222f9c8b767764086 msaf/tests/test_analytic_tail_bound.py
 sha256LF d0e73398cc03576bd25e95e6ea8297b6271c46d5c4d31ee366865bbbbae395ec reports/ANALYTIC_TAIL_BOUND_2026-10-26.md
 sha256LF f2374b7d32c8f79fd3ca75d0ac2abfa46440228f201e3ee223bd51b90cd3e026 reports/TARGET_STATUS_2026-10-25.md
-sha256LF 66d3ae7e17b6260713ab36eb01db8f2141d362790ac9ff7d092082e4709853f7 msaf/tests/test_anti_circularity_gate.py
+sha256LF 0c0410ee29fce414a3837a3f5c14f9eff83396f951938c60aa37f0c737d7250b msaf/tests/test_anti_circularity_gate.py
   ```
 
 ### A-2026-0052 - Sensus abc Q3 v3: sensus lengkap hingga C = 10^7 (17 triple q > 1.4)
@@ -2535,5 +2535,22 @@ sha256LF c710e84898fd6ae19c2db4548d401b75df9d025e487767a695f11f78631ef97d lean/R
 sha256LF c08e9b3d1841f29830979677e3a2245c64b6a65ce87262eb470d60ebffbb1d86 lean/Stage_7_Tail_Extension.lean
 sha256LF 04c9b9c83a211a86bfe62a93b59d5ea1b94d3b8a4fc403c01046818f6b9769d3 reports/PREREG_TAIL_EXTENSION_2026-10-30.md
 sha256LF cca8436aa8b745063434b498614fe70f46c342bfbdf7c952e8136d7d74c41962 msaf/tests/test_stage7_tail_extension.lean
+```
+
+
+### T-2026-0065 — Chrono Geometric Enclosure Data Import
+
+- **Jenis:** T
+- **Pernyataan:** `lean/EnclosureData.lean` defines Lean structures (`MoorePremises`, `DerivativeEnclosures`, `GwBounds`, `ComplexBall`) and parsed static interval enclosure constants representing T-hat-N JSON verification artifacts for the Riemann zero analysis.
+- **Batas:** No new mathematical theorems; strictly encodes verified numerical enclosure constants into Lean types.
+- **Status:** CERTIFIED
+- **Domino:** ChronoGeometric_Framework integration.
+- **Relasi:** Follows pre-registration `reports/PREREG_CHRONO_ENCODING_2026-10-30.md`.
+- **Perintah verifikasi:** `cd lean && lake build EnclosureData`; `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **Sertifikat:**
+
+```text
+sha256LF 54c57e4a06e672351caab1e6e4c6e8e3f16465c099b30e1ac35fc23fe8701bac lean/EnclosureData.lean
+sha256LF 5d43b4a94f34aa81fd038ccd6f4c4b90ce586689f5d128c2b87444abef8cb2f2 reports/PREREG_CHRONO_ENCODING_2026-10-30.md
 ```
 ```
