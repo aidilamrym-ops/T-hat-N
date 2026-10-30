@@ -2554,3 +2554,154 @@ sha256LF 54c57e4a06e672351caab1e6e4c6e8e3f16465c099b30e1ac35fc23fe8701bac lean/E
 sha256LF 5d43b4a94f34aa81fd038ccd6f4c4b90ce586689f5d128c2b87444abef8cb2f2 reports/PREREG_CHRONO_ENCODING_2026-10-30.md
 ```
 ```
+
+### T-2026-0066 — GW bounds record: satu gate derivatif terverifikasi, dua gate UNAVAILABLE
+
+- **Jenis:** T
+- **Pernyataan:** `ChronoGeometric_Framework/lean/enclosures/gw_bounds.json` merekam
+  tepat satu gate Guinand-Weil yang terverifikasi, yaitu enclosure Arb untuk xi'
+  pada seluruh box nol pertama (`t ≈ 14.1347`, degree 12) dengan
+  `derivative_magnitude = [0.0013827190892162556758 +/- 4.74e-23]` dan
+  `derivative_tail = [1.6030038524827087284e-13 +/- 2.71e-34]`; dua gate lain
+  (`character_sum`, `orthogonality`) direkam `UNAVAILABLE` karena tidak ada
+  produser di repo ini. Literal JSON disalin verbatim ke
+  `EnclosureData.lean` (dijaga oleh uji drift), dan
+  `zeta_gates_incomplete : ¬ ZetaBoundCorrect gw.index` membuktikan bahwa
+  predikat tiga-gate tidak berlaku untuk record ini.
+- **Batas:** Hanya derivatif xi' pada satu box; bukan bound character-sum,
+  bukan sertifikat orthogonality, bukan critical-line positivity, bukan Weil
+  positivity, bukan spektrum zeta, bukan RH. Real part enclosure
+  (`[+/- 1.61e-13]`) tidak dipakai untuk klaim numerik apa pun. Record hanya
+  untuk indeks 0; tidak ada keluarga record per-indeks.
+- **Status:** CERTIFIED
+- **Domino:** ChronoGeometric_Framework integrasi enclosure.
+- **Relasi:** Melanjutkan `T-2026-0065` (import data) dan
+  `reports/PREREG_CHRONO_ENCODING_2026-10-30.md` target 5; laporan
+  `reports/CHRONO_ENCODING_2026-10-30.md` §2.
+- **Perintah verifikasi:** `cd ChronoGeometric_Framework && lake build`;
+  `python -m pytest ChronoGeometric_Framework/python/test_enclosure_consistency.py -q`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **Sertifikat:**
+
+```text
+sha256LF 35bcc3a34f844b30a08b493dd36252fcc918899a145192b5ed4ff7a7241a6031 ChronoGeometric_Framework/lean/enclosures/gw_bounds.json
+sha256LF 13565b02fe9e5de01a9a519985fa666b58f28be92a3da4270d10f553441c5ca3 ChronoGeometric_Framework/lean/EnclosureData.lean
+sha256LF f95ec419ca82adbd5d27348a96ab041f57efe07a0c2702ec376105606138cef6 ChronoGeometric_Framework/lean/ChronoBridge.lean
+sha256LF bdc2f3229983aa6d00830e553a7ea2fb98818341427dd8b45a788a4bfb427426 ChronoGeometric_Framework/python/export_enclosures.py
+sha256LF eb510bd40ca4cd05ab9dc9dee5dd67aa1a4e42b8a17df841c4ee5f9f75f36de5 ChronoGeometric_Framework/python/test_enclosure_consistency.py
+sha256LF 010f6e4091c67a69eeb762afd45c3ed468f4a0c7cd0c51d3958a56f9b6fee03d ChronoGeometric_Framework/verify.ps1
+sha256LF d62216ecbb2297e5dbb61e1247be666b966991ea02536311e1d79dd14cbcfb6f ChronoGeometric_Framework/Makefile
+sha256LF 4fc45359a82dfde0b17f5f7713428740eeb18716b29e757b225c9bf99807acce reports/CHRONO_ENCODING_2026-10-30.md
+```
+
+### T-2026-0067 — Chrono encoding faithful pada indeks
+
+- **Jenis:** T
+- **Pernyataan:** Untuk semua `n : MyNat`,
+  `ZetaStep n = Shape.space (List.replicate (n.toNat + 1) Shape.point)` dan
+  `sign_budget_shape n = Shape.space (List.replicate (n.toNat + 12) Shape.point)`,
+  dengan `1 = gw.verifiedGateCount` dan `12 = moore.degree` dibaca dari record
+  enclosure; kedua fungsi injektif (`ZetaStep_injective`,
+  `sign_budget_shape_injective`), dan `collapse_to_harmony` mereduksi tiap state
+  hasil encoding ke `Shape.point` tanpa mengubah nilai maupun waktu.
+- **Batas:** Ini faithfulness **indeks**, bukan faithfulness numerik: `Shape`
+  tidak punya payload sehingga encoding tidak information-preserving untuk
+  string enclosure. Teorema `chrono_boundary_harmony` dan
+  `riemann_instant_reduction` adalah sifat struktural `collapse_to_harmony`,
+  bukan pernyataan tentang xi atau bound GW. Nama lama
+  `zeta_step_encoding_correct`/`riemann_encoding_correct` di-retract (lihat
+  `A-2026-0053`) dan tidak diklaim di sini.
+- **Status:** CERTIFIED
+- **Domino:** ChronoGeometric_Framework encoding.
+- **Relasi:** Melanjutkan `T-2026-0065`/`T-2026-0066`; target 2-3
+  `reports/PREREG_CHRONO_ENCODING_2026-10-30.md`; laporan
+  `reports/CHRONO_ENCODING_2026-10-30.md` §4.
+- **Perintah verifikasi:** `cd ChronoGeometric_Framework && lake build Test`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **Sertifikat:**
+
+```text
+sha256LF 645b431248f92b5286c6fd6e3818b58fc223e4a5e2d766179f377663a9ef5f9f ChronoGeometric_Framework/lean/NewArithmetic.lean
+sha256LF f95ec419ca82adbd5d27348a96ab041f57efe07a0c2702ec376105606138cef6 ChronoGeometric_Framework/lean/ChronoBridge.lean
+sha256LF 03e0e11927f190db8b83d0d5e5b42a4175924cb3bd754dc740c1a48bbe6824cd ChronoGeometric_Framework/lean/ChronoRiemann.lean
+sha256LF 13565b02fe9e5de01a9a519985fa666b58f28be92a3da4270d10f553441c5ca3 ChronoGeometric_Framework/lean/EnclosureData.lean
+sha256LF cdd951e7602cbd159676dede0fb856ac8a7d59d89b77c55bef1140dd52ecc41f ChronoGeometric_Framework/lean/Test.lean
+sha256LF 4fc45359a82dfde0b17f5f7713428740eeb18716b29e757b225c9bf99807acce reports/CHRONO_ENCODING_2026-10-30.md
+```
+
+### A-2026-0053 — Audit Chrono encoding: retraksi teorema vacuous dan drift literal
+
+- **Jenis:** A
+- **Pernyataan:** Audit atas pekerjaan Chrono encoding 2026-10-30 menetapkan dua
+  temuan. (a) Tiga teorema yang sebelumnya dilaporkan sebagai "encoding
+  correctness" (`zeta_step_encoding_correct`, `riemann_encoding_correct`,
+  `sat_encoding_correct`) tidak membawa isi numerik: ruas kanan selalu benar
+  secara struktural dan ruas kiri konstanta placeholder, sehingga pernyataannya
+  setara `True ↔ True`; nama-nama itu dihapus dan diganti pernyataan yang dapat
+  difalsifikasi (`T-2026-0066`, `T-2026-0067`). (b) Dua literal di salinan
+  subproject `ChronoGeometric_Framework/lean/EnclosureData.lean` menyimpang dari
+  JSON sumbernya — `moore.scope` kehilangan kata `premises`, dan
+  `second_derivative.imag_rad` memuat nilai `real_rad`
+  (`1.113295572055...e-13` sebagai ganti `3.0772113471659...e-17`) — dan
+  keduanya diperbaiki di salinan subproject serta dijaga oleh uji drift.
+- **Batas:** Audit tidak mengubah status `T-2026-0065`. Salinan top-level
+  `lean/EnclosureData.lean` yang tersertifikasi `T-2026-0065` **masih memuat
+  kedua drift yang sama** dan sengaja tidak diubah di sini; perbaikannya
+  memerlukan entri registry baru atau amendment atas keputusan pemilik. Audit
+  tidak menyatakan apa pun tentang RH, Weil positivity, atau spektrum zeta.
+- **Status:** CERTIFIED
+- **Domino:** Audit proses (anti-circularity).
+- **Relasi:** `T-2026-0065`, `T-2026-0066`, `T-2026-0067`; laporan
+  `reports/CHRONO_ENCODING_2026-10-30.md` §1 dan §5.
+- **Perintah verifikasi:**
+  `python -m pytest ChronoGeometric_Framework/python/test_enclosure_consistency.py -q`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **Sertifikat:**
+
+```text
+sha256LF eb510bd40ca4cd05ab9dc9dee5dd67aa1a4e42b8a17df841c4ee5f9f75f36de5 ChronoGeometric_Framework/python/test_enclosure_consistency.py
+sha256LF 4fc45359a82dfde0b17f5f7713428740eeb18716b29e757b225c9bf99807acce reports/CHRONO_ENCODING_2026-10-30.md
+sha256LF 13565b02fe9e5de01a9a519985fa666b58f28be92a3da4270d10f553441c5ca3 ChronoGeometric_Framework/lean/EnclosureData.lean
+```
+
+---
+
+### T-2026-0068 - Latis eksak dan emulator diskret Chrono
+
+- **Jenis:** T
+- **Pernyataan:** Latis diskret dengan N_STEPS = 54446853992717733278474003174004102075476951347404957757284586 dan TICK_SECONDS eksak Fraction, serta emulator transisi diskret dengan jaminan invarian leaf_count terverifikasi.
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Implementasi di `msaf/chrono_runtime/`, laporan di `reports/CHRONO_RUNTIME_2026-10-30.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_runtime.py -q`
+
+```text
+sha256LF b5e0054d5f5491ec69059af5ed2d93aa6ef0195aa7cf657b7af343769457bc1d reports/CHRONO_RUNTIME_2026-10-30.md
+```
+
+### T-2026-0069 - Spektrum Riemann dan observables dim 201/301
+
+- **Jenis:** T
+- **Pernyataan:** Penahanan Arb untuk observabel H_S, L_Im, dan pengujian struktur sirkulan refutatif pada spektrum dim 201 dan 301.
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Output di `reports/CHRONO_RIEMANN_INSIGHTS.json`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_riemann_operator.py -q`
+
+```text
+sha256LF d6024166921f018791fec59ff70aeee15e9f28a7bb176bdd4fcf04fec4df89e0 reports/CHRONO_RIEMANN_INSIGHTS.json
+```
+
+### A-2026-0054 - Audit Ledger dan Runtime evidence
+
+- **Jenis:** A
+- **Pernyataan:** Verifikasi integritas rantai ledger dan pemenuhan seluruh kriteria A1-A10 pra-registrasi.
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Ledger di `ledger/chrono_execution_ledger.jsonl`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_ledger.py -q`
+
+```text
+sha256LF e7b04adf9dde243635f7e48849b8fecfb6309dd52ddbf7ad8b9caf9e758d8135 ledger/chrono_execution_ledger.jsonl
+```
+
