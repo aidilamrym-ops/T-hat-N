@@ -3,6 +3,11 @@
 *T-hat-N - Matrix-constraint Spectral Analysis Framework (MSAF): one rigid
 computational kernel, every reported number an interval enclosure.*
 
+## Abstract
+
+**Rigorous Finite-Lattice Spectral Analysis and the Decomposition of Truncated Guinand-Weil Operators**  
+This research presents a rigorous framework for finite-lattice spectral analysis applied to the Riemann zeta function, Dirichlet L-functions, and truncated Guinand-Weil spectra. Utilizing verified ball arithmetic (`arb`/`acb`/`arb_mat`), all numeric evaluations maintain strict enclosure bounds, eliminating floating-point rounding errors and ensuring unconditional mathematical reliability.
+
 A rigid computational kernel for finite-lattice spectral analysis over the
 Riemann zeta function, Dirichlet L-functions and truncated Guinand-Weil
 spectra, built by **Muhammad Aidil Amry** (ORCID 0009-0002-9718-9710).
@@ -14,8 +19,8 @@ equality: only by containment.
 
 - **CI:** [![CI](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aidilamrym-ops/T-hat-N/actions/workflows/ci.yml) - `python -m pytest msaf -q` plus the Lean kernel build; every push must stay green
 - **Permanent archive:** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23338271.svg)](https://doi.org/10.5281/zenodo.23338271) (concept DOI, all versions; latest version v1.41.0-alpha: https://doi.org/10.5281/zenodo.23445149)
-- **Sealed releases:** [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) Â· [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha); final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
-- **License:** MIT - see [LICENSE](LICENSE)
+- **Sealed releases:** [v1.1.0](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.1.0) (archive) · [v1.40.0-alpha](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha); final certified delivery (2026-10-16): [v1.40.0-alpha-final-certified-delivery](https://github.com/aidilamrym-ops/T-hat-N/releases/tag/v1.40.0-alpha-final-certified-delivery) - consolidated manuscript [exports/research_paper.tex](exports/research_paper.tex), sealed-artifact transcription over the three-resolution campaign (Section 6); archived on Zenodo: https://doi.org/10.5281/zenodo.23410894
+- **License:** GNU General Public License v3 (GPLv3) - see [LICENSE](LICENSE)
 
 Display equations below are versioned local SVG assets under
 [`docs/math/`](docs/math/), rendered offline by
