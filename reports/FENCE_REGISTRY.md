@@ -2718,3 +2718,16 @@ sha256LF e40816cf0ab90d2d7cb80e79168b62c6b710e78bba72cbc89fd3172628370968 ledger
 sha256LF ad43363dcc08e02538747dfdbc9ad69ff26bc6a22e2fb86da8f680cf33979425 reports/TAU_ANATOMY_RESULTS_2026-10-30.md
 ```
 
+### T-2026-0073 - Pra-Registrasi Kampanye SVD dan Otomatisasi Manifes SKILL.md
+
+- **Jenis:** T
+- **Pernyataan:** Dokumen perencanaan pra-registrasi terikat untuk dekomposisi SVD terkurung dan pembuatan manifes agen `skills/t2n_science/SKILL.md`.
+- **Status:** CERTIFIED (Preregistration)
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Berkas pra-registrasi di `reports/PREREG_TAU_SVD_AUTOMATION_2026-10-30.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py -q`
+
+```text
+sha256LF 72f619ff637de9b4830cd3a713afcc19924547d4dafa9ffc6334dedbebb14e2d reports/PREREG_TAU_SVD_AUTOMATION_2026-10-30.md
+```
+
