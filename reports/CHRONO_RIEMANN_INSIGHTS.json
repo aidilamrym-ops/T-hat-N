@@ -1,0 +1,198 @@
+{
+  "schema": "msaf.chrono_riemann_insights.v1",
+  "run_id": "3fda0cbfb6302ca3a347fd669a72eaa58d717f39101348c0f2523ae889412859",
+  "prereg": "reports/PREREG_CHRONO_RUNTIME_2026-10-30.md",
+  "prereg_sha256lf": "f4c7ea47af3face3e5e7e22082f23591b17b17e7e7e2e0aafecfb68ec8187dfe",
+  "generated_utc": "2026-10-30T03:47:28.884082+00:00",
+  "prec_bits": 256,
+  "scope": {
+    "rh_claim": false,
+    "zero_location_claim": false,
+    "weil_positivity_claim": false
+  },
+  "records": [
+    {
+      "dim": 201,
+      "artifact": "reports/gw_spectrum_100_100.json",
+      "artifact_sha256lf": "c645c590e54717cf793a31ecd941640adbbca162caf15108f56dde1da993f75d",
+      "eigenvalue_count": 201,
+      "conductor": 100,
+      "block": 100,
+      "source_prec_bits": 6000,
+      "prec_bits": 256,
+      "sigma_abs_sum": {
+        "mid": "425.1897200764097360829892671287975210614621207281338588165733052145528130169912834830412339832049959",
+        "rad": "7.700303834845067138472948458392177560851e-73"
+      },
+      "spectral_entropy": {
+        "mid": "4.503982294414111320126027497768662966202505836260868610877003074120820355245972394376484878979835922",
+        "rad": "2.085576776677610325305686179451884767670e-74"
+      },
+      "imaginary_leak": {
+        "mid": "0",
+        "rad": "0"
+      },
+      "circulant_pairing": {
+        "verdict": "NOT-SYMMETRIC-CIRCULANT",
+        "witness_index": 0,
+        "defect_lower_bound": "7.157150695550212163363135185722790314826",
+        "defect_lower_ball": {
+          "mid": "7.157150695550212163363135185722790314825869705395670508665939999999999999999520728191618202700960181",
+          "rad": "0"
+        },
+        "defect": {
+          "mid": "7.157150695550212163363135185722790314825869705395670508665939999999999999999866174933821980485975635",
+          "rad": "3.109020684981557654607115588747096019073e-76"
+        },
+        "ordering_certified": true,
+        "real_spectrum": true
+      },
+      "perturbations": [
+        {
+          "epsilon": "1/100",
+          "synthetic_only": true,
+          "zero_location_claim": false,
+          "spectral_entropy": {
+            "mid": "4.521467144980469398611226959077169447653195495108122653425580211094256876213024690272440499240308717",
+            "rad": "2.092694532696320134113838560540504400272e-74"
+          },
+          "imaginary_leak": {
+            "mid": "0.004715713166551148823225355393082350168118053734826554358680907534653214397430451412962182814753044126",
+            "rad": "1.416039815641603761280723004767066203283e-77"
+          },
+          "checks": {
+            "P2_leak_positive": true,
+            "P3_entropy_increases": true,
+            "P3_entropy_gain_at_least_1e-3": true
+          },
+          "execution_status": "PASS"
+        },
+        {
+          "epsilon": "1/50",
+          "synthetic_only": true,
+          "zero_location_claim": false,
+          "spectral_entropy": {
+            "mid": "4.535633675170283667871552231633833862175911103928029221621551448894637490229547503868683971785333513",
+            "rad": "2.091570717923387474040430464501992061137e-74"
+          },
+          "imaginary_leak": {
+            "mid": "0.009408097976282379688040093514952793693755287511109577351201175151724529056254768400482724165832290491",
+            "rad": "2.822780510587810646805502663369543848888e-77"
+          },
+          "checks": {
+            "P2_leak_positive": true,
+            "P3_entropy_increases": true,
+            "P3_entropy_gain_at_least_1e-3": true
+          },
+          "execution_status": "PASS"
+        }
+      ],
+      "checks": {
+        "P1_baseline_leak_zero": true,
+        "ordering_certified": true,
+        "circulant_verdict_recorded": true,
+        "P4_leak_monotone": true,
+        "eps=1/100:P2_leak_positive": true,
+        "eps=1/100:P3_entropy_increases": true,
+        "eps=1/100:P3_entropy_gain_at_least_1e-3": true,
+        "eps=1/50:P2_leak_positive": true,
+        "eps=1/50:P3_entropy_increases": true,
+        "eps=1/50:P3_entropy_gain_at_least_1e-3": true
+      },
+      "numerical_verdict": "dim 201: L_Im = 0; H_S = [4.50398229441 +/- 4.12e-12]; circulant pairing NOT-SYMMETRIC-CIRCULANT (witness 0, lower bound [7.1571507 +/- 4.46e-9])",
+      "execution_status": "PASS"
+    },
+    {
+      "dim": 301,
+      "artifact": "reports/gw_spectrum_100_150.json",
+      "artifact_sha256lf": "8fded8394f0ab4e8ed83f537609d313d0d50eef42f09214c30d1cfcd994d161d",
+      "eigenvalue_count": 301,
+      "conductor": 100,
+      "block": 150,
+      "source_prec_bits": 6000,
+      "prec_bits": 256,
+      "sigma_abs_sum": {
+        "mid": "758.9564527274470009732402406851121221455710111731689931922083763978251931742208800875972234388451957",
+        "rad": "8.210890649988625690186205359085049574885e-73"
+      },
+      "spectral_entropy": {
+        "mid": "5.065403564968237972713046262781855719255020686581428277106358916295100299134367370264107039030732406",
+        "rad": "1.223833898980117663315872688086269178115e-74"
+      },
+      "imaginary_leak": {
+        "mid": "0",
+        "rad": "0"
+      },
+      "circulant_pairing": {
+        "verdict": "NOT-SYMMETRIC-CIRCULANT",
+        "witness_index": 0,
+        "defect_lower_bound": "7.867165908929375974086514431910445203289",
+        "defect_lower_ball": {
+          "mid": "7.867165908929375974086514431910445203288722927654035979910719999999999999999523877416246494357873707",
+          "rad": "0"
+        },
+        "defect": {
+          "mid": "7.867165908929375974086514431910445203288722927654035979910719999999999999999869324158450272142889161",
+          "rad": "3.109020684981557654607115588747096019073e-76"
+        },
+        "ordering_certified": true,
+        "real_spectrum": true
+      },
+      "perturbations": [
+        {
+          "epsilon": "1/100",
+          "synthetic_only": true,
+          "zero_location_claim": false,
+          "spectral_entropy": {
+            "mid": "5.077875561751901921139414131063066819496105060354404653373580717024773428889168903266442966865631126",
+            "rad": "1.249695083354383321180908449012897738531e-74"
+          },
+          "imaginary_leak": {
+            "mid": "0.003959056018803762774037551037988748039840300982384060266679695627793224165278494167953608413234977431",
+            "rad": "1.208226413746099237051426281260050003193e-77"
+          },
+          "checks": {
+            "P2_leak_positive": true,
+            "P3_entropy_increases": true,
+            "P3_entropy_gain_at_least_1e-3": true
+          },
+          "execution_status": "PASS"
+        },
+        {
+          "epsilon": "1/50",
+          "synthetic_only": true,
+          "zero_location_claim": false,
+          "spectral_entropy": {
+            "mid": "5.087968504761672037805322364069128350219098565477919210619345613006820323230518428256492912003524834",
+            "rad": "1.253188075921029892074370968578316508235e-74"
+          },
+          "imaginary_leak": {
+            "mid": "0.007904200647791255700988741838027329669686277290452616084188818579902756690768083043386253446079769632",
+            "rad": "2.413090680949296470509861662886926322218e-77"
+          },
+          "checks": {
+            "P2_leak_positive": true,
+            "P3_entropy_increases": true,
+            "P3_entropy_gain_at_least_1e-3": true
+          },
+          "execution_status": "PASS"
+        }
+      ],
+      "checks": {
+        "P1_baseline_leak_zero": true,
+        "ordering_certified": true,
+        "circulant_verdict_recorded": true,
+        "P4_leak_monotone": true,
+        "eps=1/100:P2_leak_positive": true,
+        "eps=1/100:P3_entropy_increases": true,
+        "eps=1/100:P3_entropy_gain_at_least_1e-3": true,
+        "eps=1/50:P2_leak_positive": true,
+        "eps=1/50:P3_entropy_increases": true,
+        "eps=1/50:P3_entropy_gain_at_least_1e-3": true
+      },
+      "numerical_verdict": "dim 301: L_Im = 0; H_S = [5.06540356497 +/- 1.77e-12]; circulant pairing NOT-SYMMETRIC-CIRCULANT (witness 0, lower bound [7.8671659 +/- 8.94e-9])",
+      "execution_status": "PASS"
+    }
+  ],
+  "deviations": []
+}
