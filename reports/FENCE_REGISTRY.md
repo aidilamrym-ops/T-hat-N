@@ -2770,4 +2770,17 @@ sha256LF 73cad9aec42c0bb149edc5c55d5e4d3c3845c788425c625d6da764498d2d3eeb skills
 sha256LF e2266439897f911257d7bd24ca26792a3044d1563b00ab5f81eca9647e43169e ledger/chrono_execution_ledger.jsonl
 ```
 
+### T-2026-0076 - Pra-Registrasi Amandemen Lisensi GNU GPLv3
+
+- **Jenis:** T
+- **Pernyataan:** Dokumen perencanaan pra-registrasi terikat untuk transisi lisensi repositori dari MIT ke GNU GPLv3.
+- **Status:** CERTIFIED (Preregistration)
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Berkas pra-registrasi di `reports/PREREG_GPLv3_TRANSITION_2026-10-30.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py -q`
+
+```text
+sha256LF 61b014f54f090ef9d24ac9106254aaf0099259a7a3037391ce23b3c85eda16ce reports/PREREG_GPLv3_TRANSITION_2026-10-30.md
+```
+
 
