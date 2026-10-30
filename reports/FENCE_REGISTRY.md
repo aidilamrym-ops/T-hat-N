@@ -2702,6 +2702,6 @@ sha256LF d6024166921f018791fec59ff70aeee15e9f28a7bb176bdd4fcf04fec4df89e0 report
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_ledger.py -q`
 
 ```text
-sha256LF e7b04adf9dde243635f7e48849b8fecfb6309dd52ddbf7ad8b9caf9e758d8135 ledger/chrono_execution_ledger.jsonl
+sha256LF e40816cf0ab90d2d7cb80e79168b62c6b710e78bba72cbc89fd3172628370968 ledger/chrono_execution_ledger.jsonl
 ```
 
