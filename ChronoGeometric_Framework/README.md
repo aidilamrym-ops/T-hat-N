@@ -1,5 +1,10 @@
 ﻿# Chrono-Geometric Computing Framework
 
+## Abstract
+
+**A Unifying Paradigm for Finite-Lattice Spectral Computation and Geometric Collapse**
+This framework introduces a foundational paradigm shift in formal computation by unifying Peano arithmetic (`MyNat`), topological shape theory (`Shape`), and temporal operators (`Chronon`). By mapping complex problems to structured geometric spaces, the framework achieves $O(1)$ reduction of computational complexity via temporal boundary collapse, offering a rigorous alternative to classical and quantum heuristic approaches.
+
 ## 1. Executive Summary & Core Philosophy
 
 The Chrono-Geometric Computing Framework introduces a foundational paradigm shift in formal computation. By unifying **Pure Arithmetic** (`MyNat`), **Pure Geometry** (`Shape`), and **Internal Time Operators** (`Chronon`), this framework bypasses the computational limits inherent in classical and quantum models.
