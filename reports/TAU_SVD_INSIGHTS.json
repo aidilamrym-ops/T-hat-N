@@ -1,0 +1,14 @@
+{
+  "gw_matrix_100_100": {
+    "dimension": 201,
+    "trace": "[425.1897200764 +/- 1.30e-11]",
+    "frobenius_norm_sq": "[2060.9091085 +/- 9.85e-9]",
+    "status": "exact enclosing computed via matrix elements"
+  },
+  "gw_matrix_100_150": {
+    "dimension": 301,
+    "trace": "[758.9564527274 +/- 5.59e-11]",
+    "frobenius_norm_sq": "[3781.0796611 +/- 2.68e-8]",
+    "status": "exact enclosing computed via matrix elements"
+  }
+}

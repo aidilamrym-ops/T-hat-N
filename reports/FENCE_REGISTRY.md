@@ -2702,7 +2702,7 @@ sha256LF d6024166921f018791fec59ff70aeee15e9f28a7bb176bdd4fcf04fec4df89e0 report
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_ledger.py -q`
 
 ```text
-sha256LF e40816cf0ab90d2d7cb80e79168b62c6b710e78bba72cbc89fd3172628370968 ledger/chrono_execution_ledger.jsonl
+sha256LF e2266439897f911257d7bd24ca26792a3044d1563b00ab5f81eca9647e43169e ledger/chrono_execution_ledger.jsonl
 ```
 
 ### T-2026-0072 - Analisis Anatomi Matriks Tau (Toeplitz & Hankel Residuals)
@@ -2730,4 +2730,44 @@ sha256LF ad43363dcc08e02538747dfdbc9ad69ff26bc6a22e2fb86da8f680cf33979425 report
 ```text
 sha256LF 72f619ff637de9b4830cd3a713afcc19924547d4dafa9ffc6334dedbebb14e2d reports/PREREG_TAU_SVD_AUTOMATION_2026-10-30.md
 ```
+
+### T-2026-0074 - Analisis SVD Terkurung Matriks Tau
+
+- **Jenis:** T
+- **Pernyataan:** Ekstraksi metrik spektral terkurung dan norma Frobenius untuk matriks $\\tau$ dimensi 201 dan 301 menggunakan Flint Arb.
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Laporan di `reports/TAU_SVD_INSIGHTS.json`.
+- **Perintah verifikasi:** `python -m msaf.chrono_runtime.svd_analysis && python -m pytest msaf/tests/test_fence_registry.py -q`
+
+```text
+sha256LF 9d9bb5f8f744e9b68ce29c55d1aca85ce88321b98c1aa7323aa4af7ade3b761f reports/TAU_SVD_INSIGHTS.json
+```
+
+### T-2026-0075 - Manifes Kecakapan Agen t2n_science
+
+- **Jenis:** T
+- **Pernyataan:** Pembuatan manifes SKILL.md untuk sub-perintah sains t2n (`skills/t2n_science/SKILL.md`).
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Manifes di `skills/t2n_science/SKILL.md`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py -q`
+
+```text
+sha256LF 73cad9aec42c0bb149edc5c55d5e4d3c3845c788425c625d6da764498d2d3eeb skills/t2n_science/SKILL.md
+```
+
+### A-2026-0056 - Audit Eksekusi SVD dan Manifes t2n_science
+
+- **Jenis:** A
+- **Pernyataan:** Verifikasi integritas pelaksanaan kampanye SVD terkurung dan manifes kecakapan agen.
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Ledger di `ledger/chrono_execution_ledger.jsonl`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_ledger.py -q`
+
+```text
+sha256LF e2266439897f911257d7bd24ca26792a3044d1563b00ab5f81eca9647e43169e ledger/chrono_execution_ledger.jsonl
+```
+
 
