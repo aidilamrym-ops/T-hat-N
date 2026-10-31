@@ -1,0 +1,15 @@
+{
+  "schema": "msaf.stage3_spectral_lock.v1",
+  "date": "2026-11-01",
+  "engine": "Stage3SpectralLockEngine",
+  "certificate": {
+    "dimension": 12,
+    "imag_leak_certified": true,
+    "max_radius": 2.288836398085629e-149,
+    "frobenius_norm_sq": "[77.124950919106476910746580270708798829288048384932146368349514368980436829722242674304562106864492717160270392739358292478280588059162975089043187660455 +/- 8.92e-151]",
+    "k_90": 10,
+    "gm0_passed": true,
+    "status": "CERTIFIED"
+  },
+  "status": "CERTIFIED"
+}
