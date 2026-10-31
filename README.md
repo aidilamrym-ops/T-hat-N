@@ -77,7 +77,7 @@ The trace and the squared Frobenius norm are accumulated element-wise in
 of the stored matrix:
 
 $$
-\operatorname{tr}\tau \;=\; \sum_{i} \tau_{ii}, \qquad
+\mathrm{tr }\tau \;=\; \sum_{i} \tau_{ii}, \qquad
 \|\tau\|_F^2 \;=\; \sum_{i,j} \lvert \tau_{ij} \rvert^2 .
 $$
 
@@ -93,7 +93,7 @@ Addendum A1 of the SVD-extension pre-registration). Recomputing the same
 matrices at 256 bits gives, at dim 201,
 
 $$
-\operatorname{tr}\tau = [425.189720076409736082989267128797521061462120728134562 \pm 2.02\times10^{-71}],
+\mathrm{tr }\tau = [425.189720076409736082989267128797521061462120728134562 \pm 2.02\times10^{-71}],
 \qquad
 \|\tau\|_F^2 = [2060.909108506543244009701800058552457127969898240227258 \pm 7.63\times10^{-70}],
 $$
