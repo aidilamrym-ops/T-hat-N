@@ -114,4 +114,19 @@ Catatan D4: header peringatan historis ditambahkan (aditif) on section atas
 `generate_receipts.py` (jangan dieksekusi). Byte receipt and kode skrip
 no diubah.
 
+## Penyisihan sisa kerja 2026-10-31 (tanpa artefak tersertifikasi)
+
+Empat path untracked disisihkan atas keputusan pemilik 2026-10-31. Tidak satu
+pun pernah masuk commit, tidak ada baris `sha256LF` yang merujuknya, dan tidak
+ada test/workflow yang membacanya. Karena tidak pernah di-commit, tidak ada
+recovery commit; hash di bawah adalah hash byte saat penyisihan (CRLF
+dinormalisasi ke LF, sama with konvensi registry).
+
+| Path | Status | sha256LF saat disisihkan | Pengganti / alasan |
+|---|---|---|---|
+| `reports/RH_SCAFFOLD_NOTES/STAGE_7_TAIL_EXTENSION.md` | `tombstoned` | `fe48ce1fa00d9855b1c36982767241829ec7f0a50d4de5f90dc129d1f7732ac2` | Rencana Task A-D which already dieksekusi: `reports/PREREG_TAIL_EXTENSION_2026-10-30.md` and `lean/Stage_7_Tail_Extension.lean` (blok sertifikat in registry). Dokumen ini no boleh dijalankan sebagai instruksi baru. |
+| `msaf/chrono_bridge.py` | `tombstoned` | `7354a4128c16f13876c15e37921acac7b6041a8565e81537c75f953059d6bf64` | Duplikat byte-identik (modulo line ending) dari `msaf/bridge/chrono_bridge.py` which tracked; bukan artefak and no dirujuk. |
+| `msaf/reports/RELEASE_v1.41.0-alpha.md` | `tombstoned` | `87823b5a456c66ddfde0fa9cf534833adf87ec88f926e71d330e2612a5676706` | Template rilis which mengklaim "CI passes; all tests green" tanpa dasar; no dirujuk and no boleh dipakai sebagai bukti status CI. |
+| `reports/anti_circularity_gate_current.log` | `tombstoned` | `93634a02bc0652601dc1a761d9123d537525bd8009050f06a4416e340ac29892` | Log runtime which dapat dibuat ulang; bukan bukti tersertifikasi and no dirujuk registry. |
+
 

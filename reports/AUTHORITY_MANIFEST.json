@@ -41,11 +41,11 @@
     },
     "decision_log": {
       "path": "reports/DECISION_LOG.md",
-      "sha256lf": "af528e88c6be5b1d23d509d05d9ff2ff7e7b22468038c8edfc0a6b6ef9bc3adb"
+      "sha256lf": "18374c525f90b6faf143b150d3a3418b8a111211c43375e704d3a199791b9510"
     },
     "archive_tombstones": {
       "path": "reports/ARCHIVE_TOMBSTONES.md",
-      "sha256lf": "32e7d5ecb691003b2af56e3498b782681cf7f7887a86ee06202998979c9a05d6"
+      "sha256lf": "c17aeab4bbb7e856a68aa77da7ec116be223ff4c234f2a6f96940c588e641b84"
     }
   },
   "superseded": [

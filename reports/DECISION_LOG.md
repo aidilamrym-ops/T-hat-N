@@ -574,6 +574,33 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   matematika, verdict, or receipt which berubah; artefak tersertifikasi
   run 2026-10-17 no disentuh.
 
+## 2026-10-31 - Custody artefak Chrono and penyisihan sisa kerja
+
+- **Dasar:** instruksi pemilik 2026-10-31 for mengeksekusi urutan rekomendasi
+  status repo (custody -> penyisihan -> pemulihan cache -> sinkronisasi
+  otoritas).
+- **Commit custody `0eaa16d`:** lima file which already dirujuk baris
+  `sha256LF` tetapi untracked dimasukkan ke tree:
+  `reports/CHRONO_ENCODING_2026-10-30.md`,
+  `ChronoGeometric_Framework/lean/EnclosureData.lean`,
+  `ChronoGeometric_Framework/python/test_enclosure_consistency.py`,
+  `ChronoGeometric_Framework/verify.ps1`, and
+  `ChronoGeometric_Framework/Makefile`.
+  Tidak ada byte which diubah: hash blob staged = hash registry for kelimanya,
+  474/474 baris sertifikat tetap cocok, and clone bersih no lagi gagal
+  `msaf/tests/test_fence_registry.py` because file hilang.
+- **Penyisihan (keputusan pemilik "hapus 3, tombstone 1"):**
+  `msaf/chrono_bridge.py` (duplikat byte-identik modulo line ending dari
+  `msaf/bridge/chrono_bridge.py`), `msaf/reports/RELEASE_v1.41.0-alpha.md`
+  (template rilis tanpa dasar verifikasi), and
+  `reports/anti_circularity_gate_current.log` (log runtime) dihapus;
+  `reports/RH_SCAFFOLD_NOTES/STAGE_7_TAIL_EXTENSION.md` di-tombstone karena
+  rencananya already dieksekusi. Rincian hash in
+  `reports/ARCHIVE_TOMBSTONES.md`.
+- **Batas:** no ada entri registry, verdict, receipt, status, or klaim
+  matematika which diubah; commit ini custody and housekeeping. Tidak ada
+  artefak ber-`sha256LF` which dihapus.
+
 ## Keputusan which masih menunggu pemilik
 
 Tiga question delegasi 2026-10-27 already diputuskan in atas (D1â€“D3). Tidak
