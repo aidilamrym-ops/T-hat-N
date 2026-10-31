@@ -542,6 +542,38 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   hijau" tetap menunggu job `python-tests` on commit which memuat
   perubahan ini.
 
+## 2026-10-31 - Reparasi byte artefak tersegel: harness engine-B and spec amendment-floor
+
+- **Temuan:** guard `msaf/tests/test_readme_guard.py` gagal karena
+  `msaf/gw_engine_b_verify.py` no cocok dengan sha256 which tercatat in
+  manifes run-nya sendiri. `git log`/`git show` menunjukkan penyebabnya
+  commit `c52260f` ("BOM/hash hygiene"), which menambahkan dua baris
+  kosong di akhir `msaf/gw_engine_b_verify.py` and menambahkan BOM UTF-8
+  plus dua baris kosong on `reports/AMENDMENT_FLOOR_SPEC.md`.
+- **Reparasi:** kedua file dikembalikan ke byte pra-`c52260f`:
+  `reports/AMENDMENT_FLOOR_SPEC.md` via
+  `git checkout c52260f^ -- reports/AMENDMENT_FLOOR_SPEC.md`, harness via
+  pemangkasan dua baris kosong. No ada logika, teks, or angka which
+  berubah; hanya whitespace and BOM.
+- **Hash pulih:** `msaf/gw_engine_b_verify.py` sha256LF
+  `485ab6525531aa8e...` (= sha256 in manifes run tersegel 2026-10-17);
+  `reports/AMENDMENT_FLOOR_SPEC.md` sha256LF `3c9958bee3021385...`
+  (10839 byte, = baris tabel artefak blok sealed-status README).
+- **Re-run dibatalkan dengan sengaja:** `--full` sempat berjalan sebelum
+  diagnosis selesai and dihentikan, karena hasilnya akan menimpa
+  `reports/gw_engine_b_verify.json`/`.log` which tersertifikasi and
+  tercatat in blok sealed (f7b3eb01... / 27743364...) sekaligus menyematkan
+  sha256 skrip which no lagi cocok dengan file hasil reparasi. Transkrip
+  parsialnya disimpan sebagai
+  `reports/gw_engine_b_verify_interrupted_2026-10-31.log` (append-only).
+- **Verifikasi:** `python msaf/gw_readme.py --check` PASS;
+  `python -m pytest msaf/tests/test_readme_guard.py -q` 3 passed;
+  `test_fence_registry.py`, `test_authority_manifest.py`, and
+  `test_anti_circularity_gate.py` tetap hijau.
+- **Batas:** no ada entri registry which diubah or dicabut; no ada klaim
+  matematika, verdict, or receipt which berubah; artefak tersertifikasi
+  run 2026-10-17 no disentuh.
+
 ## Keputusan which masih menunggu pemilik
 
 Tiga question delegasi 2026-10-27 already diputuskan in atas (D1â€“D3). Tidak
