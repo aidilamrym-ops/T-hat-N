@@ -31,41 +31,130 @@ installation, so the archive stays self-contained forever.
 
 ## 2. Structural Falsification: Refuting Classical Morphologies
 
-The truncated Guinand-Weil operator $\tau$ is tested against classical linear structures (Toeplitz, Hankel). Results from `reports/TAU_ANATOMY_RESULTS_2026-10-30.md` (T-2026-0072):
+A matrix is Toeplitz when it is constant along diagonals and Hankel when it
+is constant along anti-diagonals. Both families are the natural "linear"
+candidates for a truncated convolution-type operator, so each stored
+$\tau$ is measured against them with the two residuals
 
-| Matrix | Toeplitz Max Diff | Hankel Max Diff | Verdict |
-| :--- | :--- | :--- | :--- |
-| $\tau_{100\times100}$ | $[5.26 \pm 2.0e\text{-}15]$ | $[6.26 \pm 4.6e\text{-}15]$ | `REFUTED` |
-| $\tau_{150\times150}$ | $[5.51 \pm 1.2e\text{-}15]$ | $[6.81 \pm 2.9e\text{-}15]$ | `REFUTED` |
+$$
+R_{\mathrm{Toep}}(\tau) \;=\; \max_{\substack{0 \le i < n-1 \\ 0 \le j < n-1}}
+\bigl\lvert \tau_{ij} - \tau_{i+1,j+1} \bigr\rvert,
+\qquad
+R_{\mathrm{Hank}}(\tau) \;=\; \max_{\substack{0 \le i < n-1 \\ 1 \le j < n}}
+\bigl\lvert \tau_{ij} - \tau_{i+1,j-1} \bigr\rvert ,
+$$
 
-Increasing deviation ($\sim 5.2 \to 5.5$) confirms absolute rejection of linear morphologies.
+accumulated in `arb` ball arithmetic, and the flag `is_*_approximate` is
+raised only when the corresponding residual is certified below
+$10^{-10}$ (`msaf/chrono_runtime/anatomy_test.py`). The measured values are
+recorded in `reports/TAU_ANATOMY_RESULTS_2026-10-30.md` (T-2026-0072):
+
+| Matrix | $R_{\mathrm{Toep}}$ | $R_{\mathrm{Hank}}$ | `is_toeplitz_approximate` | `is_hankel_approximate` |
+| :--- | :--- | :--- | :--- | :--- |
+| $\tau$, dim 201 | $[5.26351929276012 \pm 2.00\times10^{-15}]$ | $[6.26301449431639 \pm 4.57\times10^{-15}]$ | `false` | `false` |
+| $\tau$, dim 301 | $[5.51053094098761 \pm 1.21\times10^{-15}]$ | $[6.80842605216683 \pm 2.85\times10^{-15}]$ | `false` | `false` |
+
+Both residuals are of order $10^{0}$, i.e. fourteen orders of magnitude
+above the $10^{-10}$ decision threshold, and the Toeplitz residual *grows*
+from $\approx 5.26$ to $\approx 5.51$ when the resolution is raised. A
+quantity that tracked a Toeplitz (or Hankel) morphology would shrink toward
+zero as the matrix grows; this one does not. The classical linear
+morphologies are therefore rejected at both measured resolutions, and the
+intervals are far too tight for the rejection to be an artefact of
+enclosure width.
 
 ---
 
 ## 3. Enclosed SVD & Spectral Energy Profiling
 
-SVD metrics from `reports/TAU_SVD_INSIGHTS.json` (T-2026-0074) at 256-bit precision:
+Every entry below is an interval enclosure recomputed from the committed
+artefacts; none of them is a floating-point estimate.
 
-| Dimension | Trace | $\|\tau\|_F^2$ | Spectral Class |
-| :--- | :--- | :--- | :--- |
-| 201 | $[425.19 \pm 1.3e\text{-}11]$ | $[2060.91 \pm 9.9e\text{-}9]$ | Compact Semi-Local |
-| 301 | $[758.96 \pm 5.6e\text{-}11]$ | $[3781.08 \pm 2.7e\text{-}8]$ | Compact Semi-Local |
+### 3.1 Trace and Frobenius energy (`reports/TAU_SVD_INSIGHTS.json`, T-2026-0074)
 
-**Key Findings:**
-- Imaginary component bounded at $[\pm 2.88 \times 10^{-304}] j$ — pure real spectrum.
-- Exponential singular value decay $\implies$ operator is **Compact Semi-Local**.
+The trace and the squared Frobenius norm are accumulated element-wise in
+`arb` ball arithmetic, so each reported interval contains the exact value
+of the stored matrix:
+
+$$
+\operatorname{tr}\tau \;=\; \sum_{i} \tau_{ii}, \qquad
+\|\tau\|_F^2 \;=\; \sum_{i,j} \lvert \tau_{ij} \rvert^2 .
+$$
+
+| Dimension | Trace | $\lVert\tau\rVert_F^2$ |
+| :--- | :--- | :--- |
+| 201 | $[425.1897200764 \pm 1.30\times10^{-11}]$ | $[2060.9091085 \pm 9.85\times10^{-9}]$ |
+| 301 | $[758.9564527274 \pm 5.59\times10^{-11}]$ | $[3781.0796611 \pm 2.68\times10^{-8}]$ |
+
+### 3.2 Spectrum containment (`reports/CHRONO_RIEMANN_INSIGHTS.json`)
+
+The certified spectra at dims 201 and 301 are re-enclosed at 256 bits and
+the following quantities are recorded:
+
+| Quantity | Dim 201 | Dim 301 |
+| :--- | :--- | :--- |
+| eigenvalue count | 201 | 301 |
+| $\sum \lvert\lambda_i\rvert$ | $425.1897\ldots$ (rad $7.70\times10^{-73}$) | $758.9565\ldots$ (rad $8.21\times10^{-73}$) |
+| spectral entropy $-\sum p_i\log p_i$ | $4.503982\ldots$ (rad $2.09\times10^{-74}$) | $5.065404\ldots$ (rad $1.22\times10^{-74}$) |
+| imaginary leak | $[0,\,0]$ | $[0,\,0]$ |
+| circulant pairing | `NOT-SYMMETRIC-CIRCULANT` | `NOT-SYMMETRIC-CIRCULANT` |
+| defect lower bound | $7.1571506955\ldots$ | $7.8671659089\ldots$ |
+
+The imaginary leak is an **exact zero ball** (midpoint $0$, radius $0$): the
+stored spectrum carries no imaginary part at all. The circulant-pairing
+verdict is a negative result with a witness index and a certified defect
+lower bound of $7.1571506955\ldots$ at dim 201 and $7.8671659089\ldots$ at
+dim 301. This is an independent second negative result: a symmetric
+circulant would be Toeplitz in particular, so the Section 2 residuals and
+this defect point the same way, but neither verdict is derived from the
+other.
+
+### 3.3 Entropy scaling between the two resolutions
+
+`reports/CHRONO_SPECTRUM_GRADIENT_2026-10-30.json` records
+
+$$
+\Delta S \;=\; S_{301} - S_{201} \;=\; 0.561421270554\ldots \;\pm\; 3.35\times10^{-74},
+$$
+
+with the dimension-scaling fraction $301/201$. The projected dim-401
+enclosure radius ($\approx 10^{-1600}$) is **theoretical only**: the
+artifact sets `physical_run_executed: false`. No dim-401 spectral claim is
+made anywhere in this repository.
+
+**What is deliberately not claimed.** These artifacts do not establish
+exponential singular-value decay, do not classify $\tau$ as a compact
+operator, and do not compute a full enclosed SVD. They establish enclosed
+trace, enclosed Frobenius energy, enclosed spectral entropy, exact-zero
+imaginary leak, and the circulant negative result. Extending the SVD
+profile to dims 401/501 is a separate, pre-registered campaign.
 
 ---
 
 ## 4. Geometric Langlands Bridge Connection
 
-Synthesis from `reports/GEOMETRIC_LANGLANDS_BRIDGE_2026-10-30.md` (T-2026-0080):
+Synthesis from `reports/GEOMETRIC_LANGLANDS_BRIDGE_2026-10-30.md`
+(T-2026-0080). This section is **interpretive**: it maps two published
+Geometric Langlands results onto the measured structure of $\tau$. It adds
+no numerical claim and is not used as evidence for any theorem.
 
-### 4.1 Kac-Moody Localization at Critical Level
-Per GLC Paper II, localization of $\widehat{\mathfrak{g}}$-modules at $k = -h^\vee$ reduces to geometry of $\text{Bun}_G$. Discrete symmetric boundary conditions on $\tau$ replicate critical-level reduction, eliminating dissipative components and locking spectrum to real axis ($L_{\text{Im}} = 0$).
+### 4.1 Kac-Moody localization at the critical level (GLC Paper II)
 
-### 4.2 Multiplicity One & SVD Rigidity
-Per GLC Paper V (Whittaker sheaves), absolute rigidity of automorphic Hom-spaces prevents free spectral degeneracy. This theoretically dictates the **Strict Geometric Profile** of $\tau$'s singular value decay — energy concentration is structurally enforced, not accidental.
+Localization of $\widehat{\mathfrak{g}}$-modules at the critical level
+$k = -h^{\vee}$ reduces the representation-theoretic problem to coherent
+sheaves on $\mathrm{Bun}_G$. The structural analogue here is the discrete
+symmetric boundary condition imposed on $\tau$: the measured exact-zero
+imaginary leak (Section 3.2) is the operator-level counterpart of removing
+the dissipative component, so the spectrum is confined to the real axis.
+
+### 4.2 Multiplicity one and spectral rigidity (GLC Paper V)
+
+The Multiplicity One theorem for Whittaker sheaves forbids free spectral
+degeneracy. The operator-level analogue is the measured non-circulant
+defect (lower bound $7.157\ldots$) together with the strictly positive
+entropy gap $\Delta S = 0.5614\ldots$: the energy distribution is pinned by
+structure, not free to spread. This is an analogy between two rigidity
+statements, not a derivation of one from the other.
 
 ---
 
