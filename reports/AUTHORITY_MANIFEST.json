@@ -37,11 +37,11 @@
     },
     "current_authority": {
       "path": "CURRENT_AUTHORITY.md",
-      "sha256lf": "879a77e9ebbb3385ed6046f82ea5b8ad9a601e72ce1f651588150f6264d4191b"
+      "sha256lf": "6eaa2313c031371a7c1ad874c75eded588a29c2ab8ca6e5de73eed985a22f3ce"
     },
     "decision_log": {
       "path": "reports/DECISION_LOG.md",
-      "sha256lf": "34e01ff962757e1402616c7b8e28bed13cb28dd12351a31c63e817ae1ef9c03f"
+      "sha256lf": "ea2f9a4ffafcf60cf9ceef1138cdc394ecddbfa7ef889492b97c64ed6880617c"
     },
     "archive_tombstones": {
       "path": "reports/ARCHIVE_TOMBSTONES.md",

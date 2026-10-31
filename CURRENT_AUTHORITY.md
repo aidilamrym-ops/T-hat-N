@@ -3,8 +3,8 @@
 **Status:** otoritatif sampai digantikan versi bertanggal lebih baru.
 **Baseline P2:** `0b0a32c` (commit). Tag `p2-green-0b0a32c` created setelah
 CI run `40261066426` hijau (lean-kernel, coq-kernel, python-tests).
-**Registry r6:** `A-2026-0047` (CERTIFIED, dikonfirmasi pemilik 2026-10-26;
-entri ledger ditambahkan for menutup celah `ad34cbc`).
+**Registry r6:** `A-2026-0044` (Three-Body reduced 8x8 unique global orbit closure, r6 receipt `reports/figure_eight_r6_receipt_2026-10-31.json`, all pass).
+**License:** GNU General Public License v3 (GPLv3).
 **Menggantikan:** `reports/HANDOFF.md` sebagai source tugas aktif; target
 `C/n`; induksi Stage 3; pembacaan placeholder Stage 2/3 sebagai implementasi.
 
