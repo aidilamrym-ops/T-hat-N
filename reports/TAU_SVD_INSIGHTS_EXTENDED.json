@@ -1,0 +1,383 @@
+{
+ "schema": "msaf.tau_svd_extension.v1",
+ "campaign": "TAU-SVD-EXTENSION (PREREG 2026-10-31 + addenda A1-A3)",
+ "generated_utc": "2026-10-31T00:40:01Z",
+ "started_utc": "2026-10-31T00:37:32Z",
+ "repo_head": "13f7b58296ca3984372120d1c7ee978d4343ac4f",
+ "tool": {
+  "path": "msaf/chrono_runtime/svd_extension.py",
+  "sha256lf": "b37eeec3ded8729a2ecbac312507fa29fb90d0660f130b16e19f83e25baaf644"
+ },
+ "authority": {
+  "prereg": {
+   "path": "reports/PREREG_TAU_SVD_EXTENSION_2026-10-31.md",
+   "sha256lf": "2c1fae8c482dcc19c607e84de7782c28bfc286f85a796cfdb17c469fa269b617"
+  },
+  "addendum_A1": {
+   "path": "reports/PREREG_TAU_SVD_EXTENSION_2026-10-31_ADDENDUM_A1.md",
+   "sha256lf": "817009e8aac2647e33035096e4a8e0575d04b6e1be0276342031acf849f5cb7d"
+  },
+  "addendum_A2": {
+   "path": "reports/PREREG_TAU_SVD_EXTENSION_2026-10-31_ADDENDUM_A2.md",
+   "sha256lf": "da4d79bbeca30dbdfdcc893b53ecebb8a0e39ac054e7566815afde0de7adb227"
+  },
+  "addendum_A3": {
+   "path": "reports/PREREG_TAU_SVD_EXTENSION_2026-10-31_ADDENDUM_A3.md",
+   "sha256lf": "242d8f46fcda504988a41d0ad8876f6a5ee7b73421d9c52e9fe7211305b0622f"
+  }
+ },
+ "scope": {
+  "rh_claim": false,
+  "zero_location_claim": false,
+  "weil_positivity_claim": false
+ },
+ "environment": {
+  "OPENBLAS_NUM_THREADS": "1",
+  "OMP_NUM_THREADS": "1",
+  "python": "3.14.4",
+  "platform": "Windows-10-10.0.19045-SP0"
+ },
+ "precision": {
+  "enclosure_prec_bits": 256,
+  "reproduction_prec_bits": 53
+ },
+ "parameters": {
+  "conductor": 100,
+  "blocks": {
+   "201": [
+    "gw_matrix_100_100.json",
+    100
+   ],
+   "301": [
+    "gw_matrix_100_150.json",
+    150
+   ],
+   "401": 200,
+   "501": 250
+  },
+  "prec_bits": 256
+ },
+ "gates": {
+  "G-M1_build_finiteness": "per dimension",
+  "G-M2a_53bit_reproduction": {
+   "pass": true,
+   "detail": {
+    "201": {
+     "dimension": 201,
+     "prec_bits": 53,
+     "trace_computed": "[425.1897200764 +/- 1.30e-11]",
+     "trace_committed": "[425.1897200764 +/- 1.30e-11]",
+     "trace_equal": true,
+     "frobenius_computed": "[2060.9091085 +/- 9.85e-9]",
+     "frobenius_committed": "[2060.9091085 +/- 9.85e-9]",
+     "frobenius_equal": true
+    },
+    "301": {
+     "dimension": 301,
+     "prec_bits": 53,
+     "trace_computed": "[758.9564527274 +/- 5.59e-11]",
+     "trace_committed": "[758.9564527274 +/- 5.59e-11]",
+     "trace_equal": true,
+     "frobenius_computed": "[3781.0796611 +/- 2.68e-8]",
+     "frobenius_committed": "[3781.0796611 +/- 2.68e-8]",
+     "frobenius_equal": true
+    }
+   }
+  },
+  "G-M2b_256bit_containment": {
+   "pass": true,
+   "detail": {
+    "201": {
+     "dimension": 201,
+     "prec_bits": 256,
+     "trace": "[425.1897200764097360829892671287975210614621207281345620000000000000000000 +/- 2.02e-71]",
+     "frobenius_sq": "[2060.909108506543244009701800058552457127969898240227258257802454584162849 +/- 7.63e-70]",
+     "trace_contained": true,
+     "frobenius_contained": true
+    },
+    "301": {
+     "dimension": 301,
+     "prec_bits": 256,
+     "trace": "[758.9564527274470009732402406851121221455710111731701420000000000000000000 +/- 4.04e-71]",
+     "frobenius_sq": "[3781.07966111223043606231716763985399642033528408217079597883674273003484 +/- 4.06e-69]",
+     "trace_contained": true,
+     "frobenius_contained": true
+    }
+   }
+  },
+  "G-M2c_prime_roundtrip": {
+   "pass": true,
+   "detail": {
+    "201": {
+     "dimension": 201,
+     "trace_reparsed": "[425.1897200764097360829892671287975210614621207281345620000000000000000000 +/- 2.02e-71]",
+     "trace_equal": true,
+     "frobenius_reparsed": "[2060.909108506543244009701800058552457127969898240227258257802454584162849 +/- 7.63e-70]",
+     "frobenius_equal": true
+    },
+    "301": {
+     "dimension": 301,
+     "trace_reparsed": "[758.9564527274470009732402406851121221455710111731701420000000000000000000 +/- 4.04e-71]",
+     "trace_equal": true,
+     "frobenius_reparsed": "[3781.07966111223043606231716763985399642033528408217079597883674273003484 +/- 4.06e-69]",
+     "frobenius_equal": true
+    }
+   }
+  },
+  "G-M2d_declared_shift": {
+   "201": {
+    "dimension": 201,
+    "max_entrywise_midpoint_shift": "[4.92619747402229269444070341e-50 +/- 2.02e-77]",
+    "note": "the committed file is the canonical serialization of this rebuild; it is narrower than the in-memory ball by this shift, so entrywise containment cannot hold (Addendum A3)"
+   },
+   "301": {
+    "dimension": 301,
+    "max_entrywise_midpoint_shift": "[4.92619747402229269444070341e-50 +/- 2.02e-77]",
+    "note": "the committed file is the canonical serialization of this rebuild; it is narrower than the in-memory ball by this shift, so entrywise containment cannot hold (Addendum A3)"
+   }
+  },
+  "G-M3a_committed_reproduction": {
+   "pass": true,
+   "detail": {
+    "201": {
+     "dimension": 201,
+     "block": 100,
+     "rebuilt_sha256lf": "8d2151e5b85c8279cd8bd9e6e88dc10667a193074043faf42c5782c98a04e344",
+     "committed_sha256lf": "8d2151e5b85c8279cd8bd9e6e88dc10667a193074043faf42c5782c98a04e344",
+     "equal": true
+    },
+    "301": {
+     "dimension": 301,
+     "block": 150,
+     "rebuilt_sha256lf": "513b14ef5c8950457f8407a00031296022535cfba9e8167b6e2b7013a1d5cc83",
+     "committed_sha256lf": "513b14ef5c8950457f8407a00031296022535cfba9e8167b6e2b7013a1d5cc83",
+     "equal": true
+    }
+   }
+  }
+ },
+ "decision_rule": {
+  "FEW-MODES-REFUTED": "k90 >= 10",
+  "UNDECIDED": "k90 < 10",
+  "note": "per-dimension only; no trend statement across dimensions, and no compactness or decay conclusion"
+ },
+ "dimensions": {
+  "201": {
+   "dimension": 201,
+   "block": 100,
+   "conductor": 100,
+   "prec_bits": 256,
+   "matrix_source": "committed gw_matrix_100_100.json",
+   "M1_trace": "[425.1897200764097360829892671287975210614621207281345620000000000000000000 +/- 2.02e-71]",
+   "M2_frobenius_sq": "[2060.909108506543244009701800058552457127969898240227258257802454584162849 +/- 7.63e-70]",
+   "M2_square_sum": "[2060.909108506543244009701800058552457127969898240227258257802454584162849 +/- 7.63e-70]",
+   "M2_square_and_abs_square_identical": true,
+   "gates": {
+    "G-M1_build_finiteness": {
+     "pass": true,
+     "entries_checked": 40401
+    },
+    "G-M2c_prime_roundtrip": {
+     "dimension": 201,
+     "trace_reparsed": "[425.1897200764097360829892671287975210614621207281345620000000000000000000 +/- 2.02e-71]",
+     "trace_equal": true,
+     "frobenius_reparsed": "[2060.909108506543244009701800058552457127969898240227258257802454584162849 +/- 7.63e-70]",
+     "frobenius_equal": true
+    },
+    "G-M2d_declared_shift": {
+     "dimension": 201,
+     "max_entrywise_midpoint_shift": "[4.92619747402229269444070341e-50 +/- 2.02e-77]",
+     "note": "the committed file is the canonical serialization of this rebuild; it is narrower than the in-memory ball by this shift, so entrywise containment cannot hold (Addendum A3)"
+    }
+   },
+   "timing_s": {
+    "metrics": 0.446
+   },
+   "M3_column_norm_max_L_col": "[6.108024913620195433895444112617927265803062465914777836162563303539732644 +/- 5.01e-73]",
+   "M4_gershgorin": {
+    "lambda_max_G": "[116.3837422544494878296474547451162474134323538807431964424975220511518529 +/- 7.72e-71]",
+    "lambda_min_G_looseness_only": "[-68.2346573983955863030848199542386982280806627169469991829000646822642220 +/- 7.75e-71]"
+   },
+   "M5_bracket": {
+    "L": "[6.108024913620195433895444112617927265803062465914777836162563303539732644 +/- 5.01e-73]",
+    "U": "[10.78812969214077847839927674486172796486566724503316097209206057129923431 +/- 3.17e-72]",
+    "L_lower_endpoint": "[6.108024913620195433895444112617927265803062465914777836162563303539732643500 +/- 8.11e-77]",
+    "U_upper_endpoint": "[10.78812969214077847839927674486172796486566724503316097209206057129923431041 +/- 4.67e-75]",
+    "nrm_1": "[16.19045712299754775811908911529279699341288663579889110000000000000000000 +/- 1.13e-72]",
+    "nrm_inf": "[16.19045712299754775811908911529279699341288663579889110000000000000000000 +/- 1.13e-72]"
+   },
+   "M6_concentration": {
+    "rho_lo": "[0.01810267526666450543770348786790439401414365919236271900788274315151413709080 +/- 1.45e-78]",
+    "rho_hi": "[0.05647204031175738650492839512451939322870314568480688395180664221399381677942 +/- 4.04e-78]",
+    "k90": 16,
+    "k90_threshold": 10,
+    "verdict": "FEW-MODES-REFUTED"
+   },
+   "G-M3c_serialization_slack": "[4.92619747402229269444070341e-50 +/- 2.02e-77]",
+   "serialization_sha256lf": "8d2151e5b85c8279cd8bd9e6e88dc10667a193074043faf42c5782c98a04e344"
+  },
+  "301": {
+   "dimension": 301,
+   "block": 150,
+   "conductor": 100,
+   "prec_bits": 256,
+   "matrix_source": "committed gw_matrix_100_150.json",
+   "M1_trace": "[758.9564527274470009732402406851121221455710111731701420000000000000000000 +/- 4.04e-71]",
+   "M2_frobenius_sq": "[3781.07966111223043606231716763985399642033528408217079597883674273003484 +/- 4.06e-69]",
+   "M2_square_sum": "[3781.07966111223043606231716763985399642033528408217079597883674273003484 +/- 4.06e-69]",
+   "M2_square_and_abs_square_identical": true,
+   "gates": {
+    "G-M1_build_finiteness": {
+     "pass": true,
+     "entries_checked": 90601
+    },
+    "G-M2c_prime_roundtrip": {
+     "dimension": 301,
+     "trace_reparsed": "[758.9564527274470009732402406851121221455710111731701420000000000000000000 +/- 4.04e-71]",
+     "trace_equal": true,
+     "frobenius_reparsed": "[3781.07966111223043606231716763985399642033528408217079597883674273003484 +/- 4.06e-69]",
+     "frobenius_equal": true
+    },
+    "G-M2d_declared_shift": {
+     "dimension": 301,
+     "max_entrywise_midpoint_shift": "[4.92619747402229269444070341e-50 +/- 2.02e-77]",
+     "note": "the committed file is the canonical serialization of this rebuild; it is narrower than the in-memory ball by this shift, so entrywise containment cannot hold (Addendum A3)"
+    }
+   },
+   "timing_s": {
+    "metrics": 1.053
+   },
+   "M3_column_norm_max_L_col": "[7.121377513090751655512966521185948830339493104089360049114054723755279482 +/- 7.45e-73]",
+   "M4_gershgorin": {
+    "lambda_max_G": "[137.0130951281933845578887616519860520057937622253029812240022103119374790 +/- 9.06e-71]",
+    "lambda_min_G_looseness_only": "[-77.8208375121360909207465700360285067539812641260322295719263489151033142 +/- 9.26e-71]"
+   },
+   "M5_bracket": {
+    "L": "[7.121377513090751655512966521185948830339493104089360049114054723755279482 +/- 7.45e-73]",
+    "U": "[11.70525929350535081763239083691028518184753001823125032522033827108977780 +/- 4.94e-72]",
+    "L_lower_endpoint": "[7.121377513090751655512966521185948830339493104089360049114054723755279481255 +/- 2.16e-76]",
+    "U_upper_endpoint": "[11.70525929350535081763239083691028518184753001823125032522033827108977780102 +/- 4.74e-75]",
+    "nrm_1": "[17.62362115424668590596401929549619254919409902645526480000000000000000000 +/- 2.56e-72]",
+    "nrm_inf": "[17.62362115424668590596401929549619254919409902645526480000000000000000000 +/- 2.56e-72]"
+   },
+   "M6_concentration": {
+    "rho_lo": "[0.01341257583264901213417366955267018588918761813232294814771861929878307839718 +/- 2.38e-78]",
+    "rho_hi": "[0.03623650052585510609862278110404508299531636241295536779153458313590730161280 +/- 4.72e-78]",
+    "k90": 25,
+    "k90_threshold": 10,
+    "verdict": "FEW-MODES-REFUTED"
+   },
+   "G-M3c_serialization_slack": "[4.92619747402229269444070341e-50 +/- 2.02e-77]",
+   "serialization_sha256lf": "513b14ef5c8950457f8407a00031296022535cfba9e8167b6e2b7013a1d5cc83"
+  },
+  "401": {
+   "dimension": 401,
+   "block": 200,
+   "conductor": 100,
+   "prec_bits": 256,
+   "matrix_source": "in-memory build_arb_tau",
+   "M1_trace": "[1120.537548344285022594986881734201116824534942678192875445779934059021923 +/- 2.28e-70]",
+   "M2_frobenius_sq": "[5683.3185519743289513076375901605986837658627004126384686073547200720689 +/- 4.00e-68]",
+   "M2_square_sum": "[5683.3185519743289513076375901605986837658627004126384686073547200720689 +/- 4.00e-68]",
+   "M2_square_and_abs_square_identical": true,
+   "gates": {
+    "G-M1_build_finiteness": {
+     "pass": true,
+     "entries_checked": 160801
+    },
+    "G-M3b_rebuild_determinism": {
+     "sha256lf_build_1": "97e9402a99ef30eb83471714b9070ec260f90219b534aa12a488f6de60de3361",
+     "sha256lf_build_2": "97e9402a99ef30eb83471714b9070ec260f90219b534aa12a488f6de60de3361",
+     "pass": true
+    }
+   },
+   "timing_s": {
+    "build": 19.371,
+    "serialize": 1.425,
+    "second_build_and_serialize": 21.634,
+    "metrics": 2.868,
+    "slack": 2.315
+   },
+   "M3_column_norm_max_L_col": "[7.751540523250978343200416562477161693244733097551750684309536775792109855 +/- 4.53e-73]",
+   "M4_gershgorin": {
+    "lambda_max_G": "[150.242151831879105170328861226087468555731164794092327440933882029916654 +/- 9.36e-71]",
+    "lambda_min_G_looseness_only": "[-100.821274495694213827459141921197872831277233503141366125464473352866761 +/- 5.16e-70]"
+   },
+   "M5_bracket": {
+    "L": "[7.751540523250978343200416562477161693244733097551750684309536775792109855 +/- 4.53e-73]",
+    "U": "[12.25733053449563728335382119464663497812471696967497952505014181365080945 +/- 8.47e-72]",
+    "L_lower_endpoint": "[7.751540523250978343200416562477161693244733097551750684309536775792109854548 +/- 3.44e-76]",
+    "U_upper_endpoint": "[12.25733053449563728335382119464663497812471696967497952505014181365080944905 +/- 3.81e-75]",
+    "nrm_1": "[19.38669218431048096368704129483094180446583431062259588865273763898200039 +/- 5.59e-72]",
+    "nrm_inf": "[19.38669218431048096368704129483094180446583431062259588865273763898200039 +/- 5.59e-72]"
+   },
+   "M6_concentration": {
+    "rho_lo": "[0.01057241115980180869618247629202039213398360447333656494152352667117326912699 +/- 2.24e-78]",
+    "rho_hi": "[0.02643563799176564891596615589985695383609665627385443569208082687947290774291 +/- 3.63e-78]",
+    "k90": 35,
+    "k90_threshold": 10,
+    "verdict": "FEW-MODES-REFUTED"
+   },
+   "serialization_sha256lf": "97e9402a99ef30eb83471714b9070ec260f90219b534aa12a488f6de60de3361",
+   "G-M3c_serialization_slack": "[4.932553018797187274852978048e-50 +/- 1.16e-78]"
+  },
+  "501": {
+   "dimension": 501,
+   "block": 250,
+   "conductor": 100,
+   "prec_bits": 256,
+   "matrix_source": "in-memory build_arb_tau",
+   "M1_trace": "[1513.432638966884817657001278911811049170415011686537075875761291183784851 +/- 1.61e-70]",
+   "M2_frobenius_sq": "[7840.6418841799073908445994969086076506991459849248919711025684559064011 +/- 4.77e-68]",
+   "M2_square_sum": "[7840.6418841799073908445994969086076506991459849248919711025684559064011 +/- 4.77e-68]",
+   "M2_square_and_abs_square_identical": true,
+   "gates": {
+    "G-M1_build_finiteness": {
+     "pass": true,
+     "entries_checked": 251001
+    },
+    "G-M3b_rebuild_determinism": {
+     "sha256lf_build_1": "041692a1548dad5104b2c95570f97036d67a3806b47bce9933f64553121ac418",
+     "sha256lf_build_2": "041692a1548dad5104b2c95570f97036d67a3806b47bce9933f64553121ac418",
+     "pass": true
+    }
+   },
+   "timing_s": {
+    "build": 30.881,
+    "serialize": 2.242,
+    "second_build_and_serialize": 32.822,
+    "metrics": 3.267,
+    "slack": 3.661
+   },
+   "M3_column_norm_max_L_col": "[7.752094696888635637583319824535533570182055455798365425119197231656657414 +/- 5.04e-73]",
+   "M4_gershgorin": {
+    "lambda_max_G": "[200.142092251842490227796527645700589618655575972632188436916246031492873 +/- 1.75e-70]",
+    "lambda_min_G_looseness_only": "[-125.920549670300251604637907543358809743695389449665405501000624778900093 +/- 3.82e-70]"
+   },
+   "M5_bracket": {
+    "L": "[7.752094696888635637583319824535533570182055455798365425119197231656657414 +/- 5.04e-73]",
+    "U": "[14.14715845149980958633947790591208066194720684082118428718418278153111027 +/- 6.08e-72]",
+    "L_lower_endpoint": "[7.752094696888635637583319824535533570182055455798365425119197231656657413835 +/- 2.68e-76]",
+    "U_upper_endpoint": "[14.14715845149980958633947790591208066194720684082118428718418278153111027608 +/- 3.94e-75]",
+    "nrm_1": "[20.48840208695848870680655490661380497597236548681793869033072022568761294 +/- 7.02e-72]",
+    "nrm_inf": "[20.48840208695848870680655490661380497597236548681793869033072022568761294 +/- 7.02e-72]"
+   },
+   "M6_concentration": {
+    "rho_lo": "[0.007664547504813701410822733937841972497873208292043788979689430914764368951042 +/- 5.46e-79]",
+    "rho_hi": "[0.02552623818410453642369371261062048241368925011864763940065265186677471066916 +/- 3.19e-78]",
+    "k90": 36,
+    "k90_threshold": 10,
+    "verdict": "FEW-MODES-REFUTED"
+   },
+   "serialization_sha256lf": "041692a1548dad5104b2c95570f97036d67a3806b47bce9933f64553121ac418",
+   "G-M3c_serialization_slack": "[4.996617567698159280661230207e-50 +/- 4.09e-78]"
+  }
+ },
+ "total_wall_clock_s": 148.149,
+ "not_claimed": [
+  "no enclosed singular-value spectrum",
+  "no individual singular value",
+  "no compactness or exponential-decay conclusion",
+  "no statement about the Riemann hypothesis, zero locations or Weil positivity"
+ ]
+}

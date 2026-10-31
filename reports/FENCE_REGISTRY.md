@@ -2848,6 +2848,49 @@ sha256LF e6071a1b551a12b0d8edddc1930a4b2b75f686dfb3877802c99346dd5d39bf78 report
 sha256LF bcd955b6a6a7d22fe7fb9f105988a06bf7a10a891a2577618a39ce0c02df0f86 ledger/chrono_execution_ledger.jsonl
 ```
 
+### T-2026-0081 - Pra-Pendaftaran Perluasan SVD: Bracket Tertutup pada dim 401/501
+
+- **Jenis:** T
+- **Pernyataan:** Dokumen pra-registrasi membekukan definisi M1-M6, gerbang G-M1/G-M2/G-M3 beserta amandemen A1-A3, protokol `c=100`, `N in {200,250}`, `prec_bits=256`, dan aturan keputusan `k90 >= 10 -> FEW-MODES-REFUTED` sebelum modul implementasi ada. Amandemen A1 mencatat bahwa T-2026-0074 adalah komputasi 53-bit; A2 mencatat serialisasi kanonik bersifat lossy; A3 mengganti G-M2c dengan identitas round-trip.
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Implementasi di `msaf/chrono_runtime/svd_extension.py`; laporan di `reports/TAU_SVD_INSIGHTS_EXTENDED.json`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py -q`
+
+```text
+sha256LF 2c1fae8c482dcc19c607e84de7782c28bfc286f85a796cfdb17c469fa269b617 reports/PREREG_TAU_SVD_EXTENSION_2026-10-31.md
+sha256LF 817009e8aac2647e33035096e4a8e0575d04b6e1be0276342031acf849f5cb7d reports/PREREG_TAU_SVD_EXTENSION_2026-10-31_ADDENDUM_A1.md
+sha256LF da4d79bbeca30dbdfdcc893b53ecebb8a0e39ac054e7566815afde0de7adb227 reports/PREREG_TAU_SVD_EXTENSION_2026-10-31_ADDENDUM_A2.md
+sha256LF 242d8f46fcda504988a41d0ad8876f6a5ee7b73421d9c52e9fe7211305b0622f reports/PREREG_TAU_SVD_EXTENSION_2026-10-31_ADDENDUM_A3.md
+```
+
+### T-2026-0082 - Bracket Nilai Singular Tertutup pada dim 201/301/401/501
+
+- **Jenis:** T
+- **Pernyataan:** Laporan kampanye: bracket `L <= sigma_max <= U` dan batas bawah `k90` pada empat dimensi, dengan `k90 = 16, 25, 35, 36` dan vonis `FEW-MODES-REFUTED` di keempatnya. Tidak ada nilai singular tunggal, spektrum SVD tertutup, klaim tren, klaim kekompakan, atau klaim RH.
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Modul `msaf/chrono_runtime/svd_extension.py`; README bagian 3.4.
+- **Perintah verifikasi:** `python -m msaf.chrono_runtime.svd_extension --out reports/TAU_SVD_INSIGHTS_EXTENDED.json`
+
+```text
+sha256LF bb71b2fe3d7901ec4dd3932966c62f9fdc12c3b82687e5f47ce04b748d199a82 reports/TAU_SVD_INSIGHTS_EXTENDED.json
+sha256LF b37eeec3ded8729a2ecbac312507fa29fb90d0660f130b16e19f83e25baaf644 msaf/chrono_runtime/svd_extension.py
+```
+
+### A-2026-0059 - Audit Eksekusi Perluasan SVD
+
+- **Jenis:** A
+- **Pernyataan:** Verifikasi eksekusi: G-M1 (finiteness semua entri), G-M2a (reproduksi 53-bit karakter-per-karakter T-2026-0074), G-M2b (kontainmen 256-bit), G-M2c' (round-trip rebuild), G-M2d (shift entri 4.93e-50), G-M3a (sha256lf komit `8d2151e5...` dan `513b14ef...` direproduksi), G-M3b (determinisme rebuild `97e9402a...` dan `041692a1...`) semuanya PASS; total 148.1 s pada HEAD `13f7b58`.
+- **Status:** CERTIFIED
+- **Domino:** Chrono Geometric Runtime
+- **Relasi:** Laporan `reports/TAU_SVD_INSIGHTS_EXTENDED.json` (header memuat HEAD eksekusi, sha256lf alat, parameter, dan stempel UTC).
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py -q`
+
+```text
+sha256LF bb71b2fe3d7901ec4dd3932966c62f9fdc12c3b82687e5f47ce04b748d199a82 reports/TAU_SVD_INSIGHTS_EXTENDED.json
+```
+
 
 
 

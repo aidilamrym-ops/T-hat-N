@@ -70,7 +70,7 @@ enclosure width.
 Every entry below is an interval enclosure recomputed from the committed
 artefacts; none of them is a floating-point estimate.
 
-### 3.1 Trace and Frobenius energy (`reports/TAU_SVD_INSIGHTS.json`, T-2026-0074)
+### 3.1 Trace and Frobenius energy (`reports/TAU_SVD_INSIGHTS.json`, T-2026-0074, 53 bits)
 
 The trace and the squared Frobenius norm are accumulated element-wise in
 `arb` ball arithmetic, so each reported interval contains the exact value
@@ -85,6 +85,22 @@ $$
 | :--- | :--- | :--- |
 | 201 | $[425.1897200764 \pm 1.30\times10^{-11}]$ | $[2060.9091085 \pm 9.85\times10^{-9}]$ |
 | 301 | $[758.9564527274 \pm 5.59\times10^{-11}]$ | $[3781.0796611 \pm 2.68\times10^{-8}]$ |
+
+These are **53-bit** enclosures: the tool `msaf/chrono_runtime/svd_analysis.py`
+never raises the working precision, so the radii are roughly sixty decimal
+digits wider than the stored 256-bit matrices require (finding recorded in
+Addendum A1 of the SVD-extension pre-registration). Recomputing the same
+matrices at 256 bits gives, at dim 201,
+
+$$
+\operatorname{tr}\tau = [425.189720076409736082989267128797521061462120728134562 \pm 2.02\times10^{-71}],
+\qquad
+\|\tau\|_F^2 = [2060.909108506543244009701800058552457127969898240227258 \pm 7.63\times10^{-70}],
+$$
+
+and both 256-bit intervals are contained in the 53-bit ones. The 53-bit
+figures above are therefore correct, merely loose; every statement that uses
+them is unaffected by the width.
 
 ### 3.2 Spectrum containment (`reports/CHRONO_RIEMANN_INSIGHTS.json`)
 
@@ -126,8 +142,77 @@ made anywhere in this repository.
 exponential singular-value decay, do not classify $\tau$ as a compact
 operator, and do not compute a full enclosed SVD. They establish enclosed
 trace, enclosed Frobenius energy, enclosed spectral entropy, exact-zero
-imaginary leak, and the circulant negative result. Extending the SVD
-profile to dims 401/501 is a separate, pre-registered campaign.
+imaginary leak, and the circulant negative result. Section 3.4 extends the
+energy profile to dims 401/501, but it too computes no singular value.
+
+### 3.4 A rigorous bracket on $\sigma_{\max}$ at dims 201, 301, 401, 501
+
+The pre-registered extension (`reports/PREREG_TAU_SVD_EXTENSION_2026-10-31.md`
+and Addenda A1–A3; T-2026-0081) asks a falsifiable question about spectral
+concentration without computing a single singular value. Write
+$n = 2N+1$, let $\sigma_1 \ge \dots \ge \sigma_n$ be the singular values of
+$\tau$ and $F = \lVert\tau\rVert_F^2 = \sum_i \sigma_i^2$. Two bounds are
+available from matrix-vector reasoning alone:
+
+$$
+\sigma_{\max} \;\ge\; \max_j \lVert \tau e_j \rVert_2
+\;=\; \max_j \Bigl( \textstyle\sum_i \lvert \tau_{ij}\rvert^2 \Bigr)^{1/2}
+\quad\text{and}\quad
+\sigma_{\max} \;\ge\; \sqrt{F/n},
+$$
+
+because $F \le n\,\sigma_{\max}^2$, while from above
+
+$$
+\sigma_{\max}^2 = \lambda_{\max}(\tau\tau^{\top})
+\;\le\; \max_i \bigl( G_{ii} + \textstyle\sum_{j \ne i} \lvert G_{ij}\rvert \bigr),
+\qquad
+G = \tfrac{1}{2}\bigl(\tau\tau^{\top} + (\tau\tau^{\top})^{\top}\bigr),
+$$
+
+by Gershgorin's theorem applied to the symmetrised Gram matrix, and
+$\sigma_{\max}^2 \le \lVert\tau\rVert_1 \lVert\tau\rVert_\infty$ by the Schur
+test. Taking $L$ as the largest lower bound and $U$ as the smallest upper
+bound yields a certified bracket $L \le \sigma_{\max} \le U$. If $k$ singular
+values carry 90% of the energy, then
+$0.9\,F \le k\,\sigma_{\max}^2 \le k\,U^2$, so
+
+$$
+k \;\ge\; \frac{0.9\,F}{U^2}
+\qquad\Longrightarrow\qquad
+k_{90} \;=\; \left\lceil \frac{0.9\,F}{U^2} \right\rceil
+$$
+
+is a rigorous lower bound on the number of modes needed. The decision rule
+was frozen before execution: $k_{90} \ge 10$ refutes the "handful of modes"
+statement (S), otherwise the bracket is too wide and the dimension is
+`UNDECIDED`.
+
+| Dimension | $L$ | $U$ | $U^2/F$ | $k_{90}$ | Verdict |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 201 | $6.108024913620\ldots$ | $10.788129692140\ldots$ | $[0.056472040311757 \pm 4.04\times10^{-78}]$ | 16 | `FEW-MODES-REFUTED` |
+| 301 | $7.121377513090\ldots$ | $11.705259293505\ldots$ | $[0.036236500525855 \pm 4.72\times10^{-78}]$ | 25 | `FEW-MODES-REFUTED` |
+| 401 | $7.751540523250\ldots$ | $12.257330534495\ldots$ | $[0.026435637991765 \pm 3.63\times10^{-78}]$ | 35 | `FEW-MODES-REFUTED` |
+| 501 | $7.752094696888\ldots$ | $14.147158451499\ldots$ | $[0.025526238184104 \pm 3.19\times10^{-78}]$ | 36 | `FEW-MODES-REFUTED` |
+
+At every measured dimension the bracket alone forces $k_{90} \ge 10$: no set
+of fewer than $k_{90}$ singular values can hold 90% of $\lVert\tau\rVert_F^2$,
+whatever the individual singular values are. The verdict is a property of
+the enclosure, not of a heuristic fit, and it is reported per dimension — the
+campaign makes no trend statement across the four points and draws no
+conclusion about compactness or decay.
+
+Two neighbouring results are *not* used here. The dim-401 spectrum of
+2026-10-16 was produced by a different chain (decimal serialization at
+prec 2048, no `build_arb_tau`) and is not a committed matrix; the dim-501
+Route-S ladder of 2026-10-17 stopped at `UNDETERMINED at pivot 446` at 6000
+bits, which is a positivity certificate and irrelevant to a campaign that
+needs none. The report `reports/TAU_SVD_INSIGHTS_EXTENDED.json` (T-2026-0082)
+carries the gates, the timings, and the `sha256lf` fingerprints of the
+uncommitted dim-401/501 serializations, so the two new rows can be rebuilt
+and re-hashed by a third party in about two minutes
+(`python -m msaf.chrono_runtime.svd_extension`).
+
 
 ---
 
