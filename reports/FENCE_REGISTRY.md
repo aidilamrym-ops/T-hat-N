@@ -2363,7 +2363,7 @@ sha256LF ee679910feb10b18f07c88d699b73271f50d2170d25e257a17b6d904913b41dd msaf/t
 sha256LF 2149a89242c3fc010a84d5796c6b4412746a07e6f8c6f8a3ccb917104941f71d lean/Stage_2_Tail_Bound.lean
 sha256LF 551e7e31f73de57ef2c8ee0c9c84fbd7da93295fbde8e6946b5f42db5916155f lean/Stage_3_Eigenvalue_Locking.lean
 sha256LF 5786929a607aa73bc2395481af8f3cb848fff79d3bfff82536b5be88b69a7d61 reports/RH_SCAFFOLD_NOTES/Stage_4_Containment_Proof.lean
-sha256LF 152abf4a1e106e6579a7bf2a3aa8a15e4495a83394ef9cdb3755b050cbec8bad lean/lakefile.toml
+sha256LF a8d0c67101a6415bcb2cd96d167e87c440c78346d2cf860cbce69c406a83d3cb lean/lakefile.toml
 sha256LF bd0cc31c822cc9ec2a9de9d978056f90d14f5069f49359590d4c2d8e3716036d reports/GW_TAIL_CONSTANTS_2026-10-26.md
 sha256LF e92e05ef8d37b10bb3e39c65e7537e23c8e3a426da548028a0a560126b60b696 reports/lambda_min_eig_ladder_dim321.json
 sha256LF 84152da16f02125e85563184053ba958786efed65de68a0d48bfc5f741fdfc84 reports/lambda_min_eig_ladder_big.json
@@ -2424,7 +2424,7 @@ sha256LF c1637305e5703c6d5a8bd363fc50e55da0113a70883f43018758ef0684dd5486 report
 sha256LF e5ffa181fa69f2709c9cfdff3482b8f89b8431dd8b69901b90021a5bfaf25551 msaf/entry_error_envelope.py
 sha256LF 65f9ac60282baada3437c4f594bba36d5e4c4b4b134179fb597191c9498a844f reports/entry_error_envelope_c13_n160.json
 sha256LF 27e292f7f9c5d035a5451008564c410db33372a9a08257d914ac72888e42d68a lean/Stage_5_EntryError_Perturbation.lean
-sha256LF 152abf4a1e106e6579a7bf2a3aa8a15e4495a83394ef9cdb3755b050cbec8bad lean/lakefile.toml
+sha256LF a8d0c67101a6415bcb2cd96d167e87c440c78346d2cf860cbce69c406a83d3cb lean/lakefile.toml
 sha256LF 7bf13dfa9132d9bfb83d2b14020882b5c087d954a540e72c6b63a27835c6f4bc msaf/tests/test_entry_error_envelope.py
 sha256LF fb5f1008a60983beae526bbe68cc9bfbd56c1724db419ee0d14298fa17df9c2b reports/ENTRY_ERROR_ENVELOPE_2026-10-26.md
 sha256LF 2149a89242c3fc010a84d5796c6b4412746a07e6f8c6f8a3ccb917104941f71d lean/Stage_2_Tail_Bound.lean
@@ -2480,7 +2480,7 @@ sha256LF 12e6960a12e312ee8ff1453eab334a562bc4bf2b7ec4dc24a4ca287af8197ebe report
 sha256LF 3ae4b61f8e0a188de8cda5f35dc743f0889878034b219f59d4ab9f7ae3060dbc msaf/analytic_tail_bound.py
 sha256LF 1e581f8bdccc4abb2e39af48e54758c60840f4e3deea6ce3b103a7903320e95a reports/analytic_tail_bound_c13.json
 sha256LF 552f9296b20da6681a6c77a592aab5032c28ff692b901c231aacedc196d0d0db lean/Stage_6_Analytic_Tail.lean
-sha256LF 152abf4a1e106e6579a7bf2a3aa8a15e4495a83394ef9cdb3755b050cbec8bad lean/lakefile.toml
+sha256LF a8d0c67101a6415bcb2cd96d167e87c440c78346d2cf860cbce69c406a83d3cb lean/lakefile.toml
 sha256LF 79a504f7e6fb5b6b5073b1684766e5360dd649a6fdb8655222f9c8b767764086 msaf/tests/test_analytic_tail_bound.py
 sha256LF d0e73398cc03576bd25e95e6ea8297b6271c46d5c4d31ee366865bbbbae395ec reports/ANALYTIC_TAIL_BOUND_2026-10-26.md
 sha256LF f2374b7d32c8f79fd3ca75d0ac2abfa46440228f201e3ee223bd51b90cd3e026 reports/TARGET_STATUS_2026-10-25.md
@@ -2522,6 +2522,8 @@ sha256LF c710e84898fd6ae19c2db4548d401b75df9d025e487767a695f11f78631ef97d lean/R
 ```
 
 
+### T-2026-0060 — MSAF Stage 7 off-diagonal tail extension: harmonik-kuadratik
+
 - **Jenis:** T
 - **Pernyataan:** `lean/Stage_7_Tail_Extension.lean` memformalkan batas off-diagonal `sum_Ico_offdiag_le` untuk ekor harmonik-kuadratik, menggunakan `sum_Ico_one_div_sq_le` dari `Stage_6_Analytic_Tail.lean` sebagai dasar, dengan stub lemmas untuk menjaga `lake build` tanpa `sorry`/`admit`.
 - **Batas:** `Stage 7` hanya diagonal `XC`; `S(n)`, `Wp`, `W02`, entri off-diagonal, positivity matriks, spektrum zeta, Weil positivity, dan RH no tercakup; bukti menggunakan tail limit mayoran finit (bukan limit kuadratik seluruh matriks).
@@ -2536,6 +2538,18 @@ sha256LF c08e9b3d1841f29830979677e3a2245c64b6a65ce87262eb470d60ebffbb1d86 lean/S
 sha256LF 04c9b9c83a211a86bfe62a93b59d5ea1b94d3b8a4fc403c01046818f6b9769d3 reports/PREREG_TAIL_EXTENSION_2026-10-30.md
 sha256LF cca8436aa8b745063434b498614fe70f46c342bfbdf7c952e8136d7d74c41962 msaf/tests/test_stage7_tail_extension.lean
 ```
+
+**Catatan audit 2026-10-31 (struktur, bukan klaim):** heading entri ini
+hilang karena commit `34ad37a` mengganti baris
+`### T-2026-0060 — MSAF Stage 7 off-diagonal tail extension: harmonik-kuadratik`
+dengan heading `### T-2026-0064 — Russell paradox formalisation`, sehingga blok
+sertifikat Stage 7 menempel tanpa judul di bawah entri Russell. Heading
+dipulihkan apa adanya; tidak satu pun field, status, atau baris `sha256LF`
+diubah. `Perintah verifikasi` tetap seperti tercatat dan **tidak** ditulis
+ulang, meski `msaf/tests/test_stage7_tail_extension.py` tidak ada di tree
+(artefak yang dipin adalah `msaf/tests/test_stage7_tail_extension.lean` dan
+`lean/Stage_7_Tail_Extension.lean`); perbedaan ini dicatat, bukan diperbaiki
+diam-diam.
 
 
 ### T-2026-0065 — Chrono Geometric Enclosure Data Import
@@ -2552,7 +2566,6 @@ sha256LF cca8436aa8b745063434b498614fe70f46c342bfbdf7c952e8136d7d74c41962 msaf/t
 ```text
 sha256LF 54c57e4a06e672351caab1e6e4c6e8e3f16465c099b30e1ac35fc23fe8701bac lean/EnclosureData.lean
 sha256LF 5d43b4a94f34aa81fd038ccd6f4c4b90ce586689f5d128c2b87444abef8cb2f2 reports/PREREG_CHRONO_ENCODING_2026-10-30.md
-```
 ```
 
 ### T-2026-0066 — GW bounds record: satu gate derivatif terverifikasi, dua gate UNAVAILABLE
@@ -2890,6 +2903,45 @@ sha256LF b37eeec3ded8729a2ecbac312507fa29fb90d0660f130b16e19f83e25baaf644 msaf/c
 ```text
 sha256LF bb71b2fe3d7901ec4dd3932966c62f9fdc12c3b82687e5f47ce04b748d199a82 reports/TAU_SVD_INSIGHTS_EXTENDED.json
 ```
+
+### T-2026-0083 — Perbaikan target build yang hilang di `lean/lakefile.toml`
+
+- **Jenis:** T
+- **Pernyataan:** `lean/lakefile.toml` mencantumkan dua nama di `defaultTargets`
+  tanpa blok `[[lean_lib]]`, sehingga `lake build` berhenti dengan
+  `package 'that_n_lean' has no target ...`. Keduanya dipulihkan:
+  `Stage_7_Tail_Extension` (hilang di `34ad37a`, yang **mengganti** baris
+  `[[lean_lib]] name = "Stage_7_Tail_Extension"` menjadi `name = "Russell"`)
+  dan `Theory137` (hilang di `cff0559`/`f597930`, yang mengganti baris
+  `name = "Theory137"` menjadi `name = "EnclosureData"`). Sekarang 12
+  `defaultTargets` cocok dengan 12 `[[lean_lib]]`.
+- **Batas:** Perbaikan infrastruktur build. Tidak ada teorema, pernyataan,
+  status, verdict, receipt, atau sertifikat entri lain yang diubah; tidak ada
+  klaim matematika baru dan tidak ada klaim RH.
+- **Status:** CERTIFIED
+- **Domino:** `lake build` seluruh target proyek (dipakai `ci.yml` baris 38).
+- **Relasi:** memperbaiki regresi dari `34ad37a` (`T-2026-0064`) dan
+  `f597930`/`cff0559` (`T-2026-0065`); memulihkan efek `T-2026-0060`,
+  `T-2026-0051`, dan `T-2026-0052` yang mem-pin `lean/lakefile.toml`.
+- **Perintah verifikasi:** `cd lean && lake build`;
+  `python -m pytest msaf/tests/test_lean_axiom_audit.py -q`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **Sertifikat:**
+
+```text
+sha256LF a8d0c67101a6415bcb2cd96d167e87c440c78346d2cf860cbce69c406a83d3cb lean/lakefile.toml
+```
+
+**Catatan audit 2026-10-31 (pin build, bukan klaim):** baris
+`sha256LF 152abf4a... lean/lakefile.toml` di `T-2026-0050`, `T-2026-0051`, dan
+`T-2026-0052` diperbarui ke digest di atas karena artefak yang sama berubah
+isi; teks, batas, dan status ketiga entri tidak disentuh. Bukti lokal:
+`lake build` selesai dengan `Build completed successfully (8729 jobs)`,
+`msaf/tests/test_lean_axiom_audit.py` lulus 2/2 (4m12s), dan gate
+anti-circularity `lean` memberi `PASS` (`FAIL=0 NOT_RUN=0 SKIP=0`) atas seluruh
+`lean/*.lean`. Ini **bukan** klaim CI hijau: status CI untuk commit sebelum
+perbaikan ini merah, dan commit perbaikan hanya boleh disebut hijau setelah job
+`python-tests` selesai sukses pada commit tersebut.
 
 
 

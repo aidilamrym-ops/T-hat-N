@@ -601,6 +601,40 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   matematika which diubah; commit ini custody and housekeeping. Tidak ada
   artefak ber-`sha256LF` which dihapus.
 
+## 2026-10-31 - Perbaikan target build hilang and pemulihan cache Mathlib
+
+- **Regresi which ditemukan:** `lean/lakefile.toml` menyebut `Stage_7_Tail_Extension`
+  and `Theory137` di `defaultTargets` tetapi blok `[[lean_lib]]` keduanya
+  tidak ada. `34ad37a` mengganti baris lib Stage 7 menjadi `Russell`;
+  `f597930`/`cff0559` mengganti baris lib `Theory137` menjadi `EnclosureData`.
+  Akibatnya `lake build` gagal with `package 'that_n_lean' has no target ...`
+  sejak `34ad37a`, termasuk on CI (`ci.yml` baris 38).
+- **Perbaikan:** kedua blok `[[lean_lib]]` ditambahkan kembali (tanpa menghapus
+  `Russell`/`EnclosureData`), sehingga 12 `defaultTargets` = 12 `lean_lib`.
+  Entri registry baru `T-2026-0083` mencatat perbaikan ini and mem-pin digest
+  `lean/lakefile.toml` yang baru; tiga baris pin lama (`T-2026-0050`,
+  `T-2026-0051`, `T-2026-0052`) diperbarui ke digest yang sama karena
+  artefaknya identik, tanpa mengubah teks/status ketiga entri.
+- **Insiden lingkungan (bukan cacat repo):** dependency in
+  `lean/.lake/packages` pernah terkontaminasi header GPL buatan skrip
+  (8.913 file Mathlib + 8 paket lain). Seluruh paket dikembalikan ke upstream
+  pinned with `git checkout -- .` (semua 0 file termodifikasi), lalu
+  `lake exe cache get` dipakai sesuai `ci.yml`. Sembilan file `.ltar`
+  (`1c64f02d..`, `431460a3..`, `6a3d2948444..`, `9c6cce38..`, `9eb9a041..`,
+  `a56773d9..`, `add3c785..`, `f8aaf26a..`, `faee151c..`) tetap gagal
+  didekompresi bahkan setelah diunduh ulang; modulnya dibangun lokal.
+  Catatan: ini insiden lokal, bukan alasan untuk melemahkan sensor
+  `sorry`/`admit`/`unsafe`/`axiom`.
+- **Bukti lokal:** `cd lean && lake build` -> `Build completed successfully
+  (8729 jobs)`; `msaf/tests/test_lean_axiom_audit.py` 2 passed (4m12s);
+  `test_fence_registry` + `test_authority_manifest` 7 passed; gate
+  anti-circularity `lean` PASS atas seluruh `lean/*.lean`.
+- **Batas klaim:** tidak ada theorem, status, verdict, receipt, or klaim
+  matematika which berubah. `lake build` lokal **bukan** bukti CI hijau:
+  commit perbaikan baru boleh disebut hijau setelah job `python-tests`
+  selesai sukses on commit itu. Khusus `34ad37a`..`4a39bf6`, status CI adalah
+  merah because target build hilang.
+
 ## Keputusan which masih menunggu pemilik
 
 Tiga question delegasi 2026-10-27 already diputuskan in atas (D1â€“D3). Tidak

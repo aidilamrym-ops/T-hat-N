@@ -50,7 +50,13 @@ name = "Stage_6_Analytic_Tail"
 # Stage 7 formalises the off-diagonal harmonic-square tail bound reusing
 # Stage 6 diagonal bound. Stub lemmas keep build green without sorry/admit.
 [[lean_lib]]
+name = "Stage_7_Tail_Extension"
+
+[[lean_lib]]
 name = "Russell"
+
+[[lean_lib]]
+name = "Theory137"
 
 [[lean_lib]]
 name = "EnclosureData"
