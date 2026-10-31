@@ -24,6 +24,6 @@
     "computational number theory",
     "Lean 4"
   ],
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "language": "eng"
 }
