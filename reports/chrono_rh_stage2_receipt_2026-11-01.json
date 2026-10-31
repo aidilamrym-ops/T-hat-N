@@ -1,0 +1,40 @@
+{
+  "schema": "msaf.stage2_tail_bound.v1",
+  "date": "2026-11-01",
+  "engine": "Stage2TailBoundEngine",
+  "laurent_bridge": "LaurentLogicBridgeEngine",
+  "truncation_N": 100,
+  "tail_bound_certificate": {
+    "N": 100,
+    "tail_bound": "[0.0519237751763962 +/- 5.53e-17]",
+    "radius": 4.2933293369104515e-17,
+    "threshold": 1e-12,
+    "threshold_exceeded": false,
+    "status": "CERTIFIED",
+    "pole_isolation": {
+      "digamma_poles": [
+        {
+          "pole": 0,
+          "residue": "1/2"
+        },
+        {
+          "pole": -1,
+          "residue": "1/2"
+        },
+        {
+          "pole": -2,
+          "residue": "1/2"
+        },
+        {
+          "pole": -3,
+          "residue": "1/2"
+        },
+        {
+          "pole": -4,
+          "residue": "1/2"
+        }
+      ]
+    }
+  },
+  "status": "CERTIFIED"
+}
