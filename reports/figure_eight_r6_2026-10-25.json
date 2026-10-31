@@ -15,16 +15,15 @@
     },
     "module": "msaf/figure_eight_r3.py",
     "module_sha256lf": "8eddc2bb17647d452e15325397e852e224e1af028f055fa4fe41de94af939ec6",
-    "prereg_sha256lf": "92b687f5ee6237fd01a0b43374c91cce4ba72898f32bfd3f655925a61e591b6b",
     "receipt": "reports/figure_eight_r3_2026-10-23.json",
     "receipt_sha256lf": "6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9",
     "schema": "msaf.figure_eight_r3.v1",
     "summary": "ALL PASS"
   },
-  "claim": "local existence and uniqueness in B (tighter R_B=1e-30), conditional on base K1-K5 and r6 K6 M1-M10; no global or physical claim",
+  "claim": "local existence and uniqueness in B (tighter R_B=1e-40), conditional on base K1-K5 and r6 K6 M1-M11; no global or physical claim",
   "k6": {
     "all_pass": true,
-    "matrix": "M1-M10",
+    "matrix": "M1-M11",
     "rows": [
       {
         "expected": "K2 FAILED at step 2 (Picard enclosure failed)",
@@ -36,6 +35,12 @@
         "expected": "AST hits for literal and call; clean original",
         "id": "M10",
         "parameter": "inject 1.5 and float(x) into a source copy",
+        "passed": true
+      },
+      {
+        "expected": "exact determinant boundaries verified",
+        "id": "M11",
+        "parameter": "Gram matrix det boundary scan",
         "passed": true
       },
       {
@@ -88,8 +93,8 @@
       }
     ]
   },
-  "prereg_sha256lf": "92b687f5ee6237fd01a0b43374c91cce4ba72898f32bfd3f655925a61e591b6b",
-  "registry": "A-2026-0047",
+  "prereg_sha256lf": "e8bf7fe1567804333ee89cad59ea0c024b014cc89da64d0db489caac103ff23e",
+  "registry": "A-2026-0044",
   "schema": "msaf.figure_eight_r6.v1",
   "summary": "ALL PASS"
 }

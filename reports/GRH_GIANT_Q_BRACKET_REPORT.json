@@ -1,0 +1,254 @@
+{
+  "modulus": 1000,
+  "number": 3,
+  "conductor": 1000,
+  "precision_bits": 512,
+  "brackets": [
+    {
+      "t_low": 10.0,
+      "t_high": 10.5,
+      "certified": true
+    },
+    {
+      "t_low": 10.5,
+      "t_high": 11.0,
+      "certified": true
+    },
+    {
+      "t_low": 11.5,
+      "t_high": 12.0,
+      "certified": true
+    },
+    {
+      "t_low": 12.0,
+      "t_high": 12.5,
+      "certified": true
+    },
+    {
+      "t_low": 13.0,
+      "t_high": 13.5,
+      "certified": true
+    },
+    {
+      "t_low": 14.0,
+      "t_high": 14.5,
+      "certified": true
+    },
+    {
+      "t_low": 15.0,
+      "t_high": 15.5,
+      "certified": true
+    },
+    {
+      "t_low": 15.5,
+      "t_high": 16.0,
+      "certified": true
+    },
+    {
+      "t_low": 16.5,
+      "t_high": 17.0,
+      "certified": true
+    },
+    {
+      "t_low": 17.0,
+      "t_high": 17.5,
+      "certified": true
+    },
+    {
+      "t_low": 18.0,
+      "t_high": 18.5,
+      "certified": true
+    },
+    {
+      "t_low": 18.5,
+      "t_high": 19.0,
+      "certified": true
+    },
+    {
+      "t_low": 19.0,
+      "t_high": 19.5,
+      "certified": true
+    },
+    {
+      "t_low": 20.5,
+      "t_high": 21.0,
+      "certified": true
+    },
+    {
+      "t_low": 21.0,
+      "t_high": 21.5,
+      "certified": true
+    },
+    {
+      "t_low": 22.0,
+      "t_high": 22.5,
+      "certified": true
+    },
+    {
+      "t_low": 22.5,
+      "t_high": 23.0,
+      "certified": true
+    },
+    {
+      "t_low": 23.0,
+      "t_high": 23.5,
+      "certified": true
+    },
+    {
+      "t_low": 24.0,
+      "t_high": 24.5,
+      "certified": true
+    },
+    {
+      "t_low": 24.5,
+      "t_high": 25.0,
+      "certified": true
+    },
+    {
+      "t_low": 27.5,
+      "t_high": 28.0,
+      "certified": true
+    },
+    {
+      "t_low": 28.0,
+      "t_high": 28.5,
+      "certified": true
+    },
+    {
+      "t_low": 28.5,
+      "t_high": 29.0,
+      "certified": true
+    },
+    {
+      "t_low": 29.0,
+      "t_high": 29.5,
+      "certified": true
+    },
+    {
+      "t_low": 30.0,
+      "t_high": 30.5,
+      "certified": true
+    },
+    {
+      "t_low": 31.0,
+      "t_high": 31.5,
+      "certified": true
+    },
+    {
+      "t_low": 31.5,
+      "t_high": 32.0,
+      "certified": true
+    },
+    {
+      "t_low": 32.5,
+      "t_high": 33.0,
+      "certified": true
+    },
+    {
+      "t_low": 33.0,
+      "t_high": 33.5,
+      "certified": true
+    },
+    {
+      "t_low": 33.5,
+      "t_high": 34.0,
+      "certified": true
+    },
+    {
+      "t_low": 34.5,
+      "t_high": 35.0,
+      "certified": true
+    },
+    {
+      "t_low": 35.0,
+      "t_high": 35.5,
+      "certified": true
+    },
+    {
+      "t_low": 36.0,
+      "t_high": 36.5,
+      "certified": true
+    },
+    {
+      "t_low": 36.5,
+      "t_high": 37.0,
+      "certified": true
+    },
+    {
+      "t_low": 37.5,
+      "t_high": 38.0,
+      "certified": true
+    },
+    {
+      "t_low": 39.5,
+      "t_high": 40.0,
+      "certified": true
+    },
+    {
+      "t_low": 40.5,
+      "t_high": 41.0,
+      "certified": true
+    },
+    {
+      "t_low": 41.0,
+      "t_high": 41.5,
+      "certified": true
+    },
+    {
+      "t_low": 41.5,
+      "t_high": 42.0,
+      "certified": true
+    },
+    {
+      "t_low": 42.0,
+      "t_high": 42.5,
+      "certified": true
+    },
+    {
+      "t_low": 43.5,
+      "t_high": 44.0,
+      "certified": true
+    },
+    {
+      "t_low": 44.0,
+      "t_high": 44.5,
+      "certified": true
+    },
+    {
+      "t_low": 44.5,
+      "t_high": 45.0,
+      "certified": true
+    },
+    {
+      "t_low": 45.0,
+      "t_high": 45.5,
+      "certified": true
+    },
+    {
+      "t_low": 46.0,
+      "t_high": 46.5,
+      "certified": true
+    },
+    {
+      "t_low": 46.5,
+      "t_high": 47.0,
+      "certified": true
+    },
+    {
+      "t_low": 47.0,
+      "t_high": 47.5,
+      "certified": true
+    },
+    {
+      "t_low": 48.0,
+      "t_high": 48.5,
+      "certified": true
+    },
+    {
+      "t_low": 48.5,
+      "t_high": 49.0,
+      "certified": true
+    }
+  ],
+  "status": "CERTIFIED"
+}
