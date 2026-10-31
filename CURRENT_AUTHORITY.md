@@ -1,4 +1,4 @@
-﻿# CURRENT AUTHORITY â€” 2026-10-26
+﻿# CURRENT AUTHORITY â€” 2026-10-31
 
 **Status:** otoritatif sampai digantikan versi bertanggal lebih baru.
 **Baseline P2:** `0b0a32c` (commit). Tag `p2-green-0b0a32c` created setelah
@@ -13,6 +13,15 @@ entri ledger ditambahkan for menutup celah `ad34cbc`).
 termasuk guard `msaf/tests/test_authority_manifest.py`; status
 `T-2026-0049`, `A-2026-0048`, `A-2026-0049`, and `A-2026-0050` telah dibawa
 keputusan pemilik 2026-10-27 (rincian in Â§5 and `reports/DECISION_LOG.md`).
+
+**Pembaruan 2026-10-31 (custody, perbaikan build, insiden cache):** lima file
+which already dirujuk baris `sha256LF` tetapi masih untracked dimasukkan ke tree
+(`0eaa16d`); empat sisa kerja dibuang or di-tombstone (`410abc3`, rincian in
+`reports/ARCHIVE_TOMBSTONES.md`); dua target `[[lean_lib]]` which hilang
+dipulihkan (`afaf501`, entri `T-2026-0083`). Baseline P2 and klaim
+`T-2026-0052` tidak berubah. Status CI: **merah** for `34ad37a`..`4a39bf6`
+because target build hilang; `afaf501` hanya boleh disebut hijau setelah job
+`python-tests` selesai sukses on commit itu.
 
 ## 1. Klaim aktif
 
@@ -53,6 +62,20 @@ keputusan pemilik 2026-10-27 (rincian in Â§5 and `reports/DECISION_LOG.md`).
 - Catatan proses: pra-registrasi r6 in-commit bersama kode on `ad34cbc`
   (temuan audit Â§T6). Catatan itu dipertahankan; sertifikasi berlaku atas
   keputusan pemilik, bukan karena temuan itu dihapus.
+
+### 1.3 Klaim tercatat 2026-10-27..31
+
+Baris di bawah adalah ringkasan; otoritasnya tetap entri registry. Tidak satu
+pun menambah klaim RH, Weil positivity, positivity matriks, or spektrum zeta.
+
+| ID | Klaim | Artefak utama | Batas |
+|---|---|---|---|
+| `T-2026-0065` | Import data enclosure Chrono ke Lean: `MoorePremises`, `DerivativeEnclosures`, `GwBounds`, `ComplexBall` plus konstanta interval statis dari JSON | `lean/EnclosureData.lean`; `reports/PREREG_CHRONO_ENCODING_2026-10-30.md` | Encoding data; bukan teorema matematika baru |
+| `T-2026-0066` | `gw_bounds.json` merekam tepat satu gate Guinand-Weil terverifikasi (enclosure Arb untuk xi' pada satu box nol) and dua gate `UNAVAILABLE`; `zeta_gates_incomplete` membuktikan predikat tiga-gate no berlaku | `ChronoGeometric_Framework/lean/enclosures/gw_bounds.json`; `reports/CHRONO_ENCODING_2026-10-30.md` | Hanya derivatif xi' satu box; bukan character-sum, orthogonality, Weil positivity, spektrum zeta, or RH |
+| `T-2026-0067` | Encoding Chrono faithful on indeks: `ZetaStep n` and `sign_budget_shape n` cocok with bentuk which diminta | `ChronoGeometric_Framework/lean/ChronoBridge.lean`; `reports/CHRONO_ENCODING_2026-10-30.md` | Bentuk/indeks saja; bukan bound analitik |
+| `T-2026-0077` | Migrasi teks lisensi utama ke GNU GPLv3 | `LICENSE` | Lisensi; bukan klaim matematika |
+| `T-2026-0082` | Bracket nilai singular terkurung on dim 201/301/401/501: `k90 = 16, 25, 35, 36` and vonis `FEW-MODES-REFUTED` on keempatnya | `reports/TAU_SVD_INSIGHTS_EXTENDED.json`; `msaf/chrono_runtime/svd_extension.py` | Hanya bracket `L <= sigma_max <= U` and batas bawah `k90`; bukan nilai singular tunggal, bukan spektrum zeta, bukan RH |
+| `T-2026-0083` | Perbaikan `lean/lakefile.toml`: `Stage_7_Tail_Extension` and `Theory137` dipulihkan sebagai `[[lean_lib]]`; 12 `defaultTargets` = 12 lib | `lean/lakefile.toml`; `reports/DECISION_LOG.md` 2026-10-31 | Infrastruktur build; tidak mengubah teorema, status, verdict, or receipt |
 
 ## 2. Batas which no boleh dilanggar
 
@@ -122,6 +145,10 @@ ikut diperbarui; jangan membacanya sebagai daftar tugas aktif.
 | Â§6.5 menyebut verifikasi identitas BSD belum dimulai | `T-2026-0049` (BSD Q1 v2) berstatus `CERTIFIED` for 5 kurva pilot | Registry; timing pra-registrasi ditetapkan sebagai pengecualian proses oleh pemilik 2026-10-27 (`DECISION_LOG` D1) |
 | Â§6.6 menyebut target twin prime N=10^9 belum dikerjakan | `A-2026-0046` (N=10^9) and `A-2026-0048` (N=10^10) berstatus `CERTIFIED` | Registry; timing pra-registrasi v4 ditetapkan sebagai pengecualian proses oleh pemilik 2026-10-27 (`DECISION_LOG` D1) |
 | `README.md` baris 26-27 menyebut r6 `A-2026-0047` and Learn-harness `A-2026-0050` | r6 benar; entri `A-2026-0050` kini ada in `FENCE_REGISTRY.md`, `CERTIFIED` terbatas on **stub deterministik** (`DECISION_LOG` D2, 2026-10-27) | `README.md` baris 26 juga menyebut r7 `CERTIFIED` â€” koreksi: r7 adalah `A-2026-0049` `RETRACTED`; README diselaraskan per 2026-10-27 |
+| `lean/lakefile.toml` `defaultTargets` menyebut `Stage_7_Tail_Extension` and `Theory137` | Kedua target hilang (diganti, bukan ditambah) by `34ad37a` and `cff0559`; `lake build` gagal `no target` sejak `34ad37a`; dipulihkan on `afaf501` | `FENCE_REGISTRY` `T-2026-0083`; `DECISION_LOG` 2026-10-31 |
+| Entri `T-2026-0060` (Stage 7) tampak tanpa heading | Heading diganti heading `T-2026-0064` by `34ad37a`; dipulihkan 2026-10-31 tanpa mengubah field, status, or baris `sha256LF` | Catatan audit `T-2026-0060` in registry |
+| `Perintah verifikasi` `T-2026-0060` menyebut `msaf/tests/test_stage7_tail_extension.py` | Berkas itu tidak ada; artefak which dipin adalah `msaf/tests/test_stage7_tail_extension.lean` and `lean/Stage_7_Tail_Extension.lean` | Dicatat and sengaja **tidak** ditulis ulang |
+| Cache Mathlib lokal (`~/.cache/mathlib`) memuat 9 file `.ltar` rusak | Sembilan modul dibangun lokal; `lake build` selesai `(8729 jobs)` setelah paket `.lake/packages` dikembalikan ke upstream pinned | `DECISION_LOG` 2026-10-31; `T-2026-0083` |
 
 Jangan menaikkan or menurunkan status `T-2026-0049`, `A-2026-0047`,
 `A-2026-0048`, `A-2026-0049`, or `A-2026-0050` secara diam-diam. Status
