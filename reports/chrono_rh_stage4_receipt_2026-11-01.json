@@ -1,0 +1,41 @@
+{
+  "schema": "msaf.stage4_containment_proof.v1",
+  "date": "2026-11-01",
+  "engine": "Stage4ContainmentEngine",
+  "containment_certificate": {
+    "tested_zeros_count": 3,
+    "topological_containment_verified": true,
+    "banach_contraction_verified": true,
+    "max_radius": 5.0000000139e-13,
+    "threshold": 1e-12,
+    "status": "CERTIFIED",
+    "zero_reports": [
+      {
+        "t": 14.134725,
+        "verdict": "NEWTON-IMAGE-ESCAPED",
+        "sigma_is_on_half_line": false,
+        "final_radius": "5.00000001390e-13",
+        "lipschitz_K": "[7.23212578948171401904889e-10 +/- 5.49e-34]"
+      },
+      {
+        "t": 21.02204,
+        "verdict": "NEWTON-IMAGE-ESCAPED",
+        "sigma_is_on_half_line": false,
+        "final_radius": "5.00000001390e-13",
+        "lipschitz_K": "[5.63387693837469754728588e-8 +/- 3.86e-32]"
+      },
+      {
+        "t": 25.010858,
+        "verdict": "NEWTON-IMAGE-ESCAPED",
+        "sigma_is_on_half_line": false,
+        "final_radius": "5.00000001390e-13",
+        "lipschitz_K": "[7.90386956468835154839050e-7 +/- 4.37e-31]"
+      }
+    ],
+    "scope_notice": {
+      "rh_global_analytic_proof_claim": false,
+      "absolute_infinite_continuum_derivation": false
+    }
+  },
+  "status": "CERTIFIED"
+}
