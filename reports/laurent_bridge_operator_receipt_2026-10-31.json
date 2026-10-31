@@ -1,0 +1,11 @@
+{
+  "schema": "msaf.laurent_bridge_operator.v1",
+  "engine": "LaurentLogicBridgeEngine",
+  "residue_analysis": {
+    "residue": "1",
+    "max_radius": 1e-13,
+    "bounded_below_threshold": true,
+    "status": "CERTIFIED"
+  },
+  "status": "CERTIFIED"
+}
