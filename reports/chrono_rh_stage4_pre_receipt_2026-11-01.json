@@ -1,0 +1,17 @@
+{
+  "schema": "msaf.chrono_execution.v1",
+  "rule_id": "T-2026-0093",
+  "date": "2026-11-01",
+  "stage": "Stage 4 Pre-Registration",
+  "parameters": {
+    "precision_bits": 512,
+    "max_precision_bits": 1024,
+    "radius_threshold": 1e-12,
+    "banach_contraction_bound": 1.0,
+    "scope_limits": {
+      "rh_global_analytic_proof_claim": false,
+      "absolute_infinite_continuum_derivation": false
+    }
+  },
+  "status": "LOCKED"
+}
