@@ -1,8 +1,20 @@
 {
   "index": 0,
   "t_center": 14.134725141734695,
-  "derivative_bound": "PLACEHOLDER",
+  "derivative_status": "VERIFIED",
+  "derivative_enclosure": "[-3.2371970124285254413619746251039808684772136393909e-18 +/- 3.57e-69] + [0.0013827190892162549620131306582493380119558423757553 +/- 1.01e-53]*I",
+  "derivative_magnitude": "[0.0013827190892162549620131306582493380119558423757553 +/- 1.01e-53]",
+  "derivative_tail": "[1.11295402690243e-13 +/- 3.15e-28]",
+  "character_sum_status": "UNAVAILABLE",
   "character_sum_bound": "PLACEHOLDER",
+  "orthogonality_status": "UNAVAILABLE",
   "orthogonality": "PLACEHOLDER",
-  "note": "Requires msaf.gw_* import; implement when available"
+  "note": "Derivative verified via interval-Newton; character sum and orthogonality gates require Weil explicit formula implementation",
+  "provenance": "ChronoGeometric_Framework/lean/enclosures/derivative_enclosures.json",
+  "scope": {
+    "rh_claim": false,
+    "zero_location_claim": false,
+    "weil_positivity_claim": false,
+    "critical_line_claim": false
+  }
 }

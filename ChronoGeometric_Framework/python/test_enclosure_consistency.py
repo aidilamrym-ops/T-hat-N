@@ -115,7 +115,7 @@ def test_gw_bounds_literals_mirrored_in_lean() -> None:
         "orthogonality",
         "note",
     ):
-        literal = gw[key]
+        literal = str(gw[key])
         assert literal in source, (
             f"{key} literal drifted out of EnclosureData.lean: {literal!r}"
         )
@@ -161,7 +161,7 @@ def test_recorded_derivative_enclosure_recomputes() -> None:
     recorded = gw["derivative_enclosure"]
     assert "] + [" in recorded, recorded
     real_text, imag_text = recorded.split("] + [", 1)
-    imag_text = imag_text.rstrip("j")
+    imag_text = imag_text.rstrip("*I")
     imag_mid_rec, imag_rad_rec = _split_ball(imag_text)
     recorded_imag = (imag_mid_rec - imag_rad_rec).union(imag_mid_rec + imag_rad_rec)
 

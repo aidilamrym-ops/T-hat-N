@@ -66,7 +66,7 @@ structure VerifiedDerivativeCondition where
 /-- Placeholder: construct the verified condition from exported enclosure data.
     In reality, this reads JSON exported by `msaf.zeta_inversion.verify_moore_premises`
     and checks the three Boolean gates. -/
-def verified_condition_from_enclosure (n : MyNat) : VerifiedDerivativeCondition :=
+def verified_condition_from_enclosure (_n : MyNat) : VerifiedDerivativeCondition :=
   ⟨true, true, true⟩
 
 /-- The ACTUAL mathematical condition that the sign budget encoding should capture:
@@ -88,4 +88,4 @@ def SignBudgetCorrect (n : MyNat) : Prop :=
     3. Connecting the `space` structure to the three verification gates -/
 theorem riemann_encoding_correct (n : MyNat) :
     SignBudgetCorrect n ↔ (collapse_to_harmony (simulate_riemann n)).shape = Shape.point := by
-  simpa [SignBudgetCorrect, verified_condition_from_enclosure, riemann_instant_reduction]
+  simp [SignBudgetCorrect, verified_condition_from_enclosure, riemann_instant_reduction]

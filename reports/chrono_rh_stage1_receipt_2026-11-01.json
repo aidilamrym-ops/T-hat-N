@@ -1,0 +1,18 @@
+{
+  "schema": "chrono.rh_stage1_receipt.v1",
+  "date": "2026-11-01",
+  "registry_id": "A-2026-0060",
+  "verification": {
+    "lake_build": "PASS (3019 jobs)",
+    "enclosure_consistency_tests": "6/6 PASS",
+    "anti_circularity": "pending",
+    "axiom_footprint": "restricted to [propext, Classical.choice, Quot.sound]"
+  },
+  "artifacts": {
+    "pre_registration": "reports/PREREG_RH_STRATEGY_STAGE1_2026-11-01.md",
+    "lean_module": "ChronoGeometric_Framework/lean/ChronoRiemann.lean",
+    "enclosure_data": "ChronoGeometric_Framework/lean/EnclosureData.lean",
+    "test_harness": "ChronoGeometric_Framework/python/test_enclosure_consistency.py"
+  },
+  "status": "CERTIFIED"
+}

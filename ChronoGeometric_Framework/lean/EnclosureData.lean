@@ -117,17 +117,17 @@ def derivative : DerivativeEnclosures := ⟨
     with radius 4.74e-23. -/
 def gw : GwBounds := ⟨
   0,
-  "[14.134725141734692854811328288633376359939575195313 +/- 5.00e-49]",
+  "14.134725141734695",
   GateStatus.verified,
-  "[+/- 1.61e-13] + [0.0013827190892162556758 +/- 3.81e-23]j",
-  "[0.0013827190892162556758 +/- 4.74e-23]",
-  "[1.6030038524827087284e-13 +/- 2.71e-34]",
+  "[-3.2371970124285254413619746251039808684772136393909e-18 +/- 3.57e-69] + [0.0013827190892162549620131306582493380119558423757553 +/- 1.01e-53]*I",
+  "[0.0013827190892162549620131306582493380119558423757553 +/- 1.01e-53]",
+  "[1.11295402690243e-13 +/- 3.15e-28]",
   GateStatus.unavailable,
-  "UNAVAILABLE",
+  "PLACEHOLDER",
   GateStatus.unavailable,
-  "UNAVAILABLE",
+  "PLACEHOLDER",
   12,
-  "derivative gate only: xi' enclosed over the whole first-zero box with msaf.zeta_inversion.xi_derivative_over_ball; character-sum and orthogonality gates have no producing artifact in this repo"
+  "Derivative verified via interval-Newton; character sum and orthogonality gates require Weil explicit formula implementation"
 ⟩
 
 namespace GwBounds
