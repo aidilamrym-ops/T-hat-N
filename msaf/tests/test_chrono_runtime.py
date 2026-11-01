@@ -15,7 +15,7 @@ set_precision(DEFAULT_PRECISION_BITS)
 
 from msaf.chrono_runtime import emulator, lattice  # noqa: E402
 from msaf.chrono_runtime import shape_ops as so  # noqa: E402
-from msaf.bridge.chrono_bridge import (  # noqa: E402
+from msaf.chrono_bridge import (  # noqa: E402
     OFF_DIAGONAL_GUARD,
     build_operators,
     verify_commutation,
@@ -28,7 +28,7 @@ RUNTIME_SOURCES = (
     ROOT / "msaf" / "chrono_runtime" / "emulator.py",
     ROOT / "msaf" / "chrono_runtime" / "riemann_operator.py",
     ROOT / "msaf" / "chrono_runtime" / "ledger.py",
-    ROOT / "msaf" / "bridge" / "chrono_bridge.py",
+    ROOT / "msaf" / "chrono_bridge.py",
 )
 
 
