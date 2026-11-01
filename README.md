@@ -3,15 +3,6 @@
 *T-hat-N - Matrix-constraint Spectral Analysis Framework (MSAF): one rigid
 computational kernel, every reported number an interval enclosure.*
 
-## Status (2026-11-01)
-*   **Riemann Stage 4:** Adaptive initial ball radii containment proof certified (T-2026-0097).
-*   **BSD Q1 Pilot (v2):** Rational rank-0 pilot suite certified (T-2026-0098).
-*   **Twin Prime (v3):** $N=10^9$ census certified (T-2026-0099).
-*   **Gödel-Turing Ceiling:** Finite lattice & Newton-escape enforcement (A-2026-0070) certified.
-*   **RBM Anderson:** Diagnostic ensemble certified.
-
-*See [`reports/FENCE_REGISTRY.md`](reports/FENCE_REGISTRY.md) for full audit trail.*
-
 ## Abstract
 
 **Rigorous Finite-Lattice Spectral Analysis and the Decomposition of Truncated Guinand-Weil Operators**  
@@ -257,6 +248,13 @@ statements, not a derivation of one from the other.
 All claims are bound to deterministic code, machine-checked gates, and replayable runs. The `FENCE_REGISTRY` (guarded by `msaf/tests/test_fence_registry.py`) records every `sha256LF` certificate.
 
 **Scope Limits (per registry):** `{rh_claim: false, zero_location_claim: false, weil_positivity_claim: false}`
+
+**Status (2026-11-01) - A-List Milestones & Rigidity.**
+- **Riemann Stage 4:** Adaptive initial ball radii containment proof certified (T-2026-0097).
+- **BSD Q1 Pilot (v2):** Rational rank-0 pilot suite certified (T-2026-0098).
+- **Twin Prime (v3):** $N=10^9$ census certified (T-2026-0099).
+- **Gödel-Turing Ceiling:** Finite lattice & Newton-escape enforcement (A-2026-0070) certified.
+- **RBM Anderson:** Diagnostic ensemble certified.
 
 **Status (2026-10-18) - H1 floor-amendment closed (stages A + B + C).** The
 - Figureâ€‘eight campaign now includes **r6** (CERTIFIED, entry `Aâ€‘2026â€‘0047`) and **r7** (RETRACTED stub, entry `Aâ€‘2026â€‘0049`).
