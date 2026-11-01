@@ -2811,7 +2811,7 @@ sha256LF d6024166921f018791fec59ff70aeee15e9f28a7bb176bdd4fcf04fec4df89e0 report
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_ledger.py -q`
 
 ```text
-sha256LF 345b00142ebddb02efe9fca2c15d0d403bb4d313288f4b8b632655a87f103250 ledger/chrono_execution_ledger.jsonl
+sha256LF ce26e84e5ca1a42b51c0b46c268fba6e4226f4ba8634d130bf0c8849551d51c0 ledger/chrono_execution_ledger.jsonl
 ```
 
 ### T-2026-0072 - Analisis Anatomi Matriks Tau (Toeplitz & Hankel Residuals)
@@ -2876,7 +2876,7 @@ sha256LF 73cad9aec42c0bb149edc5c55d5e4d3c3845c788425c625d6da764498d2d3eeb skills
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_ledger.py -q`
 
 ```text
-sha256LF 345b00142ebddb02efe9fca2c15d0d403bb4d313288f4b8b632655a87f103250 ledger/chrono_execution_ledger.jsonl
+sha256LF ce26e84e5ca1a42b51c0b46c268fba6e4226f4ba8634d130bf0c8849551d51c0 ledger/chrono_execution_ledger.jsonl
 ```
 
 ### T-2026-0076 - Pra-Registrasi Amandemen Lisensi GNU GPLv3
@@ -2915,7 +2915,7 @@ sha256LF eeaa5dc5c4b1c09579ffabf7c8c12883201c98cdff6a41c3743c5cc80a384f16 LICENS
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_ledger.py -q`
 
 ```text
-sha256LF 345b00142ebddb02efe9fca2c15d0d403bb4d313288f4b8b632655a87f103250 ledger/chrono_execution_ledger.jsonl
+sha256LF ce26e84e5ca1a42b51c0b46c268fba6e4226f4ba8634d130bf0c8849551d51c0 ledger/chrono_execution_ledger.jsonl
 ```
 
 ### T-2026-0079 - Pra-Pendaftaran Eksplorasi Geometrik Langlands & Jembatan Operator
@@ -2954,7 +2954,7 @@ sha256LF e6071a1b551a12b0d8edddc1930a4b2b75f686dfb3877802c99346dd5d39bf78 report
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_ledger.py -q`
 
 ```text
-sha256LF 345b00142ebddb02efe9fca2c15d0d403bb4d313288f4b8b632655a87f103250 ledger/chrono_execution_ledger.jsonl
+sha256LF ce26e84e5ca1a42b51c0b46c268fba6e4226f4ba8634d130bf0c8849551d51c0 ledger/chrono_execution_ledger.jsonl
 ```
 
 ### T-2026-0081 - Pra-Pendaftaran Perluasan SVD: Bracket Tertutup pada dim 401/501
