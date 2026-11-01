@@ -1098,7 +1098,7 @@ sha256LF 4e88f5f7d6e237046fac154f6afffe3ac150a38dc4fd1989308f0d9efccba1e9 report
 
   ```text
 sha256LF 701204089981143425ca57e97a6e7df3d93cef9d55d2f5d73cffa5c7a198e0f2 harness/run_anti_circularity_gate.py
-sha256LF 6e5c97a9d780e54a54968ca06a4d453236f65b45f881fbc6234902ef53ed9aab reports/anti_circularity_gate_2026-10-20.log
+sha256LF 47022e2c03ad0fa9208a9be7ec111cacb4b6df07ee73e698267e6e33499434f3 reports/anti_circularity_gate_2026-10-20.log
 sha256LF f64276ea877c88a2fc6675ded125c5bda96e17c31ded4a47327a776f097b3f07 reports/ANTI_CIRCULARITY_GATE_RUN_2026-10-20.md
 sha256LF 0c0410ee29fce414a3837a3f5c14f9eff83396f951938c60aa37f0c737d7250b msaf/tests/test_anti_circularity_gate.py
 sha256LF 5b3b263b6796016536653a4511124d9d4b5b81d47798d3580412eef89c86c0e9 lean/ComplexMoore.lean
@@ -2727,6 +2727,17 @@ sha256LF a8f1ae3959ea0a89b3101261a9fcdb7f1f870bb7455cd3a7203a005e2746e9e8 Chrono
 sha256LF 4fc45359a82dfde0b17f5f7713428740eeb18716b29e757b225c9bf99807acce reports/CHRONO_ENCODING_2026-10-30.md
 ```
 
+### T-2026-0084 — Finite block perturbation bound: Nb=32768
+
+- **Jenis:** T
+- **Pernyataan:** Finite block perturbation bound |W_ij| <= 1/(i^2+j^2) diverifikasi untuk Nb=32768 (1.07 miliar iterasi Arb).
+- **Batas:** Bukan bukti RH, bukan kontrol seluruh matriks, bukan pembuktian spektral global.
+- **Sertifikat:**
+  ```text
+  sha256LF 6c32b4d3506d3123bef281b188e463d2915d49df181dfa84c661b68101c632c0 msaf/finite_block_perturbation.py
+  ```
+- **Status:** CERTIFIED
+
 ### A-2026-0053 — Audit Chrono encoding: retraksi teorema vacuous dan drift literal
 
 - **Jenis:** A
@@ -3044,6 +3055,22 @@ sha256LF 1b8812426ba9b1e0b0ebd79b66ae803e9f6573d387dded2f53e8330307f42a9a msaf/g
 sha256LF 2c92ecaf727fd2ff0bee0f76fd4afe9978cfd3f59fba298fbe42e3aa6eee357f msaf/tests/test_godel_turing_ceiling.py
 sha256LF 0240906268e9795f27c58224ca5b82193a4d9e8e9dfa21ee3beeea305e01b29d reports/PREREG_GODEL_TURING_CEILING_2026-11-01.md
   ```
+
+
+
+### T-2026-0085 — SMT-LIB2 verification: finite block perturbation bounds
+
+- **Jenis:** T
+- **Pernyataan:** SMT-LIB2/Z3 Tribunal verifikasi properti fungsi batas pembatasan blok hingga Nb=64 (CI): off-diagonal |W_ij| <= 1/(i^2+j^2) dan diagonal |XC(n)| < 1/n^2. Semua negasi UNSAT (properti terbukti); konsistensi gabungan SAT.
+- **Batas:** Hanya properti fungsi batas; bukan pembuktian matriks penuh; kondisional on A.PosDef untuk teorema perturbasi.
+- **Sertifikat:**
+  ```text
+  sha256LF f03b94458acc323f7e9e9ced7bd210bc6159235574c660800720cf54373a597e reports/SMT_FINITE_BLOCK_PERTURBATION_2026-11-01.md
+  ```
+- **Status:** CERTIFIED
+- **Domino:** SMT gate sebelum Lean formalisasi.
+- **Relasi:** Prasyarat untuk Stage 7/8 Lean formalisasi perturbasi off-diagonal.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py -q`
 
 
 
