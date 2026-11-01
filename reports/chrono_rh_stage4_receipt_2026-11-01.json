@@ -4,11 +4,12 @@
   "engine": "Stage4ContainmentEngine",
   "containment_certificate": {
     "tested_zeros_count": 3,
-    "topological_containment_verified": true,
+    "localized_zeros_count": 0,
+    "topological_containment_verified": false,
     "banach_contraction_verified": true,
     "max_radius": 5.0000000139e-13,
     "threshold": 1e-12,
-    "status": "CERTIFIED",
+    "status": "NOT_VERIFIED",
     "zero_reports": [
       {
         "t": 14.134725,
@@ -37,5 +38,5 @@
       "absolute_infinite_continuum_derivation": false
     }
   },
-  "status": "CERTIFIED"
+  "status": "NOT_VERIFIED"
 }

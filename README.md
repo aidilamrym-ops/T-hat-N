@@ -411,6 +411,7 @@ author takes responsibility for all content.
 - [Section 6: Guinand-Weil Interval Spectra & the Montgomery Question (201/301/401)](#section-6-guinand-weil-interval-spectra--the-montgomery-question-201301401)
 - [Section 7: Sealed Status, Workflow and Verification Chain](#section-7-sealed-status-workflow-and-verification-chain)
 - [Section 8: Figure-Eight Three-Body Reduced 8x8 (T2-r4, A-2026-0043)](#section-8-figure-eight-three-body-reduced-8x8-t2-r4-a-2026-0043)
+- [Section 10: Chrono-RH Stage 1-4 Scaffold (2026-11-01)](#section-10-chrono-rh-stage-14-scaffold-2026-11-01)
 - [Symbol Glossary](#symbol-glossary)
 - [Proven vs Postulated](#proven-vs-postulated-standing-disclosure)
 - [Repository Layout](#repository-layout)
@@ -1942,6 +1943,54 @@ kemajuan lewat `git log --oneline` secara langsung.
   `D:\Opencode AI Agent\...`) menyimpan lokal-mesin; pengguna
   lain harus menyesuaikannya (satu-satunya section which no
   portabel in setup ini).
+
+---
+
+## SECTION 10: CHRONO-RH STAGE 1-4 SCAFFOLD (2026-11-01)
+
+`msaf/chrono_runtime/` carries a four-stage scaffold that wires a
+Laurent-residue bridge into an analytic tail bound, a matrix-tau spectral lock
+and a containment engine. **It is an interface scaffold, not a new certificate
+for the Guinand-Weil campaign.** Every runtime stage is driven by placeholder
+rational coefficients, and the production certificates for the real operator
+remain the external Arb runs quoted in Sections 3 and 6.
+
+### 10.1 Stage map
+
+| Stage | Module | Receipt | Measured | Verdict |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | `ChronoGeometric_Framework/lean/ChronoRiemann.lean` | `reports/chrono_rh_stage1_receipt_2026-11-01.json` | `lake build` PASS; enclosure-consistency 6/6 | `A-2026-0060` CERTIFIED; anti-circularity gate recorded as *pending* |
+| 2 | `msaf/chrono_runtime/stage2_tail_bound.py` | `reports/chrono_rh_stage2_receipt_2026-11-01.json` | $\lvert E_N\rvert \le [0.0519237751763962 \pm 5.53\times10^{-17}]$ at $N=100$; radius $4.29\times10^{-17}$ | CERTIFIED *for the placeholder coefficients only* |
+| 3 | `msaf/chrono_runtime/stage3_spectral_lock.py` | `reports/chrono_rh_stage3_receipt_2026-11-01.json` | 12x12 $\tau$; $\lVert\tau\rVert_F^2 = [77.1249\ldots \pm 8.92\times10^{-151}]$; imaginary leak zero ball; $k_{90}=10$ | CERTIFIED *at the scaffold dimension* |
+| 4 | `msaf/chrono_runtime/stage4_containment_proof.py` | `reports/chrono_rh_stage4_receipt_2026-11-01.json` | $K = [7.23\times10^{-10}], [5.63\times10^{-8}], [7.90\times10^{-7}]$ on three seeds | Banach contraction verified; topological containment **NOT_VERIFIED** (0 of 3 zeros localized) |
+
+### 10.2 What is certified and what is not
+
+- **Stage 2** evaluates $|E_N| \le \frac{1}{N}\left(|\psi(N+1)-\psi(1)| + \frac{1}{2N}\right)$ with $\psi$ from `acb.digamma()`. The coefficients `[1/2, 1/6, -1/12, 1/20]` are placeholders; they are not output of `msaf/zeta_inversion.py`.
+- **Stage 3** assembles a 12x12 real symmetric $\tau = W_{02} - W_R - W_p$ from those placeholders. The imaginary leak is the exact zero ball because the assembly is real-valued by construction, so the "critical line lock" here is structural, not measured. The $k_{90}=10$ floor clears only at this toy dimension.
+- **Stage 4** verifies $K<1$ for the interval-Newton map on three scaffold seeds, but `certify_sigma_one_half` returns `NEWTON-IMAGE-ESCAPED` for all three. The receipt therefore records `topological_containment_verified: false` and `status: NOT_VERIFIED`. Ledger record `T-2026-0094` at index 15 is superseded by index 16 with the corrected verdict; the original line is retained, not rewritten.
+- No stage claims RH, a compact operator, a universal zero-free zone, or an infinite continuum derivation.
+
+### 10.3 Reproduce
+
+```sh
+python -m pytest msaf/tests/test_laurent_bridge.py -q
+python -m pytest msaf/tests/test_spectral_lock.py -q
+python -m pytest msaf/tests/test_containment_proof.py -q
+python msaf/chrono_runtime/stage2_tail_bound.py
+python msaf/chrono_runtime/stage3_spectral_lock.py
+python msaf/chrono_runtime/stage4_containment_proof.py
+```
+
+Pre-registrations: `reports/PREREG_RH_STRATEGY_STAGE2_2026-11-01.md`,
+`reports/PREREG_RH_STRATEGY_STAGE3_2026-11-01.md`,
+`reports/PREREG_RH_STRATEGY_STAGE4_2026-11-01.md`.
+
+### 10.4 Ledger anchors
+
+`A-2026-0060` (Stage 1), `T-2026-0091` (Stage 3 pre-registration),
+`T-2026-0092` (Stage 3), `T-2026-0093` (Stage 4 pre-registration),
+`T-2026-0094` (Stage 4; corrected verdict at ledger index 16).
 
 
 

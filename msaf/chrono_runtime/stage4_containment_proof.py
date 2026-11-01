@@ -98,13 +98,24 @@ class Stage4ContainmentEngine:
             if max_rad > arb("1e-14"):
                 raise ResolutionAlarm(f"Enclosure radius {max_rad} exceeds 1e-12 threshold.")
 
+        # Topological containment is only certified when every tested zero was
+        # actually localized on the half line. A Newton image that escapes the
+        # ball localizes nothing, so it must not inherit a CERTIFIED verdict.
+        localized = [
+            r for r in results
+            if r["verdict"].startswith("ZERO-LOCALIZED") and r["sigma_is_on_half_line"]
+        ]
+        containment_verified = len(localized) == len(results) and len(results) > 0
+        both_gates = containment_verified and all_contracted
+
         return {
             "tested_zeros_count": len(self.t_values),
-            "topological_containment_verified": True,
+            "localized_zeros_count": len(localized),
+            "topological_containment_verified": containment_verified,
             "banach_contraction_verified": all_contracted,
             "max_radius": float(max_rad),
             "threshold": float(self.THRESHOLD_RADIUS),
-            "status": "CERTIFIED",
+            "status": "CERTIFIED" if both_gates else "NOT_VERIFIED",
             "zero_reports": results,
             "scope_notice": {
                 "rh_global_analytic_proof_claim": False,
