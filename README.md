@@ -249,7 +249,8 @@ All claims are bound to deterministic code, machine-checked gates, and replayabl
 
 **Scope Limits (per registry):** `{rh_claim: false, zero_location_claim: false, weil_positivity_claim: false}`
 
-**Status (2026-11-01) - A-List Milestones & Rigidity.**
+**Status (2026-11-02) - SMT-LIB2 Finite Block Perturbation & A-List Milestones.**
+- **SMT-LIB2 Perturbation Bounds:** Z3 Tribunal verified finite block perturbation bounds up to Nb=32768 (T-2026-0085), proving off-diagonal `|W_ij| <= 1/(i^2+j^2)` and diagonal `|XC(n)| < 1/n^2` property bounds (all property negations UNSAT; combined consistency SAT).
 - **Riemann Stage 4:** Adaptive initial ball radii containment proof certified (T-2026-0097).
 - **BSD Q1 Pilot (v2):** Rational rank-0 pilot suite certified (T-2026-0098).
 - **Twin Prime (v3):** $N=10^9$ census certified (T-2026-0099).
