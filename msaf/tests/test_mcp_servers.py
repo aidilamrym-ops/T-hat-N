@@ -12,6 +12,7 @@ import json
 import os
 import subprocess
 import sys
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import pytest
@@ -40,10 +41,11 @@ CORE_TOOLS = {
     "ping", "self_check",
 }
 
-# Contract K4: 3 SVG renderers + HTML dashboard + mp_query + 2 builtins.
+# Contract K4: 4 SVG renderers + HTML dashboard + mp_query + 2 builtins.
 VIZ_TOOLS = {
     "render_receipt_svg", "render_dependency_svg", "render_orbit_svg",
-    "render_html_dashboard", "mp_query", "ping", "self_check",
+    "render_gate_tree_svg", "render_html_dashboard", "mp_query", "ping",
+    "self_check",
 }
 
 
@@ -141,7 +143,7 @@ def test_viz_lists_exactly_the_contracted_tools(tmp_path):
     assert init["serverInfo"]["name"] == "t2n_viz"
 
     names = _tool_names(responses, stderr)
-    assert len(names) == 7, (len(names), sorted(names), stderr[-2000:])
+    assert len(names) == 8, (len(names), sorted(names), stderr[-2000:])
     assert len(names) == len(set(names)), "duplicate tool names"
     assert set(names) == VIZ_TOOLS
 
@@ -162,6 +164,86 @@ def test_viz_dashboard_writes_html_inside_allowlist(tmp_path):
     text = path.read_text(encoding="utf-8")
     assert "<h1>Guard Dashboard</h1>" in text
     assert "<h2>Alpha</h2>" in text
+
+
+def test_viz_gate_tree_is_self_contained_svg(tmp_path):
+    responses, stderr = _session(
+        MCP / "t2n_viz.py", tmp_path,
+        calls=[("render_gate_tree_svg", {"gates": [
+            {"id": "G0", "label": "scope", "status": "PASS"},
+            {"id": "G1", "label": "integer", "status": "CERTIFIED",
+             "parent": "G0"},
+            {"id": "G2", "label": "bridge", "status": "CERTIFIED",
+             "parent": "G1"},
+        ]})],
+    )
+    payload = _tool_payload(_result(responses, 3, stderr), stderr)
+    assert payload["schema"] == "t2n_illumina.gate_tree.v1"
+    assert payload["gate_count"] == 3
+    assert payload["roots"] == ["G0"]
+    svg = payload["svg"]
+    assert svg.startswith("<svg")
+    for forbidden in ("<script", "src=", "href=", "@import", "url(http"):
+        assert forbidden not in svg
+    ET.fromstring(svg)
+
+
+def test_viz_dependency_layers_and_root_pulling_orbit(tmp_path):
+    responses, stderr = _session(
+        MCP / "t2n_viz.py", tmp_path,
+        calls=[
+            ("render_dependency_svg", {"graph": {
+                "nodes": [
+                    {"id": "a", "label": "Stage 1", "layer": 0,
+                     "status": "CERTIFIED"},
+                    {"id": "b", "label": "Stage 2", "layer": 1,
+                     "status": "PASS"},
+                ],
+                "edges": [["a", "b"]],
+            }}),
+            ("render_orbit_svg", {"root": "a", "nodes": [
+                {"id": "a", "label": "root", "status": "PASS"},
+                {"id": "b", "parent": "a", "label": "child",
+                 "status": "CERTIFIED"},
+            ]}),
+        ],
+    )
+    dep = _tool_payload(_result(responses, 3, stderr), stderr)
+    assert dep["layers"] == [0, 1]
+    assert dep["node_count"] == 2
+    ET.fromstring(dep["svg"])
+
+    orbit = _tool_payload(_result(responses, 4, stderr), stderr)
+    assert orbit["mode"] == "root_pulling"
+    assert orbit["root"] == "a"
+    assert orbit["max_depth"] == 1
+    ET.fromstring(orbit["svg"])
+
+
+def test_viz_dashboard_embeds_svg_without_remote_references(tmp_path):
+    responses, stderr = _session(
+        MCP / "t2n_viz.py", tmp_path,
+        calls=[
+            ("render_gate_tree_svg", {"tree": {
+                "id": "root", "label": "root", "status": "PASS",
+                "children": [{"id": "leaf", "label": "leaf",
+                              "status": "CERTIFIED"}]}}),
+        ],
+    )
+    svg = _tool_payload(_result(responses, 3, stderr), stderr)["svg"]
+    responses, stderr = _session(
+        MCP / "t2n_viz.py", tmp_path,
+        calls=[("render_html_dashboard", {
+            "title": "Track 2 Dashboard",
+            "sections": [{"header": "Gate tree", "content": svg}],
+        })],
+    )
+    payload = _tool_payload(_result(responses, 3, stderr), stderr)
+    text = Path(payload["path"]).read_text(encoding="utf-8")
+    assert "<h1>Track 2 Dashboard</h1>" in text
+    assert "<svg" in text
+    for forbidden in ("http://", "https://", "<script", "src=", "@import"):
+        assert forbidden not in text
 
 
 def test_combined_shim_serves_the_viz_contract(tmp_path):

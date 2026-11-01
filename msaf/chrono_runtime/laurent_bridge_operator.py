@@ -21,12 +21,17 @@ class LaurentLogicBridgeEngine:
     """Rigorous bridge operator for Laurent residue extraction and logic isolation."""
 
     def __init__(self, coefficients: list[fmpq | int], p: int = 1) -> None:
-        # Validate no float64 or non-rational types
+        # Validate no float64, ball, or non-rational types.  fmpz is accepted
+        # explicitly so exact Dirichlet blocks never pass through a string.
         cleaned_coeffs = []
         for c in coefficients:
-            if isinstance(c, float):
-                raise StructuralIntegrityViolation("Forbidden float64 detected in bridge input.")
-            if isinstance(c, int):
+            if isinstance(c, (float, complex, arb, acb)):
+                raise StructuralIntegrityViolation(
+                    f"Forbidden non-exact coefficient detected: {type(c).__name__}"
+                )
+            if isinstance(c, fmpz):
+                cleaned_coeffs.append(fmpq(c))
+            elif isinstance(c, int):
                 cleaned_coeffs.append(fmpq(c))
             elif isinstance(c, fmpq):
                 cleaned_coeffs.append(c)
@@ -34,12 +39,14 @@ class LaurentLogicBridgeEngine:
                 try:
                     cleaned_coeffs.append(fmpq(str(c)))
                 except Exception as exc:
-                    raise StructuralIntegrityViolation(f"Invalid coefficient type: {type(c)}") from exc
+                    raise StructuralIntegrityViolation(
+                        f"Invalid coefficient type: {type(c)}"
+                    ) from exc
         self.coefficients = cleaned_coeffs
         self.p = int(p)
 
     def evaluate_expansion(self, epsilon: arb) -> acb:
-        """Evaluate \mathcal{I}(\epsilon) = \sum_{k=-p}^{\infty} c_k \epsilon^k."""
+        r"""Evaluate \mathcal{I}(\epsilon) = \sum_{k=-p}^{\infty} c_k \epsilon^k."""
         total = acb(0)
         eps_acb = acb(epsilon)
         # Power series evaluation over exact coefficients

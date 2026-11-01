@@ -1899,7 +1899,7 @@ opencode mcp list
 | `t2n_scribe` | `ledger_append`, `ledger_tail`, `audit_state`, `area_claim`/`area_release` (TTL, pelepasan paksa tercatat in ledger), `areas_list`, `resume_brief`, `handoff_draft` | F2 | **HIDUP** (F2) |
 | `t2n_watchtower` | `guarded_run` (log streaming which tetap tertulis), `watch`, `reap`, `reap_all_stale`, `run_history` â€” verifikasi identitas pid + tanda tangan pembuatan proses | F2 | **HIDUP** (F2) |
 | `t2n_science` | `iv_eval` (interval with pembulatan-ke-luar, AST-whitelist tanpa `eval`), `frac_compare` (rasional eksak `Fraction`), `ast_float_scan` (pemindai literal `float`/`float()`/`eval`-`exec`) | F3 | **HIDUP** (F3) |
-| `t2n_illumina` | render SVG/HTML (gate-tree, dependency map, orbit) | F5 | **HIDUP** (F5) |
+| `t2n_illumina` | render SVG/HTML: gate-tree, layered dependency map, root-pulling orbit, receipt label, dashboard | F5 | **HIDUP** (F5) |
 
 Fase **P1** (penyegelan jujur r5 + pendokumentasian) selesai in
 commit `a41b9be`. Setiap fase berakhir **satu commit in `main`
@@ -1991,6 +1991,41 @@ Pre-registrations: `reports/PREREG_RH_STRATEGY_STAGE2_2026-11-01.md`,
 `A-2026-0060` (Stage 1), `T-2026-0091` (Stage 3 pre-registration),
 `T-2026-0092` (Stage 3), `T-2026-0093` (Stage 4 pre-registration),
 `T-2026-0094` (Stage 4; corrected verdict at ledger index 16).
+
+### 10.5 Track 2-3 (2026-11-01): knowledge graph and Dirichlet coefficient sweep
+
+Track 2 is tooling, not a new theorem. `scripts/chrono_knowledge_graph.py`
+derives a 12-node, 18-edge graph from the stage receipts, the measured
+`FENCE_REGISTRY` pins and the ledger tail, then renders a layered dependency
+map, a root-pulling orbit, a functional gate tree, receipt labels and an
+offline dashboard below `mcp/out/` (untracked). `mcp/t2n/illumina.py` now
+exposes `render_gate_tree_svg`; the dependency renderer accepts layered nodes
+and object edges, and the orbit renderer accepts a root/parent graph. Every
+generated HTML/SVG artefact is inline: no CDN, script, font, image, `src=`, or
+`@import`.
+
+Track 3 is an exact arithmetic audit, not an L-function theorem. The frozen
+sweep covers moduli `1..60` plus `72, 84, 120, 180, 210, 360, 420, 840, 1000`
+with `n = 1..128`: 2062 characters, 308 admitted real characters
+(46 primitive, 262 imprimitive), 1754 complex characters rejected without
+coercion. Every admitted value is an exact `fmpz` in `{-1, 0, +1}` and
+satisfies `chi(n) = 0 <=> gcd(n, q) > 1`; every admitted block is transported
+into `LaurentLogicBridgeEngine`.
+
+The legacy q=1000 report is now honest: its real characters are all
+imprimitive (conductors 1, 4, 5, 8, 20, 40), so the report is
+`UNAVAILABLE_NON_PRIMITIVE` with zero brackets. A real primitive character
+(q=5, number 4) still brackets (19 sign changes in `[10, 50]`). Ledger
+`T-2026-0095` anchors the campaign.
+
+Known red at this commit, all pre-existing and not introduced here:
+`msaf/tests/test_bridge.py` fails collection against the current
+`msaf/bridge/` package; `test_fence_registry.py` reports
+`ChronoGeometric_Framework/` and ledger hash drift; `test_chrono_ledger.py`
+reports five record-hash mismatches on ledger lines 13-17 and two statuses
+outside `PASS`/`FAILED`. No certified registry entry and no ledger line was
+rewritten. The campaign receipt therefore records `PARTIAL_PASS`, not green.
+
 
 
 

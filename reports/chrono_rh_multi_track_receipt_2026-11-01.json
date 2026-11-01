@@ -1,0 +1,151 @@
+{
+  "schema": "chrono.multi_track_receipt.v1",
+  "date": "2026-11-01",
+  "rule_id": "T-2026-0095",
+  "prereg": "reports/PREREG_CHRONO_MULTI_TRACK_2026-11-01.md",
+  "status": "PARTIAL_PASS",
+  "status_reason": "Track 2 rendered and Track 3 gates passed; repository-wide gates stay red on pre-existing issues that this campaign did not modify.",
+  "tracks": {
+    "track2_knowledge_graph": {
+      "status": "PASS",
+      "builder": "scripts/chrono_knowledge_graph.py",
+      "renderer_module": "mcp/t2n/illumina.py",
+      "mcp_viz_tool_count": 8,
+      "new_tool": "render_gate_tree_svg",
+      "graph_nodes": 12,
+      "graph_edges": 18,
+      "layers": 8,
+      "gate_overall": "NOT_VERIFIED",
+      "gate_status_counts": {
+        "CERTIFIED": 8,
+        "FAIL": 1,
+        "NOT_VERIFIED": 2,
+        "PASS": 3
+      },
+      "ledger": {
+        "indexes": [17, 18],
+        "note": "Index 17 recorded the pre-anchor render (ledger node NOT_RUN); index 18 supersedes it with the final render counts after anchoring."
+      },
+      "remote_reference_markers_found": 0,
+      "write_zone": "mcp/out/",
+      "written": [
+        "mcp/out/chrono_kg/graph.json",
+        "mcp/out/chrono_kg/summary.json",
+        "mcp/out/chrono_kg/dependency.svg",
+        "mcp/out/chrono_kg/orbit.svg",
+        "mcp/out/chrono_kg/gate_tree.svg",
+        "mcp/out/chrono_kg/receipt_labels.svg",
+        "mcp/out/illumina/Chrono-RH_Knowledge_Graph_2026-11-01.html",
+        "mcp/out/chrono_kg/manifest.json"
+      ]
+    },
+    "track3_dirichlet_sweep": {
+      "status": "CERTIFIED",
+      "module": "msaf/chrono_runtime/dirichlet_giant_q.py",
+      "bridge": "msaf/chrono_runtime/laurent_bridge_operator.py",
+      "receipt": "reports/chrono_rh_dirichlet_sweep_2026-11-01.json",
+      "precision_bits": 128,
+      "max_n": 128,
+      "modulus_count": 69,
+      "moduli": [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+        37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
+        54, 55, 56, 57, 58, 59, 60, 72, 84, 120, 180, 210, 360, 420, 840,
+        1000
+      ],
+      "characters_total": 2062,
+      "primitive_total": 922,
+      "imprimitive_total": 1140,
+      "real_total": 308,
+      "complex_total": 1754,
+      "admitted_total": 308,
+      "primitive_admitted": 46,
+      "imprimitive_admitted": 262,
+      "rejected_total": 1754,
+      "coefficient_values_total": 39424,
+      "gates": {
+        "exact_integer_gate": true,
+        "structural_zero_gate": true,
+        "complex_rejected_not_coerced": true,
+        "bridge_transport_gate": true
+      },
+      "giant_q1000": {
+        "receipt": "reports/GRH_GIANT_Q_BRACKET_REPORT.json",
+        "number": 249,
+        "conductor": 5,
+        "primitive": false,
+        "real": true,
+        "order": 2,
+        "bracket_count": 0,
+        "status": "UNAVAILABLE_NON_PRIMITIVE"
+      },
+      "real_primitive_smoke": {
+        "modulus": 5,
+        "number": 4,
+        "status": "CERTIFIED",
+        "bracket_count": 19
+      }
+    }
+  },
+  "measurements": {
+    "targeted_suite": {
+      "command": "python -m pytest msaf/tests/test_dirichlet.py msaf/tests/test_dirichlet_giant.py msaf/tests/test_dirichlet_sweep.py msaf/tests/test_laurent_bridge.py msaf/tests/test_spectral_lock.py msaf/tests/test_containment_proof.py msaf/tests/test_analytic_tail_bound.py msaf/tests/test_chrono_runtime.py msaf/tests/test_chrono_ledger.py msaf/tests/test_mcp_servers.py msaf/tests/test_t2n_illumina.py msaf/tests/test_authority_manifest.py msaf/tests/test_anti_circularity_gate.py msaf/tests/test_lean_axiom_audit.py -q",
+      "passed": 105,
+      "failed": 1,
+      "duration_seconds": 30.58,
+      "failures": [
+        "msaf/tests/test_chrono_ledger.py::test_committed_ledger_is_valid_and_scoped"
+      ]
+    },
+    "minimum_gates": {
+      "command": "python -m pytest msaf/tests/test_authority_manifest.py msaf/tests/test_lean_axiom_audit.py msaf/tests/test_anti_circularity_gate.py -q",
+      "passed": 12,
+      "failed": 0,
+      "duration_seconds": 214.43
+    },
+    "fence_registry": {
+      "command": "python -m pytest msaf/tests/test_fence_registry.py -q",
+      "passed": 1,
+      "failed": 1,
+      "status": "FAIL",
+      "checked_certificate_lines": 475,
+      "drift_entries": 11,
+      "drift_paths": [
+        "ChronoGeometric_Framework/lean/enclosures/gw_bounds.json",
+        "ChronoGeometric_Framework/lean/EnclosureData.lean",
+        "ChronoGeometric_Framework/python/test_enclosure_consistency.py",
+        "ChronoGeometric_Framework/lean/ChronoRiemann.lean",
+        "ledger/chrono_execution_ledger.jsonl"
+      ],
+      "note": "Pre-existing at HEAD a91822b; no CERTIFIED registry line was rewritten."
+    },
+    "ledger_chain": {
+      "verify_chain_errors_at_head": 5,
+      "first_broken_line": 13,
+      "last_index_at_head": 16,
+      "note": "Record-hash mismatches on lines 13-17 and statuses PENDING/NOT_VERIFIED predate this campaign; the ledger was appended to, never rewritten."
+    },
+    "lake_build": {
+      "command": "lake build -q",
+      "status": "PASS_WITH_WARNING",
+      "jobs": 3132,
+      "warning": "ComplexMoore.lean:88:4: Try this: intro h hmem"
+    },
+    "full_suite": {
+      "command": "python -m pytest msaf -q -m \"not slow\"",
+      "status": "NOT_RUN",
+      "collection_error": "msaf/tests/test_bridge.py: ImportError: cannot import name 'MANDATE' from 'msaf.bridge'",
+      "bounded_attempt": "Ignoring test_bridge.py, the collection stage found 853/855 tests, but the run exceeded the 2400 s budget and was terminated. No green claim is made."
+    }
+  },
+  "scope_notice": {
+    "rh_claim": false,
+    "grh_claim": false,
+    "weil_positivity_claim": false,
+    "zero_location_claim": false,
+    "l_function_global_claim": false,
+    "stage4_containment_status": "NOT_VERIFIED",
+    "meaning": "Track 2 is tooling and Track 3 is an exact algebraic coefficient audit. Neither proves RH, GRH, Weil positivity, or a zero localisation."
+  }
+}
