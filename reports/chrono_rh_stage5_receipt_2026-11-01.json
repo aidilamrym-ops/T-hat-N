@@ -1,0 +1,14 @@
+{
+  "schema": "chrono.stage5_convergence.v1",
+  "date": "2026-11-01",
+  "rule_id": "T-2026-0096",
+  "status": "PASS",
+  "nodes_count": 16,
+  "edges_count": 22,
+  "dashboard": "mcp/out/dashboards/maa_convergence_v1.html",
+  "scope_notice": {
+    "rh_global_analytic_proof_claim": false,
+    "weil_positivity_claim": false,
+    "zero_location_claim": false
+  }
+}

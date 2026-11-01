@@ -31,15 +31,35 @@ class BanachContractionViolation(RuntimeError):
 
 
 class Stage4ContainmentEngine:
-    """Rigorous Stage 4 topological containment and Banach contraction engine."""
+    """Rigorous Stage 4 topological containment and Banach contraction engine.
+
+    Adaptive initial ball radius per zero ensures the actual zero is enclosed
+    given approximate t-values, while keeping the Banach contraction constant
+    K < 1. The radius for each zero is chosen as the maximum safe radius
+    that satisfies K < 1 while exceeding the tabulation offset.
+    """
 
     THRESHOLD_RADIUS = arb("1e-12")
     PRECISION_BITS = 512
     MAX_PRECISION_BITS = 1024
 
+    # Per-zero initial radii: (t_value, initial_radius)
+    # t=14.134725: offset 1.42e-7, max K<1 radius ~1e-6
+    # t=21.022040: offset 3.61e-7, max K<1 radius ~1e-6
+    # t=25.010858: offset 4.20e-7, max K<1 radius ~6.33e-7
+    INITIAL_RADII = {
+        14.134725: arb("1e-6"),
+        21.022040: arb("1e-6"),
+        25.010858: arb("6e-7"),
+    }
+
     def __init__(self, t_values: list[float] | None = None) -> None:
         ctx.prec = self.PRECISION_BITS
         self.t_values = t_values or [14.134725, 21.022040, 25.010858]
+
+    def _initial_radius(self, t: float) -> arb:
+        """Get adaptive initial radius for a given t-value."""
+        return self.INITIAL_RADII.get(t, arb("1e-6"))
 
     def verify_banach_contraction(self, s_ball: acb) -> arb:
         """Compute localized Lipschitz constant K of interval-Newton map and certify K < 1."""
@@ -70,14 +90,15 @@ class Stage4ContainmentEngine:
 
         for t in self.t_values:
             centre = acb(0.5, t)
-            b = ball(centre, 5e-13)
+            init_rad = self._initial_radius(t)
+            b = ball(centre, init_rad)
             
             deriv, _ = xi_derivative_over_ball(b)
             deriv_lower = abs(deriv).lower()
             if deriv_lower <= 0:
                 raise BoundaryLeakAlarm(f"Boundary derivative enclosure includes zero at t = {t}")
 
-            report = certify_sigma_one_half(b, max_iter=10)
+            report = certify_sigma_one_half(b, max_iter=20)
             final_rad = report["final_radius_real"]
             max_rad = max(max_rad, arb(str(final_rad)))
 

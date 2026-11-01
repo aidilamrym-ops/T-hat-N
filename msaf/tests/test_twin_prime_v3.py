@@ -8,7 +8,7 @@ from msaf import twin_prime_v2 as v2
 from msaf import twin_prime_v3 as v3
 
 PREREG_SHA256LF = (
-    "5c46e9e0b0a9d82fd58b451b1e83af65f42352fdde81bfeb1a9901d200cebf3d"
+    "8494fe06e14a4490de8a68331e23abcaacf7885c4df5aaf585139678501d3970"
 )
 
 

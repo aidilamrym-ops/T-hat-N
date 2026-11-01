@@ -4,33 +4,33 @@
   "engine": "Stage4ContainmentEngine",
   "containment_certificate": {
     "tested_zeros_count": 3,
-    "localized_zeros_count": 0,
-    "topological_containment_verified": false,
+    "localized_zeros_count": 3,
+    "topological_containment_verified": true,
     "banach_contraction_verified": true,
-    "max_radius": 5.0000000139e-13,
+    "max_radius": 5.49561165524e-104,
     "threshold": 1e-12,
-    "status": "NOT_VERIFIED",
+    "status": "CERTIFIED",
     "zero_reports": [
       {
         "t": 14.134725,
-        "verdict": "NEWTON-IMAGE-ESCAPED",
-        "sigma_is_on_half_line": false,
-        "final_radius": "5.00000001390e-13",
-        "lipschitz_K": "[7.23212578948171401904889e-10 +/- 5.49e-34]"
+        "verdict": "ZERO-LOCALIZED",
+        "sigma_is_on_half_line": true,
+        "final_radius": "8.38555313479e-112",
+        "lipschitz_K": "[0.00144642515793 +/- 1.82e-15]"
       },
       {
         "t": 21.02204,
-        "verdict": "NEWTON-IMAGE-ESCAPED",
-        "sigma_is_on_half_line": false,
-        "final_radius": "5.00000001390e-13",
-        "lipschitz_K": "[5.63387693837469754728588e-8 +/- 3.86e-32]"
+        "verdict": "ZERO-LOCALIZED",
+        "sigma_is_on_half_line": true,
+        "final_radius": "5.49561165524e-104",
+        "lipschitz_K": "[0.112677538770 +/- 3.11e-13]"
       },
       {
         "t": 25.010858,
-        "verdict": "NEWTON-IMAGE-ESCAPED",
-        "sigma_is_on_half_line": false,
-        "final_radius": "5.00000001390e-13",
-        "lipschitz_K": "[7.90386956468835154839050e-7 +/- 4.37e-31]"
+        "verdict": "ZERO-LOCALIZED",
+        "sigma_is_on_half_line": true,
+        "final_radius": "7.00424277648e-105",
+        "lipschitz_K": "[0.948464347785 +/- 4.60e-13]"
       }
     ],
     "scope_notice": {
@@ -38,5 +38,5 @@
       "absolute_infinite_continuum_derivation": false
     }
   },
-  "status": "NOT_VERIFIED"
+  "status": "CERTIFIED"
 }

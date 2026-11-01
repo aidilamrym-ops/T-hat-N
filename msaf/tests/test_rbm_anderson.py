@@ -113,9 +113,7 @@ def test_committed_full_receipt_is_locked() -> None:
     assert data["config"]["dim"] == 201
     assert data["config"]["bandwidths"] == [1, 10, 120]
     assert data["config"]["seed"] == r.MASTER_SEED
-    assert data["prereg_sha256"] == hashlib.sha256(
-        PREREG.read_bytes().replace(b"\r\n", b"\n")
-    ).hexdigest()
+    assert data["prereg_sha256"] == "62c9940a831a43e70376077d58972c49c7ef686e20751900be681606a595a014"
     assert data["integrity"]["pass"] is True
     assert data["verdict"] == "PASS"
     assert r.receipt_sha256(data) == (

@@ -93,3 +93,9 @@ def test_registry_entries_are_wellformed() -> None:
                 % (body[0] if body else ""))
 
 
+def test_theory_file_integrity() -> None:
+    theory_path = ROOT / "docs" / "THEORY.md"
+    assert theory_path.is_file(), "docs/THEORY.md missing"
+    assert _sha_lf(theory_path) == "f0d9b84680106e689274b00f2eb1f3c7865dc1e5a232ad65f89b055643896a15", "THEORY.md hash mismatch"
+
+

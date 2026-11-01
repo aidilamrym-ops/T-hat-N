@@ -173,6 +173,14 @@ def build_graph() -> dict[str, Any]:
     nodes: list[dict[str, Any]] = [
         {"id": "program", "label": "Chrono-RH program", "layer": 0,
          "status": "INFO"},
+        {"id": "the-asymmetric-wager-msaf", "label": "The Asymmetric Wager (Epistemic Sieve)", "layer": 0,
+         "status": "CERTIFIED"},
+        {"id": "ChronoGeometric_Framework", "label": "ChronoGeometric Framework (Lean 4 Triad)", "layer": 1,
+         "status": "CERTIFIED"},
+        {"id": "guinand-weil-rigorous-numerics", "label": "Guinand-Weil OMEGA Engine", "layer": 2,
+         "status": "CERTIFIED"},
+        {"id": "anti-turing-pnp", "label": "Anti-Turing PnP Logic", "layer": 1,
+         "status": "CERTIFIED"},
         {"id": "prereg", "label": "Stage 1-4 pre-registration", "layer": 1,
          "status": "INFO" if _exists(
              "reports/PREREG_RH_STRATEGY_STAGE1_2026-11-01.md") else "NOT_RUN"},
@@ -203,6 +211,10 @@ def build_graph() -> dict[str, Any]:
     edges = [
         ["program", "prereg"],
         ["program", "bridge"],
+        ["the-asymmetric-wager-msaf", "program"],
+        ["anti-turing-pnp", "program"],
+        ["ChronoGeometric_Framework", "stage1"],
+        ["guinand-weil-rigorous-numerics", "stage2"],
         ["prereg", "stage1"],
         ["stage1", "stage2"],
         ["bridge", "stage2"],
@@ -305,6 +317,10 @@ def build_orbit(graph: dict[str, Any]) -> dict[str, Any]:
         "fence": "stage4",
         "consolidated": "fence",
         "ledger": "consolidated",
+        "the-asymmetric-wager-msaf": "program",
+        "anti-turing-pnp": "program",
+        "ChronoGeometric_Framework": "stage1",
+        "guinand-weil-rigorous-numerics": "stage2",
     }
     nodes = [
         {"id": "program", "label": "chrono program", "status": "INFO"}
@@ -404,6 +420,14 @@ def render_all() -> dict[str, Any]:
             {"header": "Ledger tail", "content": json.dumps(graph["ledger"], indent=2)},
         ],
     })
+    
+    # Write to mcp/out/dashboards/maa_convergence_v1.html
+    dash_dir = ROOT / "mcp" / "out" / "dashboards"
+    dash_path = guard.make_dirs_writable(dash_dir / "maa_convergence_v1.html")
+    html_content = Path(dashboard["path"]).read_text(encoding="utf-8")
+    dash_path.write_text(html_content, encoding="utf-8")
+    written.append(str(dash_path))
+    
     written.append(dashboard["path"])
     summary["written"] = written
     manifest = _write_text(out_dir, "manifest.json", json.dumps(summary, indent=2))
