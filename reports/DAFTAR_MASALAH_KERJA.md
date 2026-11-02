@@ -98,6 +98,8 @@ with q>1.4, max_gap=40640, dua sieve independen sepakat, receipt
 
 **Q7 â€” 3D Navier-Stokes Planck-Scale Blow-Up.** (PREREG: `reports/PREREG_NAVIER_STOKES_PLANCK_2026-11-02.md`)
 
+**Q-ULTIMATE â€” De Bruijn-Newman Constant Falsification.** (PREREG: `reports/PREREG_DEBRUIJN_NEWMAN_2026-11-02.md`)
+
 ## 4. Daftar-B (pintu bersyarat, bukan janji)
 
 Masuk A-list hanya bila syaratnya terpenuhi TERLEBIH DULU sebagai
