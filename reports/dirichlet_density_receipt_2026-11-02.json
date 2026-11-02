@@ -1,0 +1,18 @@
+{
+  "moduli_scanned": [
+    1000,
+    2100
+  ],
+  "results": {
+    "1000": {
+      "midpoint": 0.24587738401118153,
+      "radius": 1e-45,
+      "zero_free_enclosed": true
+    },
+    "2100": {
+      "midpoint": 0.06553123200779079,
+      "radius": 1e-45,
+      "zero_free_enclosed": true
+    }
+  }
+}
