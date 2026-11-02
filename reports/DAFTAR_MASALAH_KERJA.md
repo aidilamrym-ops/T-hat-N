@@ -90,9 +90,13 @@ with q>1.4, max_gap=40640, dua sieve independen sepakat, receipt
 `reports/abc_census_v3_10000000.json` (verdict ALL PASS). Gate C=10^5:
 6/6825; validasi C=10^6: 11/6825.
 
-**Q4 â€” Ekstensi RH.** Fragmen: T = 100 with mesin which sama
-(COMPLETE + winding cross-lock), DENGAN ukur-dinding-dulu. Latar:
-kerja literatur G2. Ini background, bukan trek utama.
+**Q4 â€” Lagarias Spectral Criterion.** (PREREG: `reports/PREREG_LAGARIAS_SPECTRAL_2026-11-02.md`)
+
+**Q5 â€” Dirichlet L-Function Density Expansion.** (PREREG: `reports/PREREG_DIRICHLET_DENSITY_2026-11-02.md`)
+
+**Q6 â€” Multi-Leg Feynman Loop Integrals.** (PREREG: `reports/PREREG_FEYNMAN_LOOPS_2026-11-02.md`)
+
+**Q7 â€” 3D Navier-Stokes Planck-Scale Blow-Up.** (PREREG: `reports/PREREG_NAVIER_STOKES_PLANCK_2026-11-02.md`)
 
 ## 4. Daftar-B (pintu bersyarat, bukan janji)
 
