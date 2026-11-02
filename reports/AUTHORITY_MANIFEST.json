@@ -45,7 +45,7 @@
     },
     "archive_tombstones": {
       "path": "reports/ARCHIVE_TOMBSTONES.md",
-      "sha256lf": "c17aeab4bbb7e856a68aa77da7ec116be223ff4c234f2a6f96940c588e641b84"
+      "sha256lf": "c97f65719bca272b6ae7457be501f993cee3d9a75d1054b2ef79ed9fcb5192b5"
     }
   },
   "superseded": [
@@ -153,6 +153,48 @@
       "replacement": "reports/c4_s20261009_stdout.log",
       "recovery_commit": "19fe938",
       "note": "Berkas stderr nol byte; stdout memuat DONE exit=0."
+    },
+    {
+      "path": "msaf/figure_eight_r2.py",
+      "state": "tombstoned",
+      "replacement": "msaf/figure_eight_r6.py",
+      "recovery_commit": "0b0a32c",
+      "note": "Versi paling lama, FAILED (K2 slack kuadratik), digantikan r4/r6."
+    },
+    {
+      "path": "msaf/figure_eight.py",
+      "state": "tombstoned",
+      "replacement": "msaf/figure_eight_r6.py",
+      "recovery_commit": "0b0a32c",
+      "note": "Versi sebelum r2, digantikan r4/r6. Tidak digunakan file lain."
+    },
+    {
+      "path": "msaf/learnharness_prototype.py",
+      "state": "tombstoned",
+      "replacement": "msaf/learnharness_v1.py",
+      "recovery_commit": "0b0a32c",
+      "note": "Prototipe stub, digantikan learnharness_v1.py (CERTIFIED A-2026-0050)."
+    },
+    {
+      "path": "msaf/lambda_min_ladder.py",
+      "state": "tombstoned",
+      "replacement": "msaf/lambda_min_eig_ladder.py",
+      "recovery_commit": "0b0a32c",
+      "note": "Digantikan lambda_min_eig_ladder.py (yang aktif digunakan)."
+    },
+    {
+      "path": "msaf/tests/test_figure_eight_r2.py",
+      "state": "tombstoned",
+      "replacement": "Tidak ada; test untuk versi superseded",
+      "recovery_commit": "0b0a32c",
+      "note": "Test untuk figure_eight_r2.py yang sudah dihapus."
+    },
+    {
+      "path": "msaf/tests/test_learnharness_prototype.py",
+      "state": "tombstoned",
+      "replacement": "msaf/tests/test_learnharness_v1.py",
+      "recovery_commit": "0b0a32c",
+      "note": "Test untuk learnharness_prototype.py yang sudah dihapus."
     }
   ],
   "historical_artifacts": [

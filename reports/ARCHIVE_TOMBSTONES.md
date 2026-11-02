@@ -129,4 +129,24 @@ dinormalisasi ke LF, sama with konvensi registry).
 | `msaf/reports/RELEASE_v1.41.0-alpha.md` | `tombstoned` | `87823b5a456c66ddfde0fa9cf534833adf87ec88f926e71d330e2612a5676706` | Template rilis which mengklaim "CI passes; all tests green" tanpa dasar; no dirujuk and no boleh dipakai sebagai bukti status CI. |
 | `reports/anti_circularity_gate_current.log` | `tombstoned` | `93634a02bc0652601dc1a761d9123d537525bd8009050f06a4416e340ac29892` | Log runtime which dapat dibuat ulang; bukan bukti tersertifikasi and no dirujuk registry. |
 
+## Pembersihan file usang (2026-11-02)
+
+Enam file dihapus atas keputusan 2026-11-02 (file `reports/FILE_CLEANUP_DECISION_2026-11-02.md`).
+Semuanya: tidak memiliki baris `sha256LF`, tidak digunakan oleh file aktif,
+dan sudah superseded oleh versi lebih baru.
+
+| Path | Status | sha256LF saat disisihkan | Pengganti / alasan |
+|---|---|---|---|
+| `msaf/figure_eight_r2.py` | `tombstoned` | (tidak ada) | Versi paling lama, FAILED (K2 slack kuadratik), digantikan r4/r6. Hanya digunakan oleh test_r2 yang juga dihapus. Recovery: `git show 0b0a32c:msaf/figure_eight_r2.py` |
+| `msaf/figure_eight.py` | `tombstoned` | (tidak ada) | Versi sebelum r2, digantikan r4/r6. Tidak digunakan file lain. Recovery: `git show 0b0a32c:msaf/figure_eight.py` |
+| `msaf/learnharness_prototype.py` | `tombstoned` | (tidak ada) | Prototipe stub, digantikan `learnharness_v1.py` (CERTIFIED A-2026-0050). Recovery: `git show 0b0a32c:msaf/learnharness_prototype.py` |
+| `msaf/lambda_min_ladder.py` | `tombstoned` | (tidak ada) | Digantikan `lambda_min_eig_ladder.py` (yang aktif). Recovery: `git show 0b0a32c:msaf/lambda_min_ladder.py` |
+| `msaf/tests/test_figure_eight_r2.py` | `tombstoned` | (tidak ada) | Test untuk versi superseded. Recovery: `git show 0b0a32c:msaf/tests/test_figure_eight_r2.py` |
+| `msaf/tests/test_learnharness_prototype.py` | `tombstoned` | (tidak ada) | Test untuk prototipe superseded. Recovery: `git show 0b0a32c:msaf/tests/test_learnharness_prototype.py` |
+
+Catatan: file-file yang memiliki baris `sha256LF` atau digunakan oleh file
+aktif TIDAK dihapus, termasuk `twin_prime_v2.py`, `figure_eight_r3.py`,
+`figure_eight_r5.py`, `figure_eight_r7.py`, `bsd_descent.py`, `bsd_full.py`,
+`bsd_v3.py`, `gw_dashboard_v4.py`, dan `gw_dashboard_v5.py`.
+
 
