@@ -649,6 +649,31 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   selesai sukses on commit itu. Khusus `34ad37a`..`4a39bf6`, status CI adalah
   merah because target build hilang.
 
+## 2026-11-03 - PLAN-10: eig penuh diganti Gershgorin + LDL^T banded
+
+- **Dasar:** proses `python msaf/problems/cosmological_quantization.py` (PID
+  4980) berjalan sekitar 67 menit pada matriks 802x802 @ 24000 bit tanpa
+  selesai. Benchmark mesin kerja: n=32 = 37,7 s; n=64 = 324,7 s; skala
+  sekitar n^3,1; ekstrapolasi n=802 sekitar 7–10 hari single-core. Run
+  dihentikan atas persetujuan pemilik 2026-11-03.
+- **Perubahan:** `reports/PREREG_COSMOLOGY_2026-11-03.md` mendapat amendment
+  bertanggal 2026-11-03 (metode Gershgorin + LDL^T banded). Modul
+  `msaf/problems/cosmological_quantization.py` tidak lagi memanggil
+  `arb_mat.eig()`; verifikasi selesai sekitar 1,5 s. Receipt baru
+  `reports/cosmological_quantization_receipt_2026-11-03.json`; receipt lama
+  dipertahankan sebagai
+  `reports/cosmological_quantization_receipt_2026-11-03_eig_legacy.json`.
+- **Registry:** `T-2026-0108` di-retract (metode lama tidak feasible); entri
+  baru `T-2026-0109` CERTIFIED dengan hash baru. Tidak ada perubahan klaim,
+  token, dimensi, presisi, atau celah entropi.
+- **Verifikasi:** `python msaf/problems/cosmological_quantization.py` ->
+  CERTIFIED, sekitar 1,5 s; `python -m pytest
+  msaf/tests/test_cosmological_quantization.py -q` 1 passed;
+  `python -m pytest msaf/tests/test_fence_registry.py -q` 3 passed.
+- **Batas:** metode verifikasi berubah; batas Gershgorin bukan nilai eigen
+  eksak, dan LDL^T hanya mensertifikasi positivity/upper bound. Klaim tetap
+  analisis spektral finit, bukan kosmologi kontinu universal.
+
 ## Keputusan which masih menunggu pemilik
 
 Tiga question delegasi 2026-10-27 already diputuskan in atas (D1â€“D3). Tidak
