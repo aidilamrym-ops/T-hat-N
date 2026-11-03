@@ -1828,7 +1828,7 @@ sha256LF a05dfa96fad3e5c02ae31108f3e17ccc1d48f5d1ce23980a942035a6837c812e report
 - **Sertifikat:**
 
   ```text
-sha256LF f870c57792a0b79fff015a9a9764191e6c0ca9b3989faae604be9aec19a51193 msaf/abc_census.py
+sha256LF 2b83ff69095a712cb1b82927ddf4c3aadf040d5c96e5f0bc40a82992f030628a msaf/abc_census.py
 sha256LF bcee548ff1be8410f24ac1a4f04a20203df1c9bb9aa414712a8aa8b97ce69ae8 msaf/tests/test_abc_census.py
 sha256LF 0b1ad639ee07529708e0749f02a6dd99600667bed69a3c2d87effff5fa83042d reports/PREREG_Q3_ABC_CENSUS_2026-10-21.md
 sha256LF 276c4dc095f28d901c9aaa56b25c10e0802d6b158a2ed63d16e28a7a1ae8a06f reports/abc_census.json
@@ -2252,6 +2252,11 @@ sha256LF 068368eb9e66c90ce660cc94a86b2f028bb01042d376ca62f54236308758be0b report
   (dijalankan sekali, bukan dua kali) dan kedua uji kampanye ditandai
   `slow`. Tidak ada asersi, ambang, receipt, atau verdict yang berubah;
   baris sertifikat test diperbarui ke hash baru.
+- **Catatan 2026-11-02:** penanda `@pytest.mark.slow` ternyata hilang dari
+  `test_registry_entry` (dan sempat hilang dari `test_campaign`), sehingga
+  `test_ci_slow_split.py` gagal. Kedua penanda dipulihkan; tidak ada
+  asersi, ambang, receipt, verdict, atau jalur kampanye yang berubah.
+  Baris sertifikat test diperbarui ke `5e0744ca...` (lihat `T-2026-0101`).
 - **Domino:** figure-eight reduced 8x8 (fondasi trek T2b; stabilitas tetap
   memerlukan pra-registrasi sendiri).
 - **Relasi:** Melanjutkan basis r3 (`reports/figure_eight_r3_2026-10-23.json`,
@@ -2270,7 +2275,7 @@ sha256LF 068368eb9e66c90ce660cc94a86b2f028bb01042d376ca62f54236308758be0b report
 
   ```text
 sha256LF 0251e9e6e3312cc9a7a622f0792d420f4135e94e1686f0a749c7e095db2d29aa msaf/figure_eight_r6.py
-sha256LF 2345fb8b91150344c21a5996ef42956ac8d4cf24ba56c6ef3abc93464cd67be5 msaf/tests/test_figure_eight_r6.py
+sha256LF 5e0744cac19a25a4f251433c547b4da21d258b50853300fdce29f2233bc7e004 msaf/tests/test_figure_eight_r6.py
 sha256LF b05f35ec58cc5525d11ae0b5b5b9a40f3746d218d3e10456b94cba4e4fd0ff65 msaf/figure_eight_r3.py
 sha256LF 174a76f9f1ea633899a982bcef6705ea3d905b6eaf791b0646ef461514d1ce7a reports/PREREG_FIGURE_EIGHT_R6_2026-10-25.md
 sha256LF 6b0b71e91c9b38a2e8b43e8b2da12dbf2ce273321ffe2c4376e09bbbbdf829c9 reports/figure_eight_r3_2026-10-23.json
@@ -2584,9 +2589,9 @@ sha256LF 0c0410ee29fce414a3837a3f5c14f9eff83396f951938c60aa37f0c737d7250b msaf/t
 - **Sertifikat:**
 
 ```text
-sha256LF d7c457cd5b00b4cea9b59791e5bee2637722b6d8c3a713be0afb876623cf72c9 reports/PREREG_Q3_ABC_CENSUS_V3_2026-10-27.md
+sha256LF ae41cc0147a4e1e0e8adf436304382a3ccc488e953d50dfb4ff6d06321df57e4 reports/PREREG_Q3_ABC_CENSUS_V3_2026-10-27.md
 sha256LF e2176e22df095e19015422e6ed2d7564b131ca90f8d866cfa3edaa6dbef69af8 reports/abc_census_v3_10000000.json
-sha256LF f870c57792a0b79fff015a9a9764191e6c0ca9b3989faae604be9aec19a51193 msaf/abc_census.py
+sha256LF 2b83ff69095a712cb1b82927ddf4c3aadf040d5c96e5f0bc40a82992f030628a msaf/abc_census.py
 sha256LF bcee548ff1be8410f24ac1a4f04a20203df1c9bb9aa414712a8aa8b97ce69ae8 msaf/tests/test_abc_census.py
 sha256LF ca1c44bbaaee4495bdd309fcde14b42eede8716757f4f303822ff110c4fd13c6 reports/ABC_CENSUS_2026-10-27.md
 
@@ -3071,6 +3076,51 @@ sha256LF 0240906268e9795f27c58224ca5b82193a4d9e8e9dfa21ee3beeea305e01b29d report
 - **Domino:** SMT gate sebelum Lean formalisasi.
 - **Relasi:** Prasyarat untuk Stage 7/8 Lean formalisasi perturbasi off-diagonal.
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py -q`
+
+### T-2026-0101 — Sinkronisasi pagar global: amandemen pra-registrasi Q3 v3 dan pemulihan penanda slow r6
+
+- **Jenis:** T
+- **Pernyataan:** Dua blokir pra-ada yang membuat suite lokal merah
+  diselesaikan tanpa melonggarkan klaim mana pun.
+  (1) *Q3 v3.* Commit `c52260f` menulis ulang
+  `reports/PREREG_Q3_ABC_CENSUS_V3_2026-10-27.md` (86 baris, penghapusan BOM,
+  substitusi leksikal Indonesia→Inggris, mojibake UTF-8), sehingga hash
+  bergeser dari `aed8e63c...` ke `d7c457cd...` dan konstanta
+  `PREREG_SHA256LF` di `msaf/abc_census.py` menolak semua run. Audit diff
+  `0d229bb`→`c52260f`: 263 token numerik multiset identik; token kunci
+  `1.4`(13), `5/7`(7), `10^5`(7), `10^6`(5), `10^7`(7), `RAD_LIMIT`(3),
+  `rad(abc)`(7), `gcd`(3), `q > 1.4`(6), `floor`(3) berjumlah sama; 17 baris
+  pertidaksamaan byte-identik pada ekspresi matematikanya. Drift terbukti
+  leksikal/encoding, bukan kompromi logika. Blok amandemen aditif
+  `AMENDMENT_2026-11-02` ditambahkan ke pra-registrasi dan hash pasca-amandemen
+  `ae41cc0147a4e1e0e8adf436304382a3ccc488e953d50dfb4ff6d06321df57e4` di-pin
+  ulang di konstanta dan registry.
+  (2) *r6.* `@pytest.mark.slow` hilang dari `test_registry_entry` dan
+  `test_campaign` pada `msaf/tests/test_figure_eight_r6.py`, sehingga
+  `test_ci_slow_split.py::test_both_campaign_tests_are_marked_slow` gagal.
+  Kedua penanda dipulihkan; asersi, ambang, receipt, dan verdict kampanye tidak
+  disentuh.
+- **Batas:** Ini entri sinkronisasi pagar, bukan klaim matematis baru. Tidak ada
+  ambang yang dilonggarkan, tidak ada receipt yang ditulis ulang, tidak ada
+  verdict yang diubah. Klaim `A-2026-0032` (6 triple C=100.000) dan
+  `A-2026-0052` (17 triple C=10^7, canonical `fb0ea6f8...`) tetap persis sama;
+  `A-2026-0047` tetap ALL PASS dengan hash receipt tak berubah. Bukan bukti
+  konjektur abc dan bukan klaim RH/GRH.
+- **Status:** CERTIFIED
+- **Domino:** pagar global (`reports/FENCE_REGISTRY.md`) dan partisi CI
+  fast/slow.
+- **Relasi:** menambal `A-2026-0032`, `A-2026-0052`, dan `A-2026-0047` lewat
+  catatan bertanggal; tidak menulis ulang pernyataan ketiganya.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_abc_census.py -q`;
+  `python -m pytest msaf/tests/test_ci_slow_split.py -q`;
+  `python -m pytest msaf/tests/test_fence_registry.py -q`.
+- **Sertifikat:**
+
+  ```text
+sha256LF ae41cc0147a4e1e0e8adf436304382a3ccc488e953d50dfb4ff6d06321df57e4 reports/PREREG_Q3_ABC_CENSUS_V3_2026-10-27.md
+sha256LF 2b83ff69095a712cb1b82927ddf4c3aadf040d5c96e5f0bc40a82992f030628a msaf/abc_census.py
+sha256LF 5e0744cac19a25a4f251433c547b4da21d258b50853300fdce29f2233bc7e004 msaf/tests/test_figure_eight_r6.py
+  ```
 
 ### T-2026-0108 — PLAN-10: Cosmological Quantisation and Spectral Refutation of Infinite Dark Energy
 

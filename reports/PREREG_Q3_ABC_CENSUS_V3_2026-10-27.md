@@ -207,3 +207,49 @@ menunggu keputusan pemilik.
 - `q` memakai float64 `math.log`; uji kelengkapan memakai integer eksak.
 
 
+
+---
+
+## AMENDMENT_2026-11-02: Document hash alignment post-MSAF convergence
+
+**Alasan amandemen.** Commit `c52260f` ("Archive obsolete draft reports (13
+files) and maintain BOM/hash hygiene") menulis ulang berkas ini secara
+menyeluruh: 86 baris disunting, BOM dihapus, dan sebagian token Bahasa
+Indonesia diganti kata Inggris (`yang`→`which`, `dan`→`and`, `di`→`in`,
+`untuk`→`for`, `berkas`→`file`, `batas`→`limit`, `pada`→`on`,
+`dengan`→`with`). Encoding UTF-8 dari em-dash dan simbol matematika juga
+rusak menjadi mojibake (`â€”`, `âˆˆ`). Karena itu `sha256LF` bergeser dari
+`aed8e63cdbb463b58bf207686ddf562ae50114b1d38b40f52174e53f1a6001a2`
+menjadi `d7c457cd5b00b4cea9b59791e5bee2637722b6d8c3a713be0afb876623cf72c9`,
+dan pin di `msaf/abc_census.py` menolak semua run (`ValueError:
+preregistration hash mismatch`).
+
+**Audit non-kompromi (dilakukan sebelum amandemen ini ditulis).** Diff
+`0d229bb` → `c52260f` diperiksa mesin:
+
+- 263 token numerik pada versi lama dan versi baru: **multiset identik**.
+- Semua token kunci berjumlah sama persis: `1.4` (13), `5/7` (7), `10^5`
+  (7), `10^6` (5), `10^7` (7), `RAD_LIMIT` (3), `rad(abc)` (7), `gcd` (3),
+  `q > 1.4` (6), `floor` (3).
+- 17 baris yang memuat pertidaksamaan dibandingkan satu per satu: ekspresi
+  matematikanya byte-identik (`rad(abc) < c^(5/7)`, `prod^7 < c^5`,
+  `floor(c^(5/7) / rad(c)) + 2`, `q > 1.4`), hanya kata penghubung yang
+  berubah bahasa.
+- Tabel lima triple yang hilang dan seluruh ambang gate/validasi/full tidak
+  berubah.
+
+Kesimpulan audit: drift bersifat **leksikal dan encoding**, bukan
+kompromi logika. Tidak ada ambang yang dilonggarkan dan tidak ada klaim
+yang diperlemah.
+
+**Re-lock.** Berkas ini dinyatakan disetujui ulang pada keadaan
+pasca-amandemen. Hash `sha256LF` yang mengikat adalah hash **setelah**
+blok amandemen ini ada; nilai itu dicatat di
+`reports/FENCE_REGISTRY.md` entri `T-2026-0101` dan di konstanta
+`PREREG_SHA256LF` pada `msaf/abc_census.py`. Hash pra-amandemen
+`d7c457cd...` tetap disebut di entri registry agar jejaknya tidak hilang.
+
+**Tidak mengubah:** `A-2026-0032` (C=100.000, 6 triple), `A-2026-0052`
+(C=10^7, 17 triple, canonical_sha256 `fb0ea6f8...`), P0/P1/P2,
+`shp_asymmetric_wager`, `shp_bridge`. Isi matematis pra-registrasi di atas
+garis ini dibekukan dan tidak disunting oleh amandemen ini.

@@ -46,6 +46,7 @@ def campaign():
     return r6.run_campaign()
 
 
+@pytest.mark.slow
 def test_campaign(campaign):
     payload = campaign
     assert RECEIPT.exists(), "receipt not written"
@@ -63,6 +64,7 @@ def test_campaign(campaign):
         assert row["passed"] is True
 
 
+@pytest.mark.slow
 def test_registry_entry(campaign):
     payload = campaign
     if payload["all_pass"]:
