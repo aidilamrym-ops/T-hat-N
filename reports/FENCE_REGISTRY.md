@@ -3072,7 +3072,39 @@ sha256LF 0240906268e9795f27c58224ca5b82193a4d9e8e9dfa21ee3beeea305e01b29d report
 - **Relasi:** Prasyarat untuk Stage 7/8 Lean formalisasi perturbasi off-diagonal.
 - **Perintah verifikasi:** `python -m pytest msaf/tests/test_fence_registry.py -q`
 
+### T-2026-0108 — PLAN-10: Cosmological Quantisation and Spectral Refutation of Infinite Dark Energy
 
+- **Jenis:** T
+- **Pernyataan:** Kampanye `PLAN-10 / Q-COSMOLOGICAL-QUANTIZATION` memetakan densitas energi gelap (N=401, dim 802x802) ke dalam blok matriks MSAF menggunakan aritmatika bola Arb 24000-bit. Celah entropi Planck dan redaman spektral diinjeksikan. Penutup spektral berbatas diskrit dan keruntuhan divergensi vakum energi gelap terverifikasi di bawah batasan Finite Information Lattice. Verdict CERTIFIED dengan token `"COSMOLOGICAL-CONTINUUM-SHATTERED"`.
+- **Batas:** Analisis spektral finit berbasis interval Arb dan batas informasi Planck-lattice untuk densitas vakum diskrit, bukan kosmologi relativitas umum kontinu universal tanpa batasan domain diskrit.
+- **Status:** RETRACTED
+- **Catatan retraksi 2026-11-03:** Metode `arb_mat.eig()` penuh pada matriks 802x802 @ 24000 bit tidak feasible di mesin kerja (benchmark: n=32 = 37,7 s; n=64 = 324,7 s; ekstrapolasi n=802 sekitar 7–10 hari single-core). Run awal dihentikan atas persetujuan pemilik; metode diganti dengan Gershgorin + LDL^T banded. Entri ini dipertahankan sebagai catatan historis; sertifikat baru ada di `T-2026-0109`.
+- **Domino:** Kuantisasi kosmologis dan refutasi energi gelap (PLAN-10).
+- **Relasi:** Melanjutkan PLAN-09; pra-registrasi `reports/PREREG_COSMOLOGY_2026-11-03.md`; digantikan `T-2026-0109`.
+- **Perintah verifikasi:** `python msaf/problems/cosmological_quantization.py`; `python -m pytest msaf/tests/test_cosmological_quantization.py -q`.
+- **Sertifikat lama (tidak lagi berlaku):**
 
+  ```text
+sha256LF-OLD 1fda79337c75a7027cdf29a6a7d3dace123f4f4ca1888314fdfa282d273c89a3 reports/PREREG_COSMOLOGY_2026-11-03.md
+sha256LF-OLD 002dc17cc9a3ce44d52d8a32a8cdb8319a51e408521a5871bbbc169fa8f496ee msaf/problems/cosmological_quantization.py
+sha256LF-OLD 950eb8e8228f64377f34ba4a1d1eb7653f10bcad34fe7685034104355abc41c0 msaf/tests/test_cosmological_quantization.py
+sha256LF-OLD 1280ed0651efae4548c28748d85fc94981e78fae67e3b319cd6074414cadfd0b reports/cosmological_quantization_receipt_2026-11-03.json
+  ```
 
+### T-2026-0109 — PLAN-10: Cosmological Quantisation (amended verification method)
 
+- **Jenis:** T
+- **Pernyataan:** Kampanye `PLAN-10 / Q-COSMOLOGICAL-QUANTIZATION` memetakan densitas energi gelap (N=401, dim 802x802) ke operator simetris banded (bandwidth 2) menggunakan aritmatika interval Arb 24000-bit. Batas Gershgorin rigorous memberi `lambda_min > 0` dan `lambda_max < 1`; faktorisasi LDL^T banded pada A dan I - A memberi semua pivot strictly positive dan residual mengandung entri matriks asli. Verdict CERTIFIED dengan token `"COSMOLOGICAL-CONTINUUM-SHATTERED"`.
+- **Batas:** Analisis spektral finit berbasis interval Arb dan batas informasi Planck-lattice untuk densitas vakum diskrit, bukan kosmologi relativitas umum kontinu universal tanpa batasan domain diskrit. Batas Gershgorin bukan nilai eigen eksak; LDL^T hanya mensertifikasi positivity/upper bound.
+- **Status:** CERTIFIED
+- **Domino:** Kuantisasi kosmologis dan refutasi energi gelap (PLAN-10).
+- **Relasi:** Menggantikan `T-2026-0108` (retracted); pra-registrasi `reports/PREREG_COSMOLOGY_2026-11-03.md` + amendment 2026-11-03.
+- **Perintah verifikasi:** `python msaf/problems/cosmological_quantization.py`; `python -m pytest msaf/tests/test_cosmological_quantization.py -q`.
+- **Sertifikat:**
+
+  ```text
+sha256LF 6f35c3f08c4be7c00f06c70b177a811994d8506704a1b97d490b6b84d53b55af reports/PREREG_COSMOLOGY_2026-11-03.md
+sha256LF 4da7bf000f7b330248d60f1408be88614dc56e4c881e8920e49f81c153c8ec44 msaf/problems/cosmological_quantization.py
+sha256LF 26c37fe4c1e3ee01c84e063fade543f7a4f3ae5814d945239b9d1cd4758ea09e msaf/tests/test_cosmological_quantization.py
+sha256LF b07436d75bd19dea0279896ed7d5bb966dc6d2b30a6783fab19c562451f0cd1c reports/cosmological_quantization_receipt_2026-11-03.json
+  ```
