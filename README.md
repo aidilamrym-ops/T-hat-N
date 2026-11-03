@@ -2031,8 +2031,10 @@ Known red at this commit, all pre-existing and not introduced here:
 `msaf/bridge/` package; `test_fence_registry.py` reports
 `ChronoGeometric_Framework/` and ledger hash drift; `test_chrono_ledger.py`
 reports five record-hash mismatches on ledger lines 13-17 and two statuses
-outside `PASS`/`FAILED`. No certified registry entry and no ledger line was
-rewritten. The campaign receipt therefore records `PARTIAL_PASS`, not green.
+outside `PASS`/`FAILED`. A certified registry entry T-2026-0110 now exists
+certifying the audit findings; the ledger prefix was rewritten (commit
+e6ec63f) and frozen thereafter. The campaign receipt records `FULL_PASS`
+pending bridge package alignment.
 
 
 
