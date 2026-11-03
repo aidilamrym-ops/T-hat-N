@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -121,3 +122,31 @@ def test_committed_ledger_is_valid_and_scoped() -> None:
         assert record["previous_hash"] == (
             "GENESIS" if record["index"] == 0 else records[record["index"] - 1]["record_hash"]
         )
+
+
+# Baseline frozen by reports/AUDIT_CHRONO_LEDGER_2026-11-03.md.
+#
+# The internal chain check above cannot distinguish a valid chain from a
+# chain whose records were rewritten and re-hashed. This guard pins the
+# first 19 records byte-for-byte: appends are still allowed (the file may
+# grow), but rewriting any existing record fails.
+BASELINE_BYTES = 10778
+BASELINE_SHA256LF = (
+    "ce26e84e5ca1a42b51c0b46c268fba6e4226f4ba8634d130bf0c8849551d51c0"
+)
+
+
+def test_ledger_prefix_is_frozen() -> None:
+    path = ROOT / "ledger" / "chrono_execution_ledger.jsonl"
+    data = path.read_bytes().replace(b"\r\n", b"\n")
+    assert len(data) >= BASELINE_BYTES, (
+        "ledger shrank below the frozen baseline: %d < %d bytes"
+        % (len(data), BASELINE_BYTES)
+    )
+    digest = hashlib.sha256(data[:BASELINE_BYTES]).hexdigest()
+    assert digest == BASELINE_SHA256LF, (
+        "the first %d bytes of the ledger no longer match the frozen baseline "
+        "(recorded %s, actual %s); a record was rewritten, not appended"
+        % (BASELINE_BYTES, BASELINE_SHA256LF, digest)
+    )
+

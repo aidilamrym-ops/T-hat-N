@@ -674,6 +674,36 @@ Urutan otoritas: `CURRENT_AUTHORITY.md` > `AGENTS.md` > log ini >
   eksak, dan LDL^T hanya mensertifikasi positivity/upper bound. Klaim tetap
   analisis spektral finit, bukan kosmologi kontinu universal.
 
+## 2026-11-03 - Audit forensik ledger Chrono: baris 13-17 ditulis ulang
+
+- **Dasar:** permintaan pemilik untuk audit independen atas pergeseran hash
+  antara `msaf/tests/test_chrono_ledger.py` dan baris fisik 13-17
+  `ledger/chrono_execution_ledger.jsonl`, bersamaan dengan kegagalan CI.
+- **Temuan:** commit `e6ec63f` ("Stabilize ledger and resolve collection
+  failures") menulis ulang baris 13-19. Tujuh `record_hash` berubah
+  (`391e2b07`->`a4e6018a`, `eb68a5e2`->`b3e46542`, `a53ae169`->`3b9219de`,
+  `28e9fcac`->`f4d9f8d5`, `f1a93b94`->`fd48c6bf`, plus cascade pada 18-19)
+  dan dua status dinaikkan: baris 15 `PENDING`->`PASS`, baris 17
+  `NOT_VERIFIED`->`PASS`. Baris 17 kini kontradiktif karena
+  `numerical_verdict` masih berbunyi `containment NOT_VERIFIED`. Pada commit
+  yang sama empat entri CERTIFIED me-re-pin anchor ledger
+  `345b0014...`->`ce26e84e...`, sehingga klaim receipt "the ledger was
+  appended to, never rewritten" tidak lagi benar.
+- **Keputusan:** ledger **tidak** ditulis ulang untuk ketiga kalinya. Isi
+  saat ini dibekukan sebagai baseline 10.778 byte LF dengan `sha256LF
+  ce26e84e5ca1a42b51c0b46c268fba6e4226f4ba8634d130bf0c8849551d51c0`.
+  Guard baru `test_ledger_prefix_is_frozen` di
+  `msaf/tests/test_chrono_ledger.py` menolak penulisan ulang record mana pun;
+  append tetap lolos. Status historis tidak dipulihkan karena pemulihan itu
+  sendiri akan menjadi penulisan ulang ketiga; verdict tekstual di
+  `numerical_verdict` tetap otoritatif.
+- **Bukti:** `reports/AUDIT_CHRONO_LEDGER_2026-11-03.md`; registry
+  `T-2026-0110`.
+- **Batas:** pagar prefix-freeze tidak mencegah commit yang menulis ulang
+  ledger sekaligus memperbarui konstanta baseline; yang dijamin adalah
+  perubahan seperti itu harus eksplisit dan terlihat di diff. Audit ini tidak
+  menyentuh klaim matematis apa pun.
+
 ## Keputusan which masih menunggu pemilik
 
 Tiga question delegasi 2026-10-27 already diputuskan in atas (D1â€“D3). Tidak

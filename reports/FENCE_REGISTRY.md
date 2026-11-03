@@ -3158,3 +3158,35 @@ sha256LF 4da7bf000f7b330248d60f1408be88614dc56e4c881e8920e49f81c153c8ec44 msaf/p
 sha256LF 26c37fe4c1e3ee01c84e063fade543f7a4f3ae5814d945239b9d1cd4758ea09e msaf/tests/test_cosmological_quantization.py
 sha256LF b07436d75bd19dea0279896ed7d5bb966dc6d2b30a6783fab19c562451f0cd1c reports/cosmological_quantization_receipt_2026-11-03.json
   ```
+
+### T-2026-0110 — Audit forensik pergeseran hash ledger Chrono (baris 13-17) dan pagar prefix-freeze
+
+- **Jenis:** T
+- **Pernyataan:** Audit forensik riwayat git membuktikan commit `e6ec63f`
+  ("Stabilize ledger and resolve collection failures") menulis ulang baris
+  13-19 `ledger/chrono_execution_ledger.jsonl`: tujuh `record_hash` berubah
+  (`391e2b07`->`a4e6018a`, `eb68a5e2`->`b3e46542`, `a53ae169`->`3b9219de`,
+  `28e9fcac`->`f4d9f8d5`, `f1a93b94`->`fd48c6bf`, plus cascade pada 18-19),
+  dua `execution_status` dinaikkan dari `PENDING` dan `NOT_VERIFIED` menjadi
+  `PASS`, dan baris 17 menjadi kontradiktif karena `numerical_verdict` masih
+  menyatakan `containment NOT_VERIFIED`. Anchor registry di-re-pin pada
+  commit yang sama. Isi ledger saat ini dibekukan sebagai baseline 10.778
+  byte LF; guard `test_ledger_prefix_is_frozen` menolak penulisan ulang
+  record mana pun dan tetap mengizinkan append.
+- **Batas:** Pagar prefix-freeze tidak mencegah penulisan ulang yang
+  disertai pembaruan konstanta baseline dalam commit yang sama; perubahan
+  seperti itu harus eksplisit di diff. Audit ini tidak menyentuh klaim
+  matematis dan tidak memulihkan status historis (pemulihan akan menjadi
+  penulisan ulang ketiga); verdict tekstual di `numerical_verdict` tetap
+  otoritatif.
+- **Status:** CERTIFIED
+- **Domino:** Integritas ledger Chrono / epistemologi MSAF.
+- **Relasi:** `reports/AUDIT_CHRONO_LEDGER_2026-11-03.md`; commit `e6ec63f`;
+  anchor lama `T-2026-0071`/`T-2026-0072`.
+- **Perintah verifikasi:** `python -m pytest msaf/tests/test_chrono_ledger.py -q`.
+- **Sertifikat:**
+
+  ```text
+sha256LF 2dec0509d7db17e5fd61ec3055ed0b8605dc7c00ee256282a05b2066ffd2ea7c reports/AUDIT_CHRONO_LEDGER_2026-11-03.md
+sha256LF 9e786ef1f0798b04a7280d858096432582fe771a6e3224ad3e2cf908c573a22d msaf/tests/test_chrono_ledger.py
+  ```
